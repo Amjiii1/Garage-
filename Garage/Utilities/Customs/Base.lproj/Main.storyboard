@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad10_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ckM-eN-Zen"/>
+                        <viewControllerLayoutGuide type="bottom" id="T7M-QW-3mN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-tq-8Gy" userLabel="BackgroundView">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="ihh-TE-hDW">
+                                        <rect key="frame" x="-12" y="-12" width="858" height="1124"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="tWU-kR-zfw" userLabel="PinCodeTextfield" customClass="SecureTextFieldWithCustomFont" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="279" y="431" width="250" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="4Ie-6u-xAz"/>
+                                            <constraint firstAttribute="height" constant="60" id="Dek-32-HxL"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TD2-zy-HgD" customClass="CustomButton" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="329" y="943" width="177" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="+ New? Free trail">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="18"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ki6-Bl-bnP" customClass="CustomButton" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="331" y="1036" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="shape"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fG1-PW-TBv" customClass="CustomButton" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="401" y="1036" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="line"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9B-HU-W2O" customClass="CustomButton" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="467" y="1036" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="invalidName"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="17"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGs-Li-hSS">
+                                        <rect key="frame" x="311" y="536" width="195" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ihh-TE-hDW" firstAttribute="top" secondItem="gPT-tq-8Gy" secondAttribute="top" constant="-12" id="9d7-Q6-7F2"/>
+                                    <constraint firstAttribute="trailing" secondItem="ihh-TE-hDW" secondAttribute="trailing" constant="-12" id="C6L-o5-LTE"/>
+                                    <constraint firstAttribute="bottom" secondItem="ihh-TE-hDW" secondAttribute="bottom" id="H3w-H4-Pyy"/>
+                                    <constraint firstItem="ihh-TE-hDW" firstAttribute="leading" secondItem="gPT-tq-8Gy" secondAttribute="leading" constant="-12" id="Sd7-aU-bKK"/>
+                                    <constraint firstItem="tWU-kR-zfw" firstAttribute="centerY" secondItem="gPT-tq-8Gy" secondAttribute="centerY" constant="-95" id="fdQ-4o-My9"/>
+                                    <constraint firstItem="tWU-kR-zfw" firstAttribute="centerX" secondItem="gPT-tq-8Gy" secondAttribute="centerX" constant="-13" id="yMf-u1-dVt"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Applogo" translatesAutoresizingMaskIntoConstraints="NO" id="gWu-Qf-RsE">
+                                <rect key="frame" x="333" y="250" width="134" height="134"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="134" id="6Eu-r1-bAF"/>
+                                    <constraint firstAttribute="height" constant="134" id="jdH-Br-DL5"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gPT-tq-8Gy" firstAttribute="bottom" secondItem="T7M-QW-3mN" secondAttribute="top" id="3lM-b8-lJB"/>
+                            <constraint firstItem="gPT-tq-8Gy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lca-iY-E66"/>
+                            <constraint firstItem="gWu-Qf-RsE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="333" id="No5-z7-F3X"/>
+                            <constraint firstAttribute="trailing" secondItem="gPT-tq-8Gy" secondAttribute="trailing" id="edU-i3-yPS"/>
+                            <constraint firstItem="gPT-tq-8Gy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rEm-Ls-srp"/>
+                            <constraint firstItem="gWu-Qf-RsE" firstAttribute="top" secondItem="ckM-eN-Zen" secondAttribute="bottom" constant="230" id="vqh-fZ-Txe"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="341" y="165"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Applogo" width="134" height="134"/>
+        <image name="Loginbg" width="768" height="1024"/>
+        <image name="invalidName" width="11" height="17"/>
+        <image name="line" width="18" height="11"/>
+        <image name="shape" width="21" height="17"/>
+    </resources>
+</document>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Mechanic View-->
+        <scene sceneID="ujG-Fn-6QB">
+            <objects>
+                <viewController storyboardIdentifier="MechanicVc" id="NKT-6w-w6b" customClass="MechanicView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Och-OO-ce3">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="nBc-rq-4a9">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pzp-mP-udE">
+                                <rect key="frame" x="29.5" y="0.0" width="150" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="kHb-K8-row"/>
+                                    <constraint firstAttribute="height" constant="60" id="yZR-0r-LId"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="bay">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WcU-yT-dR4">
+                                <rect key="frame" x="24" y="85" width="786" height="805"/>
+                                <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.80292166095890416" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WcU-yT-dR4" secondAttribute="height" multiplier="786:805" id="Reh-9C-HSH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="deU-Y5-Mlh">
+                                <rect key="frame" x="223" y="16" width="388" height="29"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="deU-Y5-Mlh" secondAttribute="height" multiplier="374:27" id="ASR-b9-Krr"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerX" secondItem="7Ze-ic-sks" secondAttribute="centerX" id="4qp-dI-tba"/>
+                            <constraint firstItem="Pzp-mP-udE" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="6ma-PC-oJx"/>
+                            <constraint firstItem="7Ze-ic-sks" firstAttribute="trailing" secondItem="WcU-yT-dR4" secondAttribute="trailing" constant="24" id="9h2-EK-vfJ"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="trailing" secondItem="7Ze-ic-sks" secondAttribute="trailing" id="9nS-BK-hrt"/>
+                            <constraint firstItem="WcU-yT-dR4" firstAttribute="bottom" secondItem="7Ze-ic-sks" secondAttribute="bottom" id="C7c-6t-lLJ"/>
+                            <constraint firstItem="WcU-yT-dR4" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" constant="25" id="FF1-QK-OYK"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="bottom" secondItem="7Ze-ic-sks" secondAttribute="bottom" id="JX1-gk-fiL"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="LOX-8a-6zR"/>
+                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerY" secondItem="Pzp-mP-udE" secondAttribute="centerY" id="OT6-3f-cGq"/>
+                            <constraint firstItem="WcU-yT-dR4" firstAttribute="leading" secondItem="7Ze-ic-sks" secondAttribute="leading" constant="24" id="afG-AN-qN0"/>
+                            <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="7Ze-ic-sks" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="leading" secondItem="7Ze-ic-sks" secondAttribute="leading" id="tTM-Dg-ufU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Ze-ic-sks"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="834" height="890"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ie-Y7-ua0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="65.467625899280577" y="94.42446043165468"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Loginbg" width="768" height="1024"/>
+        <image name="bay" width="150" height="60"/>
+    </resources>
+</document>

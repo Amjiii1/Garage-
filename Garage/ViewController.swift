@@ -10,9 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    
+    
+    //var loginVc: LoginViewController
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+       // containerView.isHidden = true
+//        let storyboardSettings = UIStoryboard(name: "Login", bundle: nil)
+//        loginVc = storyboardSettings.instantiateViewController(withIdentifier: "LoginVc") as! LoginViewController
+//        self.addChildViewController(loginVc)
+//        self.containerView.addSubview(loginVc.view)
+//        loginVc.didMove(toParentViewController: self)
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,4 +40,8 @@ class ViewController: UIViewController {
 
 
 }
+
+
+
+
 

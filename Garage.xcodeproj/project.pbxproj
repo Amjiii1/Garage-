@@ -27,6 +27,7 @@
 		17A4EBA420F619DD0007FF6E /* AddnewCar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */; };
 		17A67B4420CF789E00660B7A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67B4320CF789E00660B7A /* CustomButton.swift */; };
 		17A67B4620CF78BF00660B7A /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67B4520CF78BF00660B7A /* CustomTextfield.swift */; };
+		17CB27FC20FB1B2C00B684CA /* footrView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17CB27FB20FB1B2C00B684CA /* footrView.xib */; };
 		17FEF6C420CCEA1600EC99C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FEF6C320CCEA1600EC99C2 /* AppDelegate.swift */; };
 		17FEF6C620CCEA1600EC99C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FEF6C520CCEA1600EC99C2 /* ViewController.swift */; };
 		17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6CA20CCEA2500EC99C2 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddnewCar.storyboard; sourceTree = "<group>"; };
 		17A67B4320CF789E00660B7A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		17A67B4520CF78BF00660B7A /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		17CB27FB20FB1B2C00B684CA /* footrView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = footrView.xib; sourceTree = "<group>"; };
 		17FEF6C020CCEA1600EC99C2 /* Garage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Garage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FEF6C320CCEA1600EC99C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17FEF6C520CCEA1600EC99C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				17A67B4320CF789E00660B7A /* CustomButton.swift */,
 				171A7F2920EB444600875A19 /* CustonLabel.swift */,
 				1730627B20F38384005902A2 /* WelcomeView.storyboard */,
+				17CB27FB20FB1B2C00B684CA /* footrView.xib */,
 				178E706420D0EDDC00BF0382 /* ReceptionalistView.storyboard */,
 				17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */,
 				17FEF6C720CCEA1600EC99C2 /* LoginView.storyboard */,
@@ -365,6 +368,7 @@
 				17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */,
 				178E706520D0EDDC00BF0382 /* ReceptionalistView.storyboard in Resources */,
 				178E706320D0DD6100BF0382 /* Main.storyboard in Resources */,
+				17CB27FC20FB1B2C00B684CA /* footrView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

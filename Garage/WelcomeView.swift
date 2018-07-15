@@ -28,13 +28,13 @@ class WelcomeView: UIViewController {
        let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
         let newCarvc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as! addNewCar
         addChildViewController(newCarvc)
-        // Move the child view controller's view to the parent's view
+ 
         view.addSubview(newCarvc.view)
-//        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .top, relatedBy: .equal, toItem: self.topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0))
-//        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .bottom, relatedBy: .equal, toItem: self.bottomLayoutGuide, attribute:.top, multiplier: 1, constant: 20))
-//
-//        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,multiplier: 1, constant: 300))
-//        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .trailingMargin, relatedBy: .equal, toItem: view, attribute: .trailingMargin, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .top, relatedBy: .equal, toItem: self.topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .bottom, relatedBy: .equal, toItem: self.bottomLayoutGuide, attribute:.top, multiplier: 1, constant: 0))
+
+        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,multiplier: 1, constant: 300))
+        view.addConstraint(NSLayoutConstraint(item: newCarvc, attribute: .trailingMargin, relatedBy: .equal, toItem: view, attribute: .trailingMargin, multiplier: 1, constant: 0))
         // Notify the child that it was moved to a parent
         newCarvc.didMove(toParentViewController: self)
         

@@ -3,16 +3,14 @@
 //  Garage
 //
 //  Created by Amjad Ali on 7/11/18.
-//  Copyright © 2018 Amjad Ali. All rights reserved.
-//
+//  Copyright © 2018 Amjad Ali. All rights reserved
 
 import UIKit
 
 class addNewCar: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -22,12 +20,8 @@ class addNewCar: UIViewController {
              self.willMove(toParentViewController: nil)
         
                self.removeFromParentViewController()
-       
-              self.view.removeFromSuperview()
-        
-        
-        
-    }
+     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

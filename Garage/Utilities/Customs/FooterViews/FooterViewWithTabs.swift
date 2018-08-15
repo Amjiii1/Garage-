@@ -6,56 +6,42 @@
 //  Copyright © 2018 Amjad Ali. All rights reserved.
 //
 
+
+
+
 import Foundation
 import UIKit
 
+protocol FooterViewWithTabsDelegate {
+    func selectedButtonIndex(index: Int)
+}
 
 class FooterViewWithTabs: UIView {
     
     @IBOutlet weak var btnWelcome: UIButton!
     @IBOutlet weak var btnService: UIButton!
     @IBOutlet weak var btnCheckout: UIButton!
+    @IBOutlet weak var buttonsContainer: UIView!
+
+    var delegate: FooterViewWithTabsDelegate!
     
-    @IBAction func tabButtons_action(_ sender: UIButton) {
-        
-        var storyboard: UIStoryboard!
-        var vc: UIViewController!
-        //select(sender)
-        switch sender.tag {
-        case btnWelcome.tag:
-            storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as! WelcomeView
-            btnWelcome.isSelected = true
-            btnCheckout.isSelected = false
-            btnService.isSelected = false
-
-            break
-        case btnService.tag:
-            storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as! MechanicView
-            btnService.isSelected = true
-            btnWelcome.isSelected = false
-            btnCheckout.isSelected = false
-            break
-        case btnCheckout.tag:
-            storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as! CheckoutView
-            btnCheckout.isSelected = true
-            btnWelcome.isSelected = false
-            btnService.isSelected = false
-
-            break
-
-        default:
-            break
-        }
-
-//        if vc != nil {
-//            switchViewController(vc: vc)
-        }
+    var buttons = [UIButton]()
+    override func awakeFromNib() {
+        buttons = [btnWelcome, btnService, btnCheckout]
     }
     
-    
-    
-    
-//}
+    @IBAction func tabButtons_action(_ sender: UIButton) {
+        for i in 1...3 {
+            if let button = buttonsContainer.viewWithTag(i) as? UIButton {
+                button.isSelected = false
+            }
+        }
+        sender.isSelected = true
+        if delegate != nil {
+            delegate.selectedButtonIndex(index: sender.tag)
+        }
+    }
+}
+
+
+

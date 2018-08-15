@@ -20,7 +20,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9N8-Z5-y4K">
                     <rect key="frame" x="45" y="8.5" width="797" height="156"/>
                     <subviews>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmG-jR-6pd">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmG-jR-6pd">
                             <rect key="frame" x="59.5" y="45" width="199.5" height="66.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -30,8 +30,11 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="selected" image="welcome-selected"/>
+                            <connections>
+                                <action selector="tabButtons_action:" destination="iN0-l3-epB" eventType="touchUpInside" id="Q7U-QQ-s5a"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knm-xK-wPu">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knm-xK-wPu">
                             <rect key="frame" x="299" y="44.5" width="199.5" height="66.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="knm-xK-wPu" secondAttribute="height" multiplier="3:1" id="Dz3-Og-E2c"/>
@@ -44,6 +47,9 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="selected" image="service-selected"/>
+                            <connections>
+                                <action selector="tabButtons_action:" destination="iN0-l3-epB" eventType="touchUpInside" id="GKr-SB-mXY"/>
+                            </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOj-00-aD5">
                             <rect key="frame" x="538" y="44.5" width="199.5" height="66.5"/>
@@ -55,6 +61,9 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="selected" image="checked-selected"/>
+                            <connections>
+                                <action selector="tabButtons_action:" destination="iN0-l3-epB" eventType="touchUpInside" id="VIc-I0-4qh"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,6 +95,12 @@
                 <constraint firstItem="9N8-Z5-y4K" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="gyA-xB-GPF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnCheckout" destination="kOj-00-aD5" id="pbp-nY-cQ0"/>
+                <outlet property="btnService" destination="knm-xK-wPu" id="NOb-Cp-c8O"/>
+                <outlet property="btnWelcome" destination="cmG-jR-6pd" id="qfa-0l-ceN"/>
+                <outlet property="buttonsContainer" destination="9N8-Z5-y4K" id="JeV-OZ-1d4"/>
+            </connections>
             <point key="canvasLocation" x="41" y="607.5"/>
         </view>
     </objects>

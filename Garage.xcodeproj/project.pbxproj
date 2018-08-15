@@ -10,10 +10,26 @@
 		11E1979E5180D05B83F084E9 /* Pods_GarageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D66CD60175917B8056FCE96B /* Pods_GarageTests.framework */; };
 		138353780EA2E4BCFBE87006 /* Pods_GarageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C59A381E6536B318BD25A19 /* Pods_GarageUITests.framework */; };
 		171A7F2A20EB444600875A19 /* CustonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7F2920EB444600875A19 /* CustonLabel.swift */; };
+		171FAA6021199DE60096721E /* GiftCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FAA5E21199DE60096721E /* GiftCardView.swift */; };
+		171FAA6121199DE60096721E /* GiftCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171FAA5F21199DE60096721E /* GiftCardView.xib */; };
+		171FAA642119B2080096721E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FAA622119B2080096721E /* CardView.swift */; };
+		171FAA652119B2080096721E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171FAA632119B2080096721E /* CardView.xib */; };
+		171FAA682119C0490096721E /* LoyaltyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FAA662119C0490096721E /* LoyaltyView.swift */; };
+		171FAA692119C0490096721E /* LoyaltyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171FAA672119C0490096721E /* LoyaltyView.xib */; };
+		171FAA702119C2E10096721E /* CashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FAA6E2119C2E10096721E /* CashView.swift */; };
+		171FAA712119C2E10096721E /* CashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 171FAA6F2119C2E10096721E /* CashView.xib */; };
 		1730627C20F38384005902A2 /* WelcomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1730627B20F38384005902A2 /* WelcomeView.storyboard */; };
 		1730628020F38979005902A2 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1730627F20F38979005902A2 /* WelcomeView.swift */; };
+		1740571B211701A300766746 /* CheckoutPopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1740571A211701A300766746 /* CheckoutPopUp.storyboard */; };
+		1740571F2117025A00766746 /* CheckOutPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740571E2117025A00766746 /* CheckOutPopView.swift */; };
 		176F2B4420E4B809008DB208 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F2B4320E4B809008DB208 /* Constants.swift */; };
 		176F2B4720E4BC71008DB208 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F2B4620E4BC71008DB208 /* Reachability.swift */; };
+		1783CDDF211034A10005CC7B /* ServiceCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1783CDDE211034A10005CC7B /* ServiceCartView.swift */; };
+		1783CDE1211035540005CC7B /* ServiceCart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1783CDE0211035540005CC7B /* ServiceCart.storyboard */; };
+		1783CDE421104DFE0005CC7B /* Code Pro Black LC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1783CDE321104DFD0005CC7B /* Code Pro Black LC.ttf */; };
+		1783CDE621104E110005CC7B /* Code Pro Bold LC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1783CDE521104E110005CC7B /* Code Pro Bold LC.ttf */; };
+		1783CDE921104E230005CC7B /* Code Pro Light LC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1783CDE721104E230005CC7B /* Code Pro Light LC.ttf */; };
+		1783CDEA21104E230005CC7B /* Code Pro LC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1783CDE821104E230005CC7B /* Code Pro LC.ttf */; };
 		178E705F20D0CE3C00BF0382 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6C720CCEA1600EC99C2 /* LoginView.storyboard */; };
 		178E706120D0D07000BF0382 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178E706020D0D07000BF0382 /* LoginViewController.swift */; };
 		178E706320D0DD6100BF0382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178E706220D0DD6100BF0382 /* Main.storyboard */; };
@@ -23,12 +39,18 @@
 		178E706B20D0EFB600BF0382 /* ReceptionalistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178E706A20D0EFB600BF0382 /* ReceptionalistView.swift */; };
 		178E706D20D0EFD000BF0382 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178E706C20D0EFD000BF0382 /* CheckoutView.swift */; };
 		178E706F20D0EFEB00BF0382 /* MechanicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178E706E20D0EFEB00BF0382 /* MechanicView.swift */; };
+		179F434F21216B9200126200 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179F434E21216B9200126200 /* SettingsViewController.storyboard */; };
+		179F435121216C0600126200 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F435021216C0600126200 /* SettingsViewController.swift */; };
 		17A4EBA220F619BD0007FF6E /* addNewCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4EBA120F619BD0007FF6E /* addNewCar.swift */; };
 		17A4EBA420F619DD0007FF6E /* AddnewCar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */; };
 		17A67B4420CF789E00660B7A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67B4320CF789E00660B7A /* CustomButton.swift */; };
 		17A67B4620CF78BF00660B7A /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67B4520CF78BF00660B7A /* CustomTextfield.swift */; };
+		17C66F6421007B29003CAA3D /* CarScan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17C66F6321007B29003CAA3D /* CarScan.storyboard */; };
+		17C66F6A21008FB1003CAA3D /* CarScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C66F6921008FB1003CAA3D /* CarScannerView.swift */; };
 		17CB27FC20FB1B2C00B684CA /* FooterViewWithTabs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17CB27FB20FB1B2C00B684CA /* FooterViewWithTabs.xib */; };
 		17CB27FF20FB235D00B684CA /* FooterViewWithTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB27FE20FB235D00B684CA /* FooterViewWithTabs.swift */; };
+		17F856542119876D006BEF5C /* VoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F856522119876D006BEF5C /* VoucherView.swift */; };
+		17F856552119876D006BEF5C /* VoucherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17F856532119876D006BEF5C /* VoucherView.xib */; };
 		17FEF6C420CCEA1600EC99C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FEF6C320CCEA1600EC99C2 /* AppDelegate.swift */; };
 		17FEF6C620CCEA1600EC99C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FEF6C520CCEA1600EC99C2 /* ViewController.swift */; };
 		17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6CA20CCEA2500EC99C2 /* Assets.xcassets */; };
@@ -57,10 +79,26 @@
 
 /* Begin PBXFileReference section */
 		171A7F2920EB444600875A19 /* CustonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonLabel.swift; sourceTree = "<group>"; };
+		171FAA5E21199DE60096721E /* GiftCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardView.swift; sourceTree = "<group>"; };
+		171FAA5F21199DE60096721E /* GiftCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftCardView.xib; sourceTree = "<group>"; };
+		171FAA622119B2080096721E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		171FAA632119B2080096721E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		171FAA662119C0490096721E /* LoyaltyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyView.swift; sourceTree = "<group>"; };
+		171FAA672119C0490096721E /* LoyaltyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoyaltyView.xib; sourceTree = "<group>"; };
+		171FAA6E2119C2E10096721E /* CashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashView.swift; sourceTree = "<group>"; };
+		171FAA6F2119C2E10096721E /* CashView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CashView.xib; sourceTree = "<group>"; };
 		1730627B20F38384005902A2 /* WelcomeView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeView.storyboard; sourceTree = "<group>"; };
 		1730627F20F38979005902A2 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		1740571A211701A300766746 /* CheckoutPopUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CheckoutPopUp.storyboard; sourceTree = "<group>"; };
+		1740571E2117025A00766746 /* CheckOutPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutPopView.swift; sourceTree = "<group>"; };
 		176F2B4320E4B809008DB208 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		176F2B4620E4BC71008DB208 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		1783CDDE211034A10005CC7B /* ServiceCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCartView.swift; sourceTree = "<group>"; };
+		1783CDE0211035540005CC7B /* ServiceCart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServiceCart.storyboard; sourceTree = "<group>"; };
+		1783CDE321104DFD0005CC7B /* Code Pro Black LC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Code Pro Black LC.ttf"; path = "../../../../../../Desktop/fonts/Code Pro Black LC.ttf"; sourceTree = "<group>"; };
+		1783CDE521104E110005CC7B /* Code Pro Bold LC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Code Pro Bold LC.ttf"; path = "../../../../../../Desktop/fonts/Code Pro Bold LC.ttf"; sourceTree = "<group>"; };
+		1783CDE721104E230005CC7B /* Code Pro Light LC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Code Pro Light LC.ttf"; path = "../../../../../../Desktop/fonts/Code Pro Light LC.ttf"; sourceTree = "<group>"; };
+		1783CDE821104E230005CC7B /* Code Pro LC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Code Pro LC.ttf"; path = "../../../../../../Desktop/fonts/Code Pro LC.ttf"; sourceTree = "<group>"; };
 		178E706020D0D07000BF0382 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		178E706220D0DD6100BF0382 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		178E706420D0EDDC00BF0382 /* ReceptionalistView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReceptionalistView.storyboard; sourceTree = "<group>"; };
@@ -69,12 +107,18 @@
 		178E706A20D0EFB600BF0382 /* ReceptionalistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptionalistView.swift; sourceTree = "<group>"; };
 		178E706C20D0EFD000BF0382 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		178E706E20D0EFEB00BF0382 /* MechanicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicView.swift; sourceTree = "<group>"; };
+		179F434E21216B9200126200 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
+		179F435021216C0600126200 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		17A4EBA120F619BD0007FF6E /* addNewCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewCar.swift; sourceTree = "<group>"; };
 		17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddnewCar.storyboard; sourceTree = "<group>"; };
 		17A67B4320CF789E00660B7A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		17A67B4520CF78BF00660B7A /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		17C66F6321007B29003CAA3D /* CarScan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CarScan.storyboard; sourceTree = "<group>"; };
+		17C66F6921008FB1003CAA3D /* CarScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarScannerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		17CB27FB20FB1B2C00B684CA /* FooterViewWithTabs.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterViewWithTabs.xib; sourceTree = "<group>"; };
 		17CB27FE20FB235D00B684CA /* FooterViewWithTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewWithTabs.swift; sourceTree = "<group>"; };
+		17F856522119876D006BEF5C /* VoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherView.swift; sourceTree = "<group>"; };
+		17F856532119876D006BEF5C /* VoucherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoucherView.xib; sourceTree = "<group>"; };
 		17FEF6C020CCEA1600EC99C2 /* Garage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Garage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FEF6C320CCEA1600EC99C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17FEF6C520CCEA1600EC99C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +176,8 @@
 			children = (
 				176F2B4320E4B809008DB208 /* Constants.swift */,
 				17A67B4220CF787200660B7A /* Customs */,
+				17A67B4520CF78BF00660B7A /* CustomTextfield.swift */,
+				179F3A572111BA5F0038C181 /* Views */,
 				176F2B4520E4BC59008DB208 /* Sources */,
 			);
 			path = Utilities;
@@ -145,6 +191,34 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		1783CDE221104DDB0005CC7B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1783CDE521104E110005CC7B /* Code Pro Bold LC.ttf */,
+				1783CDE321104DFD0005CC7B /* Code Pro Black LC.ttf */,
+				1783CDE821104E230005CC7B /* Code Pro LC.ttf */,
+				1783CDE721104E230005CC7B /* Code Pro Light LC.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		179F3A572111BA5F0038C181 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17F856522119876D006BEF5C /* VoucherView.swift */,
+				17F856532119876D006BEF5C /* VoucherView.xib */,
+				171FAA662119C0490096721E /* LoyaltyView.swift */,
+				171FAA6E2119C2E10096721E /* CashView.swift */,
+				171FAA6F2119C2E10096721E /* CashView.xib */,
+				171FAA672119C0490096721E /* LoyaltyView.xib */,
+				171FAA5E21199DE60096721E /* GiftCardView.swift */,
+				171FAA5F21199DE60096721E /* GiftCardView.xib */,
+				171FAA622119B2080096721E /* CardView.swift */,
+				171FAA632119B2080096721E /* CardView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		17A67B4220CF787200660B7A /* Customs */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,11 +226,14 @@
 				17A67B4320CF789E00660B7A /* CustomButton.swift */,
 				171A7F2920EB444600875A19 /* CustonLabel.swift */,
 				1730627B20F38384005902A2 /* WelcomeView.storyboard */,
+				179F434E21216B9200126200 /* SettingsViewController.storyboard */,
+				17C66F6321007B29003CAA3D /* CarScan.storyboard */,
+				1740571A211701A300766746 /* CheckoutPopUp.storyboard */,
+				1783CDE0211035540005CC7B /* ServiceCart.storyboard */,
 				178E706420D0EDDC00BF0382 /* ReceptionalistView.storyboard */,
 				17A4EBA320F619DD0007FF6E /* AddnewCar.storyboard */,
 				17FEF6C720CCEA1600EC99C2 /* LoginView.storyboard */,
 				178E706820D0EE3500BF0382 /* CheckoutView.storyboard */,
-				17A67B4520CF78BF00660B7A /* CustomTextfield.swift */,
 				178E706620D0EDF500BF0382 /* MechanicView.storyboard */,
 			);
 			path = Customs;
@@ -174,6 +251,7 @@
 		17EC985220CCF4F400EFD54A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1783CDE221104DDB0005CC7B /* Fonts */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -206,7 +284,11 @@
 				17FEF6C320CCEA1600EC99C2 /* AppDelegate.swift */,
 				178E706020D0D07000BF0382 /* LoginViewController.swift */,
 				178E706A20D0EFB600BF0382 /* ReceptionalistView.swift */,
+				1783CDDE211034A10005CC7B /* ServiceCartView.swift */,
+				1740571E2117025A00766746 /* CheckOutPopView.swift */,
 				178E706E20D0EFEB00BF0382 /* MechanicView.swift */,
+				179F435021216C0600126200 /* SettingsViewController.swift */,
+				17C66F6921008FB1003CAA3D /* CarScannerView.swift */,
 				17A4EBA120F619BD0007FF6E /* addNewCar.swift */,
 				1730627F20F38979005902A2 /* WelcomeView.swift */,
 				178E706C20D0EFD000BF0382 /* CheckoutView.swift */,
@@ -373,10 +455,23 @@
 				178E706920D0EE3500BF0382 /* CheckoutView.storyboard in Resources */,
 				1730627C20F38384005902A2 /* WelcomeView.storyboard in Resources */,
 				178E706720D0EDF500BF0382 /* MechanicView.storyboard in Resources */,
+				171FAA712119C2E10096721E /* CashView.xib in Resources */,
+				17F856552119876D006BEF5C /* VoucherView.xib in Resources */,
 				178E705F20D0CE3C00BF0382 /* LoginView.storyboard in Resources */,
+				1783CDE1211035540005CC7B /* ServiceCart.storyboard in Resources */,
+				17C66F6421007B29003CAA3D /* CarScan.storyboard in Resources */,
+				171FAA6121199DE60096721E /* GiftCardView.xib in Resources */,
+				1783CDEA21104E230005CC7B /* Code Pro LC.ttf in Resources */,
+				179F434F21216B9200126200 /* SettingsViewController.storyboard in Resources */,
+				1783CDE621104E110005CC7B /* Code Pro Bold LC.ttf in Resources */,
+				1783CDE421104DFE0005CC7B /* Code Pro Black LC.ttf in Resources */,
+				171FAA692119C0490096721E /* LoyaltyView.xib in Resources */,
 				17FEF6CE20CCEA2500EC99C2 /* LaunchScreen.storyboard in Resources */,
+				1740571B211701A300766746 /* CheckoutPopUp.storyboard in Resources */,
+				1783CDE921104E230005CC7B /* Code Pro Light LC.ttf in Resources */,
 				17A4EBA420F619DD0007FF6E /* AddnewCar.storyboard in Resources */,
 				17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */,
+				171FAA652119B2080096721E /* CardView.xib in Resources */,
 				178E706520D0EDDC00BF0382 /* ReceptionalistView.storyboard in Resources */,
 				178E706320D0DD6100BF0382 /* Main.storyboard in Resources */,
 				17CB27FC20FB1B2C00B684CA /* FooterViewWithTabs.xib in Resources */,
@@ -461,11 +556,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Garage/Pods-Garage-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AKASegmentedControl/AKASegmentedControl.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AKASegmentedControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -479,18 +574,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1740571F2117025A00766746 /* CheckOutPopView.swift in Sources */,
 				178E706F20D0EFEB00BF0382 /* MechanicView.swift in Sources */,
 				178E706B20D0EFB600BF0382 /* ReceptionalistView.swift in Sources */,
+				171FAA702119C2E10096721E /* CashView.swift in Sources */,
 				17A67B4620CF78BF00660B7A /* CustomTextfield.swift in Sources */,
 				17FEF6C620CCEA1600EC99C2 /* ViewController.swift in Sources */,
 				178E706D20D0EFD000BF0382 /* CheckoutView.swift in Sources */,
+				171FAA642119B2080096721E /* CardView.swift in Sources */,
 				17FEF6C420CCEA1600EC99C2 /* AppDelegate.swift in Sources */,
+				17F856542119876D006BEF5C /* VoucherView.swift in Sources */,
+				1783CDDF211034A10005CC7B /* ServiceCartView.swift in Sources */,
+				171FAA682119C0490096721E /* LoyaltyView.swift in Sources */,
 				178E706120D0D07000BF0382 /* LoginViewController.swift in Sources */,
 				1730628020F38979005902A2 /* WelcomeView.swift in Sources */,
+				171FAA6021199DE60096721E /* GiftCardView.swift in Sources */,
+				179F435121216C0600126200 /* SettingsViewController.swift in Sources */,
 				17A67B4420CF789E00660B7A /* CustomButton.swift in Sources */,
 				17CB27FF20FB235D00B684CA /* FooterViewWithTabs.swift in Sources */,
 				176F2B4720E4BC71008DB208 /* Reachability.swift in Sources */,
 				176F2B4420E4B809008DB208 /* Constants.swift in Sources */,
+				17C66F6A21008FB1003CAA3D /* CarScannerView.swift in Sources */,
 				171A7F2A20EB444600875A19 /* CustonLabel.swift in Sources */,
 				17A4EBA220F619BD0007FF6E /* addNewCar.swift in Sources */,
 			);
@@ -673,7 +777,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Wizsoft.Garage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marntech.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -692,7 +796,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Wizsoft.Garage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marntech.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnUpArrow: UIButton!
     @IBOutlet weak var btnHelp: UIButton!
@@ -17,6 +16,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var pinCodeTextField: SecureTextFieldWithCustomFont!
     @IBOutlet var newFreeTrail: CustomButton!
     @IBOutlet var businesssCodeTextField: UITextField!
+    
+    @IBOutlet weak var logoImage: UIImageView!
+    
     
     let companyRightButton: UIButton = UIButton(type: .custom)
     let viewRightOfCompanyField = UIView(frame:
@@ -35,9 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        
         pinCodeTextField.layer.cornerRadius = 15.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
@@ -45,8 +45,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         businesssCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        businesssCodeTextField.text = "POS-"
-
+         businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
+     
+               businesssCodeTextField.text = "POS-"
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -55,18 +56,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @objc func bussinessCodeDidChange(_ textField: UITextField) {
+       // businesssCodeTextField.text = "POS-"
+      
+         //   businesssCodeTextField.isEnabled = true
+        if businesssCodeTextField.text!.characters.count == 10 {
+            businesssCodeTextField.isEnabled = false
+        }
+        //  businesssCodeTextField.isEnabled = false
+        
+        else {
+            businesssCodeTextField.isEnabled = true
+        }
     
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-         checkSavedTohide()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        businesssCodeTextField.isEnabled = true
     }
     
     
+  
+
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
-        self.businesssCodeTextField.resignFirstResponder()
-        self.pinCodeTextField.resignFirstResponder()
-        //AvailableItems.sharedInstance.showingLoginWillAppear = false
+//        self.businesssCodeTextField.resignFirstResponder()
+//        self.pinCodeTextField.resignFirstResponder()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,10 +101,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         btnCustomer.layer.cornerRadius = btnCustomer.frame.size.width/2
     }
     
-    @IBAction func editCompanyCode(_ sender: Any) {
-          savedCode = false
-         addButtonToCompanyCodeTextField()
+    @IBAction func BusinnesscodeBtn(_ sender: Any) {
+//        businesssCodeTextField.text = "POS-"
+//        if businesssCodeTextField.text!.characters.count == 6 {
+//            businesssCodeTextField.isHidden = true
+//        }
+//        else {
+//            businesssCodeTextField.isHidden = false
+//        }
     }
+    @IBAction func editCompanyCode(_ sender: Any) {
+      // businesssCodeTextField.text = "POS-"
+//        if businesssCodeTextField.text!.characters.count == 6 {
+//            businesssCodeTextField.isHidden = true
+//        }
+//        else {
+//        businesssCodeTextField.isHidden = false
+//    }
+    }
+        
     
     
     func checkSavedTohide() {
@@ -110,30 +141,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func addButtonToCompanyCodeTextField() {
     
-    self.businesssCodeTextField.clearButtonMode = .whileEditing
-    
-    companyRightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-    
-    var imageForButton = UIImage(named: Constants.saveButtonImageName)
-    imageForButton = (imageForButton!.withRenderingMode(.alwaysTemplate))
-  //  companyRightButton.imageView!.tintColor = UIColor.init(netHex: ColorsCode.mainColor)
-    companyRightButton.setImage(imageForButton, for: UIControlState())
-    //button.setImage(UIImage(named: Constants.saveButtonImageName), forState: .Normal)
-    companyRightButton.addTarget(self, action: #selector(LoginViewController.submitCompanyCode(_:)), for: .touchUpInside)
-
-    //button.setImage(UIImage(named: Constants.saveButtonImageName), forState: .Normal)
-    viewRightOfCompanyField.addSubview(companyRightButton)
-//    viewRightOfCompanyField.addSubview(cancelRightButton)
-    
-    
-    self.businesssCodeTextField.rightView = viewRightOfCompanyField
-    self.businesssCodeTextField.rightViewMode = .always
-    
-    //        self.companyCodeTextField.leftView = UIView(frame:
-    //            CGRectMake(0, 0, 25, 25))
-    //        self.companyCodeTextField.leftViewMode = .Always
-    
-    businesssCodeTextField.layer.masksToBounds = true;
+//    self.businesssCodeTextField.clearButtonMode = .whileEditing
+//
+//    companyRightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+//
+//    var imageForButton = UIImage(named: Constants.saveButtonImageName)
+//    imageForButton = (imageForButton!.withRenderingMode(.alwaysTemplate))
+//  //  companyRightButton.imageView!.tintColor = UIColor.init(netHex: ColorsCode.mainColor)
+//    companyRightButton.setImage(imageForButton, for: UIControlState())
+//    //button.setImage(UIImage(named: Constants.saveButtonImageName), forState: .Normal)
+//    companyRightButton.addTarget(self, action: #selector(LoginViewController.submitCompanyCode(_:)), for: .touchUpInside)
+//
+//    //button.setImage(UIImage(named: Constants.saveButtonImageName), forState: .Normal)
+//    viewRightOfCompanyField.addSubview(companyRightButton)
+////    viewRightOfCompanyField.addSubview(cancelRightButton)
+//
+//
+//    self.businesssCodeTextField.rightView = viewRightOfCompanyField
+//    self.businesssCodeTextField.rightViewMode = .always
+//
+//    //        self.companyCodeTextField.leftView = UIView(frame:
+//    //            CGRectMake(0, 0, 25, 25))
+//    //        self.companyCodeTextField.leftViewMode = .Always
+//
+//    businesssCodeTextField.layer.masksToBounds = true;
 }
     
     
@@ -145,23 +176,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func changeViewForSavedCode() {
         
         
-//        if(savedCode == true) {
-//        //    changeConstraints()
-//            //self.tickImage.hidden = false
-//            self.companyCode.isHidden = false
-//           self.editButton.isHidden = false
-//            self.businesssCodeTextField.isHidden = true
-//            companyCode.text = businesssCodeTextField.text
-//            
-//        }
-//        else {
-//            self.companyCode.isHidden = true
-//          self.editButton.isHidden = true
+//        if(savedCode == false) {
 //            self.businesssCodeTextField.isHidden = false
-//            
+//            if businesssCodeTextField.text!.characters.count  == 6  {
+//                self.businesssCodeTextField.isHidden = true
+//            }
+//        else {
+//                businesssCodeTextField.isHidden = true
+//
+//
+//    }
+//
 //        }
-        
-    //    setCompanyCodeCancelButton()
     }
     
     func setCompanyCodeCancelButton () {
@@ -174,15 +200,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //
 //    }
 }
-    @objc func submitCompanyCode(_ sender:AnyObject) {
+        func submitCompanyCode(_ sender:AnyObject) {
         
-        self.businesssCodeTextField.resignFirstResponder()
-     
-        if(self.businesssCodeTextField.text!.characters.count > 0) {
-            // ARSLineProgress.showWithPresentCompetionBlock {
-            
-            self.companyRightButton.isHidden = true
-            //Loader.startLoadingInsideView(viewRightOfCompanyField)
+//        self.businesssCodeTextField.resignFirstResponder()
+//
+//        if(self.businesssCodeTextField.text!.characters.count > 0) {
+//            // ARSLineProgress.showWithPresentCompetionBlock {
+//
+//            self.companyRightButton.isHidden = true
+//            //Loader.startLoadingInsideView(viewRightOfCompanyField)
 //            self.saveCompanyCode({ (success) in
 //
 //                self.dismissKeyboard()
@@ -193,48 +219,48 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //}
         }
         //        #endif
-    }
+    
     
     func saveCompanyCode(_ completion: @escaping (_ success: Bool,_ message:String) -> Void) {
-        reachability =  Reachability()!
-        if reachability!.isReachable {
-            if reachability!.isReachableViaWiFi {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-                
-            }
-            
-//            saveCompanyCodeWithNet({ (success,message) in
+//        reachability =  Reachability()!
+//        if reachability!.isReachable {
+//            if reachability!.isReachableViaWiFi {
+//                print("Reachable via WiFi")
+//            } else {
+//                print("Reachable via Cellular")
 //
-//                if(!success) {
-//                    if(message.contains("ncorrect") || message.contains("input")) {
-//                        completion(success,message)
-//                    }
-//                    else {
-//                        Utilities.showInfo(title: "Internet issue", body: "Trying offline.")
-//                        self.saveCompanyCodeWithOutNet({ (success,message) in
+//            }
 //
-//                            completion(success,message)
-//                        })
-//                    }
-//                }
-//                else {
-//                    completion(success,message)
-//                }
-//            })
-            
-        }
-        else {
-            print("Network not reachable")
-            
-//            saveCompanyCodeWithOutNet({ (success,message) in
+////            saveCompanyCodeWithNet({ (success,message) in
+////
+////                if(!success) {
+////                    if(message.contains("ncorrect") || message.contains("input")) {
+////                        completion(success,message)
+////                    }
+////                    else {
+////                        Utilities.showInfo(title: "Internet issue", body: "Trying offline.")
+////                        self.saveCompanyCodeWithOutNet({ (success,message) in
+////
+////                            completion(success,message)
+////                        })
+////                    }
+////                }
+////                else {
+////                    completion(success,message)
+////                }
+////            })
 //
-//                completion(success,message)
-//            })
-        }
-        
-    }
+//        }
+//        else {
+//            print("Network not reachable")
+//
+////            saveCompanyCodeWithOutNet({ (success,message) in
+////
+////                completion(success,message)
+////            })
+//        }
+//
+//    }
     
   
 
@@ -248,6 +274,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     */
 
+}
 }
 
 class SecureTextFieldWithCustomFont : UITextField {

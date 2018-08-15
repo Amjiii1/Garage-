@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad10_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Car Scanner View-->
+        <scene sceneID="qax-tI-qtK">
+            <objects>
+                <viewController storyboardIdentifier="carScannerVc" id="0ob-62-hT5" customClass="CarScannerView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lXv-uw-SKf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Evo-Bs-Odc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JOu-G2-GDy">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-Qh-s0x">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="743"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="743" id="OYc-C1-dUM"/>
+                                    <constraint firstAttribute="width" constant="834" id="Zkt-pq-FWX"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osd-b9-woP">
+                                <rect key="frame" x="504" y="941" width="201" height="85"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.20784313725490197" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="201" id="LIo-Y2-mY2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLi-X7-e3i">
+                                <rect key="frame" x="94.5" y="941.5" width="145" height="85"/>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.23921568627450981" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="BZ9-l0-zix"/>
+                                    <constraint firstAttribute="height" constant="85" id="qkc-Jb-1qL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="scannerBackBtn:" destination="0ob-62-hT5" eventType="touchUpInside" id="UHZ-zq-xIM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQZ-Aq-T5V">
+                                <rect key="frame" x="412" y="789.5" width="385" height="89"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.13725490196078433" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="385" id="bDe-CM-3pk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Add VIN">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjN-sg-ReV">
+                                <rect key="frame" x="50" y="789.5" width="233" height="89"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.13725490196078433" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="89" id="VEl-Om-2vS"/>
+                                    <constraint firstAttribute="width" constant="233" id="hud-pZ-ffk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Add Plate No.">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="osd-b9-woP" firstAttribute="height" secondItem="NLi-X7-e3i" secondAttribute="height" id="0Z1-fH-j0w"/>
+                            <constraint firstItem="NLi-X7-e3i" firstAttribute="centerX" secondItem="kjN-sg-ReV" secondAttribute="centerX" id="8Hh-6Z-CqL"/>
+                            <constraint firstItem="hoE-Qh-s0x" firstAttribute="top" secondItem="JOu-G2-GDy" secondAttribute="top" id="Gw0-Jm-jyi"/>
+                            <constraint firstItem="osd-b9-woP" firstAttribute="centerY" secondItem="NLi-X7-e3i" secondAttribute="centerY" id="H01-B2-OJg"/>
+                            <constraint firstItem="osd-b9-woP" firstAttribute="centerX" secondItem="wQZ-Aq-T5V" secondAttribute="centerX" id="JEs-Pt-y64"/>
+                            <constraint firstItem="wQZ-Aq-T5V" firstAttribute="centerY" secondItem="kjN-sg-ReV" secondAttribute="centerY" id="MfZ-B1-AGE"/>
+                            <constraint firstAttribute="trailing" secondItem="hoE-Qh-s0x" secondAttribute="trailing" id="bXW-8u-TF7"/>
+                            <constraint firstItem="kjN-sg-ReV" firstAttribute="centerY" secondItem="JOu-G2-GDy" secondAttribute="centerY" multiplier="1.5" id="fEr-qE-2x0"/>
+                            <constraint firstItem="wQZ-Aq-T5V" firstAttribute="height" secondItem="kjN-sg-ReV" secondAttribute="height" id="g52-Ri-TOg"/>
+                            <constraint firstItem="kjN-sg-ReV" firstAttribute="centerX" secondItem="JOu-G2-GDy" secondAttribute="centerX" multiplier="0.4" id="giY-T4-cpU"/>
+                            <constraint firstItem="NLi-X7-e3i" firstAttribute="centerY" secondItem="JOu-G2-GDy" secondAttribute="centerY" multiplier="1.77" id="pMK-Vw-NnI"/>
+                            <constraint firstItem="hoE-Qh-s0x" firstAttribute="leading" secondItem="JOu-G2-GDy" secondAttribute="leading" id="s4e-QK-9de"/>
+                            <constraint firstItem="wQZ-Aq-T5V" firstAttribute="centerX" secondItem="JOu-G2-GDy" secondAttribute="centerX" multiplier="1.45" id="vxs-gA-EEJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="camerView" destination="hoE-Qh-s0x" id="oSq-Ms-IM8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rl3-bD-5dH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-220.14388489208633" y="138.66906474820144"/>
+        </scene>
+    </scenes>
+</document>

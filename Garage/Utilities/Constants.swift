@@ -9,10 +9,19 @@
 import Foundation
 
 struct Constants {
-    
+
     static let saveButtonImageName = "save-1"
     static let selectIconImage = "edit company code"
     
-    
 }
+
+
+
+
+
+
+
+
+
+
 

@@ -15,7 +15,7 @@
         <!--Mechanic View-->
         <scene sceneID="ujG-Fn-6QB">
             <objects>
-                <viewController storyboardIdentifier="MechanicVc" id="NKT-6w-w6b" customClass="MechanicView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MechanicVc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKT-6w-w6b" customClass="MechanicView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Och-OO-ce3">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,8 +23,22 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="nBc-rq-4a9">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="deU-Y5-Mlh">
+                                <rect key="frame" x="223" y="16" width="388" height="29"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="deU-Y5-Mlh" secondAttribute="height" multiplier="374:27" id="ASR-b9-Krr"/>
+                                    <constraint firstAttribute="height" constant="28" id="Pc9-xd-oOJ"/>
+                                    <constraint firstAttribute="width" constant="388" id="Zmm-tY-X0G"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pzp-mP-udE">
-                                <rect key="frame" x="29.5" y="0.0" width="150" height="60"/>
+                                <rect key="frame" x="30" y="0.0" width="150" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="kHb-K8-row"/>
@@ -39,47 +53,36 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WcU-yT-dR4">
-                                <rect key="frame" x="24" y="85" width="786" height="805"/>
-                                <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.80292166095890416" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8C-1O-VwM">
+                                <rect key="frame" x="27" y="100" width="780" height="790"/>
+                                <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.80227953767123283" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="WcU-yT-dR4" secondAttribute="height" multiplier="786:805" id="Reh-9C-HSH"/>
+                                    <constraint firstAttribute="width" secondItem="v8C-1O-VwM" secondAttribute="height" multiplier="78:79" id="0fY-35-uHu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="790" id="DEG-Xg-wjA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="780" id="TVa-c4-Uei"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="deU-Y5-Mlh">
-                                <rect key="frame" x="223" y="16" width="388" height="29"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="deU-Y5-Mlh" secondAttribute="height" multiplier="374:27" id="ASR-b9-Krr"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerX" secondItem="7Ze-ic-sks" secondAttribute="centerX" id="4qp-dI-tba"/>
+                            <constraint firstItem="v8C-1O-VwM" firstAttribute="centerX" secondItem="deU-Y5-Mlh" secondAttribute="centerX" id="44y-BR-I7i"/>
+                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" id="4qp-dI-tba"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="6ma-PC-oJx"/>
-                            <constraint firstItem="7Ze-ic-sks" firstAttribute="trailing" secondItem="WcU-yT-dR4" secondAttribute="trailing" constant="24" id="9h2-EK-vfJ"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="trailing" secondItem="7Ze-ic-sks" secondAttribute="trailing" id="9nS-BK-hrt"/>
-                            <constraint firstItem="WcU-yT-dR4" firstAttribute="bottom" secondItem="7Ze-ic-sks" secondAttribute="bottom" id="C7c-6t-lLJ"/>
-                            <constraint firstItem="WcU-yT-dR4" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" constant="25" id="FF1-QK-OYK"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="bottom" secondItem="7Ze-ic-sks" secondAttribute="bottom" id="JX1-gk-fiL"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="trailing" secondItem="lVL-lV-oyi" secondAttribute="trailing" id="9nS-BK-hrt"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="bottom" secondItem="lVL-lV-oyi" secondAttribute="bottom" id="JX1-gk-fiL"/>
                             <constraint firstItem="nBc-rq-4a9" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="LOX-8a-6zR"/>
                             <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerY" secondItem="Pzp-mP-udE" secondAttribute="centerY" id="OT6-3f-cGq"/>
-                            <constraint firstItem="WcU-yT-dR4" firstAttribute="leading" secondItem="7Ze-ic-sks" secondAttribute="leading" constant="24" id="afG-AN-qN0"/>
-                            <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="7Ze-ic-sks" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="leading" secondItem="7Ze-ic-sks" secondAttribute="leading" id="tTM-Dg-ufU"/>
+                            <constraint firstItem="v8C-1O-VwM" firstAttribute="bottom" secondItem="lVL-lV-oyi" secondAttribute="bottom" id="Ot6-Yy-m73"/>
+                            <constraint firstItem="v8C-1O-VwM" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" priority="988" constant="40" id="USh-hd-dBJ"/>
+                            <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
+                            <constraint firstItem="nBc-rq-4a9" firstAttribute="leading" secondItem="lVL-lV-oyi" secondAttribute="leading" id="tTM-Dg-ufU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7Ze-ic-sks"/>
+                        <viewLayoutGuide key="safeArea" id="lVL-lV-oyi"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="834" height="890"/>

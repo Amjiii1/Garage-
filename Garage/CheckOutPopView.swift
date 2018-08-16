@@ -25,10 +25,11 @@ class CheckOutPopView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
     }
     
 
-override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     
     }

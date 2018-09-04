@@ -24,12 +24,12 @@ class CheckoutView: UIViewController {
     
     @IBAction func ChecoutTest(_ sender: Any) {
         let storyboard = UIStoryboard(name: "CheckoutPopUp", bundle: nil)
-        let carScanner = storyboard.instantiateViewController(withIdentifier: "CheckOutPopVc") as! CheckOutPopView
+        let Checkout = storyboard.instantiateViewController(withIdentifier: "CheckOutPopVc") as! CheckOutPopView
         
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
-            carScanner.view.frame = vc.view.frame
-            vc.addChildViewController(carScanner)
-            vc.view.addSubview(carScanner.view)
+            Checkout.view.frame = vc.view.frame
+            vc.addChildViewController(Checkout)
+            vc.view.addSubview(Checkout.view)
         }
     }
     

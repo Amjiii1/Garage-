@@ -57,10 +57,12 @@
                                 <color key="tintColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="adx-qK-QDn">
-                                <rect key="frame" x="24" y="161" width="786" height="729"/>
+                                <rect key="frame" x="24" y="157" width="786" height="733"/>
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="729" id="TQJ-EN-mbM"/>
+                                    <constraint firstAttribute="height" constant="733" id="QwH-Wr-a8X"/>
+                                    <constraint firstAttribute="width" secondItem="adx-qK-QDn" secondAttribute="height" multiplier="786:733" id="Wgo-Tu-f6m"/>
+                                    <constraint firstAttribute="width" constant="786" id="f4I-Md-LKL"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -106,7 +108,6 @@
                             <constraint firstItem="tzh-FS-tlZ" firstAttribute="trailing" secondItem="307-cr-iuc" secondAttribute="trailing" id="3pk-NW-JC7"/>
                             <constraint firstItem="adx-qK-QDn" firstAttribute="leading" secondItem="307-cr-iuc" secondAttribute="leading" constant="24" id="8Yc-1V-tTA"/>
                             <constraint firstItem="ybL-j6-WGj" firstAttribute="centerX" secondItem="307-cr-iuc" secondAttribute="centerX" id="Axr-q8-1ZP"/>
-                            <constraint firstItem="adx-qK-QDn" firstAttribute="top" secondItem="ybL-j6-WGj" secondAttribute="bottom" constant="25" id="Ffe-3u-aiX"/>
                             <constraint firstItem="mCW-ne-tbG" firstAttribute="centerX" secondItem="307-cr-iuc" secondAttribute="centerX" multiplier="1.3" id="FxK-wa-uqb"/>
                             <constraint firstItem="mCW-ne-tbG" firstAttribute="top" secondItem="307-cr-iuc" secondAttribute="top" id="LpH-2F-ZrI"/>
                             <constraint firstItem="Rck-Xz-Vag" firstAttribute="centerX" secondItem="307-cr-iuc" secondAttribute="centerX" multiplier="1.67" id="Mks-HD-DMW"/>
@@ -114,6 +115,7 @@
                             <constraint firstItem="tzh-FS-tlZ" firstAttribute="bottom" secondItem="307-cr-iuc" secondAttribute="bottom" id="UgW-Tc-D51"/>
                             <constraint firstItem="adx-qK-QDn" firstAttribute="bottom" secondItem="307-cr-iuc" secondAttribute="bottom" id="Wup-nK-fB4"/>
                             <constraint firstAttribute="trailing" secondItem="adx-qK-QDn" secondAttribute="trailing" constant="24" id="XSK-Pg-8Va"/>
+                            <constraint firstItem="adx-qK-QDn" firstAttribute="bottom" secondItem="xXZ-Gz-Y28" secondAttribute="bottom" id="b0Z-2d-BkK"/>
                             <constraint firstItem="Rck-Xz-Vag" firstAttribute="top" secondItem="307-cr-iuc" secondAttribute="top" id="byw-vl-58u"/>
                             <constraint firstItem="tzh-FS-tlZ" firstAttribute="top" secondItem="307-cr-iuc" secondAttribute="top" id="fdz-2C-Noj"/>
                             <constraint firstItem="tzh-FS-tlZ" firstAttribute="leading" secondItem="307-cr-iuc" secondAttribute="leading" id="fty-0t-6lw"/>
@@ -135,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HkZ-Jp-gHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="759"/>
+            <point key="canvasLocation" x="94.964028776978424" y="758.6330935251799"/>
         </scene>
         <!--carScannerVc-->
         <scene sceneID="W0k-xX-J6e">

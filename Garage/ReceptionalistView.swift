@@ -79,6 +79,10 @@ class ReceptionalistView: UIViewController  {
             break
         default:
             break
+//            let url = URL(string: "https://www.marnpos.com/#/home")
+//            let requestObj = URLRequest(url: url! as URL)
+//            WebView.loadRequest(requestObj)
+            
         }
         
         if vc != nil {

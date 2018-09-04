@@ -9,18 +9,7 @@
 import UIKit
 
 class VoucherView: UIView {
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//
-//    }
-//    
+
 
 
 }

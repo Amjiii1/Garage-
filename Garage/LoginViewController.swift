@@ -16,7 +16,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var pinCodeTextField: SecureTextFieldWithCustomFont!
     @IBOutlet var newFreeTrail: CustomButton!
     @IBOutlet var businesssCodeTextField: UITextField!
-    
     @IBOutlet weak var logoImage: UIImageView!
     
     

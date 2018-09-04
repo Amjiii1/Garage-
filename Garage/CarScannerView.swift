@@ -9,16 +9,16 @@
 import AVFoundation  
 import UIKit
 
+
 class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
   //  var scanEnabled: Bool = false
     
     @IBOutlet weak var camerView: UIView!
-    
     @IBAction func scannerBackBtn(_ sender: Any) {
         
-        if let parentVC = self.parent as? ReceptionalistView {
+     if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
             parentVC.switchViewController(vc: vc!, showFooter: true)
@@ -31,9 +31,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate 
        
         capturingImage()
     }
-    
-    
-    
     
     func capturingImage() {
         view.backgroundColor = UIColor.black

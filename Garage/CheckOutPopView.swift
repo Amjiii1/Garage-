@@ -10,6 +10,8 @@ import UIKit
 
 class CheckOutPopView: UIViewController {
 
+    
+    
     @IBOutlet weak var PopUpView: UIView!
     @IBOutlet weak var containerPop: UIView!
     

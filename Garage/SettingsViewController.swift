@@ -63,6 +63,9 @@ class SettingsViewController: UIViewController {
         }
         
     }
+    
+    
+    
    
     func removeNibViews() {
         if settingContianerPop.subviews.count > 0  {
@@ -77,7 +80,13 @@ class SettingsViewController: UIViewController {
         
     }
     
-    
+    func myButtonTapped(){
+        if  UIButton.isSelected == true {
+            UIButton.isSelected = false
+        }   else {
+            UIButton.isSelected = true
+        }
+    }
     
     
     

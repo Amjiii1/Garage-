@@ -14,20 +14,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="GiftCardView" customModule="Garage" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="545" height="415"/>
+            <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-Re-gSm">
-                    <rect key="frame" x="0.0" y="0.0" width="545" height="415"/>
+                    <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardBox" translatesAutoresizingMaskIntoConstraints="NO" id="VBY-Bm-1sU">
-                            <rect key="frame" x="0.0" y="0.0" width="545" height="415"/>
+                            <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoGC" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-UT-ZZX">
-                            <rect key="frame" x="85.5" y="84" width="118" height="40"/>
+                            <rect key="frame" x="86.5" y="92" width="118" height="40"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7788-6655-1111-2311" textAlignment="center" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-wA-Mbm">
-                            <rect key="frame" x="92.5" y="234" width="360" height="67"/>
+                            <rect key="frame" x="94" y="253.5" width="360" height="67"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="yAR-wA-Mbm" secondAttribute="height" multiplier="360:67" id="cJt-S0-Csp"/>
                                 <constraint firstAttribute="height" constant="67" id="f1U-hL-F6D"/>

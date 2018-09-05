@@ -12,11 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="LoyaltyView" customModule="Garage" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="545" height="415"/>
+            <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoyaltyScreen" translatesAutoresizingMaskIntoConstraints="NO" id="fU8-MZ-jQc">
-                    <rect key="frame" x="0.0" y="0.0" width="545" height="415"/>
+                    <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lG7-tK-GaI">
                     <rect key="frame" x="25" y="24" width="382" height="57"/>

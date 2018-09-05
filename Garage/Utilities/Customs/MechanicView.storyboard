@@ -52,6 +52,9 @@
                                         <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="SeetingsBtnexp:" destination="NKT-6w-w6b" eventType="touchUpInside" id="1Ab-Bx-Wl9"/>
+                                </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8C-1O-VwM">
                                 <rect key="frame" x="27" y="100" width="780" height="790"/>
@@ -78,7 +81,7 @@
                             <constraint firstItem="nBc-rq-4a9" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="LOX-8a-6zR"/>
                             <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerY" secondItem="Pzp-mP-udE" secondAttribute="centerY" id="OT6-3f-cGq"/>
                             <constraint firstItem="v8C-1O-VwM" firstAttribute="bottom" secondItem="lVL-lV-oyi" secondAttribute="bottom" id="Ot6-Yy-m73"/>
-                            <constraint firstItem="v8C-1O-VwM" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" priority="988" constant="40" id="USh-hd-dBJ"/>
+                            <constraint firstItem="v8C-1O-VwM" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" constant="40" id="USh-hd-dBJ"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
                             <constraint firstItem="nBc-rq-4a9" firstAttribute="leading" secondItem="lVL-lV-oyi" secondAttribute="leading" id="tTM-Dg-ufU"/>
                         </constraints>
@@ -86,10 +89,21 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="834" height="890"/>
+                    <connections>
+                        <segue destination="NVA-F5-GMu" kind="show" id="gm6-a8-g5t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ie-Y7-ua0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="65.467625899280577" y="94.42446043165468"/>
+        </scene>
+        <!--SettingViewControllerVc-->
+        <scene sceneID="inB-eo-fAr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsViewController" referencedIdentifier="SettingViewControllerVc" id="NVA-F5-GMu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sEP-bE-2Qr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="94"/>
         </scene>
     </scenes>
     <resources>

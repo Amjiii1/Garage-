@@ -17,6 +17,19 @@ class MechanicView: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+   
+    
+    @IBAction func SeetingsBtnexp(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+        let setting = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+        
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            setting.view.frame = vc.view.frame
+            vc.addChildViewController(setting)
+            vc.view.addSubview(setting.view)
+        }
+        
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {

@@ -20,16 +20,14 @@ class MechanicView: UIViewController {
    
     
     @IBAction func SeetingsBtnexp(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
-        let setting = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
-        
-        if let vc = UIApplication.shared.keyWindow?.rootViewController {
-            setting.view.frame = vc.view.frame
-            vc.addChildViewController(setting)
-            vc.view.addSubview(setting.view)
-        }
-        
+        if let parentVC = self.parent as? ReceptionalistView {
+            let storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+            let setting = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+            parentVC.switchViewController(vc: setting, showFooter: false)
+
     }
+    }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {

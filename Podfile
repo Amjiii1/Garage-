@@ -8,6 +8,9 @@ target 'Garage' do
   # Pods for Garage
 
    pod 'IQKeyboardManager'
+    pod 'Alamofire', '~> 4.7'
+    pod 'SwiftyJSON'
+    
 
 
   target 'GarageTests' do

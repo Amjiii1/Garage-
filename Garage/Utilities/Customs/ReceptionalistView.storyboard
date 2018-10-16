@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
         <!--Receptionalist View-->
         <scene sceneID="uKB-3b-hO1">
             <objects>
-                <viewController storyboardIdentifier="ReceptionalistVc" id="taV-Q1-0Xu" customClass="ReceptionalistView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReceptionalistVc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="taV-Q1-0Xu" customClass="ReceptionalistView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V4Q-Hz-YGN">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,6 +86,9 @@
                                             <constraint firstAttribute="width" secondItem="Gm2-q9-QT7" secondAttribute="height" multiplier="1:1" id="9MA-Gv-MYi"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="menuButton"/>
+                                        <connections>
+                                            <action selector="logoutButton:" destination="taV-Q1-0Xu" eventType="touchUpInside" id="fGr-NI-lG6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -160,7 +163,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="ServiceVc" storyboardName="WelcomeView" referencedIdentifier="WelcomeVc" id="LmI-mf-xKd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrk-lt-BhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="564" y="-168"/>
+            <point key="canvasLocation" x="727" y="-213"/>
         </scene>
         <!--MechanicVc-->
         <scene sceneID="dv6-Za-FT1">
@@ -168,7 +171,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="MechanicVc" storyboardName="MechanicView" referencedIdentifier="MechanicVc" id="RrT-tt-aya" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rW9-eA-5ZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="564" y="-97"/>
+            <point key="canvasLocation" x="729" y="-98"/>
         </scene>
         <!--CheckoutVc-->
         <scene sceneID="qze-NJ-5fL">
@@ -176,7 +179,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="CheckoutVc" storyboardName="CheckoutView" referencedIdentifier="CheckoutVc" id="19b-Iz-w5V" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paJ-QZ-Sye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562" y="-19"/>
+            <point key="canvasLocation" x="726" y="1"/>
         </scene>
     </scenes>
     <resources>

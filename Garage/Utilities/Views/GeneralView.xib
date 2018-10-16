@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,12 +15,17 @@
             <rect key="frame" x="0.0" y="0.0" width="834" height="671"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GeneralView" translatesAutoresizingMaskIntoConstraints="NO" id="Feu-sh-Ksr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GeneralView" translatesAutoresizingMaskIntoConstraints="NO" id="Feu-sh-Ksr">
                     <rect key="frame" x="0.0" y="0.0" width="834" height="671"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Feu-sh-Ksr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Gg-rZ-bZF"/>
+                <constraint firstItem="Feu-sh-Ksr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sj5-1t-QU9"/>
+                <constraint firstAttribute="bottom" secondItem="Feu-sh-Ksr" secondAttribute="bottom" id="fw7-ke-c8D"/>
+                <constraint firstAttribute="trailing" secondItem="Feu-sh-Ksr" secondAttribute="trailing" id="uWh-5x-WRs"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="25" y="51.5"/>
         </view>

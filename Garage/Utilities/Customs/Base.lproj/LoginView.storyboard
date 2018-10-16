@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,33 +32,36 @@
                                     <constraint firstAttribute="width" secondItem="gWu-Qf-RsE" secondAttribute="height" multiplier="1:1" id="2as-nN-a0F"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="tWU-kR-zfw" userLabel="PinCodeTextfield" customClass="SecureTextFieldWithCustomFont" customModule="Garage" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="tWU-kR-zfw" userLabel="PinCodeTextfield" customClass="SecureTextFieldWithCustomFont" customModule="Garage" customModuleProvider="target">
                                 <rect key="frame" x="283.5" y="444.5" width="267" height="78.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tWU-kR-zfw" secondAttribute="height" multiplier="115:34" id="3Gt-lc-abg"/>
                                 </constraints>
                                 <color key="textColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="53"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGs-Li-hSS" userLabel="businessCode">
-                                <rect key="frame" x="297" y="544.5" width="240" height="78.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="BusinnesscodeBtn:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="IIE-8B-bYq"/>
+                                    <action selector="Pincodefield:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="d59-a5-clI"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGs-Li-hSS" userLabel="businessCode">
+                                <rect key="frame" x="297" y="544.5" width="240" height="78.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="BusinessCodeAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="AgG-Io-e22"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TD2-zy-HgD" customClass="CustomButton" customModule="Garage" customModuleProvider="target">
@@ -67,7 +70,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TD2-zy-HgD" secondAttribute="height" multiplier="57:14" id="bce-2F-MSM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="+ New? Free trail">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -76,14 +79,14 @@
                                         <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="Wfm-9E-h2Q" kind="show" identifier="ReceptionalistVc" id="d6F-7f-U64"/>
-                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ki6-Bl-bnP">
                                 <rect key="frame" x="296.5" y="1013.5" width="58" height="58"/>
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="shape"/>
+                                <connections>
+                                    <action selector="toastexmple:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6p4-db-01V"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fG1-PW-TBv">
                                 <rect key="frame" x="388" y="1013.5" width="58" height="58"/>
@@ -139,6 +142,7 @@
                         <outlet property="logoImage" destination="gWu-Qf-RsE" id="Kxy-8J-25c"/>
                         <outlet property="newFreeTrail" destination="TD2-zy-HgD" id="lSE-hh-siy"/>
                         <outlet property="pinCodeTextField" destination="tWU-kR-zfw" id="BkW-tu-oU6"/>
+                        <segue destination="Wfm-9E-h2Q" kind="show" id="jCD-5w-j5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

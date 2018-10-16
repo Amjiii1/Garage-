@@ -15,6 +15,7 @@ class CheckOutPopView: UIViewController {
     @IBOutlet weak var PopUpView: UIView!
     @IBOutlet weak var containerPop: UIView!
     
+    @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var voucherBtn: UIButton!
     @IBOutlet weak var loyalityBtn: UIButton!
     @IBOutlet weak var giftcardBtn: UIButton!
@@ -25,7 +26,12 @@ class CheckOutPopView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var voucherNibView:  VoucherView!
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
+        voucherNibView = Bundle.main.loadNibNamed("VoucherView", owner: self, options: nil)?[0] as! VoucherView
+        voucherNibView.frame.size = containerPop.frame.size
+        self.containerPop.addSubview(voucherNibView)
+        voucherBtn.isSelected = true
     }
     
 
@@ -42,7 +48,8 @@ class CheckOutPopView: UIViewController {
        var cardNibView:     CardView!
        var cashNibView:     CashView!
 
-        removeNibViews()    
+        removeNibViews()
+        checkboxDidTap(sender: sender)
         
         switch sender.tag {
             
@@ -81,14 +88,23 @@ class CheckOutPopView: UIViewController {
         
        }
     
-    
     func checkboxDidTap(sender: UIButton){
-        let tag = sender.tag
-        if tag == 1 {
-          voucherBtn.isSelected = true
-            
+        
+        for i in 1...5 {
+            if let btn = buttonStackView.viewWithTag(i) as? UIButton {
+                btn.isSelected = false
+            }
+        }
+        sender.isSelected = true
+         }
     
-}
+    
+    func myButtonTapped()  {
+        if  voucherBtn.isSelected == true {
+            voucherBtn.isSelected = false
+        }   else {
+            voucherBtn.isSelected = true
+        }
     }
     
     
@@ -109,10 +125,13 @@ class CheckOutPopView: UIViewController {
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
-         if let parentVC = self.parent as? ReceptionalistView {
-            print("Hellow")
-       
-            }
+        if let parentVC = (self.parent as? ReceptionalistView) {
+            let storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as? CheckoutView
+            parentVC.switchViewController(vc: vc!, showFooter: true)
+            
+        }
+        
     }
     
     

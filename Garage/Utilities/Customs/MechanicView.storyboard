@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,9 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="nBc-rq-4a9">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="890"/>
-                            </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="deU-Y5-Mlh">
                                 <rect key="frame" x="223" y="16" width="388" height="29"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -32,8 +29,8 @@
                                     <constraint firstAttribute="width" constant="388" id="Zmm-tY-X0G"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Current"/>
+                                    <segment title="Finished"/>
                                 </segments>
                                 <color key="tintColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
@@ -58,11 +55,23 @@
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8C-1O-VwM">
                                 <rect key="frame" x="27" y="100" width="780" height="790"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQe-Ub-0VL">
+                                        <rect key="frame" x="195.5" y="276.5" width="390" height="237"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.80227953767123283" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="v8C-1O-VwM" secondAttribute="height" multiplier="78:79" id="0fY-35-uHu"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="790" id="DEG-Xg-wjA"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="780" id="TVa-c4-Uei"/>
+                                    <constraint firstItem="yQe-Ub-0VL" firstAttribute="height" secondItem="v8C-1O-VwM" secondAttribute="height" multiplier="0.3" id="Z23-Mz-Xbk"/>
+                                    <constraint firstItem="yQe-Ub-0VL" firstAttribute="width" secondItem="v8C-1O-VwM" secondAttribute="width" multiplier="0.5" id="Zjx-7C-YSh"/>
+                                    <constraint firstItem="yQe-Ub-0VL" firstAttribute="centerX" secondItem="v8C-1O-VwM" secondAttribute="centerX" id="jBw-Qd-3Vg"/>
+                                    <constraint firstItem="yQe-Ub-0VL" firstAttribute="centerY" secondItem="v8C-1O-VwM" secondAttribute="centerY" id="mro-4y-d25"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -71,19 +80,15 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="v8C-1O-VwM" firstAttribute="centerX" secondItem="deU-Y5-Mlh" secondAttribute="centerX" id="44y-BR-I7i"/>
                             <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" id="4qp-dI-tba"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="6ma-PC-oJx"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="trailing" secondItem="lVL-lV-oyi" secondAttribute="trailing" id="9nS-BK-hrt"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="bottom" secondItem="lVL-lV-oyi" secondAttribute="bottom" id="JX1-gk-fiL"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="top" secondItem="Och-OO-ce3" secondAttribute="top" id="LOX-8a-6zR"/>
                             <constraint firstItem="deU-Y5-Mlh" firstAttribute="centerY" secondItem="Pzp-mP-udE" secondAttribute="centerY" id="OT6-3f-cGq"/>
                             <constraint firstItem="v8C-1O-VwM" firstAttribute="bottom" secondItem="lVL-lV-oyi" secondAttribute="bottom" id="Ot6-Yy-m73"/>
                             <constraint firstItem="v8C-1O-VwM" firstAttribute="top" secondItem="Pzp-mP-udE" secondAttribute="bottom" constant="40" id="USh-hd-dBJ"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
-                            <constraint firstItem="nBc-rq-4a9" firstAttribute="leading" secondItem="lVL-lV-oyi" secondAttribute="leading" id="tTM-Dg-ufU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lVL-lV-oyi"/>
                     </view>
@@ -107,7 +112,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Loginbg" width="768" height="1024"/>
         <image name="bay" width="150" height="60"/>
     </resources>
 </document>

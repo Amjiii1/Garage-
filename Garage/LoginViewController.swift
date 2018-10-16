@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnUpArrow: UIButton!
@@ -37,6 +38,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+      
         pinCodeTextField.layer.cornerRadius = 15.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
@@ -45,32 +47,127 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
          businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
-     
-               businesssCodeTextField.text = "POS-"
+        businesssCodeTextField.text = "POS-"
+       
+        
+    }
+   
+    
+    
+    @IBAction func Pincodefield(_ sender: Any) {
+        guard let url = URL(string: "http://garageapi.isalespos.com/api/login/signin/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
+        print("\(pinCodeTextField.text!)")
+        print("\(businesssCodeTextField.text!)")
+      
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                print(data)
+                do {
+                    
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    
+                    let descript = login(json: json)
+                    print(descript.description)
+                    if (descript.description == 1) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "Login Successfully", controller: self)
+                       // self.showLoader()
+                        }
+                        
+                        let storyboard: UIStoryboard = UIStoryboard(name: "ReceptionalistView", bundle: nil)
+                        let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "ReceptionalistVc") as! ReceptionalistView
+                        self.present(initViewController, animated: true, completion: nil)
+                    } else {
+                         DispatchQueue.main.async {
+                        ToastView.show(message: "User does Not Exist", controller: self)
+                        
+                        self.pinCodeTextField.isEnabled = true
+                            self.businesssCodeTextField.isEnabled = true
+                    }
+                    }
+                    
+                   
+                } catch {
+                   
+                    print(error)
+                    DispatchQueue.main.async {
+                   ToastView.show(message: "Login Failed! check internet", controller: self)
+                    self.pinCodeTextField.isEnabled = true
+                    self.businesssCodeTextField.isEnabled = true
+                    }
+                }
+              
+                
+            }
+            
+            
+        }.resume()
+    
+        
     }
     
+    @IBAction func toastexmple(_ sender: Any) {
+       
+        
+    }
+    
+    
+    @IBAction func BusinessCodeAction(_ sender: Any) {
+        
+        guard let url = URL(string: "http://garageapi.isalespos.com/api/login/\(businesssCodeTextField.text!)") else { return }
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response,  error) in
+            if let data = data {
+                do {
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    let status = Course(json: json)
+                    if (status.message == 1) {
+                          DispatchQueue.main.async {
+                     ToastView.show(message: "BusinessCode Verified Successfully!", controller: self)
+                        }
+                    }
+                     else {
+                         DispatchQueue.main.async {
+                      ToastView.show(message: "BusinessCode Verified Failed!", controller: self)
+                        self.businesssCodeTextField.isEnabled = true
+                }
+                    
+                }
+                } catch {
+                     print("Nothing")
+                    print(error)
+                    ToastView.show(message: " BusinessCode Login Failed! check internet", controller: self)
+                     self.businesssCodeTextField.isEnabled = true
+                }
+                
+            }
+            }.resume()
+       
+    }
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField.text!.characters.count  == 4          {
-             self.performSegue(withIdentifier: "ReceptionalistVc", sender: nil)
+           //  self.performSegue(withIdentifier: "ReceptionalistVc", sender: nil)
+            pinCodeTextField.isEnabled = false
+            
         }
     }
     
     @objc func bussinessCodeDidChange(_ textField: UITextField) {
-       // businesssCodeTextField.text = "POS-"
-      
-         //   businesssCodeTextField.isEnabled = true
         if businesssCodeTextField.text!.characters.count == 10 {
             businesssCodeTextField.isEnabled = false
         }
-        //  businesssCodeTextField.isEnabled = false
-        
         else {
             businesssCodeTextField.isEnabled = true
         }
     
     }
     override func viewWillAppear(_ animated: Bool) {
+        businesssCodeTextField.text = "POS-"
+        pinCodeTextField.text = ""
         businesssCodeTextField.isEnabled = true
+        pinCodeTextField.isEnabled = true
     }
     
     
@@ -79,9 +176,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewWillDisappear(_ animated: Bool) {
-//        self.businesssCodeTextField.resignFirstResponder()
-//        self.pinCodeTextField.resignFirstResponder()
-        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -274,6 +369,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     */
 
 }
+   
+    
+    
+}
+extension UIActivityIndicatorView {
+    func dismissLoader() {
+        self.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
 }
 
 class SecureTextFieldWithCustomFont : UITextField {
@@ -329,25 +433,25 @@ class SecureTextFieldWithCustomFont : UITextField {
             self.text = ""
         }
         self.actualText = textFrom
-        self.text = self.dotPlaceholder()
+        //self.text = self.dotPlaceholder()
     }
     
     @objc func editingDidFinish() {
         //self.isSecureTextEntry = false
         self.actualText = self.textFrom
-        self.text = self.dotPlaceholder()
+       // self.text = self.dotPlaceholder()
     }
     
-    func dotPlaceholder() -> String {
-        var index = 0
-        var dots = ""
-        while index < (self.text?.characters.count)! {
-            dots += "•"
-            index += 1
-        }
-        return dots
+//    func dotPlaceholder() -> String {
+//        var index = 0
+//        var dots = ""
+//        while index < (self.text?.characters.count)! {
+//            dots += "•"
+//            index += 1
+//        }
+//        return dots
     }
     
     
     
-}
+

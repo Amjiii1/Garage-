@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoGC" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-UT-ZZX">
-                            <rect key="frame" x="86.5" y="92" width="118" height="40"/>
+                            <rect key="frame" x="90.5" y="89" width="110" height="44.5"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7788-6655-1111-2311" textAlignment="center" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-wA-Mbm">
                             <rect key="frame" x="94" y="253.5" width="360" height="67"/>
@@ -47,12 +47,18 @@
                     <constraints>
                         <constraint firstItem="yAR-wA-Mbm" firstAttribute="centerX" secondItem="1MI-Re-gSm" secondAttribute="centerX" id="41g-Sf-Vkn"/>
                         <constraint firstItem="VBY-Bm-1sU" firstAttribute="leading" secondItem="1MI-Re-gSm" secondAttribute="leading" id="6ns-6T-CNn"/>
+                        <constraint firstItem="VBY-Bm-1sU" firstAttribute="leading" secondItem="1MI-Re-gSm" secondAttribute="leading" id="Aes-Mh-jlD"/>
+                        <constraint firstAttribute="bottom" secondItem="VBY-Bm-1sU" secondAttribute="bottom" id="Hph-aJ-iB9"/>
                         <constraint firstAttribute="trailing" secondItem="VBY-Bm-1sU" secondAttribute="trailing" id="Sfs-n1-NF2"/>
                         <constraint firstItem="dsf-UT-ZZX" firstAttribute="centerY" secondItem="1MI-Re-gSm" secondAttribute="centerY" multiplier="0.5" id="V0S-oO-Wq8"/>
                         <constraint firstItem="dsf-UT-ZZX" firstAttribute="centerX" secondItem="1MI-Re-gSm" secondAttribute="centerX" multiplier="0.53" id="dPh-Ap-Kzo"/>
+                        <constraint firstItem="dsf-UT-ZZX" firstAttribute="height" secondItem="1MI-Re-gSm" secondAttribute="height" multiplier="0.1" id="dca-TA-4R1"/>
                         <constraint firstItem="yAR-wA-Mbm" firstAttribute="centerY" secondItem="1MI-Re-gSm" secondAttribute="centerY" multiplier="1.29" id="dho-PD-YXu"/>
                         <constraint firstAttribute="bottom" secondItem="VBY-Bm-1sU" secondAttribute="bottom" id="f8V-hF-Mb4"/>
+                        <constraint firstItem="dsf-UT-ZZX" firstAttribute="width" secondItem="1MI-Re-gSm" secondAttribute="width" multiplier="0.2" id="fYx-9K-IXS"/>
+                        <constraint firstItem="VBY-Bm-1sU" firstAttribute="top" secondItem="1MI-Re-gSm" secondAttribute="top" id="kin-cm-AG8"/>
                         <constraint firstItem="VBY-Bm-1sU" firstAttribute="top" secondItem="1MI-Re-gSm" secondAttribute="top" id="liU-61-noG"/>
+                        <constraint firstAttribute="trailing" secondItem="VBY-Bm-1sU" secondAttribute="trailing" id="xXh-SW-Z94"/>
                     </constraints>
                 </view>
             </subviews>

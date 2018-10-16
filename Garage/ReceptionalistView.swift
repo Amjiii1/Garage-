@@ -39,19 +39,25 @@ class ReceptionalistView: UIViewController  {
     }
     
     
+    @IBAction func logoutButton(_ sender: Any) {
+       dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     func showLocationTable () {
         var storyboard: UIStoryboard!
          var popController: UIViewController!
-        storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as! WelcomeView
+        storyboard = UIStoryboard(name: "PopOver", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "PopOverVc") as! PopOver
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 44*3
         let popover = nav.popoverPresentationController
         popController.preferredContentSize = CGSize(width: 200 , height: heightForPopOver)
-        popover?.permittedArrowDirections = .left
+        popover?.permittedArrowDirections = .up
         popover?.sourceView = self.profileBtnOutlet
-        popController.popoverPresentationController?.sourceRect = self.profileBtnOutlet.frame
+        popController.popoverPresentationController?.sourceRect = self.profileBtnOutlet.bounds
         self.present(nav, animated: true, completion: nil)
     
     }
@@ -92,15 +98,16 @@ class ReceptionalistView: UIViewController  {
     
     func removeAllChildViewControllers() {
        
-
+ 
         if childViewControllers.count > 0 {
             let viewControllers:[UIViewController] = childViewControllers
             for viewContoller in viewControllers  {
                 viewContoller.willMove(toParentViewController: nil)
                 viewContoller.view.removeFromSuperview()
                 viewContoller.removeFromParentViewController()
-            }
+            
         }
+    }
     }
     
     func switchViewController(vc: UIViewController, showFooter: Bool) {
@@ -114,6 +121,7 @@ class ReceptionalistView: UIViewController  {
             height = orginalHeight - headerView.frame.size.height
             footerViewHeightConstraint.constant = 0
             self.view.layoutIfNeeded()
+            
         }
          self.view.layoutIfNeeded()
         vc.view.frame = CGRect(x: 0, y: 0, width: containerView.frame.size.width, height: height)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -45,6 +45,9 @@
                                         <integer key="value" value="14"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="continueBtn:" destination="0ob-62-hT5" eventType="touchUpInside" id="rsS-yY-RDp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLi-X7-e3i">
                                 <rect key="frame" x="94.5" y="941.5" width="145" height="85"/>
@@ -98,17 +101,36 @@
                                         <integer key="value" value="14"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addPlateNmbBtn:" destination="0ob-62-hT5" eventType="touchUpInside" id="wWW-Wa-UHR"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NQp-Bi-nqS">
+                                <rect key="frame" x="50" y="789.5" width="233" height="89"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="osd-b9-woP" firstAttribute="height" secondItem="NLi-X7-e3i" secondAttribute="height" id="0Z1-fH-j0w"/>
                             <constraint firstItem="NLi-X7-e3i" firstAttribute="centerX" secondItem="kjN-sg-ReV" secondAttribute="centerX" id="8Hh-6Z-CqL"/>
+                            <constraint firstItem="NQp-Bi-nqS" firstAttribute="centerX" secondItem="kjN-sg-ReV" secondAttribute="centerX" id="8Ka-QJ-ybt"/>
                             <constraint firstItem="hoE-Qh-s0x" firstAttribute="top" secondItem="JOu-G2-GDy" secondAttribute="top" id="Gw0-Jm-jyi"/>
                             <constraint firstItem="osd-b9-woP" firstAttribute="centerY" secondItem="NLi-X7-e3i" secondAttribute="centerY" id="H01-B2-OJg"/>
                             <constraint firstItem="osd-b9-woP" firstAttribute="centerX" secondItem="wQZ-Aq-T5V" secondAttribute="centerX" id="JEs-Pt-y64"/>
                             <constraint firstItem="wQZ-Aq-T5V" firstAttribute="centerY" secondItem="kjN-sg-ReV" secondAttribute="centerY" id="MfZ-B1-AGE"/>
+                            <constraint firstItem="NQp-Bi-nqS" firstAttribute="centerY" secondItem="kjN-sg-ReV" secondAttribute="centerY" id="XcP-po-P2S"/>
+                            <constraint firstItem="NQp-Bi-nqS" firstAttribute="height" secondItem="kjN-sg-ReV" secondAttribute="height" id="Zwf-gs-Qbk"/>
                             <constraint firstAttribute="trailing" secondItem="hoE-Qh-s0x" secondAttribute="trailing" id="bXW-8u-TF7"/>
+                            <constraint firstItem="NQp-Bi-nqS" firstAttribute="width" secondItem="kjN-sg-ReV" secondAttribute="width" id="bdO-4S-tyO"/>
                             <constraint firstItem="kjN-sg-ReV" firstAttribute="centerY" secondItem="JOu-G2-GDy" secondAttribute="centerY" multiplier="1.5" id="fEr-qE-2x0"/>
                             <constraint firstItem="wQZ-Aq-T5V" firstAttribute="height" secondItem="kjN-sg-ReV" secondAttribute="height" id="g52-Ri-TOg"/>
                             <constraint firstItem="kjN-sg-ReV" firstAttribute="centerX" secondItem="JOu-G2-GDy" secondAttribute="centerX" multiplier="0.4" id="giY-T4-cpU"/>
@@ -118,6 +140,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addplateTextfield" destination="NQp-Bi-nqS" id="2w6-I8-KDv"/>
                         <outlet property="camerView" destination="hoE-Qh-s0x" id="oSq-Ms-IM8"/>
                     </connections>
                 </viewController>

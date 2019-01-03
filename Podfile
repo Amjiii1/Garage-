@@ -10,6 +10,8 @@ target 'Garage' do
    pod 'IQKeyboardManager'
     pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON'
+    pod 'Kingfisher'
+    pod 'NumericKeyboard'
     
 
 

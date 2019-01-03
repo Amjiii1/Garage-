@@ -27,7 +27,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var anything = true
     var reveal = true
     
-    
     var savedCode = false {
         didSet {
             changeViewForSavedCode()
@@ -39,73 +38,130 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
       
-        pinCodeTextField.layer.cornerRadius = 15.0
+        pinCodeTextField.layer.cornerRadius = 18.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
-        businesssCodeTextField.layer.cornerRadius = 15.0
+        businesssCodeTextField.layer.cornerRadius = 18.0
         businesssCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
          businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
         businesssCodeTextField.text = "POS-"
-       
+        arrowImage()
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+     
+        
+  
+           }
+  
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    func arrowImage() {
+        
+        pinCodeTextField.rightViewMode = .always
+        let emailImgContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let emailImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        emailImg.image = UIImage(named: "arrowlogin")
+        emailImg.center = emailImgContainer.center
+        emailImgContainer.addSubview(emailImg)
+        pinCodeTextField.rightView = emailImgContainer
+        
         
     }
    
     
     
     @IBAction func Pincodefield(_ sender: Any) {
-        guard let url = URL(string: "http://garageapi.isalespos.com/api/login/signin/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
+        self.pinCodeTextField.isEnabled = true
+        
+    }
+    
+    func PincodeApi() {
+        
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.LoginApi)/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
         print("\(pinCodeTextField.text!)")
         print("\(businesssCodeTextField.text!)")
-      
+        
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    self.pinCodeTextField.isEnabled = true
+                    self.businesssCodeTextField.isEnabled = true
+                }
+            }
             if let data = data {
                 print(data)
                 do {
                     
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
-                    
+                    print(json)
                     let descript = login(json: json)
-                    print(descript.description)
-                    if (descript.description == 1) {
+                    if (descript.status == 1) {
                         DispatchQueue.main.async {
                             ToastView.show(message: "Login Successfully", controller: self)
-                       // self.showLoader()
                         }
-                        
+                        if let User = json["User"] as? [String: Any] {
+                            print(User)
+                            if  let session = User["Session"] as? String {
+                                print(session)
+                                Constants.sessions = session
+                                print(session)
+                            }
+                            if  let ordertracker = User["SubUserID"] as? Int {
+                                print(session)
+                                Constants.ordertracker = String (ordertracker)
+                                print(session)
+                            }
+                        }
                         let storyboard: UIStoryboard = UIStoryboard(name: "ReceptionalistView", bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "ReceptionalistVc") as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)
                     } else {
-                         DispatchQueue.main.async {
-                        ToastView.show(message: "User does Not Exist", controller: self)
-                        
-                        self.pinCodeTextField.isEnabled = true
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "User does Not Exist", controller: self)
+                            
+                            self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
-                    }
+                        }
                     }
                     
-                   
+                    
                 } catch {
-                   
+                    
                     print(error)
                     DispatchQueue.main.async {
-                   ToastView.show(message: "Login Failed! check internet", controller: self)
-                    self.pinCodeTextField.isEnabled = true
-                    self.businesssCodeTextField.isEnabled = true
+                        ToastView.show(message: "Login failed! Try Again", controller: self)
+                        self.pinCodeTextField.isEnabled = true
+                        self.businesssCodeTextField.isEnabled = true
                     }
                 }
-              
+                
                 
             }
             
             
-        }.resume()
-    
+            
+            }.resume()
+        
         
     }
+    
+    
+    
+    
     
     @IBAction func toastexmple(_ sender: Any) {
        
@@ -114,65 +170,89 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func BusinessCodeAction(_ sender: Any) {
+         self.businesssCodeTextField.isEnabled = true
+      
+    }
+    
+    
+    func BusinessApi() {
         
-        guard let url = URL(string: "http://garageapi.isalespos.com/api/login/\(businesssCodeTextField.text!)") else { return }
+        
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.BusinessCodeapi)/\(businesssCodeTextField.text!)") else { return }
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response,  error) in
+//            if response == nil {
+//                DispatchQueue.main.async {
+//                    ToastView.show(message: "Login failed! Check internet", controller: self)
+//                    self.businesssCodeTextField.isEnabled = true
+//                }
+//            }
             if let data = data {
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    print(json)
                     let status = Course(json: json)
                     if (status.message == 1) {
-                          DispatchQueue.main.async {
-                     ToastView.show(message: "BusinessCode Verified Successfully!", controller: self)
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "BusinessCode Verified Successfully!", controller: self)
+                            self.businesssCodeTextField.isEnabled = true
+                           
                         }
                     }
-                     else {
-                         DispatchQueue.main.async {
-                      ToastView.show(message: "BusinessCode Verified Failed!", controller: self)
-                        self.businesssCodeTextField.isEnabled = true
-                }
-                    
-                }
+                        
+                    else {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "BusinessCode Verified Failed!", controller: self)
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                        
+                    }
                 } catch {
-                     print("Nothing")
+                    
                     print(error)
-                    ToastView.show(message: " BusinessCode Login Failed! check internet", controller: self)
-                     self.businesssCodeTextField.isEnabled = true
+                    ToastView.show(message: " BusinessCode Failed! Try Again", controller: self)
+                    self.businesssCodeTextField.isEnabled = true
                 }
                 
             }
             }.resume()
-       
+        
+        
+        
     }
+    
+    
 
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField.text!.characters.count  == 4          {
-           //  self.performSegue(withIdentifier: "ReceptionalistVc", sender: nil)
             pinCodeTextField.isEnabled = false
+            PincodeApi()
             
         }
     }
     
     @objc func bussinessCodeDidChange(_ textField: UITextField) {
+      
         if businesssCodeTextField.text!.characters.count == 10 {
             businesssCodeTextField.isEnabled = false
+            BusinessApi()
         }
-        else {
-            businesssCodeTextField.isEnabled = true
+        else if  businesssCodeTextField.text!.characters.count > 10 {
+         
+            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
         }
+        
     
     }
     override func viewWillAppear(_ animated: Bool) {
-        businesssCodeTextField.text = "POS-"
+        //businesssCodeTextField.text = "POS-"
         pinCodeTextField.text = ""
         businesssCodeTextField.isEnabled = true
         pinCodeTextField.isEnabled = true
     }
-    
-    
-  
-
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -181,6 +261,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLayoutSubviews() {
         setupUI()
+//        businesssCodeTextField.layer.cornerRadius = 30.0
+//        pinCodeTextField.layer.cornerRadius = 30.0
     }
     
     override func didReceiveMemoryWarning() {
@@ -193,7 +275,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         btnUpArrow.layer.cornerRadius = btnUpArrow.frame.size.width/2
         btnHelp.layer.cornerRadius = btnHelp.frame.size.width/2
         btnCustomer.layer.cornerRadius = btnCustomer.frame.size.width/2
+        businesssCodeTextField.layer.cornerRadius = 30.0
+        pinCodeTextField.layer.cornerRadius = 30.0
     }
+    
     
     @IBAction func BusinnesscodeBtn(_ sender: Any) {
 //        businesssCodeTextField.text = "POS-"
@@ -213,7 +298,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //        businesssCodeTextField.isHidden = false
 //    }
     }
-        
+    
     
     
     func checkSavedTohide() {

@@ -20,6 +20,8 @@ class ReceptionalistView: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // GeneralNibView.frame.size = settingContianerPop.frame.size
+        
     }
     
     @IBOutlet weak var profileBtnOutlet: UIButton!
@@ -31,6 +33,7 @@ class ReceptionalistView: UIViewController  {
         }
         orginalHeight = UIScreen.main.bounds.height
         showView(index: 1)
+     
     }
     
     @IBAction func profileBtn(_ sender: Any) {
@@ -40,6 +43,10 @@ class ReceptionalistView: UIViewController  {
     
     
     @IBAction func logoutButton(_ sender: Any) {
+        Constants.platenmb = "0"
+        Constants.vinnmb = "0"
+        Constants.CarIDData = 0
+        Constants.sessions = ""
        dismiss(animated: true, completion: nil)
     }
     
@@ -48,16 +55,17 @@ class ReceptionalistView: UIViewController  {
     func showLocationTable () {
         var storyboard: UIStoryboard!
          var popController: UIViewController!
-        storyboard = UIStoryboard(name: "PopOver", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "PopOverVc") as! PopOver
+        storyboard = UIStoryboard(name: "profilepop", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "profilepop") as! profilePOpViewController
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let heightForPopOver = 44*3
+        let heightForPopOver = 70*3
         let popover = nav.popoverPresentationController
-        popController.preferredContentSize = CGSize(width: 200 , height: heightForPopOver)
+        popController.preferredContentSize = CGSize(width: 300 , height: heightForPopOver)
         popover?.permittedArrowDirections = .up
+        popover?.backgroundColor = UIColor.white
         popover?.sourceView = self.profileBtnOutlet
-        popController.popoverPresentationController?.sourceRect = self.profileBtnOutlet.bounds
+        popover?.sourceRect = self.profileBtnOutlet.bounds
         self.present(nav, animated: true, completion: nil)
     
     }
@@ -114,13 +122,15 @@ class ReceptionalistView: UIViewController  {
         removeAllChildViewControllers()
         var height: CGFloat = 0.0
         if showFooter {
+             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height - footerViewheight
             footerViewHeightConstraint.constant = footerViewheight
             
         } else {
+             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height
             footerViewHeightConstraint.constant = 0
-            self.view.layoutIfNeeded()
+           
             
         }
          self.view.layoutIfNeeded()

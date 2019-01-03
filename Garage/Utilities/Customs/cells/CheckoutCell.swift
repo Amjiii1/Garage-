@@ -20,7 +20,7 @@ class CheckoutCell: UITableViewCell {
     
     @IBOutlet weak var CPlatenmb: UILabel!
     
-    @IBOutlet weak var Bay: UILabel!
+   // @IBOutlet weak var Bay: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -29,7 +29,7 @@ class CheckoutCell: UITableViewCell {
         CMake.text?.removeAll()
         CModel.text?.removeAll()
         CPlatenmb.text?.removeAll()
-         Bay.text?.removeAll()
+        // Bay.text?.removeAll()
     }
     
     func populate(with checkoutcar: CheckoutCars) {
@@ -38,7 +38,7 @@ class CheckoutCell: UITableViewCell {
         CMake.text = checkoutcar.make
         CModel.text = checkoutcar.model
         CPlatenmb.text = checkoutcar.plate
-        Bay.text = checkoutcar.Cbay
+       // Bay.text = checkoutcar.Cbay
     }
     
 }
@@ -49,5 +49,5 @@ struct CheckoutCars {
     let make: String
     let model: String
     let plate: String
-    let Cbay: String
+   // let Cbay: String
 }

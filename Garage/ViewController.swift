@@ -29,9 +29,21 @@ class ViewController: UIViewController {
 //        loginVc.didMove(toParentViewController: self)
         
         
-        
+        self.addBadge(itemvalue: "3")
         
     }
+    
+    func addBadge(itemvalue: String) {
+        
+        let bagButton = BadgeButton()
+        bagButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        bagButton.tintColor = UIColor.darkGray
+        bagButton.setImage(UIImage(named: "heloo")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        bagButton.badgeEdgeInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 15)
+        bagButton.badge = itemvalue
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bagButton)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

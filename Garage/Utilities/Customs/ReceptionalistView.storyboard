@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmjadRegular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Receptionalist View-->
         <scene sceneID="uKB-3b-hO1">
@@ -22,22 +25,23 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="UKF-BL-Zg5">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oya-0V-bPx">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="111"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Za5-zF-MNP">
-                                        <rect key="frame" x="21" y="36.5" width="125.5" height="38.5"/>
+                                        <rect key="frame" x="19.5" y="36" width="127.5" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Za5-zF-MNP" secondAttribute="height" multiplier="131:40" id="Zx8-PO-Imr"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="sideLogo"/>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-AO-46U">
-                                        <rect key="frame" x="514" y="28.5" width="181" height="55.5"/>
+                                        <rect key="frame" x="535" y="28" width="181" height="55.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="LkA-7t-Alp">
-                                                <rect key="frame" x="6" y="6" width="42.5" height="42"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Amjad" translatesAutoresizingMaskIntoConstraints="NO" id="LkA-7t-Alp">
+                                                <rect key="frame" x="6" y="6.5" width="42.5" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="LkA-7t-Alp" secondAttribute="height" multiplier="1:1" id="AWy-Hi-GWY"/>
@@ -63,10 +67,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zp-xw-VQu">
-                                        <rect key="frame" x="514.5" y="29" width="181" height="55.5"/>
+                                        <rect key="frame" x="535" y="28" width="181" height="55.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="137" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="145" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Amjad Ali" image="dropDown">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -80,7 +85,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gm2-q9-QT7">
-                                        <rect key="frame" x="744" y="28.5" width="55.5" height="55.5"/>
+                                        <rect key="frame" x="748" y="28" width="55.5" height="55.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Gm2-q9-QT7" secondAttribute="height" multiplier="1:1" id="9MA-Gv-MYi"/>
@@ -99,12 +104,12 @@
                                     <constraint firstItem="6zp-xw-VQu" firstAttribute="height" secondItem="uiB-AO-46U" secondAttribute="height" id="4GH-QM-i2q"/>
                                     <constraint firstItem="6zp-xw-VQu" firstAttribute="centerX" secondItem="uiB-AO-46U" secondAttribute="centerX" id="5DM-1G-dAI"/>
                                     <constraint firstItem="Gm2-q9-QT7" firstAttribute="height" secondItem="oya-0V-bPx" secondAttribute="height" multiplier="0.5" id="8SR-5M-8Lr"/>
-                                    <constraint firstItem="uiB-AO-46U" firstAttribute="centerX" secondItem="oya-0V-bPx" secondAttribute="centerX" multiplier="1.45" id="S6A-Di-7iE"/>
+                                    <constraint firstItem="uiB-AO-46U" firstAttribute="centerX" secondItem="oya-0V-bPx" secondAttribute="centerX" multiplier="1.5" id="S6A-Di-7iE"/>
                                     <constraint firstItem="Za5-zF-MNP" firstAttribute="centerY" secondItem="oya-0V-bPx" secondAttribute="centerY" id="UG7-tE-09K"/>
                                     <constraint firstItem="Za5-zF-MNP" firstAttribute="centerX" secondItem="oya-0V-bPx" secondAttribute="centerX" multiplier="0.2" id="VQN-HM-cry"/>
                                     <constraint firstItem="6zp-xw-VQu" firstAttribute="centerY" secondItem="uiB-AO-46U" secondAttribute="centerY" id="lbW-aH-tJ0"/>
                                     <constraint firstItem="6zp-xw-VQu" firstAttribute="width" secondItem="uiB-AO-46U" secondAttribute="width" id="oRc-df-S7S"/>
-                                    <constraint firstItem="Gm2-q9-QT7" firstAttribute="centerX" secondItem="oya-0V-bPx" secondAttribute="centerX" multiplier="1.85" id="qyn-q3-U8c"/>
+                                    <constraint firstItem="Gm2-q9-QT7" firstAttribute="centerX" secondItem="oya-0V-bPx" secondAttribute="centerX" multiplier="1.86" id="qyn-q3-U8c"/>
                                     <constraint firstItem="Za5-zF-MNP" firstAttribute="height" secondItem="oya-0V-bPx" secondAttribute="height" multiplier="0.35" id="wOc-Oo-Xe6"/>
                                 </constraints>
                             </view>
@@ -163,7 +168,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="ServiceVc" storyboardName="WelcomeView" referencedIdentifier="WelcomeVc" id="LmI-mf-xKd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrk-lt-BhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="727" y="-213"/>
+            <point key="canvasLocation" x="738" y="-153"/>
         </scene>
         <!--MechanicVc-->
         <scene sceneID="dv6-Za-FT1">
@@ -171,7 +176,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="MechanicVc" storyboardName="MechanicView" referencedIdentifier="MechanicVc" id="RrT-tt-aya" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rW9-eA-5ZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="-98"/>
+            <point key="canvasLocation" x="738" y="-78"/>
         </scene>
         <!--CheckoutVc-->
         <scene sceneID="qze-NJ-5fL">
@@ -179,14 +184,14 @@
                 <viewControllerPlaceholder storyboardIdentifier="CheckoutVc" storyboardName="CheckoutView" referencedIdentifier="CheckoutVc" id="19b-Iz-w5V" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paJ-QZ-Sye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="726" y="1"/>
+            <point key="canvasLocation" x="738" y="-16"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Amjad" width="640" height="640"/>
         <image name="Loginbg" width="768" height="1024"/>
         <image name="dropDown" width="11" height="7"/>
         <image name="menuButton" width="50" height="50"/>
-        <image name="profile" width="195" height="250"/>
         <image name="sideLogo" width="131" height="40"/>
     </resources>
 </document>

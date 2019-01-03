@@ -9,32 +9,41 @@
 import Foundation
 
 
+
+final class Shared {
+    static let shared = Shared()
+    
+    var companyName : String!
+    
+}
+
 struct  Course {
     let message: Int
     
-    init(json: [String: Any]) {
-        message = (json["Status"] as? Int)!
+    init(json: [String: Any]) {message = (json["Status"] as? Int)!
     }
 }
 
 
 struct  login {
-    let description: Int
+    let status: Int
+    // let User: [String: Any]
     
     init(json: [String: Any]) {
-      description  = (json["Status"] as? Int)!
+      status  = (json["Status"] as? Int)!
+   // User = (json["User"] as? [String: Any])!
     }
 }
 
 
 struct Constants {
 
-    static let Searchapi = "http://garageapi.isalespos.com/api/car/search/\(Constants.platenmb)/null/POS-KXCBSH636726904049291864"
-    static let Editapi = "http://garageapi.isalespos.com/api/Car/Edit"
+   // static let Searchapi = "http://garageapi.isalespos.com/api/car/search/\(Constants.platenmb)/null/POS-KXCBSH636726904049291864"
     
     static let saveButtonImageName = "save-1"
     static let selectIconImage = "edit company code"
-    static var platenmb = ""
+    static var platenmb = "0"
+    static var vinnmb = "0"
     static let Cars = "Cars"
     static let MakerName = "MakerName"
     static var VinNo = "VinNo"
@@ -48,15 +57,45 @@ struct Constants {
     static var ModelID = "ModelID"
     static var CarID = "CarID"
     static var CustomerID = "CustomerID"
+    static var OrderID = "OrderID"
     static var CarName = "CarName"
     static var CarDescription = "CarDescription"
     static var Color = "Color"
     static var ImagePath = "ImagePath"
     static var SessionID = "SessionID"
-   
+    static var EngineType = "EngineType"
+    static var CarIDData = 0
+    static var CarNameData = ""
+    static var MakeIDData = 0
+    static var ModelIDData = 0
+    static var ColorData = ""
+    static var CustomerIDData = ""
+    static var OrderIDData = ""
+    static let User = "User"
+    static var sessions = ""
+    static var ordertracker = ""
+    static var searchedplatenmb = ""
+    static var currenttime = ""
+    static var bayid = 0
+     static var bayname = "B0"
+    static var history = 0
+    static var currentdate = ""
+    static var totalprice = 0
+    static var counterQTY = 1
+    static var carmakeid = 2
+    static var editOrderid = 0
+    static var flagEdit = 0
+  
+    
+     
     
 }
 
+struct product {
+    
+//    let : Int
+    let ItemName: String
+}
 
 
 
@@ -82,6 +121,7 @@ struct  Cardetails {
        
     }
 }
+
 
 struct  EditCar {
     let response: String

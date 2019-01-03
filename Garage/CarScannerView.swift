@@ -8,27 +8,26 @@
 
 import AVFoundation  
 import UIKit
+import Alamofire
 
 
 
-class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
+class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
   //  var scanEnabled: Bool = false
     
     @IBOutlet weak var camerView: UIView!
-    
-  
+    @IBOutlet weak var addVintextfield: UITextField!
     @IBOutlet weak var addplateTextfield: UITextField!
+    @IBOutlet weak var camerabtnOutlet: UIButton!
+    @IBOutlet weak var imageview: UIImageView!
     
     
-    
-    
-    
-    
+    var flag = 0
     
     @IBAction func scannerBackBtn(_ sender: Any) {
-        
+        //self.dismiss(animated: true, completion: nil)
      if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
@@ -38,16 +37,149 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
         capturingImage()
         addplateTextfield.isUserInteractionEnabled = false
         addplateTextfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        addVintextfield.isUserInteractionEnabled = false
+      //  editVinPlateImage()
+     
+        
+    }
+    
+
+    
+    func editVinPlateImage() {
+        
+        addVintextfield.rightViewMode = .always
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let Img = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        Img.image = UIImage(named: "editbilal")
+        Img.center = Img.center
+        container.addSubview(Img)
+        addVintextfield.rightView = container
+        addplateTextfield.rightViewMode = .always
+        let Pcontainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let PImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        PImg.image = UIImage(named: "editbilal")
+        PImg.center = PImg.center
+        Pcontainer.addSubview(PImg)
+        addplateTextfield.rightView = Pcontainer
         
         
     }
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func cameraBtn(_ sender: Any) {
+        ToastView.show(message: "Under real time testing wil be in available next version", controller: self)
+     //   openCamera()
+    }
+    
+    
+    func openCamera()
+    {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self// as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageview.image = nil
+        imageview.image = pickedImage
+             upload()
+            
+        }
+        flag = 1
+        picker.dismiss(animated: true, completion: nil)
+        capturingImage()
+    }
+    
+  
+    func upload() {
+        
+       // let params: Parameters = ["name": "abcd" "gender": "Male"]
+        Alamofire.upload(multipartFormData:
+            {
+             //   DispatchQueue.main.async {
+                (multipartFormData) in
+              //  DispatchQueue.main.async {
+                multipartFormData.append(UIImageJPEGRepresentation(self.imageview.image!, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+//                for (key, value) in params
+             //   }
+                
+                
+//                {
+//                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+//                }
+                
+             //   }
+        }, to: "http://garageapi.isalespos.com/api/car/scan/plateno",headers:nil)
+        { (result) in
+            switch result {
+                
+            case .success(let upload,_,_ ):
+                upload.uploadProgress(closure: { (progress) in
+                    //Print progress
+                })
+                upload.responseJSON
+                   
+                    { response in
+                        if let dict = response.result.value as? NSObject {
+                               DispatchQueue.main.async {
+                              let descript = dict.value(forKey: "Description") as! String
+                            ToastView.show(message: descript, controller: self)
+                            if let Platenmb = dict.value(forKey: "PlateNo") as? String {
+                             
+                                   self.addplateTextfield.text  = Platenmb
+                                }
+                            }
+                            
+                            
+//                         let descript = dict.value(forKey: "Description") as! String
+//                        let descript = dict.value(forKey: "PlateNo") as! String
+                        }
+//                        if status == 1
+//                        {
+//                            print("DATA UPLOAD SUCCESSFULLY")
+//                        }
+//
+//                        else if status == 0 {
+//                            print("DATA UPLOAD FAILED")
+//
+//                        }
+                        
+                        
+                }
+            case .failure(let encodingError):
+                break
+                
+            }
+            
+        }
+        
+        
+    }
+     
    
     
     func capturingImage() {
+         self.view.layoutIfNeeded()
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
 
@@ -73,16 +205,27 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             captureSession.addOutput(metadataOutput)
 
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
+            metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.code39]
         } else {
             failed()
             return
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+       
+        
+        
+        
+        self.view.layoutIfNeeded()
+        previewLayer.frame.size = camerView.frame.size
         previewLayer.frame = camerView.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        camerView.layer.addSublayer(previewLayer)
+        
+        if flag == 0 {
+             self.view.layoutIfNeeded()
+            camerView.layer.addSublayer(previewLayer)
+        }
+        
 
 
         captureSession.startRunning()
@@ -131,11 +274,21 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
 
     func found(code: String) {
         print(code)
-        if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
-            parentVC.switchViewController(vc: vc!, showFooter: false)
+        
+         addVintextfield.backgroundColor = UIColor.darkGray
+         addVintextfield.isUserInteractionEnabled = true
+        addVintextfield.text = code
+        if code.characters.count  > 17  {
+            addVintextfield.text = String(code.characters.dropFirst())
         }
+        
+        
+        
+//        if let parentVC = self.parent as? ReceptionalistView {
+//            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
+//            parentVC.switchViewController(vc: vc!, showFooter: false)
+//        }
 
     }
 
@@ -163,26 +316,51 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
 
 
     @IBAction func continueBtn(_ sender: Any) {
-        Constants.platenmb = addplateTextfield.text!
+        
+        
+        
+        
+        if addplateTextfield.text! == "" && addVintextfield.text! == "" {
+        ToastView.show(message: "Please Enter any one Field", controller: self)
+        }
+        else if addplateTextfield.text! == "" {
+            Constants.vinnmb = addVintextfield.text!
+        }
+        else if addVintextfield.text! == ""{
+            Constants.platenmb = addplateTextfield.text!
+        }
+       
         if let parentVC = self.parent as? ReceptionalistView {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear , animations: {
+           // UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear , animations: {
             let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
                 
             parentVC.switchViewController(vc: vc!, showFooter: false)
-          }, completion: nil)
+        //  }, completion: nil)
           
         }
-        //}
+        
     }
     
     
-    @IBAction func addPlateNmbBtn(_ sender: Any)  {       
+    
+    @IBAction func addPlateNmbBtn(_ sender: Any)  {
+        addVintextfield.isUserInteractionEnabled = false
         addplateTextfield.backgroundColor = UIColor.darkGray
         addplateTextfield.attributedPlaceholder = NSAttributedString(string: "Enter Plate number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addplateTextfield.isUserInteractionEnabled = true
         
         }
+    
+    
+    @IBAction func addVinAction(_ sender: Any) {
+        addplateTextfield.isUserInteractionEnabled = false
+        addVintextfield.backgroundColor = UIColor.darkGray
+        addVintextfield.attributedPlaceholder = NSAttributedString(string: "Enter Vin number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
+        addVintextfield.isUserInteractionEnabled = true
+    }
+    
+    
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -197,6 +375,12 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             addplateTextfield.resignFirstResponder()
             
 }
+        else if textField.text!.characters.count  > 8  {
+            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
  
 }
 

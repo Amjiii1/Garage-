@@ -15,7 +15,7 @@ import Alamofire
 class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-  //  var scanEnabled: Bool = false
+    //  var scanEnabled: Bool = false
     
     @IBOutlet weak var camerView: UIView!
     @IBOutlet weak var addVintextfield: UITextField!
@@ -23,12 +23,13 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     @IBOutlet weak var camerabtnOutlet: UIButton!
     @IBOutlet weak var imageview: UIImageView!
     
+    var myImage: UIImage!
     
     var flag = 0
     
     @IBAction func scannerBackBtn(_ sender: Any) {
         //self.dismiss(animated: true, completion: nil)
-     if let parentVC = self.parent as? ReceptionalistView {
+        if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
             parentVC.switchViewController(vc: vc!, showFooter: true)
@@ -41,12 +42,12 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         addplateTextfield.isUserInteractionEnabled = false
         addplateTextfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         addVintextfield.isUserInteractionEnabled = false
-      //  editVinPlateImage()
-     
+        //  editVinPlateImage()
+        
         
     }
     
-
+    
     
     func editVinPlateImage() {
         
@@ -76,7 +77,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     @IBAction func cameraBtn(_ sender: Any) {
         ToastView.show(message: "Under real time testing wil be in available next version", controller: self)
-     //   openCamera()
+        //openCamera()
     }
     
     
@@ -99,120 +100,173 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageview.image = nil
-        imageview.image = pickedImage
-             upload()
+        if let pickedImaged = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            
+            print(pickedImaged)
+            self.imageview.image = nil
+            self.imageview.image = pickedImaged
+            print(imageview.image)
+            myImage = pickedImaged
+            upload()
             
         }
         flag = 1
+        
         picker.dismiss(animated: true, completion: nil)
+        
         capturingImage()
+        
     }
     
-  
+    
     func upload() {
-        
-       // let params: Parameters = ["name": "abcd" "gender": "Male"]
-        Alamofire.upload(multipartFormData:
-            {
-             //   DispatchQueue.main.async {
-                (multipartFormData) in
-              //  DispatchQueue.main.async {
-                multipartFormData.append(UIImageJPEGRepresentation(self.imageview.image!, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
-//                for (key, value) in params
-             //   }
+        DispatchQueue.main.async {
+            //   let params: Parameters = ["name": "abcd", "gender": "Male"]
+            
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
                 
+                multipartFormData.append(UIImageJPEGRepresentation(self.myImage!, 0.0)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
                 
-//                {
-//                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
-//                }
-                
-             //   }
-        }, to: "http://garageapi.isalespos.com/api/car/scan/plateno",headers:nil)
-        { (result) in
-            switch result {
-                
-            case .success(let upload,_,_ ):
-                upload.uploadProgress(closure: { (progress) in
-                    //Print progress
-                })
-                upload.responseJSON
-                   
-                    { response in
-                        if let dict = response.result.value as? NSObject {
-                               DispatchQueue.main.async {
-                              let descript = dict.value(forKey: "Description") as! String
-                            ToastView.show(message: descript, controller: self)
-                            if let Platenmb = dict.value(forKey: "PlateNo") as? String {
-                             
-                                   self.addplateTextfield.text  = Platenmb
+                // for (key, value) in params {
+                //                            multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                //}
+            }, to:"http://garageapi.isalespos.com/api/car/scan/plateno")
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (Progress) in
+                        print("Upload Progress: \(Progress.fractionCompleted)")
+                    })
+                    
+                    upload.responseJSON { response in
+                        //self.delegate?.showSuccessAlert()
+                        print(response.request)  // original URL request
+                        print(response.response) // URL response
+                        print(response.data)     // server data
+                        print(response.result)   // result of response serialization
+                        //                        self.showSuccesAlert()
+                        //self.removeImage("frame", fileExtension: "txt")
+                        if let JSON = response.result.value as? NSObject {
+                            DispatchQueue.main.async {
+                                let descript = JSON.value(forKey: "Description") as! String
+                                print(descript)
+                                ToastView.show(message: descript, controller: self)
+                                if let Platenmb = JSON.value(forKey: "PlateNo") as? String {
+                                    self.addplateTextfield.text  = Platenmb
                                 }
                             }
-                            
-                            
-//                         let descript = dict.value(forKey: "Description") as! String
-//                        let descript = dict.value(forKey: "PlateNo") as! String
                         }
-//                        if status == 1
-//                        {
-//                            print("DATA UPLOAD SUCCESSFULLY")
-//                        }
-//
-//                        else if status == 0 {
-//                            print("DATA UPLOAD FAILED")
-//
-//                        }
-                        
-                        
+                    }
+                    
+                case .failure(let encodingError):
+                    //self.delegate?.showFailAlert()
+                    print(encodingError)
                 }
-            case .failure(let encodingError):
-                break
-                
             }
             
         }
         
+        //       // let params: Parameters = ["name": "abcd" "gender": "Male"]
+        //        Alamofire.upload(multipartFormData:
+        //            {
+        //            //    DispatchQueue.main.async {
+        //                (multipartFormData) in
+        //              //  DispatchQueue.main.async {
+        //                multipartFormData.append(UIImageJPEGRepresentation(self.imageview.image!, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+        ////                for (key, value) in params
+        //             //   }
+        //
+        //
+        ////                {
+        ////                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+        ////                }
+        //
+        //              //  }
+        //        }, to: "http://garageapi.isalespos.com/api/car/scan/plateno",headers:nil)
+        //        { (result) in
+        //            switch result {
+        //
+        //            case .success(let upload,_,_ ):
+        //                upload.uploadProgress(closure: { (progress) in
+        //                    //Print progress
+        //                })
+        //                upload.responseJSON
+        //                    { response in
+        //                        if let dict = response.result.value as? NSObject {
+        //                               DispatchQueue.main.async {
+        //                              let descript = dict.value(forKey: "Description") as! String
+        //                            ToastView.show(message: descript, controller: self)
+        //                            if let Platenmb = dict.value(forKey: "PlateNo") as? String {
+        //
+        //                                   self.addplateTextfield.text  = Platenmb
+        //                                }
+        //                            }
+        //
+        //
+        ////                         let descript = dict.value(forKey: "Description") as! String
+        ////                        let descript = dict.value(forKey: "PlateNo") as! String
+        //                        }
+        ////                        if status == 1
+        ////                        {
+        ////                            print("DATA UPLOAD SUCCESSFULLY")
+        ////                        }
+        ////
+        ////                        else if status == 0 {
+        ////                            print("DATA UPLOAD FAILED")
+        ////
+        ////                        }
+        //
+        //
+        //                }
+        //            case .failure(let encodingError):
+        //                break
+        //
+        //            }
+        //
+        //        }
+        //
         
     }
-     
-   
+    
+    
     
     func capturingImage() {
-         self.view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
-
+        
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
-
+        
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
             return
         }
-
+        
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
             failed()
             return
         }
-
+        
         let metadataOutput = AVCaptureMetadataOutput()
-
+        
         if (captureSession.canAddOutput(metadataOutput)) {
             captureSession.addOutput(metadataOutput)
-
+            
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.code39]
         } else {
             failed()
             return
         }
-
+        
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-       
+        
         
         
         
@@ -222,61 +276,61 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         previewLayer.videoGravity = .resizeAspectFill
         
         if flag == 0 {
-             self.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
             camerView.layer.addSublayer(previewLayer)
         }
         
-
-
+        
+        
         captureSession.startRunning()
-
+        
     }
     
     
-
-
+    
+    
     func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
         captureSession = nil
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
         }
     }
-
+    
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         captureSession.stopRunning()
-
+        
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
-
-      //  dismiss(animated: true)
+        
+        //  dismiss(animated: true)
     }
-
-
+    
+    
     func found(code: String) {
         print(code)
         
-         addVintextfield.backgroundColor = UIColor.darkGray
-         addVintextfield.isUserInteractionEnabled = true
+        addVintextfield.backgroundColor = UIColor.darkGray
+        addVintextfield.isUserInteractionEnabled = true
         addVintextfield.text = code
         if code.characters.count  > 17  {
             addVintextfield.text = String(code.characters.dropFirst())
@@ -284,21 +338,21 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         
         
         
-//        if let parentVC = self.parent as? ReceptionalistView {
-//            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
-//            parentVC.switchViewController(vc: vc!, showFooter: false)
-//        }
-
+        //        if let parentVC = self.parent as? ReceptionalistView {
+        //            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
+        //            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
+        //            parentVC.switchViewController(vc: vc!, showFooter: false)
+        //        }
+        
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
-}
+    }
     
     func showLoader() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
@@ -313,15 +367,15 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     }
     
     
-
-
+    
+    
     @IBAction func continueBtn(_ sender: Any) {
         
         
         
         
         if addplateTextfield.text! == "" && addVintextfield.text! == "" {
-        ToastView.show(message: "Please Enter any one Field", controller: self)
+            ToastView.show(message: "Please Enter any one Field", controller: self)
         }
         else if addplateTextfield.text! == "" {
             Constants.vinnmb = addVintextfield.text!
@@ -329,15 +383,15 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         else if addVintextfield.text! == ""{
             Constants.platenmb = addplateTextfield.text!
         }
-       
+        
         if let parentVC = self.parent as? ReceptionalistView {
-           // UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear , animations: {
+            // UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear , animations: {
             let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
-                
+            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
+            
             parentVC.switchViewController(vc: vc!, showFooter: false)
-        //  }, completion: nil)
-          
+            //  }, completion: nil)
+            
         }
         
     }
@@ -350,7 +404,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         addplateTextfield.attributedPlaceholder = NSAttributedString(string: "Enter Plate number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addplateTextfield.isUserInteractionEnabled = true
         
-        }
+    }
     
     
     @IBAction func addVinAction(_ sender: Any) {
@@ -364,7 +418,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-    
+        
         var currentText = textField.text!.replacingOccurrences(of: "-", with: "")
         if currentText.count >= 4 {
             currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 3))
@@ -374,17 +428,18 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             
             addplateTextfield.resignFirstResponder()
             
-}
+        }
         else if textField.text!.characters.count  > 8  {
             let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }
- 
+        
+    }
+    
 }
 
-}
 
 
 

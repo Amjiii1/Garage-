@@ -12,7 +12,7 @@ import NumericKeyboard
 
 
 class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-   
+    
     
     @IBOutlet weak var VinNumber: UITextField!
     @IBOutlet weak var carplateNumber: UITextField!
@@ -45,10 +45,11 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var flexmakeid = 2
     var Product = [ReceiptModel]()
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         print("\(Constants.bayid)")
+        print(Items.nameArray)
+        print("\(Constants.bayid)")
         Numberpadview.isHidden = true
         NumberpadViewCheck.isHidden = true
         makeCardetails()
@@ -57,9 +58,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
         
-//         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-//
-//        view.addGestureRecognizer(tap)
+        //         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        //
+        //        view.addGestureRecognizer(tap)
         
         
         VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
@@ -79,22 +80,22 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         self.picker.delegate = self
         self.picker.dataSource = self
         currentTime()
-//        NKInputView.with(phoneNumber, type: NKInputView.NKKeyboardType.phonePad, returnKeyType: NKInputView.NKKeyboardReturnKeyType.next)
-//        NKInputView.appearance().backgroundColor = UIColor.clear
+        //        NKInputView.with(phoneNumber, type: NKInputView.NKKeyboardType.phonePad, returnKeyType: NKInputView.NKKeyboardReturnKeyType.next)
+        //        NKInputView.appearance().backgroundColor = UIColor.clear
         historyBtn.layer.shadowColor = UIColor.white.cgColor    //.layer.shadowColor = UIColor.red as? CGColor
         historyBtn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         
         
     }
- 
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         CarMakeTableView.isHidden = true
         CarModelTableView.isHidden = true
         Numberpadview.isHidden = true
-       // NumberpadViewCheck.isHidden = true
+        NumberpadViewCheck.isHidden = true
     }
-
+    
     
     
     func numberPad() {
@@ -111,25 +112,25 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         Numberpadview .customKeyTitleColor = .DefaultApp
         Numberpadview.clearKeyIcon = UIImage.init(named: "x")
         Numberpadview.delegate = self
- 
+        
     }
     
-//    func numberPadCheck() {
-//        check.inputView = UIView()
-//        check.inputAccessoryView = UIView()
-//        NumberpadViewCheck.isHidden = false
-//        NumberpadViewCheck.backgroundColor = .BlackApp
-//        NumberpadViewCheck.clearKeyBackgroundColor = .BlackApp
-//        NumberpadViewCheck.clearKeyHighlightColor = .BlackApp
-//        NumberpadViewCheck.clearKeyTintColor = .BlackApp
-//        NumberpadViewCheck.keyScale = 0.8
-//        NumberpadViewCheck.customKeyText = "."
-//        NumberpadViewCheck.customKeyBackgroundColor = .BlackApp
-//        NumberpadViewCheck .customKeyTitleColor = .DefaultApp
-//        NumberpadViewCheck.clearKeyIcon = UIImage.init(named: "x")
-//        NumberpadViewCheck.delegate = self
-//
-//    }
+    func numberPadCheck() {
+        check.inputView = UIView()
+        check.inputAccessoryView = UIView()
+        NumberpadViewCheck.isHidden = false
+        NumberpadViewCheck.backgroundColor = .BlackApp
+        NumberpadViewCheck.clearKeyBackgroundColor = .BlackApp
+        NumberpadViewCheck.clearKeyHighlightColor = .BlackApp
+        NumberpadViewCheck.clearKeyTintColor = .BlackApp
+        NumberpadViewCheck.keyScale = 0.8
+        NumberpadViewCheck.customKeyText = "."
+        NumberpadViewCheck.customKeyBackgroundColor = .BlackApp
+        NumberpadViewCheck .customKeyTitleColor = .DefaultApp
+        NumberpadViewCheck.clearKeyIcon = UIImage.init(named: "x")
+        NumberpadViewCheck.delegate = self
+        
+    }
     
     
     
@@ -145,44 +146,44 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         for _ in pastyear...year  {
             print("\(year) ")
             pickerData.append("\(year) ")
-             year -= 1
+            year -= 1
         }
         
     }
     
     func numberOfComponents(in pickerView: UIPickerView) ->  Int {
-    return 1
+        return 1
         
     }
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int)  ->  Int {
-    return pickerData.count
-    
+        return pickerData.count
+        
     }
     
     // The data to return fopr the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) ->  String? {
-    return pickerData[row]
-       
+        return pickerData[row]
+        
         
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         var attributedString: NSAttributedString!
         
-      ///  attributedString = NSAttributedString(string: pickerData[row], attributes: [NSAttributedStringKey.foregroundColor : UIColor.,.font: UIFont.boldSystemFont(ofSize: 17.0)])
+        ///  attributedString = NSAttributedString(string: pickerData[row], attributes: [NSAttributedStringKey.foregroundColor : UIColor.,.font: UIFont.boldSystemFont(ofSize: 17.0)])
         return attributedString
     }
     
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-      
+        
         return 65
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-         let valueSelected = pickerData[row] as String
+        let valueSelected = pickerData[row] as String
         self.yearNumber.text = valueSelected
         pickerView.reloadAllComponents()
     }
@@ -213,7 +214,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func CustomCarMaketableview()  {
         
-         self.view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
         CarMakeTableView = UITableView(frame: CGRect(x: self.carMake.frame.origin.x, y: self.carMake.frame.origin.y, width: self.carMake.frame.width, height: 300))
         CarMakeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         CarMakeTableView.dataSource = self
@@ -232,13 +233,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         CarModelTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell2")
         CarModelTableView.dataSource = self
         CarModelTableView.delegate = self
-       // view.superview?.layoutIfNeeded()
+        // view.superview?.layoutIfNeeded()
         CarModelTableView.backgroundColor = UIColor.darkGray
         view.addSubview(CarModelTableView)
         CarModelTableView.isHidden = true
         
     }
- 
+    
     
     override func viewDidLayoutSubviews() {
         
@@ -257,15 +258,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @objc func CarmakeFunction() {
         carMake.inputView = UIView()
         carMake.inputAccessoryView = UIView()
-       carMake.resignFirstResponder()
+        carMake.resignFirstResponder()
         CarMakeTableView.isHidden = false
-       CarModelTableView.isHidden = true
+        CarModelTableView.isHidden = true
         self.modelNumber.text  = ""
         self.yearNumber.text  = ""
         self.recommendedAmount.text  = ""
         self.engineType.text  = ""
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == CarMakeTableView {
@@ -292,7 +293,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (tableView  == CarMakeTableView) {
@@ -300,23 +301,23 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         } else if (tableView  == CarModelTableView) {
             
-           return ModelCarDetails.count
-    }
+            return ModelCarDetails.count
+        }
         else {
             return 0 
         }
         
     }
     
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == CarMakeTableView {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-        cell.textLabel!.text = MakeCarDetails[indexPath.row].Name
-        cell.backgroundColor = UIColor.darkGray
-        cell.textLabel?.textColor = UIColor.white
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+            cell.textLabel!.text = MakeCarDetails[indexPath.row].Name
+            cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor.white
             return cell
         }
         else if tableView == CarModelTableView {
@@ -330,19 +331,19 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         return UITableViewCell()
-    
+        
     }
     
     
     @objc func CarmodeltFunction() {
         modelNumber.inputView = UIView()
         modelNumber.inputAccessoryView = UIView()
-      //  modelCardetails()
-         DispatchQueue.main.async {
+        //  modelCardetails()
+        DispatchQueue.main.async {
             self.CarModelTableView.isHidden = false
             self.CarMakeTableView.isHidden = true
         }
-       
+        
     }
     
     
@@ -353,28 +354,34 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response,  error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
             if let data = data {
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     let discript = json["Description"] as? String
                     if let status = json["Status"] as? Int {
-                    if (status == 1) {
-        
-                    if let order = json["MakeList"] as? [[String: Any]] {
-                        self.MakeCarDetails.removeAll()
-                        for Makedetails in order {
-                            let neworder =  makeCarModel(Makedetails: Makedetails)
-                            self.MakeCarDetails.append(neworder!)
+                        if (status == 1) {
+                            
+                            if let order = json["MakeList"] as? [[String: Any]] {
+                                self.MakeCarDetails.removeAll()
+                                for Makedetails in order {
+                                    let neworder =  makeCarModel(Makedetails: Makedetails)
+                                    self.MakeCarDetails.append(neworder!)
+                                    
+                                }
+                                
+                            }
                             
                         }
-                        
-                    }
-                     
-                }
                         else {
                             
-                          ToastView.show(message: discript!, controller: self)
+                            ToastView.show(message: discript!, controller: self)
                         }
                     }
                     DispatchQueue.main.async {
@@ -384,7 +391,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                 } catch let error as NSError {
                     print(error)
-                   ToastView.show(message: "Check Internet or Try Again", controller: self)
+                    ToastView.show(message: "Check Internet or Try Again", controller: self)
                 }
                 
             }
@@ -400,11 +407,17 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         print("\(url)")
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response,  error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
             if let data = data {
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
-                     let discript = json["Description"] as? String
+                    let discript = json["Description"] as? String
                     if let status = json["Status"] as? Int {
                         if (status == 1) {
                             print(status)
@@ -431,7 +444,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                 } catch let error as NSError {
                     print(error)
-                   ToastView.show(message: "Check Internet or Try Again", controller: self)
+                    ToastView.show(message: "Check Internet or Try Again", controller: self)
                 }
                 
             }
@@ -466,7 +479,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         popover?.sourceRect = self.assignBtn.bounds//CGRect(x: self.assignBtn.bounds.midX, y: self.assignBtn.bounds.midY, width: 0, height: 0)
         self.present(nav, animated: true, completion: nil)
     }
-   
+    
     
     
     
@@ -475,8 +488,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
+        loadingIndicator.backgroundColor = UIColor.DefaultApp
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
@@ -507,7 +521,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     
- 
+    
     
     
     
@@ -517,27 +531,27 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if Constants.platenmb != "0" || Constants.vinnmb != "0" {
             
             SearchApiDeatils()
-         
-           // ToastView.show(message: "Please Add deatils of Car", controller: self)
+            
+            // ToastView.show(message: "Please Add deatils of Car", controller: self)
         }
             
             
         else if Constants.flagEdit != 0 {
-
-           editOrder()
+            
+            editOrder()
             
             
         }
             
-        
+            
         else {
             
-        ToastView.show(message: "Please Add deatils of Car", controller: self)
+            ToastView.show(message: "Please Add deatils of Car", controller: self)
             
             
             
-           }
-      
+        }
+        
     }
     
     
@@ -554,6 +568,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         let session = URLSession.shared
         print(addcarapi)
         session.dataTask(with: addcarapi){ (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+
+                }
+            }
             if let data = data {
                 print(data)
                 
@@ -657,7 +677,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 }
                                 if  let OrderID = items[Constants.OrderID] as? Int {
                                     DispatchQueue.main.async {
-                                        Constants.OrderIDData = String (OrderID)
+                                        Constants.OrderIDData = OrderID
+                                    }
+                                    
+                                }
+                                if  let Orderno = items[Constants.OrderNo] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.OrderNoData =  Orderno
                                     }
                                     
                                 }
@@ -704,7 +730,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             }
             
             }.resume()
-     
+        
     }
     
     
@@ -712,24 +738,35 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func editOrder() {
         
         guard let orderdetails = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderDetails)/\(Constants.editOrderid)/\(Constants.sessions)" ) else { return }
-     
+        
         let session = URLSession.shared
-     
+        
         session.dataTask(with: orderdetails){ (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
             if let data = data {
                 print(data)
                 
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
-                    Constants.history = json["OrderHistoryCount"] as! Int
-                    DispatchQueue.main.async {
-                        self.historyBtn.titleLabel?.text = "History (\(Constants.history))"
-                    }
                     let details = Cardetails(json: json)
                     if (details.description == "Success") {
                         self.showloader()
-                        
+                        Constants.history = json["OrderHistoryCount"] as! Int
+                        DispatchQueue.main.async {
+                            self.historyBtn.titleLabel?.text = "History (\(Constants.history))"
+                        }
+                        if  let OrderID = json[Constants.OrderID] as? Int {
+                            DispatchQueue.main.async {
+                                Constants.OrderIDData = OrderID
+                                print(Constants.OrderIDData)
+                            }
+                        }
                         if let cars = json[Constants.Cars] as? [[String: Any]] {
                             for items in cars {
                                 print("\(items)")
@@ -817,28 +854,26 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                     
                                 }
-                                if  let OrderID = items[Constants.OrderID] as? Int {
-                                    DispatchQueue.main.async {
-                                        Constants.OrderIDData = String (OrderID)
-                                    }
-                                    
-                                }
-                               
+                                
                             }
                             
                         }
                         
-                         if let order = json["Orderdetail"] as? [[String: Any]] {
+                        if let order = json["Orderdetail"] as? [[String: Any]] {
                             for orders in order {
                                 print(orders)
                                 let Name = orders["ItemName"] as! String
                                 let Price = orders["Price"] as! Int
                                 let ItemID = orders["ItemID"] as! Int
                                 let Quantity = orders["Quantity"] as! Int
-                                let products = ReceiptModel(Name: Name, Price: Price, ItemID: ItemID, Quantity: Quantity)
-                            Items.Product.append(products)
+                                let OrderDetails = orders["OrderDetailID"] as! Int
+                                let products = ReceiptModel(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                Items.Product.append(products)
                                 let price = Price*Constants.counterQTY
-                                Constants.totalprice = Constants.totalprice + price
+                                Constants.totalprice = Constants.totalprice + Double(price)
+//                                let newDict = [
+//                                    "Name": Name, "Price":Price, "Quantity": Quantity, "ItemID": ItemID, "Mode": Constants.modeupdate,"OrderDetailID": OrderDetails, "Status": 202] as [String : Any]
+//                                Items.nameArray.append(newDict)
                             }
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -876,13 +911,10 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             }.resume()
         
     }
-   
+    
     
     @IBAction func reScannerBtn(_ sender: Any) {
-//        let viewController:UIViewController = UIStoryboard(name: "CarScan", bundle: nil).instantiateViewController(withIdentifier: "carScannerVc") as UIViewController
-//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-//
-//        self.present(viewController, animated: false, completion: nil)
+     
         if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "CarScan", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "carScannerVc") as?CarScannerView
@@ -895,7 +927,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
         editDetails()
         
-       //  punchOrder()
+        //  punchOrder()
         
     }
     
@@ -918,6 +950,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
             if let response = response {
                 print(response)
             }
@@ -965,7 +1003,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 
                 DispatchQueue.main.async {
                     ToastView.show(message: "Please Add mendatory fields!", controller: self)
-                   // self.staric.textColor = UIColor.red
+                    // self.staric.textColor = UIColor.red
                     self.phStaric.textColor = UIColor.red
                     self.CarStaric.textColor = UIColor.red
                     self.modelStaric.textColor = UIColor.red
@@ -974,78 +1012,83 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 
             }
             else {
-            
-            guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.editCar)") else { return }
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-            request.httpBody = httpBody
-            if let JSONString = String(data: httpBody, encoding: .utf8) {
                 
-                print(JSONString)
-            }
-            let session = URLSession.shared
-            session.dataTask(with: request) { (data, response, error) in
-                if let response = response {
-                    print(response)
+                guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.editCar)") else { return }
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+                request.httpBody = httpBody
+                if let JSONString = String(data: httpBody, encoding: .utf8) {
+                    
+                    print(JSONString)
                 }
-               
-                
-                if let data = data {
-                    print(data)
-                    do {
-                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
-                        print(json)
-                        
-                        let status = json["Status"] as? Int
-                        let newmessage = json["Description"] as? String
-                        if (status == 1) {
-                            if  let carid = json[Constants.CarID] as? Int {
-                                DispatchQueue.main.async {
-                                    Constants.CarIDData = carid
+                let session = URLSession.shared
+                session.dataTask(with: request) { (data, response, error) in
+                    if response == nil {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "Login failed! Check internet", controller: self)
+                        }
+                    }
+                    if let response = response {
+                        print(response)
+                    }
+                    
+                    
+                    if let data = data {
+                        print(data)
+                        do {
+                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                            print(json)
+                            
+                            let status = json["Status"] as? Int
+                            let newmessage = json["Description"] as? String
+                            if (status == 1) {
+                                if  let carid = json[Constants.CarID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.CarIDData = carid
+                                    }
                                 }
-                            }
                                 ToastView.show(message: newmessage!, controller: self)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                print("hello")
-                                if let parentVC = self.parent as? ReceptionalistView {
-                                    let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                                    let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
-                                    parentVC.switchViewController(vc: vc!, showFooter: false)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                    print("hello")
+                                    if let parentVC = self.parent as? ReceptionalistView {
+                                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                                        parentVC.switchViewController(vc: vc!, showFooter: false)
+                                        
+                                    }
                                     
+                                })
+                                
+                                
+                                
+                                
+                                
+                            }
+                            else if (status == 0) {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: newmessage!, controller: self)
                                 }
                                 
-                            })
-                            
-                           
-                            
-                            
-                            
-                        }
-                        else if (status == 0) {
-                            
-                            print(status!)
-                            DispatchQueue.main.async {
-                            ToastView.show(message: newmessage!, controller: self)
                             }
                             
+                            
+                        } catch {
+                            print(error)
+                            ToastView.show(message: "Edit Failed! error occured", controller: self)
+                            
                         }
                         
                         
-                    } catch {
-                        print(error)
-                        ToastView.show(message: "Edit Failed! error occured", controller: self)
                         
                     }
                     
-        
-                
-                }
-                
-                
-                
-                }.resume()
+                    
+                    
+                    }.resume()
             }
             
         } else {
@@ -1072,90 +1115,95 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 
                 DispatchQueue.main.async {
                     ToastView.show(message: "Please Add mendatory fields!", controller: self)
-                  //  self.staric.textColor = UIColor.red
+                    //  self.staric.textColor = UIColor.red
                     self.phStaric.textColor = UIColor.red
                     self.CarStaric.textColor = UIColor.red
                     self.modelStaric.textColor = UIColor.red
-               
+                    
                 }
                 
             }
-            
+                
             else {
-            
-            guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.addCar)") else { return }
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-            request.httpBody = httpBody
+                
+                guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.addCar)") else { return }
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+                request.httpBody = httpBody
                 request.httpBody = httpBody
                 if let JSONString = String(data: httpBody, encoding: .utf8) {
                     
                     print(JSONString)
                 }
-            let session = URLSession.shared
-            session.dataTask(with: request) { (data, response, error) in
-                if let response = response {
-                    print(response)
-                }
-                
-                if let data = data {
-                    print(data)
-                    do {
-                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
-                        print(json)
-                        let status = json["Status"] as? Int
-                        let message = json["Description"] as? String
-                        if (status == 1) {
-                            if  let carid = json[Constants.CarID] as? Int {
-                                DispatchQueue.main.async {
-                                    Constants.CarIDData = carid
-                                }
-                            }
-                             ToastView.show(message: message!, controller: self)
-    
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            print("hello")
-                            if let parentVC = self.parent as? ReceptionalistView {
-                                let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                                let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
-                                parentVC.switchViewController(vc: vc!, showFooter: false)
-                            }
-                            })
-
-                            
+                let session = URLSession.shared
+                session.dataTask(with: request) { (data, response, error) in
+                    if response == nil {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: "Login failed! Check internet", controller: self)
                         }
-                        else if (status == 0) {
-                            
-                            print(status!)
-                            DispatchQueue.main.async {
-                                ToastView.show(message: message!, controller: self)
-                            }
-                            
-                        }
-                        
-                        
-                    } catch {
-                        print(error)
-                        ToastView.show(message: "Added failed! error occured", controller: self)
-                        
                     }
-                }
+                    if let response = response {
+                        print(response)
+                    }
+                    
+                    if let data = data {
+                        print(data)
+                        do {
+                            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                            print(json)
+                            let status = json["Status"] as? Int
+                            let message = json["Description"] as? String
+                            if (status == 1) {
+                                if  let carid = json[Constants.CarID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.CarIDData = carid
+                                    }
+                                }
+                                ToastView.show(message: message!, controller: self)
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                    print("hello")
+                                    if let parentVC = self.parent as? ReceptionalistView {
+                                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                                        parentVC.switchViewController(vc: vc!, showFooter: false)
+                                    }
+                                })
+                                
+                                
+                            }
+                            else if (status == 0) {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: message!, controller: self)
+                                }
+                                
+                            }
+                            
+                            
+                        } catch {
+                            print(error)
+                            ToastView.show(message: "Added failed! error occured", controller: self)
+                            
+                        }
+                    }
+                    
+                    }.resume()
+                //                DispatchQueue.main.async {
+                //                    if let parentVC = self.parent as? ReceptionalistView {
+                //                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
+                //                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                //                        parentVC.switchViewController(vc: vc!, showFooter: false)
+                //
+                //                    }
+                //
+                //                }
                 
-                }.resume()
-//                DispatchQueue.main.async {
-//                    if let parentVC = self.parent as? ReceptionalistView {
-//                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-//                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
-//                        parentVC.switchViewController(vc: vc!, showFooter: false)
-//
-//                    }
-//
-//                }
                 
                 
-            
             }
         }
     }
@@ -1190,7 +1238,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             let storyboard = UIStoryboard(name: "HistoryCar", bundle: nil)
             let history = storyboard.instantiateViewController(withIdentifier: "historycarVc") as? HistoryCar
             parentVC.switchViewController(vc: history!, showFooter: false)
-
+            
         }
         
     }
@@ -1214,7 +1262,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-     
+        
         
         var currentText = textField.text!.replacingOccurrences(of: "-", with: "")
         if currentText.count >= 4 {
@@ -1238,16 +1286,18 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     @objc func textFieldDidChanged(_ textField: UITextField) {
         
-     Numberpadview.isHidden = true
-    // NumberpadViewCheck.isHidden = false
-
+        Numberpadview.isHidden = true
+        self.numberPadCheck()
+        
     }
     
     @objc func phoneNumberDidChange(_ textField: UITextField) {
-        phoneNumber.resignFirstResponder()
-        
+        // phoneNumber.resignFirstResponder()
+        NumberpadViewCheck.isHidden = true
         
         self.numberPad()
+        
+        
         
     }
     
@@ -1279,7 +1329,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+    
 }
 
 extension addNewCar: NumberPadDelegate {
@@ -1287,28 +1337,49 @@ extension addNewCar: NumberPadDelegate {
     
     
     func keyPressed(key: NumberKey?) {
-        guard let number = key else {
-            return
-        }
-        switch number {
-        case .clear:
-            guard !(phoneNumber.text?.isEmpty ?? true) else {
+        if Numberpadview.isHidden == false {
+            guard let number = key else {
                 return
             }
-            phoneNumber.text?.removeLast()
-        case .custom:
-            phoneNumber.text? = "+"
-        default:
-            phoneNumber.text?.append("\(number.rawValue)")
+            switch number {
+            case .clear:
+                guard !(phoneNumber.text?.isEmpty ?? true) else {
+                    return
+                }
+                phoneNumber.text?.removeLast()
+            case .custom:
+                phoneNumber.text? = "+"
+            default:
+                phoneNumber.text?.append("\(number.rawValue)")
+            }
         }
+        else {
+            guard let number = key else {
+                return
+            }
+            switch number {
+            case .clear:
+                guard !(check.text?.isEmpty ?? true) else {
+                    return
+                }
+                check.text?.removeLast()
+            case .custom:
+                check.text? = "."
+            default:
+                check.text?.append("\(number.rawValue)")
+            }
+            
+        }
+        
     }
+    
 }
 
-//extension addNewCar: NumberPadDelegate {
+//extension addNewCar {
 //
 //
 //
-//    func keyPressed1(key: NumberKey?) {
+//    func keyPressed(key: NumberKey?) {
 //        guard let number = key else {
 //            return
 //        }

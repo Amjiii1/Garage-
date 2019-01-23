@@ -9,8 +9,8 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
- 
+    
+    
     @IBOutlet weak var settingContianerPop: UIView!
     
     
@@ -21,11 +21,11 @@ class SettingsViewController: UIViewController {
         GeneralNibView.frame.size = settingContianerPop.frame.size
         self.settingContianerPop.addSubview(GeneralNibView)
         
-      
+        
     }
     
-     @IBAction func tabButtonaction(_ sender: UIButton) {
-       
+    @IBAction func tabButtonaction(_ sender: UIButton) {
+        
         let GeneralNibView: GeneralView!
         let HardwareNibView: HardwareView!
         let ReceiptNibView: ReceiptView!
@@ -42,7 +42,7 @@ class SettingsViewController: UIViewController {
             
         case 1:
             GeneralNibView = Bundle.main.loadNibNamed("GeneralView", owner: self, options: nil)?[0] as? GeneralView
-             GeneralNibView.frame.size = settingContianerPop.frame.size
+            GeneralNibView.frame.size = settingContianerPop.frame.size
             self.settingContianerPop.addSubview(GeneralNibView)
             break
         case 2:
@@ -90,7 +90,7 @@ class SettingsViewController: UIViewController {
     
     
     
-   
+    
     func removeNibViews() {
         if settingContianerPop.subviews.count > 0  {
             let views:[UIView] = settingContianerPop.subviews
@@ -119,21 +119,21 @@ class SettingsViewController: UIViewController {
     }
     
     func myButtonTapped(){
-//        if  UIButton.isSelected == true {
-//            UIButton.isSelected = false
-//        }   else {
-//            UIButton.isSelected = true
-//        }
+        //        if  UIButton.isSelected == true {
+        //            UIButton.isSelected = false
+        //        }   else {
+        //            UIButton.isSelected = true
+        //        }
     }
     
     
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
     
-
+    
 }

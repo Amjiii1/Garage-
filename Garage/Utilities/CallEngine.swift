@@ -34,6 +34,13 @@ class CallEngine {
     static let LoadCardetailsapi = "order/load/"
     static let notesImguploadapi = "car/notes/image"
     static let OrderDetails = "order/details"
+    static let OrderEdit = "order/edit"
+    static let Unlist = "order/updatestatus/unlist"
+    static let Assigned = "order/updatestatus/assigned"
+    static let UnAssigned = "order/updatestatus/assigned"
+    static let finishedOrderlist = "orderlist/service/all"
+    static let WorkDone = "order/updatestatus/workdone"
+    
     
     
 

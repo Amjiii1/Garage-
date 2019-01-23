@@ -13,9 +13,10 @@ import SwiftyJSON
 
 
 
+
 struct Items {
-    static var nameArray = [[String: Any]]()
-  static var Product = [ReceiptModel]()
+    static var nameArray = [AnyObject]()
+    static var Product = [ReceiptModel]()
 }
 
 
@@ -32,7 +33,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     @IBOutlet weak var cellview: CollectionViewCell!
     
     var categories = [Category]()
-   // var Product = [ReceiptModel]()
+    // var Product = [ReceiptModel]()
     var nameArray = [String]()
     var Searchitems = [Item]()
     
@@ -41,9 +42,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     var subCategoryIndex = 0
     var count = 0
     var updateprice  = 0
-     let dateFormatter : DateFormatter = DateFormatter()
+    let dateFormatter : DateFormatter = DateFormatter()
     var meanValuesArray : [String] = ["","0","1","1", "0", ""]
-   var scores = ["x" : 1, "y" : 1, "z" : 1, "t": 1]
+    var scores = ["x" : 1, "y" : 1, "z" : 1, "t": 1]
     
     var new = [Int]()
     
@@ -51,52 +52,31 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(Constants.bayid)")
+        print("\(Items.nameArray)")
         serviceSearch.attributedPlaceholder = NSAttributedString(string: "Search a Service Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         subcategoryBtn.isHidden = true
         itemBtn.isHidden = true
         colectionview.delegate = self
         colectionview.dataSource = self
         category.backgroundColor = UIColor.gray
-       // colectionview.layer.borderColor = UIColor.yellow as! CGColor
         getData()
-        //  print(ReceiptModel())
-       self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+        
+      
         serviceSearch.delegate = self
-       // serviceSearch.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("NotificationIdentifier"), object: nil)
     }
     
     
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//
-//        if textField.text  != "" {
-//            if (serviceSearch.text?.count)! != 0 {
-//              //  self.Ite.removeAll()
-//                for str in Searchitems {
-//                    let range = str.name.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
-//                    if range != nil {
-//                       // self.Welcomecellobj.append(str)/
-//                    }
-//                }
-//            }
-//            colectionview.reloadData()
-//
-//        } else {
-//
-//            serviceSearch.resignFirstResponder()
-//            serviceSearch.text = ""
-//           // self.Welcomecellobj.removeAll()
-//            for str in Searchitems {
-//             //   Welcomecellobj.append(str)
-//            }
-//            colectionview.reloadData()
-//
-//        }
-//
-//
-//    }
     
-    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+    }
     
     
     
@@ -104,6 +84,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         let url = "\(CallEngine.baseURL)\(CallEngine.productapi)\(Constants.sessions)"
         print(url)
         Alamofire.request(url).response { [weak self] (response) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self!)
+                }
+            }
             guard self != nil else { return }
             if let error = response.error {
                 debugPrint("🔥 Network Error : ", error)
@@ -188,7 +173,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     
-   
+    
     @IBAction func HomeButtonTemp(_ sender: Any) {
         
         removeDataa()
@@ -225,7 +210,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     @IBAction func onitemTab(_ sender: Any) {
-       
+        
         itemBtn.backgroundColor = UIColor.gray
         subcategoryBtn.backgroundColor = UIColor.darkGray
         category.backgroundColor = UIColor.darkGray
@@ -239,28 +224,29 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         print("Current State : ", currentState)
         print("Category Index : ", categoryIndex)
         print("Sub Category Index : ", subCategoryIndex)
-//        print("Category Count : ", categories.count)
-//        print("SuCategory Count : ", categories[categoryIndex].subCategories.count)
-//        print("Item Count : ", categories[categoryIndex].subCategories[subCategoryIndex].items.count)
+        //        print("Category Count : ", categories.count)
+        //        print("SuCategory Count : ", categories[categoryIndex].subCategories.count)
+        //        print("Item Count : ", categories[categoryIndex].subCategories[subCategoryIndex].items.count)
         DispatchQueue.main.async {
             self.colectionview.reloadData()
         }
     }
     
     override func viewDidLayoutSubviews() {
-//                addBtn.layer.cornerRadius = addBtn.frame.size.width/2
-//                 subtractBtn.layer.cornerRadius = subtractBtn.frame.size.width/2
+        //                addBtn.layer.cornerRadius = addBtn.frame.size.width/2
+        //                 subtractBtn.layer.cornerRadius = subtractBtn.frame.size.width/2
         //         productView.layer.cornerRadius = 16.0
         //        productView.layer.masksToBounds = true
     }
     
     @IBAction func receptBtn(_ sender: Any) {
-         self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
         Receiptdetails()
     }
     
     @IBAction func nextBtn(_ sender: Any) {
-      
+        
+        print(Items.Product.first as Any)
         
         if   (Items.Product.first != nil)    {
             
@@ -276,12 +262,12 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         
         
-       
-     
+        
+        
     }
     
     func removeDataa() {
-        
+        Items.nameArray.removeAll()
         Items.Product.removeAll()
         Constants.platenmb = "0"
         Constants.vinnmb = "0"
@@ -313,7 +299,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     @IBAction func backBtn(_ sender: Any) {
         Items.Product.removeAll()
-       // Items.nameArray.removeAll()
+        Items.nameArray.removeAll()
         Constants.totalprice = 0
         if let parentVC = (self.parent as? ReceptionalistView) {
             let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
@@ -340,11 +326,15 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
 }
 
+
+
+
+
 extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-    
+        
+        
         switch currentState {
         case 1:
             return categories[categoryIndex].subCategories.count
@@ -357,7 +347,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-       
+        
         switch currentState {
         case 1:
             cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].name, image: categories[categoryIndex].subCategories[indexPath.row].image)
@@ -369,8 +359,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.plusBtn.isHidden = false
             cell.minusBtn.isHidden = false
             cell.countLbl.isHidden = false
-//      new = [(categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].itemID)]
-//             print(new)
+            //      new = [(categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].itemID)]
+            //             print(new)
             
             count = count+1
             print("\(count)")
@@ -378,16 +368,16 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             print(count)
         default:
             cell.populate(with: categories[indexPath.row].name, image: categories[indexPath.row].image)
-           // cell.cellDelegate = self
+            // cell.cellDelegate = self
             cell.index = indexPath
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
             cell.countLbl.text = "\(count)"
             print("\(count)")
-           // cell.decorate(for: "\(count)", in: self)
+            // cell.decorate(for: "\(count)", in: self)
             
-
+            
         }
         
         return cell
@@ -396,14 +386,22 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 15
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 12, bottom: 15, right: 12)
+        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
+   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: colectionview.frame.size.width / 3.4, height: colectionview.frame.size.height / 2.7)
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+       
+        let cell = colectionview.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.clear.cgColor
+     
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -422,6 +420,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             subcategoryBtn.backgroundColor = UIColor.gray
             category.backgroundColor = UIColor.darkGray
+           
         case 1:
             currentState = 2
             cell.plusBtn.isHidden = false
@@ -434,159 +433,269 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             itemBtn.backgroundColor = UIColor.gray
             subcategoryBtn.backgroundColor = UIColor.darkGray
+            
         default:
             let new = cell.countLbl.text
             let stringArray = new!.components(separatedBy: CharacterSet.decimalDigits.inverted)
             for item in stringArray {
                 if let number = Int(item) {
-                  Constants.counterQTY = number
+                    Constants.counterQTY = number
                 }
             }
             let name = [(categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row])]
             cell.plusBtn.tag = indexPath.row
             cell.minusBtn.tag = indexPath.row
             print(indexPath.row)
+            
             for newname in name {
-                let product = ReceiptModel(Name: newname.name, Price: newname.price*Constants.counterQTY, ItemID: newname.itemID, Quantity: Constants.counterQTY)
-             Items.Product.append(product)
-//                 let price = newname.price*Constants.counterQTY
-//                Constants.totalprice = Constants.totalprice + price
-//                self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+                let product = ReceiptModel(Name: newname.name, Price: Double(newname.price*Constants.counterQTY), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
                 
-            let dict = [
-                            "Name": newname.name, "Price":newname.price*Constants.counterQTY, "Quantity": Constants.counterQTY, "ItemID": newname.itemID] as [String : Any]
+                Items.Product.append(product)
+                
+                
+                
+                //                 let price = newname.price*Constants.counterQTY
+                //                Constants.totalprice = Constants.totalprice + price
+                //                self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+                
+//                let dict = [
+//                    "Name": newname.name, "Price":newname.price*Constants.counterQTY, "Quantity": Constants.counterQTY, "ItemID": newname.itemID, "Mode": Constants.mode, "OrderDetailID": 0, "Status": 201] as [String : Any]
+                
                 let price = newname.price*Constants.counterQTY
-               Constants.totalprice = Constants.totalprice + price
+                Constants.totalprice = Constants.totalprice + Double(price)
                 self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
-               Items.nameArray.append(dict)
-//
                 
-            
-             
-
-
+                
             }
+            let cell = colectionview.cellForItem(at: indexPath)
+            cell?.layer.borderWidth = 2.0
+            cell?.layer.borderColor = UIColor.DefaultApp.cgColor
             
-           
+            
             break
         }
         
     }
     
-
+    
     
     func PunchOder() {
         
         
-
+//        if Constants.flagEdit != 0 {
+            
+      
+       
+//          if Constants.flagEdit != 0 {
+//
+//        for models in Items.Product {
+//            print(models)
+//            if models.Status == 201 {
+//                  print(models)
+//                Items.Product.append(models)
+//            } else {
+//
+//                Items.Product.removeAll()
+//
+//            }
+//
+//
+//        }
+//        }
+        if Constants.flagEdit != 0 {
+            
+            for models in Items.Product {
+                if models.Status == 201 {
+                    print(models)
+                   Items.Product.append(models)
+                    
+                } else {
+                    
+                   Items.Product.removeAll()
+                    
+                }
+                
+                
+            }
+        }
+        
+        
+        
+   if Constants.flagEdit != 0 {
+    
+    for System in Items.nameArray {
+        
+        Items.Product.append(System as! ReceiptModel)
+    }
+        }
+    
+       
+        print(Items.Product)
+        
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(Items.Product)
-        let string = String(data: data, encoding: .utf8)!
-        let test = String(string.filter { !" \n\t\r\\".contains($0) })
-        nameArray.append(string)
-        //                self.nameArray = string
-        print(string)
-        print(test)
-        print(data)
-        
-//
-        
-        print("\(Items.Product)")
-        print(Items.nameArray)
-         print(test)
-        print(string)
-     
-
-        //Items.nameArray = String(Items.)
+        let data1 = try! encoder.encode(Items.Product)
+//           let json = String(data: data1, encoding: String.Encoding.utf8)
+//          let testd = Int(json!.filter { !" \n\t\\r\\".contains($0) })
+       
         
         
+        guard let test = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
+       print(test)
+        var urlorderpunch = ""
         
-        print(Constants.CarIDData)
+        print(Constants.OrderIDData)
         
         let parameters = [
             "SessionID": Constants.sessions,
             "CarID": Constants.CarIDData,
             "OrderTakerID":Constants.ordertracker,
             "BayID": Constants.bayid,
-            "OrderID": 0,
+            "OrderID": Constants.OrderIDData,
             "OrderPunchDt": Constants.currentdate,
-            "Items": test]  as [String : Any]
+            "OrderNo":Constants.OrderNoData,
+            "Items": test as Any]  as [String : Any]
         
-    
-    guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderPunchApi)") else { return }
-        print(url)
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-    request.httpBody = httpBody
-        if let JSONString = String(data: httpBody, encoding: .utf8) {
+        if Constants.flagEdit != 0 {
             
-            print(JSONString)
-        }
-    let session = URLSession.shared
-    session.dataTask(with: request) { (data, response, error) in
-    if let response = response {
-    print(response)
-    }
-        if let data = data {
-            print(data)
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+            urlorderpunch = "\(CallEngine.baseURL)\(CallEngine.OrderEdit)"    //BASE
+            print(urlorderpunch)
+            let url = URL(string: urlorderpunch)
+            var request = URLRequest(url: url!)
+            request.httpMethod = "PUT"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+            request.httpBody = httpBody
+            let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
+            if let json = jsonS {
                 print(json)
-                let status = json["Status"] as? Int
-                let newmessage = json["Description"] as? String
-                if (status == 1) {
-                    
-                    ToastView.show(message: newmessage!, controller: self)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        print("hello")
-                        if let parentVC = self.parent as? ReceptionalistView {
-                            let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-                            let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
-                            parentVC.switchViewController(vc: vc!, showFooter: true)
+            }
+            let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                
+                if response == nil {
+                    DispatchQueue.main.async {
+                        ToastView.show(message: "Login failed! Check internet", controller: self)
+                    }
+                }
+                if let response = response {
+                    print(response)
+                }
+                if let data = data {
+                    print(data)
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                        print(json)
+                        let status = json["Status"] as? Int
+                        let newmessage = json["Description"] as? String
+                        if (status == 1) {
+                            
+                            ToastView.show(message: newmessage!, controller: self)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                print("hello")
+                                if let parentVC = self.parent as? ReceptionalistView {
+                                    let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+                                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                                }
+                            })
+                        }
+                        else if (status == 0) {
+                            
+                            print(status!)
+                            DispatchQueue.main.async {
+                                ToastView.show(message: newmessage!, controller: self)
+                            }
                         }
                         
-                    })
-                    
-                }
-                else if (status == 0) {
-                    
-                    print(status!)
-                    DispatchQueue.main.async {
-                        ToastView.show(message: newmessage!, controller: self)
+                    } catch {
+                        print(error)
+                        ToastView.show(message: "Edit Failed! error occured", controller: self)
                     }
-                
+                    
                 }
-                
-                
-            } catch {
-                print(error)
-                ToastView.show(message: "Edit Failed! error occured", controller: self)
-                
+                }.resume()
+            
+        }
+        else {
+            
+            let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderPunchApi)")!
+            
+            print(urlorderpunch)
+            
+            //let url = URL(string: urlorderpunch)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+            request.httpBody = httpBody
+            let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
+            if let json = jsonS {
+                print(json)
             }
-            
-            
+            let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                if response == nil {
+                    DispatchQueue.main.async {
+                        ToastView.show(message: "Login failed! Check internet", controller: self)
+                    }
+                }
+                if let response = response {
+                    print(response)
+                }
+                if let data = data {
+                    print(data)
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                        print(json)
+                        let status = json["Status"] as? Int
+                        let newmessage = json["Description"] as? String
+                        if (status == 1) {
+                            
+                            ToastView.show(message: newmessage!, controller: self)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                print("hello")
+                                if let parentVC = self.parent as? ReceptionalistView {
+                                    let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+                                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                                }
+                            })
+                        }
+                        else if (status == 0) {
+                            
+                            print(status!)
+                            DispatchQueue.main.async {
+                                ToastView.show(message: newmessage!, controller: self)
+                            }
+                        }
+                        
+                    } catch {
+                        print(error)
+                        ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    }
+                    
+                }
+                }.resume()
             
         }
-    }.resume()
-    
-        }
-    
+    }
 }
+
+
 
 enum mathFunction {
     /// When Addition is to done
     case Add
-
+    
     
     case Subtract
     
     
-
-   
+    
+    
 }
 
 

@@ -45,31 +45,46 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
             guard let data = data, error == nil else { return }
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-                print(json)
                 if let bay = json["BaysList"] as? [[String: Any]] {
                     self.Baydetails.removeAll()
                     for Baylist in bay {
+                    
+                        print(Constants.bayflag)
                         let baylist = popModel(Baylist: Baylist)
+                        if Constants.bayflag == 1 {
+                            let new = baylist?.Name
+                            let new1 = baylist?.BayID
+                        if (new == "Waiting List") && (new1 == 0)   {
+                            print("Hello world")
+                        } else {
                         self.Baydetails.append(baylist!)
-                        print(bay)
-                        
+                        }
+                            
+                        } else {
+                             self.Baydetails.append(baylist!)
+                            
+                        }
                         
                     }
                     
                 }
                 DispatchQueue.main.async {
                     self.tablviepopover.reloadData()
+                    Constants.bayflag = 0
                 }
                 
             } catch let error as NSError {
                 print(error)
+                Constants.bayflag = 0
             }
         }).resume()
-        DispatchQueue.main.async {
-          self.tablviepopover.reloadData()
-            
-        }
+//        DispatchQueue.main.async {
+//          self.tablviepopover.reloadData()
+//            
+//            
+//        }
         
+       
         
     }
     
@@ -88,6 +103,7 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         Constants.bayid = Baydetails[indexPath.row].BayID!
         Constants.bayname = Baydetails[indexPath.row].Name!
+        NotificationCenter.default.post(name: Notification.Name("Notificationbayname"), object: nil)
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
         }

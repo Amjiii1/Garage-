@@ -64,13 +64,15 @@ struct Constants {
     static var ImagePath = "ImagePath"
     static var SessionID = "SessionID"
     static var EngineType = "EngineType"
+    static var OrderNo = "OrderNo"
+    static var OrderNoData = 0
     static var CarIDData = 0
     static var CarNameData = ""
     static var MakeIDData = 0
     static var ModelIDData = 0
     static var ColorData = ""
     static var CustomerIDData = ""
-    static var OrderIDData = ""
+    static var OrderIDData = 0
     static let User = "User"
     static var sessions = ""
     static var ordertracker = ""
@@ -80,11 +82,16 @@ struct Constants {
      static var bayname = "B0"
     static var history = 0
     static var currentdate = ""
-    static var totalprice = 0
+    static var totalprice: Double = 0
     static var counterQTY = 1
     static var carmakeid = 2
     static var editOrderid = 0
     static var flagEdit = 0
+    static var BMake = ""
+    static var Bplate = ""
+    static var mode = "Add"
+    static var modeupdate = "Update"
+    static var bayflag = 0
   
     
      

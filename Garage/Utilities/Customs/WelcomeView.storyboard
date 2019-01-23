@@ -278,200 +278,20 @@
                         <outlet property="welcomeView" destination="307-cr-iuc" id="VKW-af-maI"/>
                         <segue destination="o2n-3t-zmW" kind="show" identifier="addNewCarVc" id="IOe-xb-WlC"/>
                         <segue destination="JRV-NT-bjj" kind="show" identifier="carScannerVc" id="Svn-Fa-tzl"/>
-                        <segue destination="Mi6-6h-iN0" kind="popoverPresentation" identifier="BayAssign" animates="NO" popoverAnchorView="307-cr-iuc" id="TVl-aj-Zk6">
-                            <popoverArrowDirection key="popoverArrowDirection"/>
-                        </segue>
+                        <segue destination="c8T-Id-hTY" kind="show" identifier="BayForWelcomeVc" id="HXA-4a-O2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HkZ-Jp-gHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="94.964028776978424" y="758.6330935251799"/>
         </scene>
-        <!--Bay Assign View-->
-        <scene sceneID="CGt-F2-zmU">
+        <!--BayForWelcomeVc-->
+        <scene sceneID="zEI-Ua-dSI">
             <objects>
-                <viewController storyboardIdentifier="BayAssign" modalPresentationStyle="overCurrentContext" id="Mi6-6h-iN0" customClass="BayAssignView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PmL-8v-7Sm"/>
-                        <viewControllerLayoutGuide type="bottom" id="dvm-CY-SIe"/>
-                    </layoutGuides>
-                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="SPK-vq-bzH">
-                        <rect key="frame" x="0.0" y="0.0" width="666" height="327"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85D-5d-Xad">
-                                <rect key="frame" x="0.0" y="0.0" width="666" height="98"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amjad Ali" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrV-Vl-R04">
-                                        <rect key="frame" x="200" y="5" width="266" height="39"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift ABC-1237" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNe-OK-L9Z">
-                                        <rect key="frame" x="200" y="51.5" width="266" height="39"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="CNe-OK-L9Z" firstAttribute="centerX" secondItem="XrV-Vl-R04" secondAttribute="centerX" id="0hc-nX-gzm"/>
-                                    <constraint firstItem="XrV-Vl-R04" firstAttribute="height" secondItem="85D-5d-Xad" secondAttribute="height" multiplier="0.4" id="4Bx-hr-0nj"/>
-                                    <constraint firstItem="CNe-OK-L9Z" firstAttribute="height" secondItem="XrV-Vl-R04" secondAttribute="height" id="NN6-IB-Ofd"/>
-                                    <constraint firstItem="XrV-Vl-R04" firstAttribute="centerY" secondItem="85D-5d-Xad" secondAttribute="centerY" multiplier="0.5" id="Xf7-63-q6c"/>
-                                    <constraint firstItem="XrV-Vl-R04" firstAttribute="centerX" secondItem="85D-5d-Xad" secondAttribute="centerX" id="Xob-tv-CyV"/>
-                                    <constraint firstItem="XrV-Vl-R04" firstAttribute="width" secondItem="85D-5d-Xad" secondAttribute="width" multiplier="0.4" id="ZSs-Ud-rwq"/>
-                                    <constraint firstItem="CNe-OK-L9Z" firstAttribute="width" secondItem="XrV-Vl-R04" secondAttribute="width" id="hxa-PH-iVQ"/>
-                                    <constraint firstItem="CNe-OK-L9Z" firstAttribute="centerY" secondItem="XrV-Vl-R04" secondAttribute="centerY" multiplier="2.9" id="vF7-Of-W5Y"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIA-eg-aRb">
-                                <rect key="frame" x="33.5" y="122.5" width="99.5" height="114.5"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="28"/>
-                                <state key="normal" title="B1">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="bay1BtnAction:" destination="Mi6-6h-iN0" eventType="touchUpInside" id="04g-mv-rFp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Al-Ol-HzM">
-                                <rect key="frame" x="191.5" y="122.5" width="100" height="114.5"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="28"/>
-                                <state key="normal" title="B2">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttw-IP-dv0">
-                                <rect key="frame" x="360.5" y="122.5" width="100" height="114.5"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="28"/>
-                                <state key="normal" title="B3">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwJ-4d-CYt">
-                                <rect key="frame" x="524.5" y="122.5" width="100" height="114.5"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="28"/>
-                                <state key="normal" title="B4">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="952-FJ-roA">
-                                <rect key="frame" x="70" y="263" width="110" height="46"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="Edit Car">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wx8-ja-EIK">
-                                <rect key="frame" x="238.5" y="263" width="197.5" height="46"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="Services">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEZ-dt-3h9">
-                                <rect key="frame" x="497" y="263" width="118.5" height="46"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="Unlist">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="SwJ-4d-CYt" firstAttribute="width" secondItem="Ttw-IP-dv0" secondAttribute="width" id="4v1-ws-rB5"/>
-                            <constraint firstItem="952-FJ-roA" firstAttribute="height" secondItem="wIA-eg-aRb" secondAttribute="height" multiplier="0.4" id="65h-5U-uaB"/>
-                            <constraint firstItem="SwJ-4d-CYt" firstAttribute="height" secondItem="Ttw-IP-dv0" secondAttribute="height" id="6u6-0T-abx"/>
-                            <constraint firstItem="QEZ-dt-3h9" firstAttribute="centerX" secondItem="wx8-ja-EIK" secondAttribute="centerX" multiplier="1.65" id="BNs-0b-9NX"/>
-                            <constraint firstItem="QEZ-dt-3h9" firstAttribute="height" secondItem="wx8-ja-EIK" secondAttribute="height" id="BYl-02-InQ"/>
-                            <constraint firstItem="wx8-ja-EIK" firstAttribute="width" secondItem="952-FJ-roA" secondAttribute="width" multiplier="1.8" id="BfE-tH-DzM"/>
-                            <constraint firstItem="8Al-Ol-HzM" firstAttribute="height" secondItem="wIA-eg-aRb" secondAttribute="height" id="D04-kd-Rir"/>
-                            <constraint firstItem="wx8-ja-EIK" firstAttribute="height" secondItem="952-FJ-roA" secondAttribute="height" id="EKf-an-6jC"/>
-                            <constraint firstItem="Ttw-IP-dv0" firstAttribute="height" secondItem="8Al-Ol-HzM" secondAttribute="height" id="EyS-U7-cHl"/>
-                            <constraint firstItem="85D-5d-Xad" firstAttribute="width" secondItem="SPK-vq-bzH" secondAttribute="width" id="MjJ-ik-e7w"/>
-                            <constraint firstItem="952-FJ-roA" firstAttribute="centerY" secondItem="SPK-vq-bzH" secondAttribute="centerY" multiplier="1.75" id="QYb-Q0-VCs"/>
-                            <constraint firstItem="Ttw-IP-dv0" firstAttribute="centerX" secondItem="8Al-Ol-HzM" secondAttribute="centerX" multiplier="1.7" id="Roi-eJ-WzJ"/>
-                            <constraint firstItem="SwJ-4d-CYt" firstAttribute="centerY" secondItem="Ttw-IP-dv0" secondAttribute="centerY" id="Tru-cr-GxG"/>
-                            <constraint firstItem="85D-5d-Xad" firstAttribute="top" secondItem="PmL-8v-7Sm" secondAttribute="bottom" id="TwD-Rx-dGZ"/>
-                            <constraint firstItem="952-FJ-roA" firstAttribute="width" secondItem="wIA-eg-aRb" secondAttribute="width" multiplier="1.1" id="VDa-TB-wbK"/>
-                            <constraint firstItem="952-FJ-roA" firstAttribute="centerX" secondItem="wIA-eg-aRb" secondAttribute="centerX" multiplier="1.5" id="Yiq-gI-hUm"/>
-                            <constraint firstItem="85D-5d-Xad" firstAttribute="height" secondItem="SPK-vq-bzH" secondAttribute="height" multiplier="0.3" id="boK-bF-8Tf"/>
-                            <constraint firstItem="wIA-eg-aRb" firstAttribute="height" secondItem="SPK-vq-bzH" secondAttribute="height" multiplier="0.35" id="cQm-E4-JaC"/>
-                            <constraint firstItem="wx8-ja-EIK" firstAttribute="centerY" secondItem="952-FJ-roA" secondAttribute="centerY" id="cdj-ZI-IvG"/>
-                            <constraint firstItem="85D-5d-Xad" firstAttribute="centerX" secondItem="SPK-vq-bzH" secondAttribute="centerX" id="cqD-6U-VAR"/>
-                            <constraint firstItem="8Al-Ol-HzM" firstAttribute="centerX" secondItem="wIA-eg-aRb" secondAttribute="centerX" multiplier="2.9" id="es7-QO-dlT"/>
-                            <constraint firstItem="QEZ-dt-3h9" firstAttribute="width" secondItem="wx8-ja-EIK" secondAttribute="width" multiplier="0.6" id="ewM-On-Nzh"/>
-                            <constraint firstItem="wIA-eg-aRb" firstAttribute="centerX" secondItem="SPK-vq-bzH" secondAttribute="centerX" multiplier="0.25" id="fRg-cu-mVW"/>
-                            <constraint firstItem="Ttw-IP-dv0" firstAttribute="width" secondItem="8Al-Ol-HzM" secondAttribute="width" id="iCn-AW-pNr"/>
-                            <constraint firstItem="wIA-eg-aRb" firstAttribute="centerY" secondItem="SPK-vq-bzH" secondAttribute="centerY" multiplier="1.1" id="iWg-zC-alW"/>
-                            <constraint firstItem="QEZ-dt-3h9" firstAttribute="centerY" secondItem="wx8-ja-EIK" secondAttribute="centerY" id="jcz-CK-3mM"/>
-                            <constraint firstItem="Ttw-IP-dv0" firstAttribute="centerY" secondItem="8Al-Ol-HzM" secondAttribute="centerY" id="oKB-hY-STz"/>
-                            <constraint firstItem="SwJ-4d-CYt" firstAttribute="centerX" secondItem="Ttw-IP-dv0" secondAttribute="centerX" multiplier="1.4" id="pHn-vE-HAc"/>
-                            <constraint firstItem="wIA-eg-aRb" firstAttribute="width" secondItem="SPK-vq-bzH" secondAttribute="width" multiplier="0.15" id="pSh-G7-T7H"/>
-                            <constraint firstItem="8Al-Ol-HzM" firstAttribute="width" secondItem="wIA-eg-aRb" secondAttribute="width" id="t63-p4-avQ"/>
-                            <constraint firstItem="wx8-ja-EIK" firstAttribute="centerX" secondItem="952-FJ-roA" secondAttribute="centerX" multiplier="2.7" id="xmx-jG-VRe"/>
-                            <constraint firstItem="8Al-Ol-HzM" firstAttribute="centerY" secondItem="wIA-eg-aRb" secondAttribute="centerY" id="zq4-Ze-9LV"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <integer key="value" value="18"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="686" height="400"/>
-                    <size key="freeformSize" width="686" height="400"/>
-                    <connections>
-                        <outlet property="Bay1Btn" destination="wIA-eg-aRb" id="00l-jF-CwC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sjz-Mq-Usr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="BayForWelcome" referencedIdentifier="BayForWelcomeVc" id="c8T-Id-hTY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="meR-J9-aHD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="626"/>
+            <point key="canvasLocation" x="615" y="665"/>
         </scene>
         <!--carScannerVc-->
         <scene sceneID="W0k-xX-J6e">
@@ -479,7 +299,7 @@
                 <viewControllerPlaceholder storyboardName="CarScan" referencedIdentifier="carScannerVc" id="JRV-NT-bjj" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltz-CT-o9j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="617" y="766"/>
+            <point key="canvasLocation" x="609" y="754"/>
         </scene>
         <!--addNewCarVc-->
         <scene sceneID="K4S-jc-Mnl">
@@ -487,7 +307,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="addNewCarVc" storyboardName="AddnewCar" referencedIdentifier="addNewCarVc" id="o2n-3t-zmW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kX-Tr-5pD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="617" y="878"/>
+            <point key="canvasLocation" x="610" y="826"/>
         </scene>
     </scenes>
     <resources>

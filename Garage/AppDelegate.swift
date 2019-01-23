@@ -17,13 +17,14 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarStyle = .lightContent
+       
         // Override point for customization after application launch.
 //        window = UIWindow()
 //        window?.makeKeyAndVisible()
 //        let navController = UINavigationController(rootViewController: WelcomeView())
 //        window?.rootViewController = navController
         
-        
+        Loader.loadLoader()
         return true
     }
 

@@ -34,7 +34,8 @@ class ToastView: UIViewController {
         let toastLabel = UILabel(frame: CGRect())
         toastLabel.textColor = UIColor.black
         toastLabel.textAlignment = .center;
-        toastLabel.font.withSize(14.0)
+        toastLabel.font = UIFont(name:"SFProDisplay-Bold", size: 18.0)
+        //toastLabel.font.withSize(14.0)
         toastLabel.text = message
         toastLabel.clipsToBounds  =  true
         toastLabel.numberOfLines = 0

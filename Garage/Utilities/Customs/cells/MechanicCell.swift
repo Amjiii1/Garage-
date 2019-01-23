@@ -7,19 +7,36 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MechanicCell: UICollectionViewCell {
     
     @IBOutlet weak var subtitle: UILabel!
     
+    @IBOutlet weak var mechanicImage: UIImageView!
+    
+   
+    
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+         mechanicImage.image = nil
+       
         subtitle.text?.removeAll()
+      
+       
+
     }
     
-    func populate(with model: String) {
-        subtitle.text = model
+    func Mpopulate(with model: String, image: String) {
+      
+        subtitle.text = model.capitalized
+
+      
+        if let url = URL(string: image) {
+            mechanicImage.kf.indicatorType = .activity
+            mechanicImage.kf.setImage(with: url)
+        }
     }
     
     

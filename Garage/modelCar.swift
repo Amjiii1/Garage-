@@ -9,12 +9,12 @@
 import UIKit
 
 class modelCar: NSObject {
-
+    
     var Name: String?
     var ModelID: Int?
-     var Year: Int?
-     var EngineNo: String?
-     var RecommendedLitres: String?
+    var Year: Int?
+    var EngineNo: String?
+    var RecommendedLitres: String?
     
     
     
@@ -42,13 +42,13 @@ class modelCar: NSObject {
     init(DetailsModel: [String: Any]){
         
         guard let name = DetailsModel["Name"] as? String,
-        let modelid = DetailsModel["ModelID"] as? Int,
-        let year = DetailsModel["Year"] as? Int,
-        let engineno = DetailsModel["EngineNo"] as? String,
-        let recomend = DetailsModel["RecommendedLitres"] as? String
-        
-        
-        else {return}
+            let modelid = DetailsModel["ModelID"] as? Int,
+            let year = DetailsModel["Year"] as? Int,
+            let engineno = DetailsModel["EngineNo"] as? String,
+            let recomend = DetailsModel["RecommendedLitres"] as? String
+            
+            
+            else {return}
         
         self.Name = name
         self.ModelID = modelid
@@ -57,7 +57,7 @@ class modelCar: NSObject {
         self.RecommendedLitres = recomend
         
     }
-
+    
     
     
     

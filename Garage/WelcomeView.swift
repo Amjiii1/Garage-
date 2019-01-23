@@ -20,6 +20,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var Welcomecellobj = [WelcomeModel]()
     var fruitsArray = [WelcomeModel]()
     
+    var AssignedID: Int = 0
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewWelcome.reloadData()
@@ -28,11 +32,12 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         SearcIconImage()
         ApiImplimentations()
         carSearchTextField.delegate = self
-       carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
-       print("\(Constants.bayid)")
-        
-        }
+        carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        print("\(Constants.bayid)")
+
+    }
     
+  
     
     func setClearButtonColor(_ color: UIColor?, forTextfield textField: UITextField?) {
         
@@ -81,8 +86,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         textField.text = currentText
         if textField.text!.characters.count  == 8          {
-           
-        
+            
+            
         }
         
     }
@@ -118,7 +123,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         for str in fruitsArray {
             Welcomecellobj.append(str)
         }
-       tableViewWelcome.reloadData()
+        tableViewWelcome.reloadData()
         return false
     }
     
@@ -140,7 +145,6 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @IBAction func segmentedAction(_ sender: Any) {
-        tableViewWelcome.reloadData()
         ApiImplimentations()
     }
     
@@ -157,8 +161,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
+        loadingIndicator.backgroundColor = UIColor.DefaultApp
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
@@ -169,54 +174,76 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     func ApiImplimentations() {
-
+        
         var Apiurl = ""
         switch (WelcomeSegmented.selectedSegmentIndex) {
-        
+            
         case 0:
             Apiurl = "\(CallEngine.baseURL)\(CallEngine.Welcomelistall)\(Constants.sessions)"
         case 1:
-             Apiurl = "\(CallEngine.baseURL)\(CallEngine.Welcomelistwaitlist)\(Constants.sessions)"
+            Apiurl = "\(CallEngine.baseURL)\(CallEngine.Welcomelistwaitlist)\(Constants.sessions)"
         case 2:
-               Apiurl = "\(CallEngine.baseURL)\(CallEngine.Welcomelistassigned)\(Constants.sessions)"
+            Apiurl = "\(CallEngine.baseURL)\(CallEngine.Welcomelistassigned)\(Constants.sessions)"
         default:
             break
         }
         self.WelcomeSegmented.isUserInteractionEnabled = false
         DispatchQueue.main.async {
             self.showloader()
+         
         }
         let url = URL(string: Apiurl)
-    //    print(Apiurl)
+        //    print(Apiurl)
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    self.dismiss(animated: true, completion: nil)
+                    self.WelcomeSegmented.isUserInteractionEnabled = true
+                }
+            }
             guard let data = data, error == nil else { return }
             do {
-              
+                
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-            //    print(json)
-               
+                print(json)
+                
+                let status = json["Status"] as? Int
+                let discript = json["Description"] as? String
+                if (status == 1) {
                 if let order = json["OrdersList"] as? [[String: Any]] {
                     self.Welcomecellobj.removeAll()
                     
-                
+                    
                     for OrdersList in order {
-                       
+                        
                         let neworder = WelcomeModel(OrdersList: OrdersList)
-                         self.Welcomecellobj.append(neworder!)
+                        self.Welcomecellobj.append(neworder!)
                         self.fruitsArray = self.Welcomecellobj
                     }
-                    }
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                
-                 self.dismiss(animated: true, completion: nil)
+                  
+                    self.dismiss(animated: true, completion: nil)
                     self.tableViewWelcome.reloadData()
-                  self.WelcomeSegmented.isUserInteractionEnabled = true
+                    self.WelcomeSegmented.isUserInteractionEnabled = true
                 })
-            
-                 } catch let error as NSError {
-                   self.dismiss(animated: true, completion: nil)
-                   self.WelcomeSegmented.isUserInteractionEnabled = true
-                    ToastView.show(message: "\(error)", controller: self)
+            }
+                 else if (status == 0) {
+                   DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                         self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: discript!, controller: self)
+                      self.WelcomeSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                
+            } catch let error as NSError {
+                 DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+                self.WelcomeSegmented.isUserInteractionEnabled = true
+                ToastView.show(message: "\(error)", controller: self)
+                }
             }
         }).resume()
         DispatchQueue.main.async {
@@ -231,69 +258,120 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         switch (WelcomeSegmented.selectedSegmentIndex) {
         case 0:
             
-        
-         returnValue = Welcomecellobj.count
+            
+            returnValue = Welcomecellobj.count
             
         case 1:
-           returnValue = Welcomecellobj.count
+            returnValue = Welcomecellobj.count
         case 2:
-         
-           returnValue = Welcomecellobj.count
+            
+            returnValue = Welcomecellobj.count
             
         default:
             break
         }
         return returnValue
     }
-        
-   
-//      func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-//
-//        let Cancel = UITableViewRowAction(style: .normal, title: "Cancel") { action, index in
-//
-//        }
-//        switch (WelcomeSegmented.selectedSegmentIndex) {
-//        case 0:
-//            print(Cancel)
-//        case 1:
-//             print("Cancel")
-//        case 2:
-//
-//            let Cancel = UITableViewRowAction(style: .normal, title: "Cancel") { action, index in
-//
-//            }
-//
-//
-//        default:
-//            break
-//        }
-//           return [Cancel]
-//
-//    }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func AssignToWait() {
+        
+        
+        let parameters = [
+            "OrderID": AssignedID,
+            "BayID": 0,
+            "Type": "unassigned",
+            "SessionID": Constants.sessions]  as [String : Any]
+        
+        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.UnAssigned)")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+        request.httpBody = httpBody
+        let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
+        if let json = jsonS {
+            print(json)
+            
+        }
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                print(data)
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                    print(json)
+                    let status = json["Status"] as? Int
+                    let newmessage = json["Description"] as? String
+                    if (status == 1) {
+                        
+                        ToastView.show(message: newmessage!, controller: self)
+                        
+                        
+                    }
+                    else if (status == 0) {
+                        
+                        print(status!)
+                        DispatchQueue.main.async {
+                            ToastView.show(message: newmessage!, controller: self)
+                        }
+                    }
+                    
+                } catch {
+                    print(error)
+                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                }
+                
+            }
+            }.resume()
+        
+        
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+    {
+        var returnValue = [AnyObject]()
         
         switch (WelcomeSegmented.selectedSegmentIndex) {
         case 0:
-   
-              print("cancel")
-
-           // }
-        case 1:
-            print("cancel")
-         
+            print("Nothing")
             
+        case 1:
+            print("Nothing")
         case 2:
-               print("cancel")
-//            if editingStyle == .delete {
-//                Welcomecellobj.remove(at: indexPath.row)
-//                tableView.deleteRows(at: [indexPath], with: .automatic)
-//            }
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Cancel") { (action, indexpath) in
+                self.AssignedID = self.Welcomecellobj[indexPath.row].OrderID!
+                print(self.AssignedID)
+                self.AssignToWait()
+                self.Welcomecellobj.remove(at: indexPath.row)
+                self.tableViewWelcome.deleteRows(at: [indexPath], with: .automatic)
+                self.tableViewWelcome.reloadData()
+            }
+          
+            returnValue = [deleteAction]
+            deleteAction.backgroundColor = .black
             
         default:
-         break
+            break
         }
-        }
+        
+        return returnValue as? [UITableViewRowAction]
+        
+    }
+    
+    
+    
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -302,65 +380,67 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "welcomeCell", for: indexPath) as! Welcomecell
-     
-            switch (WelcomeSegmented.selectedSegmentIndex) {
-            case 0:
-                print(indexPath)
-                print(indexPath.row)
-                print(WelcomeSegmented.selectedSegmentIndex)
-                cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-                cell.make.text = Welcomecellobj[indexPath.row].MakerName
-                cell.model.text = Welcomecellobj[indexPath.row].ModelName
-                let trans = Welcomecellobj[indexPath.row].TransactionNo
-                cell.serialnmb.text = "\(trans!)"
-                cell.editBtn.tag = indexPath.row
-                 cell.editBtn.setTitle("", for: .normal)
-                cell.editBtn.setImage(#imageLiteral(resourceName: "editbilal"), for: .normal)
-                cell.editBtn.addTarget(self, action:#selector(self.add(_:)), for: .touchUpInside)
-                
-                
-                
-            case 1:
-                print(indexPath)
-                print(indexPath.row)
-                cell.editBtn.isUserInteractionEnabled = true
-                print(WelcomeSegmented.selectedSegmentIndex)
-                cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-                cell.make.text = Welcomecellobj[indexPath.row].MakerName
-                cell.model.text = Welcomecellobj[indexPath.row].ModelName
-                cell.editBtn.setTitle("", for: .normal)
-                cell.editBtn.setImage(#imageLiteral(resourceName: "welcomearrow"), for: .normal)
+        
+        switch (WelcomeSegmented.selectedSegmentIndex) {
+        case 0:
+            print(indexPath)
+            print(indexPath.row)
+            print(WelcomeSegmented.selectedSegmentIndex)
+            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
+            cell.make.text = Welcomecellobj[indexPath.row].MakerName
+            cell.model.text = Welcomecellobj[indexPath.row].ModelName
+            let trans = Welcomecellobj[indexPath.row].TransactionNo
+            cell.serialnmb.text = "\(trans!)"
+            cell.editBtn.tag = indexPath.row
+            cell.editBtn.setTitle("", for: .normal)
+            cell.editBtn.setImage(#imageLiteral(resourceName: "editbilal"), for: .normal)
+            cell.editBtn.addTarget(self, action:#selector(self.add(_:)), for: .touchUpInside)
+            
+            
+            
+        case 1:
+            print(indexPath)
+            print(indexPath.row)
+            cell.editBtn.isUserInteractionEnabled = true
+            print(WelcomeSegmented.selectedSegmentIndex)
+            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
+            cell.make.text = Welcomecellobj[indexPath.row].MakerName
+            cell.model.text = Welcomecellobj[indexPath.row].ModelName
+            cell.editBtn.setTitle("", for: .normal)
+            cell.editBtn.setImage(#imageLiteral(resourceName: "welcomearrow"), for: .normal)
             //   cell.editBtn.addTarget(self, action:#selector(self.add1(_:)), for: .touchUpInside)
+            let trans2 = Welcomecellobj[indexPath.row].TransactionNo
+            cell.serialnmb.text = "\(trans2!)"
+            
+        case 2:
+            cell.editBtn.isUserInteractionEnabled = true
+            print(indexPath)
+            print(indexPath.row)
+            print(WelcomeSegmented.selectedSegmentIndex)
+            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
+            cell.make.text = Welcomecellobj[indexPath.row].MakerName
+            cell.model.text = Welcomecellobj[indexPath.row].ModelName
+            let Bay = Welcomecellobj[indexPath.row].BayName
+            cell.editBtn.tag = indexPath.row
+            cell.editBtn.setTitle(Bay, for: .normal)
+            cell.editBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
+            cell.editBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+            cell.editBtn.imageView?.isHidden = true
+            cell.editBtn.isUserInteractionEnabled = false
+            //                 cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
+            let trans3 = Welcomecellobj[indexPath.row].TransactionNo
+            cell.serialnmb.text = "\(trans3!)"
+        default:
+            break
+        }
+        cell.selectionStyle = .none
 
-                let trans2 = Welcomecellobj[indexPath.row].TransactionNo
-                cell.serialnmb.text = "\(trans2!)"
-                
-            case 2:
-                cell.editBtn.isUserInteractionEnabled = true
-                print(indexPath)
-                print(indexPath.row)
-                print(WelcomeSegmented.selectedSegmentIndex)
-                cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-                cell.make.text = Welcomecellobj[indexPath.row].MakerName
-                cell.model.text = Welcomecellobj[indexPath.row].ModelName
-                let Bay = Welcomecellobj[indexPath.row].BayName
-                cell.editBtn.tag = indexPath.row
-                cell.editBtn.setTitle(Bay, for: .normal)
-                cell.editBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
-                cell.editBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
-                cell.editBtn.imageView?.isHidden = true
-                cell.editBtn.isUserInteractionEnabled = false
-//                 cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
-                let trans3 = Welcomecellobj[indexPath.row].TransactionNo
-                cell.serialnmb.text = "\(trans3!)"
-            default:
-                break
-            }
-            cell.selectionStyle = .none
-            return cell
+        
+        return cell
         
     }
     
@@ -371,6 +451,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             let bay = Welcomecellobj[sender.tag].BayID
             let bayname = Welcomecellobj[sender.tag].BayName
+            
             if bay == 0 {
                 if let new = Welcomecellobj[sender.tag].OrderID {
                     Constants.editOrderid = new
@@ -387,94 +468,73 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
                 
             }
-            
+                
             else {
                 
-                
-                ToastView.show(message: "Sorry Order cannot be added! Already Assigned to \(bayname!)", controller: self)
+                ToastView.show(message: "Sorry Order cannot be Edit! Already Assigned to \(bayname!)", controller: self)
             }
-            
-            
-            
-            
-      
+         
         case 1:
-          //  ToastView.show(message: "Under Development! Be patient (Waitlist)", controller: self)
-            //BayAssign
-            
-         tapped()
+            Constants.Bplate = Welcomecellobj[sender.tag].RegistrationNo!
+            Constants.BMake = Welcomecellobj[sender.tag].MakerName!
+            Constants.editOrderid = Welcomecellobj[sender.tag].OrderID!
+            Constants.bayid = Welcomecellobj[sender.tag].BayID!
+            print(Constants.Bplate)
+            print(Constants.BMake)
+            tapped()
             
             
         case 2:
-          ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
-//            let new = Welcomecellobj[sender.tag].OrderID
-//           print(new)
-
+            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         default:
             break
         }
     }
-        
-     func tapped() {
-        let screenSize = UIScreen.main.bounds
-      
-        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "BayAssign") else { return }
-        
-        popVC.modalPresentationStyle = .popover
-        
-        let popOverVC = popVC.popoverPresentationController
+    
+    func tapped() {
+        let screenSize = UIScreen.main.bounds.width
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "BayForWelcome", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "BayForWelcomeVc") as! BayAssignView
+        let nav = UINavigationController(rootViewController: popController)
+        nav.modalPresentationStyle = .popover
+        let popOverVC = nav.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view
         popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
-        popOverVC?.sourceRect = CGRect(x: UIScreen.main.bounds.size.width*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
-       // popVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.size.width*0.5, height: 400)
-        
-        self.present(popVC, animated: true)
+        popOverVC?.sourceRect = CGRect(x: screenSize*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
+        popController.preferredContentSize = CGSize(width: screenSize*0.6, height: 300)
+        self.present(nav, animated: true)
     }
-
     
-      @objc func add1(_ sender: UIButton){
+    
+    @objc func add1(_ sender: UIButton){
         let new = Welcomecellobj[sender.tag].TransactionNo
         print(new!)
-        
     }
+
     
     @objc func add2(_ sender: UIButton){
         let new = Welcomecellobj[sender.tag].TransactionNo
         print(new!)
         
     }
-    
-    
-    
-    
-    
-    
-   
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        let new = Welcomecellobj[indexPath.row].TransactionNo
-//        print(new)
-//    }
-    
-    
-    
 
+    
     
     @IBAction func carScannerBtn(_ sender: Any) {
         Constants.bayid = 0
         Constants.bayname = "B0"
         if let vc = self.parent as? ReceptionalistView {
-                let storyboard = UIStoryboard(name: "CarScan", bundle: nil)
-                let carScanner = storyboard.instantiateViewController(withIdentifier: "carScannerVc") as!CarScannerView
-                vc.switchViewController(vc: carScanner, showFooter: false)
-
+            let storyboard = UIStoryboard(name: "CarScan", bundle: nil)
+            let carScanner = storyboard.instantiateViewController(withIdentifier: "carScannerVc") as!CarScannerView
+            vc.switchViewController(vc: carScanner, showFooter: false)
+            
         }
-//        let viewController:UIViewController = UIStoryboard(name: "CarScan", bundle: nil).instantiateViewController(withIdentifier: "carScannerVc") as UIViewController
-//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-//
-//        self.present(viewController, animated: false, completion: nil)
     }
+    
     
     @IBAction func addNewCarBtn(_ sender: Any) {
         Constants.flagEdit = 0
@@ -488,8 +548,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     
-   
- }
+    
+}
 
 
 

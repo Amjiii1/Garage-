@@ -32,10 +32,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1it-eC-l0v">
+                                <rect key="frame" x="432" y="21" width="93.5" height="47.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="SaveButton:" destination="h9I-DM-xBk" eventType="touchUpInside" id="uI3-UT-4wl"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, 10 Nov 2018" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOq-B6-RGk">
                                 <rect key="frame" x="41.5" y="85.5" width="233.5" height="52.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                 <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-6Y-Fx5">
+                                <rect key="frame" x="432" y="85.5" width="93.5" height="52.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                                <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5OR-dg-Lh2">
@@ -117,23 +131,31 @@
                         <constraints>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="centerX" secondItem="W3W-t7-kGU" secondAttribute="centerX" id="0ZN-0H-xlY"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="centerY" secondItem="hOq-B6-RGk" secondAttribute="centerY" multiplier="0.4" id="BcH-qN-Q89"/>
+                            <constraint firstItem="zSH-6Y-Fx5" firstAttribute="trailing" secondItem="1it-eC-l0v" secondAttribute="trailing" id="C75-ZU-k76"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="leading" secondItem="5OR-dg-Lh2" secondAttribute="leading" id="Dga-DX-dWB"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" multiplier="1.177" id="FYI-7C-h2K"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="leading" secondItem="vvG-HG-qH0" secondAttribute="leading" id="GmL-Ct-P2v"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="centerY" secondItem="5OR-dg-Lh2" secondAttribute="centerY" multiplier="0.5" id="ItP-Na-Nn5"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" id="LwB-FB-d6f"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="height" secondItem="fKy-U5-IOl" secondAttribute="height" multiplier="0.25" id="O4y-vd-6zh"/>
+                            <constraint firstItem="1it-eC-l0v" firstAttribute="centerX" secondItem="ftb-OV-Jaf" secondAttribute="centerX" multiplier="4.8" id="OfX-lb-eMP"/>
+                            <constraint firstItem="1it-eC-l0v" firstAttribute="width" secondItem="ftb-OV-Jaf" secondAttribute="width" multiplier="0.8" id="Qm4-gj-fQj"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="width" secondItem="hOq-B6-RGk" secondAttribute="width" multiplier="0.5" id="T5q-IQ-Emx"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="centerY" secondItem="vvG-HG-qH0" secondAttribute="centerY" multiplier="0.6" id="Tla-wf-jht"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="leading" secondItem="hOq-B6-RGk" secondAttribute="leading" id="UkP-D7-ZYi"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="width" secondItem="fKy-U5-IOl" secondAttribute="width" multiplier="0.85" id="Xgk-0C-88k"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="height" secondItem="hOq-B6-RGk" secondAttribute="height" multiplier="0.9" id="XnM-d9-9c1"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="height" secondItem="vvG-HG-qH0" secondAttribute="height" multiplier="0.7" id="awl-Mt-jJa"/>
+                            <constraint firstItem="1it-eC-l0v" firstAttribute="height" secondItem="ftb-OV-Jaf" secondAttribute="height" id="bGO-Ps-f26"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="trailing" secondItem="vvG-HG-qH0" secondAttribute="trailing" id="eFU-ar-96O"/>
+                            <constraint firstItem="zSH-6Y-Fx5" firstAttribute="width" secondItem="hOq-B6-RGk" secondAttribute="width" multiplier="0.4" id="eKW-DB-zd6"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="height" secondItem="5OR-dg-Lh2" secondAttribute="height" multiplier="0.5" id="gou-h8-csb"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="centerX" secondItem="vvG-HG-qH0" secondAttribute="centerX" id="j4u-5h-YT4"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="height" secondItem="vvG-HG-qH0" secondAttribute="height" multiplier="0.3" id="jsJ-zv-8Dh"/>
                             <constraint firstItem="W3W-t7-kGU" firstAttribute="bottom" secondItem="LlH-Pg-fj0" secondAttribute="bottom" id="nAu-3h-Pq7"/>
+                            <constraint firstItem="zSH-6Y-Fx5" firstAttribute="height" secondItem="hOq-B6-RGk" secondAttribute="height" id="nDI-XD-C1b"/>
+                            <constraint firstItem="zSH-6Y-Fx5" firstAttribute="centerY" secondItem="hOq-B6-RGk" secondAttribute="centerY" id="nDK-Km-U7b"/>
+                            <constraint firstItem="1it-eC-l0v" firstAttribute="centerY" secondItem="ftb-OV-Jaf" secondAttribute="centerY" id="oae-hk-mnu"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="centerY" secondItem="W3W-t7-kGU" secondAttribute="centerY" multiplier="1.2" id="qMU-Zb-LoP"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="width" secondItem="5OR-dg-Lh2" secondAttribute="width" multiplier="0.5" id="vSp-AM-gGM"/>
                         </constraints>
@@ -142,9 +164,11 @@
                     <size key="freeformSize" width="550" height="600"/>
                     <connections>
                         <outlet property="Image1" destination="U1C-7t-hS5" id="POJ-f2-Fsm"/>
+                        <outlet property="dateLabel" destination="hOq-B6-RGk" id="yPJ-Rw-Is5"/>
                         <outlet property="image2" destination="XFv-QD-5F8" id="dey-UJ-1tC"/>
                         <outlet property="image3" destination="GpO-3R-F5x" id="jGg-WA-Sv5"/>
                         <outlet property="notesComt" destination="VwY-to-JFd" id="gM1-on-lHh"/>
+                        <outlet property="timelbl" destination="zSH-6Y-Fx5" id="6gY-fj-oKT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr6-G3-4Mr" userLabel="First Responder" sceneMemberID="firstResponder"/>

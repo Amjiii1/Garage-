@@ -9,27 +9,51 @@
 import UIKit
 import Alamofire
 
-class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
+//struct  images {
+//    let image1 = String
+//    let image2 = String
+//    let image3 = String
+//}
+
+
+
+class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+    
     
     @IBOutlet weak var Image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
     
     @IBOutlet weak var notesComt: UITextView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timelbl: UILabel!
+    
+    let dateFormatter : DateFormatter = DateFormatter()
     
     var flag = 0
-   var image: UIImage!
+    var image: UIImage!
+    var images = [String]()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         notesComt.delegate = self
-       self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         notesComt.text = "Write Note"
         notesComt.textColor = UIColor.lightGray
-        
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE, dd LLL yyyy"
+        let nameOfMonth = dateFormatter.string(from: now)
+        let time = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm"
+        let todaytime = timeFormatter.string(from:time)
+        dateLabel.text = nameOfMonth
+        timelbl.text = todaytime
+   
         
     }
     
@@ -51,19 +75,18 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     @IBAction func PhotoaddBtn(_ sender: Any) {
         
         openCamera()
         
     }
+    
+    
+    @IBAction func SaveButton(_ sender: Any) {
+        print(images)
+    }
+    
+    
     
     
     
@@ -94,16 +117,16 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 flag = 1
             }
             else if flag == 1 {
-                 self.image2.image = pickedImage
-                 flag = 2
+                self.image2.image = pickedImage
+                flag = 2
             }
             else if flag == 2 {
                 self.image3.image = pickedImage
                 flag = 0
             }
-       image = pickedImage
-        upload()
-
+            image = pickedImage
+            upload()
+            
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -111,29 +134,17 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     func upload() {
         
-        // let params: Parameters = ["name": "abcd" "gender": "Male"]
         Alamofire.upload(multipartFormData:
             {
-                //   DispatchQueue.main.async {
                 (multipartFormData) in
-                //  DispatchQueue.main.async {
                 multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
-                //                for (key, value) in params
-                //   }
                 
-                
-                //                {
-                //                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
-                //                }
-                
-                //   }
         }, to: "\(CallEngine.baseURL)\(CallEngine.notesImguploadapi)",headers:nil)
         { (result) in
             switch result {
                 
             case .success(let upload,_,_ ):
                 upload.uploadProgress(closure: { (progress) in
-                    //Print progress
                 })
                 upload.responseJSON
                     
@@ -143,26 +154,12 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                 let descript = dict.value(forKey: "Description") as! String
                                 ToastView.show(message: descript, controller: self)
                                 if let imagekey = dict.value(forKey: "Image") as? String {
-                                    
-                                   
+                                    self.images.append(imagekey)
                                 }
                             }
                             
                             
-                            //                         let descript = dict.value(forKey: "Description") as! String
-                            //                        let descript = dict.value(forKey: "PlateNo") as! String
                         }
-                        //                        if status == 1
-                        //                        {
-                        //                            print("DATA UPLOAD SUCCESSFULLY")
-                        //                        }
-                        //
-                        //                        else if status == 0 {
-                        //                            print("DATA UPLOAD FAILED")
-                        //
-                        //                        }
-                        
-                        
                 }
             case .failure(let encodingError):
                 break
@@ -174,6 +171,6 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
     }
     
-  
-
+    
+    
 }

@@ -126,12 +126,18 @@
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqo-uO-uzk">
+                                <rect key="frame" x="41.5" y="477" width="467.5" height="60"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="centerX" secondItem="W3W-t7-kGU" secondAttribute="centerX" id="0ZN-0H-xlY"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="centerY" secondItem="hOq-B6-RGk" secondAttribute="centerY" multiplier="0.4" id="BcH-qN-Q89"/>
                             <constraint firstItem="zSH-6Y-Fx5" firstAttribute="trailing" secondItem="1it-eC-l0v" secondAttribute="trailing" id="C75-ZU-k76"/>
+                            <constraint firstItem="yqo-uO-uzk" firstAttribute="width" secondItem="VwY-to-JFd" secondAttribute="width" id="Ces-PL-jX8"/>
+                            <constraint firstItem="yqo-uO-uzk" firstAttribute="height" secondItem="VwY-to-JFd" secondAttribute="height" multiplier="0.4" id="CmJ-YO-rJt"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="leading" secondItem="5OR-dg-Lh2" secondAttribute="leading" id="Dga-DX-dWB"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" multiplier="1.177" id="FYI-7C-h2K"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="leading" secondItem="vvG-HG-qH0" secondAttribute="leading" id="GmL-Ct-P2v"/>
@@ -139,6 +145,7 @@
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" id="LwB-FB-d6f"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="height" secondItem="fKy-U5-IOl" secondAttribute="height" multiplier="0.25" id="O4y-vd-6zh"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="centerX" secondItem="ftb-OV-Jaf" secondAttribute="centerX" multiplier="4.8" id="OfX-lb-eMP"/>
+                            <constraint firstItem="yqo-uO-uzk" firstAttribute="centerY" secondItem="VwY-to-JFd" secondAttribute="centerY" multiplier="2.8" id="Oh0-16-jMP"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="width" secondItem="ftb-OV-Jaf" secondAttribute="width" multiplier="0.8" id="Qm4-gj-fQj"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="width" secondItem="hOq-B6-RGk" secondAttribute="width" multiplier="0.5" id="T5q-IQ-Emx"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="centerY" secondItem="vvG-HG-qH0" secondAttribute="centerY" multiplier="0.6" id="Tla-wf-jht"/>
@@ -157,6 +164,7 @@
                             <constraint firstItem="zSH-6Y-Fx5" firstAttribute="centerY" secondItem="hOq-B6-RGk" secondAttribute="centerY" id="nDK-Km-U7b"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="centerY" secondItem="ftb-OV-Jaf" secondAttribute="centerY" id="oae-hk-mnu"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="centerY" secondItem="W3W-t7-kGU" secondAttribute="centerY" multiplier="1.2" id="qMU-Zb-LoP"/>
+                            <constraint firstItem="yqo-uO-uzk" firstAttribute="centerX" secondItem="VwY-to-JFd" secondAttribute="centerX" id="sFb-eu-8dj"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="width" secondItem="5OR-dg-Lh2" secondAttribute="width" multiplier="0.5" id="vSp-AM-gGM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W3W-t7-kGU"/>

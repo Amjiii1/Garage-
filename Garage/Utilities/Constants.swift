@@ -92,6 +92,17 @@ struct Constants {
     static var mode = "Add"
     static var modeupdate = "Update"
     static var bayflag = 0
+    static var orderidmechanic = 0
+    static var caridmechanic = 0
+    static var comment = String()
+    static var Status = "Status"
+    static var Description = "Description"
+    static var SuperUserID = "SuperUserID"
+    static var SuperUser = 0
+    static var Data = "Data"
+  
+    
+    
   
     
      

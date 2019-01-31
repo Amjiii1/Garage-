@@ -96,8 +96,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                 do {
                     let json = try JSON(data: response.data!)
                     print("🌎 Response : ", json)
-                    let status = json["Status"].intValue
-                    let desc = json["Description"].stringValue
+                    let status = json[Constants.Status].intValue
+                    let desc = json[Constants.Description].stringValue
                     
                     if ((status == 1) && (desc == "Success")) {
                         let categoriesList = json["CategoriesList"].arrayValue
@@ -240,8 +240,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     @IBAction func receptBtn(_ sender: Any) {
-        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
-        Receiptdetails()
+            Receiptdetails()
     }
     
     @IBAction func nextBtn(_ sender: Any) {
@@ -347,7 +346,15 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        
+        cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
+        },completion: { finished in
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.layer.transform = CATransform3DMakeScale(1,1,1)
+            })
+        })
+    
         switch currentState {
         case 1:
             cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].name, image: categories[categoryIndex].subCategories[indexPath.row].image)
@@ -451,20 +458,9 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 let product = ReceiptModel(Name: newname.name, Price: Double(newname.price*Constants.counterQTY), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
                 
                 Items.Product.append(product)
-                
-                
-                
-                //                 let price = newname.price*Constants.counterQTY
-                //                Constants.totalprice = Constants.totalprice + price
-                //                self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
-                
-//                let dict = [
-//                    "Name": newname.name, "Price":newname.price*Constants.counterQTY, "Quantity": Constants.counterQTY, "ItemID": newname.itemID, "Mode": Constants.mode, "OrderDetailID": 0, "Status": 201] as [String : Any]
-                
                 let price = newname.price*Constants.counterQTY
                 Constants.totalprice = Constants.totalprice + Double(price)
                 self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
-                
                 
             }
             let cell = colectionview.cellForItem(at: indexPath)
@@ -482,26 +478,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     func PunchOder() {
         
         
-//        if Constants.flagEdit != 0 {
-            
-      
-       
-//          if Constants.flagEdit != 0 {
-//
-//        for models in Items.Product {
-//            print(models)
-//            if models.Status == 201 {
-//                  print(models)
-//                Items.Product.append(models)
-//            } else {
-//
-//                Items.Product.removeAll()
-//
-//            }
-//
-//
-//        }
-//        }
+
         if Constants.flagEdit != 0 {
             
             for models in Items.Product {
@@ -535,13 +512,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data1 = try! encoder.encode(Items.Product)
-//           let json = String(data: data1, encoding: String.Encoding.utf8)
-//          let testd = Int(json!.filter { !" \n\t\\r\\".contains($0) })
-       
-        
-        
         guard let test = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
-       print(test)
         var urlorderpunch = ""
         
         print(Constants.OrderIDData)
@@ -586,8 +557,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                     do {
                         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                         print(json)
-                        let status = json["Status"] as? Int
-                        let newmessage = json["Description"] as? String
+                        let status = json[Constants.Status] as? Int
+                        let newmessage = json[Constants.Description] as? String
                         if (status == 1) {
                             
                             ToastView.show(message: newmessage!, controller: self)
@@ -649,8 +620,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                     do {
                         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                         print(json)
-                        let status = json["Status"] as? Int
-                        let newmessage = json["Description"] as? String
+                        let status = json[Constants.Status] as? Int
+                        let newmessage = json[Constants.Description] as? String
                         if (status == 1) {
                             
                             ToastView.show(message: newmessage!, controller: self)

@@ -364,8 +364,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
-                    let discript = json["Description"] as? String
-                    if let status = json["Status"] as? Int {
+                    let discript = json[Constants.Description] as? String
+                    if let status = json[Constants.Status] as? Int {
                         if (status == 1) {
                             
                             if let order = json["MakeList"] as? [[String: Any]] {
@@ -417,8 +417,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
-                    let discript = json["Description"] as? String
-                    if let status = json["Status"] as? Int {
+                    let discript = json[Constants.Description] as? String
+                    if let status = json[Constants.Status] as? Int {
                         if (status == 1) {
                             print(status)
                             if let order = json["ModelList"] as? [[String: Any]] {
@@ -1041,8 +1041,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                             print(json)
                             
-                            let status = json["Status"] as? Int
-                            let newmessage = json["Description"] as? String
+                            let status = json[Constants.Status] as? Int
+                            let newmessage = json[Constants.Description] as? String
                             if (status == 1) {
                                 if  let carid = json[Constants.CarID] as? Int {
                                     DispatchQueue.main.async {
@@ -1153,8 +1153,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         do {
                             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                             print(json)
-                            let status = json["Status"] as? Int
-                            let message = json["Description"] as? String
+                            let status = json[Constants.Status] as? Int
+                            let message = json[Constants.Description] as? String
                             if (status == 1) {
                                 if  let carid = json[Constants.CarID] as? Int {
                                     DispatchQueue.main.async {

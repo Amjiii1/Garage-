@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+
 class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
     
     
@@ -37,8 +38,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var statusLbl: UILabel!
     
     
+    
     var flag: Int = 0
-    var Order: Int = 0
     var flag2: Int = 0
     
     var MechanicModel = [MechanicTableviewModel]()
@@ -209,8 +210,15 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as! MechanicTableviewCell
-        
+        guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
+        cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
+        },completion: { finished in
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.layer.transform = CATransform3DMakeScale(1,1,1)
+            })
+        })
         let transaction = MechanicModel[indexPath.row].finishedTransactionNo
         cell.serialNo.text = "\(transaction!)"
         cell.makeLbl.text = MechanicModel[indexPath.row].finishedMakerName
@@ -240,19 +248,14 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             } else {
                 do {
                     let json = try JSON(data: response.data!)
-                    let status = json["Status"].intValue
-                    let desc = json["Description"].stringValue
-                    self!.Order = json["OrderID"].intValue
+                    let status = json[Constants.Status].intValue
+                    let desc = json[Constants.Description].stringValue
+                    Constants.orderidmechanic = json["OrderID"].intValue
                     ToastView.show(message: desc, controller: self!)
                     if ((status == 1) && (desc == "Success")) {
                         let CarInfo = json[Constants.Cars].arrayValue
                         for cars in CarInfo {
-                            
-                            //                            let CheckLitre = cars[Constants.CheckLitre].stringValue
-                            //                            DispatchQueue.main.async {
-                            //                                // self.check.text = CheckLitre
-                            //                            }
-                            
+                    
                             
                             
                             let RegistrationNo = cars[Constants.RegistrationNo].stringValue
@@ -261,16 +264,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             }
                             
                             
-                            //                            let RecommendedAmount = cars[Constants.RecommendedAmount].stringValue
-                            //                            DispatchQueue.main.async {
-                            //                                //  self.recommendedAmount.text =  RecommendedAmount
-                            //                            }
+                            let carid = cars[Constants.CarID].intValue
+                            DispatchQueue.main.async {
+                                  Constants.caridmechanic =  carid
+                            }
                             
                             
                             
                             let CarName = cars[Constants.CarName].stringValue
                             DispatchQueue.main.async {
-                                self!.carNamelbl.text = CarName//
+                                self!.carNamelbl.text = CarName
                             }
                             
                             
@@ -311,7 +314,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             let ItemDate = order["ItemDate"].stringValue
                             let Mode = order["Mode"].stringValue
                             
-                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: self!.Order,ItemID: ItemID, ItemName: ItemName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode)
+                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: Constants.orderidmechanic,ItemID: ItemID, ItemName: ItemName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode)
                             self?.OrderDetails.append(orders)
                             DispatchQueue.main.async {
                                 self?.collectionViewSlot.reloadData()
@@ -357,8 +360,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MechanicCell
+       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as? MechanicCell else { return UICollectionViewCell() }
         
+        cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
+        },completion: { finished in
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.layer.transform = CATransform3DMakeScale(1,1,1)
+            })
+        })
         
         cell.Mpopulate(with: OrderDetails[indexPath.item].ItemName, image: OrderDetails[indexPath.item].ItemImage)
         
@@ -419,6 +430,12 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     @IBAction func notesAction(_ sender: Any) {
+        
+        print(Constants.CarIDData)
+        print(Constants.orderidmechanic)
+        
+        
+        
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
@@ -460,6 +477,10 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     @IBAction func loadingBtnAction(_ sender: Any) {
+        
+        print(DataNotes.comment)
+         print(DataNotes.images)
+        
         loaderWorks()
         
     }
@@ -471,9 +492,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
         if Constants.bayid == 0 {
-            
             ToastView.show(message: "Please Select BayName First!", controller: self)
-            
         } else {
             flag = 1
             
@@ -493,11 +512,13 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         loaderlabel.isHidden = true
         
         
-        UIView.animate(withDuration: 0.9, animations: {
-            self.loadingBtn.alpha = 5
-            self.loaderlabel.alpha = 1
+        UIView.animate(withDuration: 0.6, animations: {
+            self.collectionViewSlot.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.collectionViewSlot.alpha = 5
+            self.collectionViewSlot.alpha = 1
         }, completion: {
             finished in
+            self.collectionViewSlot.transform = CGAffineTransform.identity
             self.loadingBtn.isHidden = true
             self.loaderlabel.isHidden = true
             self.collectionViewSlot.delegate = self
@@ -512,8 +533,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
         })
     }
-    
-    
+   
     
     func disappearView() {
         loadingBtn.alpha = 5
@@ -545,7 +565,62 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     
+    
+    func SaveDataApi() {
+        
+        let parameters = [ "SessionID": Constants.sessions,
+                           "NotesComment": DataNotes.comment,
+                           "NotesStatus": "0",
+                           "OrderID": Constants.orderidmechanic,
+                           "CarID": Constants.caridmechanic,
+                           "NotesImages": DataNotes.images]    as [String : Any]
+        
+        guard let url = URL(string: "http://garageapi.isalespos.com/api/notes/add/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
+        if let json = jsonS {
+            print(json)
+        }
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+            
+            }.resume()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func finshedAndSaveBtn(_ sender: Any) {
+        SaveDataApi()
         AssignToFinished()
         flag = 0
     }
@@ -569,7 +644,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
         let parameters = [
-            "OrderID": Order,
+            "OrderID": Constants.orderidmechanic,
             "BayID": Constants.bayid,
             "Type": "bay",
             "SessionID": Constants.sessions]  as [String : Any]
@@ -601,8 +676,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
-                    let status = json["Status"] as? Int
-                    let newmessage = json["Description"] as? String
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
                         //DispatchQueue.main.async {
                         ToastView.show(message: newmessage!, controller: self)

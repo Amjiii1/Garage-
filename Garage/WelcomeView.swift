@@ -34,8 +34,26 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         carSearchTextField.delegate = self
         carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         print("\(Constants.bayid)")
-
+        NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
     }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ServiceDone"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("unlistDone"), object: nil)
+    }
+    
+    
+    
+    @objc func service(notification: Notification) {
+        self.ApiImplimentations()
+    }
+    
+    @objc func unlist(notification: Notification) {
+        self.ApiImplimentations()
+    }
+  
     
   
     
@@ -208,8 +226,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
                 
-                let status = json["Status"] as? Int
-                let discript = json["Description"] as? String
+                let status = json[Constants.Status] as? Int
+                let discript = json[Constants.Description] as? String
                 if (status == 1) {
                 if let order = json["OrdersList"] as? [[String: Any]] {
                     self.Welcomecellobj.removeAll()
@@ -310,8 +328,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
-                    let status = json["Status"] as? Int
-                    let newmessage = json["Description"] as? String
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
                         
                         ToastView.show(message: newmessage!, controller: self)
@@ -383,8 +401,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "welcomeCell", for: indexPath) as! Welcomecell
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "welcomeCell", for: indexPath) as? Welcomecell else { return UITableViewCell() }
+     
         switch (WelcomeSegmented.selectedSegmentIndex) {
         case 0:
             print(indexPath)

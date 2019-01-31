@@ -9,13 +9,10 @@
 import UIKit
 import Alamofire
 
-
-//struct  images {
-//    let image1 = String
-//    let image2 = String
-//    let image3 = String
-//}
-
+struct DataNotes {
+    static var comment = String()
+static var images = [String]()
+}
 
 
 class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
@@ -24,7 +21,6 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var Image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
-    
     @IBOutlet weak var notesComt: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timelbl: UILabel!
@@ -41,7 +37,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         super.viewDidLoad()
         notesComt.delegate = self
         self.navigationController?.isNavigationBarHidden = true
-        notesComt.text = "Write Note"
+        notesComt.text = Constants.comment
         notesComt.textColor = UIColor.lightGray
         let now = Date()
         let dateFormatter = DateFormatter()
@@ -53,11 +49,9 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         let todaytime = timeFormatter.string(from:time)
         dateLabel.text = nameOfMonth
         timelbl.text = todaytime
-   
-        
     }
     
-    
+ 
     func textViewDidBeginEditing(_ notesComt: UITextView) {
         if notesComt.textColor == UIColor.lightGray {
             notesComt.text = nil
@@ -83,7 +77,58 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     @IBAction func SaveButton(_ sender: Any) {
-        print(images)
+        if notesComt.text == "Write Note" {
+            notesComt.text = ""
+         DataNotes.comment = notesComt.text
+         DataNotes.images = images
+        }
+        DataNotes.comment = notesComt.text
+        DataNotes.images = images
+        
+       // SaveDataApi()
+    dismiss(animated: true, completion: nil)
+       
+    }
+   
+    func SaveDataApi() {
+        
+        let parameters = [ "SessionID": Constants.sessions,
+                           "NotesComment":notesComt.text!,
+                           "NotesStatus": "0",
+                           "OrderID": Constants.orderidmechanic,
+                           "CarID": Constants.caridmechanic,
+                           "NotesImages": [images]]    as [String : Any]
+        
+        guard let url = URL(string: "http://garageapi.isalespos.com/api/notes/add/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    
+                }
+            }
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+            
+            }.resume()
+    
     }
     
     
@@ -110,6 +155,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             if flag == 0 {
@@ -132,17 +178,35 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     
+    func showloader1() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        loadingIndicator.startAnimating();
+        loadingIndicator.backgroundColor = UIColor.DefaultApp
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
     func upload() {
         
         Alamofire.upload(multipartFormData:
+            
             {
+               
                 (multipartFormData) in
                 multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
                 
         }, to: "\(CallEngine.baseURL)\(CallEngine.notesImguploadapi)",headers:nil)
         { (result) in
+             self.showloader1()
             switch result {
-                
+               
             case .success(let upload,_,_ ):
                 upload.uploadProgress(closure: { (progress) in
                 })
@@ -151,17 +215,21 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     { response in
                         if let dict = response.result.value as? NSObject {
                             DispatchQueue.main.async {
-                                let descript = dict.value(forKey: "Description") as! String
-                                ToastView.show(message: descript, controller: self)
-                                if let imagekey = dict.value(forKey: "Image") as? String {
+                                let Status = dict.value(forKey: "Status") as! Int
+                                if Status == 1 {
+                                if let imagekey = dict.value(forKey: "Image") as? String
+                               {
                                     self.images.append(imagekey)
                                 }
+                               
+                                }
+                                 self.dismiss(animated: true, completion: nil)
                             }
-                            
                             
                         }
                 }
             case .failure(let encodingError):
+                self.dismiss(animated: true, completion: nil)
                 break
                 
             }

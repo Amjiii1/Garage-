@@ -16,8 +16,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     @IBOutlet weak var BayCollectionView: UICollectionView!
     var assigning: Int = 0
     
-    let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
-    // var items = ["B1", "B2", "B3", "B4"]
+    let reuseIdentifier = "cell"
     var WBaydetails = [BayforWelcomeOBj]()
     
     
@@ -93,13 +92,15 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
-                    let status = json["Status"] as? Int
-                    let newmessage = json["Description"] as? String
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
                         
                         ToastView.show(message: newmessage!, controller: self)
                         
                         DispatchQueue.main.async {
+                            
+                          NotificationCenter.default.post(name: Notification.Name("ServiceDone"), object: nil)
                             self.dismiss(animated: true, completion: nil)
                             
  
@@ -137,6 +138,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     
     
     @IBAction func EditCarBtn(_ sender: Any) {
+       
         Constants.flagEdit = 1
         Constants.bayid = 0
         Constants.bayname = "B0"
@@ -208,13 +210,14 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
-                    let status = json["Status"] as? Int
-                    let newmessage = json["Description"] as? String
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
                         
                         ToastView.show(message: newmessage!, controller: self)
                         
                         DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: Notification.Name("unlistDone"), object: nil)
                             self.dismiss(animated: true, completion: nil)
                        
                         }

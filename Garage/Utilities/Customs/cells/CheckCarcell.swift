@@ -10,28 +10,33 @@ import UIKit
 
 class CheckCarcell: UITableViewCell {
 
-    
     @IBOutlet weak var checkboxA: UIButton!
-    
     @IBOutlet weak var checkBoxB: UIButton!
-    
     @IBOutlet weak var checkBoxC: UIButton!
+    @IBOutlet weak var titleLabels: UILabel!
     
     
-    
-//
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        self.selectionStyle = .none
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        self.accessoryType = selected ? .checkmark : .none
+    @IBAction func onTypeCTap(_ sender: UIButton) {
+        
+        sender.isSelected = true
+        checkboxA.isSelected = false
+        checkBoxB.isSelected = false
     }
-
+    
+    
+    @IBAction func onTypeBTap(_ sender: UIButton) {
+      
+        
+        sender.isSelected = true
+        checkboxA.isSelected = false
+        checkBoxC.isSelected = false
+    }
+    
+    
+    @IBAction func onTypeATap(_ sender: UIButton) {
+     
+        sender.isSelected = true
+        checkBoxB.isSelected = false
+        checkBoxC.isSelected = false
+    }
 }

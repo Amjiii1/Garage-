@@ -52,6 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
+        Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
         
         
         if loggedIn() {
@@ -203,6 +204,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             self.businesssCodeTextField.isEnabled = true
                             UserDefaults.standard.set(self.businesssCodeTextField.text, forKey: "loggedIn")
                             UserDefaults.standard.synchronize()
+                            if let User = json[Constants.Data] as? [String: Any] {
+                                if  let superuser = User[Constants.SuperUserID] as? Int {
+                                     UserDefaults.standard.set(superuser, forKey: "superuser")
+                                }
+                            }
                             
                         }
                     }

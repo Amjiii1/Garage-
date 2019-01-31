@@ -40,6 +40,7 @@ class CallEngine {
     static let UnAssigned = "order/updatestatus/assigned"
     static let finishedOrderlist = "orderlist/service/all"
     static let WorkDone = "order/updatestatus/workdone"
+    static let carinspection = "car/inspection/0"
     
     
     

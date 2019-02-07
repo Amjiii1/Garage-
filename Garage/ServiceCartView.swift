@@ -60,9 +60,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         colectionview.dataSource = self
         category.backgroundColor = UIColor.gray
         getData()
+         BindinfItems()
         self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
-        
-      
         serviceSearch.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
     }
@@ -78,6 +77,141 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
     }
     
+    
+    func BindinfItems() {
+        
+        if Constants.editcheckout == 1 {
+            OrderEdit()
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func OrderEdit() {
+        
+        guard let orderdetails = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderDetails)/\(Constants.editOrderid)/\(Constants.sessions)" ) else { return }
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: orderdetails){ (data, response, error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+            if let data = data {
+                print(data)
+                
+                do {
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    print(json)
+                    let details = Cardetails(json: json)
+                    if (details.description == "Success") {
+                        if  let OrderID = json[Constants.OrderID] as? Int {
+                            DispatchQueue.main.async {
+                                Constants.OrderIDData = OrderID
+                                print(Constants.OrderIDData)
+                            }
+                        }
+                        
+                        if let cars = json[Constants.Cars] as? [[String: Any]] {
+                            for items in cars {
+                                print("\(items)")
+                                
+                                if  let CarID = items[Constants.CarID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.CarIDData = CarID
+                                    }
+                                    
+                                }
+                                if  let CarName = items[Constants.CarName] as? String {
+                                    DispatchQueue.main.async {
+                                        Constants.CarNameData = CarName
+                                    }
+                                    
+                                }
+                                if  let ModelID = items[Constants.ModelID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.ModelIDData = ModelID
+                                    }
+                                    
+                                }
+                                if  let MakeID = items[Constants.MakeID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.MakeIDData = MakeID
+                                    }
+                                    
+                                }
+                                if  let Color = items[Constants.Color] as? String {
+                                    DispatchQueue.main.async {
+                                        Constants.ColorData = Color
+                                    }
+                                    
+                                }
+                                if  let CustomerID = items[Constants.CustomerID] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.CustomerIDData = String (CustomerID)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                        if let order = json["Orderdetail"] as? [[String: Any]] {
+                            for orders in order {
+                                print(orders)
+                                let Name = orders["ItemName"] as! String
+                                let Price = orders["Price"] as! Int
+                                let ItemID = orders["ItemID"] as! Int
+                                let Quantity = orders["Quantity"] as! Int
+                                let OrderDetails = orders["OrderDetailID"] as! Int
+                                let editproducts = ReceiptModel(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                Items.Product.append(editproducts)
+                                let price = Price*Constants.counterQTY
+                                Constants.totalprice = Constants.totalprice + Double(price)
+                            }
+                        }
+                        DispatchQueue.main.async {
+                             print(Constants.totalprice)
+                             self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+                        }
+                        
+                    }
+                        
+                    else {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: details.description, controller: self)
+                        }
+                    }
+                    
+                } catch {
+                    
+                    DispatchQueue.main.async {
+                        ToastView.show(message: "Failed to load! error occured", controller: self)
+                    }
+                    
+                }
+                
+            }
+            
+            
+            }.resume()
+        
+    }
     
     
     private func getData() {
@@ -297,6 +431,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     @IBAction func backBtn(_ sender: Any) {
+        if Constants.editcheckout != 0 {
+            
+            ToastView.show(message: "Sorry! You can't step back!", controller: self)
+        } else
+        {
+        
+        
         Items.Product.removeAll()
         Items.nameArray.removeAll()
         Constants.totalprice = 0
@@ -304,6 +445,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
             parentVC.switchViewController(vc: vc!, showFooter: false)
+        }
         }
     }
     
@@ -479,7 +621,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         
 
-        if Constants.flagEdit != 0 {
+        if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             for models in Items.Product {
                 if models.Status == 201 {
@@ -498,12 +640,30 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         
         
-   if Constants.flagEdit != 0 {
+   if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
     
     for System in Items.nameArray {
         
         Items.Product.append(System as! ReceiptModel)
     }
+        }
+        
+        if Constants.editcheckout != 0 {
+            
+            Constants.orderstatus = 104
+            
+            
+        }
+        else{
+            if Constants.flagEdit != 0  {
+                if Constants.bayid != 0 {
+                    
+                   Constants.orderstatus = 102
+                }
+                else {
+                    Constants.orderstatus = 101
+                }
+            }
         }
     
        
@@ -525,9 +685,10 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             "OrderID": Constants.OrderIDData,
             "OrderPunchDt": Constants.currentdate,
             "OrderNo":Constants.OrderNoData,
+            "StatusID": Constants.orderstatus,
             "Items": test as Any]  as [String : Any]
         
-        if Constants.flagEdit != 0 {
+        if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             urlorderpunch = "\(CallEngine.baseURL)\(CallEngine.OrderEdit)"    //BASE
             print(urlorderpunch)
@@ -565,10 +726,19 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                                 print("hello")
+                                if Constants.editcheckout != 0 {
+                                    if let parentVC = self.parent as? ReceptionalistView {
+                                        let storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as? CheckoutView
+                                        parentVC.switchViewController(vc: vc!, showFooter: true)
+                                    }
+                                    
+                                } else {
                                 if let parentVC = self.parent as? ReceptionalistView {
                                     let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
                                     parentVC.switchViewController(vc: vc!, showFooter: true)
+                                }
                                 }
                             })
                         }

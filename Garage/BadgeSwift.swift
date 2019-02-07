@@ -20,6 +20,10 @@ import UIKit
   @IBInspectable open var borderWidth: CGFloat = 0 {
     didSet {
       invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
     }
   }
   

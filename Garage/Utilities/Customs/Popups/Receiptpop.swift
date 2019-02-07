@@ -39,7 +39,7 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func dataupdate() {
     
-     if Constants.flagEdit != 0 {
+     if Constants.flagEdit != 0 || Constants.editcheckout != 0  {
         OrderLabel.text = "\(Constants.OrderIDData)"
         statusLabel.text = "Hold"
         }
@@ -65,7 +65,7 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let Delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexpath) in
-            if Constants.flagEdit != 0 {
+            if Constants.flagEdit != 0  || Constants.editcheckout != 0 {
                  let Model = Items.Product[indexpath.row]
                 Model.Mode = "Delete"
                 Model.Status = 203

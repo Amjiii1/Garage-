@@ -48,8 +48,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Items.nameArray)
-        print("\(Constants.bayid)")
         Numberpadview.isHidden = true
         NumberpadViewCheck.isHidden = true
         makeCardetails()
@@ -57,13 +55,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControlEvents.touchDown)
         carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
-        
-        //         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        //
-        //        view.addGestureRecognizer(tap)
-        
-        
-        VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
+            VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
         carMake.addTarget(self, action: #selector(CarmakeFunction), for: .touchDown)
         modelNumber.addTarget(self, action: #selector(CarmodeltFunction), for: .touchDown)
         CardetailsData()
@@ -491,6 +483,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
+         loadingIndicator.layer.cornerRadius = 18.0
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)

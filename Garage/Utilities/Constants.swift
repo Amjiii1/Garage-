@@ -100,6 +100,10 @@ struct Constants {
     static var SuperUserID = "SuperUserID"
     static var SuperUser = 0
     static var Data = "Data"
+    static var checklistbtn = 0
+    static var checkflag = 0
+    static var editcheckout = 0
+    static var orderstatus = 0
   
     
     

@@ -11,7 +11,8 @@ import Alamofire
 
 struct DataNotes {
     static var comment = String()
-static var images = [String]()
+    static var images = [String]()
+    static var Object = [String]()
 }
 
 
@@ -24,6 +25,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var notesComt: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timelbl: UILabel!
+    @IBOutlet weak var statusbtn: UIButton!
     
     let dateFormatter : DateFormatter = DateFormatter()
     
@@ -50,8 +52,18 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         dateLabel.text = nameOfMonth
         timelbl.text = todaytime
     }
+    var fourUniqueDigits: String {
+        var result = ""
+        repeat {
+            // create a string with up to 7 leading zeros with a random number 0...9999999
+            result = String(format:"%07d", arc4random_uniform(10000000) )
+            // generate another random number if the set of characters count is less than four
+        } while Set<Character>(result.characters).count < 7
+        return result    // ran 8 times
+    }
+   
     
- 
+    
     func textViewDidBeginEditing(_ notesComt: UITextView) {
         if notesComt.textColor == UIColor.lightGray {
             notesComt.text = nil
@@ -77,62 +89,31 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     @IBAction func SaveButton(_ sender: Any) {
+        
+        
+        print(DataNotes.Object)
+        
         if notesComt.text == "Write Note" {
             notesComt.text = ""
-         DataNotes.comment = notesComt.text
-         DataNotes.images = images
+            DataNotes.comment = notesComt.text
+            DataNotes.images = images
         }
         DataNotes.comment = notesComt.text
         DataNotes.images = images
         
-       // SaveDataApi()
-    dismiss(animated: true, completion: nil)
-       
-    }
-   
-    func SaveDataApi() {
+        // SaveDataApi()
+        dismiss(animated: true, completion: nil)
         
-        let parameters = [ "SessionID": Constants.sessions,
-                           "NotesComment":notesComt.text!,
-                           "NotesStatus": "0",
-                           "OrderID": Constants.orderidmechanic,
-                           "CarID": Constants.caridmechanic,
-                           "NotesImages": [images]]    as [String : Any]
-        
-        guard let url = URL(string: "http://garageapi.isalespos.com/api/notes/add/") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        request.httpBody = httpBody
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if response == nil {
-                DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
-                    
-                }
-            }
-            if let response = response {
-                print(response)
-            }
-            
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
-                }
-            }
-            
-            }.resume()
-    
     }
     
-    
-    
+    @IBAction func statusbtn(_ sender: Any) {
+        if statusbtn.titleLabel?.text == "Checked" {
+            statusbtn.setTitle("Unchecked", for: .normal)
+        }
+        else if statusbtn.titleLabel?.text == "Unchecked" {
+            statusbtn.setTitle("Checked", for: .normal)
+        }
+    }
     
     
     
@@ -186,27 +167,27 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
+        loadingIndicator.layer.cornerRadius = 18.0
+     
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
     
     
-    
     func upload() {
-        
+    
         Alamofire.upload(multipartFormData:
             
             {
-               
                 (multipartFormData) in
-                multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.1)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+                multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.1)!, withName: "image", fileName: "\(self.fourUniqueDigits).jpg", mimeType: "image/jpeg")
                 
         }, to: "\(CallEngine.baseURL)\(CallEngine.notesImguploadapi)",headers:nil)
         { (result) in
-             self.showloader1()
+            self.showloader1()
             switch result {
-               
+                
             case .success(let upload,_,_ ):
                 upload.uploadProgress(closure: { (progress) in
                 })
@@ -215,17 +196,23 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     { response in
                         if let dict = response.result.value as? NSObject {
                             DispatchQueue.main.async {
+                                
                                 let Status = dict.value(forKey: "Status") as! Int
+                                let message = dict.value(forKey: "Description") as! String
                                 if Status == 1 {
-                                if let imagekey = dict.value(forKey: "Image") as? String
-                               {
-                                    self.images.append(imagekey)
+                                  print(dict)
+                                    //setValue(value: AnyObject?, forKey: String)
+                                    if let imagekey = dict.value(forKey: "Image") as? String
+                                    {
+                                        print(imagekey)
+                                        self.images.append(imagekey)
+                                    }
+                                    self.dismiss(animated: true, completion: nil)
+                                } else if Status == 0 {
+                                    ToastView.show(message: message, controller: self)
                                 }
-                               
-                                }
-                                 self.dismiss(animated: true, completion: nil)
+                                
                             }
-                            
                         }
                 }
             case .failure(let encodingError):

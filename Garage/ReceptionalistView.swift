@@ -14,14 +14,12 @@ class ReceptionalistView: UIViewController  {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var footerViewContainer: UIView!
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
-    
     var footerViewheight: CGFloat = 0.0
     var orginalHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // GeneralNibView.frame.size = settingContianerPop.frame.size
-        
     }
     
     @IBOutlet weak var profileBtnOutlet: UIButton!
@@ -33,8 +31,7 @@ class ReceptionalistView: UIViewController  {
         }
         orginalHeight = UIScreen.main.bounds.height
         showView(index: 1)
-        
-    }
+  }
     
     @IBAction func profileBtn(_ sender: Any) {
         showLocationTable ()
@@ -121,6 +118,14 @@ class ReceptionalistView: UIViewController  {
     func switchViewController(vc: UIViewController, showFooter: Bool) {
         removeAllChildViewControllers()
         var height: CGFloat = 0.0
+//        containerView.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.containerView.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
+//        },completion: { finished in
+//            UIView.animate(withDuration: 0.1, animations: {
+//                self.containerView.layer.transform = CATransform3DMakeScale(1,1,1)
+//            })
+//        })
         if showFooter {
             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height - footerViewheight

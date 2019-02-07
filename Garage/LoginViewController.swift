@@ -38,6 +38,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+//        self.view.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.view.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
+//        },completion: { finished in
+//            UIView.animate(withDuration: 0.1, animations: {
+//                self.view.layer.transform = CATransform3DMakeScale(1,1,1)
+//            })
+//        })
+        
+        
         pinCodeTextField.layer.cornerRadius = 18.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor

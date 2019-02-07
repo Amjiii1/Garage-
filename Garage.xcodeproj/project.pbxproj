@@ -61,6 +61,7 @@
 		951C139321539DFF00BDA923 /* UpdatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951C139221539DFF00BDA923 /* UpdatesView.xib */; };
 		951C13962153BEE900BDA923 /* Welcomecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C13952153BEE900BDA923 /* Welcomecell.swift */; };
 		951C13992153BF5800BDA923 /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C13982153BF5800BDA923 /* WelcomeModel.swift */; };
+		953470A72209AA690091A7C0 /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953470A62209AA690091A7C0 /* CheckoutModel.swift */; };
 		95383E44215100A8003DE261 /* HardwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95383E43215100A8003DE261 /* HardwareView.swift */; };
 		95383E46215100BF003DE261 /* HardwareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95383E45215100BF003DE261 /* HardwareView.xib */; };
 		95383E4E21512235003DE261 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95383E4D21512235003DE261 /* ReceiptView.swift */; };
@@ -75,6 +76,7 @@
 		955AB8AD21F5A64C00091813 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8AC21F5A64C00091813 /* Loader.swift */; };
 		955AB8AF21F5B8CB00091813 /* InternetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8AE21F5B8CB00091813 /* InternetCheck.swift */; };
 		955AB8B121F5B92000091813 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8B021F5B92000091813 /* UIUtility.swift */; };
+		955B49842202DB5C00EDC98B /* checkCarPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B49832202DB5C00EDC98B /* checkCarPost.swift */; };
 		955B6D3121D23FAB0049E3B9 /* CheckCarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 955B6D3021D23FAB0049E3B9 /* CheckCarController.storyboard */; };
 		955B6D3321D240210049E3B9 /* CheckCarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B6D3221D240210049E3B9 /* CheckCarController.swift */; };
 		955BDD1421B5558800F95542 /* makeCarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BDD1321B5558800F95542 /* makeCarModel.swift */; };
@@ -223,6 +225,7 @@
 		951C139221539DFF00BDA923 /* UpdatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdatesView.xib; sourceTree = "<group>"; };
 		951C13952153BEE900BDA923 /* Welcomecell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcomecell.swift; sourceTree = "<group>"; };
 		951C13982153BF5800BDA923 /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
+		953470A62209AA690091A7C0 /* CheckoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModel.swift; sourceTree = "<group>"; };
 		95383E43215100A8003DE261 /* HardwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareView.swift; sourceTree = "<group>"; };
 		95383E45215100BF003DE261 /* HardwareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HardwareView.xib; sourceTree = "<group>"; };
 		95383E4D21512235003DE261 /* ReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 		955AB8AC21F5A64C00091813 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		955AB8AE21F5B8CB00091813 /* InternetCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetCheck.swift; sourceTree = "<group>"; };
 		955AB8B021F5B92000091813 /* UIUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtility.swift; sourceTree = "<group>"; };
+		955B49832202DB5C00EDC98B /* checkCarPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkCarPost.swift; sourceTree = "<group>"; };
 		955B6D3021D23FAB0049E3B9 /* CheckCarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CheckCarController.storyboard; sourceTree = "<group>"; };
 		955B6D3221D240210049E3B9 /* CheckCarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCarController.swift; sourceTree = "<group>"; };
 		955BDD1321B5558800F95542 /* makeCarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeCarModel.swift; sourceTree = "<group>"; };
@@ -471,6 +475,7 @@
 				179F435021216C0600126200 /* SettingsViewController.swift */,
 				17C66F6921008FB1003CAA3D /* CarScannerView.swift */,
 				955B6D3221D240210049E3B9 /* CheckCarController.swift */,
+				955B49832202DB5C00EDC98B /* checkCarPost.swift */,
 				9575C45F2201D4E0001608ED /* CheckcarPostData.swift */,
 				9554560D21FF15710000A9A5 /* CheckCarModel.swift */,
 				9567AAAB21D4C3FB00E4A24E /* New Group */,
@@ -490,6 +495,7 @@
 				17FEF6CC20CCEA2500EC99C2 /* LaunchScreen.storyboard */,
 				95C57DD6215BA387001C1B76 /* Info.plist */,
 				9563DDFC21C6797C00BBC461 /* MechanicModel.swift */,
+				953470A62209AA690091A7C0 /* CheckoutModel.swift */,
 			);
 			path = Garage;
 			sourceTree = "<group>";
@@ -892,6 +898,7 @@
 				951C139121539DF500BDA923 /* UpdatesView.swift in Sources */,
 				955BDD1421B5558800F95542 /* makeCarModel.swift in Sources */,
 				171FAA642119B2080096721E /* CardView.swift in Sources */,
+				953470A72209AA690091A7C0 /* CheckoutModel.swift in Sources */,
 				956D71612160CA0B0055A160 /* ToastView.swift in Sources */,
 				9565C34321AC277F00D68EFD /* BayAssignView.swift in Sources */,
 				9557B18A21C1407C007C14D2 /* CustomSearchField.swift in Sources */,
@@ -917,6 +924,7 @@
 				17CB27FF20FB235D00B684CA /* FooterViewWithTabs.swift in Sources */,
 				176F2B4720E4BC71008DB208 /* Reachability.swift in Sources */,
 				951C13962153BEE900BDA923 /* Welcomecell.swift in Sources */,
+				955B49842202DB5C00EDC98B /* checkCarPost.swift in Sources */,
 				956B6C51218851830025986F /* Receiptpop.swift in Sources */,
 				9573179A2152542B004B92D3 /* DatabaseView.swift in Sources */,
 				176F2B4420E4B809008DB208 /* Constants.swift in Sources */,

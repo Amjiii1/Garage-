@@ -26,6 +26,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         tableViewWelcome.reloadData()
         tableViewWelcome.dataSource = self
         tableViewWelcome.delegate = self
@@ -36,6 +37,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         print("\(Constants.bayid)")
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
+        
+        
     }
     
     deinit {
@@ -43,6 +46,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("unlistDone"), object: nil)
     }
+    
     
     
     
@@ -164,6 +168,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBAction func segmentedAction(_ sender: Any) {
         ApiImplimentations()
+        
+       
     }
     
     
@@ -182,6 +188,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
+         loadingIndicator.layer.cornerRadius = 18.0
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
@@ -497,8 +504,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             Constants.BMake = Welcomecellobj[sender.tag].MakerName!
             Constants.editOrderid = Welcomecellobj[sender.tag].OrderID!
             Constants.bayid = Welcomecellobj[sender.tag].BayID!
-            print(Constants.Bplate)
-            print(Constants.BMake)
+            Constants.orderstatus = 101
             tapped()
             
             

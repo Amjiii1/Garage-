@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="162.5" width="500" height="265"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReceiptCell" id="ZmK-2y-hzM" customClass="ReceiptCell" customModule="Garage" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReceiptCell" id="ZmK-2y-hzM" customClass="ReceiptCell" customModule="Garage" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="500" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZmK-2y-hzM" id="vsG-7g-dUx">
@@ -38,19 +38,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYy-J7-SPc">
-                                                    <rect key="frame" x="12.5" y="0.0" width="156.5" height="43.5"/>
+                                                    <rect key="frame" x="10" y="0.0" width="125" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94g-dn-KyN">
-                                                    <rect key="frame" x="279.5" y="2" width="93.5" height="39.5"/>
+                                                    <rect key="frame" x="216.5" y="2" width="75" height="39.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrF-jj-SR7">
-                                                    <rect key="frame" x="508" y="2" width="93.5" height="39.5"/>
+                                                    <rect key="frame" x="406.5" y="2" width="75" height="39.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -65,8 +65,8 @@
                                                 <constraint firstItem="94g-dn-KyN" firstAttribute="centerY" secondItem="iYy-J7-SPc" secondAttribute="centerY" id="Hhb-3x-aTf"/>
                                                 <constraint firstItem="vrF-jj-SR7" firstAttribute="width" secondItem="94g-dn-KyN" secondAttribute="width" id="KzW-Oe-qek"/>
                                                 <constraint firstItem="iYy-J7-SPc" firstAttribute="centerY" secondItem="vsG-7g-dUx" secondAttribute="centerY" id="Us6-qB-iqH"/>
-                                                <constraint firstItem="vrF-jj-SR7" firstAttribute="centerX" secondItem="94g-dn-KyN" secondAttribute="centerX" multiplier="1.7" id="aoR-LR-FgF"/>
-                                                <constraint firstItem="94g-dn-KyN" firstAttribute="centerX" secondItem="iYy-J7-SPc" secondAttribute="centerX" multiplier="3.6" id="ce7-3J-tQH"/>
+                                                <constraint firstItem="vrF-jj-SR7" firstAttribute="centerX" secondItem="94g-dn-KyN" secondAttribute="centerX" multiplier="1.75" id="aoR-LR-FgF"/>
+                                                <constraint firstItem="94g-dn-KyN" firstAttribute="centerX" secondItem="iYy-J7-SPc" secondAttribute="centerX" multiplier="3.5" id="ce7-3J-tQH"/>
                                                 <constraint firstItem="vrF-jj-SR7" firstAttribute="centerY" secondItem="94g-dn-KyN" secondAttribute="centerY" id="iqR-wn-hOY"/>
                                                 <constraint firstItem="94g-dn-KyN" firstAttribute="height" secondItem="iYy-J7-SPc" secondAttribute="height" multiplier="0.9" id="ukY-a7-Nbs"/>
                                             </constraints>

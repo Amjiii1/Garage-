@@ -26,12 +26,12 @@ class CheckOutPopView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var voucherNibView:  VoucherView!
+        var cashNibView:     CashView!
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
-        voucherNibView = Bundle.main.loadNibNamed("VoucherView", owner: self, options: nil)?[0] as? VoucherView
-        voucherNibView.frame.size = containerPop.frame.size
-        self.containerPop.addSubview(voucherNibView)
-        voucherBtn.isSelected = true
+        cashNibView = Bundle.main.loadNibNamed("CashView", owner: self, options: nil)?[0] as? CashView
+        cashNibView.frame.size = containerPop.frame.size
+        self.containerPop.addSubview(cashNibView)
+        cashBtn.isSelected = true
     }
     
 
@@ -88,7 +88,7 @@ class CheckOutPopView: UIViewController {
         
        }
     
-    func checkboxDidTap(sender: UIButton){
+    func checkboxDidTap(sender: UIButton) {
         
         for i in 1...5 {
             if let btn = buttonStackView.viewWithTag(i) as? UIButton {

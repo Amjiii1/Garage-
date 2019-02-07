@@ -51,15 +51,17 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         notesBtn.isUserInteractionEnabled = false
         checkcarBtn.isUserInteractionEnabled = false
-        finishBtn.isUserInteractionEnabled = false
+       
         carNamelbl.isHidden = true
         platenumberlbl.isHidden = true
         finishedTableview.isHidden = true
         finishedTableview.dataSource = self
         finishedTableview.delegate = self
         labelsView.isHidden = true
+        donebtnenable()
         assignserviceBtn.setTitle("\(Constants.bayname)", for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(MechanicView.BayNotification(notification:)), name: Notification.Name("Notificationbayname"), object: nil)
         
@@ -78,6 +80,30 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name("NotificationIdentifier"), object: nil)
     }
+    
+    
+    func donebtnenable() {
+        
+        if Constants.checkflag == 0 {
+             finishBtn.isUserInteractionEnabled = false
+            
+            
+        } else if Constants.checkflag == 1 {
+            finishBtn.isUserInteractionEnabled = true
+            finishBtn.isSelected = true
+             Constants.checkflag = 0
+        }
+        
+        
+    }
+    
+
+    
+    
+    
+    
+    
+    
     
     
     
@@ -153,6 +179,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
+        loadingIndicator.layer.cornerRadius = 18.0
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
@@ -211,14 +238,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
-        cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
-        UIView.animate(withDuration: 0.3, animations: {
-            cell.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
-        },completion: { finished in
-            UIView.animate(withDuration: 0.1, animations: {
-                cell.layer.transform = CATransform3DMakeScale(1,1,1)
-            })
-        })
+    
         let transaction = MechanicModel[indexPath.row].finishedTransactionNo
         cell.serialNo.text = "\(transaction!)"
         cell.makeLbl.text = MechanicModel[indexPath.row].finishedMakerName
@@ -256,13 +276,10 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         let CarInfo = json[Constants.Cars].arrayValue
                         for cars in CarInfo {
                     
-                            
-                            
                             let RegistrationNo = cars[Constants.RegistrationNo].stringValue
                             DispatchQueue.main.async {
                                 self!.platenumberlbl.text = RegistrationNo
                             }
-                            
                             
                             let carid = cars[Constants.CarID].intValue
                             DispatchQueue.main.async {
@@ -277,14 +294,9 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             }
                             
                             
-                            
                         }
                         
-                        
-                        
-                        
-                        
-                        
+                   
                         
                         let Notes = json["Notes"].dictionaryValue
                         
@@ -478,8 +490,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     @IBAction func loadingBtnAction(_ sender: Any) {
         
-        print(DataNotes.comment)
-         print(DataNotes.images)
+       
         
         loaderWorks()
         
@@ -566,7 +577,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     
-    func SaveDataApi() {
+    func SaveNotesData() {
         
         let parameters = [ "SessionID": Constants.sessions,
                            "NotesComment": DataNotes.comment,
@@ -575,7 +586,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                            "CarID": Constants.caridmechanic,
                            "NotesImages": DataNotes.images]    as [String : Any]
         
-        guard let url = URL(string: "http://garageapi.isalespos.com/api/notes/add/") else { return }
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Notespost)") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -600,13 +611,88 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
+                     let status = json[Constants.Status] as? Int
+                     let newmessage = json[Constants.Description] as? String
+                    if (status == 1) {
+                       print("sucess")
+                    }
+                    else if (status == 0) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: newmessage!, controller: self)
+                            self.removeData()
+                        }
+                       
+                    }
                 } catch {
                     print(error)
                 }
             }
             
+            }.resume()
+        
+    }
+    
+    
+    func SaveChecklist()  {
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data1 = try! encoder.encode(Checklist.CheckcarPost)
+        guard let arreydetails = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
+        
+        let parameters = [
+            "OrderID": Constants.orderidmechanic,
+            "CarID": Constants.caridmechanic,
+            "SessionID": Constants.sessions,
+            "InspectionDetails": arreydetails as Any]  as [String : Any]
+        
+        let saveapi = ("\(CallEngine.baseURL)\(CallEngine.checklistpost)")
+        let url = URL(string: saveapi)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+        request.httpBody = httpBody
+        let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
+        if let json = jsonS {
+            print(json)
+        }
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                }
+            }
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                print(data)
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                    print(json)
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
+                    if (status == 1) {
+                    print("sucess")
+                    }
+                    else if (status == 0) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: newmessage!, controller: self)
+                        }
+                    }
+                    
+                } catch {
+                    print(error)
+                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                }
+                
+            }
             }.resume()
         
     }
@@ -619,10 +705,17 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     
+    
+    
     @IBAction func finshedAndSaveBtn(_ sender: Any) {
-        SaveDataApi()
         AssignToFinished()
         flag = 0
+    }
+    
+    func removeData() {
+        DataNotes.comment.removeAll()
+        DataNotes.images.removeAll()
+        Checklist.CheckcarPost.removeAll()
     }
     
     
@@ -679,7 +772,13 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     let status = json[Constants.Status] as? Int
                     let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
-                        //DispatchQueue.main.async {
+                        
+                        if   (DataNotes.comment.isEmpty == false) ||  (DataNotes.images.isEmpty == false)  {
+                        self.SaveNotesData()
+                        }
+                        if  ( Checklist.CheckcarPost.isEmpty == false) {
+                        self.SaveChecklist()
+                        }
                         ToastView.show(message: newmessage!, controller: self)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             if let parentVC = self.parent as? ReceptionalistView {

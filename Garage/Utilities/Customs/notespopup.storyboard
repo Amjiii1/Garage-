@@ -64,7 +64,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GpO-3R-F5x">
                                         <rect key="frame" x="363" y="0.0" width="102.5" height="105"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WpS-Xn-iOa">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WpS-Xn-iOa">
                                         <rect key="frame" x="0.0" y="0.0" width="102.5" height="105"/>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Add Pictures">
@@ -130,6 +130,22 @@
                                 <rect key="frame" x="41.5" y="477" width="467.5" height="60"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7N-1g-cqK">
+                                <rect key="frame" x="53.5" y="477" width="140.5" height="60"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iou-qJ-Ldr">
+                                <rect key="frame" x="375.5" y="477" width="140" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Checked">
+                                    <color key="titleColor" red="0.54901960780000003" green="0.54901960780000003" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="statusbtn:" destination="h9I-DM-xBk" eventType="touchUpInside" id="cFD-tn-TaD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -139,24 +155,32 @@
                             <constraint firstItem="yqo-uO-uzk" firstAttribute="width" secondItem="VwY-to-JFd" secondAttribute="width" id="Ces-PL-jX8"/>
                             <constraint firstItem="yqo-uO-uzk" firstAttribute="height" secondItem="VwY-to-JFd" secondAttribute="height" multiplier="0.4" id="CmJ-YO-rJt"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="leading" secondItem="5OR-dg-Lh2" secondAttribute="leading" id="Dga-DX-dWB"/>
+                            <constraint firstItem="e7N-1g-cqK" firstAttribute="centerX" secondItem="yqo-uO-uzk" secondAttribute="centerX" multiplier="0.45" id="FVO-KS-ph1"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" multiplier="1.177" id="FYI-7C-h2K"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="leading" secondItem="vvG-HG-qH0" secondAttribute="leading" id="GmL-Ct-P2v"/>
+                            <constraint firstItem="Iou-qJ-Ldr" firstAttribute="centerX" secondItem="e7N-1g-cqK" secondAttribute="centerX" multiplier="3.6" id="Gxx-ad-toh"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="centerY" secondItem="5OR-dg-Lh2" secondAttribute="centerY" multiplier="0.5" id="ItP-Na-Nn5"/>
+                            <constraint firstItem="e7N-1g-cqK" firstAttribute="width" secondItem="yqo-uO-uzk" secondAttribute="width" multiplier="0.3" id="LO6-yE-2aq"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="width" secondItem="vvG-HG-qH0" secondAttribute="width" id="LwB-FB-d6f"/>
+                            <constraint firstItem="Iou-qJ-Ldr" firstAttribute="height" secondItem="e7N-1g-cqK" secondAttribute="height" id="Nn9-hc-bg7"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="height" secondItem="fKy-U5-IOl" secondAttribute="height" multiplier="0.25" id="O4y-vd-6zh"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="centerX" secondItem="ftb-OV-Jaf" secondAttribute="centerX" multiplier="4.8" id="OfX-lb-eMP"/>
                             <constraint firstItem="yqo-uO-uzk" firstAttribute="centerY" secondItem="VwY-to-JFd" secondAttribute="centerY" multiplier="2.8" id="Oh0-16-jMP"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="width" secondItem="ftb-OV-Jaf" secondAttribute="width" multiplier="0.8" id="Qm4-gj-fQj"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="width" secondItem="hOq-B6-RGk" secondAttribute="width" multiplier="0.5" id="T5q-IQ-Emx"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="centerY" secondItem="vvG-HG-qH0" secondAttribute="centerY" multiplier="0.6" id="Tla-wf-jht"/>
+                            <constraint firstItem="e7N-1g-cqK" firstAttribute="centerY" secondItem="yqo-uO-uzk" secondAttribute="centerY" id="UdU-Zo-9JA"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="leading" secondItem="hOq-B6-RGk" secondAttribute="leading" id="UkP-D7-ZYi"/>
                             <constraint firstItem="vvG-HG-qH0" firstAttribute="width" secondItem="fKy-U5-IOl" secondAttribute="width" multiplier="0.85" id="Xgk-0C-88k"/>
                             <constraint firstItem="ftb-OV-Jaf" firstAttribute="height" secondItem="hOq-B6-RGk" secondAttribute="height" multiplier="0.9" id="XnM-d9-9c1"/>
+                            <constraint firstItem="e7N-1g-cqK" firstAttribute="height" secondItem="yqo-uO-uzk" secondAttribute="height" id="ZfC-JI-KmU"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="height" secondItem="vvG-HG-qH0" secondAttribute="height" multiplier="0.7" id="awl-Mt-jJa"/>
                             <constraint firstItem="1it-eC-l0v" firstAttribute="height" secondItem="ftb-OV-Jaf" secondAttribute="height" id="bGO-Ps-f26"/>
+                            <constraint firstItem="Iou-qJ-Ldr" firstAttribute="width" secondItem="e7N-1g-cqK" secondAttribute="width" id="cnX-EV-LOg"/>
                             <constraint firstItem="5OR-dg-Lh2" firstAttribute="trailing" secondItem="vvG-HG-qH0" secondAttribute="trailing" id="eFU-ar-96O"/>
                             <constraint firstItem="zSH-6Y-Fx5" firstAttribute="width" secondItem="hOq-B6-RGk" secondAttribute="width" multiplier="0.4" id="eKW-DB-zd6"/>
                             <constraint firstItem="hOq-B6-RGk" firstAttribute="height" secondItem="5OR-dg-Lh2" secondAttribute="height" multiplier="0.5" id="gou-h8-csb"/>
+                            <constraint firstItem="Iou-qJ-Ldr" firstAttribute="centerY" secondItem="e7N-1g-cqK" secondAttribute="centerY" id="iwO-bd-rdd"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="centerX" secondItem="vvG-HG-qH0" secondAttribute="centerX" id="j4u-5h-YT4"/>
                             <constraint firstItem="LlH-Pg-fj0" firstAttribute="height" secondItem="vvG-HG-qH0" secondAttribute="height" multiplier="0.3" id="jsJ-zv-8Dh"/>
                             <constraint firstItem="W3W-t7-kGU" firstAttribute="bottom" secondItem="LlH-Pg-fj0" secondAttribute="bottom" id="nAu-3h-Pq7"/>
@@ -176,6 +200,7 @@
                         <outlet property="image2" destination="XFv-QD-5F8" id="dey-UJ-1tC"/>
                         <outlet property="image3" destination="GpO-3R-F5x" id="jGg-WA-Sv5"/>
                         <outlet property="notesComt" destination="VwY-to-JFd" id="gM1-on-lHh"/>
+                        <outlet property="statusbtn" destination="Iou-qJ-Ldr" id="5Sp-Ap-Zph"/>
                         <outlet property="timelbl" destination="zSH-6Y-Fx5" id="6gY-fj-oKT"/>
                     </connections>
                 </viewController>

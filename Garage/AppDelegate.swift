@@ -17,6 +17,7 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarStyle = .lightContent
+       RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.5))
        
         // Override point for customization after application launch.
 //        window = UIWindow()
@@ -24,7 +25,7 @@ import UIKit
 //        let navController = UINavigationController(rootViewController: WelcomeView())
 //        window?.rootViewController = navController
         
-        Loader.loadLoader()
+        //Loader.loadLoader()
         return true
     }
 

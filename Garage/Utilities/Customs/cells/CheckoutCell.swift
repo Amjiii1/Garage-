@@ -20,7 +20,8 @@ class CheckoutCell: UITableViewCell {
     
     @IBOutlet weak var CPlatenmb: UILabel!
     
-   // @IBOutlet weak var Bay: UILabel!
+    @IBOutlet weak var checkoutBtn: UIButton!
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()

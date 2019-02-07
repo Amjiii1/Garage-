@@ -13,8 +13,8 @@ import Kingfisher
 
 
 struct Checklist {
-    static var CheckcarPost = [InspectionListPOST]()
-    static var CheckcarPostDetails = [InspectionDetailsPOST]()
+    static var CheckcarPost = [checkCarPost]()
+    
 }
 
 
@@ -33,6 +33,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         ChecklistTableview.delegate = self
         ChecklistTableview.dataSource = self
          getDetails()
+        Constants.checkflag = 1
     }
     
     private func getDetails() {
@@ -127,42 +128,40 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func tabA(_ sender: UIButton){
         let row = sender.tag % 1000
         let section = sender.tag / 1000
-        let count = [(Inspectionlist[section])]
+        let count = [(Inspectionlist[section].InspectionDetails[row])]
         for details in count {
-            Checklist.CheckcarPostDetails = []
-            for deepdetails in details.InspectionDetails {
-               
-                let innerdetail = InspectionDetailsPOST(CarInspectionDetailID: deepdetails.CarInspectionDetailID, CarInspectionID: deepdetails.CarInspectionID, Name: deepdetails.Name, AlternateName: deepdetails.AlternateName, Description: deepdetails.Description, Kilometer: deepdetails.Kilometer, IsInspection: true, IsReplace: false, IsInspectWithoutReplace: false)
-                Checklist.CheckcarPostDetails.append(innerdetail)
-                
-            }
             
-            let outerdetails = InspectionListPOST(InspectionDetails: Checklist.CheckcarPostDetails, InspectionID: details.InspectionID, Name: details.Name, AlternateName: details.AlternateName, Image: details.Image, Description: details.Description, UserID: details.UserID)
-            Checklist.CheckcarPost.append(outerdetails)
+            let rowdetails = checkCarPost(CarInspectionDetailID: details.CarInspectionDetailID, CarInspectionID: details.CarInspectionID, Name: details.Name, AlternateName: details.AlternateName, Description: details.Description, Kilometer: details.Kilometer, IsInspection: true, IsReplace: false, IsInspectWithoutReplace: false)
+            
+             Checklist.CheckcarPost.append(rowdetails)
         }
-        
-             print(Checklist.CheckcarPost)
-            
-            
-            
-            
-   
+       
      
     }
     
     @objc func tabB(_ sender: UIButton){
        let row = sender.tag % 1000
        let section = sender.tag / 1000
-        let name = Inspectionlist[section].InspectionDetails[row].Name
-        print(name)
+        let count = [(Inspectionlist[section].InspectionDetails[row])]
+        for details in count {
+            
+            let rowdetails = checkCarPost(CarInspectionDetailID: details.CarInspectionDetailID, CarInspectionID: details.CarInspectionID, Name: details.Name, AlternateName: details.AlternateName, Description: details.Description, Kilometer: details.Kilometer, IsInspection: false, IsReplace: true, IsInspectWithoutReplace: false)
+            
+            Checklist.CheckcarPost.append(rowdetails)
+        }
     }
     
     
     @objc func tabC(_ sender: UIButton){
         let row = sender.tag % 1000
         let section = sender.tag / 1000
-        let name = Inspectionlist[section].InspectionDetails[row].Name
-        print(name)
+        let count = [(Inspectionlist[section].InspectionDetails[row])]
+        for details in count {
+            
+            let rowdetails = checkCarPost(CarInspectionDetailID: details.CarInspectionDetailID, CarInspectionID: details.CarInspectionID, Name: details.Name, AlternateName: details.AlternateName, Description: details.Description, Kilometer: details.Kilometer, IsInspection: false, IsReplace: false, IsInspectWithoutReplace: true)
+            
+            Checklist.CheckcarPost.append(rowdetails)
+        }
         
     }
     
@@ -237,42 +236,43 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 15
         let buttonA = UIButton()
-        //buttonA.setTitle("A", for: .normal)
-        buttonA.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+        buttonA.setTitle("A", for: .normal)
+        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        buttonA.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         buttonA.translatesAutoresizingMaskIntoConstraints = false
         buttonA.widthAnchor.constraint(equalToConstant: 30).isActive = true
         let buttonB = UIButton()
-        //buttonB.setTitle("B", for: .normal)
-        buttonB.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+        buttonB.setTitle("B", for: .normal)
+        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        buttonB.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         let buttonC = UIButton()
-        buttonC.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
-        buttonA.tag = section
-        buttonA.addTarget(self, action: #selector(selectAType(_:)), for: .touchUpInside)
-        buttonB.tag = section
-        buttonB.addTarget(self, action: #selector(selectBType(_:)), for: .touchUpInside)
-        buttonC.tag = section
-        buttonC.addTarget(self, action: #selector(selectCType(_:)), for: .touchUpInside)
+        buttonC.setTitle("C", for: .normal)
+        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        buttonC.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
+//        buttonA.tag = section
+//        buttonA.addTarget(self, action: #selector(selectAType(_:)), for: .touchUpInside)
+//        buttonB.tag = section
+//        buttonB.addTarget(self, action: #selector(selectBType(_:)), for: .touchUpInside)
+//        buttonC.tag = section
+//        buttonC.addTarget(self, action: #selector(selectCType(_:)), for: .touchUpInside)
         buttonStackView.addArrangedSubview(buttonA)
         buttonStackView.addArrangedSubview(buttonB)
         buttonStackView.addArrangedSubview(buttonC)
         mainStackView.addArrangedSubview(titletStackView)
         mainStackView.addArrangedSubview(buttonStackView)
         mainStackView.frame = CGRect(x: 25, y: 0, width: tableView.frame.width - 50, height: 40)
-        
         customeView.addSubview(mainStackView)
-
         return customeView
     }
     
     
     @objc private func selectCType(_ sender: UIButton) {
-        
-      
-        sender.isSelected = true
         let section = sender.tag
        
         let count = Inspectionlist[section].Name.count
+        print(count)
         for i in 0...count {
+            print(section)
             let index = IndexPath(row: i, section: section)
             if let cell = ChecklistTableview.cellForRow(at: index) as? CheckCarcell {
                 cell.checkBoxC.isSelected = true
@@ -310,123 +310,23 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
-    func SaveChecklist()  {
- 
-        print(InspectionListPOST.self)
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .prettyPrinted
-  //  let data1 = try! encoder.encode(InspectionListPOST)
-  //  guard let test = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
-    var urlorderpunch = ""
-    
-    print(Checklist.CheckcarPost)
-    
-    let parameters = [
-        "OrderID": Constants.orderidmechanic,
-        "CarID": Constants.caridmechanic,
-        "SessionID": Constants.sessions,
-        "Items": Checklist.CheckcarPost as Any]  as [String : Any]
-    
-    
-    let saveapi = "http://garageapi.isalespos.com/api/order/carinspection/"    //BASE
    
-    let url = URL(string: saveapi)
-    var request = URLRequest(url: url!)
-    request.httpMethod = "PUT"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
-    request.httpBody = httpBody
-    let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
-    if let json = jsonS {
-    print(json)
-    }
-    let session = URLSession.shared
-    session.dataTask(with: request) { (data, response, error) in
-    
-    if response == nil {
-    DispatchQueue.main.async {
-    ToastView.show(message: "Login failed! Check internet", controller: self)
-    }
-    }
-    if let response = response {
-    print(response)
-    }
-    if let data = data {
-    print(data)
-    do {
-    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
-    print(json)
-    let status = json[Constants.Status] as? Int
-    let newmessage = json[Constants.Description] as? String
-    if (status == 1) {
-    
-    ToastView.show(message: newmessage!, controller: self)
-    
-//    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-//    print("hello")
-//    if let parentVC = self.parent as? ReceptionalistView {
-//    let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-//    let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
-//    parentVC.switchViewController(vc: vc!, showFooter: true)
-//    }
-//    })
-    }
-    else if (status == 0) {
-    
-    print(status!)
-    DispatchQueue.main.async {
-    ToastView.show(message: newmessage!, controller: self)
-    }
-    }
-    
-    } catch {
-    print(error)
-    ToastView.show(message: "Edit Failed! error occured", controller: self)
-    }
-    
-    }
-    }.resume()
-    
-    }
-    
     
 
     
     
     @IBAction func savecontinueBtn(_ sender: Any) {
-     //   SaveChecklist()
+         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+       
+        if let parentVC = self.parent as? ReceptionalistView {
+            let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView
+            parentVC.switchViewController(vc: vc!, showFooter: true)
+        }
+        })
+        
+    
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

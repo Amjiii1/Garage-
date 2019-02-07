@@ -41,6 +41,11 @@ class CallEngine {
     static let finishedOrderlist = "orderlist/service/all"
     static let WorkDone = "order/updatestatus/workdone"
     static let carinspection = "car/inspection/0"
+    static let Notespost = "notes/add/"
+    static let checklistpost = "order/carinspection/"
+    static let checkoutDone = "orderlist/checkout/done/"
+    static let checkoutHold = "orderlist/checkout/checkout/"
+    static let checkoutwork = "orderlist/checkout/work/"
     
     
     

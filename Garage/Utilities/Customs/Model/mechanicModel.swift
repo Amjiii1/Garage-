@@ -25,8 +25,17 @@ struct Orderdetail {
     let StatusID: Int
     let ItemDate: String
     let Mode: String
+   // var orderPrinterType: PrinterType?
     
     
+}
+struct CompanyInfo {
+    
+    var name: String = ""
+    var phoneNumber: String = ""
+    var valueAddedTaxNumber: String = ""
+    var snapchatLink: String = ""
+    var instagranLink: String = ""
 }
 
 

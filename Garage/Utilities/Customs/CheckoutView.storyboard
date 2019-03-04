@@ -40,12 +40,10 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-r2-7U1">
-                                <rect key="frame" x="229.5" y="19.5" width="375" height="29"/>
+                                <rect key="frame" x="229.5" y="18.5" width="375" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="2Xv-VN-mu3"/>
                                     <constraint firstAttribute="width" constant="375" id="Cn7-iY-jc5"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="hGW-je-a3Z"/>
-                                    <constraint firstAttribute="height" constant="28" id="pny-Id-EMf"/>
                                 </constraints>
                                 <segments>
                                     <segment title="In Work"/>
@@ -69,7 +67,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhU-6c-F8M">
                                 <rect key="frame" x="24" y="89.5" width="786" height="73"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S.N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cA-Vu-siy">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trans.No" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cA-Vu-siy">
                                         <rect key="frame" x="19.5" y="4" width="118" height="65"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,7 +79,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Madel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ds3-gM-qeM">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ds3-gM-qeM">
                                         <rect key="frame" x="303.5" y="10" width="141.5" height="53"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,7 +91,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSl-Lf-AuQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSl-Lf-AuQ">
                                         <rect key="frame" x="657.5" y="12.5" width="109" height="48"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -225,6 +223,7 @@
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="centerX" secondItem="Qos-Kb-fJ2" secondAttribute="centerX" id="BMh-qE-odl"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="width" secondItem="Qos-Kb-fJ2" secondAttribute="width" id="Dkx-zS-OkF"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="top" secondItem="Qos-Kb-fJ2" secondAttribute="top" multiplier="0.55" id="Eb2-1R-X4D"/>
+                            <constraint firstItem="gyC-r2-7U1" firstAttribute="height" secondItem="pyW-uL-To0" secondAttribute="height" multiplier="0.45" id="IdH-qZ-Ikc"/>
                             <constraint firstItem="Qos-Kb-fJ2" firstAttribute="bottom" secondItem="SB2-yS-aiX" secondAttribute="bottom" id="J6e-wV-qCp"/>
                             <constraint firstItem="gyC-r2-7U1" firstAttribute="centerY" secondItem="pyW-uL-To0" secondAttribute="centerY" id="Jhh-Yf-cqb"/>
                             <constraint firstItem="mVi-EO-igu" firstAttribute="width" secondItem="Qos-Kb-fJ2" secondAttribute="width" id="KIu-3K-65L"/>

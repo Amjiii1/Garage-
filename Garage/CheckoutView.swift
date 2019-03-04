@@ -8,7 +8,15 @@
 
 import UIKit
 
-class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+struct Checkoutstruct {
+    static var Itemdetails = [checkoutItems]()
+    static var sentitems = [checkoutItems]()
+    //hello
+}
+
+
+
+class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
   
     @IBOutlet weak var tableViewContainer: UITableView!
     @IBOutlet weak var checkoutSegment: UISegmentedControl!
@@ -28,8 +36,23 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         checkoutSegment.selectedSegmentIndex = 1
          CheckoutDetails()
         Constants.editcheckout = 0
+         
+        Constants.percent = Int(Double(Constants.tax)! * 100)
+        NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
         
     }
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("checkoutDone"), object: nil)
+    }
+    
+    
+    
+    
+    @objc func checkoutDone(notification: Notification) {
+        self.CheckoutDetails()
+    }
+    
     
     
     func CheckoutDetails() {
@@ -52,11 +75,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         }
         let url = URL(string: Apiurl)
-        //    print(Apiurl)
+       
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
                     self.checkoutSegment.isUserInteractionEnabled = true
                 }
@@ -72,14 +95,47 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if (status == 1) {
                     if let order = json["OrdersList"] as? [[String: Any]] {
                         self.checkoutmodel.removeAll()
+                        Checkoutstruct.Itemdetails.removeAll()
+                      
+                        for items in order {
+                            if let item = items["OrderItems"] as? [[String: Any]] {
+                                for details in item {
+                                    let Name = details["ItemName"] as! String
+                                    let Price = details["Price"] as! Int
+                                    let ItemID = details["ItemID"] as! Int
+                                    let Quantity = details["Quantity"] as! Int
+                                    let OrderDetails = details["OrderDetailID"] as! Int
+                                    let itemorderID = details["OrderID"] as! Int
+                                    let itemsdetailed = checkoutItems(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
+                                  Checkoutstruct.Itemdetails.append(itemsdetailed)
+                                }
+                                
+                                  }
+                            }
                         
                         
                         for checkoutlist in order {
-                            
+//                            if let items = checkoutlist["OrderItems"] as? AnyObject{
+//                                CheckoutItems.Itemdetails.append(items as! CheckoutItems)
+//                            }
                             let details = CheckoutModel(checkoutlist: checkoutlist)
                             self.checkoutmodel.append(details!)
+                            
+                            
+                            
                         }
+                    
+                        
                     }
+                    
+                  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         
                         self.dismiss(animated: true, completion: nil)
@@ -170,8 +226,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
                 
                     if let parentVC = self.parent as? ReceptionalistView {
-                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                        let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                         parentVC.switchViewController(vc: vc!, showFooter: false)
 
                     }
@@ -237,6 +293,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CPlatenmb.text = checkoutmodel[indexPath.row].RegistrationNo
             cell.CMake.text = checkoutmodel[indexPath.row].MakerName
             cell.CModel.text = checkoutmodel[indexPath.row].ModelName
+            cell.checkoutBtn.tag = indexPath.row
             cell.checkoutBtn.setTitle("Checkout", for: .normal)
             cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
             cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
@@ -284,13 +341,31 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
              ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
-            if let parentVC = self.parent as? ReceptionalistView {
-                let storyboard = UIStoryboard(name: "CheckoutPopUp", bundle: nil)
-                let setting = storyboard.instantiateViewController(withIdentifier: "CheckOutPopVc") as! CheckOutPopView
-                let navigationController = UINavigationController(rootViewController: setting)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                parentVC.switchViewController(vc: setting, showFooter: false)
+             Checkoutstruct.sentitems.removeAll()
+            Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID!
+            Constants.checkoutcarid = checkoutmodel[sender.tag].CarID!
+           Constants.subtotal = 0.0
+            Constants.checkoutGrandtotal = 0.0
+             Constants.checkouttax = 0.0
+            for itemmodels in Checkoutstruct.Itemdetails {
+
+                if itemmodels.itemorderid == Constants.checkoutorderid {
+                    
+                    Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
+                   
+                     Checkoutstruct.sentitems.append(itemmodels)
+                } else if itemmodels.itemorderid != Constants.checkoutorderid {
+
+                }
+        
+
             }
+          
+             Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
+              Constants.subtotal = Constants.checkoutGrandtotal
+             Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
+              checkoutpop()
+           
             
         case 2:
             ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
@@ -299,6 +374,29 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             break
         }
     }
+    
+    
+    
+    func checkoutpop() {
+        
+        let screenSize = UIScreen.main.bounds.width
+        let screenheight = UIScreen.main.bounds.size.height
+        print(screenheight)
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "CheckoutPopUp", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "CheckOutPopVc") as! CheckOutPopView
+        popController.modalPresentationStyle = .popover
+        let popOverVC = popController.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.view
+        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.70, width: 0, height: 0)
+        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.70)
+        self.present(popController, animated: true)
+        
+    }
+    
     
     
     
@@ -312,19 +410,28 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
    
     @IBAction func settings(_ sender: Any) {
-        if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
-            let setting = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
-            parentVC.switchViewController(vc: setting, showFooter: false)
         
+      setupsettings()
     }
-    }
     
     
     
-    
-    func setupConstraints(){
-       
+    func setupsettings(){
+        let screenSize = UIScreen.main.bounds.width
+        let screenheight = UIScreen.main.bounds.size.height
+        print(screenheight)
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+        popController.modalPresentationStyle = .popover
+        let popOverVC = popController.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.view
+        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
+        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
+        self.present(popController, animated: true)
 
     }
     

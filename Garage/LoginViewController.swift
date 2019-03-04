@@ -36,18 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-//        self.view.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.view.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
-//        },completion: { finished in
-//            UIView.animate(withDuration: 0.1, animations: {
-//                self.view.layer.transform = CATransform3DMakeScale(1,1,1)
-//            })
-//        })
-        
-        
+    
         pinCodeTextField.layer.cornerRadius = 18.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
@@ -62,8 +51,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-        Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
-        
         
         if loggedIn() {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
@@ -71,6 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
             
         }
+       //  Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
         
         
     }
@@ -111,7 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.pinCodeTextField.isEnabled = true
                     self.businesssCodeTextField.isEnabled = true
                 }
@@ -127,6 +115,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async {
                             ToastView.show(message: "Login Successfully", controller: self)
                         }
+                        if let tax = json["Tax"] as? String {
+                       Constants.tax = tax
+                        }
+                        
                         if let User = json["User"] as? [String: Any] {
                             print(User)
                             if  let session = User["Session"] as? String {
@@ -140,8 +132,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 print(session)
                             }
                         }
-                        let storyboard: UIStoryboard = UIStoryboard(name: "ReceptionalistView", bundle: nil)
-                        let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "ReceptionalistVc") as! ReceptionalistView
+                        let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
+                        let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)
                     } else {
                         DispatchQueue.main.async {
@@ -167,14 +159,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             
             
-            
             }.resume()
         
-        
     }
-    
-    
-    
     
     
     

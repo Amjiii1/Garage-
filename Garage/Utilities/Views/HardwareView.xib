@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,20 +15,27 @@
             <rect key="frame" x="0.0" y="0.0" width="834" height="671"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hardware" translatesAutoresizingMaskIntoConstraints="NO" id="aaE-n3-6bf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hardware" translatesAutoresizingMaskIntoConstraints="NO" id="PUW-cq-ppI">
                     <rect key="frame" x="0.0" y="0.0" width="834" height="671"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHQ-Gd-hn9">
+                    <rect key="frame" x="41.5" y="53.5" width="751" height="127.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="aaE-n3-6bf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CXe-G6-h4M"/>
-                <constraint firstItem="aaE-n3-6bf" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Gq1-Bk-vyp"/>
-                <constraint firstItem="aaE-n3-6bf" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="XWR-7t-JCZ"/>
-                <constraint firstItem="aaE-n3-6bf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eYJ-od-8P0"/>
+                <constraint firstItem="wHQ-Gd-hn9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="425-mq-nTh"/>
+                <constraint firstItem="wHQ-Gd-hn9" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.19" id="CKI-0f-MrQ"/>
+                <constraint firstItem="PUW-cq-ppI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="D4x-A4-7e9"/>
+                <constraint firstItem="wHQ-Gd-hn9" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="IJg-u1-4wk"/>
+                <constraint firstItem="wHQ-Gd-hn9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.35" id="WJh-03-Sgs"/>
+                <constraint firstItem="PUW-cq-ppI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cLk-LW-72A"/>
+                <constraint firstItem="PUW-cq-ppI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="vkt-MJ-Lpn"/>
+                <constraint firstItem="PUW-cq-ppI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="y3U-Qr-ysS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="34" y="53.5"/>
+            <point key="canvasLocation" x="33.600000000000001" y="52.623688155922046"/>
         </view>
     </objects>
     <resources>

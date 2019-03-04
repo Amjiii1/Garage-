@@ -61,10 +61,10 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
         
         
         let parameters = [
-            "OrderID": Constants.editOrderid,
-            "BayID": assigning,
-            "Type": "bay",
-            "SessionID": Constants.sessions]  as [String : Any]
+            Constants.OrderID: Constants.editOrderid,
+            Constants.BayID: assigning,
+            Constants.type: "bay",
+            Constants.SessionID: Constants.sessions]  as [String : Any]
         
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Assigned)")!
         
@@ -109,13 +109,18 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                     else if (status == 0) {
                         print(status!)
                         DispatchQueue.main.async {
-                            ToastView.show(message: newmessage!, controller: self)
+                            let messageVC = UIAlertController(title: "\(newmessage!)", message: "Failed" , preferredStyle: .actionSheet)
+                            self.present(messageVC, animated: true) {
+                                Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { (_) in
+                                    messageVC.dismiss(animated: true, completion: nil)})}
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                     
                 } catch {
                     print(error)
                     ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    self.dismiss(animated: true, completion: nil)
                 }
                 
             }
@@ -179,10 +184,10 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     
     func UnlistApi() {
         let parameters = [
-            "OrderID": Constants.editOrderid,
-            "BayID": Constants.bayid,
-            "Type": "unlist",
-            "SessionID": Constants.sessions]  as [String : Any]
+            Constants.OrderID: Constants.editOrderid,
+            Constants.BayID: Constants.bayid,
+            Constants.type: "unlist",
+            Constants.SessionID: Constants.sessions]  as [String : Any]
         
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Unlist)")!
         

@@ -7,85 +7,115 @@
 //
 
 import UIKit
+import Foundation
 
 class SettingsViewController: UIViewController {
     
     
     @IBOutlet weak var settingContianerPop: UIView!
     
+    @IBOutlet weak var tabButtonsStackView: UIStackView!
     
+    enum SettingViews: Int {
+        case General = 1
+        case Hardware
+        case Receipt
+        case QuickPay
+        case DataBase
+        case Language
+        case Aboutus
+        case Updates
+    }
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        let GeneralNibView: GeneralView!
-        GeneralNibView = Bundle.main.loadNibNamed("GeneralView", owner: self, options: nil)?[0] as? GeneralView
-        GeneralNibView.frame.size = settingContianerPop.frame.size
-        self.settingContianerPop.addSubview(GeneralNibView)
-        
-        
+        tabButtonsStackView.backgroundColor = UIColor.white
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        for i in 1...5 {
+//            if (self.tabButtonsStackView.viewWithTag(i) as? UIButton) != nil {
+//              
+//            }
+//        }
+    
+    
+    DispatchQueue.main.async {
+    // to open General tab by default
+    if let button = self.tabButtonsStackView.viewWithTag(1) as? UIButton  {
+    print(button)
+    self.tabButtonaction(button)
+    }
+    }
+}
+    
+    
     
     @IBAction func tabButtonaction(_ sender: UIButton) {
         
-        let GeneralNibView: GeneralView!
-        let HardwareNibView: HardwareView!
-        let ReceiptNibView: ReceiptView!
-        let QuickpayNibView: QuickpayView!
-        let DatabaseNibView: DatabaseView!
-        let LanguageNibView: LanguagesView!
-        let AboutusNibView: AboutusView!
-        let UpdatesNibView: UpdatesView!
         
+        for i in 1...8 {
+            if let button = self.tabButtonsStackView.viewWithTag(i) as? UIButton {
+                button.isSelected = false
+            }
+        }
+        sender.isSelected = true
+        addChildView(index: sender.tag)
+    }
+    
+    
+
+    
+    
+    func addChildView(index: Int) {
         
-        removeNibViews()
-        
-        switch sender.tag {
-            
-        case 1:
-            GeneralNibView = Bundle.main.loadNibNamed("GeneralView", owner: self, options: nil)?[0] as? GeneralView
-            GeneralNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(GeneralNibView)
-            break
-        case 2:
-            HardwareNibView = Bundle.main.loadNibNamed("HardwareView", owner: self, options: nil)?[0] as? HardwareView
-            HardwareNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(HardwareNibView)
-            break
-        case 3:
-            ReceiptNibView = Bundle.main.loadNibNamed("ReceiptView", owner: self, options: nil)?[0] as? ReceiptView
-            ReceiptNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(ReceiptNibView)
-            break
-        case 4:
-            QuickpayNibView = Bundle.main.loadNibNamed("QuickpayView", owner: self, options: nil)?[0] as? QuickpayView
-            QuickpayNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(QuickpayNibView)
-            break
-        case 5:
-            
-            DatabaseNibView = Bundle.main.loadNibNamed("DatabaseView", owner: self, options: nil)?[0] as? DatabaseView
-            DatabaseNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(DatabaseNibView)
-            break
-        case 6:
-            LanguageNibView = Bundle.main.loadNibNamed("LanguagesView", owner: self, options: nil)?[0] as? LanguagesView
-            LanguageNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(LanguageNibView)
-            break
-        case 7:
-            AboutusNibView = Bundle.main.loadNibNamed("AboutusView", owner: self, options: nil)?[0] as? AboutusView
-            AboutusNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(AboutusNibView)
-            break
-        case 8:
-            UpdatesNibView = Bundle.main.loadNibNamed("UpdatesView", owner: self, options: nil)?[0] as? UpdatesView
-            UpdatesNibView.frame.size = settingContianerPop.frame.size
-            self.settingContianerPop.addSubview(UpdatesNibView)
-            break
-            
-        default:
-            break
+        for childVC in self.childViewControllers {
+            childVC.willMove(toParentViewController: nil)
+            childVC.removeFromParentViewController()
+            childVC.view.removeFromSuperview()
         }
         
+        var childVC: UIViewController?
+        
+        guard let value = SettingViews(rawValue: index) else { return }
+        
+        switch value {
+            
+        case .General:
+            print("General tapped")
+            childVC = UIStoryboard(name: "General", bundle: nil).instantiateViewController(withIdentifier: "GeneralVCID") as? GeneralViewController
+            break
+        case .Hardware:
+            print("Hardware tapped")
+            childVC = UIStoryboard(name: "Hardware", bundle: nil).instantiateViewController(withIdentifier: "HardwareVCID") as? HardwareViewController
+        case .Receipt:
+            print("Receipt tapped")
+            childVC = UIStoryboard(name: "Receipt", bundle: nil).instantiateViewController(withIdentifier: "ReceiptVCID") as? ReceiptViewController
+        case .QuickPay:
+             print("QuickPay tapped")
+            childVC = UIStoryboard(name: "QuickPay", bundle: nil).instantiateViewController(withIdentifier: "QuickPayVCID") as? QuickPayViewController
+        case .DataBase:
+             print("DataBase tapped")
+            childVC = UIStoryboard(name: "Database", bundle: nil).instantiateViewController(withIdentifier: "DatabaseVCID") as? DatabaseViewController
+        case .Language:
+             print("Language tapped")
+            childVC = UIStoryboard(name: "Language", bundle: nil).instantiateViewController(withIdentifier: "LanguageVCID") as? LanguageViewController
+        case .Aboutus:
+             print("Aboutus tapped")
+            childVC = UIStoryboard(name: "Aboutus", bundle: nil).instantiateViewController(withIdentifier: "AboutusVCID") as? AboutusViewController
+        case .Updates:
+             print("Updates tapped")
+            childVC = UIStoryboard(name: "Updates", bundle: nil).instantiateViewController(withIdentifier: "UpdatesVCID") as? UpdatesViewController
+        }
+        
+        if childVC != nil {
+            childVC?.view.frame.size = settingContianerPop.frame.size
+            childVC?.view.frame.origin = CGPoint(x: 0, y: 0)
+            addChildViewController(childVC!)
+            settingContianerPop.addSubview((childVC?.view)!)
+            childVC?.didMove(toParentViewController: self)
+        }
     }
     
     
@@ -108,12 +138,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func savecloseBtn(_ sender: Any) {
         
-        if let parentVC = (self.parent as? ReceptionalistView) {
-            let storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as? CheckoutView
-            parentVC.switchViewController(vc: vc!, showFooter: true)
-            
-        }
+       dismiss(animated: true, completion: nil)
         
         
     }

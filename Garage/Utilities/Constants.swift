@@ -27,10 +27,13 @@ struct  Course {
 
 struct  login {
     let status: Int
+   
     // let User: [String: Any]
     
     init(json: [String: Any]) {
       status  = (json["Status"] as? Int)!
+     
+        
    // User = (json["User"] as? [String: Any])!
     }
 }
@@ -44,6 +47,9 @@ struct Constants {
     static let selectIconImage = "edit company code"
     static var platenmb = "0"
     static var vinnmb = "0"
+    
+    
+    // postApi's
     static let Cars = "Cars"
     static let MakerName = "MakerName"
     static var VinNo = "VinNo"
@@ -65,6 +71,64 @@ struct Constants {
     static var SessionID = "SessionID"
     static var EngineType = "EngineType"
     static var OrderNo = "OrderNo"
+    static var BayID = "BayID"
+    static var type = "Type"
+    static var OrderTakerID = "OrderTakerID"
+    static var OrderPunchDt = "OrderPunchDt"
+    static var StatusID = "StatusID"
+    static var Items = "Items"
+    static var NotesComment = "NotesComment"
+    static var NotesStatus = "NotesStatus"
+    static var NotesImages = "NotesImages"
+    static var InspectionDetails = "InspectionDetails"
+    static var Date = "Date"
+    static var AmountTotal = "AmountTotal"
+    static var GrandTotal = "GrandTotal"
+    static var Tax = "Tax"
+    static var WorkerID = "WorkerID"
+    static var AssistantID = "AssistantID"
+    
+    
+    // viewcontrollers
+    static var interneterror = "Login failed! Check internet"
+    static var ReceptionalistView = "ReceptionalistView"
+    static var ReceptionalistVc = "ReceptionalistVc"
+    static var BayForWelcome = "BayForWelcome"
+    static var BayForWelcomeVc = "BayForWelcomeVc"
+    static var CarScan = "CarScan"
+    static var carScannerVc = "carScannerVc"
+    static var AddnewCar = "AddnewCar"
+    static var addNewCarVc = "addNewCarVc"
+    static var WelcomeView = "WelcomeView"
+    static var WelcomeVc = "WelcomeVc"
+    static var MechanicView = "MechanicView"
+    static var MechanicVc = "MechanicVc"
+    static var CheckoutView = "CheckoutView"
+    static var CheckoutVc = "CheckoutVc"
+    static var FooterView = "FooterViewWithTabs"
+    static var PopOver = "PopOver"
+    static var PopOverVc = "PopOverVc"
+    static var ServiceCart = "ServiceCart"
+    static var ServiceCartVc = "ServiceCartVc"
+    static var HistoryCar = "HistoryCar"
+    static var historycarVc = "historycarVc"
+    static var Receiptpopover = "Receiptpopover"
+    static var ReceiptpopVc = "ReceiptpopVc"
+    static var notespopup = "notespopup"
+    static var notesPopupVc = "notesPopupVc"
+    static var CheckCarController = "CheckCarController"
+    static var CheckCarControllerVc = "CheckCarControllerVc"
+    static var Subusers = "Subusers"
+    static var SubusersVc = "SubusersVc"
+    static var VoucherView = "VoucherView"
+    static var LoyaltyView = "LoyaltyView"
+    static var GiftCardView = "GiftCardView"
+    static var CardView = "CardView"
+    static var CashView = "CashView"
+    
+    
+    
+    
     static var OrderNoData = 0
     static var CarIDData = 0
     static var CarNameData = ""
@@ -80,6 +144,8 @@ struct Constants {
     static var currenttime = ""
     static var bayid = 0
      static var bayname = "B0"
+    static var SubUserID = 0
+    static var FullName = "A"
     static var history = 0
     static var currentdate = ""
     static var totalprice: Double = 0
@@ -104,6 +170,17 @@ struct Constants {
     static var checkflag = 0
     static var editcheckout = 0
     static var orderstatus = 0
+    static var workerflag = 0
+    static var checkoutGrandtotal = 0.0
+    static var subtotal = 0.0
+    static var checkoutQTY = 1.0
+    static var checkouttax = 0.0
+    static var tax = "0"
+    static var percent = 0
+    static var checkoutorderid = 0
+    static var checkoutcarid = 0
+    static let _4inchScale:Float = 576
+    static var Printer = ""//:CGFloat = 576
   
     
     
@@ -117,6 +194,13 @@ struct product {
     
 //    let : Int
     let ItemName: String
+}
+
+
+
+enum ConnectionMedium: Int {
+    case bluetooth = 1
+    case localAreaNetwork
 }
 
 

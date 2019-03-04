@@ -51,6 +51,8 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         let todaytime = timeFormatter.string(from:time)
         dateLabel.text = nameOfMonth
         timelbl.text = todaytime
+        DataNotes.comment.removeAll()
+        DataNotes.images.removeAll()
     }
     var fourUniqueDigits: String {
         var result = ""

@@ -37,8 +37,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         print("\(Constants.bayid)")
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
-        
-        
+        Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
+        print("\(Constants.Printer)")
+        Constants.flagEdit = 0
     }
     
     deinit {
@@ -222,7 +223,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
                     self.WelcomeSegmented.isUserInteractionEnabled = true
                 }
@@ -248,7 +249,6 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                  
                     self.dismiss(animated: true, completion: nil)
                     self.tableViewWelcome.reloadData()
                     self.WelcomeSegmented.isUserInteractionEnabled = true
@@ -302,10 +302,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         
         let parameters = [
-            "OrderID": AssignedID,
-            "BayID": 0,
-            "Type": "unassigned",
-            "SessionID": Constants.sessions]  as [String : Any]
+            Constants.OrderID: AssignedID,
+            Constants.BayID: 0,
+            Constants.type: "unassigned",
+            Constants.SessionID: Constants.sessions]  as [String : Any]
         
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.UnAssigned)")!
         
@@ -323,7 +323,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     
                 }
             }
@@ -484,8 +484,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     Constants.bayid = 0
                     Constants.bayname = "B0"
                     if let vc = self.parent as? ReceptionalistView {
-                        let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-                        let newCarvc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as! addNewCar
+                        let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+                        let newCarvc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as! addNewCar
                         vc.switchViewController(vc: newCarvc, showFooter: false)
                     }
                 }
@@ -520,17 +520,17 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let screenSize = UIScreen.main.bounds.width
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "BayForWelcome", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "BayForWelcomeVc") as! BayAssignView
-        let nav = UINavigationController(rootViewController: popController)
-        nav.modalPresentationStyle = .popover
-        let popOverVC = nav.popoverPresentationController
+        storyboard = UIStoryboard(name: Constants.BayForWelcome, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.BayForWelcomeVc) as! BayAssignView
+       // let nav = UINavigationController(rootViewController: popController)
+        popController.modalPresentationStyle = .popover
+        let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view
         popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
         popOverVC?.sourceRect = CGRect(x: screenSize*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenSize*0.6, height: 300)
-        self.present(nav, animated: true)
+        self.present(popController, animated: true)
     }
     
     
@@ -552,8 +552,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         Constants.bayid = 0
         Constants.bayname = "B0"
         if let vc = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "CarScan", bundle: nil)
-            let carScanner = storyboard.instantiateViewController(withIdentifier: "carScannerVc") as!CarScannerView
+            let storyboard = UIStoryboard(name: Constants.CarScan, bundle: nil)
+            let carScanner = storyboard.instantiateViewController(withIdentifier: Constants.carScannerVc) as!CarScannerView
             vc.switchViewController(vc: carScanner, showFooter: false)
             
         }
@@ -565,8 +565,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         Constants.bayid = 0
         Constants.bayname = "B0"
         if let vc = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-            let newCarvc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as! addNewCar
+            let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+            let newCarvc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as! addNewCar
             vc.switchViewController(vc: newCarvc, showFooter: false)
         }
     }

@@ -46,6 +46,8 @@ class CallEngine {
     static let checkoutDone = "orderlist/checkout/done/"
     static let checkoutHold = "orderlist/checkout/checkout/"
     static let checkoutwork = "orderlist/checkout/work/"
+    static let subusers = "subusers/list/"
+    static let checkout = "order/checkout"
     
     
     

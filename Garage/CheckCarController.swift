@@ -34,6 +34,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         ChecklistTableview.dataSource = self
          getDetails()
         Constants.checkflag = 1
+         Checklist.CheckcarPost.removeAll()
     }
     
     private func getDetails() {
@@ -317,7 +318,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func savecontinueBtn(_ sender: Any) {
          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-       
+      
         if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView

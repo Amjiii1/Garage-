@@ -39,9 +39,8 @@ public protocol NumberPadDelegate {
         didSet { updateKeys() }
     }
     
-    open var keyFont: UIFont? = UIFont(name: "AppleSDGothicNeo-Thin", size: 44) {
-        didSet { updateKeys() }
-    }
+    open var keyFont: UIFont? = UIFont(name: "SFProDisplay-Bold", size: 30)
+    
     
     open var clearKeyPosition: NumberClearKeyPosition = .right {
         didSet { updateKeys() }
@@ -214,9 +213,9 @@ public protocol NumberPadDelegate {
             
             button.layer.cornerRadius = style == .square ? 0 : button.bounds.height / 2
             button.setScale(scale: keyScale)
-            button.setBackgroundColor(color: UIColor.gray, forState: .normal)
-            button.setBackgroundColor(color: UIColor.BlackApp, forState: .highlighted)
-            button.setTitleColor(UIColor.DefaultApp, for: .normal)
+            button.setBackgroundColor(color: UIColor.white, forState: .normal)
+            button.setBackgroundColor(color: UIColor.white, forState: .highlighted)
+            button.setTitleColor(UIColor.black, for: .normal)
             button.titleLabel?.font = keyFont
             button.clipsToBounds = true
             

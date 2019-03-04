@@ -30,8 +30,8 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     @IBAction func scannerBackBtn(_ sender: Any) {
         //self.dismiss(animated: true, completion: nil)
         if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+            let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
             parentVC.switchViewController(vc: vc!, showFooter: true)
         }
     }
@@ -386,8 +386,8 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         
         if let parentVC = self.parent as? ReceptionalistView {
             // UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear , animations: {
-            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
+            let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as? addNewCar
             
             parentVC.switchViewController(vc: vc!, showFooter: false)
             //  }, completion: nil)

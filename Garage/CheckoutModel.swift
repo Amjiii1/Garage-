@@ -30,6 +30,7 @@ class CheckoutModel: NSObject {
     
     
     
+    
     override init() {
         
     }

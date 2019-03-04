@@ -31,6 +31,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     @IBOutlet weak var category: UIButton!
     @IBOutlet weak var colectionview: UICollectionView!
     @IBOutlet weak var cellview: CollectionViewCell!
+    @IBOutlet weak var Nextoutlet: UIButton!
     
     var categories = [Category]()
     // var Product = [ReceiptModel]()
@@ -58,7 +59,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         itemBtn.isHidden = true
         colectionview.delegate = self
         colectionview.dataSource = self
-        category.backgroundColor = UIColor.gray
+        category.backgroundColor = UIColor.darkGray
         getData()
          BindinfItems()
         self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
@@ -89,13 +90,6 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     
     
-    
-    
-    
-    
-    
-    
-    
     func OrderEdit() {
         
         guard let orderdetails = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderDetails)/\(Constants.editOrderid)/\(Constants.sessions)" ) else { return }
@@ -105,7 +99,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         session.dataTask(with: orderdetails){ (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
                 }
             }
@@ -220,7 +214,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         Alamofire.request(url).response { [weak self] (response) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self!)
+                    ToastView.show(message: Constants.interneterror, controller: self!)
                 }
             }
             guard self != nil else { return }
@@ -310,11 +304,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     @IBAction func HomeButtonTemp(_ sender: Any) {
         
-        removeDataa()
+        
         if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
             parentVC.switchViewController(vc: vc!, showFooter: true)
+            removeDataa()
+            
         }
     }
     
@@ -327,7 +323,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         subcategoryBtn.isHidden = true
         itemBtn.isHidden = true
         
-        category.backgroundColor = UIColor.gray
+        category.backgroundColor = UIColor.darkGray
         
         currentState = 0
         reloadData()
@@ -337,17 +333,17 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         subcategoryBtn.isHidden = false
         itemBtn.isHidden = true
         
-        subcategoryBtn.backgroundColor = UIColor.gray
-        category.backgroundColor = UIColor.darkGray
+        subcategoryBtn.backgroundColor = UIColor.darkGray
+        category.backgroundColor = UIColor.BlackApp
         currentState = 1
         reloadData()
     }
     
     @IBAction func onitemTab(_ sender: Any) {
         
-        itemBtn.backgroundColor = UIColor.gray
-        subcategoryBtn.backgroundColor = UIColor.darkGray
-        category.backgroundColor = UIColor.darkGray
+        itemBtn.backgroundColor = UIColor.darkGray
+        subcategoryBtn.backgroundColor = UIColor.BlackApp
+        category.backgroundColor = UIColor.BlackApp
         
         currentState = 2
         reloadData()
@@ -382,9 +378,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         print(Items.Product.first as Any)
         
         if   (Items.Product.first != nil)    {
-            
+            Nextoutlet.isUserInteractionEnabled = false
             PunchOder()
-            removeDataa()
+            
             
         }
         else {
@@ -407,7 +403,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         Constants.CarIDData = 0
         Constants.totalprice = 0
         Constants.counterQTY = 1
-        
+       Constants.OrderIDData = 0
     }
     
     
@@ -416,8 +412,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
-        storyboard = UIStoryboard(name: "PopOver", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "PopOverVc") as! PopOver
+        storyboard = UIStoryboard(name: Constants.PopOver, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.PopOverVc) as! PopOver
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 80 * 3
@@ -442,8 +438,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         Items.nameArray.removeAll()
         Constants.totalprice = 0
         if let parentVC = (self.parent as? ReceptionalistView) {
-            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as? addNewCar
+            let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as? addNewCar
             parentVC.switchViewController(vc: vc!, showFooter: false)
         }
         }
@@ -452,8 +448,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     func Receiptdetails() {
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "Receiptpopover", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "ReceiptpopVc") as! Receiptpop
+        storyboard = UIStoryboard(name: Constants.Receiptpopover, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.ReceiptpopVc) as! Receiptpop
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 160 * 3
@@ -567,8 +563,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             subcategoryBtn.isHidden = false
             itemBtn.isHidden = true
             reloadData()
-            subcategoryBtn.backgroundColor = UIColor.gray
-            category.backgroundColor = UIColor.darkGray
+            subcategoryBtn.backgroundColor = UIColor.darkGray
+            category.backgroundColor = UIColor.BlackApp
            
         case 1:
             currentState = 2
@@ -580,8 +576,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             itemBtn.isHidden = false
             
             reloadData()
-            itemBtn.backgroundColor = UIColor.gray
-            subcategoryBtn.backgroundColor = UIColor.darkGray
+            itemBtn.backgroundColor = UIColor.darkGray
+            subcategoryBtn.backgroundColor = UIColor.BlackApp
             
         default:
             let new = cell.countLbl.text
@@ -634,11 +630,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                     
                 }
                 
-                
             }
         }
-        
-        
         
    if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
     
@@ -677,18 +670,19 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         print(Constants.OrderIDData)
         
+     
         let parameters = [
-            "SessionID": Constants.sessions,
-            "CarID": Constants.CarIDData,
-            "OrderTakerID":Constants.ordertracker,
-            "BayID": Constants.bayid,
-            "OrderID": Constants.OrderIDData,
-            "OrderPunchDt": Constants.currentdate,
-            "OrderNo":Constants.OrderNoData,
-            "StatusID": Constants.orderstatus,
-            "Items": test as Any]  as [String : Any]
+            Constants.SessionID: Constants.sessions,
+            Constants.CarID: Constants.CarIDData,
+            Constants.OrderTakerID:Constants.ordertracker,
+            Constants.BayID: Constants.bayid,
+            Constants.OrderID: Constants.OrderIDData,
+            Constants.OrderPunchDt: Constants.currentdate,
+            Constants.OrderNo:Constants.OrderNoData,
+            Constants.StatusID: Constants.orderstatus,
+            Constants.Items: test as Any]  as [String : Any]
         
-        if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
+         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             urlorderpunch = "\(CallEngine.baseURL)\(CallEngine.OrderEdit)"    //BASE
             print(urlorderpunch)
@@ -707,7 +701,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 
                 if response == nil {
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Login failed! Check internet", controller: self)
+                        ToastView.show(message: Constants.interneterror, controller: self)
                     }
                 }
                 if let response = response {
@@ -724,25 +718,36 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             ToastView.show(message: newmessage!, controller: self)
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                print("hello")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if Constants.editcheckout != 0 {
                                     if let parentVC = self.parent as? ReceptionalistView {
-                                        let storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
-                                        let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as? CheckoutView
+                                        let storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: Constants.CheckoutVc) as? CheckoutView
                                         parentVC.switchViewController(vc: vc!, showFooter: true)
+                                        self.removeDataa()
+                                        self.Nextoutlet.isUserInteractionEnabled = true
+                                        
                                     }
                                     
                                 } else {
                                 if let parentVC = self.parent as? ReceptionalistView {
-                                    let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-                                    let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+                                    let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
                                     parentVC.switchViewController(vc: vc!, showFooter: true)
+                                    self.removeDataa()
+                                    self.Nextoutlet.isUserInteractionEnabled = true
                                 }
                                 }
                             })
                         }
                         else if (status == 0) {
+                            
+                            print(status!)
+                            DispatchQueue.main.async {
+                                ToastView.show(message: newmessage!, controller: self)
+                            }
+                        }
+                        else if (status == 1000) {
                             
                             print(status!)
                             DispatchQueue.main.async {
@@ -763,7 +768,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             
             let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderPunchApi)")!
             
-            print(urlorderpunch)
+              print(urlorderpunch)
             
             //let url = URL(string: urlorderpunch)
             var request = URLRequest(url: url)
@@ -779,7 +784,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             session.dataTask(with: request) { (data, response, error) in
                 if response == nil {
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Login failed! Check internet", controller: self)
+                        ToastView.show(message: Constants.interneterror, controller: self)
                     }
                 }
                 if let response = response {
@@ -796,16 +801,24 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             ToastView.show(message: newmessage!, controller: self)
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                print("hello")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if let parentVC = self.parent as? ReceptionalistView {
-                                    let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-                                    let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+                                    let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
                                     parentVC.switchViewController(vc: vc!, showFooter: true)
+                                    self.removeDataa()
+                                    self.Nextoutlet.isUserInteractionEnabled = true
                                 }
                             })
                         }
                         else if (status == 0) {
+                            
+                            print(status!)
+                            DispatchQueue.main.async {
+                                ToastView.show(message: newmessage!, controller: self)
+                            }
+                        }
+                        else if (status == 1000) {
                             
                             print(status!)
                             DispatchQueue.main.async {

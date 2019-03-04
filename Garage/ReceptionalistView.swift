@@ -69,24 +69,23 @@ class ReceptionalistView: UIViewController  {
     
     
     
-    
     func showView(index: Int) {
         
         var storyboard: UIStoryboard!
         var vc: UIViewController!
         switch index {
         case 1:
-            storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as! WelcomeView
+            storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+            vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as! WelcomeView
             break
             
         case 2:
-            storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as! MechanicView
+            storyboard = UIStoryboard(name: Constants.MechanicView, bundle: nil)
+            vc = storyboard.instantiateViewController(withIdentifier: Constants.MechanicVc) as! MechanicView
             break
         case 3:
-            storyboard = UIStoryboard(name: "CheckoutView", bundle: nil)
-            vc = storyboard.instantiateViewController(withIdentifier: "CheckoutVc") as! CheckoutView
+            storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
+            vc = storyboard.instantiateViewController(withIdentifier: Constants.CheckoutVc) as! CheckoutView
             break
         default:
             break
@@ -98,6 +97,9 @@ class ReceptionalistView: UIViewController  {
         
         if vc != nil {
             switchViewController(vc: vc, showFooter: true)
+            UIView.transition(with: containerView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+            }) { (completed) in
+            }
         }
     }
     
@@ -118,14 +120,7 @@ class ReceptionalistView: UIViewController  {
     func switchViewController(vc: UIViewController, showFooter: Bool) {
         removeAllChildViewControllers()
         var height: CGFloat = 0.0
-//        containerView.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.containerView.layer.transform = CATransform3DMakeScale(1.05,1.05,1)
-//        },completion: { finished in
-//            UIView.animate(withDuration: 0.1, animations: {
-//                self.containerView.layer.transform = CATransform3DMakeScale(1,1,1)
-//            })
-//        })
+
         if showFooter {
             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height - footerViewheight
@@ -158,7 +153,7 @@ class ReceptionalistView: UIViewController  {
         removeFooterView()
         footerViewHeightConstraint.constant = footerViewheight
         self.view.layoutIfNeeded()
-        let footerViewWithTabs = Bundle.main.loadNibNamed("FooterViewWithTabs", owner: self, options: nil)?[0] as! FooterViewWithTabs
+        let footerViewWithTabs = Bundle.main.loadNibNamed(Constants.FooterView, owner: self, options: nil)?[0] as! FooterViewWithTabs
         footerViewWithTabs.tabButtons_action(footerViewWithTabs.buttons[selected])
         footerViewWithTabs.delegate = self
         footerViewWithTabs.frame = CGRect(x: 0, y: 0, width: footerViewContainer.frame.size.width, height: footerViewContainer.frame.size.height)
@@ -169,7 +164,7 @@ class ReceptionalistView: UIViewController  {
         removeFooterView()
         footerViewHeightConstraint.constant = footerViewheight
         self.view.layoutIfNeeded()
-        let footerViewWithTabs = Bundle.main.loadNibNamed("FooterViewWithTabs", owner: self, options: nil)?[0] as! FooterViewWithTabs
+        let footerViewWithTabs = Bundle.main.loadNibNamed(Constants.FooterView, owner: self, options: nil)?[0] as! FooterViewWithTabs
         footerViewWithTabs.tabButtons_action(footerViewWithTabs.btnWelcome)
         footerViewWithTabs.delegate = self
         footerViewWithTabs.frame = CGRect(x: 0, y: 0, width: footerViewContainer.frame.size.width, height: footerViewContainer.frame.size.height)

@@ -41,6 +41,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     var flag: Int = 0
     var flag2: Int = 0
+    var rec = "0"
     
     var MechanicModel = [MechanicTableviewModel]()
     
@@ -54,7 +55,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         notesBtn.isUserInteractionEnabled = false
         checkcarBtn.isUserInteractionEnabled = false
-       
+        
+        milesBtn.isHidden = true
         carNamelbl.isHidden = true
         platenumberlbl.isHidden = true
         finishedTableview.isHidden = true
@@ -78,33 +80,24 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     deinit {
         
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("NotificationIdentifier"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("Notificationbayname"), object: nil)
     }
     
     
     func donebtnenable() {
         
         if Constants.checkflag == 0 {
-             finishBtn.isUserInteractionEnabled = false
+            finishBtn.isUserInteractionEnabled = false
             
             
         } else if Constants.checkflag == 1 {
             finishBtn.isUserInteractionEnabled = true
             finishBtn.isSelected = true
-             Constants.checkflag = 0
+            Constants.checkflag = 0
         }
         
         
     }
-    
-
-    
-    
-    
-    
-    
-    
-    
     
     
     func HideDetails() {
@@ -115,6 +108,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         checkcarBtn.isHidden = true
         finishBtn.isHidden = true
         carNamelbl.isHidden = true
+        milesBtn.isHidden = true
         platenumberlbl.isHidden = true
         milesBtn.isHidden = true
         dropDwnBtn.isHidden = true
@@ -135,27 +129,28 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func Showdetails() {
         collectionViewSlot.isHidden = false
-       if flag2 != 0 {
-        if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView
-            parentVC.switchViewController(vc: vc!, showFooter: true)
+        if flag2 != 0 {
+            if let parentVC = self.parent as? ReceptionalistView {
+                let storyboard = UIStoryboard(name: Constants.MechanicView, bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: Constants.MechanicVc) as? MechanicView
+                parentVC.switchViewController(vc: vc!, showFooter: true)
+            }
         }
-        }
-       else {
-        if flag != 1  {
-            loadingBtn.isHidden = false
-            loaderlabel.isHidden = false
-        } else {
-            loadingBtn.isHidden = true
-            loaderlabel.isHidden = true
-        }
+        else {
+            if flag != 1  {
+                loadingBtn.isHidden = false
+                loaderlabel.isHidden = false
+            } else {
+                loadingBtn.isHidden = true
+                loaderlabel.isHidden = true
+            }
         }
         completeView.isHidden = false
         notesBtn.isHidden = false
         checkcarBtn.isHidden = false
         finishBtn.isHidden = false
         carNamelbl.isHidden = false
+        milesBtn.isHidden = false
         platenumberlbl.isHidden = false
         milesBtn.isHidden = false
         dropDwnBtn.isHidden = false
@@ -238,15 +233,15 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
-    
+        
         let transaction = MechanicModel[indexPath.row].finishedTransactionNo
         cell.serialNo.text = "\(transaction!)"
         cell.makeLbl.text = MechanicModel[indexPath.row].finishedMakerName
         cell.modelLbl.text = MechanicModel[indexPath.row].finishedModelName
         cell.plateLbl.text = MechanicModel[indexPath.row].finishedRegistrationNo
-        let status = MechanicModel[indexPath.row].finishedSNo
+        let status = MechanicModel[indexPath.row].finishedBayName   //.finishedSNo
         cell.statusLbl.text = "\(status!)"
-          cell.selectionStyle = .none
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -275,7 +270,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     if ((status == 1) && (desc == "Success")) {
                         let CarInfo = json[Constants.Cars].arrayValue
                         for cars in CarInfo {
-                    
+                            
                             let RegistrationNo = cars[Constants.RegistrationNo].stringValue
                             DispatchQueue.main.async {
                                 self!.platenumberlbl.text = RegistrationNo
@@ -283,7 +278,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             
                             let carid = cars[Constants.CarID].intValue
                             DispatchQueue.main.async {
-                                  Constants.caridmechanic =  carid
+                                Constants.caridmechanic =  carid
                             }
                             
                             
@@ -292,11 +287,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             DispatchQueue.main.async {
                                 self!.carNamelbl.text = CarName
                             }
+                            let recomd = cars["RecommendedAmount"].stringValue
+                            DispatchQueue.main.async {
+                                self!.rec = recomd
+                                self!.milesBtn.setTitle("\(self!.rec) km", for: .normal)
+                            }
                             
                             
                         }
                         
-                   
+                        
                         
                         let Notes = json["Notes"].dictionaryValue
                         
@@ -372,7 +372,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as? MechanicCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as? MechanicCell else { return UICollectionViewCell() }
         
         cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
         UIView.animate(withDuration: 0.3, animations: {
@@ -390,15 +390,15 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         //testButton.addTarget(self, action: #selector(self.deleteRecipe(_:)), for: .touchUpInside)
         testButton.backgroundColor = UIColor.DefaultApp
         let qty = OrderDetails[indexPath.row].Quantity
-         testButton.setTitle("\(qty)", for: .normal)
+        testButton.setTitle("\(qty)", for: .normal)
         testButton.setTitleColor(UIColor.black, for: .normal)
         testButton.clipsToBounds = true
         testButton.layer.cornerRadius = 0.5 * testButton.frame.size.width
-         testButton.isUserInteractionEnabled = false
-             cell.contentView.addSubview(testButton)
-   
+        testButton.isUserInteractionEnabled = false
+        cell.contentView.addSubview(testButton)
         
-
+        
+        
         
         
         
@@ -407,13 +407,13 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     // MARK: - UICollectionViewDelegate protocol
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        // handle tap events
-//        print("You selected cell #\(indexPath.item)!")
-//
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //        // handle tap events
+    //        print("You selected cell #\(indexPath.item)!")
+    //
+    //    }
     
-   
+    
     
     
     
@@ -451,32 +451,39 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
-        storyboard = UIStoryboard(name: "notespopup", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "notesPopupVc") as! notesPopup
-        let nav = UINavigationController(rootViewController: popController)
-        nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let heightForPopOver = 250*2
-        let popover = nav.popoverPresentationController
+        storyboard = UIStoryboard(name: Constants.notespopup, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.notesPopupVc) as! notesPopup
+        //let nav = UINavigationController(rootViewController: popController)
+        popController.modalPresentationStyle = .popover
+        let heightForPopOver = 300*2
+        let popover = popController.popoverPresentationController
         popController.preferredContentSize = CGSize(width: 500 , height: heightForPopOver)
         popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 3)
-        popover?.permittedArrowDirections = .left
+        popover?.permittedArrowDirections =  UIPopoverArrowDirection.left
         popover?.backgroundColor = UIColor.white
         popover?.sourceView = self.notesBtn
         popover?.sourceRect = self.notesBtn.bounds
-        self.present(nav, animated: true, completion: nil)
+        self.present(popController, animated: true, completion: nil)
+        
+
+        
+        
+        
+        
+        
     }
     
     
     @IBAction func SeetingsBtnexp(_ sender: Any) {
-         Constants.bayflag = 1
+        Constants.bayflag = 1
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
-        storyboard = UIStoryboard(name: "PopOver", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "PopOverVc") as! PopOver
+        storyboard = UIStoryboard(name: Constants.PopOver, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.PopOverVc) as! PopOver
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let heightForPopOver = 80*3
+        let heightForPopOver = 90*3
         let popover = nav.popoverPresentationController
         popController.preferredContentSize = CGSize(width: 200 , height: heightForPopOver)
         popover?.permittedArrowDirections = .up
@@ -490,7 +497,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     @IBAction func loadingBtnAction(_ sender: Any) {
         
-       
+        
         
         loaderWorks()
         
@@ -538,13 +545,14 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             self.checkcarBtn.isUserInteractionEnabled = true
             self.finishBtn.isUserInteractionEnabled = true
             self.carNamelbl.isHidden = false
+            self.milesBtn.isHidden = false
             self.platenumberlbl.isHidden = false
             self.checkcarBtn.isSelected = true
             self.finishBtn.isSelected = true
             
         })
     }
-   
+    
     
     func disappearView() {
         loadingBtn.alpha = 5
@@ -566,6 +574,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             self.checkcarBtn.isUserInteractionEnabled = false
             self.finishBtn.isUserInteractionEnabled = false
             self.carNamelbl.isHidden = true
+            self.milesBtn.isHidden = true
             self.platenumberlbl.isHidden = true
             self.checkcarBtn.isSelected = false
             self.finishBtn.isSelected = false
@@ -579,12 +588,12 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func SaveNotesData() {
         
-        let parameters = [ "SessionID": Constants.sessions,
-                           "NotesComment": DataNotes.comment,
-                           "NotesStatus": "0",
-                           "OrderID": Constants.orderidmechanic,
-                           "CarID": Constants.caridmechanic,
-                           "NotesImages": DataNotes.images]    as [String : Any]
+        let parameters = [ Constants.SessionID: Constants.sessions,
+                           Constants.NotesComment: DataNotes.comment,
+                           Constants.NotesStatus: "0",
+                           Constants.OrderID: Constants.orderidmechanic,
+                           Constants.CarID: Constants.caridmechanic,
+                           Constants.NotesImages: DataNotes.images]    as [String : Any]
         
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Notespost)") else { return }
         var request = URLRequest(url: url)
@@ -601,7 +610,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     
                 }
             }
@@ -613,17 +622,17 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                     print(json)
-                     let status = json[Constants.Status] as? Int
-                     let newmessage = json[Constants.Description] as? String
+                    let status = json[Constants.Status] as? Int
+                    let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
-                       print("sucess")
+                        print("sucess")
                     }
                     else if (status == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: newmessage!, controller: self)
                             self.removeData()
                         }
-                       
+                        
                     }
                 } catch {
                     print(error)
@@ -643,10 +652,10 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         guard let arreydetails = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
         
         let parameters = [
-            "OrderID": Constants.orderidmechanic,
-            "CarID": Constants.caridmechanic,
-            "SessionID": Constants.sessions,
-            "InspectionDetails": arreydetails as Any]  as [String : Any]
+            Constants.OrderID: Constants.orderidmechanic,
+            Constants.CarID: Constants.caridmechanic,
+            Constants.SessionID: Constants.sessions,
+            Constants.InspectionDetails: arreydetails as Any]  as [String : Any]
         
         let saveapi = ("\(CallEngine.baseURL)\(CallEngine.checklistpost)")
         let url = URL(string: saveapi)
@@ -664,7 +673,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -678,7 +687,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     let status = json[Constants.Status] as? Int
                     let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
-                    print("sucess")
+                        print("sucess")
                     }
                     else if (status == 0) {
                         
@@ -724,8 +733,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBAction func checkcarBtn(_ sender: Any) {
         
         if let vc = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "CheckCarController", bundle: nil)
-            let newCarvc = storyboard.instantiateViewController(withIdentifier: "CheckCarControllerVc") as! CheckCarController
+            let storyboard = UIStoryboard(name: Constants.CheckCarController, bundle: nil)
+            let newCarvc = storyboard.instantiateViewController(withIdentifier: Constants.CheckCarControllerVc) as! CheckCarController
             vc.switchViewController(vc: newCarvc, showFooter: false)
         }
         
@@ -737,10 +746,10 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
         let parameters = [
-            "OrderID": Constants.orderidmechanic,
-            "BayID": Constants.bayid,
-            "Type": "bay",
-            "SessionID": Constants.sessions]  as [String : Any]
+            Constants.OrderID: Constants.orderidmechanic,
+            Constants.BayID: Constants.bayid,
+            Constants.type: "bay",
+            Constants.SessionID: Constants.sessions]  as [String : Any]
         
         let url = URL(string:"\(CallEngine.baseURL)\(CallEngine.WorkDone)")!
         
@@ -758,7 +767,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -774,16 +783,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     if (status == 1) {
                         
                         if   (DataNotes.comment.isEmpty == false) ||  (DataNotes.images.isEmpty == false)  {
-                        self.SaveNotesData()
+                            self.SaveNotesData()
                         }
                         if  ( Checklist.CheckcarPost.isEmpty == false) {
-                        self.SaveChecklist()
+                            self.SaveChecklist()
                         }
                         ToastView.show(message: newmessage!, controller: self)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             if let parentVC = self.parent as? ReceptionalistView {
-                                let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
-                                let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView
+                                let storyboard = UIStoryboard(name: Constants.MechanicView, bundle: nil)
+                                let vc = storyboard.instantiateViewController(withIdentifier: Constants.MechanicVc) as? MechanicView
                                 parentVC.switchViewController(vc: vc!, showFooter: true)
                             }
                         })
@@ -795,8 +804,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         ToastView.show(message: newmessage!, controller: self)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             if let parentVC = self.parent as? ReceptionalistView {
-                                let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
-                                let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView
+                                let storyboard = UIStoryboard(name: Constants.MechanicView, bundle: nil)
+                                let vc = storyboard.instantiateViewController(withIdentifier: Constants.MechanicVc) as? MechanicView
                                 parentVC.switchViewController(vc: vc!, showFooter: true)
                             }
                         })

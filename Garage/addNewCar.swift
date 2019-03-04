@@ -55,7 +55,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControlEvents.touchDown)
         carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
-            VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
+        VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
         carMake.addTarget(self, action: #selector(CarmakeFunction), for: .touchDown)
         modelNumber.addTarget(self, action: #selector(CarmodeltFunction), for: .touchDown)
         CardetailsData()
@@ -72,9 +72,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         self.picker.delegate = self
         self.picker.dataSource = self
         currentTime()
-        //        NKInputView.with(phoneNumber, type: NKInputView.NKKeyboardType.phonePad, returnKeyType: NKInputView.NKKeyboardReturnKeyType.next)
-        //        NKInputView.appearance().backgroundColor = UIColor.clear
-        historyBtn.layer.shadowColor = UIColor.white.cgColor    //.layer.shadowColor = UIColor.red as? CGColor
+        historyBtn.layer.shadowColor = UIColor.white.cgColor   
         historyBtn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         
         
@@ -246,7 +244,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     
-    
     @objc func CarmakeFunction() {
         carMake.inputView = UIView()
         carMake.inputAccessoryView = UIView()
@@ -348,7 +345,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     
                 }
             }
@@ -383,7 +380,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                 } catch let error as NSError {
                     print(error)
-                    ToastView.show(message: "Check Internet or Try Again", controller: self)
+                    ToastView.show(message: "Failed! Try Again", controller: self)
                 }
                 
             }
@@ -401,7 +398,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     
                 }
             }
@@ -427,8 +424,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             ToastView.show(message: discript!, controller: self)
                         }
                         
-                        
-                        
                     }
                     DispatchQueue.main.async {
                         self.CarModelTableView.reloadData()
@@ -436,7 +431,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                 } catch let error as NSError {
                     print(error)
-                    ToastView.show(message: "Check Internet or Try Again", controller: self)
+                    ToastView.show(message: "failed! Try Again", controller: self)
                 }
                 
             }
@@ -458,8 +453,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
-        storyboard = UIStoryboard(name: "PopOver", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "PopOverVc") as! PopOver
+        storyboard = UIStoryboard(name: Constants.PopOver, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.PopOverVc) as! PopOver
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 80*3
@@ -483,7 +478,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
-         loadingIndicator.layer.cornerRadius = 18.0
+        loadingIndicator.layer.cornerRadius = 18.0
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
@@ -519,7 +514,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     func CardetailsData() {
-        
         
         if Constants.platenmb != "0" || Constants.vinnmb != "0" {
             
@@ -563,8 +557,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: addcarapi){ (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
-
+                    ToastView.show(message: Constants.interneterror, controller: self)
+                    
                 }
             }
             if let data = data {
@@ -737,7 +731,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: orderdetails){ (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
                 }
             }
@@ -864,9 +858,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 Items.Product.append(products)
                                 let price = Price*Constants.counterQTY
                                 Constants.totalprice = Constants.totalprice + Double(price)
-//                                let newDict = [
-//                                    "Name": Name, "Price":Price, "Quantity": Quantity, "ItemID": ItemID, "Mode": Constants.modeupdate,"OrderDetailID": OrderDetails, "Status": 202] as [String : Any]
-//                                Items.nameArray.append(newDict)
+                                //                                let newDict = [
+                                //                                    "Name": Name, "Price":Price, "Quantity": Quantity, "ItemID": ItemID, "Mode": Constants.modeupdate,"OrderDetailID": OrderDetails, "Status": 202] as [String : Any]
+                                //                                Items.nameArray.append(newDict)
                             }
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -907,10 +901,10 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     @IBAction func reScannerBtn(_ sender: Any) {
-     
+        
         if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "CarScan", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "carScannerVc") as?CarScannerView
+            let storyboard = UIStoryboard(name: Constants.CarScan, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.carScannerVc) as? CarScannerView
             parentVC.switchViewController(vc: vc!, showFooter: false)
         }
     }
@@ -927,12 +921,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func punchOrder() {
         
-        let parameters = [ "SessionID": Constants.sessions,
-                           "CarID":Constants.CarIDData,
-                           "OrderTakerID": Constants.ordertracker,
-                           "BayID": Constants.bayid,
-                           "OrderID":  Constants.OrderIDData,
-                           "OrderPunchDt": Constants.currentdate ] as [String : Any]
+        let parameters = [ Constants.SessionID: Constants.sessions,
+                           Constants.CarID:Constants.CarIDData,
+                           Constants.OrderTakerID: Constants.ordertracker,
+                           Constants.BayID: Constants.bayid,
+                           Constants.OrderID:  Constants.OrderIDData,
+                           Constants.OrderPunchDt: Constants.currentdate ] as [String : Any]
         
         guard let url = URL(string: "http://garageapi.isalespos.com/api/order/new") else { return }
         var request = URLRequest(url: url)
@@ -1020,7 +1014,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 session.dataTask(with: request) { (data, response, error) in
                     if response == nil {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "Login failed! Check internet", controller: self)
+                            ToastView.show(message: Constants.interneterror, controller: self)
                         }
                     }
                     if let response = response {
@@ -1043,19 +1037,16 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                 }
                                 ToastView.show(message: newmessage!, controller: self)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                     print("hello")
                                     if let parentVC = self.parent as? ReceptionalistView {
-                                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                                        let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                                         parentVC.switchViewController(vc: vc!, showFooter: false)
                                         
                                     }
                                     
                                 })
-                                
-                                
-                                
                                 
                                 
                             }
@@ -1125,7 +1116,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
                 request.httpBody = httpBody
-                request.httpBody = httpBody
                 if let JSONString = String(data: httpBody, encoding: .utf8) {
                     
                     print(JSONString)
@@ -1134,7 +1124,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 session.dataTask(with: request) { (data, response, error) in
                     if response == nil {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "Login failed! Check internet", controller: self)
+                            ToastView.show(message: Constants.interneterror, controller: self)
                         }
                     }
                     if let response = response {
@@ -1156,11 +1146,11 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 }
                                 ToastView.show(message: message!, controller: self)
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                     print("hello")
                                     if let parentVC = self.parent as? ReceptionalistView {
-                                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
+                                        let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                                         parentVC.switchViewController(vc: vc!, showFooter: false)
                                     }
                                 })
@@ -1228,8 +1218,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     @IBAction func historyCar(_ sender: Any) {
         if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "HistoryCar", bundle: nil)
-            let history = storyboard.instantiateViewController(withIdentifier: "historycarVc") as? HistoryCar
+            let storyboard = UIStoryboard(name: Constants.HistoryCar, bundle: nil)
+            let history = storyboard.instantiateViewController(withIdentifier: Constants.historycarVc) as? HistoryCar
             parentVC.switchViewController(vc: history!, showFooter: false)
             
         }
@@ -1243,8 +1233,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         Constants.CarIDData = 0
         
         if let parentVC = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "WelcomeView", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVc") as? WelcomeView
+            let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
             parentVC.switchViewController(vc: vc!, showFooter: true)
             
         }

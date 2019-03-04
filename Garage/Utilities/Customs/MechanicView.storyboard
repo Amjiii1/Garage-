@@ -62,36 +62,36 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-kL-em6">
                                 <rect key="frame" x="23.5" y="93.5" width="787" height="48.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S.N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBZ-oE-ji8">
-                                        <rect key="frame" x="20" y="2.5" width="78.5" height="43.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trans.No" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBZ-oE-ji8">
+                                        <rect key="frame" x="0.0" y="2.5" width="118" height="43.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LU-xy-0Rk">
-                                        <rect key="frame" x="161.5" y="2.5" width="102" height="43.5"/>
+                                        <rect key="frame" x="136" y="2.5" width="153.5" height="43.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1j-NW-bjp">
-                                        <rect key="frame" x="320.5" y="2.5" width="102.5" height="43.5"/>
+                                        <rect key="frame" x="295" y="2.5" width="153.5" height="43.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.Plate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xto-ka-15w">
-                                        <rect key="frame" x="488" y="2.5" width="102" height="43.5"/>
+                                        <rect key="frame" x="462.5" y="2.5" width="153.5" height="43.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWu-Ht-J7T">
-                                        <rect key="frame" x="676.5" y="2.5" width="102.5" height="43.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWu-Ht-J7T">
+                                        <rect key="frame" x="651" y="2.5" width="153.5" height="43.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,7 +114,7 @@
                                     <constraint firstItem="xto-ka-15w" firstAttribute="centerY" secondItem="n1j-NW-bjp" secondAttribute="centerY" id="Y5O-Zm-hiD"/>
                                     <constraint firstItem="ZWu-Ht-J7T" firstAttribute="centerY" secondItem="xto-ka-15w" secondAttribute="centerY" id="ahD-MO-yzk"/>
                                     <constraint firstItem="ZWu-Ht-J7T" firstAttribute="centerX" secondItem="xto-ka-15w" secondAttribute="centerX" multiplier="1.35" id="bEk-Fj-DiX"/>
-                                    <constraint firstItem="PBZ-oE-ji8" firstAttribute="width" secondItem="yaq-kL-em6" secondAttribute="width" multiplier="0.1" id="bWS-cE-dau"/>
+                                    <constraint firstItem="PBZ-oE-ji8" firstAttribute="width" secondItem="yaq-kL-em6" secondAttribute="width" multiplier="0.15" id="bWS-cE-dau"/>
                                     <constraint firstItem="ZWu-Ht-J7T" firstAttribute="width" secondItem="xto-ka-15w" secondAttribute="width" id="gIU-1X-1w7"/>
                                     <constraint firstItem="PBZ-oE-ji8" firstAttribute="height" secondItem="yaq-kL-em6" secondAttribute="height" multiplier="0.9" id="rJG-2S-Jt4"/>
                                     <constraint firstItem="n1j-NW-bjp" firstAttribute="centerX" secondItem="5LU-xy-0Rk" secondAttribute="centerX" multiplier="1.75" id="thh-1f-Nx7"/>
@@ -395,7 +395,7 @@
                                         <rect key="frame" x="589.5" y="47.5" width="169.5" height="64"/>
                                         <color key="backgroundColor" red="0.30980392156862746" green="0.31372549019607843" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
-                                        <state key="normal" title="98700 KM">
+                                        <state key="normal" title="0">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>

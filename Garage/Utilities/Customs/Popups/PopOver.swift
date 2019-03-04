@@ -12,8 +12,6 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tablviepopover: UITableView!
     
-    
-   // var names: [String] = ["B1","B2","B3","B4","B5","Waiting list"]
     var Baydetails = [popModel]()
     
     
@@ -25,19 +23,12 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tablviepopover.dataSource = self
         tablviepopover.delegate = self
         
-        // Apply radius to Popupview
-//        Popupview.layer.cornerRadius = 10
-//        Popupview.layer.masksToBounds = true
+ 
          baylist() 
     }
     
     
-    
-    
-    
     func  baylist()  {
-        
-        
         
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.BayAssignApi)\(Constants.sessions)")
         print(url)
@@ -78,13 +69,7 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 Constants.bayflag = 0
             }
         }).resume()
-//        DispatchQueue.main.async {
-//          self.tablviepopover.reloadData()
-//            
-//            
-//        }
-        
-       
+
         
     }
     

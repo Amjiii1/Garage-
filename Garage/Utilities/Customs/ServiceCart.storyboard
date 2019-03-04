@@ -356,6 +356,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Nextoutlet" destination="GPk-Th-JSD" id="ms6-V3-fkI"/>
                         <outlet property="Reassignoutlet" destination="37N-Ft-Y5u" id="p3L-v8-BV4"/>
                         <outlet property="category" destination="sHM-QV-aUN" id="obL-TK-vki"/>
                         <outlet property="colectionview" destination="cn7-3i-HCK" id="grw-If-YzU"/>

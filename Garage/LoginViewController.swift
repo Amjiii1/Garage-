@@ -78,9 +78,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailImg.center = emailImgContainer.center
         emailImgContainer.addSubview(emailImg)
         pinCodeTextField.rightView = emailImgContainer
-        
-        
     }
+    
     
     
     
@@ -107,7 +106,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let data = data {
                 print(data)
                 do {
-                    
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     let descript = login(json: json)
@@ -135,10 +133,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)
-                    } else {
+                    } else if (descript.status == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: "User does Not Exist", controller: self)
                             
+                            self.pinCodeTextField.isEnabled = true
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                    else if (descript.status == 1000) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                            
+                            self.pinCodeTextField.isEnabled = true
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                        
+                    else if (descript.status == 1001) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                            self.pinCodeTextField.isEnabled = true
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                        
+                    else {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
                             self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
                         }
@@ -210,13 +232,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                         
-                    else {
+                    else if (status.message == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: "BusinessCode Verified Failed!", controller: self)
                             self.businesssCodeTextField.isEnabled = true
                         }
-                        
                     }
+                        
+                    else if (status.message == 1000) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                    
+                    else if (status.message == 1001) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                    else  {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                            self.businesssCodeTextField.isEnabled = true
+                        }
+                    }
+                    
                 } catch {
                     
                     print(error)

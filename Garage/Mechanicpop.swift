@@ -15,14 +15,16 @@ class Mechanicpop: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
       var Details = [Orderdetail]()
     
+    var things = ["Filter", "Oil"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationController?.isNavigationBarHidden = true
         mechanicTableview.dataSource = self
         mechanicTableview.delegate = self
-       
+        
     }
     
 
@@ -45,11 +47,10 @@ class Mechanicpop: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MechanicpopCell", for: indexPath) as! MechanicpopCell
-       
-//        cell.DataLbl.text = Details[indexPath.row].
-        
+        cell.titleLbl.text = things[indexPath.row]
         
         return cell
+        
     }
     
     

@@ -28,8 +28,20 @@ class CashView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
        updateFirstButtonAmount()
+        NotificationCenter.default.addObserver(self, selector: #selector(CashView.pressed(notification:)), name: Notification.Name("buttonpressed"), object: nil)
+    }
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("buttonpressed"), object: nil)
+        
     }
     
+    
+    
+    
+    @objc func pressed(notification: Notification) {
+        self.updateFirstButtonAmount()
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
          updateFirstButtonAmount()

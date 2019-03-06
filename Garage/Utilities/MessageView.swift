@@ -44,7 +44,7 @@ class MessageView {
                          errMessage)
         }
         
-        show(msg)
+       // show(msg) 
     }
     
     class func show(_ message:String) {
@@ -55,12 +55,12 @@ class MessageView {
     class fileprivate func getEposErrorText(_ error : Int32) -> String {
         var errText = ""
         switch (error) {
-        case EPOS2_SUCCESS.rawValue:
-            errText = "SUCCESS"
-            break
-        case EPOS2_ERR_PARAM.rawValue:
-            errText = "Please Add Printer"
-            break
+//        case EPOS2_SUCCESS.rawValue:
+//            errText = "SUCCESS"
+//            break
+//        case EPOS2_ERR_PARAM.rawValue:
+//            errText = "Please Add Printer"
+//            break
         case EPOS2_ERR_CONNECT.rawValue:
             errText = "ERR_CONNECT"
             break

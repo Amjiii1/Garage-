@@ -13,7 +13,7 @@
         <array key="AmjadRegular.otf">
             <string>SFProDisplay-Regular</string>
         </array>
-        <array key="Amjad_Bold.otf">
+        <array key="SF-Pro-Display-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
     </customFonts>
@@ -390,6 +390,9 @@
                                                 <integer key="value" value="18"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dropdownAction:" destination="NKT-6w-w6b" eventType="touchUpInside" id="gwJ-g0-aFt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOf-CG-x4f">
                                         <rect key="frame" x="589.5" y="47.5" width="169.5" height="64"/>

@@ -110,7 +110,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     let details = Cardetails(json: json)
-                    if (details.description == "Success") {
+                    if (details.status == 1) {
                         if  let OrderID = json[Constants.OrderID] as? Int {
                             DispatchQueue.main.async {
                                 Constants.OrderIDData = OrderID
@@ -185,12 +185,28 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                         
                     }
                         
-                    else {
-                        
+                    else if (details.status == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: details.description, controller: self)
                         }
                     }
+                    
+                    else if (details.status == 1000) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                    }
+                    else if (details.status == 1001) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                        }
+                    }
+                    
                     
                 } catch {
                     
@@ -227,7 +243,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     let status = json[Constants.Status].intValue
                     let desc = json[Constants.Description].stringValue
                     
-                    if ((status == 1) && (desc == "Success")) {
+                    if (status == 1) {
                         let categoriesList = json["CategoriesList"].arrayValue
                         
                         var subCategories = [SubCategory]()
@@ -293,6 +309,24 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             }
                         }
                     }
+                    else  if (status == 0) {
+                        ToastView.show(message: desc, controller: self!)
+                    }
+                    
+                    else  if (status == 1000) {
+                        ToastView.show(message: Constants.wrong, controller: self!)
+                    }
+                    
+                    else  if (status == 1001) {
+                        ToastView.show(message: Constants.invalid, controller: self!)
+                    }
+                    
+                    else {
+                        ToastView.show(message: Constants.occured, controller: self!)
+                    }
+                    
+                    
+                    
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
                 }
@@ -742,22 +776,39 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         }
                         else if (status == 0) {
                             
-                            print(status!)
                             DispatchQueue.main.async {
                                 ToastView.show(message: newmessage!, controller: self)
+                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
                         else if (status == 1000) {
                             
-                            print(status!)
                             DispatchQueue.main.async {
-                                ToastView.show(message: newmessage!, controller: self)
+                                ToastView.show(message: Constants.wrong, controller: self)
+                                 self.Nextoutlet.isUserInteractionEnabled = true
+                            }
+                        }
+                        
+                        else if (status == 1001) {
+                            
+                            DispatchQueue.main.async {
+                                ToastView.show(message: Constants.invalid, controller: self)
+                                 self.Nextoutlet.isUserInteractionEnabled = true
+                            }
+                        }
+                        
+                        else  {
+                            
+                            DispatchQueue.main.async {
+                                ToastView.show(message: Constants.occured, controller: self)
+                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
                         
                     } catch {
                         print(error)
                         ToastView.show(message: "Edit Failed! error occured", controller: self)
+                         self.Nextoutlet.isUserInteractionEnabled = true
                     }
                     
                 }
@@ -820,9 +871,22 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         }
                         else if (status == 1000) {
                             
-                            print(status!)
                             DispatchQueue.main.async {
-                                ToastView.show(message: newmessage!, controller: self)
+                                ToastView.show(message: Constants.wrong, controller: self)
+                            }
+                        }
+                            
+                        else if (status == 1001) {
+                            
+                            DispatchQueue.main.async {
+                                ToastView.show(message: Constants.invalid, controller: self)
+                            }
+                        }
+                            
+                        else  {
+                            
+                            DispatchQueue.main.async {
+                                ToastView.show(message: Constants.occured, controller: self)
                             }
                         }
                         

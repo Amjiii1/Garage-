@@ -34,11 +34,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         ApiImplimentations()
         carSearchTextField.delegate = self
         carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
-        print("\(Constants.bayid)")
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
         Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
-        print("\(Constants.Printer)")
         Constants.flagEdit = 0
     }
     
@@ -262,6 +260,32 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     })
                     
                 }
+                else if (status == 1000) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.wrong, controller: self)
+                        self.WelcomeSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                
+                else if (status == 1001) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.invalid, controller: self)
+                        self.WelcomeSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.occured, controller: self)
+                        self.WelcomeSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
                 
             } catch let error as NSError {
                  DispatchQueue.main.async {
@@ -345,9 +369,26 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     }
                     else if (status == 0) {
                         
-                        print(status!)
                         DispatchQueue.main.async {
                             ToastView.show(message: newmessage!, controller: self)
+                        }
+                    }
+                    else if (status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                    }
+                    else if (status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                    }
+                    else  {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured                           , controller: self)
                         }
                     }
                     

@@ -11,10 +11,7 @@ import UIKit
 struct Checkoutstruct {
     static var Itemdetails = [checkoutItems]()
     static var sentitems = [checkoutItems]()
-    //hello
 }
-
-
 
 class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
   
@@ -22,11 +19,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var checkoutSegment: UISegmentedControl!
     
     @IBOutlet weak var headerlabel: UILabel!
-    
-    
     var checkoutmodel = [CheckoutModel]()
-    
-  
     
     
     override func viewDidLoad() {
@@ -36,11 +29,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         checkoutSegment.selectedSegmentIndex = 1
          CheckoutDetails()
         Constants.editcheckout = 0
-         
         Constants.percent = Int(Double(Constants.tax)! * 100)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
         
     }
+    
     deinit {
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name("checkoutDone"), object: nil)
@@ -121,20 +114,9 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             let details = CheckoutModel(checkoutlist: checkoutlist)
                             self.checkoutmodel.append(details!)
                             
-                            
-                            
                         }
-                    
                         
                     }
-                    
-                  
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         
@@ -149,7 +131,30 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         ToastView.show(message: discript!, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
-                    
+                }
+                
+                else if (status == 1000) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.wrong, controller: self)
+                        self.checkoutSegment.isUserInteractionEnabled = true
+                    })
+                }
+                
+                else if (status == 1001) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.invalid, controller: self)
+                        self.checkoutSegment.isUserInteractionEnabled = true
+                    })
+                }
+                
+                else  {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.occured, controller: self)
+                        self.checkoutSegment.isUserInteractionEnabled = true
+                    })
                 }
                 
             } catch let error as NSError {
@@ -169,7 +174,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func showloader() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-        
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -247,10 +251,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         return returnValue as? [UITableViewRowAction]
         
     }
-    
-    
-    
-    
     
     
     
@@ -344,6 +344,14 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
              Checkoutstruct.sentitems.removeAll()
             Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID!
             Constants.checkoutcarid = checkoutmodel[sender.tag].CarID!
+            Constants.checkoutplatenmb = checkoutmodel[sender.tag].RegistrationNo!
+             Constants.checkoutvin = checkoutmodel[sender.tag].VinNo!
+             Constants.checkoutcarmake = checkoutmodel[sender.tag].MakerName!
+             Constants.checkoutcarmodel = checkoutmodel[sender.tag].ModelName!
+              Constants.checkoutbayname = checkoutmodel[sender.tag].BayName!
+              Constants.checkoutyear = checkoutmodel[sender.tag].Year!
+             Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID!
+             
            Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0
              Constants.checkouttax = 0.0
@@ -399,14 +407,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     
-    
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.gray
         return CGFloat(60)
         
     }
-    
     
    
     @IBAction func settings(_ sender: Any) {
@@ -434,8 +439,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.present(popController, animated: true)
 
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

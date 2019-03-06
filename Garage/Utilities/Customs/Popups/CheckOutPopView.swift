@@ -17,6 +17,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let BARCODE_HEIGHT_POS: Int = 70
     let BARCODE_WIDTH_POS: Int = 110
     
+    
+    
     @IBOutlet weak var buttonstack: UIStackView!
     @IBOutlet weak var PopUpView: UIView!
     @IBOutlet weak var containerPop: UIView!
@@ -34,14 +36,14 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var discouttableview: UITableView!
     @IBOutlet weak var tenderedbalance: UITextField!
     @IBOutlet weak var grandtotalLbl: UILabel!
-    
-  
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
      private weak var subView: UIView?
     
-    var printer: Epos2Printer?
     
+    
+    
+    var printer: Epos2Printer?
     var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
     var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
     
@@ -53,7 +55,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     var amount = [0,Constants.subtotal,Constants.checkouttax]
     var workerid = 0
     var assistantid = 0
-   // var currenttime = ""
     
     
     override func viewDidLoad() {
@@ -63,9 +64,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let button = buttonstack.viewWithTag(1) as? UIButton {
             tabButtonaction(button)
         }
+        
+        
+       //  buttonstack.layer.cornerRadius = 14.0
          tenderedbalance.delegate = self
          viewModel.checkoutVC = self
-      //  tenderedbalance.becomeFirstResponder()
         checkout_tableview.delegate = self
         checkout_tableview.dataSource = self
         discouttableview.delegate = self
@@ -78,19 +81,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         Constants.currentdate = dateString
-//        let timeFormatter = DateFormatter()
-//        timeFormatter.dateFormat = "hh:mm"
-//        let todaytime = timeFormatter.string(from: date)
-//        currenttime = todaytime
         grandtotalLbl.text = "\(Constants.checkoutGrandtotal)"
-        //grandtotalBtn.setTitle("\(Constants.checkoutGrandtotal)", for: .normal)
-//        grandtotalBtn.setTitleColor(UIColor.BlackApp, for: .normal)
-//        grandtotalBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
         tenderedbalance.textAlignment = NSTextAlignment.left
         tenderedbalance.text = "0"
         balancetxtf.text = "\(Constants.checkoutGrandtotal)"
         tenderedbalance.addTarget(self, action: #selector(tendrdFieldDidChange(_:)), for: .editingChanged)
         let result = Epos2Log.setLogSettings(EPOS2_PERIOD_TEMPORARY.rawValue, output: EPOS2_OUTPUT_STORAGE.rawValue, ipAddress:nil, port:0, logSize:1, logLevel:EPOS2_LOGLEVEL_LOW.rawValue)
+        
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method: "setLogSettings")
         }
@@ -103,8 +100,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func printeradded(notification: Notification) {
         print(Constants.Printer)
-      
-        
     }
     
     
@@ -126,7 +121,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
     }
-
     
     
     @objc func userNotification(notification: Notification) {
@@ -401,19 +395,58 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             self.runPrinterReceiptSequence()
                             NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
                             self.dismiss(animated: true, completion: nil)
+                            self.grandtotalBtn.isUserInteractionEnabled = true
                             
                         }
                         
                     }
                     else if (status == 0) {
                         
-                        print(status!)
                         DispatchQueue.main.async {
                             let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
                             self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
                             ToastView.show(message: newmessage!, controller: self)
+                            self.grandtotalBtn.isUserInteractionEnabled = true
+                        }
+                        
+                    }
+                    
+                    else if (status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
+                            self.present(messageVC, animated: true) {
+                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                    messageVC.dismiss(animated: true, completion: nil)})}
+                            ToastView.show(message: newmessage!, controller: self)
+                            self.grandtotalBtn.isUserInteractionEnabled = true
+                        }
+                        
+                    }
+                    
+                    else if (status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
+                            self.present(messageVC, animated: true) {
+                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                    messageVC.dismiss(animated: true, completion: nil)})}
+                            ToastView.show(message: newmessage!, controller: self)
+                            self.grandtotalBtn.isUserInteractionEnabled = true
+                        }
+                        
+                    }
+                    
+                    else  {
+                        DispatchQueue.main.async {
+                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
+                            self.present(messageVC, animated: true) {
+                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                    messageVC.dismiss(animated: true, completion: nil)})}
+                            ToastView.show(message: newmessage!, controller: self)
+                            self.grandtotalBtn.isUserInteractionEnabled = true
                         }
                         
                     }
@@ -422,6 +455,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 } catch {
                     print(error)
                     ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    self.grandtotalBtn.isUserInteractionEnabled = true
                     
                 }
                 
@@ -430,11 +464,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             }.resume()
+            
        }   else {
         let messageVC = UIAlertController(title: "Checkout Failed", message: "Please Enter Total Amount!" , preferredStyle: .actionSheet)
                     present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { (_) in
+                        Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                             messageVC.dismiss(animated: true, completion: nil)})}
+               self.grandtotalBtn.isUserInteractionEnabled = true
         
         }
         
@@ -444,18 +480,18 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-    func updateQuickButtonAmount(){
-        if let view = containerPop as? CashView   {
-           view.updateFirstButtonAmount()
-        }
-    }
+//    func updateQuickButtonAmount(){
+//        if let view = containerPop as? CashView   {
+//           view.updateFirstButtonAmount()
+//        }
+//    }
     
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
-   
+      self.grandtotalBtn.isUserInteractionEnabled = true
         if Constants.Printer == "" {
-           alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer")
+           alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
         } else {
             checkoutOrder()
         }
@@ -495,7 +531,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         })
         
         alert.addAction(defaultAction)
-        let cancel = UIAlertAction(title: "NO", style: .default, handler: { action in
+        let cancel = UIAlertAction(title: "No", style: .default, handler: { action in
              self.checkoutOrder()
         })
         alert.addAction(cancel)
@@ -597,18 +633,37 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             return false
         }
         
+        
         // Section 1 : Store information
         result = printer!.addFeedLine(1)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addFeedLine")
             return false
         }
-        textData.append("Garage  (+966) 591 – 523805\n")
-        textData.append("GARAGE OWNER – Mohammad ALQifari\n")
+        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
+        if result != EPOS2_SUCCESS.rawValue {
+            MessageView.showErrorEpos(result, method:"addTextAlign")
+            return false;
+        }
+        textData.append("AL MALAZ BRANCH\n")
+        textData.append("Phone No. 0568833923\n")
         textData.append("\n")
-        textData.append("\(Constants.currentdate)\n")
-        textData.append("Majid Bin Abdul Aziz Road\n")
+        //textData.append("\(Constants.currentdate)\n")
+       // textData.append("Majid Bin Abdul Aziz Road\n")
+        textData.append("VAT# 98237456389756\n")
+        textData.append("\n")
+        textData.append("Plate No. \(Constants.checkoutplatenmb)\n")
+        textData.append("\n")
+        textData.append("VIN: \(Constants.checkoutvin)\n")
+        textData.append("\n\n")
         textData.append("------------------------------\n")
+        textData.append("\(Constants.currentdate)\n")
+        textData.append("------------------------------\n")
+        textData.append("\(Constants.checkoutcustm)                       \(Constants.checkoutbayname)\n")
+        textData.append("\(Constants.checkoutcarmake)                      \(Constants.checkoutcarmodel)\n")
+        textData.append("00km                       \(Constants.checkoutyear)\n")
+        
+        textData.append("------------------------------\n\n")
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addText")
@@ -618,7 +673,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Section 2 : Purchaced items
         for receipt in Checkoutstruct.sentitems {
-          textData.append("\(receipt.Name!) -------------------\(receipt.Price!)\n")
+          textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
 //        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
 //        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
 //        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
@@ -631,6 +686,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
 //        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
         }
+        textData.append("\n")
         textData.append("------------------------------\n")
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
@@ -642,7 +698,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Section 3 : Payment infomation
         textData.append("SUBTOTAL                 \( Constants.subtotal)\n");
-        textData.append("TAX                      \(Constants.checkouttax)\n");
+        textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax)\n\n");
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addText")
@@ -685,7 +741,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         textData.setString("")
         
         // Section 4 : Advertisement
-        textData.append("** THANKYOU FOR VISIT **\n")
+        textData.append("** Have a safe drive **\n")
       //  textData.append("Sign Up and Save !\n")
         textData.append("Garage.sa\n")
         result = printer!.addText(textData as String)
@@ -701,17 +757,17 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             return false
         }
         
-        result = printer!.addBarcode("01209457",
-                                     type:EPOS2_BARCODE_CODE39.rawValue,
-                                     hri:EPOS2_HRI_BELOW.rawValue,
-                                     font:EPOS2_FONT_A.rawValue,
-                                     width:barcodeWidth,
-                                     height:barcodeHeight)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addBarcode")
-            return false
-        }
-        
+//        result = printer!.addBarcode("01209457",
+//                                     type:EPOS2_BARCODE_CODE39.rawValue,
+//                                     hri:EPOS2_HRI_BELOW.rawValue,
+//                                     font:EPOS2_FONT_A.rawValue,
+//                                     width:barcodeWidth,
+//                                     height:barcodeHeight)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addBarcode")
+//            return false
+//        }
+//
         result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addCut")
@@ -1055,7 +1111,7 @@ extension CheckOutPopView: UITextFieldDelegate {
             if let amount = Double(textField.text!) {
                 viewModel.amountTendered = amount
             }
-            updateQuickButtonAmount()
+           NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
         }
     }
     
@@ -1070,7 +1126,7 @@ extension CheckOutPopView: UITextFieldDelegate {
                 //backspace on last character
                 if updatedText == "" {
                     viewModel.amountTendered = 0
-                    updateQuickButtonAmount()
+                    NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
                     return true
                 }
                 let doub = Double(updatedText)
@@ -1108,7 +1164,7 @@ extension CheckOutPopView: CashViewDelegate {
             }
         }
       //  on tapping quickbutton textdidendediting is not called so update here
-      updateQuickButtonAmount()
+     NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
         
     }
 

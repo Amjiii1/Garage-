@@ -55,7 +55,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
                     let status = json[Constants.Status].intValue
                     let desc = json[Constants.Description].stringValue
                     
-                    if ((status == 1) && (desc == "Success")) {
+                    if (status == 1) {
                         let InspectionLst = json["InspectionList"].arrayValue
                         
                         var InspectionDtail = [InspectionDetails]()
@@ -90,6 +90,23 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
                             }
                         }
                     }
+                    
+                    else  if (status == 0) {
+                        ToastView.show(message: desc, controller: self!)
+                    }
+                        
+                    else  if (status == 1000) {
+                        ToastView.show(message: Constants.wrong, controller: self!)
+                    }
+                        
+                    else  if (status == 1001) {
+                        ToastView.show(message: Constants.invalid, controller: self!)
+                    }
+                        
+                    else {
+                        ToastView.show(message: Constants.occured, controller: self!)
+                    }
+                    
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
                 }
@@ -333,6 +350,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func backBtn(_ sender: Any) {
+        Constants.checkflag = 0
         if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView

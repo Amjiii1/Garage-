@@ -14,6 +14,7 @@ class ReceptionalistView: UIViewController  {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var footerViewContainer: UIView!
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
+    
     var footerViewheight: CGFloat = 0.0
     var orginalHeight: CGFloat = 0.0
     
@@ -40,11 +41,11 @@ class ReceptionalistView: UIViewController  {
     
     
     @IBAction func logoutButton(_ sender: Any) {
-        Constants.platenmb = "0"
-        Constants.vinnmb = "0"
-        Constants.CarIDData = 0
-        Constants.sessions = ""
-        dismiss(animated: true, completion: nil)
+//        Constants.platenmb = "0"
+//        Constants.vinnmb = "0"
+//        Constants.CarIDData = 0
+//        Constants.sessions = ""
+//        dismiss(animated: true, completion: nil)
     }
     
     

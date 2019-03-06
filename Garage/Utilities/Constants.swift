@@ -88,6 +88,12 @@ struct Constants {
     static var WorkerID = "WorkerID"
     static var AssistantID = "AssistantID"
     
+    static var Status = "Status"
+    static var Description = "Description"
+    static var wrong = "Something went wrong"
+    static var invalid = "Invalid sessions"
+    static var occured = "Error occured"
+    
     
     // viewcontrollers
     static var interneterror = "Login failed! Check internet"
@@ -161,8 +167,6 @@ struct Constants {
     static var orderidmechanic = 0
     static var caridmechanic = 0
     static var comment = String()
-    static var Status = "Status"
-    static var Description = "Description"
     static var SuperUserID = "SuperUserID"
     static var SuperUser = 0
     static var Data = "Data"
@@ -181,6 +185,15 @@ struct Constants {
     static var checkoutcarid = 0
     static let _4inchScale:Float = 576
     static var Printer = ""//:CGFloat = 576
+    static var checkoutplatenmb = ""
+    static var checkoutvin = ""
+    static var checkoutcarmake = ""
+    static var checkoutcarmodel = ""
+    static var checkoutbayname = ""
+    static var checkoutyear = 0
+    static var checkoutcustm = 0
+    
+    
   
     
     
@@ -210,6 +223,7 @@ enum ConnectionMedium: Int {
 
 struct  Cardetails {
     let description: String
+    let status: Int
     let model: String
     let make: String
     let vin: String
@@ -218,6 +232,7 @@ struct  Cardetails {
    
     
     init(json: [String: Any]) {
+        status = (json["Status"] as? Int)!
         description = json["Description"] as? String ?? ""
         model = json["ModelName"] as? String ?? ""
         make = json["MakerName"] as? String ?? ""

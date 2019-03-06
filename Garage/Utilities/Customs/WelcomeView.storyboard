@@ -118,13 +118,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.Plate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgQ-Mo-Etn">
-                                        <rect key="frame" x="525.5" y="5.5" width="119" height="45.5"/>
+                                        <rect key="frame" x="522" y="5.5" width="118.5" height="45.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-0G-5nZ">
-                                        <rect key="frame" x="672" y="5.5" width="119" height="45.5"/>
+                                        <rect key="frame" x="667" y="5.5" width="119" height="45.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -142,7 +142,7 @@
                                     <constraint firstItem="ChA-0G-5nZ" firstAttribute="centerY" secondItem="WgQ-Mo-Etn" secondAttribute="centerY" id="LCq-K0-pBR"/>
                                     <constraint firstItem="ChA-0G-5nZ" firstAttribute="height" secondItem="WgQ-Mo-Etn" secondAttribute="height" id="OVX-1r-n29"/>
                                     <constraint firstItem="yk6-WX-Vra" firstAttribute="centerX" secondItem="JKc-az-lkv" secondAttribute="centerX" multiplier="0.15" id="QEo-9q-65O"/>
-                                    <constraint firstItem="WgQ-Mo-Etn" firstAttribute="centerX" secondItem="A1t-GU-cYg" secondAttribute="centerX" multiplier="1.52" id="WMI-TJ-fOp"/>
+                                    <constraint firstItem="WgQ-Mo-Etn" firstAttribute="centerX" secondItem="A1t-GU-cYg" secondAttribute="centerX" multiplier="1.51" id="WMI-TJ-fOp"/>
                                     <constraint firstItem="WgQ-Mo-Etn" firstAttribute="height" secondItem="A1t-GU-cYg" secondAttribute="height" id="Y6M-I7-zrw"/>
                                     <constraint firstItem="kjg-vL-L0c" firstAttribute="height" secondItem="yk6-WX-Vra" secondAttribute="height" id="c7Y-Oj-dXc"/>
                                     <constraint firstItem="WgQ-Mo-Etn" firstAttribute="centerY" secondItem="A1t-GU-cYg" secondAttribute="centerY" id="cCP-N3-82f"/>

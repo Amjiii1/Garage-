@@ -418,10 +418,20 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 }
                             }
                         }
-                        else {
-                            
-                            
+                        else if (status == 0) {
                             ToastView.show(message: discript!, controller: self)
+                        }
+                        
+                        else if (status == 1000) {
+                            ToastView.show(message: "Something went wrong", controller: self)
+                        }
+                        
+                        else if (status == 1001) {
+                            ToastView.show(message: "Invalid session", controller: self)
+                        }
+                        
+                        else {
+                            ToastView.show(message: "error occured", controller: self)
                         }
                         
                     }
@@ -572,7 +582,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         self.historyBtn.titleLabel?.text = "History (\(Constants.history))"
                     }
                     let details = Cardetails(json: json)
-                    if (details.description == "Success") {
+                    if (details.status == 1) {
                         self.showloader()
                         
                         if let cars = json[Constants.Cars] as? [[String: Any]] {
@@ -699,10 +709,31 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                     }
                         
-                    else {
+                    else if (details.status == 0) {
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: details.description, controller: self)
+                        }
+                    }
+                    
+                    else if (details.status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message:Constants.wrong, controller: self)
+                        }
+                    }
+                    
+                    else if (details.status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message:Constants.invalid, controller: self)
+                        }
+                    }
+                        
+                    else {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message:Constants.occured, controller: self)
                         }
                     }
                     
@@ -742,7 +773,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     let details = Cardetails(json: json)
-                    if (details.description == "Success") {
+                    if (details.status == 1) {
                         self.showloader()
                         Constants.history = json["OrderHistoryCount"] as! Int
                         DispatchQueue.main.async {
@@ -877,12 +908,34 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                     }
                         
-                    else {
+                    else if (details.status == 0) {
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: details.description, controller: self)
                         }
                     }
+                    
+                    else if (details.status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                    }
+                    
+                    else if (details.status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                    }
+                    
+                    else {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                        }
+                    }
+                   
                     
                 } catch {
                     
@@ -1038,16 +1091,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 }
                                 ToastView.show(message: newmessage!, controller: self)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                                    print("hello")
                                     if let parentVC = self.parent as? ReceptionalistView {
                                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
                                         let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                                         parentVC.switchViewController(vc: vc!, showFooter: false)
                                         
                                     }
-                                    
                                 })
-                                
                                 
                             }
                             else if (status == 0) {
@@ -1056,9 +1106,28 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 DispatchQueue.main.async {
                                     ToastView.show(message: newmessage!, controller: self)
                                 }
-                                
                             }
-                            
+                            else if (status == 1000) {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.wrong, controller: self)
+                                }
+                            }
+                            else if (status == 1001) {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.invalid, controller: self)
+                                }
+                            }
+                            else  {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.occured, controller: self)
+                                }
+                            }
                             
                         } catch {
                             print(error)
@@ -1147,7 +1216,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 ToastView.show(message: message!, controller: self)
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                                    print("hello")
                                     if let parentVC = self.parent as? ReceptionalistView {
                                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
                                         let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
@@ -1159,11 +1227,30 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             }
                             else if (status == 0) {
                                 
-                                print(status!)
                                 DispatchQueue.main.async {
                                     ToastView.show(message: message!, controller: self)
                                 }
+                            }
+                            else if (status == 1000) {
                                 
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.wrong, controller: self)
+                                }
+                            }
+                            else if (status == 1001) {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.invalid, controller: self)
+                                }
+                            }
+                            else  {
+                                
+                                print(status!)
+                                DispatchQueue.main.async {
+                                    ToastView.show(message: Constants.occured, controller: self)
+                                }
                             }
                             
                             
@@ -1175,17 +1262,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     }
                     
                     }.resume()
-                //                DispatchQueue.main.async {
-                //                    if let parentVC = self.parent as? ReceptionalistView {
-                //                        let storyboard = UIStoryboard(name: "ServiceCart", bundle: nil)
-                //                        let vc = storyboard.instantiateViewController(withIdentifier: "ServiceCartVc") as? ServiceCartView
-                //                        parentVC.switchViewController(vc: vc!, showFooter: false)
-                //
-                //                    }
-                //
-                //                }
-                
-                
                 
             }
         }
@@ -1357,30 +1433,6 @@ extension addNewCar: NumberPadDelegate {
     }
     
 }
-
-//extension addNewCar {
-//
-//
-//
-//    func keyPressed(key: NumberKey?) {
-//        guard let number = key else {
-//            return
-//        }
-//        switch number {
-//        case .clear:
-//            guard !(check.text?.isEmpty ?? true) else {
-//                return
-//            }
-//            check.text?.removeLast()
-//        case .custom:
-//            check.text? = "."
-//        default:
-//            check.text?.append("\(number.rawValue)")
-//        }
-//    }
-//}
-
-
 
 
 

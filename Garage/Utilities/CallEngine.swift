@@ -13,9 +13,8 @@ class CallEngine {
     
     static var LiveURL = "http://api-v1.isalesgarage.com/api/"
     static var localURL = "http://garageapi.isalespos.com/api/"
+    static var GlocalURL = "http://api-uat.garage.sa/api/"
     static var baseURL =  localURL
-    
-    
     
     static let editCar = "Car/Edit"
     static let addCar = "Car/add"
@@ -48,9 +47,8 @@ class CallEngine {
     static let checkoutwork = "orderlist/checkout/work/"
     static let subusers = "subusers/list/"
     static let checkout = "order/checkout"
-    
-    
-    
 
  }
+
+
 //http://api-v1.isalesgarage.com/api/login/POS-KXCBSH

@@ -30,6 +30,25 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>api-uat.garage.sa</key>
+			<dict>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<true/>
+				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
+				<string>TLSv1.2</string>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+				<key>NSRequiresCertificateTransparency</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<true/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.2</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>api-v1.isalesgarage.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

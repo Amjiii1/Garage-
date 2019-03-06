@@ -196,6 +196,9 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
+                let statusmessage = json[Constants.Status] as? Int
+                let descriptmessage = json[Constants.Description] as? String
+                if (statusmessage == 1) {
                 
                 if let order = json["OrdersList"] as? [[String: Any]] {
                     self.MechanicModel.removeAll()
@@ -213,11 +216,49 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     self.finishedTableview.reloadData()
                     self.MechanicSegmented.isUserInteractionEnabled = true
                 })
+            }
+                else if (statusmessage == 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: descriptmessage!, controller: self)
+                        self.MechanicSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                else if (statusmessage == 1000) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.wrong, controller: self)
+                        self.MechanicSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                    
+                else if (statusmessage == 1001) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message: Constants.invalid, controller: self)
+                        self.MechanicSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
+                    
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.dismiss(animated: true, completion: nil)
+                        ToastView.show(message:Constants.occured, controller: self)
+                        self.MechanicSegmented.isUserInteractionEnabled = true
+                    })
+                    
+                }
                 
-            } catch let error as NSError {
+            }
+            
+                
+                catch let error as NSError {
                 self.dismiss(animated: true, completion: nil)
                 self.MechanicSegmented.isUserInteractionEnabled = true
-                ToastView.show(message: "\(error)", controller: self)
+                ToastView.show(message: "failed to load", controller: self)
             }
         }).resume()
         DispatchQueue.main.async {
@@ -267,7 +308,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     let desc = json[Constants.Description].stringValue
                     Constants.orderidmechanic = json["OrderID"].intValue
                     ToastView.show(message: desc, controller: self!)
-                    if ((status == 1) && (desc == "Success")) {
+                    if (status == 1) {
                         let CarInfo = json[Constants.Cars].arrayValue
                         for cars in CarInfo {
                             
@@ -293,11 +334,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                                 self!.milesBtn.setTitle("\(self!.rec) km", for: .normal)
                             }
                             
-                            
                         }
-                        
-                        
-                        
                         let Notes = json["Notes"].dictionaryValue
                         
                         
@@ -335,6 +372,22 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         
                         self!.appearView()
                     }
+                    else  if (status == 0) {
+                        ToastView.show(message: desc, controller: self!)
+                    }
+                        
+                    else  if (status == 1000) {
+                        ToastView.show(message: Constants.wrong, controller: self!)
+                    }
+                        
+                    else  if (status == 1001) {
+                        ToastView.show(message: Constants.invalid, controller: self!)
+                    }
+                        
+                    else {
+                        ToastView.show(message: Constants.occured, controller: self!)
+                    }
+                    
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
                 }
@@ -465,12 +518,6 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         popover?.sourceRect = self.notesBtn.bounds
         self.present(popController, animated: true, completion: nil)
         
-
-        
-        
-        
-        
-        
     }
     
     
@@ -497,11 +544,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     @IBAction func loadingBtnAction(_ sender: Any) {
         
-        
-        
         loaderWorks()
         
     }
+    
+    
+    
+    @IBAction func dropdownAction(_ sender: Any) {
+    }
+    
+    
     
     
     
@@ -519,7 +571,6 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
         }
     }
-    
     
     
     
@@ -611,7 +662,6 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
-                    
                 }
             }
             if let response = response {
@@ -632,8 +682,30 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             ToastView.show(message: newmessage!, controller: self)
                             self.removeData()
                         }
-                        
                     }
+                    
+                    else if (status == 1000) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                            self.removeData()
+                        }
+                    }
+                    
+                    else if (status == 1001) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                            self.removeData()
+                        }
+                    }
+                    
+                    else {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                            self.removeData()
+                        }
+                    }
+                    
+                    
                 } catch {
                     print(error)
                 }
@@ -693,6 +765,27 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: newmessage!, controller: self)
+                        }
+                    }
+                    
+                    else if (status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                    }
+                    
+                    else if (status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                    }
+                    
+                    else {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
                         }
                     }
                     
@@ -798,17 +891,33 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         })
                         
                     }
+                        
                     else if (status == 0) {
                         
-                        print(status!)
+                        DispatchQueue.main.async {
                         ToastView.show(message: newmessage!, controller: self)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            if let parentVC = self.parent as? ReceptionalistView {
-                                let storyboard = UIStoryboard(name: Constants.MechanicView, bundle: nil)
-                                let vc = storyboard.instantiateViewController(withIdentifier: Constants.MechanicVc) as? MechanicView
-                                parentVC.switchViewController(vc: vc!, showFooter: true)
-                            }
-                        })
+                        }
+                    }
+                    
+                    else if (status == 1000) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                    }
+                    
+                    else if (status == 1001) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                    }
+                    
+                    else {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                        }
                     }
                     
                 } catch {

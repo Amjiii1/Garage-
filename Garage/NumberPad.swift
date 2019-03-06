@@ -39,7 +39,7 @@ public protocol NumberPadDelegate {
         didSet { updateKeys() }
     }
     
-    open var keyFont: UIFont? = UIFont(name: "SFProDisplay-Bold", size: 30)
+    open var keyFont: UIFont? = UIFont(name: "SFProDisplay-Regular", size: 30)
     
     
     open var clearKeyPosition: NumberClearKeyPosition = .right {

@@ -388,7 +388,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     else  {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured                           , controller: self)
+                            ToastView.show(message: Constants.occured, controller: self)
                         }
                     }
                     

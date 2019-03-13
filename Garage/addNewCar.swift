@@ -66,8 +66,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         CustomCarMaketableview()
         CustomCarModeltableview()
         modelNumber.isUserInteractionEnabled = false
-        recommendedAmount.isUserInteractionEnabled = false
-        engineType.isUserInteractionEnabled = false
+//        recommendedAmount.isUserInteractionEnabled = false
+//        engineType.isUserInteractionEnabled = false
         phoneNumber.text = "+966"
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -245,6 +245,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     @objc func CarmakeFunction() {
+        NumberpadViewCheck.isHidden = true
         carMake.inputView = UIView()
         carMake.inputAccessoryView = UIView()
         carMake.resignFirstResponder()
@@ -289,7 +290,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             return  MakeCarDetails.count
             
         } else if (tableView  == CarModelTableView) {
-            
             return ModelCarDetails.count
         }
         else {
@@ -368,9 +368,20 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             }
                             
                         }
-                        else {
-                            
+                        else if (status == 0) {
                             ToastView.show(message: discript!, controller: self)
+                        }
+                            
+                        else if (status == 1000) {
+                            ToastView.show(message: "Something went wrong", controller: self)
+                        }
+                            
+                        else if (status == 1001) {
+                            ToastView.show(message: "Invalid session", controller: self)
+                        }
+                            
+                        else {
+                            ToastView.show(message: "error occured", controller: self)
                         }
                     }
                     DispatchQueue.main.async {

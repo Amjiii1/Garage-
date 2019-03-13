@@ -44,7 +44,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     var rec = "0"
     
     var MechanicModel = [MechanicTableviewModel]()
-    
+   
     
     
     var OrderDetails = [Orderdetail]()
@@ -55,6 +55,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         notesBtn.isUserInteractionEnabled = false
         checkcarBtn.isUserInteractionEnabled = false
+        dropDwnBtn.isUserInteractionEnabled = false
         
         milesBtn.isHidden = true
         carNamelbl.isHidden = true
@@ -551,6 +552,21 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     @IBAction func dropdownAction(_ sender: Any) {
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        
+        storyboard = UIStoryboard(name: "Mechanicpop", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "MechanicpopVc") as! Mechanicpop
+        let nav = UINavigationController(rootViewController: popController)
+        nav.modalPresentationStyle = UIModalPresentationStyle.popover
+        let heightForPopOver = 30*3
+        let popover = nav.popoverPresentationController
+        popController.preferredContentSize = CGSize(width: 230 , height: heightForPopOver)
+        popover?.permittedArrowDirections = .left
+        popover?.backgroundColor = UIColor.white
+        popover?.sourceView = self.dropDwnBtn
+        popover?.sourceRect = self.dropDwnBtn.bounds//CGRect(x: self.assignBtn.bounds.midX, y: self.assignBtn.bounds.midY, width: 0, height: 0)
+        self.present(nav, animated: true, completion: nil)
     }
     
     
@@ -595,6 +611,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             self.notesBtn.isUserInteractionEnabled = true
             self.checkcarBtn.isUserInteractionEnabled = true
             self.finishBtn.isUserInteractionEnabled = true
+            self.dropDwnBtn.isUserInteractionEnabled = true
             self.carNamelbl.isHidden = false
             self.milesBtn.isHidden = false
             self.platenumberlbl.isHidden = false
@@ -624,6 +641,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             self.notesBtn.isUserInteractionEnabled = false
             self.checkcarBtn.isUserInteractionEnabled = false
             self.finishBtn.isUserInteractionEnabled = false
+            self.dropDwnBtn.isUserInteractionEnabled = false
             self.carNamelbl.isHidden = true
             self.milesBtn.isHidden = true
             self.platenumberlbl.isHidden = true

@@ -14,7 +14,7 @@ struct Checkoutstruct {
 }
 
 class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-  
+    
     @IBOutlet weak var tableViewContainer: UITableView!
     @IBOutlet weak var checkoutSegment: UISegmentedControl!
     
@@ -27,7 +27,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableViewContainer.dataSource = self
         tableViewContainer.delegate = self
         checkoutSegment.selectedSegmentIndex = 1
-         CheckoutDetails()
+        CheckoutDetails()
         Constants.editcheckout = 0
         Constants.percent = Int(Double(Constants.tax)! * 100)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
@@ -68,7 +68,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         }
         let url = URL(string: Apiurl)
-       
+        
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
@@ -89,7 +89,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     if let order = json["OrdersList"] as? [[String: Any]] {
                         self.checkoutmodel.removeAll()
                         Checkoutstruct.Itemdetails.removeAll()
-                      
+                        
                         for items in order {
                             if let item = items["OrderItems"] as? [[String: Any]] {
                                 for details in item {
@@ -100,17 +100,17 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                                     let OrderDetails = details["OrderDetailID"] as! Int
                                     let itemorderID = details["OrderID"] as! Int
                                     let itemsdetailed = checkoutItems(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
-                                  Checkoutstruct.Itemdetails.append(itemsdetailed)
+                                    Checkoutstruct.Itemdetails.append(itemsdetailed)
                                 }
                                 
-                                  }
                             }
+                        }
                         
                         
                         for checkoutlist in order {
-//                            if let items = checkoutlist["OrderItems"] as? AnyObject{
-//                                CheckoutItems.Itemdetails.append(items as! CheckoutItems)
-//                            }
+                            //                            if let items = checkoutlist["OrderItems"] as? AnyObject{
+                            //                                CheckoutItems.Itemdetails.append(items as! CheckoutItems)
+                            //                            }
                             let details = CheckoutModel(checkoutlist: checkoutlist)
                             self.checkoutmodel.append(details!)
                             
@@ -132,7 +132,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
-                
+                    
                 else if (status == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
@@ -140,7 +140,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
-                
+                    
                 else if (status == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
@@ -148,7 +148,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
-                
+                    
                 else  {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
@@ -188,7 +188,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     @IBAction func segmentAction(_ sender: Any) {
-         CheckoutDetails()
+        CheckoutDetails()
     }
     
     
@@ -224,25 +224,25 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         case 1:
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Edit") { (action, indexpath) in
-               DispatchQueue.main.async {
-                Constants.editcheckout = 1
-               Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
-                Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
-                
+                DispatchQueue.main.async {
+                    Constants.editcheckout = 1
+                    Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
+                    Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
+                    
                     if let parentVC = self.parent as? ReceptionalistView {
                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
                         let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                         parentVC.switchViewController(vc: vc!, showFooter: false)
-
+                        
                     }
-                
+                    
                 }
             }
             
             returnValue = [deleteAction]
             deleteAction.backgroundColor = .black
         case 2:
-          
+            
             print("Nothing")
         default:
             break
@@ -257,7 +257,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    let cell = tableView.dequeueReusableCell(withIdentifier: "CheckoutCell", for: indexPath) as! CheckoutCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CheckoutCell", for: indexPath) as! CheckoutCell
         
         switch (checkoutSegment.selectedSegmentIndex) {
         case 0:
@@ -312,7 +312,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CPlatenmb.text = checkoutmodel[indexPath.row].RegistrationNo
             cell.CMake.text = checkoutmodel[indexPath.row].MakerName
             cell.CModel.text = checkoutmodel[indexPath.row].ModelName
-          //  let Bay = checkoutmodel[indexPath.row].BayName
+            //  let Bay = checkoutmodel[indexPath.row].BayName
             cell.checkoutBtn.tag = indexPath.row
             cell.checkoutBtn.setTitle("Done", for: .normal)
             cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
@@ -330,50 +330,50 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         return cell
         
-            
-        }
+        
+    }
     
     
     @objc func addccheckout(_ sender: UIButton){
         switch (checkoutSegment.selectedSegmentIndex) {
             
         case 0:
-             ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
+            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
-             Checkoutstruct.sentitems.removeAll()
+            Checkoutstruct.sentitems.removeAll()
             Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID!
             Constants.checkoutcarid = checkoutmodel[sender.tag].CarID!
             Constants.checkoutplatenmb = checkoutmodel[sender.tag].RegistrationNo!
-             Constants.checkoutvin = checkoutmodel[sender.tag].VinNo!
-             Constants.checkoutcarmake = checkoutmodel[sender.tag].MakerName!
-             Constants.checkoutcarmodel = checkoutmodel[sender.tag].ModelName!
-              Constants.checkoutbayname = checkoutmodel[sender.tag].BayName!
-              Constants.checkoutyear = checkoutmodel[sender.tag].Year!
-             Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID!
-             
-           Constants.subtotal = 0.0
+            Constants.checkoutvin = checkoutmodel[sender.tag].VinNo!
+            Constants.checkoutcarmake = checkoutmodel[sender.tag].MakerName!
+            Constants.checkoutcarmodel = checkoutmodel[sender.tag].ModelName!
+            Constants.checkoutbayname = checkoutmodel[sender.tag].BayName!
+            Constants.checkoutyear = checkoutmodel[sender.tag].Year!
+            Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID!
+            
+            Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0
-             Constants.checkouttax = 0.0
+            Constants.checkouttax = 0.0
             for itemmodels in Checkoutstruct.Itemdetails {
-
+                
                 if itemmodels.itemorderid == Constants.checkoutorderid {
                     
                     Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
-                   
-                     Checkoutstruct.sentitems.append(itemmodels)
+                    
+                    Checkoutstruct.sentitems.append(itemmodels)
                 } else if itemmodels.itemorderid != Constants.checkoutorderid {
-
+                    
                 }
-        
-
+                
+                
             }
-          
-             Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
-              Constants.subtotal = Constants.checkoutGrandtotal
-             Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
-              checkoutpop()
-           
+            
+            Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
+            Constants.subtotal = Constants.checkoutGrandtotal
+            Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
+            checkoutpop()
+            
             
         case 2:
             ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
@@ -413,10 +413,10 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-   
+    
     @IBAction func settings(_ sender: Any) {
         
-      setupsettings()
+        setupsettings()
     }
     
     
@@ -437,7 +437,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
         self.present(popController, animated: true)
-
+        
     }
     
     override func didReceiveMemoryWarning() {

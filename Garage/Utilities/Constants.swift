@@ -84,6 +84,7 @@ struct Constants {
     static var Date = "Date"
     static var AmountTotal = "AmountTotal"
     static var GrandTotal = "GrandTotal"
+    static var AmountPaid = "AmountPaid"
     static var Tax = "Tax"
     static var WorkerID = "WorkerID"
     static var AssistantID = "AssistantID"

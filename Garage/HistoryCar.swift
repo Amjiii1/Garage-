@@ -34,7 +34,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func historyData() {
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.HistoryApi)\(Constants.CarIDData)/\(Constants.sessions)")
-        print(url)
         
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
@@ -42,9 +41,10 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
                 
-                if let intstatus = json["Status"] as? Int {
-                    let status = String (intstatus)
-                    if status == "1" {
+                if let intstatus = json[Constants.Status] as? Int {
+                  let descript = json[Constants.Description] as? String
+                  //  let status = String (intstatus)
+                    if intstatus == 1 {
                         
                         if let model = json["CarModelName"] as? String {
                             DispatchQueue.main.async {
@@ -72,20 +72,40 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                         
+                    else  if intstatus == 0 {
+                         DispatchQueue.main.async {
+                        ToastView.show(message: descript!, controller: self)
+                        }
+                    }
+                    else if (intstatus == 1000) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                            
+                          
+                        }
+                    }
+                        
+                    else if (intstatus == 1001) {
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                           
+                        }
+                    }
+                        
                     else {
-                        //  ToastView.show(message: "Backend issue", controller: self)
+                        DispatchQueue.main.async {
+                            ToastView.show(message: Constants.occured, controller: self)
+                           
+                        }
                     }
                     
-                    
-                    
-                }
-                DispatchQueue.main.async {
                     
                     
                 }
                 
             } catch let error as NSError {
                 print(error)
+                 ToastView.show(message: "failed! error occured", controller: self)
             }
         }).resume()
     }
@@ -103,6 +123,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return CGFloat(60)
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pressed = HistoryData[indexPath.row].Total
+        print(pressed!)
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

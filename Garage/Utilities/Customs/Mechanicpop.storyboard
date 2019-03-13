@@ -12,34 +12,34 @@
         <!--Mechanicpop-->
         <scene sceneID="oAc-oL-P4R">
             <objects>
-                <viewController id="XUv-fM-LUp" customClass="Mechanicpop" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MechanicpopVc" id="XUv-fM-LUp" customClass="Mechanicpop" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zhv-FO-FCN"/>
                         <viewControllerLayoutGuide type="bottom" id="8sb-Bi-kAk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CU6-nZ-MSd">
-                        <rect key="frame" x="0.0" y="0.0" width="334" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mCx-cf-bdr">
-                                <rect key="frame" x="0.0" y="0.0" width="334" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MechanicpopCell" id="BnR-KB-P0h" customClass="MechanicpopCell" customModule="Garage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="334" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BnR-KB-P0h" id="GSq-GT-pmZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc3-dK-kGi">
-                                                    <rect key="frame" x="0.0" y="4.5" width="100" height="34.5"/>
+                                                    <rect key="frame" x="0.0" y="4.5" width="90" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opV-CI-RZy">
-                                                    <rect key="frame" x="215.5" y="4.5" width="100" height="34.5"/>
+                                                    <rect key="frame" x="184.5" y="4.5" width="90" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                                             <constraints>
                                                 <constraint firstItem="opV-CI-RZy" firstAttribute="height" secondItem="tc3-dK-kGi" secondAttribute="height" id="H4K-iQ-NeT"/>
                                                 <constraint firstItem="tc3-dK-kGi" firstAttribute="width" secondItem="GSq-GT-pmZ" secondAttribute="width" multiplier="0.3" id="RS6-7g-PWS"/>
-                                                <constraint firstItem="opV-CI-RZy" firstAttribute="centerX" secondItem="tc3-dK-kGi" secondAttribute="centerX" multiplier="5.3" id="a2m-TR-4hv"/>
+                                                <constraint firstItem="opV-CI-RZy" firstAttribute="centerX" secondItem="tc3-dK-kGi" secondAttribute="centerX" multiplier="5.1" id="a2m-TR-4hv"/>
                                                 <constraint firstItem="tc3-dK-kGi" firstAttribute="centerY" secondItem="GSq-GT-pmZ" secondAttribute="centerY" id="bGd-Fk-8da"/>
                                                 <constraint firstItem="tc3-dK-kGi" firstAttribute="height" secondItem="GSq-GT-pmZ" secondAttribute="height" multiplier="0.8" id="mnj-bD-Jtr"/>
                                                 <constraint firstItem="tc3-dK-kGi" firstAttribute="centerX" secondItem="GSq-GT-pmZ" secondAttribute="centerX" multiplier="0.3" id="tyd-tV-Qz1"/>
@@ -72,7 +72,7 @@
                             <constraint firstItem="mCx-cf-bdr" firstAttribute="centerY" secondItem="CU6-nZ-MSd" secondAttribute="centerY" id="y7m-hP-Sdu"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="334" height="300"/>
+                    <size key="freeformSize" width="300" height="300"/>
                     <connections>
                         <outlet property="mechanicTableview" destination="mCx-cf-bdr" id="gxf-4Q-yBq"/>
                     </connections>

@@ -15,7 +15,8 @@ class Mechanicpop: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
       var Details = [Orderdetail]()
     
-    var things = ["Filter", "Oil"]
+    var things = ["Oil", "Filter"]
+    var value = ["0.0 liters", "Option"]
     
     
     override func viewDidLoad() {
@@ -48,6 +49,8 @@ class Mechanicpop: UIViewController, UITableViewDelegate, UITableViewDataSource 
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MechanicpopCell", for: indexPath) as! MechanicpopCell
         cell.titleLbl.text = things[indexPath.row]
+        cell.DataLbl.text = value[indexPath.row]
+        
         
         return cell
         

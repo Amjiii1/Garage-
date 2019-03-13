@@ -18,7 +18,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let BARCODE_WIDTH_POS: Int = 110
     
     
-    
     @IBOutlet weak var buttonstack: UIStackView!
     @IBOutlet weak var PopUpView: UIView!
     @IBOutlet weak var containerPop: UIView!
@@ -38,7 +37,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var grandtotalLbl: UILabel!
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
-     private weak var subView: UIView?
+    private weak var subView: UIView?
     
     
     
@@ -47,10 +46,10 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
     var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
     
-  
     
     
-     let viewModel = CheckoutViewModel()
+    
+    let viewModel = CheckoutViewModel()
     var dummyData = ["Discount","SubTotal","VAT \(Constants.percent)%"]
     var amount = [0,Constants.subtotal,Constants.checkouttax]
     var workerid = 0
@@ -66,9 +65,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         
-       //  buttonstack.layer.cornerRadius = 14.0
-         tenderedbalance.delegate = self
-         viewModel.checkoutVC = self
+        //  buttonstack.layer.cornerRadius = 14.0
+        tenderedbalance.delegate = self
+        viewModel.checkoutVC = self
         checkout_tableview.delegate = self
         checkout_tableview.dataSource = self
         discouttableview.delegate = self
@@ -92,8 +91,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             MessageView.showErrorEpos(result, method: "setLogSettings")
         }
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.printeradded(notification:)), name: Notification.Name("printerAdded"), object: nil)
-     
-       
+        
+        
     }
     
     
@@ -117,7 +116,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let blnce = Constants.checkoutGrandtotal - intFromString!
                 balancetxtf.text = "\(blnce)"
             }
-           
+            
         }
         
     }
@@ -196,7 +195,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func workerAction(_ sender: Any) {
-     
+        
         Constants.workerflag = 1
         var storyboard: UIStoryboard!
         var popController: UIViewController!
@@ -327,177 +326,181 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     func checkoutOrder() {
-      //  let test = String(Constants.checkoutGrandtotal)
-      
+        //  let test = String(Constants.checkoutGrandtotal)
+        
         let test2 = Double(tenderedbalance.text!) ?? Double.nan
-       
+        
         if (test2) >= Constants.checkoutGrandtotal  {
             
-        let parameters = [   Constants.OrderID: Constants.checkoutorderid,
-                             Constants.SessionID: Constants.sessions,
-                             "PaymentMode": 0,
-                             Constants.Date: Constants.currentdate,
-                             Constants.AmountTotal: Constants.subtotal,
-                             "OrderStatus": 103,
-                             "AmountPaid": tenderedbalance.text!,
-                             Constants.GrandTotal: Constants.checkoutGrandtotal,
-                             "AmountDiscount": 0,
-                             "PartialPayment": 0,
-                             "Gratuity": 0,
-                             "ServiceCharges": 0,
-                             Constants.CarID:  Constants.checkoutcarid,
-                             Constants.Tax: Constants.checkouttax,
-                             Constants.WorkerID: workerid,
-                             Constants.AssistantID: assistantid,
-                             "AmountComplementary": 0,
-                             "CheckoutDetails": [
-                                "CardNumber": "",
-                                "CardHolderName": "",
-                                "CardType": "",
-                                "AmountPaid": Constants.checkoutGrandtotal,
-                                "AmountDiscount": 0,
-                                "PaymentMode": 1    ]] as [String : Any]
-        
-        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        request.httpBody = httpBody
-        if let JSONString = String(data: httpBody, encoding: .utf8) {
+            let parameters = [   Constants.OrderID: Constants.checkoutorderid,
+                                 Constants.SessionID: Constants.sessions,
+                                 "PaymentMode": 0,
+                                 Constants.Date: Constants.currentdate,
+                                 Constants.AmountTotal: Constants.subtotal,
+                                 "OrderStatus": 103,
+                                 Constants.AmountPaid: tenderedbalance.text!,
+                                 Constants.GrandTotal: Constants.checkoutGrandtotal,
+                                 "AmountDiscount": 0,
+                                 "PartialPayment": 0,
+                                 "Gratuity": 0,
+                                 "ServiceCharges": 0,
+                                 Constants.CarID:  Constants.checkoutcarid,
+                                 Constants.Tax: Constants.checkouttax,
+                                 Constants.WorkerID: workerid,
+                                 Constants.AssistantID: assistantid,
+                                 "AmountComplementary": 0,
+                                 "CheckoutDetails": [
+                                    "CardNumber": "",
+                                    "CardHolderName": "",
+                                    "CardType": "",
+                                    Constants.AmountPaid: Constants.checkoutGrandtotal,
+                                    "AmountDiscount": 0,
+                                    "PaymentMode": 1    ]] as [String : Any]
             
-            print(JSONString)
-        }
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if response == nil {
-                DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
-                    
+            guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+            request.httpBody = httpBody
+            if let JSONString = String(data: httpBody, encoding: .utf8) {
+                
+                print(JSONString)
+            }
+            let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                if response == nil {
+                    DispatchQueue.main.async {
+                        ToastView.show(message: "Login failed! Check internet", controller: self)
+                        
+                    }
                 }
-            }
-            if let response = response {
-                print(response)
-            }
-            
-            if let data = data {
-                print(data)
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
-                    print(json)
-                    
-                    let status = json[Constants.Status] as? Int
-                    let newmessage = json[Constants.Description] as? String
-                    if (status == 1) {
-                        ToastView.show(message: newmessage!, controller: self)
-                       
-                        DispatchQueue.main.async {
-                            self.runPrinterReceiptSequence()
-                            NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
-                            self.dismiss(animated: true, completion: nil)
-                            self.grandtotalBtn.isUserInteractionEnabled = true
+                if let response = response {
+                    print(response)
+                }
+                
+                if let data = data {
+                    print(data)
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+                        print(json)
+                        
+                        let status = json[Constants.Status] as? Int
+                        let newmessage = json[Constants.Description] as? String
+                        if (status == 1) {
+                            ToastView.show(message: newmessage!, controller: self)
+                            
+                            DispatchQueue.main.async {
+                                self.runPrinterReceiptSequence()
+                                NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
+                                self.dismiss(animated: true, completion: nil)
+                                self.grandtotalBtn.isUserInteractionEnabled = true
+                                
+                            }
+                            
+                        }
+                        else if (status == 0) {
+                            
+                            DispatchQueue.main.async {
+                                let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
+                                self.present(messageVC, animated: true) {
+                                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                        messageVC.dismiss(animated: true, completion: nil)})}
+                                ToastView.show(message: newmessage!, controller: self)
+                                self.grandtotalBtn.isUserInteractionEnabled = true
+                            }
+                            
+                        }
+                            
+                        else if (status == 1000) {
+                            
+                            DispatchQueue.main.async {
+                                let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
+                                self.present(messageVC, animated: true) {
+                                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                        messageVC.dismiss(animated: true, completion: nil)})}
+                                ToastView.show(message: newmessage!, controller: self)
+                                self.grandtotalBtn.isUserInteractionEnabled = true
+                            }
+                            
+                        }
+                            
+                        else if (status == 1001) {
+                            
+                            DispatchQueue.main.async {
+                                let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
+                                self.present(messageVC, animated: true) {
+                                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                        messageVC.dismiss(animated: true, completion: nil)})}
+                                ToastView.show(message: newmessage!, controller: self)
+                                self.grandtotalBtn.isUserInteractionEnabled = true
+                            }
+                            
+                        }
+                            
+                        else  {
+                            DispatchQueue.main.async {
+                                let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
+                                self.present(messageVC, animated: true) {
+                                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                                        messageVC.dismiss(animated: true, completion: nil)})}
+                                ToastView.show(message: newmessage!, controller: self)
+                                self.grandtotalBtn.isUserInteractionEnabled = true
+                            }
                             
                         }
                         
-                    }
-                    else if (status == 0) {
                         
-                        DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
-                            self.grandtotalBtn.isUserInteractionEnabled = true
-                        }
-                        
-                    }
-                    
-                    else if (status == 1000) {
-                        
-                        DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
-                            self.grandtotalBtn.isUserInteractionEnabled = true
-                        }
-                        
-                    }
-                    
-                    else if (status == 1001) {
-                        
-                        DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
-                            self.grandtotalBtn.isUserInteractionEnabled = true
-                        }
-                        
-                    }
-                    
-                    else  {
-                        DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
-                            self.grandtotalBtn.isUserInteractionEnabled = true
-                        }
+                    } catch {
+                        print(error)
+                        ToastView.show(message: "Edit Failed! error occured", controller: self)
+                        self.grandtotalBtn.isUserInteractionEnabled = true
                         
                     }
                     
                     
-                } catch {
-                    print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
-                    self.grandtotalBtn.isUserInteractionEnabled = true
                     
                 }
                 
-                
-                
-            }
+                }.resume()
             
-            }.resume()
+        }   else {
+            let messageVC = UIAlertController(title: "Checkout Failed", message: "Please Enter Total Amount!" , preferredStyle: .actionSheet)
+            present(messageVC, animated: true) {
+                Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
+                    messageVC.dismiss(animated: true, completion: nil)})}
+            self.grandtotalBtn.isUserInteractionEnabled = true
             
-       }   else {
-        let messageVC = UIAlertController(title: "Checkout Failed", message: "Please Enter Total Amount!" , preferredStyle: .actionSheet)
-                    present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                            messageVC.dismiss(animated: true, completion: nil)})}
-               self.grandtotalBtn.isUserInteractionEnabled = true
-        
         }
-        
         
     }
     
     
     
     
-//    func updateQuickButtonAmount(){
-//        if let view = containerPop as? CashView   {
-//           view.updateFirstButtonAmount()
-//        }
-//    }
+    //    func updateQuickButtonAmount(){
+    //        if let view = containerPop as? CashView   {
+    //           view.updateFirstButtonAmount()
+    //        }
+    //    }
     
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
-      self.grandtotalBtn.isUserInteractionEnabled = true
+        
+        
+        
+        
+      //    PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: Orderdetail, cartItems: [ReceiptModel])
+        self.grandtotalBtn.isUserInteractionEnabled = true
         if Constants.Printer == "" {
-           alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
+            alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
         } else {
             checkoutOrder()
         }
         
     }
-   
+    
     
     
     
@@ -526,13 +529,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.dismiss(animated: true, completion: nil)
-       //    self.settings()
+            //    self.settings()
             
         })
         
         alert.addAction(defaultAction)
         let cancel = UIAlertAction(title: "No", style: .default, handler: { action in
-             self.checkoutOrder()
+            self.checkoutOrder()
         })
         alert.addAction(cancel)
         DispatchQueue.main.async(execute: {
@@ -555,12 +558,12 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-//    func updateButtonState(_ state: Bool) {
-//        buttonDiscovery.isEnabled = state
-//        printbtn.isEnabled = state
-//        printbtn.isEnabled = state
-//
-//    }
+    //    func updateButtonState(_ state: Bool) {
+    //        buttonDiscovery.isEnabled = state
+    //        printbtn.isEnabled = state
+    //        printbtn.isEnabled = state
+    //
+    //    }
     
     func runPrinterReceiptSequence() -> Bool {
         
@@ -582,7 +585,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func runPrinterCouponSequence() -> Bool {
-   
+        
         if !initializePrinterObject() {
             return false
         }
@@ -601,8 +604,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func createReceiptData() -> Bool {
-        let barcodeWidth = 2
-        let barcodeHeight = 100
         
         var result = EPOS2_SUCCESS.rawValue
         
@@ -649,8 +650,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         textData.append("Phone No. 0568833923\n")
         textData.append("\n")
         //textData.append("\(Constants.currentdate)\n")
-       // textData.append("Majid Bin Abdul Aziz Road\n")
-        textData.append("VAT# 98237456389756\n")
+        // textData.append("Majid Bin Abdul Aziz Road\n")
+        textData.append("VAT# 12345678912345\n")
         textData.append("\n")
         textData.append("Plate No. \(Constants.checkoutplatenmb)\n")
         textData.append("\n")
@@ -671,20 +672,26 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         textData.setString("")
         
+        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
+        if result != EPOS2_SUCCESS.rawValue {
+            MessageView.showErrorEpos(result, method:"addTextAlign")
+            return false;
+        }
+        
         // Section 2 : Purchaced items
         for receipt in Checkoutstruct.sentitems {
-          textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
-//        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
-//        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
-//        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
-//        textData.append("474 TRIPOD              8.99 R\n")
-//        textData.append("433 BLK LOGO PRNTED ZO  7.99 R\n")
-//        textData.append("458 AQUA MICROTERRY SC  6.99 R\n")
-//        textData.append("493 30L BLK FF DRESS   16.99 R\n")
-//        textData.append("407 LEVITATING DESKTOP  7.99 R\n")
-//        textData.append("441 **Blue Overprint P  2.99 R\n")
-//        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
-//        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
+            textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
+            //        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
+            //        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
+            //        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
+            //        textData.append("474 TRIPOD              8.99 R\n")
+            //        textData.append("433 BLK LOGO PRNTED ZO  7.99 R\n")
+            //        textData.append("458 AQUA MICROTERRY SC  6.99 R\n")
+            //        textData.append("493 30L BLK FF DRESS   16.99 R\n")
+            //        textData.append("407 LEVITATING DESKTOP  7.99 R\n")
+            //        textData.append("441 **Blue Overprint P  2.99 R\n")
+            //        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
+            //        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
         }
         textData.append("\n")
         textData.append("------------------------------\n")
@@ -697,8 +704,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         // Section 3 : Payment infomation
-        textData.append("SUBTOTAL                 \( Constants.subtotal)\n");
-        textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax)\n\n");
+        textData.append("SUBTOTAL                 \( Constants.subtotal) SR\n");
+         textData.append("Discount                   0.0 SR\n");
+        textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax) SR\n\n");
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addText")
@@ -712,7 +720,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             return false
         }
         
-        result = printer!.addText("TOTAL    \(Constants.checkoutGrandtotal)\n")
+        result = printer!.addText("TOTAL    \(Constants.checkoutGrandtotal) SR\n")
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addText")
             return false;
@@ -731,7 +739,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         textData.append("CASH                    \(Constants.checkoutGrandtotal)\n")
-        textData.append("CHANGE                   00.0\n")
         textData.append("------------------------------\n")
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
@@ -742,7 +749,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Section 4 : Advertisement
         textData.append("** Have a safe drive **\n")
-      //  textData.append("Sign Up and Save !\n")
+        //  textData.append("Sign Up and Save !\n")
         textData.append("Garage.sa\n")
         result = printer!.addText(textData as String)
         if result != EPOS2_SUCCESS.rawValue {
@@ -757,17 +764,17 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             return false
         }
         
-//        result = printer!.addBarcode("01209457",
-//                                     type:EPOS2_BARCODE_CODE39.rawValue,
-//                                     hri:EPOS2_HRI_BELOW.rawValue,
-//                                     font:EPOS2_FONT_A.rawValue,
-//                                     width:barcodeWidth,
-//                                     height:barcodeHeight)
-//        if result != EPOS2_SUCCESS.rawValue {
-//            MessageView.showErrorEpos(result, method:"addBarcode")
-//            return false
-//        }
-//
+        //        result = printer!.addBarcode("01209457",
+        //                                     type:EPOS2_BARCODE_CODE39.rawValue,
+        //                                     hri:EPOS2_HRI_BELOW.rawValue,
+        //                                     font:EPOS2_FONT_A.rawValue,
+        //                                     width:barcodeWidth,
+        //                                     height:barcodeHeight)
+        //        if result != EPOS2_SUCCESS.rawValue {
+        //            MessageView.showErrorEpos(result, method:"addBarcode")
+        //            return false
+        //        }
+        //
         result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method:"addCut")
@@ -1026,7 +1033,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         MessageView.showResult(code, errMessage: makeErrorMessage(status))
         
         //dispPrinterWarnings(status)
-    //    updateButtonState(true)
+        //    updateButtonState(true)
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
             self.disconnectPrinter()
@@ -1111,7 +1118,7 @@ extension CheckOutPopView: UITextFieldDelegate {
             if let amount = Double(textField.text!) {
                 viewModel.amountTendered = amount
             }
-           NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
         }
     }
     
@@ -1145,9 +1152,6 @@ extension CheckOutPopView: UITextFieldDelegate {
     }
 }
 
-
-
-
 extension CheckOutPopView: CashViewDelegate {
     func PayAmountTapped(amount: Double) {
         if let amountTender = tenderedbalance.text {
@@ -1163,13 +1167,12 @@ extension CheckOutPopView: CashViewDelegate {
                 }
             }
         }
-      //  on tapping quickbutton textdidendediting is not called so update here
-     NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+        //  on tapping quickbutton textdidendediting is not called so update here
+        NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
         
     }
-
-
-
+    
+    
 }
 
 

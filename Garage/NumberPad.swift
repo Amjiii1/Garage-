@@ -205,17 +205,17 @@ public protocol NumberPadDelegate {
                         button.frame = CGRect(x: CGFloat(col) * width, y: CGFloat(row) * height, width: width, height: width)
                     }
                 } else {
-                    var offset: CGFloat = (keyBorderWidth > 0) ? keyBorderWidth/2 : 0
+                    var offset: CGFloat = (keyBorderWidth > 0) ? keyBorderWidth/2 : -5//0
                     offset = (button.key == .custom) ? 0 : offset
                     button.frame = CGRect(x: CGFloat(col) * width, y: CGFloat(row) * height, width: width + offset, height: height + offset)
                 }
             }
             
-            button.layer.cornerRadius = style == .square ? 0 : button.bounds.height / 2
+            button.layer.cornerRadius = style == .square ? 10 : button.bounds.height/2
             button.setScale(scale: keyScale)
-            button.setBackgroundColor(color: UIColor.white, forState: .normal)
-            button.setBackgroundColor(color: UIColor.white, forState: .highlighted)
-            button.setTitleColor(UIColor.black, for: .normal)
+            button.setBackgroundColor(color: UIColor.darkGray, forState: .normal)     //
+            button.setBackgroundColor(color: UIColor.darkGray, forState: .highlighted)   //
+            button.setTitleColor(UIColor.white, for: .normal)
             button.titleLabel?.font = keyFont
             button.clipsToBounds = true
             
@@ -236,7 +236,7 @@ public protocol NumberPadDelegate {
                 button.setTitle(customKeyText, for: .normal)
                 button.setBackgroundColor(color: customKeyBackgroundColor ?? keyBackgroundColor, forState: .normal)
                 button.setBackgroundColor(color: customKeyHighlightColor ?? keyHighlightColor, forState: .highlighted)
-                button.setTitleColor(customKeyTitleColor ?? keyTitleColor, for: .normal)
+                button.setTitleColor(UIColor.white , for: .normal)
                 button.layer.borderWidth = customKeyBorderWidth
                 button.layer.borderColor = customKeyBorderColor?.cgColor
             default:

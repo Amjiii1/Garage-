@@ -806,9 +806,11 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         }
                         
                     } catch {
-                        print(error)
+                         DispatchQueue.main.async {
+                            print(error)
                         ToastView.show(message: "Edit Failed! error occured", controller: self)
                          self.Nextoutlet.isUserInteractionEnabled = true
+                        }
                     }
                     
                 }
@@ -891,8 +893,10 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         }
                         
                     } catch {
+                         DispatchQueue.main.async {
                         print(error)
                         ToastView.show(message: "Edit Failed! error occured", controller: self)
+                        }
                     }
                     
                 }

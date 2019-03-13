@@ -92,19 +92,27 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     
                     else  if (status == 0) {
+                         DispatchQueue.main.async {
                         ToastView.show(message: desc, controller: self!)
+                        }
                     }
                         
                     else  if (status == 1000) {
+                         DispatchQueue.main.async {
                         ToastView.show(message: Constants.wrong, controller: self!)
+                        }
                     }
                         
                     else  if (status == 1001) {
+                         DispatchQueue.main.async {
                         ToastView.show(message: Constants.invalid, controller: self!)
+                        }
                     }
                         
                     else {
+                         DispatchQueue.main.async {
                         ToastView.show(message: Constants.occured, controller: self!)
+                        }
                     }
                     
                 } catch {

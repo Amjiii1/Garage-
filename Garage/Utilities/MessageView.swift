@@ -34,7 +34,7 @@ class MessageView {
         if errMessage.isEmpty {
             msg = String(format:"%@\n%@\n",
                          NSLocalizedString("", comment: ""),
-                         getEposResultText(code))
+                          getEposResultText(code))
         }
         else {
             msg = String(format:"%@\n%@\n\n%@\n%@\n",
@@ -62,7 +62,7 @@ class MessageView {
 //            errText = "Please Add Printer"
 //            break
         case EPOS2_ERR_CONNECT.rawValue:
-            errText = "ERR_CONNECT"
+           errText = "Unable to connect to printer" 
             break
         case EPOS2_ERR_TIMEOUT.rawValue:
             errText = "ERR_TIMEOUT"

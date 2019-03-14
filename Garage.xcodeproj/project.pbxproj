@@ -154,8 +154,6 @@
 		9573179C2152543D004B92D3 /* DatabaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9573179B2152543D004B92D3 /* DatabaseView.xib */; };
 		9573179E2152847A004B92D3 /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573179D2152847A004B92D3 /* LanguagesView.swift */; };
 		957317A02152848F004B92D3 /* LanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9573179F2152848F004B92D3 /* LanguagesView.xib */; };
-		957317A221528624004B92D3 /* AboutusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957317A121528624004B92D3 /* AboutusView.swift */; };
-		957317A421528635004B92D3 /* AboutusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957317A321528635004B92D3 /* AboutusView.xib */; };
 		9574860D21EB447300812FED /* plated.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9574860C21EB447300812FED /* plated.jpg */; };
 		9575C4602201D4E0001608ED /* CheckcarPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575C45F2201D4E0001608ED /* CheckcarPostData.swift */; };
 		957C43E8222275ED00B482AB /* Mechanicpop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C43E7222275ED00B482AB /* Mechanicpop.storyboard */; };
@@ -172,7 +170,6 @@
 		957C4416222529FB00B482AB /* Language.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C4415222529FB00B482AB /* Language.storyboard */; };
 		957C441822252A1A00B482AB /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C441722252A1A00B482AB /* LanguageViewController.swift */; };
 		957C441A22252AA500B482AB /* Aboutus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C441922252AA500B482AB /* Aboutus.storyboard */; };
-		957C441C22252AC300B482AB /* AboutusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C441B22252AC300B482AB /* AboutusViewController.swift */; };
 		957C441E22252AF500B482AB /* Updates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C441D22252AF500B482AB /* Updates.storyboard */; };
 		957C442022252B2100B482AB /* UpdatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C441F22252B2100B482AB /* UpdatesViewController.swift */; };
 		957D4F3B2158EB5400262AA1 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D4F3A2158EB5400262AA1 /* HeaderView.swift */; };
@@ -371,27 +368,24 @@
 		9573179B2152543D004B92D3 /* DatabaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatabaseView.xib; sourceTree = "<group>"; };
 		9573179D2152847A004B92D3 /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
 		9573179F2152848F004B92D3 /* LanguagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguagesView.xib; sourceTree = "<group>"; };
-		957317A121528624004B92D3 /* AboutusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutusView.swift; sourceTree = "<group>"; };
-		957317A321528635004B92D3 /* AboutusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutusView.xib; sourceTree = "<group>"; };
 		9574860C21EB447300812FED /* plated.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plated.jpg; sourceTree = "<group>"; };
 		9575C45F2201D4E0001608ED /* CheckcarPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckcarPostData.swift; sourceTree = "<group>"; };
 		957C43E7222275ED00B482AB /* Mechanicpop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mechanicpop.storyboard; sourceTree = "<group>"; };
 		957C43E92222761B00B482AB /* Mechanicpop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanicpop.swift; sourceTree = "<group>"; };
 		957C43EB222276CB00B482AB /* MechanicpopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicpopCell.swift; sourceTree = "<group>"; };
-		957C44052225267D00B482AB /* General.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = General.storyboard; path = ../../../../../../Printer/Printer/General.storyboard; sourceTree = "<group>"; };
-		957C4407222526CC00B482AB /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GeneralViewController.swift; path = ../../../../../../Printer/Printer/GeneralViewController.swift; sourceTree = "<group>"; };
-		957C4409222526FE00B482AB /* Hardware.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Hardware.storyboard; path = ../../../../../../Printer/Printer/Hardware.storyboard; sourceTree = "<group>"; };
-		957C440B2225271100B482AB /* HardwareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HardwareViewController.swift; path = ../../../../../../Printer/Printer/HardwareViewController.swift; sourceTree = "<group>"; };
-		957C440D2225295400B482AB /* Receipt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Receipt.storyboard; path = ../../../../../../Printer/Printer/Receipt.storyboard; sourceTree = "<group>"; };
-		957C440F2225297500B482AB /* ReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiptViewController.swift; path = ../../../../../../Printer/Printer/ReceiptViewController.swift; sourceTree = "<group>"; };
-		957C4411222529A100B482AB /* Database.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Database.storyboard; path = ../../../../../../Printer/Printer/Database.storyboard; sourceTree = "<group>"; };
-		957C4413222529C100B482AB /* DatabaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatabaseViewController.swift; path = ../../../../../../Printer/Printer/DatabaseViewController.swift; sourceTree = "<group>"; };
-		957C4415222529FB00B482AB /* Language.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Language.storyboard; path = ../../../../../../Printer/Printer/Language.storyboard; sourceTree = "<group>"; };
-		957C441722252A1A00B482AB /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewController.swift; path = ../../../../../../Printer/Printer/LanguageViewController.swift; sourceTree = "<group>"; };
-		957C441922252AA500B482AB /* Aboutus.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Aboutus.storyboard; path = ../../../../../../Printer/Printer/Aboutus.storyboard; sourceTree = "<group>"; };
-		957C441B22252AC300B482AB /* AboutusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutusViewController.swift; path = ../../../../../../Printer/Printer/AboutusViewController.swift; sourceTree = "<group>"; };
-		957C441D22252AF500B482AB /* Updates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Updates.storyboard; path = ../../../../../../Printer/Printer/Updates.storyboard; sourceTree = "<group>"; };
-		957C441F22252B2100B482AB /* UpdatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatesViewController.swift; path = ../../../../../../Printer/Printer/UpdatesViewController.swift; sourceTree = "<group>"; };
+		957C44052225267D00B482AB /* General.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = General.storyboard; sourceTree = "<group>"; };
+		957C4407222526CC00B482AB /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
+		957C4409222526FE00B482AB /* Hardware.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hardware.storyboard; sourceTree = "<group>"; };
+		957C440B2225271100B482AB /* HardwareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareViewController.swift; sourceTree = "<group>"; };
+		957C440D2225295400B482AB /* Receipt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receipt.storyboard; sourceTree = "<group>"; };
+		957C440F2225297500B482AB /* ReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptViewController.swift; sourceTree = "<group>"; };
+		957C4411222529A100B482AB /* Database.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Database.storyboard; sourceTree = "<group>"; };
+		957C4413222529C100B482AB /* DatabaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewController.swift; sourceTree = "<group>"; };
+		957C4415222529FB00B482AB /* Language.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Language.storyboard; sourceTree = "<group>"; };
+		957C441722252A1A00B482AB /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		957C441922252AA500B482AB /* Aboutus.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Aboutus.storyboard; sourceTree = "<group>"; };
+		957C441D22252AF500B482AB /* Updates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Updates.storyboard; sourceTree = "<group>"; };
+		957C441F22252B2100B482AB /* UpdatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesViewController.swift; sourceTree = "<group>"; };
 		957D4F3A2158EB5400262AA1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		957D4F3C2158EB6200262AA1 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		95837847219870700085EB05 /* ReceiptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptCell.swift; sourceTree = "<group>"; };
@@ -492,8 +486,6 @@
 				957317992152542B004B92D3 /* DatabaseView.swift */,
 				9573179F2152848F004B92D3 /* LanguagesView.xib */,
 				9573179D2152847A004B92D3 /* LanguagesView.swift */,
-				957317A321528635004B92D3 /* AboutusView.xib */,
-				957317A121528624004B92D3 /* AboutusView.swift */,
 				951C139221539DFF00BDA923 /* UpdatesView.xib */,
 				951C139021539DF500BDA923 /* UpdatesView.swift */,
 				17F856532119876D006BEF5C /* VoucherView.xib */,
@@ -790,7 +782,6 @@
 				957C4415222529FB00B482AB /* Language.storyboard */,
 				957C441722252A1A00B482AB /* LanguageViewController.swift */,
 				957C441922252AA500B482AB /* Aboutus.storyboard */,
-				957C441B22252AC300B482AB /* AboutusViewController.swift */,
 				957C441D22252AF500B482AB /* Updates.storyboard */,
 				957C441F22252B2100B482AB /* UpdatesViewController.swift */,
 			);
@@ -962,7 +953,6 @@
 				95653A1921D0EE2900501A33 /* x.png in Resources */,
 				957C4416222529FB00B482AB /* Language.storyboard in Resources */,
 				17A4EBA420F619DD0007FF6E /* AddnewCar.storyboard in Resources */,
-				957317A421528635004B92D3 /* AboutusView.xib in Resources */,
 				17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */,
 				95383E46215100BF003DE261 /* HardwareView.xib in Resources */,
 				171FAA652119B2080096721E /* CardView.xib in Resources */,
@@ -1112,7 +1102,6 @@
 				957C4408222526CC00B482AB /* GeneralViewController.swift in Sources */,
 				178E706F20D0EFEB00BF0382 /* MechanicView.swift in Sources */,
 				178E706B20D0EFB600BF0382 /* ReceptionalistView.swift in Sources */,
-				957317A221528624004B92D3 /* AboutusView.swift in Sources */,
 				171FAA702119C2E10096721E /* CashView.swift in Sources */,
 				95383E5221512579003DE261 /* QuickpayView.swift in Sources */,
 				955EC29F21A3042400F16253 /* HistoryModel.swift in Sources */,
@@ -1135,7 +1124,6 @@
 				178E706D20D0EFD000BF0382 /* CheckoutView.swift in Sources */,
 				957C43EA2222761B00B482AB /* Mechanicpop.swift in Sources */,
 				95647B61219C50720071D5D6 /* popcell.swift in Sources */,
-				957C441C22252AC300B482AB /* AboutusViewController.swift in Sources */,
 				955B66292212C717009AA43D /* Subusers.swift in Sources */,
 				951C139121539DF500BDA923 /* UpdatesView.swift in Sources */,
 				9537B7B8221AB3B5008F01C8 /* PrinterDetailsModel.swift in Sources */,

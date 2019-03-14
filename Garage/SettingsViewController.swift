@@ -102,8 +102,8 @@ class SettingsViewController: UIViewController {
              print("Language tapped")
             childVC = UIStoryboard(name: "Language", bundle: nil).instantiateViewController(withIdentifier: "LanguageVCID") as? LanguageViewController
         case .Aboutus:
-             print("Aboutus tapped")
-            childVC = UIStoryboard(name: "Aboutus", bundle: nil).instantiateViewController(withIdentifier: "AboutusVCID") as? AboutusViewController
+            print("Aboutus tapped")
+        //    childVC = UIStoryboard(name: "Aboutus", bundle: nil).instantiateViewController(withIdentifier: "AboutusVCID") as? AboutusViewController
         case .Updates:
              print("Updates tapped")
             childVC = UIStoryboard(name: "Updates", bundle: nil).instantiateViewController(withIdentifier: "UpdatesVCID") as? UpdatesViewController

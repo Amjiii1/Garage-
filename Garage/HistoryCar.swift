@@ -31,7 +31,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    
     func historyData() {
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.HistoryApi)\(Constants.CarIDData)/\(Constants.sessions)")
         
@@ -138,7 +137,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.Date.text = HistoryData[indexPath.row].Date
         cell.Mechanic.text = HistoryData[indexPath.row].Mechanic
         cell.Total.text = HistoryData[indexPath.row].Total
-        
         cell.selectionStyle = .none
         
         return cell

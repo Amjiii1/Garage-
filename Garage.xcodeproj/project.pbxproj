@@ -65,12 +65,15 @@
 		951C13962153BEE900BDA923 /* Welcomecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C13952153BEE900BDA923 /* Welcomecell.swift */; };
 		951C13992153BF5800BDA923 /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C13982153BF5800BDA923 /* WelcomeModel.swift */; };
 		951F1F6022102E4200444CED /* checkoutcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951F1F5F22102E4200444CED /* checkoutcell.swift */; };
+		9524371F2251EB4A0000CCDF /* XZReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524371E2251EB4A0000CCDF /* XZReportViewController.swift */; };
+		952437212251EB8B0000CCDF /* XZReportViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952437202251EB8B0000CCDF /* XZReportViewController.storyboard */; };
+		95243723225228520000CCDF /* Xreport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95243722225228520000CCDF /* Xreport.swift */; };
+		95243725225256660000CCDF /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95243724225256660000CCDF /* Printer.swift */; };
 		953470A72209AA690091A7C0 /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953470A62209AA690091A7C0 /* CheckoutModel.swift */; };
 		9537B7B4221AB357008F01C8 /* PrintJobHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7B3221AB357008F01C8 /* PrintJobHelper.swift */; };
 		9537B7B6221AB385008F01C8 /* PrinterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7B5221AB385008F01C8 /* PrinterContext.swift */; };
 		9537B7B8221AB3B5008F01C8 /* PrinterDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7B7221AB3B5008F01C8 /* PrinterDetailsModel.swift */; };
 		9537B7BC221AB420008F01C8 /* ReceiptConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7BB221AB420008F01C8 /* ReceiptConfigurationModel.swift */; };
-		9537B7BE221AB477008F01C8 /* SearchPrinterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7BD221AB477008F01C8 /* SearchPrinterHelper.swift */; };
 		9537B7C1221AB623008F01C8 /* EpsonPrinterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7C0221AB623008F01C8 /* EpsonPrinterHelper.swift */; };
 		9537B7C4221AB6B9008F01C8 /* Discoverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7C3221AB6B9008F01C8 /* Discoverable.swift */; };
 		9537B7C6221AB6D6008F01C8 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9537B7C5221AB6D6008F01C8 /* Printable.swift */; };
@@ -121,12 +124,15 @@
 		95653A1321D0C99D00501A33 /* NumberPadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95653A1221D0C99D00501A33 /* NumberPadType.swift */; };
 		95653A1521D0E10B00501A33 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95653A1421D0E10B00501A33 /* Extentions.swift */; };
 		95653A1921D0EE2900501A33 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95653A1821D0EE2900501A33 /* x.png */; };
+		9565A98C224A2E5900150B9B /* Checkoutdetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565A98B224A2E5900150B9B /* Checkoutdetails.swift */; };
+		9565A98E224BA3AE00150B9B /* marngarage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9565A98D224BA3AE00150B9B /* marngarage.png */; };
 		9565C34321AC277F00D68EFD /* BayAssignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C34221AC277F00D68EFD /* BayAssignView.swift */; };
 		9565C34521AD537B00D68EFD /* AFWrapperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C34421AD537B00D68EFD /* AFWrapperClass.swift */; };
 		9567AAAD21D4C42F00E4A24E /* CheckCarTableviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9567AAAC21D4C42F00E4A24E /* CheckCarTableviewController.swift */; };
 		9567AAAF21D4D35100E4A24E /* CheckCarfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9567AAAE21D4D35100E4A24E /* CheckCarfile.swift */; };
 		956805FE2192DE3800737C1F /* MechanicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956805FD2192DE3800737C1F /* MechanicCell.swift */; };
 		9568A0C121CF75DA00BCB213 /* badgelabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568A0C021CF75DA00BCB213 /* badgelabelView.swift */; };
+		9568FB462250B8E50045399A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FB452250B8E50045399A /* StringExtension.swift */; };
 		956B6C4921872F440025986F /* profilePOpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C4821872F440025986F /* profilePOpViewController.swift */; };
 		956B6C4B218733EB0025986F /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C4A218733EB0025986F /* ProfileCell.swift */; };
 		956B6C4D218740920025986F /* profilepop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956B6C4C218740920025986F /* profilepop.storyboard */; };
@@ -155,6 +161,8 @@
 		9573179E2152847A004B92D3 /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573179D2152847A004B92D3 /* LanguagesView.swift */; };
 		957317A02152848F004B92D3 /* LanguagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9573179F2152848F004B92D3 /* LanguagesView.xib */; };
 		9574860D21EB447300812FED /* plated.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9574860C21EB447300812FED /* plated.jpg */; };
+		9575AD0A223E540700CC3764 /* SearchPrinterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575AD09223E540700CC3764 /* SearchPrinterHelper.swift */; };
+		9575AD0F223E7F8100CC3764 /* Garage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9575AD0D223E7F8100CC3764 /* Garage.xcdatamodeld */; };
 		9575C4602201D4E0001608ED /* CheckcarPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575C45F2201D4E0001608ED /* CheckcarPostData.swift */; };
 		957C43E8222275ED00B482AB /* Mechanicpop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C43E7222275ED00B482AB /* Mechanicpop.storyboard */; };
 		957C43EA2222761B00B482AB /* Mechanicpop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C43E92222761B00B482AB /* Mechanicpop.swift */; };
@@ -176,6 +184,10 @@
 		957D4F3D2158EB6200262AA1 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957D4F3C2158EB6200262AA1 /* HeaderView.xib */; };
 		95837848219870700085EB05 /* ReceiptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837847219870700085EB05 /* ReceiptCell.swift */; };
 		9583784C2198738B0085EB05 /* ReceiptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583784B2198738B0085EB05 /* ReceiptModel.swift */; };
+		9588D315223A820600225C37 /* PrinterDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D314223A820600225C37 /* PrinterDetails+CoreDataProperties.swift */; };
+		9588D317223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D316223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift */; };
+		9588D319223A852B00225C37 /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D318223A852B00225C37 /* FormatHelper.swift */; };
+		9588D31B223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */; };
 		958A7698222BB83500F88D69 /* store1.png in Resources */ = {isa = PBXBuildFile; fileRef = 958A7697222BB83400F88D69 /* store1.png */; };
 		95AA6BD1221190D1005D9B44 /* checkoutItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA6BD0221190D1005D9B44 /* checkoutItems.swift */; };
 		95B05BB42189EB1B00FC1503 /* Amjad_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95B05BB32189EB1B00FC1503 /* Amjad_Bold.otf */; };
@@ -279,12 +291,15 @@
 		951C13952153BEE900BDA923 /* Welcomecell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcomecell.swift; sourceTree = "<group>"; };
 		951C13982153BF5800BDA923 /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		951F1F5F22102E4200444CED /* checkoutcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutcell.swift; sourceTree = "<group>"; };
+		9524371E2251EB4A0000CCDF /* XZReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZReportViewController.swift; sourceTree = "<group>"; };
+		952437202251EB8B0000CCDF /* XZReportViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = XZReportViewController.storyboard; sourceTree = "<group>"; };
+		95243722225228520000CCDF /* Xreport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xreport.swift; sourceTree = "<group>"; };
+		95243724225256660000CCDF /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 		953470A62209AA690091A7C0 /* CheckoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModel.swift; sourceTree = "<group>"; };
 		9537B7B3221AB357008F01C8 /* PrintJobHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintJobHelper.swift; sourceTree = "<group>"; };
 		9537B7B5221AB385008F01C8 /* PrinterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterContext.swift; sourceTree = "<group>"; };
 		9537B7B7221AB3B5008F01C8 /* PrinterDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterDetailsModel.swift; sourceTree = "<group>"; };
 		9537B7BB221AB420008F01C8 /* ReceiptConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptConfigurationModel.swift; sourceTree = "<group>"; };
-		9537B7BD221AB477008F01C8 /* SearchPrinterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPrinterHelper.swift; sourceTree = "<group>"; };
 		9537B7C0221AB623008F01C8 /* EpsonPrinterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpsonPrinterHelper.swift; sourceTree = "<group>"; };
 		9537B7C3221AB6B9008F01C8 /* Discoverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discoverable.swift; sourceTree = "<group>"; };
 		9537B7C5221AB6D6008F01C8 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
@@ -336,12 +351,15 @@
 		95653A1221D0C99D00501A33 /* NumberPadType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPadType.swift; sourceTree = "<group>"; };
 		95653A1421D0E10B00501A33 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		95653A1821D0EE2900501A33 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
+		9565A98B224A2E5900150B9B /* Checkoutdetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkoutdetails.swift; sourceTree = "<group>"; };
+		9565A98D224BA3AE00150B9B /* marngarage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marngarage.png; path = ../../../marngarage.png; sourceTree = "<group>"; };
 		9565C34221AC277F00D68EFD /* BayAssignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayAssignView.swift; sourceTree = "<group>"; };
 		9565C34421AD537B00D68EFD /* AFWrapperClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFWrapperClass.swift; sourceTree = "<group>"; };
 		9567AAAC21D4C42F00E4A24E /* CheckCarTableviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCarTableviewController.swift; sourceTree = "<group>"; };
 		9567AAAE21D4D35100E4A24E /* CheckCarfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCarfile.swift; sourceTree = "<group>"; };
 		956805FD2192DE3800737C1F /* MechanicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicCell.swift; sourceTree = "<group>"; };
 		9568A0C021CF75DA00BCB213 /* badgelabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgelabelView.swift; sourceTree = "<group>"; };
+		9568FB452250B8E50045399A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		956B6C4821872F440025986F /* profilePOpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profilePOpViewController.swift; sourceTree = "<group>"; };
 		956B6C4A218733EB0025986F /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		956B6C4C218740920025986F /* profilepop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = profilepop.storyboard; sourceTree = "<group>"; };
@@ -369,6 +387,8 @@
 		9573179D2152847A004B92D3 /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
 		9573179F2152848F004B92D3 /* LanguagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguagesView.xib; sourceTree = "<group>"; };
 		9574860C21EB447300812FED /* plated.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plated.jpg; sourceTree = "<group>"; };
+		9575AD09223E540700CC3764 /* SearchPrinterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPrinterHelper.swift; sourceTree = "<group>"; };
+		9575AD0E223E7F8100CC3764 /* Garage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Garage.xcdatamodel; sourceTree = "<group>"; };
 		9575C45F2201D4E0001608ED /* CheckcarPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckcarPostData.swift; sourceTree = "<group>"; };
 		957C43E7222275ED00B482AB /* Mechanicpop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mechanicpop.storyboard; sourceTree = "<group>"; };
 		957C43E92222761B00B482AB /* Mechanicpop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanicpop.swift; sourceTree = "<group>"; };
@@ -390,6 +410,10 @@
 		957D4F3C2158EB6200262AA1 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		95837847219870700085EB05 /* ReceiptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptCell.swift; sourceTree = "<group>"; };
 		9583784B2198738B0085EB05 /* ReceiptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptModel.swift; sourceTree = "<group>"; };
+		9588D314223A820600225C37 /* PrinterDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrinterDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9588D316223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptConfiguration+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9588D318223A852B00225C37 /* FormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
+		9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptConfiguration+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		958A7697222BB83400F88D69 /* store1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store1.png; path = ../../../Example/Badgeable/Images.xcassets/group.imageset/store1.png; sourceTree = "<group>"; };
 		95AA6BD0221190D1005D9B44 /* checkoutItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutItems.swift; sourceTree = "<group>"; };
 		95B05BB32189EB1B00FC1503 /* Amjad_Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Amjad_Bold.otf; sourceTree = "<group>"; };
@@ -454,6 +478,7 @@
 				955AB8AE21F5B8CB00091813 /* InternetCheck.swift */,
 				9557B18921C1407C007C14D2 /* CustomSearchField.swift */,
 				95EE0FD42226873F003F35D2 /* MessageView.swift */,
+				95243722225228520000CCDF /* Xreport.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -462,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				176F2B4620E4BC71008DB208 /* Reachability.swift */,
+				9575AD0D223E7F8100CC3764 /* Garage.xcdatamodeld */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -473,6 +499,7 @@
 				17F4BC56213D010300F45286 /* GeneralView.xib */,
 				17F4BC54213D00CE00F45286 /* GeneralView.swift */,
 				95383E45215100BF003DE261 /* HardwareView.xib */,
+				9575AD09223E540700CC3764 /* SearchPrinterHelper.swift */,
 				1740571A211701A300766746 /* CheckoutPopUp.storyboard */,
 				95383E43215100A8003DE261 /* HardwareView.swift */,
 				95383E4F2151224F003DE261 /* ReceiptView.xib */,
@@ -538,6 +565,7 @@
 				178E706620D0EDF500BF0382 /* MechanicView.storyboard */,
 				956B6C4C218740920025986F /* profilepop.storyboard */,
 				957C43E7222275ED00B482AB /* Mechanicpop.storyboard */,
+				952437202251EB8B0000CCDF /* XZReportViewController.storyboard */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -582,6 +610,7 @@
 				178E706A20D0EFB600BF0382 /* ReceptionalistView.swift */,
 				956D71602160CA0B0055A160 /* ToastView.swift */,
 				9574860C21EB447300812FED /* plated.jpg */,
+				9565A98D224BA3AE00150B9B /* marngarage.png */,
 				95EE0FD8222696EF003F35D2 /* wmark1.png */,
 				958A7697222BB83400F88D69 /* store1.png */,
 				95EE0FDA222696F5003F35D2 /* coffee1.png */,
@@ -716,12 +745,17 @@
 				9537B7BF221AB582008F01C8 /* PrinterHelperClasses */,
 				9537B7B5221AB385008F01C8 /* PrinterContext.swift */,
 				95151CAF221D7273005F606A /* Receipt+CoreDataClass.swift */,
+				9588D318223A852B00225C37 /* FormatHelper.swift */,
 				95151CB1221D72C6005F606A /* PrinterDetails+CoreDataClass.swift */,
 				9537B7B3221AB357008F01C8 /* PrintJobHelper.swift */,
+				95243724225256660000CCDF /* Printer.swift */,
 				9537B7B7221AB3B5008F01C8 /* PrinterDetailsModel.swift */,
 				9537B7BB221AB420008F01C8 /* ReceiptConfigurationModel.swift */,
-				9537B7BD221AB477008F01C8 /* SearchPrinterHelper.swift */,
+				9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */,
+				9588D316223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift */,
+				9588D314223A820600225C37 /* PrinterDetails+CoreDataProperties.swift */,
 				9537B7D8221ADA97008F01C8 /* PrintOrderStructs.swift */,
+				9524371E2251EB4A0000CCDF /* XZReportViewController.swift */,
 			);
 			path = printer;
 			sourceTree = "<group>";
@@ -750,6 +784,7 @@
 			children = (
 				9537B7CC221AB7DA008F01C8 /* CheckoutReceiptBuilder.swift */,
 				9537B7CE221AB7EB008F01C8 /* KitchenReceiptBuilder.swift */,
+				9568FB452250B8E50045399A /* StringExtension.swift */,
 				9537B7D0221AB7FE008F01C8 /* PackagingReceiptBuilder.swift */,
 				9537B7D2221AB817008F01C8 /* ReceiptBuilder.swift */,
 				9537B7D4221AB890008F01C8 /* FontsHelper.swift */,
@@ -798,6 +833,7 @@
 				95C1261821930C3D009347E9 /* notesPopup.swift */,
 				956B6C4821872F440025986F /* profilePOpViewController.swift */,
 				951F1F5F22102E4200444CED /* checkoutcell.swift */,
+				9565A98B224A2E5900150B9B /* Checkoutdetails.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -912,6 +948,7 @@
 			files = (
 				956C95C1219AE9B60059EE9E /* heloo.jpg in Resources */,
 				956EACE9221BF8F7001F5A12 /* QuickPay.storyboard in Resources */,
+				9565A98E224BA3AE00150B9B /* marngarage.png in Resources */,
 				178E706920D0EE3500BF0382 /* CheckoutView.storyboard in Resources */,
 				17F4BC57213D010300F45286 /* GeneralView.xib in Resources */,
 				1730627C20F38384005902A2 /* WelcomeView.storyboard in Resources */,
@@ -924,6 +961,7 @@
 				171FAA712119C2E10096721E /* CashView.xib in Resources */,
 				17F856552119876D006BEF5C /* VoucherView.xib in Resources */,
 				957C4412222529A100B482AB /* Database.storyboard in Resources */,
+				952437212251EB8B0000CCDF /* XZReportViewController.storyboard in Resources */,
 				178E705F20D0CE3C00BF0382 /* LoginView.storyboard in Resources */,
 				955B66272212C64A009AA43D /* Subusers.storyboard in Resources */,
 				1783CDE1211035540005CC7B /* ServiceCart.storyboard in Resources */,
@@ -1087,10 +1125,11 @@
 				9537B7D3221AB817008F01C8 /* ReceiptBuilder.swift in Sources */,
 				9573179E2152847A004B92D3 /* LanguagesView.swift in Sources */,
 				9537B7B4221AB357008F01C8 /* PrintJobHelper.swift in Sources */,
-				9537B7BE221AB477008F01C8 /* SearchPrinterHelper.swift in Sources */,
+				9588D31B223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift in Sources */,
 				9547D9F6221432AE001DBB72 /* checkoutdiscount.swift in Sources */,
 				9567AAAF21D4D35100E4A24E /* CheckCarfile.swift in Sources */,
 				9537B7D1221AB7FE008F01C8 /* PackagingReceiptBuilder.swift in Sources */,
+				95243725225256660000CCDF /* Printer.swift in Sources */,
 				957C442022252B2100B482AB /* UpdatesViewController.swift in Sources */,
 				956D277C21E364BE0011BE1A /* barforWelcome.swift in Sources */,
 				9568A0C121CF75DA00BCB213 /* badgelabelView.swift in Sources */,
@@ -1098,6 +1137,7 @@
 				9537B7D9221ADA97008F01C8 /* PrintOrderStructs.swift in Sources */,
 				9567AAAD21D4C42F00E4A24E /* CheckCarTableviewController.swift in Sources */,
 				956EE94E21D39C8B00C37628 /* notesPopup.swift in Sources */,
+				9575AD0F223E7F8100CC3764 /* Garage.xcdatamodeld in Sources */,
 				955FFD0121BE98ED00876FB5 /* CallEngine.swift in Sources */,
 				957C4408222526CC00B482AB /* GeneralViewController.swift in Sources */,
 				178E706F20D0EFEB00BF0382 /* MechanicView.swift in Sources */,
@@ -1107,11 +1147,13 @@
 				955EC29F21A3042400F16253 /* HistoryModel.swift in Sources */,
 				9537B7C8221AB712008F01C8 /* ReceiptPrintable.swift in Sources */,
 				95647B65219C517E0071D5D6 /* popModel.swift in Sources */,
+				9588D315223A820600225C37 /* PrinterDetails+CoreDataProperties.swift in Sources */,
 				95837848219870700085EB05 /* ReceiptCell.swift in Sources */,
 				955B662D2212C7B0009AA43D /* SubuserModel.swift in Sources */,
 				956805FE2192DE3800737C1F /* MechanicCell.swift in Sources */,
 				9537B7BC221AB420008F01C8 /* ReceiptConfigurationModel.swift in Sources */,
 				9563DDFF21C67A7800BBC461 /* mechanicModel.swift in Sources */,
+				9575AD0A223E540700CC3764 /* SearchPrinterHelper.swift in Sources */,
 				955AB8AF21F5B8CB00091813 /* InternetCheck.swift in Sources */,
 				17A67B4620CF78BF00660B7A /* CustomTextfield.swift in Sources */,
 				954A16A221B6C93E00ABF0CD /* modelCar.swift in Sources */,
@@ -1123,8 +1165,10 @@
 				17FEF6C620CCEA1600EC99C2 /* ViewController.swift in Sources */,
 				178E706D20D0EFD000BF0382 /* CheckoutView.swift in Sources */,
 				957C43EA2222761B00B482AB /* Mechanicpop.swift in Sources */,
+				9568FB462250B8E50045399A /* StringExtension.swift in Sources */,
 				95647B61219C50720071D5D6 /* popcell.swift in Sources */,
 				955B66292212C717009AA43D /* Subusers.swift in Sources */,
+				9588D317223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift in Sources */,
 				951C139121539DF500BDA923 /* UpdatesView.swift in Sources */,
 				9537B7B8221AB3B5008F01C8 /* PrinterDetailsModel.swift in Sources */,
 				955BDD1421B5558800F95542 /* makeCarModel.swift in Sources */,
@@ -1136,6 +1180,7 @@
 				9557B18A21C1407C007C14D2 /* CustomSearchField.swift in Sources */,
 				95AA6BD1221190D1005D9B44 /* checkoutItems.swift in Sources */,
 				17FEF6C420CCEA1600EC99C2 /* AppDelegate.swift in Sources */,
+				9524371F2251EB4A0000CCDF /* XZReportViewController.swift in Sources */,
 				17F856542119876D006BEF5C /* VoucherView.swift in Sources */,
 				1783CDDF211034A10005CC7B /* ServiceCartView.swift in Sources */,
 				951C13992153BF5800BDA923 /* WelcomeModel.swift in Sources */,
@@ -1162,6 +1207,7 @@
 				957C440C2225271100B482AB /* HardwareViewController.swift in Sources */,
 				957D4F3B2158EB5400262AA1 /* HeaderView.swift in Sources */,
 				17CB27FF20FB235D00B684CA /* FooterViewWithTabs.swift in Sources */,
+				95243723225228520000CCDF /* Xreport.swift in Sources */,
 				176F2B4720E4BC71008DB208 /* Reachability.swift in Sources */,
 				951C13962153BEE900BDA923 /* Welcomecell.swift in Sources */,
 				955B49842202DB5C00EDC98B /* checkCarPost.swift in Sources */,
@@ -1172,12 +1218,14 @@
 				95383E4E21512235003DE261 /* ReceiptView.swift in Sources */,
 				957C43EC222276CB00B482AB /* MechanicpopCell.swift in Sources */,
 				956EACEF221C090B001F5A12 /* DataController.swift in Sources */,
+				9588D319223A852B00225C37 /* FormatHelper.swift in Sources */,
 				955BDD1621B6891C00F95542 /* modelCarModel.swift in Sources */,
 				955B662B2212C74A009AA43D /* SubusersCell.swift in Sources */,
 				955EA02321F0B38F0049A1F0 /* BadgeSwift.swift in Sources */,
 				95537F4D21BFE0F5003B5B25 /* UIColor.swift in Sources */,
 				9537B7D5221AB890008F01C8 /* FontsHelper.swift in Sources */,
 				9575C4602201D4E0001608ED /* CheckcarPostData.swift in Sources */,
+				9565A98C224A2E5900150B9B /* Checkoutdetails.swift in Sources */,
 				955EC29D21A2FFF800F16253 /* HistoryCell.swift in Sources */,
 				17C66F6A21008FB1003CAA3D /* CarScannerView.swift in Sources */,
 				956B6C552188867B0025986F /* HistoryCar.swift in Sources */,
@@ -1541,6 +1589,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9575AD0D223E7F8100CC3764 /* Garage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9575AD0E223E7F8100CC3764 /* Garage.xcdatamodel */,
+			);
+			currentVersion = 9575AD0E223E7F8100CC3764 /* Garage.xcdatamodel */;
+			path = Garage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 17FEF6B820CCEA1600EC99C2 /* Project object */;
 }

@@ -187,6 +187,7 @@
                     <connections>
                         <outlet property="BayCollectionView" destination="QNS-Vk-egC" id="2rN-dw-Ggy"/>
                         <outlet property="CarNme" destination="Ha9-hr-bEq" id="ea7-UZ-OG2"/>
+                        <outlet property="editoutlet" destination="jpF-iH-GFD" id="dRX-vK-gMq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4Z-XY-bUh" userLabel="First Responder" sceneMemberID="firstResponder"/>

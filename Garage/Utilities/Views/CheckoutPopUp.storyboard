@@ -308,8 +308,8 @@
                                                                     <color key="textColor" white="0.0" alpha="0.70417033450704225" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-HM-TCm">
-                                                                    <rect key="frame" x="304" y="2.5" width="63.5" height="49.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-HM-TCm">
+                                                                    <rect key="frame" x="292.5" y="2.5" width="73.5" height="49.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                                     <color key="textColor" white="0.0" alpha="0.6968529929577465" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -319,9 +319,9 @@
                                                                 <constraint firstItem="67V-bN-Zch" firstAttribute="centerX" secondItem="252-mk-BsB" secondAttribute="centerX" multiplier="2.3" id="3ed-ca-PQk"/>
                                                                 <constraint firstItem="252-mk-BsB" firstAttribute="centerY" secondItem="0Ey-CP-XIB" secondAttribute="centerY" id="6p9-29-nqH"/>
                                                                 <constraint firstItem="67V-bN-Zch" firstAttribute="width" secondItem="252-mk-BsB" secondAttribute="width" multiplier="0.4" id="Dwm-e1-OLF"/>
-                                                                <constraint firstItem="zz2-HM-TCm" firstAttribute="width" secondItem="67V-bN-Zch" secondAttribute="width" multiplier="1.2" id="M9j-HQ-o0e"/>
+                                                                <constraint firstItem="zz2-HM-TCm" firstAttribute="width" secondItem="67V-bN-Zch" secondAttribute="width" multiplier="1.4" id="M9j-HQ-o0e"/>
                                                                 <constraint firstItem="252-mk-BsB" firstAttribute="width" secondItem="0Ey-CP-XIB" secondAttribute="width" multiplier="0.35" id="MO7-Ps-yj2"/>
-                                                                <constraint firstItem="zz2-HM-TCm" firstAttribute="centerX" secondItem="67V-bN-Zch" secondAttribute="centerX" multiplier="1.58" id="Te3-Nk-IN4"/>
+                                                                <constraint firstItem="zz2-HM-TCm" firstAttribute="centerX" secondItem="67V-bN-Zch" secondAttribute="centerX" multiplier="1.55" id="Te3-Nk-IN4"/>
                                                                 <constraint firstItem="252-mk-BsB" firstAttribute="height" secondItem="0Ey-CP-XIB" secondAttribute="height" multiplier="0.9" id="XgV-0f-Szg"/>
                                                                 <constraint firstItem="zz2-HM-TCm" firstAttribute="centerY" secondItem="67V-bN-Zch" secondAttribute="centerY" id="abl-5q-ARJ"/>
                                                                 <constraint firstItem="252-mk-BsB" firstAttribute="centerX" secondItem="0Ey-CP-XIB" secondAttribute="centerX" multiplier="0.49" id="dAK-is-TEU"/>

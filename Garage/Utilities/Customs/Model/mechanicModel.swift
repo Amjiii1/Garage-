@@ -18,24 +18,29 @@ struct Orderdetail {
     let ItemName: String
     let ItemImage: String
     let Quantity: Int
-    let Price: Int
+    let Price: Double
     let TotalCost: Int
     let LOYALTYPoints: Int
    // let isComplementory: Bool
     let StatusID: Int
     let ItemDate: String
     let Mode: String
-   // var orderPrinterType: PrinterType?
+    var orderPrinterType: PrinterType?
+    
     
     
 }
 struct CompanyInfo {
-    
+    var logo: UIImage = UIImage()
     var name: String = ""
     var phoneNumber: String = ""
     var valueAddedTaxNumber: String = ""
+    var cashier: String = "-"
+    var vin: String = "-"
     var snapchatLink: String = ""
     var instagranLink: String = ""
+    
+    
 }
 
 

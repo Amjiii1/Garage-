@@ -8,14 +8,8 @@
 
 import UIKit
 
-class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, Epos2PtrReceiveDelegate, UIPopoverPresentationControllerDelegate {
+class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
-    let PAGE_AREA_HEIGHT: Int = 500
-    let PAGE_AREA_WIDTH: Int = 500
-    let FONT_A_HEIGHT: Int = 24
-    let FONT_A_WIDTH: Int = 12
-    let BARCODE_HEIGHT_POS: Int = 70
-    let BARCODE_WIDTH_POS: Int = 110
     
     
     @IBOutlet weak var buttonstack: UIStackView!
@@ -38,16 +32,16 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
     private weak var subView: UIView?
+    var orderdetails = [Checkoutdetails]()
+    
+
     
     
-    
-    
-    var printer: Epos2Printer?
-    var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
-    var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
-    
-    
-    
+//    var printer: Epos2Printer?
+//    var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
+//    var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
+    var cartItemStructArray = [ReceiptModel]()
+var printerDetailModelUICells: [PrinterDetailCellUIModel]!
     
     let viewModel = CheckoutViewModel()
     var dummyData = ["Discount","SubTotal","VAT \(Constants.percent)%"]
@@ -64,7 +58,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             tabButtonaction(button)
         }
         
-        
         //  buttonstack.layer.cornerRadius = 14.0
         tenderedbalance.delegate = self
         viewModel.checkoutVC = self
@@ -74,16 +67,17 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         discouttableview.dataSource = self
         checkout_tableview.separatorStyle = .none
         discouttableview.separatorStyle = .none
-        self.checkoutoutlet.setTitle("\(Constants.checkoutGrandtotal) SAR", for: .normal)
+        self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)  //(format: "%.2f", (Constants.checkoutGrandtotal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         Constants.currentdate = dateString
-        grandtotalLbl.text = "\(Constants.checkoutGrandtotal)"
+
+        grandtotalLbl.text = String(format: "%.2f", Constants.checkoutGrandtotal)
         tenderedbalance.textAlignment = NSTextAlignment.left
         tenderedbalance.text = "0"
-        balancetxtf.text = "\(Constants.checkoutGrandtotal)"
+        balancetxtf.text = String(format: "%.2f", Constants.checkoutGrandtotal)
         tenderedbalance.addTarget(self, action: #selector(tendrdFieldDidChange(_:)), for: .editingChanged)
         let result = Epos2Log.setLogSettings(EPOS2_PERIOD_TEMPORARY.rawValue, output: EPOS2_OUTPUT_STORAGE.rawValue, ipAddress:nil, port:0, logSize:1, logLevel:EPOS2_LOGLEVEL_LOW.rawValue)
         
@@ -104,9 +98,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func tendrdFieldDidChange(_ textField: UITextField) {
         if tenderedbalance.text == "0" {
-            balancetxtf.text = "\(Constants.checkoutGrandtotal)"
+            balancetxtf.text = String(format: "%.2f", Constants.checkoutGrandtotal)
         }  else if tenderedbalance.text == "" {
-            balancetxtf.text = "\(Constants.checkoutGrandtotal)"
+            balancetxtf.text = String(format: "%.2f", Constants.checkoutGrandtotal)
         } else {
             //
             let intFromString = Double(tenderedbalance.text!)
@@ -114,7 +108,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 balancetxtf.text = "0"
             } else {
                 let blnce = Constants.checkoutGrandtotal - intFromString!
-                balancetxtf.text = "\(blnce)"
+                balancetxtf.text = String(format: "%.2f", blnce)
             }
             
         }
@@ -125,7 +119,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func userNotification(notification: Notification) {
         if Constants.workerflag == 1 {
             self.workerBtn.setTitle("\(Constants.FullName)", for: .normal)
+            Constants.checkoutmechanic = Constants.FullName
             workerid = Constants.SubUserID
+            
             Constants.workerflag = 0
         } else {
             self.assistantBtn.setTitle("\(Constants.FullName)", for: .normal)
@@ -177,7 +173,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "dummycell") as! checkoutdiscount
             cell2.label.text = dummyData[indexPath.row]
             let tax = amount[indexPath.row]
-            cell2.amount.text = String(tax)
+            cell2.amount.text = String(format: "%.2f", tax)//String(tax)
             cell2.selectionStyle = .none
             //            cell2.textLabel!.text = dummyData[indexPath.row]
             return cell2
@@ -325,37 +321,34 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
+    
+    
     func checkoutOrder() {
-        //  let test = String(Constants.checkoutGrandtotal)
         
+        let test = ["CardNumber": "", "CardHolderName": "", "CardType": "", "AmountPaid": Constants.checkoutGrandtotal.myRounded(toPlaces: 2), "AmountDiscount": 0.0, "PaymentMode": 1] as [String : Any]
+
         let test2 = Double(tenderedbalance.text!) ?? Double.nan
         
-        if (test2) >= Constants.checkoutGrandtotal  {
+        if (test2) >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2)  {
             
             let parameters = [   Constants.OrderID: Constants.checkoutorderid,
                                  Constants.SessionID: Constants.sessions,
-                                 "PaymentMode": 0,
+                                 "PaymentMode": 1,
                                  Constants.Date: Constants.currentdate,
-                                 Constants.AmountTotal: Constants.subtotal,
+                                 Constants.AmountTotal: Constants.subtotal.myRounded(toPlaces: 2),
                                  "OrderStatus": 103,
                                  Constants.AmountPaid: tenderedbalance.text!,
-                                 Constants.GrandTotal: Constants.checkoutGrandtotal,
+                                 Constants.GrandTotal: Constants.checkoutGrandtotal.myRounded(toPlaces: 2),
                                  "AmountDiscount": 0,
                                  "PartialPayment": 0,
                                  "Gratuity": 0,
                                  "ServiceCharges": 0,
                                  Constants.CarID:  Constants.checkoutcarid,
-                                 Constants.Tax: Constants.checkouttax,
+                                 Constants.Tax: Constants.checkouttax.myRounded(toPlaces: 2),
                                  Constants.WorkerID: workerid,
                                  Constants.AssistantID: assistantid,
                                  "AmountComplementary": 0,
-                                 "CheckoutDetails": [
-                                    "CardNumber": "",
-                                    "CardHolderName": "",
-                                    "CardType": "",
-                                    Constants.AmountPaid: Constants.checkoutGrandtotal,
-                                    "AmountDiscount": 0,
-                                    "PaymentMode": 1    ]] as [String : Any]
+                                 "CheckoutDetails": [test] ] as [String : Any]
             
             guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
             var request = URLRequest(url: url)
@@ -391,7 +384,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             ToastView.show(message: newmessage!, controller: self)
                             
                             DispatchQueue.main.async {
-                                self.runPrinterReceiptSequence()
+                                self.printerreceipt()
+                             //   self.runPrinterReceiptSequence()
                                 NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
                                 self.dismiss(animated: true, completion: nil)
                                 self.grandtotalBtn.isUserInteractionEnabled = true
@@ -487,19 +481,46 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
+       
         
-        
-        
-        
-      //    PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: Orderdetail, cartItems: [ReceiptModel])
         self.grandtotalBtn.isUserInteractionEnabled = true
-        if Constants.Printer == "" {
-            alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
-        } else {
+//        print(Constants.Printer)
+//        if Constants.Printer == "" {
+//            alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
+//        } else {
             checkoutOrder()
+      //  }
+        
+
+    }
+    
+    
+    
+    func printerreceipt() {
+        
+        for receipt in Checkoutstruct.sentitems {
+            
+            let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
+            
+            cartItemStructArray.append(cartItemStruct)
+            self.dismiss(animated: true, completion: nil)
+            
+            
         }
         
+        
+        
+        
+        
+        
+        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Ammjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
+        
+        PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
+        
     }
+    
+    
+    
     
     
     
@@ -565,549 +586,549 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     //    }
     
-    func runPrinterReceiptSequence() -> Bool {
-        
-        if !initializePrinterObject() {
-            return false
-        }
-        
-        if !createReceiptData() {
-            finalizePrinterObject()
-            return false
-        }
-        
-        if !printData() {
-            finalizePrinterObject()
-            return false
-        }
-        
-        return true
-    }
-    
-    func runPrinterCouponSequence() -> Bool {
-        
-        if !initializePrinterObject() {
-            return false
-        }
-        
-        if !createCouponData() {
-            finalizePrinterObject()
-            return false
-        }
-        
-        if !printData() {
-            finalizePrinterObject()
-            return false
-        }
-        
-        return true
-    }
-    
-    func createReceiptData() -> Bool {
-        
-        var result = EPOS2_SUCCESS.rawValue
-        
-        let textData: NSMutableString = NSMutableString()
-        let logoData = UIImage(named: "store1.png")
-        
-        if logoData == nil {
-            return false
-        }
-        
-        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextAlign")
-            return false;
-        }
-        
-        result = printer!.add(logoData, x: 0, y:0,
-                              width:Int(logoData!.size.width),
-                              height:Int(logoData!.size.height),
-                              color:EPOS2_COLOR_1.rawValue,
-                              mode:EPOS2_MODE_MONO.rawValue,
-                              halftone:EPOS2_HALFTONE_DITHER.rawValue,
-                              brightness:Double(EPOS2_PARAM_DEFAULT),
-                              compress:EPOS2_COMPRESS_AUTO.rawValue)
-        
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addImage")
-            return false
-        }
-        
-        
-        // Section 1 : Store information
-        result = printer!.addFeedLine(1)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addFeedLine")
-            return false
-        }
-        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextAlign")
-            return false;
-        }
-        textData.append("AL MALAZ BRANCH\n")
-        textData.append("Phone No. 0568833923\n")
-        textData.append("\n")
-        //textData.append("\(Constants.currentdate)\n")
-        // textData.append("Majid Bin Abdul Aziz Road\n")
-        textData.append("VAT# 12345678912345\n")
-        textData.append("\n")
-        textData.append("Plate No. \(Constants.checkoutplatenmb)\n")
-        textData.append("\n")
-        textData.append("VIN: \(Constants.checkoutvin)\n")
-        textData.append("\n\n")
-        textData.append("------------------------------\n")
-        textData.append("\(Constants.currentdate)\n")
-        textData.append("------------------------------\n")
-        textData.append("\(Constants.checkoutcustm)                       \(Constants.checkoutbayname)\n")
-        textData.append("\(Constants.checkoutcarmake)                      \(Constants.checkoutcarmodel)\n")
-        textData.append("00km                       \(Constants.checkoutyear)\n")
-        
-        textData.append("------------------------------\n\n")
-        result = printer!.addText(textData as String)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false;
-        }
-        textData.setString("")
-        
-        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextAlign")
-            return false;
-        }
-        
-        // Section 2 : Purchaced items
-        for receipt in Checkoutstruct.sentitems {
-            textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
-            //        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
-            //        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
-            //        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
-            //        textData.append("474 TRIPOD              8.99 R\n")
-            //        textData.append("433 BLK LOGO PRNTED ZO  7.99 R\n")
-            //        textData.append("458 AQUA MICROTERRY SC  6.99 R\n")
-            //        textData.append("493 30L BLK FF DRESS   16.99 R\n")
-            //        textData.append("407 LEVITATING DESKTOP  7.99 R\n")
-            //        textData.append("441 **Blue Overprint P  2.99 R\n")
-            //        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
-            //        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
-        }
-        textData.append("\n")
-        textData.append("------------------------------\n")
-        result = printer!.addText(textData as String)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false;
-        }
-        textData.setString("")
-        
-        
-        // Section 3 : Payment infomation
-        textData.append("SUBTOTAL                 \( Constants.subtotal) SR\n");
-         textData.append("Discount                   0.0 SR\n");
-        textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax) SR\n\n");
-        result = printer!.addText(textData as String)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false
-        }
-        textData.setString("")
-        
-        result = printer!.addTextSize(2, height:2)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextSize")
-            return false
-        }
-        
-        result = printer!.addText("TOTAL    \(Constants.checkoutGrandtotal) SR\n")
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false;
-        }
-        
-        result = printer!.addTextSize(1, height:1)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextSize")
-            return false;
-        }
-        
-        result = printer!.addFeedLine(1)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addFeedLine")
-            return false;
-        }
-        
-        textData.append("CASH                    \(Constants.checkoutGrandtotal)\n")
-        textData.append("------------------------------\n")
-        result = printer!.addText(textData as String)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false
-        }
-        textData.setString("")
-        
-        // Section 4 : Advertisement
-        textData.append("** Have a safe drive **\n")
-        //  textData.append("Sign Up and Save !\n")
-        textData.append("Garage.sa\n")
-        result = printer!.addText(textData as String)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false;
-        }
-        textData.setString("")
-        
-        result = printer!.addFeedLine(2)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addFeedLine")
-            return false
-        }
-        
-        //        result = printer!.addBarcode("01209457",
-        //                                     type:EPOS2_BARCODE_CODE39.rawValue,
-        //                                     hri:EPOS2_HRI_BELOW.rawValue,
-        //                                     font:EPOS2_FONT_A.rawValue,
-        //                                     width:barcodeWidth,
-        //                                     height:barcodeHeight)
-        //        if result != EPOS2_SUCCESS.rawValue {
-        //            MessageView.showErrorEpos(result, method:"addBarcode")
-        //            return false
-        //        }
-        //
-        result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addCut")
-            return false
-        }
-        
-        return true
-    }
-    
-    func createCouponData() -> Bool {
-        let barcodeWidth = 2
-        let barcodeHeight = 64
-        
-        var result = EPOS2_SUCCESS.rawValue
-        
-        if printer == nil {
-            return false
-        }
-        
-        let coffeeData = UIImage(named: "coffee1.png")
-        let wmarkData = UIImage(named: "wmark1.png")
-        
-        if coffeeData == nil || wmarkData == nil {
-            return false
-        }
-        
-        result = printer!.addPageBegin()
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPageBegin")
-            return false
-        }
-        
-        result = printer!.addPageArea(0, y:0, width:PAGE_AREA_WIDTH, height:PAGE_AREA_HEIGHT)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPageArea")
-            return false
-        }
-        
-        result = printer!.addPageDirection(EPOS2_DIRECTION_TOP_TO_BOTTOM.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPageDirection")
-            return false
-        }
-        
-        result = printer!.addPagePosition(0, y:Int(coffeeData!.size.height))
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPagePosition")
-            return false
-        }
-        
-        result = printer!.add(coffeeData, x:0, y:0,
-                              width:Int(coffeeData!.size.width),
-                              height:Int(coffeeData!.size.height),
-                              color:EPOS2_PARAM_DEFAULT,
-                              mode:EPOS2_PARAM_DEFAULT,
-                              halftone:EPOS2_PARAM_DEFAULT,
-                              brightness:3,
-                              compress:EPOS2_PARAM_DEFAULT)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addImage")
-            return false
-        }
-        
-        result = printer!.addPagePosition(0, y:Int(wmarkData!.size.height))
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPagePosition")
-            return false
-        }
-        
-        result = printer!.add(wmarkData, x:0, y:0,
-                              width:Int(wmarkData!.size.width),
-                              height:Int(wmarkData!.size.height),
-                              color:EPOS2_PARAM_DEFAULT,
-                              mode:EPOS2_PARAM_DEFAULT,
-                              halftone:EPOS2_PARAM_DEFAULT,
-                              brightness:Double(EPOS2_PARAM_DEFAULT),
-                              compress:EPOS2_PARAM_DEFAULT)
-        
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addImage")
-            return false
-        }
-        
-        result = printer!.addPagePosition(FONT_A_WIDTH * 4, y:(PAGE_AREA_HEIGHT / 2) - (FONT_A_HEIGHT * 2))
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPagePosition")
-            return false
-        }
-        
-        result = printer!.addTextSize(3, height:3)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextSize")
-            return false
-        }
-        
-        result = printer!.addTextStyle(EPOS2_PARAM_DEFAULT, ul:EPOS2_PARAM_DEFAULT, em:EPOS2_TRUE, color:EPOS2_PARAM_DEFAULT)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextStyle")
-            return false
-        }
-        
-        result = printer!.addTextSmooth(EPOS2_TRUE)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addTextSmooth")
-            return false
-        }
-        
-        result = printer!.addText("FREE Coffee\n")
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addText")
-            return false
-        }
-        
-        result = printer!.addPagePosition((PAGE_AREA_WIDTH / barcodeWidth) - BARCODE_WIDTH_POS, y:Int(coffeeData!.size.height) + BARCODE_HEIGHT_POS)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPagePosition")
-            return false
-        }
-        
-        result = printer!.addBarcode("01234567890", type:EPOS2_BARCODE_UPC_A.rawValue, hri:EPOS2_PARAM_DEFAULT, font: EPOS2_PARAM_DEFAULT, width:barcodeWidth, height:barcodeHeight)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addBarcode")
-            return false
-        }
-        
-        result = printer!.addPageEnd()
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addPageEnd")
-            return false
-        }
-        
-        result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"addCut")
-            return false
-        }
-        
-        return true
-    }
-    
-    func printData() -> Bool {
-        var status: Epos2PrinterStatusInfo?
-        
-        if printer == nil {
-            return false
-        }
-        
-        if !connectPrinter() {
-            return false
-        }
-        
-        status = printer!.getStatus()
-        // dispPrinterWarnings(status)
-        
-        if !isPrintable(status) {
-            MessageView.show(makeErrorMessage(status))
-            printer!.disconnect()
-            return false
-        }
-        
-        let result = printer!.sendData(Int(EPOS2_PARAM_DEFAULT))
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"sendData")
-            printer!.disconnect()
-            return false
-        }
-        
-        return true
-    }
-    
-    func initializePrinterObject() -> Bool {
-        printer = Epos2Printer(printerSeries: valuePrinterSeries.rawValue, lang: valuePrinterModel.rawValue)
-        
-        if printer == nil {
-            return false
-        }
-        printer!.setReceiveEventDelegate(self)
-        
-        return true
-    }
-    
-    func finalizePrinterObject() {
-        if printer == nil {
-            return
-        }
-        
-        printer!.clearCommandBuffer()
-        printer!.setReceiveEventDelegate(nil)
-        printer = nil
-    }
-    
-    func connectPrinter() -> Bool {
-        var result: Int32 = EPOS2_SUCCESS.rawValue
-        
-        if printer == nil {
-            return false
-        }
-        
-        result = printer!.connect(Constants.Printer, timeout:Int(EPOS2_PARAM_DEFAULT))
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"connect")
-            return false
-        }
-        
-        result = printer!.beginTransaction()
-        if result != EPOS2_SUCCESS.rawValue {
-            MessageView.showErrorEpos(result, method:"beginTransaction")
-            printer!.disconnect()
-            return false
-            
-        }
-        return true
-    }
-    
-    func disconnectPrinter() {
-        var result: Int32 = EPOS2_SUCCESS.rawValue
-        
-        if printer == nil {
-            return
-        }
-        
-        result = printer!.endTransaction()
-        if result != EPOS2_SUCCESS.rawValue {
-            DispatchQueue.main.async(execute: {
-                MessageView.showErrorEpos(result, method:"endTransaction")
-            })
-        }
-        
-        result = printer!.disconnect()
-        if result != EPOS2_SUCCESS.rawValue {
-            DispatchQueue.main.async(execute: {
-                MessageView.showErrorEpos(result, method:"disconnect")
-            })
-        }
-        
-        finalizePrinterObject()
-    }
-    func isPrintable(_ status: Epos2PrinterStatusInfo?) -> Bool {
-        if status == nil {
-            return false
-        }
-        
-        if status!.connection == EPOS2_FALSE {
-            return false
-        }
-        else if status!.online == EPOS2_FALSE {
-            return false
-        }
-        else {
-            // print available
-        }
-        return true
-    }
-    
-    func onPtrReceive(_ printerObj: Epos2Printer!, code: Int32, status: Epos2PrinterStatusInfo!, printJobId: String!) {
-        MessageView.showResult(code, errMessage: makeErrorMessage(status))
-        
-        //dispPrinterWarnings(status)
-        //    updateButtonState(true)
-        
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
-            self.disconnectPrinter()
-        })
-    }
-    
-    //    func dispPrinterWarnings(_ status: Epos2PrinterStatusInfo?) {
-    //        if status == nil {
-    //            return
-    //        }
-    //
-    //        //        textWarnings.text = ""
-    //
-    //        if status!.paper == EPOS2_PAPER_NEAR_END.rawValue {
-    //          //  textWarnings.text = NSLocalizedString("warn_receipt_near_end", comment:"")
-    //        }
-    //
-    //        if status!.batteryLevel == EPOS2_BATTERY_LEVEL_1.rawValue {
-    //         //   textWarnings.text = NSLocalizedString("warn_battery_near_end", comment:"")
-    //        }
-    //    }
-    
-    func makeErrorMessage(_ status: Epos2PrinterStatusInfo?) -> String {
-        let errMsg = NSMutableString()
-        if status == nil {
-            return ""
-        }
-        
-        if status!.online == EPOS2_FALSE {
-            errMsg.append(NSLocalizedString("err_offline", comment:""))
-        }
-        if status!.connection == EPOS2_FALSE {
-            errMsg.append(NSLocalizedString("err_no_response", comment:""))
-        }
-        if status!.coverOpen == EPOS2_TRUE {
-            errMsg.append(NSLocalizedString("err_cover_open", comment:""))
-        }
-        if status!.paper == EPOS2_PAPER_EMPTY.rawValue {
-            errMsg.append(NSLocalizedString("err_receipt_end", comment:""))
-        }
-        if status!.paperFeed == EPOS2_TRUE || status!.panelSwitch == EPOS2_SWITCH_ON.rawValue {
-            errMsg.append(NSLocalizedString("err_paper_feed", comment:""))
-        }
-        if status!.errorStatus == EPOS2_MECHANICAL_ERR.rawValue || status!.errorStatus == EPOS2_AUTOCUTTER_ERR.rawValue {
-            errMsg.append(NSLocalizedString("err_autocutter", comment:""))
-            errMsg.append(NSLocalizedString("err_need_recover", comment:""))
-        }
-        if status!.errorStatus == EPOS2_UNRECOVER_ERR.rawValue {
-            errMsg.append(NSLocalizedString("err_unrecover", comment:""))
-        }
-        
-        if status!.errorStatus == EPOS2_AUTORECOVER_ERR.rawValue {
-            if status!.autoRecoverError == EPOS2_HEAD_OVERHEAT.rawValue {
-                errMsg.append(NSLocalizedString("err_overheat", comment:""))
-                errMsg.append(NSLocalizedString("err_head", comment:""))
-            }
-            if status!.autoRecoverError == EPOS2_MOTOR_OVERHEAT.rawValue {
-                errMsg.append(NSLocalizedString("err_overheat", comment:""))
-                errMsg.append(NSLocalizedString("err_motor", comment:""))
-            }
-            if status!.autoRecoverError == EPOS2_BATTERY_OVERHEAT.rawValue {
-                errMsg.append(NSLocalizedString("err_overheat", comment:""))
-                errMsg.append(NSLocalizedString("err_battery", comment:""))
-            }
-            if status!.autoRecoverError == EPOS2_WRONG_PAPER.rawValue {
-                errMsg.append(NSLocalizedString("err_wrong_paper", comment:""))
-            }
-        }
-        if status!.batteryLevel == EPOS2_BATTERY_LEVEL_0.rawValue {
-            errMsg.append(NSLocalizedString("err_battery_real_end", comment:""))
-        }
-        
-        return errMsg as String
-    }
+//    func runPrinterReceiptSequence() -> Bool {
+//
+//        if !initializePrinterObject() {
+//            return false
+//        }
+//
+//        if !createReceiptData() {
+//            finalizePrinterObject()
+//            return false
+//        }
+//
+//        if !printData() {
+//            finalizePrinterObject()
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//    func runPrinterCouponSequence() -> Bool {
+//
+//        if !initializePrinterObject() {
+//            return false
+//        }
+//
+//        if !createCouponData() {
+//            finalizePrinterObject()
+//            return false
+//        }
+//
+//        if !printData() {
+//            finalizePrinterObject()
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//    func createReceiptData() -> Bool {
+//
+//        var result = EPOS2_SUCCESS.rawValue
+//
+//        let textData: NSMutableString = NSMutableString()
+//        let logoData = UIImage(named: "store1.png")
+//
+//        if logoData == nil {
+//            return false
+//        }
+//
+//        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextAlign")
+//            return false;
+//        }
+//
+//        result = printer!.add(logoData, x: 0, y:0,
+//                              width:Int(logoData!.size.width),
+//                              height:Int(logoData!.size.height),
+//                              color:EPOS2_COLOR_1.rawValue,
+//                              mode:EPOS2_MODE_MONO.rawValue,
+//                              halftone:EPOS2_HALFTONE_DITHER.rawValue,
+//                              brightness:Double(EPOS2_PARAM_DEFAULT),
+//                              compress:EPOS2_COMPRESS_AUTO.rawValue)
+//
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addImage")
+//            return false
+//        }
+//
+//
+//        // Section 1 : Store information
+//        result = printer!.addFeedLine(1)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addFeedLine")
+//            return false
+//        }
+//        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextAlign")
+//            return false;
+//        }
+//        textData.append("AL MALAZ BRANCH\n")
+//        textData.append("Phone No. 0568833923\n")
+//        textData.append("\n")
+//        //textData.append("\(Constants.currentdate)\n")
+//        // textData.append("Majid Bin Abdul Aziz Road\n")
+//        textData.append("VAT# 12345678912345\n")
+//        textData.append("\n")
+//        textData.append("Plate No. \(Constants.checkoutplatenmb)\n")
+//        textData.append("\n")
+//        textData.append("VIN: \(Constants.checkoutvin)\n")
+//        textData.append("\n\n")
+//        textData.append("------------------------------\n")
+//        textData.append("\(Constants.currentdate)\n")
+//        textData.append("------------------------------\n")
+//        textData.append("\(Constants.checkoutcustm)                       \(Constants.checkoutbayname)\n")
+//        textData.append("\(Constants.checkoutcarmake)                      \(Constants.checkoutcarmodel)\n")
+//        textData.append("00km                       \(Constants.checkoutyear)\n")
+//
+//        textData.append("------------------------------\n\n")
+//        result = printer!.addText(textData as String)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false;
+//        }
+//        textData.setString("")
+//
+//        result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextAlign")
+//            return false;
+//        }
+//
+//        // Section 2 : Purchaced items
+//        for receipt in Checkoutstruct.sentitems {
+//            textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
+//            //        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
+//            //        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
+//            //        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
+//            //        textData.append("474 TRIPOD              8.99 R\n")
+//            //        textData.append("433 BLK LOGO PRNTED ZO  7.99 R\n")
+//            //        textData.append("458 AQUA MICROTERRY SC  6.99 R\n")
+//            //        textData.append("493 30L BLK FF DRESS   16.99 R\n")
+//            //        textData.append("407 LEVITATING DESKTOP  7.99 R\n")
+//            //        textData.append("441 **Blue Overprint P  2.99 R\n")
+//            //        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
+//            //        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
+//        }
+//        textData.append("\n")
+//        textData.append("------------------------------\n")
+//        result = printer!.addText(textData as String)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false;
+//        }
+//        textData.setString("")
+//
+//
+//        // Section 3 : Payment infomation
+//        textData.append("SUBTOTAL                 \( Constants.subtotal) SR\n");
+//         textData.append("Discount                   0.0 SR\n");
+//        textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax) SR\n\n");
+//        result = printer!.addText(textData as String)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false
+//        }
+//        textData.setString("")
+//
+//        result = printer!.addTextSize(2, height:2)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextSize")
+//            return false
+//        }
+//
+//        result = printer!.addText("TOTAL    \(Constants.checkoutGrandtotal) SR\n")
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false;
+//        }
+//
+//        result = printer!.addTextSize(1, height:1)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextSize")
+//            return false;
+//        }
+//
+//        result = printer!.addFeedLine(1)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addFeedLine")
+//            return false;
+//        }
+//
+//        textData.append("CASH                    \(Constants.checkoutGrandtotal)\n")
+//        textData.append("------------------------------\n")
+//        result = printer!.addText(textData as String)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false
+//        }
+//        textData.setString("")
+//
+//        // Section 4 : Advertisement
+//        textData.append("** Have a safe drive **\n")
+//        //  textData.append("Sign Up and Save !\n")
+//        textData.append("Garage.sa\n")
+//        result = printer!.addText(textData as String)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false;
+//        }
+//        textData.setString("")
+//
+//        result = printer!.addFeedLine(2)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addFeedLine")
+//            return false
+//        }
+//
+//        //        result = printer!.addBarcode("01209457",
+//        //                                     type:EPOS2_BARCODE_CODE39.rawValue,
+//        //                                     hri:EPOS2_HRI_BELOW.rawValue,
+//        //                                     font:EPOS2_FONT_A.rawValue,
+//        //                                     width:barcodeWidth,
+//        //                                     height:barcodeHeight)
+//        //        if result != EPOS2_SUCCESS.rawValue {
+//        //            MessageView.showErrorEpos(result, method:"addBarcode")
+//        //            return false
+//        //        }
+//        //
+//        result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addCut")
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//    func createCouponData() -> Bool {
+//        let barcodeWidth = 2
+//        let barcodeHeight = 64
+//
+//        var result = EPOS2_SUCCESS.rawValue
+//
+//        if printer == nil {
+//            return false
+//        }
+//
+//        let coffeeData = UIImage(named: "coffee1.png")
+//        let wmarkData = UIImage(named: "wmark1.png")
+//
+//        if coffeeData == nil || wmarkData == nil {
+//            return false
+//        }
+//
+//        result = printer!.addPageBegin()
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPageBegin")
+//            return false
+//        }
+//
+//        result = printer!.addPageArea(0, y:0, width:PAGE_AREA_WIDTH, height:PAGE_AREA_HEIGHT)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPageArea")
+//            return false
+//        }
+//
+//        result = printer!.addPageDirection(EPOS2_DIRECTION_TOP_TO_BOTTOM.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPageDirection")
+//            return false
+//        }
+//
+//        result = printer!.addPagePosition(0, y:Int(coffeeData!.size.height))
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPagePosition")
+//            return false
+//        }
+//
+//        result = printer!.add(coffeeData, x:0, y:0,
+//                              width:Int(coffeeData!.size.width),
+//                              height:Int(coffeeData!.size.height),
+//                              color:EPOS2_PARAM_DEFAULT,
+//                              mode:EPOS2_PARAM_DEFAULT,
+//                              halftone:EPOS2_PARAM_DEFAULT,
+//                              brightness:3,
+//                              compress:EPOS2_PARAM_DEFAULT)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addImage")
+//            return false
+//        }
+//
+//        result = printer!.addPagePosition(0, y:Int(wmarkData!.size.height))
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPagePosition")
+//            return false
+//        }
+//
+//        result = printer!.add(wmarkData, x:0, y:0,
+//                              width:Int(wmarkData!.size.width),
+//                              height:Int(wmarkData!.size.height),
+//                              color:EPOS2_PARAM_DEFAULT,
+//                              mode:EPOS2_PARAM_DEFAULT,
+//                              halftone:EPOS2_PARAM_DEFAULT,
+//                              brightness:Double(EPOS2_PARAM_DEFAULT),
+//                              compress:EPOS2_PARAM_DEFAULT)
+//
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addImage")
+//            return false
+//        }
+//
+//        result = printer!.addPagePosition(FONT_A_WIDTH * 4, y:(PAGE_AREA_HEIGHT / 2) - (FONT_A_HEIGHT * 2))
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPagePosition")
+//            return false
+//        }
+//
+//        result = printer!.addTextSize(3, height:3)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextSize")
+//            return false
+//        }
+//
+//        result = printer!.addTextStyle(EPOS2_PARAM_DEFAULT, ul:EPOS2_PARAM_DEFAULT, em:EPOS2_TRUE, color:EPOS2_PARAM_DEFAULT)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextStyle")
+//            return false
+//        }
+//
+//        result = printer!.addTextSmooth(EPOS2_TRUE)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addTextSmooth")
+//            return false
+//        }
+//
+//        result = printer!.addText("FREE Coffee\n")
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addText")
+//            return false
+//        }
+//
+//        result = printer!.addPagePosition((PAGE_AREA_WIDTH / barcodeWidth) - BARCODE_WIDTH_POS, y:Int(coffeeData!.size.height) + BARCODE_HEIGHT_POS)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPagePosition")
+//            return false
+//        }
+//
+//        result = printer!.addBarcode("01234567890", type:EPOS2_BARCODE_UPC_A.rawValue, hri:EPOS2_PARAM_DEFAULT, font: EPOS2_PARAM_DEFAULT, width:barcodeWidth, height:barcodeHeight)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addBarcode")
+//            return false
+//        }
+//
+//        result = printer!.addPageEnd()
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addPageEnd")
+//            return false
+//        }
+//
+//        result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"addCut")
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//    func printData() -> Bool {
+//        var status: Epos2PrinterStatusInfo?
+//
+//        if printer == nil {
+//            return false
+//        }
+//
+//        if !connectPrinter() {
+//            return false
+//        }
+//
+//        status = printer!.getStatus()
+//        // dispPrinterWarnings(status)
+//
+//        if !isPrintable(status) {
+//            MessageView.show(makeErrorMessage(status))
+//            printer!.disconnect()
+//            return false
+//        }
+//
+//        let result = printer!.sendData(Int(EPOS2_PARAM_DEFAULT))
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"sendData")
+//            printer!.disconnect()
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//    func initializePrinterObject() -> Bool {
+//        printer = Epos2Printer(printerSeries: valuePrinterSeries.rawValue, lang: valuePrinterModel.rawValue)
+//
+//        if printer == nil {
+//            return false
+//        }
+//        printer!.setReceiveEventDelegate(self)
+//
+//        return true
+//    }
+//
+//    func finalizePrinterObject() {
+//        if printer == nil {
+//            return
+//        }
+//
+//        printer!.clearCommandBuffer()
+//        printer!.setReceiveEventDelegate(nil)
+//        printer = nil
+//    }
+//
+//    func connectPrinter() -> Bool {
+//        var result: Int32 = EPOS2_SUCCESS.rawValue
+//
+//        if printer == nil {
+//            return false
+//        }
+//
+//        result = printer!.connect(Constants.Printer, timeout:Int(EPOS2_PARAM_DEFAULT))
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"connect")
+//            return false
+//        }
+//
+//        result = printer!.beginTransaction()
+//        if result != EPOS2_SUCCESS.rawValue {
+//            MessageView.showErrorEpos(result, method:"beginTransaction")
+//            printer!.disconnect()
+//            return false
+//
+//        }
+//        return true
+//    }
+//
+//    func disconnectPrinter() {
+//        var result: Int32 = EPOS2_SUCCESS.rawValue
+//
+//        if printer == nil {
+//            return
+//        }
+//
+//        result = printer!.endTransaction()
+//        if result != EPOS2_SUCCESS.rawValue {
+//            DispatchQueue.main.async(execute: {
+//                MessageView.showErrorEpos(result, method:"endTransaction")
+//            })
+//        }
+//
+//        result = printer!.disconnect()
+//        if result != EPOS2_SUCCESS.rawValue {
+//            DispatchQueue.main.async(execute: {
+//                MessageView.showErrorEpos(result, method:"disconnect")
+//            })
+//        }
+//
+//        finalizePrinterObject()
+//    }
+//    func isPrintable(_ status: Epos2PrinterStatusInfo?) -> Bool {
+//        if status == nil {
+//            return false
+//        }
+//
+//        if status!.connection == EPOS2_FALSE {
+//            return false
+//        }
+//        else if status!.online == EPOS2_FALSE {
+//            return false
+//        }
+//        else {
+//            // print available
+//        }
+//        return true
+//    }
+//
+//    func onPtrReceive(_ printerObj: Epos2Printer!, code: Int32, status: Epos2PrinterStatusInfo!, printJobId: String!) {
+//        MessageView.showResult(code, errMessage: makeErrorMessage(status))
+//
+//        //dispPrinterWarnings(status)
+//        //    updateButtonState(true)
+//
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
+//            self.disconnectPrinter()
+//        })
+//    }
+//
+//    //    func dispPrinterWarnings(_ status: Epos2PrinterStatusInfo?) {
+//    //        if status == nil {
+//    //            return
+//    //        }
+//    //
+//    //        //        textWarnings.text = ""
+//    //
+//    //        if status!.paper == EPOS2_PAPER_NEAR_END.rawValue {
+//    //          //  textWarnings.text = NSLocalizedString("warn_receipt_near_end", comment:"")
+//    //        }
+//    //
+//    //        if status!.batteryLevel == EPOS2_BATTERY_LEVEL_1.rawValue {
+//    //         //   textWarnings.text = NSLocalizedString("warn_battery_near_end", comment:"")
+//    //        }
+//    //    }
+//
+//    func makeErrorMessage(_ status: Epos2PrinterStatusInfo?) -> String {
+//        let errMsg = NSMutableString()
+//        if status == nil {
+//            return ""
+//        }
+//
+//        if status!.online == EPOS2_FALSE {
+//            errMsg.append(NSLocalizedString("err_offline", comment:""))
+//        }
+//        if status!.connection == EPOS2_FALSE {
+//            errMsg.append(NSLocalizedString("err_no_response", comment:""))
+//        }
+//        if status!.coverOpen == EPOS2_TRUE {
+//            errMsg.append(NSLocalizedString("err_cover_open", comment:""))
+//        }
+//        if status!.paper == EPOS2_PAPER_EMPTY.rawValue {
+//            errMsg.append(NSLocalizedString("err_receipt_end", comment:""))
+//        }
+//        if status!.paperFeed == EPOS2_TRUE || status!.panelSwitch == EPOS2_SWITCH_ON.rawValue {
+//            errMsg.append(NSLocalizedString("err_paper_feed", comment:""))
+//        }
+//        if status!.errorStatus == EPOS2_MECHANICAL_ERR.rawValue || status!.errorStatus == EPOS2_AUTOCUTTER_ERR.rawValue {
+//            errMsg.append(NSLocalizedString("err_autocutter", comment:""))
+//            errMsg.append(NSLocalizedString("err_need_recover", comment:""))
+//        }
+//        if status!.errorStatus == EPOS2_UNRECOVER_ERR.rawValue {
+//            errMsg.append(NSLocalizedString("err_unrecover", comment:""))
+//        }
+//
+//        if status!.errorStatus == EPOS2_AUTORECOVER_ERR.rawValue {
+//            if status!.autoRecoverError == EPOS2_HEAD_OVERHEAT.rawValue {
+//                errMsg.append(NSLocalizedString("err_overheat", comment:""))
+//                errMsg.append(NSLocalizedString("err_head", comment:""))
+//            }
+//            if status!.autoRecoverError == EPOS2_MOTOR_OVERHEAT.rawValue {
+//                errMsg.append(NSLocalizedString("err_overheat", comment:""))
+//                errMsg.append(NSLocalizedString("err_motor", comment:""))
+//            }
+//            if status!.autoRecoverError == EPOS2_BATTERY_OVERHEAT.rawValue {
+//                errMsg.append(NSLocalizedString("err_overheat", comment:""))
+//                errMsg.append(NSLocalizedString("err_battery", comment:""))
+//            }
+//            if status!.autoRecoverError == EPOS2_WRONG_PAPER.rawValue {
+//                errMsg.append(NSLocalizedString("err_wrong_paper", comment:""))
+//            }
+//        }
+//        if status!.batteryLevel == EPOS2_BATTERY_LEVEL_0.rawValue {
+//            errMsg.append(NSLocalizedString("err_battery_real_end", comment:""))
+//        }
+//
+//        return errMsg as String
+//    }
     
     
 }
@@ -1118,7 +1139,7 @@ extension CheckOutPopView: UITextFieldDelegate {
             if let amount = Double(textField.text!) {
                 viewModel.amountTendered = amount
             }
-            NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+         //   NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
         }
     }
     
@@ -1133,7 +1154,7 @@ extension CheckOutPopView: UITextFieldDelegate {
                 //backspace on last character
                 if updatedText == "" {
                     viewModel.amountTendered = 0
-                    NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+                  //  NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
                     return true
                 }
                 let doub = Double(updatedText)
@@ -1156,13 +1177,13 @@ extension CheckOutPopView: CashViewDelegate {
     func PayAmountTapped(amount: Double) {
         if let amountTender = tenderedbalance.text {
             if amountTender == "" || amountTender == "0" {
-                tenderedbalance.text = "\(amount)"
+                tenderedbalance.text = String(format: "%.2f", amount)//"\(amount)"
                 viewModel.amountTendered = amount
             }
             else {
                 if let amountTenderDouble = Double(amountTender) {
                     let increamented = amount + amountTenderDouble
-                    tenderedbalance.text = "\(increamented)"
+                    tenderedbalance.text = String(format: "%.2f", increamented)//"\(increamented)"
                     viewModel.amountTendered = increamented
                 }
             }

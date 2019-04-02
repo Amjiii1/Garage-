@@ -18,7 +18,7 @@ class CheckoutModel: NSObject {
     var OrderNo: Int?
     var SNo: Int?
     var CarID: Int?
-    var CustomerID: Int?
+    var CustomerID: String?
     var MakeID: Int?
     var ModelID: Int?
     var Year: Int?
@@ -36,7 +36,7 @@ class CheckoutModel: NSObject {
     }
     
     
-    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: Int, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int){
+    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: String, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int){
         
         self.TransactionNo = TransactionNo
         self.MakerName =  MakerName
@@ -69,7 +69,7 @@ class CheckoutModel: NSObject {
             let Orderno = checkoutlist["OrderNo"] as? Int,
             let Serial = checkoutlist["SNo"] as? Int,
             let Carid = checkoutlist["CarID"] as? Int,
-            let Customerid = checkoutlist["CustomerID"] as? Int,
+            let Customerid = checkoutlist["CheckLitre"] as? String,
             let Makeid = checkoutlist["MakeID"] as? Int,
             let Modelid = checkoutlist["ModelID"] as? Int,
             let Year = checkoutlist["Year"] as? Int,

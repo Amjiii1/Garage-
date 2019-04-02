@@ -12,6 +12,7 @@ class checkoutItems: NSObject {
     
     
     var Name: String?
+    var AlternateName: String?
     var Price: Double?
     var  ItemID: Int?
     var Quantity: Int?
@@ -19,8 +20,9 @@ class checkoutItems: NSObject {
     var itemorderid: Int?
     
    
-    init(Name: String, Price: Double, ItemID: Int, Quantity: Int, OrderDetailID: Int, itemorderid: Int){
+    init(Name: String, AlternateName: String,Price: Double, ItemID: Int, Quantity: Int, OrderDetailID: Int, itemorderid: Int){
         self.Name =  Name
+        self.AlternateName =  AlternateName
         self.Price = Price
         self.ItemID = ItemID
         self.Quantity = Quantity

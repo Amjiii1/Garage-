@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>9</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -108,8 +108,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We are using your bluetooth to find printers, and later print from them.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to scan barcode</string>
+	<string>We are using camera to softscan the barcode on the products.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Amjad_Bold.otf</string>

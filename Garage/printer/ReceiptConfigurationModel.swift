@@ -9,14 +9,14 @@
 import Foundation
 class ReceiptConfigurationModel {
     
-    var isPrintReceipt: Bool = false
-    var showKitchenHangingSpace : Bool = false
-    var showLogo: Bool = false
-    var showCompanyName: Bool = false
-    var showAddress: Bool = false
-    var showPhone: Bool = false
-    var showEmail: Bool = false
-    var showWebsite: Bool = false
-    var showTable: Bool = false
+    var isPrintReceipt: Bool = true
+    var showKitchenHangingSpace : Bool = true
+    var showLogo: Bool = true
+    var showCompanyName: Bool = true
+    var showAddress: Bool = true
+    var showPhone: Bool = true
+    var showEmail: Bool = true
+    var showWebsite: Bool = true
+    var showTable: Bool = true
     
 }

@@ -62,7 +62,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         category.backgroundColor = UIColor.darkGray
         getData()
          BindinfItems()
-        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+        self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
+       // self.receiptOutlet.setTitle("\( Constants.totalprice)\nSAR", for: .normal)
+        self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+        self.receiptOutlet.titleLabel?.textAlignment = .center
+//        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
         serviceSearch.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
     }
@@ -75,7 +79,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     
     @objc func methodOfReceivedNotification(notification: Notification) {
-        self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+        self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
+        self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+        self.receiptOutlet.titleLabel?.textAlignment = .center
     }
     
     
@@ -168,19 +174,21 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             for orders in order {
                                 print(orders)
                                 let Name = orders["ItemName"] as! String
-                                let Price = orders["Price"] as! Int
+                                let Price = orders["Price"] as! Double
                                 let ItemID = orders["ItemID"] as! Int
                                 let Quantity = orders["Quantity"] as! Int
                                 let OrderDetails = orders["OrderDetailID"] as! Int
-                                let editproducts = ReceiptModel(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                let editproducts = ReceiptModel(Name: Name, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(editproducts)
-                                let price = Price*Constants.counterQTY
+                                let price = Price * Double(Constants.counterQTY)
                                 Constants.totalprice = Constants.totalprice + Double(price)
                             }
                         }
                         DispatchQueue.main.async {
                              print(Constants.totalprice)
-                             self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+                            self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
+                            self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+                            self.receiptOutlet.titleLabel?.textAlignment = .center
                         }
                         
                     }
@@ -283,7 +291,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     let itemName = item["Name"].stringValue
                                     let itemAlternateName = item["AlternateName"].stringValue
                                     let itemDescription = item["Description"].stringValue
-                                    let price = item["Price"].intValue
+                                    let price = item["Price"].doubleValue
                                     let itemImage = item["Image"].stringValue
                                     let barcode = item["Barcode"].stringValue
                                     let itemType = item["ItemType"].stringValue
@@ -577,9 +585,9 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
        
-        let cell = colectionview.cellForItem(at: indexPath)
-        cell?.layer.borderWidth = 2.0
-        cell?.layer.borderColor = UIColor.clear.cgColor
+//        let cell = colectionview.cellForItem(at: indexPath)
+//        cell?.layer.borderWidth = 2.0
+//        cell?.layer.borderColor = UIColor.clear.cgColor
      
     }
     
@@ -627,17 +635,32 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             print(indexPath.row)
             
             for newname in name {
-                let product = ReceiptModel(Name: newname.name, Price: Double(newname.price*Constants.counterQTY), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+                
+                
+                print(newname.price)
+                let pp = Double(newname.price)
+                print(pp)
+                
+                let product = ReceiptModel(Name: newname.name, Price: newname.price.myRounded(toPlaces: 2) * Double(Constants.counterQTY), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
                 
                 Items.Product.append(product)
-                let price = newname.price*Constants.counterQTY
+                let price = newname.price * Double(Constants.counterQTY)
                 Constants.totalprice = Constants.totalprice + Double(price)
-                self.receiptOutlet.setTitle("\( Constants.totalprice) SAR", for: .normal)
+            //    self.receiptOutlet.titleLabel?.numberOfLines = 0
+                self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
+                self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+                self.receiptOutlet.titleLabel?.textAlignment = .center
+                
+                
+//                button.titleLabel?.numberOfLines = 0
+//                button.titleLabel?.lineBreakMode = .byWordWrapping
+//                button.setTitle("Foo\nBar", for: .normal)
+//                button.titleLabel?.textAlignment = .center
                 
             }
-            let cell = colectionview.cellForItem(at: indexPath)
-            cell?.layer.borderWidth = 2.0
-            cell?.layer.borderColor = UIColor.DefaultApp.cgColor
+//            let cell = colectionview.cellForItem(at: indexPath)
+//            cell?.layer.borderWidth = 2.0
+//            cell?.layer.borderColor = UIColor.DefaultApp.cgColor
             
             
             break
@@ -751,8 +774,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         if (status == 1) {
                             
                             ToastView.show(message: newmessage!, controller: self)
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                             DispatchQueue.main.async {
+                          //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if Constants.editcheckout != 0 {
                                     if let parentVC = self.parent as? ReceptionalistView {
                                         let storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
@@ -772,7 +795,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                                     self.Nextoutlet.isUserInteractionEnabled = true
                                 }
                                 }
-                            })
+                            }//})
                         }
                         else if (status == 0) {
                             
@@ -853,8 +876,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         if (status == 1) {
                             
                             ToastView.show(message: newmessage!, controller: self)
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            DispatchQueue.main.async {
+                          //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if let parentVC = self.parent as? ReceptionalistView {
                                     let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
@@ -862,7 +885,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                                     self.removeDataa()
                                     self.Nextoutlet.isUserInteractionEnabled = true
                                 }
-                            })
+                            }//  })
                         }
                         else if (status == 0) {
                             

@@ -43,7 +43,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var pickerData = [String]()
     var someInts = [Int]()
     var flexmakeid = 2
-    var Product = [ReceiptModel]()
+    var orderdetails = [ReceiptModel]()
     
     
     override func viewDidLoad() {
@@ -892,13 +892,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             for orders in order {
                                 print(orders)
                                 let Name = orders["ItemName"] as! String
-                                let Price = orders["Price"] as! Int
+                                let Price = orders["Price"] as! Double
                                 let ItemID = orders["ItemID"] as! Int
                                 let Quantity = orders["Quantity"] as! Int
                                 let OrderDetails = orders["OrderDetailID"] as! Int
-                                let products = ReceiptModel(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                let products = ReceiptModel(Name: Name, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(products)
-                                let price = Price*Constants.counterQTY
+                                let price = Price *  Double(Constants.counterQTY)
                                 Constants.totalprice = Constants.totalprice + Double(price)
                                 //                                let newDict = [
                                 //                                    "Name": Name, "Price":Price, "Quantity": Quantity, "ItemID": ItemID, "Mode": Constants.modeupdate,"OrderDetailID": OrderDetails, "Status": 202] as [String : Any]

@@ -36,6 +36,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnUpArrow.isHidden = true
+        btnHelp.isHidden = true
+        btnCustomer.isHidden = true
+        newFreeTrail.isHidden = true
+        
+        
     
         pinCodeTextField.layer.cornerRadius = 18.0
         pinCodeTextField.layer.borderWidth = 2.0
@@ -120,16 +126,51 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         if let User = json["User"] as? [String: Any] {
                             print(User)
                             if  let session = User["Session"] as? String {
-                                print(session)
+                            UserDefaults.standard.set(session, forKey: "Session")
                                 Constants.sessions = session
-                                print(session)
                             }
                             if  let ordertracker = User["SubUserID"] as? Int {
-                                print(session)
                                 Constants.ordertracker = String (ordertracker)
-                                print(session)
+                            }
+                            
+                            if  let VATNo = User["VATNo"] as? String {
+                                Constants.VAT = VATNo
+                            }
+                            
+                            if  let LocationName = User["LocationName"] as? String {
+                                Constants.LocationName = LocationName
+                            }
+                            
+                            if  let FirstName = User["FirstName"] as? String {
+                                Constants.FirstName = FirstName
                             }
                         }
+                        
+                       
+                    
+                        
+                        
+                        
+                        
+                        
+                        if let receipt = json["ReceiptInfo"] as? [String: Any] {//
+                            print(receipt)
+                            if  let CompanyPhones = receipt["CompanyPhones"] as? String {
+                                Constants.CompanyPhones = CompanyPhones
+                            }
+                            if  let InstagramLink = receipt["InstagramLink"] as? String {
+                                Constants.InstagramLink = InstagramLink
+                            }
+                            if  let SnapchatLink = receipt["SnapchatLink"] as? String {
+                                Constants.SnapchatLink = SnapchatLink
+                            }
+                            if  let Footer = receipt["Footer"] as? String {
+                                Constants.Footer = Footer
+                            }
+                        }
+                        
+                        
+                        
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)

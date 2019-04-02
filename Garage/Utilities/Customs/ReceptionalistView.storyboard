@@ -152,6 +152,7 @@
                         <outlet property="footerViewContainer" destination="qOc-la-iCU" id="HDk-xd-Kpn"/>
                         <outlet property="footerViewHeightConstraint" destination="V4f-F6-8J8" id="0fF-Ey-3nf"/>
                         <outlet property="headerView" destination="oya-0V-bPx" id="C6Y-ga-tID"/>
+                        <outlet property="offlibebtn" destination="Gm2-q9-QT7" id="Vhw-30-oFW"/>
                         <outlet property="profileBtnOutlet" destination="6zp-xw-VQu" id="5JN-KD-c35"/>
                         <segue destination="RrT-tt-aya" kind="show" identifier="MechanicVc" id="HVb-Es-tlP"/>
                         <segue destination="19b-Iz-w5V" kind="show" identifier="CheckoutVc" id="vCa-qI-FGw"/>

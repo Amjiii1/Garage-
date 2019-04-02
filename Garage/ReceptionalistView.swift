@@ -14,6 +14,10 @@ class ReceptionalistView: UIViewController  {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var footerViewContainer: UIView!
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var offlibebtn: UIButton!
+    
+    
+    
     
     var footerViewheight: CGFloat = 0.0
     var orginalHeight: CGFloat = 0.0
@@ -41,11 +45,33 @@ class ReceptionalistView: UIViewController  {
     
     
     @IBAction func logoutButton(_ sender: Any) {
+        
+        
 //        Constants.platenmb = "0"
 //        Constants.vinnmb = "0"
 //        Constants.CarIDData = 0
 //        Constants.sessions = ""
 //        dismiss(animated: true, completion: nil)
+        
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "XZReportViewController", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "XZReportViewControllerVc") as! XZReportViewController
+        let nav = UINavigationController(rootViewController: popController)
+        nav.modalPresentationStyle = UIModalPresentationStyle.popover
+        let heightForPopOver = 20*3
+        let popover = nav.popoverPresentationController
+        popController.preferredContentSize = CGSize(width: 300 , height: heightForPopOver)
+        popover?.permittedArrowDirections = .up
+        popover?.backgroundColor = UIColor.white
+        popover?.sourceView = self.offlibebtn
+        popover?.sourceRect = self.offlibebtn.bounds
+        self.present(nav, animated: true, completion: nil)
+        
+        
+        
+        
+        
     }
     
     

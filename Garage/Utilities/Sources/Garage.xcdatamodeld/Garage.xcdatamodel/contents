@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G5019" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PrinterDetails" representedClassName="PrinterDetails" syncable="YES">
+        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCashPrinter" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isKickDrawer" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isKitchenPrinter" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="macAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfCopies" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="target" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Receipt" representedClassName="Receipt" syncable="YES">
+        <attribute name="companyAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyFax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyLogoUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyPhones" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyTagLine" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyWebsite" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facebookLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="footer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="instagramLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="promotionTagLine" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="snapchatLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twitterLink" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ReceiptConfiguration" representedClassName="ReceiptConfiguration" syncable="YES">
+        <attribute name="isPrintReceipt" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showAddress" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showCompanyName" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showEmail" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showKitchenHangingSpace" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showLogo" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showNotes" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showPhone" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showTable" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="showWebsite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PrinterDetails" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="ReceiptConfiguration" positionX="-45" positionY="72" width="128" height="195"/>
+        <element name="Receipt" positionX="-27" positionY="126" width="128" height="255"/>
+    </elements>
+</model>

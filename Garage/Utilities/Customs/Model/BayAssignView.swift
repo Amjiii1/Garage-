@@ -12,6 +12,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     
     
     @IBOutlet weak var CarNme: UILabel!
+    @IBOutlet weak var editoutlet: UIButton!
     
     @IBOutlet weak var BayCollectionView: UICollectionView!
     var assigning: Int = 0
@@ -132,7 +133,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        editoutlet.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         let Label = Constants.BMake + ", " + Constants.Bplate
         CarNme.text = Label

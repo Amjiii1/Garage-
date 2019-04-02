@@ -31,7 +31,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         Constants.editcheckout = 0
         Constants.percent = Int(Double(Constants.tax)! * 100)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
-        
+       
+      //  Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
     }
     
     deinit {
@@ -87,6 +88,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let discript = json[Constants.Description] as? String
                 if (status == 1) {
                     if let order = json["OrdersList"] as? [[String: Any]] {
+                        print(order)
                         self.checkoutmodel.removeAll()
                         Checkoutstruct.Itemdetails.removeAll()
                         
@@ -94,12 +96,13 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             if let item = items["OrderItems"] as? [[String: Any]] {
                                 for details in item {
                                     let Name = details["ItemName"] as! String
-                                    let Price = details["Price"] as! Int
+                                    let AlternateName = details["AlternateName"] as! String
+                                    let Price = details["Price"] as! Double
                                     let ItemID = details["ItemID"] as! Int
                                     let Quantity = details["Quantity"] as! Int
                                     let OrderDetails = details["OrderDetailID"] as! Int
                                     let itemorderID = details["OrderID"] as! Int
-                                    let itemsdetailed = checkoutItems(Name: Name, Price: Double(Price), ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
+                                    let itemsdetailed = checkoutItems(Name: Name,AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
                                     Checkoutstruct.Itemdetails.append(itemsdetailed)
                                 }
                                 

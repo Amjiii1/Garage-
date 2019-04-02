@@ -289,7 +289,7 @@
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" title=" History  ( 0 )" image="historyIcon">
+                                <state key="normal" title=" History    ( 0 )" image="historyIcon">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -519,7 +519,7 @@
                 <viewControllerPlaceholder storyboardName="HistoryCar" referencedIdentifier="historycarVc" id="cU4-Xq-4nT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1X-2o-Qbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="11"/>
+            <point key="canvasLocation" x="647" y="2"/>
         </scene>
         <!--ServiceCartVc-->
         <scene sceneID="uBv-Ch-cI3">

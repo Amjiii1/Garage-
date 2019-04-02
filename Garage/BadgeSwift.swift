@@ -19,7 +19,7 @@ import UIKit
   /// Width of the badge border
   @IBInspectable open var borderWidth: CGFloat = 0 {
     didSet {
-      invalidateIntrinsicContentSize()
+        invalidateIntrinsicContentSize()
         invalidateIntrinsicContentSize()
         invalidateIntrinsicContentSize()
         invalidateIntrinsicContentSize()

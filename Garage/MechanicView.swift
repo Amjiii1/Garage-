@@ -65,9 +65,19 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         finishedTableview.delegate = self
         labelsView.isHidden = true
         donebtnenable()
-        assignserviceBtn.setTitle("\(Constants.bayname)", for: .normal)
+         bay0()
         NotificationCenter.default.addObserver(self, selector: #selector(MechanicView.BayNotification(notification:)), name: Notification.Name("Notificationbayname"), object: nil)
         
+    }
+    
+    func bay0() {
+       if Constants.bayname == "B0" {
+        assignserviceBtn.setTitle("Select Bay", for: .normal)
+       } else {
+         assignserviceBtn.setTitle("\(Constants.bayname)", for: .normal)
+        }
+        assignserviceBtn.contentHorizontalAlignment = .left
+    
     }
     
     
@@ -323,13 +333,17 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                                 Constants.caridmechanic =  carid
                             }
                             
+                            let Amount = cars["RecommendedAmount"].intValue
+                            DispatchQueue.main.async {
+                                Constants.mechanicrec =  Amount
+                            }
                             
                             
-                            let CarName = cars[Constants.CarName].stringValue
+                            let CarName = cars[Constants.ModelName].stringValue
                             DispatchQueue.main.async {
                                 self!.carNamelbl.text = CarName
                             }
-                            let recomd = cars["RecommendedAmount"].stringValue
+                            let recomd = cars["CheckLitre"].stringValue
                             DispatchQueue.main.async {
                                 self!.rec = recomd
                                 self!.milesBtn.setTitle("\(self!.rec) km", for: .normal)
@@ -356,7 +370,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             let ItemName = order["ItemName"].stringValue
                             let ItemImage = order["ItemImage"].stringValue
                             let Quantity = order["Quantity"].intValue
-                            let Price = order["Price"].intValue
+                            let Price = order["Price"].doubleValue
                             let TotalCost = order["TotalCost"].intValue
                             let LOYALTYPoints = order["LOYALTYPoints"].intValue
                             // let isComplementory = order["isComplementory"].stringValue
@@ -364,7 +378,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             let ItemDate = order["ItemDate"].stringValue
                             let Mode = order["Mode"].stringValue
                             
-                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: Constants.orderidmechanic,ItemID: ItemID, ItemName: ItemName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode)
+                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: Constants.orderidmechanic,ItemID: ItemID, ItemName: ItemName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode, orderPrinterType: PrinterType.checkout)
                             self?.OrderDetails.append(orders)
                             DispatchQueue.main.async {
                                 self?.collectionViewSlot.reloadData()

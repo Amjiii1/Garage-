@@ -26,7 +26,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        Constants.sessions = UserDefaults.standard.string(forKey: "Session")!
         tableViewWelcome.reloadData()
         tableViewWelcome.dataSource = self
         tableViewWelcome.delegate = self
@@ -250,7 +250,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     self.dismiss(animated: true, completion: nil)
                     self.tableViewWelcome.reloadData()
                     self.WelcomeSegmented.isUserInteractionEnabled = true
-                })
+                  })
             }
                  else if (status == 0) {
                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {

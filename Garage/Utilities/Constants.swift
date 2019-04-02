@@ -176,23 +176,42 @@ struct Constants {
     static var editcheckout = 0
     static var orderstatus = 0
     static var workerflag = 0
-    static var checkoutGrandtotal = 0.0
-    static var subtotal = 0.0
+    static var checkoutGrandtotal: Double = 0.0.myRounded(toPlaces: 2)
+    static var subtotal: Double = 0.0.myRounded(toPlaces: 2)
     static var checkoutQTY = 1.0
-    static var checkouttax = 0.0
+    static var checkouttax: Double = 0.0.myRounded(toPlaces: 2)
     static var tax = "0"
     static var percent = 0
     static var checkoutorderid = 0
     static var checkoutcarid = 0
     static let _4inchScale:Float = 576
     static var Printer = ""//:CGFloat = 576
+    static var printermac = ""
     static var checkoutplatenmb = ""
     static var checkoutvin = ""
     static var checkoutcarmake = ""
     static var checkoutcarmodel = ""
     static var checkoutbayname = ""
     static var checkoutyear = 0
-    static var checkoutcustm = 0
+    static var checkoutCheckL = 0
+    static var checkoutcustm = "-"
+    static var checkoutmechanic = "-"
+    static let smallPrinter:CGFloat = 384
+    static let mediumPrinter:CGFloat = 576
+    static var discountValue: Double = 0
+    static var VAT = "-"
+    static var receiptphone = "-"
+    static var receiptloc = "-"
+    static var mechanicrec = 0
+    static var LocationName = "-"
+    static var CompanyPhones = "-"
+    static var InstagramLink = "-"
+    static var SnapchatLink = "-"
+    static var Footer = "-"
+    static var FirstName = "-"
+    
+    
+    
     
     
   

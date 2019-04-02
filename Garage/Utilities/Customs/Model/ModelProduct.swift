@@ -41,7 +41,7 @@ struct Item {
     let name: String
     let alternateName: String
     let desc: String
-    let price: Int
+    let price: Double
     let image: String
     let barcode: String
     let itemType: String

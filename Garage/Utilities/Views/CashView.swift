@@ -30,6 +30,7 @@ class CashView: UIView {
        updateFirstButtonAmount()
         NotificationCenter.default.addObserver(self, selector: #selector(CashView.pressed(notification:)), name: Notification.Name("buttonpressed"), object: nil)
     }
+    
     deinit {
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name("buttonpressed"), object: nil)
@@ -54,7 +55,7 @@ class CashView: UIView {
               let balance = Constants.checkoutGrandtotal //{
                    let doubleBalance = Double(balance) //{
                         if doubleBalance > 0.0 {
-                            button1.setTitle("\(balance)", for: .normal)
+                            button1.setTitle(String(format: "%.2f", balance), for: .normal)
                             return
                         }
                    // }
@@ -70,7 +71,7 @@ class CashView: UIView {
         
         if let str = sender.titleLabel?.text {
             let doubleAmount = Double(str)
-            if let doubleAmount = doubleAmount{
+            if let doubleAmount = doubleAmount {
                 delegate?.PayAmountTapped(amount: doubleAmount)
             }
         }

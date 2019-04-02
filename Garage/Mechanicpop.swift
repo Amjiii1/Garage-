@@ -16,7 +16,7 @@ class Mechanicpop: UIViewController, UITableViewDelegate, UITableViewDataSource 
       var Details = [Orderdetail]()
     
     var things = ["Oil", "Filter"]
-    var value = ["0.0 liters", "Option"]
+    var value = ["\(Constants.mechanicrec) liters", "Option"]
     
     
     override func viewDidLoad() {

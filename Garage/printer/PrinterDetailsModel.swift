@@ -17,14 +17,13 @@ class PrinterDetailsModel: NSObject {
     var model: String = ""
     var ipAddress: String = ""
     var target: String = ""
-    var isCashPrinter: Bool = false
+    var isCashPrinter: Bool = true
     var isKickDrawer: Bool = false
     var isKitchenPrinter: Bool = false
     var numberOfCopies: Int16 = 1
     var alias: String = ""
     var manufacturer: PrinterManufacturer? = nil
-    var isConnected: Bool = false
+    var isConnected: Bool = true
     var macAddress: String = ""
-    
     var isPrinting: Bool = false
 }

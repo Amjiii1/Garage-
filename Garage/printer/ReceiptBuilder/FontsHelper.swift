@@ -16,6 +16,12 @@ class FontsHelper {
         case bold = "Code Pro Bold LC"
     }
     
+    enum SanFranciscoProDisplay: String {
+        case medium = "SFProDisplay-Regular"
+        case bold = "SFProDisplay-Bold"
+    }
+    
+    
     enum FontArabic: String {
         case regualar = "DINNextLTArabic-Regular"
         case bold = "DINNextLTArabic-Bold"

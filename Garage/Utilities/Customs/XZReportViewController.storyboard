@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,15 +23,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UZ-0x-7HR">
-                                <rect key="frame" x="29.5" y="29" width="136.5" height="112.5"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="10" y="29" width="175.5" height="112.5"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                 <state key="normal" title="X Report">
                                     <color key="titleColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="14"/>
+                                        <integer key="value" value="18"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -40,15 +39,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-tE-Otv">
-                                <rect key="frame" x="224.5" y="29" width="136.5" height="112.5"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="205" y="29" width="175.5" height="112.5"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                 <state key="normal" title="Z Report">
                                     <color key="titleColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="14"/>
+                                        <integer key="value" value="18"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -56,13 +55,13 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.79593970070422537" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="height" secondItem="5UZ-0x-7HR" secondAttribute="height" id="5oS-yj-RDO"/>
                             <constraint firstItem="5UZ-0x-7HR" firstAttribute="height" secondItem="u5A-Kd-5tS" secondAttribute="height" multiplier="0.75" id="8bB-4u-lTT"/>
                             <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerY" secondItem="231-Pn-TtJ" secondAttribute="centerY" id="Nph-Lz-Vvl"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="width" secondItem="5UZ-0x-7HR" secondAttribute="width" id="R13-eC-ksh"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.35" id="UR0-fi-NZY"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.45" id="UR0-fi-NZY"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerX" secondItem="5UZ-0x-7HR" secondAttribute="centerX" multiplier="3" id="ehn-0W-hvZ"/>
                             <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerX" secondItem="231-Pn-TtJ" secondAttribute="centerX" multiplier="0.5" id="hpN-j8-Y2m"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerY" secondItem="5UZ-0x-7HR" secondAttribute="centerY" id="iIn-FW-sPx"/>
@@ -70,6 +69,10 @@
                         <viewLayoutGuide key="safeArea" id="231-Pn-TtJ"/>
                     </view>
                     <size key="freeformSize" width="390" height="150"/>
+                    <connections>
+                        <outlet property="xReportOutlet" destination="5UZ-0x-7HR" id="puR-wN-fav"/>
+                        <outlet property="zReportOutlet" destination="3ZG-tE-Otv" id="IXY-iG-m5N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXt-Rs-BJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

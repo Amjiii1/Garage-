@@ -54,7 +54,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         carplateNumber.defaultTextAttributes.updateValue(15.0, forKey: NSAttributedString.Key.kern.rawValue)
         check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControlEvents.touchDown)
         carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
-        phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
+         phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
+         phoneNumber.addTarget(self, action: #selector(phoneNumberediting(_:)), for: .editingChanged)
         VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
         carMake.addTarget(self, action: #selector(CarmakeFunction), for: .touchDown)
         modelNumber.addTarget(self, action: #selector(CarmodeltFunction), for: .touchDown)
@@ -373,15 +374,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         }
                             
                         else if (status == 1000) {
-                            ToastView.show(message: "Something went wrong", controller: self)
+                            ToastView.show(message: Constants.wrong, controller: self)
                         }
                             
                         else if (status == 1001) {
-                            ToastView.show(message: "Invalid session", controller: self)
+                            ToastView.show(message: Constants.invalid, controller: self)
                         }
                             
                         else {
-                            ToastView.show(message: "error occured", controller: self)
+                            ToastView.show(message: Constants.occured, controller: self)
                         }
                     }
                     DispatchQueue.main.async {
@@ -434,15 +435,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         }
                         
                         else if (status == 1000) {
-                            ToastView.show(message: "Something went wrong", controller: self)
+                            ToastView.show(message: Constants.wrong, controller: self)
                         }
                         
                         else if (status == 1001) {
-                            ToastView.show(message: "Invalid session", controller: self)
+                            ToastView.show(message: Constants.invalid, controller: self)
                         }
                         
                         else {
-                            ToastView.show(message: "error occured", controller: self)
+                            ToastView.show(message: Constants.occured, controller: self)
                         }
                         
                     }
@@ -505,18 +506,18 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         present(alert, animated: true, completion: nil)
     }
     
-    func lockPlateImage() {
-        
-        carplateNumber.rightViewMode = .always
-        let emailImgContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
-        let emailImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        emailImg.image = UIImage(named: "locked")
-        emailImg.center = emailImgContainer.center
-        emailImgContainer.addSubview(emailImg)
-        carplateNumber.rightView = emailImgContainer
-        
-        
-    }
+//    func lockPlateImage() {
+//
+//        carplateNumber.rightViewMode = .always
+//        let emailImgContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+//        let emailImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+//        emailImg.image = UIImage(named: "locked")
+//        emailImg.center = emailImgContainer.center
+//        emailImgContainer.addSubview(emailImg)
+//        carplateNumber.rightView = emailImgContainer
+//
+//
+//    }
     func lockvinImage() {
         
         VinNumber.rightViewMode = .always
@@ -586,6 +587,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 print(data)
                 
                 do {
+                     self.showloader()
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     Constants.history = json["OrderHistoryCount"] as! Int
@@ -594,7 +596,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     }
                     let details = Cardetails(json: json)
                     if (details.status == 1) {
-                        self.showloader()
+                      //  self.showloader()
                         
                         if let cars = json[Constants.Cars] as? [[String: Any]] {
                             for items in cars {
@@ -709,8 +711,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             self.dismiss(animated: true, completion: nil)
                             if self.carplateNumber.text != "" {
-                                self.carplateNumber.isUserInteractionEnabled = false
-                                self.lockPlateImage()
+                              //  self.carplateNumber.isUserInteractionEnabled = false
+                               // self.lockPlateImage()
                             }
                             if self.VinNumber.text != "" {
                                 self.VinNumber.isUserInteractionEnabled = false
@@ -724,6 +726,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: details.description, controller: self)
+                            self.dismiss(animated: true, completion: nil)
+                            if self.carplateNumber.text != "" {
+//                                self.carplateNumber.isUserInteractionEnabled = false
+//                                self.lockPlateImage()
+                            }
+                            if self.VinNumber.text != "" {
+                                self.VinNumber.isUserInteractionEnabled = false
+                                self.lockvinImage()
+                            }
                         }
                     }
                     
@@ -731,6 +742,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:Constants.wrong, controller: self)
+                            self.dismiss(animated: true, completion: nil)
+                            if self.carplateNumber.text != "" {
+//                                self.carplateNumber.isUserInteractionEnabled = false
+//                                self.lockPlateImage()
+                            }
+                            if self.VinNumber.text != "" {
+                                self.VinNumber.isUserInteractionEnabled = false
+                                self.lockvinImage()
+                            }
                         }
                     }
                     
@@ -738,6 +758,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:Constants.invalid, controller: self)
+                            self.dismiss(animated: true, completion: nil)
+                            if self.carplateNumber.text != "" {
+//                                self.carplateNumber.isUserInteractionEnabled = false
+//                                self.lockPlateImage()
+                            }
+                            if self.VinNumber.text != "" {
+                                self.VinNumber.isUserInteractionEnabled = false
+                                self.lockvinImage()
+                            }
                         }
                     }
                         
@@ -745,6 +774,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:Constants.occured, controller: self)
+                            self.dismiss(animated: true, completion: nil)
+                            if self.carplateNumber.text != "" {
+//                                self.carplateNumber.isUserInteractionEnabled = false
+//                                self.lockPlateImage()
+                            }
+                            if self.VinNumber.text != "" {
+                                self.VinNumber.isUserInteractionEnabled = false
+                                self.lockvinImage()
+                            }
                         }
                     }
                     
@@ -752,6 +790,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                     DispatchQueue.main.async {
                         ToastView.show(message: "Failed to load! error occured", controller: self)
+                        self.dismiss(animated: true, completion: nil)
+                        if self.carplateNumber.text != "" {
+//                            self.carplateNumber.isUserInteractionEnabled = false
+//                            self.lockPlateImage()
+                        }
+                        if self.VinNumber.text != "" {
+                            self.VinNumber.isUserInteractionEnabled = false
+                            self.lockvinImage()
+                        }
                     }
                     
                 }
@@ -774,7 +821,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
-                    self.dismiss(animated: true, completion: nil)
                 }
             }
             if let data = data {
@@ -908,8 +954,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             self.dismiss(animated: true, completion: nil)
                             if self.carplateNumber.text != "" {
-                                self.carplateNumber.isUserInteractionEnabled = false
-                                self.lockPlateImage()
+//                                self.carplateNumber.isUserInteractionEnabled = false
+//                                self.lockPlateImage()
                             }
                             if self.VinNumber.text != "" {
                                 self.VinNumber.isUserInteractionEnabled = false
@@ -976,9 +1022,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     @IBAction func continueBtnServiceCart(_ sender: Any) {
         
-        editDetails()
         
-        //  punchOrder()
+            editDetails()
         
     }
     
@@ -1025,10 +1070,19 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     
-    
-    
-    
+ 
     func editDetails() {
+        
+        
+        if carplateNumber.text != "" {
+            Constants.platenmb = carplateNumber.text!
+        }
+       
+        
+        
+        
+        
+        
         
         
         if Constants.CarIDData != 0 {
@@ -1058,8 +1112,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     self.phStaric.textColor = UIColor.red
                     self.CarStaric.textColor = UIColor.red
                     self.modelStaric.textColor = UIColor.red
-                    
                 }
+                    
+                } else if phoneNumber.text!.count < 13 {
+                    ToastView.show(message: "Phone Number is invalid! Less than format", controller: self)
+                } else if phoneNumber.text!.count > 13 {
+                    ToastView.show(message: "Phone Number is invalid! Greater than format", controller: self)
                 
             }
             else {
@@ -1185,6 +1243,11 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     self.modelStaric.textColor = UIColor.red
                     
                 }
+                
+            } else if phoneNumber.text!.count < 13 {
+                ToastView.show(message: "Phone Number is invalid! Less than format", controller: self)
+            } else if phoneNumber.text!.count > 13 {
+                ToastView.show(message: "Phone Number is invalid! Greater than format", controller: self)
                 
             }
                 
@@ -1364,8 +1427,20 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @objc func phoneNumberDidChange(_ textField: UITextField) {
         // phoneNumber.resignFirstResponder()
         NumberpadViewCheck.isHidden = true
-        
         self.numberPad()
+        
+        
+    }
+    
+    
+    @objc func phoneNumberediting(_ textField: UITextField) {
+       print("Pressed")
+        if phoneNumber.text!.characters.count == 13 {
+            let alert = UIAlertController(title: "Alert", message: "Limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            //            return false
+        }
         
         
         

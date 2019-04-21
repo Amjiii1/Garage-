@@ -23,9 +23,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var AssignedID: Int = 0
     
     
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
         Constants.sessions = UserDefaults.standard.string(forKey: "Session")!
         tableViewWelcome.reloadData()
         tableViewWelcome.dataSource = self
@@ -83,9 +85,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 self.Welcomecellobj.removeAll()
                 for str in fruitsArray {
                     let range = str.RegistrationNo?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
+                     print(str)
                     if range != nil {
                         self.Welcomecellobj.append(str)
                     }
+                   
                 }
             }
             tableViewWelcome.reloadData()
@@ -106,7 +110,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 3))
         }
         textField.text = currentText
-        if textField.text!.characters.count  == 8          {
+        if textField.text!.characters.count  == 8  {
             
             
         }
@@ -221,8 +225,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
+                    ToastView.show(message: Constants.interneterror, controller: self)
                     self.WelcomeSegmented.isUserInteractionEnabled = true
                 }
             }

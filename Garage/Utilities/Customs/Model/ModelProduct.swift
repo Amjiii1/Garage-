@@ -24,6 +24,7 @@ struct Category {
 struct SubCategory {
     
     let items: [Item]
+    let Searchitems: [Item]
     let categoryID: Int
     let subCategoryID: Int
     let name: String

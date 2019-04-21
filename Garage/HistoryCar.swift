@@ -31,12 +31,28 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    func showloader() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        loadingIndicator.startAnimating();
+        loadingIndicator.backgroundColor = UIColor.DefaultApp
+        loadingIndicator.layer.cornerRadius = 18.0
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     func historyData() {
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.HistoryApi)\(Constants.CarIDData)/\(Constants.sessions)")
         
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
             do {
+                self.showloader()
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
                 
@@ -68,17 +84,21 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         }
                         DispatchQueue.main.async {
                             self.historyTableview.reloadData()
+                            self.dismiss(animated: true, completion: nil)
                         }
+                        
                     }
                         
                     else  if intstatus == 0 {
                          DispatchQueue.main.async {
                         ToastView.show(message: descript!, controller: self)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                     else if (intstatus == 1000) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.wrong, controller: self)
+                            self.dismiss(animated: true, completion: nil)
                             
                           
                         }
@@ -87,6 +107,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     else if (intstatus == 1001) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.invalid, controller: self)
+                            self.dismiss(animated: true, completion: nil)
                            
                         }
                     }
@@ -94,6 +115,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     else {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.occured, controller: self)
+                            self.dismiss(animated: true, completion: nil)
                            
                         }
                     }
@@ -105,6 +127,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } catch let error as NSError {
                 print(error)
                  ToastView.show(message: "failed! error occured", controller: self)
+                self.dismiss(animated: true, completion: nil)
             }
         }).resume()
     }
@@ -125,7 +148,9 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pressed = HistoryData[indexPath.row].Total
+         let presseda = HistoryData[indexPath.row].Total
         print(pressed!)
+         print((format: "%.2f", (presseda!)))
     }
     
     
@@ -137,6 +162,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.Date.text = HistoryData[indexPath.row].Date
         cell.Mechanic.text = HistoryData[indexPath.row].Mechanic
         cell.Total.text = HistoryData[indexPath.row].Total
+        //cell.Total.text = (format: "%.2f", (total!))
         cell.selectionStyle = .none
         
         return cell

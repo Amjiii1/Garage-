@@ -60,6 +60,8 @@
 		950507F1215CF70200045AF8 /* PopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950507F0215CF70200045AF8 /* PopOver.swift */; };
 		95151CB0221D7273005F606A /* Receipt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95151CAF221D7273005F606A /* Receipt+CoreDataClass.swift */; };
 		95151CB2221D72C6005F606A /* PrinterDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95151CB1221D72C6005F606A /* PrinterDetails+CoreDataClass.swift */; };
+		951C068D22536CFF00770671 /* PrinterQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C068C22536CFF00770671 /* PrinterQueue.swift */; };
+		951C068F2254CBF000770671 /* XReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C068E2254CBF000770671 /* XReportModel.swift */; };
 		951C139121539DF500BDA923 /* UpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C139021539DF500BDA923 /* UpdatesView.swift */; };
 		951C139321539DFF00BDA923 /* UpdatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951C139221539DFF00BDA923 /* UpdatesView.xib */; };
 		951C13962153BEE900BDA923 /* Welcomecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C13952153BEE900BDA923 /* Welcomecell.swift */; };
@@ -97,6 +99,7 @@
 		95537F4D21BFE0F5003B5B25 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95537F4C21BFE0F5003B5B25 /* UIColor.swift */; };
 		9554560E21FF15710000A9A5 /* CheckCarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554560D21FF15710000A9A5 /* CheckCarModel.swift */; };
 		9557B18A21C1407C007C14D2 /* CustomSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557B18921C1407C007C14D2 /* CustomSearchField.swift */; };
+		9558925A22687A9A0071AAF8 /* ItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9558925922687A9A0071AAF8 /* ItemsModel.swift */; };
 		955AB8AD21F5A64C00091813 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8AC21F5A64C00091813 /* Loader.swift */; };
 		955AB8AF21F5B8CB00091813 /* InternetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8AE21F5B8CB00091813 /* InternetCheck.swift */; };
 		955AB8B121F5B92000091813 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AB8B021F5B92000091813 /* UIUtility.swift */; };
@@ -199,6 +202,7 @@
 		95C1261621930B54009347E9 /* notespopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C1261521930B54009347E9 /* notespopup.storyboard */; };
 		95C57DD5215BA328001C1B76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6E520CCEA2500EC99C2 /* Info.plist */; };
 		95C57DD9215BC076001C1B76 /* CheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C57DD8215BC076001C1B76 /* CheckoutCell.swift */; };
+		95CB78D6226604FF00951D60 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CB78D5226604FF00951D60 /* SearchResultsController.swift */; };
 		95EE0FCB222680A0003F35D2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */; };
 		95EE0FCD222680B4003F35D2 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */; };
 		95EE0FD122268165003F35D2 /* libepos2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FD022268164003F35D2 /* libepos2.a */; };
@@ -286,6 +290,8 @@
 		950507F0215CF70200045AF8 /* PopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOver.swift; sourceTree = "<group>"; };
 		95151CAF221D7273005F606A /* Receipt+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Receipt+CoreDataClass.swift"; sourceTree = "<group>"; };
 		95151CB1221D72C6005F606A /* PrinterDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrinterDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
+		951C068C22536CFF00770671 /* PrinterQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterQueue.swift; sourceTree = "<group>"; };
+		951C068E2254CBF000770671 /* XReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XReportModel.swift; sourceTree = "<group>"; };
 		951C139021539DF500BDA923 /* UpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesView.swift; sourceTree = "<group>"; };
 		951C139221539DFF00BDA923 /* UpdatesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdatesView.xib; sourceTree = "<group>"; };
 		951C13952153BEE900BDA923 /* Welcomecell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcomecell.swift; sourceTree = "<group>"; };
@@ -324,6 +330,7 @@
 		95537F4C21BFE0F5003B5B25 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		9554560D21FF15710000A9A5 /* CheckCarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCarModel.swift; sourceTree = "<group>"; };
 		9557B18921C1407C007C14D2 /* CustomSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchField.swift; sourceTree = "<group>"; };
+		9558925922687A9A0071AAF8 /* ItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsModel.swift; sourceTree = "<group>"; };
 		955AB8AC21F5A64C00091813 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		955AB8AE21F5B8CB00091813 /* InternetCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetCheck.swift; sourceTree = "<group>"; };
 		955AB8B021F5B92000091813 /* UIUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtility.swift; sourceTree = "<group>"; };
@@ -422,6 +429,7 @@
 		95C1261821930C3D009347E9 /* notesPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesPopup.swift; sourceTree = "<group>"; };
 		95C57DD6215BA387001C1B76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95C57DD8215BC076001C1B76 /* CheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCell.swift; sourceTree = "<group>"; };
+		95CB78D5226604FF00951D60 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		95EE0FD022268164003F35D2 /* libepos2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libepos2.a; path = Garage/libepos2.a; sourceTree = "<group>"; };
@@ -615,6 +623,8 @@
 				958A7697222BB83400F88D69 /* store1.png */,
 				95EE0FDA222696F5003F35D2 /* coffee1.png */,
 				1783CDDE211034A10005CC7B /* ServiceCartView.swift */,
+				9558925922687A9A0071AAF8 /* ItemsModel.swift */,
+				95CB78D5226604FF00951D60 /* SearchResultsController.swift */,
 				9565C34421AD537B00D68EFD /* AFWrapperClass.swift */,
 				956C95C0219AE9B50059EE9E /* heloo.jpg */,
 				956B6C542188867B0025986F /* HistoryCar.swift */,
@@ -749,6 +759,7 @@
 				95151CB1221D72C6005F606A /* PrinterDetails+CoreDataClass.swift */,
 				9537B7B3221AB357008F01C8 /* PrintJobHelper.swift */,
 				95243724225256660000CCDF /* Printer.swift */,
+				951C068C22536CFF00770671 /* PrinterQueue.swift */,
 				9537B7B7221AB3B5008F01C8 /* PrinterDetailsModel.swift */,
 				9537B7BB221AB420008F01C8 /* ReceiptConfigurationModel.swift */,
 				9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */,
@@ -756,6 +767,7 @@
 				9588D314223A820600225C37 /* PrinterDetails+CoreDataProperties.swift */,
 				9537B7D8221ADA97008F01C8 /* PrintOrderStructs.swift */,
 				9524371E2251EB4A0000CCDF /* XZReportViewController.swift */,
+				951C068E2254CBF000770671 /* XReportModel.swift */,
 			);
 			path = printer;
 			sourceTree = "<group>";
@@ -1146,6 +1158,7 @@
 				95383E5221512579003DE261 /* QuickpayView.swift in Sources */,
 				955EC29F21A3042400F16253 /* HistoryModel.swift in Sources */,
 				9537B7C8221AB712008F01C8 /* ReceiptPrintable.swift in Sources */,
+				951C068D22536CFF00770671 /* PrinterQueue.swift in Sources */,
 				95647B65219C517E0071D5D6 /* popModel.swift in Sources */,
 				9588D315223A820600225C37 /* PrinterDetails+CoreDataProperties.swift in Sources */,
 				95837848219870700085EB05 /* ReceiptCell.swift in Sources */,
@@ -1179,15 +1192,18 @@
 				9565C34321AC277F00D68EFD /* BayAssignView.swift in Sources */,
 				9557B18A21C1407C007C14D2 /* CustomSearchField.swift in Sources */,
 				95AA6BD1221190D1005D9B44 /* checkoutItems.swift in Sources */,
+				9558925A22687A9A0071AAF8 /* ItemsModel.swift in Sources */,
 				17FEF6C420CCEA1600EC99C2 /* AppDelegate.swift in Sources */,
 				9524371F2251EB4A0000CCDF /* XZReportViewController.swift in Sources */,
 				17F856542119876D006BEF5C /* VoucherView.swift in Sources */,
 				1783CDDF211034A10005CC7B /* ServiceCartView.swift in Sources */,
 				951C13992153BF5800BDA923 /* WelcomeModel.swift in Sources */,
 				955B6D3321D240210049E3B9 /* CheckCarController.swift in Sources */,
+				951C068F2254CBF000770671 /* XReportModel.swift in Sources */,
 				95151CB2221D72C6005F606A /* PrinterDetails+CoreDataClass.swift in Sources */,
 				95383E44215100A8003DE261 /* HardwareView.swift in Sources */,
 				171FAA682119C0490096721E /* LoyaltyView.swift in Sources */,
+				95CB78D6226604FF00951D60 /* SearchResultsController.swift in Sources */,
 				957C44102225297500B482AB /* ReceiptViewController.swift in Sources */,
 				957C4414222529C100B482AB /* DatabaseViewController.swift in Sources */,
 				9553234921F72B7500B6B855 /* CheckCarcell.swift in Sources */,
@@ -1420,6 +1436,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 654A39JHT4;
 				INFOPLIST_FILE = Garage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1446,6 +1463,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 654A39JHT4;
 				INFOPLIST_FILE = Garage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -109,12 +108,12 @@
                             <view clipsSubviews="YES" tag="-2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVl-LX-A8S">
                                 <rect key="frame" x="25" y="167" width="784" height="1000.5"/>
                                 <subviews>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R3E-Yv-0WT">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R3E-Yv-0WT">
                                         <rect key="frame" x="0.0" y="0.5" width="784" height="80"/>
                                         <color key="backgroundColor" red="0.2196078431372549" green="0.22352941176470589" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="webSearch" keyboardAppearance="alert"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqP-aq-yqc">
                                         <rect key="frame" x="159" y="85" width="157" height="50"/>
@@ -362,13 +361,14 @@
                         <outlet property="colectionview" destination="cn7-3i-HCK" id="grw-If-YzU"/>
                         <outlet property="itemBtn" destination="ZxQ-ag-MuO" id="ivY-Tg-VAr"/>
                         <outlet property="receiptOutlet" destination="Nsx-b8-5kl" id="KCS-d2-mf0"/>
+                        <outlet property="searchView" destination="jVl-LX-A8S" id="7X8-Nm-9tf"/>
                         <outlet property="serviceSearch" destination="R3E-Yv-0WT" id="xUU-X6-Y9v"/>
                         <outlet property="subcategoryBtn" destination="tqP-aq-yqc" id="TvI-gu-k3q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHU-PX-jUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="110" y="142"/>
+            <point key="canvasLocation" x="109.35251798561151" y="141.9064748201439"/>
         </scene>
     </scenes>
     <resources>

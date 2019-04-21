@@ -26,7 +26,6 @@ class popModel: NSObject {
         self.Name =  Name
         self.LocationID =  LocationID
     
-
         
     }
     

@@ -71,6 +71,10 @@ class PrintJobHelper {
         PrintJobHelper.receiptConfigurationModel = getReceiptConfigurationModel()
     }
     
+    
+    static func printerQueue(Printer: Xreport)   {
+    printReceipt()
+    }
     /// Prints receipt of all types
     static fileprivate func printReceipt() {
         print(availablePrinters)
@@ -152,6 +156,7 @@ class PrintJobHelper {
             printReceipt()
         } else {
             print("No Checkout printer found")
+            UIUtility.showAlert(title: "No Checkout printer found")
         }
     }
     
@@ -164,7 +169,7 @@ class PrintJobHelper {
       //  if let _ = getReceipt() {
             //            let companyInfo = CompanyInfo(logo: UIImage(named: "store.png")!, name: receipt.companyTitle!, phoneNumber: receipt.companyPhones!, valueAddedTaxNumber: "1234567890", snapchatLink: receipt.snapchatLink!, instagranLink: receipt.instagramLink!)
             
-        let companyInfo = CompanyInfo(logo: UIImage(named: "marngarage.png")!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
+        let companyInfo = CompanyInfo(logo: UIImage(named: "marngarage.png")!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
             return companyInfo
 //        }
 //        return nil

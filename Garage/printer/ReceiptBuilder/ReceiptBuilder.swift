@@ -19,14 +19,18 @@ class ReceiptBuilder {
     let sfProDisplay_mediumFontAttributes_27 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 27.0)!]
     let sfProDisplay_boldFontAttributes_27 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.bold.rawValue, size: 27.0)!]
      let sfProDisplay_heavyFontAttributes_37bold = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.bold.rawValue, size: 37.0)!]
+    let sfProDisplay_heavyFontAttributes_37boldD = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.bold.rawValue, size: 50.0)!]
     let sfProDisplay_heavyFontAttributes_37 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 37.0)!]
     let sfProDisplay_heavyFontAttributes_30 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 30.0)!]
     let sfProDisplay_semiBoldFontAttributes_30 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 30.0)!]
+    let sfProDisplay_semiBoldFontAttributes_30bold = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.bold.rawValue, size: 30.0)!]
+    
     let sfProDisplay_mediumFontAttributes_30 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 30.0)!]
     let sfProDisplay_mediumFontAttributes_32 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 32.0)!]
 
     let geezaPro_boldFontAttributes_27 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 27.0)!]
     let geezaPro_boldFontAttributes_30 = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.medium.rawValue, size: 30.0)!]
+     let geezaPro_boldFontAttributes_30bold = [NSAttributedStringKey.font: UIFont(name: FontsHelper.SanFranciscoProDisplay.bold.rawValue, size: 30.0)!]
 
 
     // MARK:- Public Methods
@@ -166,5 +170,10 @@ class ReceiptBuilder {
         UIGraphicsEndImageContext()
         return resultImage
     }
+    
+    
+    
+    
+    
 
 }

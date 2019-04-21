@@ -327,9 +327,10 @@ var printerDetailModelUICells: [PrinterDetailCellUIModel]!
         
         let test = ["CardNumber": "", "CardHolderName": "", "CardType": "", "AmountPaid": Constants.checkoutGrandtotal.myRounded(toPlaces: 2), "AmountDiscount": 0.0, "PaymentMode": 1] as [String : Any]
 
-        let test2 = Double(tenderedbalance.text!) ?? Double.nan
-        
+        let test2 = (Double(tenderedbalance.text!) ?? Double.nan).myRounded(toPlaces: 2)
         if (test2) >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2)  {
+            print(test2 )
+          
             
             let parameters = [   Constants.OrderID: Constants.checkoutorderid,
                                  Constants.SessionID: Constants.sessions,
@@ -481,16 +482,15 @@ var printerDetailModelUICells: [PrinterDetailCellUIModel]!
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
-       
+      // self.printerreceipt()
         
         self.grandtotalBtn.isUserInteractionEnabled = true
-//        print(Constants.Printer)
 //        if Constants.Printer == "" {
 //            alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
 //        } else {
             checkoutOrder()
-      //  }
-        
+//        }
+//
 
     }
     
@@ -529,7 +529,6 @@ var printerDetailModelUICells: [PrinterDetailCellUIModel]!
         
         let screenSize = UIScreen.main.bounds.width
         let screenheight = UIScreen.main.bounds.size.height
-        print(screenheight)
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         storyboard = UIStoryboard(name: "CheckoutPopUp", bundle: nil)

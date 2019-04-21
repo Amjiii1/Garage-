@@ -14,6 +14,12 @@ class CheckoutModel: NSObject {
     var MakerName: String?
     var ModelName: String?
     var RegistrationNo: String?
+    var RegistrationNoP1: String?
+    var RegistrationNoP2: String?
+    var RegistrationNoP3: String?
+    var RegistrationNoP4: String?
+    var CheckoutDate: String?
+    var MechanicName: String?
     var OrderID: Int?
     var OrderNo: Int?
     var SNo: Int?
@@ -27,6 +33,7 @@ class CheckoutModel: NSObject {
     var EngineType: String?
     var BayName: String?
     var BayID: Int?
+    var Status: Int?
     
     
     
@@ -36,12 +43,18 @@ class CheckoutModel: NSObject {
     }
     
     
-    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: String, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int){
+    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, RegistrationNoP1: String, RegistrationNoP2: String, RegistrationNoP3: String,RegistrationNoP4: String, CheckoutDate: String, MechanicName: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: String, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int, Status: Int){
         
         self.TransactionNo = TransactionNo
         self.MakerName =  MakerName
         self.ModelName =  ModelName
         self.RegistrationNo =  RegistrationNo
+        self.RegistrationNoP1 =  RegistrationNoP1
+        self.RegistrationNoP2 =  RegistrationNoP2
+        self.RegistrationNoP3 =  RegistrationNoP3
+        self.RegistrationNoP4 =  RegistrationNoP4
+        self.CheckoutDate =  CheckoutDate
+        self.MechanicName =  MechanicName
         self.OrderID =  OrderID
         self.OrderNo =  OrderNo
         self.SNo =  SNo
@@ -55,6 +68,7 @@ class CheckoutModel: NSObject {
         self.EngineType =  EngineType
         self.BayName =  BayName
         self.BayID =  BayID
+        self.Status =  Status
         
     }
     
@@ -65,6 +79,12 @@ class CheckoutModel: NSObject {
             let maker = checkoutlist["MakerName"] as? String,
             let model = checkoutlist["ModelName"] as? String,
             let plate = checkoutlist["RegistrationNo"] as? String,
+            let plate1 = checkoutlist["RegistrationNoP1"] as? String,
+            let plate2 = checkoutlist["RegistrationNoP2"] as? String,
+            let plate3 = checkoutlist["RegistrationNoP3"] as? String,
+            let plate4 = checkoutlist["RegistrationNoP4"] as? String,
+            let checkoutDate = checkoutlist["CheckoutDate"] as? String,
+            let mechanicName = checkoutlist["MechanicName"] as? String,
             let Orderid = checkoutlist["OrderID"] as? Int,
             let Orderno = checkoutlist["OrderNo"] as? Int,
             let Serial = checkoutlist["SNo"] as? Int,
@@ -77,13 +97,20 @@ class CheckoutModel: NSObject {
             let Vinno = checkoutlist["VinNo"] as? String,
             let Enginetype = checkoutlist["EngineType"] as? String,
             let bayName = checkoutlist["BayName"] as? String,
-            let bayID = checkoutlist["BayID"] as? Int
+            let bayID = checkoutlist["BayID"] as? Int,
+             let status = checkoutlist["Status"] as? Int
             
             else { return }
         self.TransactionNo = TranscNO
         self.MakerName = maker
         self.ModelName = model
         self.RegistrationNo = plate
+         self.RegistrationNoP1 = plate1
+         self.RegistrationNoP2 = plate2
+         self.RegistrationNoP3 = plate3
+         self.RegistrationNoP4 = plate4
+         self.CheckoutDate = checkoutDate
+         self.MechanicName = mechanicName
         self.OrderID = Orderid
         self.OrderNo = Orderno
         self.SNo = Serial
@@ -97,6 +124,7 @@ class CheckoutModel: NSObject {
         self.EngineType = Enginetype
         self.BayName = bayName
         self.BayID = bayID
+        self.Status = status
     
     
     

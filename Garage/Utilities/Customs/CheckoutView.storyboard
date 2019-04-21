@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -74,25 +73,25 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDY-dN-qv9">
-                                        <rect key="frame" x="149.5" y="7" width="141.5" height="59"/>
+                                        <rect key="frame" x="143.5" y="7" width="153" height="59"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ds3-gM-qeM">
-                                        <rect key="frame" x="303.5" y="10" width="141.5" height="53"/>
+                                        <rect key="frame" x="297.5" y="10" width="153.5" height="53"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.Plate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laE-lB-gV5">
-                                        <rect key="frame" x="449.5" y="10" width="156" height="53"/>
+                                        <rect key="frame" x="443" y="10" width="169" height="53"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSl-Lf-AuQ">
-                                        <rect key="frame" x="657.5" y="12.5" width="109" height="48"/>
+                                        <rect key="frame" x="653" y="12.5" width="118" height="48"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -117,7 +116,7 @@
                                     <constraint firstItem="cDY-dN-qv9" firstAttribute="centerX" secondItem="7cA-Vu-siy" secondAttribute="centerX" multiplier="2.8" id="ksB-Sd-hQR"/>
                                     <constraint firstItem="wSl-Lf-AuQ" firstAttribute="height" secondItem="laE-lB-gV5" secondAttribute="height" multiplier="0.9" id="mkT-sb-EHE"/>
                                     <constraint firstItem="wSl-Lf-AuQ" firstAttribute="centerX" secondItem="laE-lB-gV5" secondAttribute="centerX" multiplier="1.35" id="pth-hu-gXY"/>
-                                    <constraint firstItem="cDY-dN-qv9" firstAttribute="width" secondItem="7cA-Vu-siy" secondAttribute="width" multiplier="1.2" id="v8f-Q6-Oi9"/>
+                                    <constraint firstItem="cDY-dN-qv9" firstAttribute="width" secondItem="7cA-Vu-siy" secondAttribute="width" multiplier="1.3" id="v8f-Q6-Oi9"/>
                                     <constraint firstItem="laE-lB-gV5" firstAttribute="width" secondItem="Ds3-gM-qeM" secondAttribute="width" multiplier="1.1" id="xwf-Pl-0fG"/>
                                     <constraint firstItem="laE-lB-gV5" firstAttribute="centerX" secondItem="Ds3-gM-qeM" secondAttribute="centerX" multiplier="1.41" id="zPT-mm-hrR"/>
                                 </constraints>

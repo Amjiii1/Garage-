@@ -188,6 +188,13 @@ struct Constants {
     static var Printer = ""//:CGFloat = 576
     static var printermac = ""
     static var checkoutplatenmb = ""
+    
+    static var checkoutplatenmb1 = ""
+    static var checkoutplatenmb2 = ""
+    static var checkoutplatenmb3 = ""
+    static var checkoutplatenmb4 = ""
+    static var Checkoutdate = ""
+    
     static var checkoutvin = ""
     static var checkoutcarmake = ""
     static var checkoutcarmodel = ""
@@ -196,6 +203,8 @@ struct Constants {
     static var checkoutCheckL = 0
     static var checkoutcustm = "-"
     static var checkoutmechanic = "-"
+    static var checkoutstatus = 0
+    static var checkoutorderNo = 0
     static let smallPrinter:CGFloat = 384
     static let mediumPrinter:CGFloat = 576
     static var discountValue: Double = 0
@@ -209,6 +218,14 @@ struct Constants {
     static var SnapchatLink = "-"
     static var Footer = "-"
     static var FirstName = "-"
+    
+    
+    
+     static let boldWritingReceipt:String = "SFProDisplay-Bold"
+    static let WritingReceipt:String = "SFProDisplay-Bold"
+    static let smallWritingReceiptSize:CGFloat = 10 * 2
+//    static let boldWritingReceipt:String = "SFProDisplay-Bold"
+//    static let boldWritingReceipt:String = "SFProDisplay-Bold"
     
     
     

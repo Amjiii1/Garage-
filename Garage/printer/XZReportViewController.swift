@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
+class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopoverPresentationControllerDelegate {
 
+    @IBOutlet weak var xReportOutlet: UIButton!
+    
+    @IBOutlet weak var zReportOutlet: UIButton!
+    
+    
     
         var printer: Epos2Printer?
         var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
@@ -22,27 +29,171 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
     let BARCODE_HEIGHT_POS: Int = 70
     let BARCODE_WIDTH_POS: Int = 110
       private var printerDetailsModel = PrinterDetailsModel()
+    let dateFormatter : DateFormatter = DateFormatter()
+    var XReport = [XReportModel]()
+    
+    var key1  = [1: "amjad", 2:"ali", 3:"abro"]
+    var  key2 = [1,2,3]
+    var Status = 0
+    var dates: String = ""
+    var report: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.BlackApp
         Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
         // Do any additional setup after loading the view.
+     
     }
     
 
     @IBAction func XreportBtn(_ sender: Any) {
-      //  self.runPrinterReceiptSequence()
-        CallEngine.printXReport(completion: { (success, message) in
-            print(message)
-          //  Loader.stopLoading()
-        })
+        Status = 1
+       Xreportdata()
+          Status = 0
     }
     
     
     @IBAction func ZreportBtn(_ sender: Any) {
+//        UIUtility.showAlertInController(title: "Alert", message: "Availabe in next Build", viewController: self)
+          if Status == 1 {
+            print("X-Report")
+         } else if Status == 0 {
+            Xreportdata()
+        }
+        
     }
     
+//    func setupsettingsq(){
+//        let screenSize = UIScreen.main.bounds.width
+//        let screenheight = UIScreen.main.bounds.size.height
+//        print(screenheight)
+//        var storyboard: UIStoryboard!
+//        var popController: UIViewController!
+//        storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+//        popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+//        popController.modalPresentationStyle = .popover
+//        let popOverVC = popController.popoverPresentationController
+//        popOverVC?.delegate = self
+//        popOverVC?.sourceView = self.view
+//        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+//        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
+//        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
+//        self.present(popController, animated: true)
+//
+//   }
     
+    
+    private func Xreportdata() {
+        var url: String = ""
+        if Status == 1 {
+        url = "\(CallEngine.baseURL)\(CallEngine.xReport)\(Constants.sessions)"
+            report = "xreport"
+            
+        }
+        else if Status == 0 {
+        url = "\(CallEngine.baseURL)\(CallEngine.zReport)\(Constants.sessions)"
+            report = "zreport"
+        }
+        xReportOutlet.isUserInteractionEnabled = false
+        zReportOutlet.isUserInteractionEnabled = false
+        Alamofire.request(url).response { [weak self] (response) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    UIUtility.showAlertInController(title: "Alert", message: Constants.interneterror, viewController: self!)
+                    self!.xReportOutlet.isUserInteractionEnabled = true
+                    self!.zReportOutlet.isUserInteractionEnabled = true
+                }
+            }
+            guard self != nil else { return }
+            if let error = response.error {
+                ToastView.show(message: Constants.interneterror, controller: self!)
+            } else {
+                do {
+                    let json = try JSON(data: response.data!)
+                    print("🌎 Response : ", json)
+                    let status = json[Constants.Status].intValue
+                    let desc = json[Constants.Description].stringValue
+                    
+                    if (status == 1) {
+                        print(self!.Status)
+                        let reports = json[self!.report].arrayValue
+                        
+                        for xreports in reports {
+                                let totalSales = xreports["TotalSales"].floatValue
+                                let minusDiscount = xreports["MinusDiscount"].floatValue
+                                let minusVoid = xreports["MinusVoid"].floatValue
+                                let minusComplimentory = xreports["MinusComplimentory"].floatValue
+                                let minusReturn = xreports["MinusReturn"].floatValue
+                                let minusTax = xreports["MinusTax"].floatValue
+                                let netSales = xreports["NetSales"].floatValue
+                                let plusGratuity = xreports["PlusGratuity"].floatValue
+                                let plusCharges = xreports["PlusCharges"].floatValue
+                                let totalTendered = xreports["TotalTendered"].floatValue
+                                let cash = xreports["Cash"].floatValue
+                                let card = xreports["Card"].floatValue
+                                let loyality = xreports["Loyality"].floatValue
+                                let giftCard = xreports["GiftCard"].floatValue
+                                let coupons = xreports["Coupons"].floatValue
+                                let totalTransactionType = xreports["TotalTransactionType"].floatValue
+                                let totalCashOrders = xreports["TotalCashOrders"].intValue
+                                let totalCardOrders = xreports["TotalCardOrders"].intValue
+                                let totatMultiPaymentOrders = xreports["TotatMultiPaymentOrders"].intValue
+                                let totalVoidOrders = xreports["TotalVoidOrders"].intValue
+                                let totalReturnOrders = xreports["TotalReturnOrders"].intValue
+                                let totalOrders = xreports["TotalOrders"].intValue
+                                let date = xreports["Date"].stringValue
+                            let newxreports = XReportModel(TotalSales: totalSales, MinusDiscount: minusDiscount, MinusVoid: minusVoid, MinusComplimentory: minusComplimentory, MinusReturn: minusReturn, MinusTax: minusTax, NetSales: netSales, PlusGratuity: plusGratuity, PlusCharges: plusCharges, TotalTendered: totalTendered, Cash: cash, Card: card, Loyality: loyality, GiftCard: giftCard, Coupons: coupons,TotalTransactionType: totalTransactionType, TotalCashOrders: totalCashOrders, TotalCardOrders: totalCardOrders, TotatMultiPaymentOrders: totatMultiPaymentOrders, TotalVoidOrders: totalVoidOrders, TotalReturnOrders: totalReturnOrders, TotalOrders: totalOrders, date: date)
+                            self?.XReport.append(newxreports)
+//                            DispatchQueue.main.async {
+//                                self?.colectionview.reloadData()
+//                            }
+                        }
+                        self!.runPrinterReceiptSequence()
+                        self!.xReportOutlet.isUserInteractionEnabled = true
+                        self!.zReportOutlet.isUserInteractionEnabled = true
+                        self!.dismiss(animated: true, completion: nil)
+                    }
+                    else  if (status == 0) {
+                        UIUtility.showAlertInController(title: "Alert", message: desc, viewController: self!)
+                        self!.xReportOutlet.isUserInteractionEnabled = true
+                        self!.zReportOutlet.isUserInteractionEnabled = true
+                    }
+                        
+                    else  if (status == 1000) {
+                        UIUtility.showAlertInController(title: "Alert", message: Constants.wrong, viewController: self!)
+                        self!.xReportOutlet.isUserInteractionEnabled = true
+                        self!.zReportOutlet.isUserInteractionEnabled = true
+                    }
+                        
+                    else  if (status == 1001) {
+                        ToastView.show(message: Constants.invalid, controller: self!)
+                        UIUtility.showAlertInController(title: "Alert", message: Constants.invalid, viewController: self!)
+                        self!.xReportOutlet.isUserInteractionEnabled = true
+                        self!.zReportOutlet.isUserInteractionEnabled = true
+                    }
+                        
+                    else {
+                        UIUtility.showAlertInController(title: "Alert", message: desc, viewController: self!)
+                        self!.xReportOutlet.isUserInteractionEnabled = true
+                        self!.zReportOutlet.isUserInteractionEnabled = true
+                    }
+                    
+                    
+                    
+                } catch {
+                    debugPrint("🔥 Network Error : ", error)
+                    UIUtility.showAlertInController(title: "Alert", message: "Network Error", viewController: self!)
+                    self!.xReportOutlet.isUserInteractionEnabled = true
+                    self!.zReportOutlet.isUserInteractionEnabled = true
+                    
+                }
+            }
+        }
+    }
+    
+
     
     
         func runPrinterReceiptSequence() -> Bool {
@@ -70,10 +221,6 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
                 return false
             }
     
-            if !createCouponData() {
-                finalizePrinterObject()
-                return false
-            }
     
             if !printData() {
                 finalizePrinterObject()
@@ -84,7 +231,8 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
         }
     
         func createReceiptData() -> Bool {
-    
+        for data in XReport {
+            
             var result = EPOS2_SUCCESS.rawValue
     
             let textData: NSMutableString = NSMutableString()
@@ -116,35 +264,26 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
     
     
             // Section 1 : Store information
-            result = printer!.addFeedLine(1)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addFeedLine")
-                return false
-            }
+           
             result = printer!.addTextAlign(EPOS2_ALIGN_CENTER.rawValue)
             if result != EPOS2_SUCCESS.rawValue {
                 MessageView.showErrorEpos(result, method:"addTextAlign")
                 return false;
             }
+            textData.append("\n")
+            textData.append(report.uppercased())
+            textData.append("\n")
             textData.append(Constants.LocationName)
-            textData.append("Phone No. \(Constants.CompanyPhones)\n")
-            textData.append("\n")
-            //textData.append("\(Constants.currentdate)\n")
-            // textData.append("Majid Bin Abdul Aziz Road\n")
-            textData.append("VAT# \(Constants.VAT)\n")
-            textData.append("\n")
-            textData.append("Plate No. \(Constants.checkoutplatenmb)\n")
-            textData.append("\n")
-            textData.append("VIN: \(Constants.checkoutvin)\n")
             textData.append("\n\n")
-            textData.append("------------------------------\n")
-            textData.append("\(Constants.currentdate)\n")
-            textData.append("------------------------------\n")
-            textData.append("\(Constants.checkoutcustm)                       \(Constants.checkoutbayname)\n")
-            textData.append("\(Constants.checkoutcarmake)                      \(Constants.checkoutcarmodel)\n")
-            textData.append("00km                       \(Constants.checkoutyear)\n")
+              textData.append("--------------------------------------------\n")
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = Date()
+            let dateString = dateFormatter.string(from: date)
+            textData.append("User: \(Constants.FirstName)        Date: \(data.date!)\n\n")
+            textData.append("Print Date: \(dateString)\n")
+         //   textData.append("00km                       \(Constants.checkoutyear)\n")
     
-            textData.append("------------------------------\n\n")
+            textData.append("--------------------------------------------\n\n")
             result = printer!.addText(textData as String)
             if result != EPOS2_SUCCESS.rawValue {
                 MessageView.showErrorEpos(result, method:"addText")
@@ -157,10 +296,43 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
                 MessageView.showErrorEpos(result, method:"addTextAlign")
                 return false;
             }
+//            result = printer!.addTextSize(2, height:1)
+//            if result != EPOS2_SUCCESS.rawValue {
+//                MessageView.showErrorEpos(result, method:"addTextSize")
+//                return false
+//            }
     
             // Section 2 : Purchaced items
-            for receipt in Checkoutstruct.sentitems {
-                textData.append("\(receipt.Quantity!)X \(receipt.Name!) ------------------ \(receipt.Price!) SR\n")
+           // for receipt in key1 {
+            
+                    print(data.TotalSales)
+                          textData.append("TotalSales                       \(data.TotalSales!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusDiscount                       \(data.MinusDiscount!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusVoid                           \(data.MinusVoid!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusComplimentory                  \(data.MinusComplimentory!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusReturn                         \(data.MinusReturn!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusTax                         \(data.MinusTax!.myRrounded(toPlaces: 2))\n")
+                          textData.append("--------------------------------------------\n")
+                          textData.append("NetSales                          \(data.NetSales!.myRrounded(toPlaces: 2))\n")
+                          textData.append("PlusGratuity                        \(data.PlusGratuity!.myRrounded(toPlaces: 2))\n")
+                          textData.append("PlusCharges                         \(data.PlusCharges!.myRrounded(toPlaces: 2))\n")
+                          textData.append("--------------------------------------------\n")
+                          textData.append("TotalTendered                     \(data.TotalTendered!.myRrounded(toPlaces: 2))\n")
+                          textData.append("Cash                             \(data.Cash!.myRrounded(toPlaces: 2))\n")
+                          textData.append("Card                                \(data.Card!.myRrounded(toPlaces: 2))\n")
+                          textData.append("Loyality                            \(data.Loyality!.myRrounded(toPlaces: 2))\n")
+                          textData.append("GiftCard                            \(data.GiftCard!.myRrounded(toPlaces: 2))\n")
+                          textData.append("Coupons                             \(data.Coupons!.myRrounded(toPlaces: 2))\n")
+                          textData.append("--------------------------------------------\n")
+                          textData.append("TotalTransactionType              \(data.TotalTransactionType!.myRrounded(toPlaces: 2))\n")
+                          textData.append("--------------------------------------------\n")
+                          textData.append("TotalCashOrders                     \(data.TotalCashOrders!)\n")
+                          textData.append("TotalCardOrders                     \(data.TotalCardOrders!)\n")
+                          textData.append("TotatMultiPaymentOrders             \(data.TotatMultiPaymentOrders!)\n")
+                          textData.append("TotalVoidOrders                     \(data.TotalVoidOrders!)\n")
+                          textData.append("TotalReturnOrders                   \(data.TotalReturnOrders!)\n")
+                    textData.append("--------------------------------------------\n")
+                    textData.append("TotalOrders                         \(data.TotalOrders!)\n")
                 //        textData.append("410 3 CUP BLK TEAPOT    9.99 R\n")
                 //        textData.append("445 EMERIL GRIDDLE/PAN 17.99 R\n")
                 //        textData.append("438 CANDYMAKER ASSORT   4.99 R\n")
@@ -172,9 +344,9 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
                 //        textData.append("441 **Blue Overprint P  2.99 R\n")
                 //        textData.append("476 REPOSE 4PCPM CHOC   5.49 R\n")
                 //        textData.append("461 WESTGATE BLACK 25  59.99 R\n")
-            }
-            textData.append("\n")
-            textData.append("------------------------------\n")
+                    
+            //}
+            textData.append("--------------------------------------------\n")
             result = printer!.addText(textData as String)
             if result != EPOS2_SUCCESS.rawValue {
                 MessageView.showErrorEpos(result, method:"addText")
@@ -183,52 +355,10 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
             textData.setString("")
     
     
-            // Section 3 : Payment infomation
-            textData.append("SUBTOTAL                 \( Constants.subtotal) SR\n");
-             textData.append("Discount                   0.0 SR\n");
-            textData.append("VAT(\(Constants.percent)%)                   \(Constants.checkouttax) SR\n\n");
-            result = printer!.addText(textData as String)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addText")
-                return false
-            }
-            textData.setString("")
-    
-            result = printer!.addTextSize(2, height:2)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addTextSize")
-                return false
-            }
-    
-            result = printer!.addText("TOTAL    \(Constants.checkoutGrandtotal) SR\n")
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addText")
-                return false;
-            }
-    
-            result = printer!.addTextSize(1, height:1)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addTextSize")
-                return false;
-            }
-    
-            result = printer!.addFeedLine(1)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addFeedLine")
-                return false;
-            }
-    
-            textData.append("CASH                    \(Constants.checkoutGrandtotal)\n")
-            textData.append("------------------------------\n")
-            result = printer!.addText(textData as String)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addText")
-                return false
-            }
-            textData.setString("")
-    
+       
             // Section 4 : Advertisement
-            textData.append("** Have a safe drive **\n")
+            textData.append(Constants.Footer)
+            textData.append("\n")
             //  textData.append("Sign Up and Save !\n")
             textData.append("Garage.sa\n")
             result = printer!.addText(textData as String)
@@ -261,139 +391,11 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
                 return false
             }
     
+         //  return true
+            }
             return true
         }
     
-        func createCouponData() -> Bool {
-            let barcodeWidth = 2
-            let barcodeHeight = 64
-    
-            var result = EPOS2_SUCCESS.rawValue
-    
-            if printer == nil {
-                return false
-            }
-    
-            let coffeeData = UIImage(named: "coffee1.png")
-            let wmarkData = UIImage(named: "wmark1.png")
-    
-            if coffeeData == nil || wmarkData == nil {
-                return false
-            }
-    
-            result = printer!.addPageBegin()
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPageBegin")
-                return false
-            }
-    
-            result = printer!.addPageArea(0, y:0, width:PAGE_AREA_WIDTH, height:PAGE_AREA_HEIGHT)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPageArea")
-                return false
-            }
-    
-            result = printer!.addPageDirection(EPOS2_DIRECTION_TOP_TO_BOTTOM.rawValue)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPageDirection")
-                return false
-            }
-    
-            result = printer!.addPagePosition(0, y:Int(coffeeData!.size.height))
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPagePosition")
-                return false
-            }
-    
-            result = printer!.add(coffeeData, x:0, y:0,
-                                  width:Int(coffeeData!.size.width),
-                                  height:Int(coffeeData!.size.height),
-                                  color:EPOS2_PARAM_DEFAULT,
-                                  mode:EPOS2_PARAM_DEFAULT,
-                                  halftone:EPOS2_PARAM_DEFAULT,
-                                  brightness:3,
-                                  compress:EPOS2_PARAM_DEFAULT)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addImage")
-                return false
-            }
-    
-            result = printer!.addPagePosition(0, y:Int(wmarkData!.size.height))
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPagePosition")
-                return false
-            }
-    
-            result = printer!.add(wmarkData, x:0, y:0,
-                                  width:Int(wmarkData!.size.width),
-                                  height:Int(wmarkData!.size.height),
-                                  color:EPOS2_PARAM_DEFAULT,
-                                  mode:EPOS2_PARAM_DEFAULT,
-                                  halftone:EPOS2_PARAM_DEFAULT,
-                                  brightness:Double(EPOS2_PARAM_DEFAULT),
-                                  compress:EPOS2_PARAM_DEFAULT)
-    
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addImage")
-                return false
-            }
-    
-            result = printer!.addPagePosition(FONT_A_WIDTH * 4, y:(PAGE_AREA_HEIGHT / 2) - (FONT_A_HEIGHT * 2))
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPagePosition")
-                return false
-            }
-    
-            result = printer!.addTextSize(3, height:3)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addTextSize")
-                return false
-            }
-    
-            result = printer!.addTextStyle(EPOS2_PARAM_DEFAULT, ul:EPOS2_PARAM_DEFAULT, em:EPOS2_TRUE, color:EPOS2_PARAM_DEFAULT)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addTextStyle")
-                return false
-            }
-    
-            result = printer!.addTextSmooth(EPOS2_TRUE)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addTextSmooth")
-                return false
-            }
-    
-            result = printer!.addText("FREE Coffee\n")
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addText")
-                return false
-            }
-    
-            result = printer!.addPagePosition((PAGE_AREA_WIDTH / barcodeWidth) - BARCODE_WIDTH_POS, y:Int(coffeeData!.size.height) + BARCODE_HEIGHT_POS)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPagePosition")
-                return false
-            }
-    
-            result = printer!.addBarcode("01234567890", type:EPOS2_BARCODE_UPC_A.rawValue, hri:EPOS2_PARAM_DEFAULT, font: EPOS2_PARAM_DEFAULT, width:barcodeWidth, height:barcodeHeight)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addBarcode")
-                return false
-            }
-    
-            result = printer!.addPageEnd()
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addPageEnd")
-                return false
-            }
-    
-            result = printer!.addCut(EPOS2_CUT_FEED.rawValue)
-            if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"addCut")
-                return false
-            }
-    
-            return true
-        }
     
         func printData() -> Bool {
             var status: Epos2PrinterStatusInfo?
@@ -593,19 +595,4 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-}
+    }

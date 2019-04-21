@@ -60,7 +60,24 @@ class UIUtility: NSObject {
         viewController.present(alert, animated: true, completion: nil)
     }
     
+    class func boldString(_ string: String,fontName :String, fontSize:CGFloat) -> NSMutableAttributedString {
+        let attrString = NSMutableAttributedString(string: string)
+        let boldRange = (string as NSString).range(of: string)
+        attrString.beginEditing()
+        attrString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: fontName, size: (fontSize))!, range: boldRange)
+        attrString.endEditing()
+        return attrString
+    }
     
+    class func drawInRectWithString(_ mutableString:NSMutableAttributedString,frame:CGRect){
+        let mutableStringRect = frame
+        mutableString.draw(in: mutableStringRect.integral)
+    }
+    class func drawInRectWithStringBold(_ value:String,frame:CGRect,fontName :String, fontSize:CGFloat){
+        let mutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(value, fontName: fontName, fontSize: fontSize))
+        let mutableStringRect = frame
+        mutableString.draw(in: mutableStringRect.integral)
+    }
     
     class func getXReport(reponseObject:[String:Any],isZreport:Bool = false) -> Xreport {
         

@@ -40,9 +40,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         btnHelp.isHidden = true
         btnCustomer.isHidden = true
         newFreeTrail.isHidden = true
-        
-        
-    
         pinCodeTextField.layer.cornerRadius = 18.0
         pinCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
@@ -97,9 +94,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func PincodeApi() {
         
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.LoginApi)/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
-        print("\(pinCodeTextField.text!)")
-        print("\(businesssCodeTextField.text!)")
-        
+       
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
@@ -113,7 +108,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print(data)
                 do {
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
-                    print(json)
                     let descript = login(json: json)
                     if (descript.status == 1) {
                         DispatchQueue.main.async {
@@ -145,13 +139,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 Constants.FirstName = FirstName
                             }
                         }
-                        
-                       
-                    
-                        
-                        
-                        
-                        
+                      
                         
                         if let receipt = json["ReceiptInfo"] as? [String: Any] {//
                             print(receipt)
@@ -330,6 +318,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             businesssCodeTextField.isEnabled = false
             BusinessApi()
         }
+            
         else if  businesssCodeTextField.text!.characters.count > 10 {
             
             let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
@@ -503,33 +492,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //
         //            }
         //
-        ////            saveCompanyCodeWithNet({ (success,message) in
-        ////
-        ////                if(!success) {
-        ////                    if(message.contains("ncorrect") || message.contains("input")) {
-        ////                        completion(success,message)
-        ////                    }
-        ////                    else {
-        ////                        Utilities.showInfo(title: "Internet issue", body: "Trying offline.")
-        ////                        self.saveCompanyCodeWithOutNet({ (success,message) in
-        ////
-        ////                            completion(success,message)
-        ////                        })
-        ////                    }
-        ////                }
-        ////                else {
-        ////                    completion(success,message)
-        ////                }
-        ////            })
+        //            saveCompanyCodeWithNet({ (success,message) in
+        //
+        //                if(!success) {
+        //                    if(message.contains("ncorrect") || message.contains("input")) {
+        //                        completion(success,message)
+        //                    }
+        //                    else {
+        //                        Utilities.showInfo(title: "Internet issue", body: "Trying offline.")
+        //                        self.saveCompanyCodeWithOutNet({ (success,message) in
+        //
+        //                            completion(success,message)
+        //                        })
+        //                    }
+        //                }
+        //                else {
+        //                    completion(success,message)
+        //                }
+        //            })
         //
         //        }
         //        else {
         //            print("Network not reachable")
         //
-        ////            saveCompanyCodeWithOutNet({ (success,message) in
-        ////
-        ////                completion(success,message)
-        ////            })
+        //            saveCompanyCodeWithOutNet({ (success,message) in
+        //
+        //                completion(success,message)
+        //            })
         //        }
         //
         //    }

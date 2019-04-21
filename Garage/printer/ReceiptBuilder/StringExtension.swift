@@ -95,3 +95,17 @@ extension Double {
     }
 }
 
+extension Float {
+    /// Rounds the double to decimal places value
+    func myRrounded(toPlaces places:Int = 2) -> Float {
+        let isInteger = floor(self) == self // true
+        if !isInteger {
+            let divisor = pow(10.0, Float(places))
+            return (self * divisor).rounded() / divisor
+        }
+        else {
+            return self
+        }
+    }
+}
+

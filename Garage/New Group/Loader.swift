@@ -172,6 +172,7 @@ class Loader {
     
     class func loadLoader() {
         for position in 0...50 {
+            print(position)
             let strImageName : String = "\(position).png"
             let image  = UIImage(named:strImageName)
             imagesListArray.add(image!)

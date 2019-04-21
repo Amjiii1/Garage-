@@ -39,7 +39,7 @@ class ReceptionalistView: UIViewController  {
   }
     
     @IBAction func profileBtn(_ sender: Any) {
-        showLocationTable ()
+    //    showLocationTable ()
         //   self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -67,11 +67,7 @@ class ReceptionalistView: UIViewController  {
         popover?.sourceView = self.offlibebtn
         popover?.sourceRect = self.offlibebtn.bounds
         self.present(nav, animated: true, completion: nil)
-        
-        
-        
-        
-        
+      
     }
     
     

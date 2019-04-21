@@ -20,7 +20,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @IBOutlet weak var headerlabel: UILabel!
     var checkoutmodel = [CheckoutModel]()
+    var cartItemStructArray = [ReceiptModel]()
     
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,13 +86,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             do {
                 
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-                print(json)
                 
                 let status = json[Constants.Status] as? Int
                 let discript = json[Constants.Description] as? String
                 if (status == 1) {
                     if let order = json["OrdersList"] as? [[String: Any]] {
-                        print(order)
                         self.checkoutmodel.removeAll()
                         Checkoutstruct.Itemdetails.removeAll()
                         
@@ -114,10 +116,13 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             //                            if let items = checkoutlist["OrderItems"] as? AnyObject{
                             //                                CheckoutItems.Itemdetails.append(items as! CheckoutItems)
                             //                            }
+                            print(checkoutlist)
+                            print(order)
                             let details = CheckoutModel(checkoutlist: checkoutlist)
                             self.checkoutmodel.append(details!)
-                            
+                        
                         }
+                        
                         
                     }
                     
@@ -246,7 +251,59 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             deleteAction.backgroundColor = .black
         case 2:
             
-            print("Nothing")
+            
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Re-Print") { (action, indexpath) in
+                DispatchQueue.main.async {
+                    
+                    Checkoutstruct.sentitems.removeAll()
+                    Constants.checkoutorderid = self.checkoutmodel[indexPath.row].OrderID!
+                    Constants.checkoutcarid = self.checkoutmodel[indexPath.row].CarID!
+                    Constants.checkoutplatenmb = self.checkoutmodel[indexPath.row].RegistrationNo!
+                    Constants.checkoutvin = self.checkoutmodel[indexPath.row].VinNo!
+                    Constants.checkoutcarmake = self.checkoutmodel[indexPath.row].MakerName!
+                    Constants.checkoutcarmodel = self.checkoutmodel[indexPath.row].ModelName!
+                    Constants.checkoutbayname = self.checkoutmodel[indexPath.row].BayName!
+                    Constants.checkoutyear = self.checkoutmodel[indexPath.row].Year!
+                    Constants.checkoutcustm = self.checkoutmodel[indexPath.row].CustomerID!
+                    Constants.checkoutplatenmb1 = self.checkoutmodel[indexPath.row].RegistrationNoP1!
+                    Constants.checkoutplatenmb2 = self.checkoutmodel[indexPath.row].RegistrationNoP2!
+                    Constants.checkoutplatenmb3 = self.checkoutmodel[indexPath.row].RegistrationNoP3!
+                    Constants.checkoutplatenmb4 = self.checkoutmodel[indexPath.row].RegistrationNoP4!
+                    Constants.Checkoutdate = self.checkoutmodel[indexPath.row].CheckoutDate!
+                    Constants.checkoutmechanic = self.checkoutmodel[indexPath.row].MechanicName!
+                    Constants.checkoutstatus = self.checkoutmodel[indexPath.row].Status!
+                    Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].OrderNo!
+                    
+                    Constants.subtotal = 0.0
+                    Constants.checkoutGrandtotal = 0.0
+                    Constants.checkouttax = 0.0
+                    for itemmodels in Checkoutstruct.Itemdetails {
+                        
+                        if itemmodels.itemorderid == Constants.checkoutorderid {
+                            
+                            Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
+                            
+                            Checkoutstruct.sentitems.append(itemmodels)
+                        } else if itemmodels.itemorderid != Constants.checkoutorderid {
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
+                    Constants.subtotal = Constants.checkoutGrandtotal
+                    Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
+                    self.printerreceipt()
+                    
+              
+                    
+                }
+            }
+            returnValue = [deleteAction]
+            deleteAction.backgroundColor = UIColor.DefaultApp
+            
+            
         default:
             break
         }
@@ -321,8 +378,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
             cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
             cell.checkoutBtn.imageView?.isHidden = true
-            cell.checkoutBtn.isUserInteractionEnabled = false
-            //                 cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
+         //   cell.checkoutBtn.isUserInteractionEnabled = false
+        //   cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
             let trans3 = checkoutmodel[indexPath.row].TransactionNo
             cell.CSerialnmb.text = "\(trans3!)"
         default:
@@ -335,6 +392,12 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
     }
+    
+    
+    
+    
+    
+    
     
     
     @objc func addccheckout(_ sender: UIButton){
@@ -354,6 +417,15 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             Constants.checkoutbayname = checkoutmodel[sender.tag].BayName!
             Constants.checkoutyear = checkoutmodel[sender.tag].Year!
             Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID!
+            Constants.checkoutplatenmb1 = checkoutmodel[sender.tag].RegistrationNoP1!
+            Constants.checkoutplatenmb2 = checkoutmodel[sender.tag].RegistrationNoP2!
+            Constants.checkoutplatenmb3 = checkoutmodel[sender.tag].RegistrationNoP3!
+            Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4!
+            Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4!
+            Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName!
+            Constants.checkoutstatus = checkoutmodel[sender.tag].Status!
+            Constants.checkoutorderNo = checkoutmodel[sender.tag].OrderNo!
+           
             
             Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0
@@ -384,6 +456,30 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         default:
             break
         }
+    }
+    
+    
+    func printerreceipt() {
+        
+        for receipt in Checkoutstruct.sentitems {
+            
+            let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
+            
+            cartItemStructArray.append(cartItemStruct)
+           
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Ammjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
+        
+        PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
+        
     }
     
     
@@ -424,7 +520,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     
-    func setupsettings(){
+    func setupsettings()  {
+        
         let screenSize = UIScreen.main.bounds.width
         let screenheight = UIScreen.main.bounds.size.height
         print(screenheight)

@@ -187,7 +187,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 
         }, to: "\(CallEngine.baseURL)\(CallEngine.notesImguploadapi)",headers:nil)
         { (result) in
-            self.showloader1()
+            
             switch result {
                 
             case .success(let upload,_,_ ):
@@ -196,6 +196,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 upload.responseJSON
                     
                     { response in
+                        self.showloader1()
                         if let dict = response.result.value as? NSObject {
                             DispatchQueue.main.async {
                                 
@@ -212,6 +213,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                     self.dismiss(animated: true, completion: nil)
                                 } else if Status == 0 {
                                     ToastView.show(message: message, controller: self)
+                                    self.dismiss(animated: true, completion: nil)
                                 }
                                 
                             }

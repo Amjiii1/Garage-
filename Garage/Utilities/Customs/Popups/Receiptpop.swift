@@ -32,7 +32,7 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
         ReceiptTableview.delegate = self
         ReceiptTableview.reloadData()
         print("hello")
-        self.Totalprice.text = ("\(Constants.totalprice) SAR")
+        self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)
         ReceiptTableview.separatorStyle = .none
         dataupdate()
     }
@@ -73,7 +73,12 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
              Items.nameArray.append(Model)
             }
              let prc = Items.Product[indexpath.row]
-              Constants.totalprice = Constants.totalprice - prc.Price!
+           
+            print(Constants.totalprice.myRounded(toPlaces: 2))
+             print(Constants.totalprice)
+            print(prc.Price!.myRounded(toPlaces: 2))
+            print(prc.Price!)
+              Constants.totalprice = (Constants.totalprice - prc.Price!).myRounded(toPlaces: 2)
                    Items.Product.remove(at: indexpath.row)
             self.ReceiptTableview.deleteRows(at: [indexpath], with: .automatic)
           self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)//(String(format: "%.2f SAR", Constants.totalprice)//("\(Constants.totalprice) SAR")

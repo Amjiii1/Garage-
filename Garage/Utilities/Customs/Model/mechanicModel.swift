@@ -37,8 +37,10 @@ struct CompanyInfo {
     var valueAddedTaxNumber: String = ""
     var cashier: String = "-"
     var vin: String = "-"
+    var reprint: String = "-"
     var snapchatLink: String = ""
     var instagranLink: String = ""
+    
     
     
 }

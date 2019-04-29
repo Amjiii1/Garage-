@@ -10,6 +10,7 @@ import UIKit
 
 class HistoryModel: NSObject {
     
+    var TransactionNo: Int?
     var Sno: Int?
     var Date: String?
     var Mechanic: String?
@@ -21,8 +22,9 @@ class HistoryModel: NSObject {
     }
     
     
-    init(Sno: Int?, Date: String, Mechanic: String, Total: String){
+    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String){
         
+        self.TransactionNo = TransactionNo
         self.Sno = Sno
         self.Date = Date
         self.Mechanic =  Mechanic
@@ -35,10 +37,13 @@ class HistoryModel: NSObject {
     
     init?(historyorder: [String: Any]) {
       guard  let sno = historyorder["SNo"] as? Int?,
+        let transactionNo = historyorder["TransactionNo"] as? Int,
        let date = historyorder["OrderDate"] as? String,
             let mechanic = historyorder["Mechanic"] as? String,
             let Total = historyorder["AmountTotal"] as? String
             else { return }
+        self.TransactionNo = transactionNo
+         self.Sno = sno
         self.Sno = sno
         self.Date = date
         self.Mechanic = mechanic

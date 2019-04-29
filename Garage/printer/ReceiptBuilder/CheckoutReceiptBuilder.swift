@@ -47,9 +47,8 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
         sfProDisplay_heavyFontAttributes_30_height = Double("Test".size(withAttributes: sfProDisplay_heavyFontAttributes_30).height)
         sfProDisplay_mediumFontAttributes_30_height = Double("Test".size(withAttributes: sfProDisplay_mediumFontAttributes_30).height)
         sfProDisplay_mediumFontAttributes_32_height = Double("Test".size(withAttributes: sfProDisplay_mediumFontAttributes_32).height)
-
-        geezaPro_boldFontAttributes_27_height = Double("تجربة".size(withAttributes: geezaPro_boldFontAttributes_27).height)
-        geezaPro_boldFontAttributes_30_height = Double("تجربة".size(withAttributes: geezaPro_boldFontAttributes_30).height)
+         geezaPro_boldFontAttributes_27_height = Double("تجربة".size(withAttributes: geezaPro_boldFontAttributes_27).height)
+         geezaPro_boldFontAttributes_30_height = Double("تجربة".size(withAttributes: geezaPro_boldFontAttributes_30).height)
 
     }
 

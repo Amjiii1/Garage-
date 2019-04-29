@@ -11,8 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 
-
-
 struct Items {
     static var nameArray = [AnyObject]()
     static var Product = [ReceiptModel]()
@@ -36,20 +34,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     var categories = [Category]()
     // var Product = [ReceiptModel]()
     var nameArray = [String]()
-    var Searchitems = [Item]()
-    var itemsfilter = [Item]()
-    var searchResultController: SearchResultsController!
+  
+    var searchQuantity: Int = 1
     var tblSearchResult: UITableView?
     var searchActive : Bool = false
-    
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-    
-    var filtered:[String] = []
-
-    
-    
-    
-    
+    var itemsModel = [ItemsModel]()
+    var itemsfilter = [ItemsModel]()
+  
     var currentState = 0
     var categoryIndex = 0
     var subCategoryIndex = 0
@@ -69,22 +60,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         super.viewDidLoad()
         
         getSearchData()
-        
-        AllData = [["pic":"list0.jpg", "name":"Angel Mark", "msg":"Hi there, I would like read your...", "time":"just now", "unread":"12"],
-                   ["pic":"list1.jpg", "name":"John Doe", "msg":"I would prefer reading on night...", "time":"56 second ago", "unread":"2"],
-                   ["pic":"list2.jpg", "name":"Krishta Hide", "msg":"Okey Great..!", "time":"2m ago", "unread":"0"],
-                   ["pic":"list3.jpg", "name":"Keithy Pamela", "msg":"I am waiting there", "time":"5h ago", "unread":"0"]
-        ]
-        
-        SearchData=AllData
-        
-       // getSearchData()
-        
-        
-        
-        
+        SearcIconImages()
+       
         print("\(Items.nameArray)")
-        serviceSearch.attributedPlaceholder = NSAttributedString(string: "Search a Service Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        serviceSearch.attributedPlaceholder = NSAttributedString(string: "   Search Items Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        serviceSearch.textAlignment = .left
         subcategoryBtn.isHidden = true
         itemBtn.isHidden = true
         colectionview.delegate = self
@@ -96,11 +76,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
         self.receiptOutlet.titleLabel?.textAlignment = .center
         serviceSearch.delegate = self
-         // DispatchQueue.main.async {
-      //      self.Customsearchtableview()
-     //   }
-//        serviceSearch.addTarget(self, action: #selector(SearchFunction), for: .touchDown)
-//        serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControlEvents.editingChanged)
+            self.Customsearchtableview()
+        serviceSearch.addTarget(self, action: #selector(SearchFunction), for: .touchDown)
+        serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControlEvents.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
     }
     
@@ -109,6 +87,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         NotificationCenter.default.removeObserver(self, name: Notification.Name("NotificationIdentifier"), object: nil)
     }
     
+    
+  
     
     
     
@@ -131,15 +111,14 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     @objc func textFieldDidChanges(_ textField: UITextField) {
         
-        print(Searchitems)
+     
         if textField.text  != "" {
             if (serviceSearch.text?.count)! != 0 {
-                self.Searchitems.removeAll()
-                for str in Searchitems {
-                    let range = str.name.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
-                    print(str)
+                self.itemsModel.removeAll()
+                for str in itemsfilter {
+                    let range = str.Name?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
                     if range != nil {
-                        self.Searchitems.append(str)
+                        self.itemsModel.append(str)
                     }
                     
                 }
@@ -150,150 +129,122 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             
             serviceSearch.resignFirstResponder()
             serviceSearch.text = ""
-            self.Searchitems.removeAll()
-            for str in Searchitems {
-                Searchitems.append(str)
+
+            self.itemsModel.removeAll()
+            for str in itemsfilter {
+                itemsModel.append(str)
             }
             SearchbarTbl.reloadData()
+        
             
         }
-      
+
     }
     
     
-//
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-//    {
-//        if string.isEmpty
-//        {
-//            search = String(search.characters.dropLast())
-//        }
-//        else
-//        {
-//            search=textField.text!+string
-//        }
-//
-//        print(search)
-//        let predicate=NSPredicate(format: "SELF.name CONTAINS[cd] %@", search)
-//        let arr=(AllData as NSArray).filtered(using: predicate)
-//
-//        if arr.count > 0
-//        {
-//            SearchData.removeAll(keepingCapacity: true)
-//            SearchData=arr as! Array<Dictionary<String,String>>
-//        }
-//        else
-//        {
-//            SearchData=AllData
-//        }
-//        SearchbarTbl.reloadData()
-//        return true
-//    }
-    
-    
+
         
         @objc func SearchFunction() {
-           // serviceSearch.inputView = UIView()
-          //  serviceSearch.inputAccessoryView = UIView()
-         //   serviceSearch.resignFirstResponder()
+      
             SearchbarTbl.isHidden = false
+            SearchbarTbl.reloadData()
         }
 
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//       // colectionview.endEditing(true)
-//        SearchbarTbl.isHidden = true
-//        serviceSearch.resignFirstResponder()
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        self.searchView.endEditing(true)
+        SearchbarTbl.isHidden = true
+        serviceSearch.resignFirstResponder()
+    }
     
+    
+    
+    
+    
+    func SearcIconImages() {
+        
+        serviceSearch.rightViewMode = .always
+        let emailImgContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let emailImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        emailImg.image = UIImage(named: "searchIcon")
+        emailImg.center = emailImgContainer.center
+        emailImgContainer.addSubview(emailImg)
+        serviceSearch.rightView = emailImgContainer
+        
+    }
     
    
         
         
         func Customsearchtableview()  {
             self.view.layoutIfNeeded()
-            SearchbarTbl = UITableView(frame: CGRect(x: self.serviceSearch.frame.origin.x, y:self.serviceSearch.frame.origin.y+self.serviceSearch.frame.size.height + 125.5, width: self.serviceSearch.frame.width, height: 300))
-            print(self.serviceSearch.frame.origin.y+self.serviceSearch.frame.size.height)
+            SearchbarTbl = UITableView(frame: CGRect(x: searchView.frame.origin.x, y: searchView.frame.origin.y+30, width: self.searchView.frame.width, height: 380))
             SearchbarTbl.register(UITableViewCell.self, forCellReuseIdentifier: "MyCellS")
             SearchbarTbl.dataSource = self
             SearchbarTbl.delegate = self
             SearchbarTbl.backgroundColor = UIColor.darkGray
-            self.view.addSubview(SearchbarTbl)
+            view.addSubview(SearchbarTbl)
             SearchbarTbl.isHidden = true
             
         }
        
-//        let searchController = UISearchController(searchResultsController: searchResultController)
-//       // serviceSearch.delegate = self
-//        self.present(searchController, animated:true, completion: nil)
-        
-//        if textField.text  != "" {
-//            if (serviceSearch.text?.count)! != 0 {
-//              //  self.items.removeAll()
-//                for str in Searchitems {
-//                    let range = str.name.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
-//                    if range != nil {
-//              //          self.items.append(str)
-//                //        categories[categoryIndex].subCategories[subCategoryIndex].items.append(str)
-//                    }
-//                    print(str)
-//                }
-//            }
-//            self.colectionview.reloadData()
-//
-//        } else {
-//
-//            serviceSearch.resignFirstResponder()
-//            serviceSearch.text = ""
-//       //     self.items.removeAll()
-//            for str in Searchitems {
-//            //    items.append(str)
-//            }
-//            self.colectionview.reloadData()
-//
-//        }
 
-  
-    
   
     
     // MARK:- TableView Delegates
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-       print(Searchitems.count)
+       print(itemsModel.count)
          //   return categories[categoryIndex].subCategories[subCategoryIndex].Searchitems.count
         
-        return categories[categoryIndex].subCategories[subCategoryIndex].items.count
+        return itemsModel.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellS", for: indexPath as IndexPath)
-       
-          cell.textLabel!.text = categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellS", for: indexPath as IndexPath)
         
-        
-//         var Data:Dictionary<String,String> = SearchData[indexPath.row]
-            cell.backgroundColor = UIColor.darkGray
-            cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textAlignment = .left
+        cell.textLabel!.text = itemsModel[indexPath.row].Name
+//        print(self.serviceSearch.frame.width)
+//        let label1 = UILabel(frame: CGRect(x: self.serviceSearch.frame.width - 130, y: 10, width: 100, height: 25))
+//        var price = 0.00
+//        price = itemsModel[indexPath.row].Price!
+//        label1.text = "\(price.myRounded(toPlaces: 2))"
+//        label1.textAlignment = .right
+//        label1.textColor = UIColor.white
+//        label1.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+//
+        cell.backgroundColor = UIColor.darkGray
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+   //     cell.textLabel?.
+      //  cell.addSubview(label1)
             return cell
         
     }
     
     
-    
-    
-    @IBAction func SearchAction(_ sender: Any) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let searchController = UISearchController(searchResultsController: searchResultController)
-        serviceSearch.delegate = self
-        self.present(searchController, animated:true, completion: nil)
+        let detail = [(itemsModel[indexPath.row])]
+        for newdetail in detail {
+          
+            let product = ReceiptModel(Name: newdetail.Name!, Price: (newdetail.Price! * 1).myRounded(toPlaces: 2), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+            
+            Items.Product.append(product)
+            let price = newdetail.Price! * Double(searchQuantity)
+            Constants.totalprice = (Constants.totalprice + Double(price)).myRounded(toPlaces: 2)
+            self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
+            self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+            self.receiptOutlet.titleLabel?.textAlignment = .center
+            SearchbarTbl.isHidden = true
+            serviceSearch.resignFirstResponder()
+    }
     }
     
     
     
-    
-    
-    
+   
     
     func OrderEdit() {
         
@@ -449,13 +400,31 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     if (status == 1) {
                        print(json)
                          if let CategoriesList = json["CategoriesList"] as? [[String: Any]] {
-                            print(CategoriesList)
-                            if let SubCategoriesList = CategoriesList["SubCategoriesList"] as? [AnyObject] {
-                                print(SubCategoriesList)
-//
+                            
+                            for Subcategories in CategoriesList {
+                              
+                               if let subCategoriesList = Subcategories["SubCategoriesList"] as? [[String: Any]] {
+                                 for ProductModels in subCategoriesList {
+                                    if let ItemsList = ProductModels["ItemsList"] as? [[String: Any]] {
+                                        for ProductModel in ItemsList {
+                                            let nam = ProductModel["Name"] as! String?
+                                            let neworder = ItemsModel(ProductModel: ProductModel)
+                                            self.itemsModel.append(neworder!)
+                                            self.itemsfilter = self.itemsModel
+                                            
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                }
+                                
+
+                                
                             }
 
                         }
+//                        self.tblSearchResult?.reloadData()
 
 
                     } else if (status == 0) {
@@ -564,7 +533,6 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                 let subLastUpdatedDate = sub["LastUpdatedDate"].stringValue
                                 
                                  items = []
-                                self!.Searchitems = []
                                 
                                 for item in itemsList {
                                     let itemID = item["ItemID"].intValue
@@ -585,26 +553,17 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     
                                     let newItem = Item(itemID: itemID, name: itemName, alternateName: itemAlternateName, desc: itemDescription, price: price, image: itemImage, barcode: barcode, itemType: itemType, status: itemStatus, lastUpdatedDate: itemLastUpdatedDate, displayOrder: itemDisplayOrder, categoryID: itemCategoryID, subCategoryID: itemSubCategoryID, modifiers: modifiers)
                                     items.append(newItem)
-                                    self!.Searchitems.append(newItem)
-                                 //   DispatchQueue.main.async {
-                                    
-                                   // self!.Customsearchtableview()
-                                  //  }
+                            
                                 }
-                               
-
-                                
-                                
-//                                print(items)
-                                let newSubCategory = SubCategory(items: items , Searchitems: self!.Searchitems , categoryID: subCategoryID, subCategoryID: subSubCategoryID, name: subName, alternateName: subAlternateName, desc: subDescription, image: subImage, status: subStatus, displayOrder: subDisplayOrder, lastUpdatedDate: subLastUpdatedDate)
+                     
+                                let newSubCategory = SubCategory(items: items , categoryID: subCategoryID, subCategoryID: subSubCategoryID, name: subName, alternateName: subAlternateName, desc: subDescription, image: subImage, status: subStatus, displayOrder: subDisplayOrder, lastUpdatedDate: subLastUpdatedDate)
                                 subCategories.append(newSubCategory)
                             }
                             let newCategory = Category(subCategories: subCategories, categoryID: categoryID, name: name, alternateName: alternateName, desc: catDesc, image: catImage, status: catStatus, displayOrder: catDisplayOrder, lastUpdatedDate: catLastUpdatedDate)
                             self?.categories.append(newCategory)
                             DispatchQueue.main.async {
                                 self?.colectionview.reloadData()
-//                                self?.SearchbarTbl.reloadData()
-//                                self!.Customsearchtableview()
+
                             }
                         }
                     }

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -139,25 +138,25 @@
                                         <rect key="frame" x="0.0" y="0.0" width="751" height="96"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kx4-6h-EnZ">
-                                                <rect key="frame" x="187" y="5" width="97.5" height="86"/>
+                                                <rect key="frame" x="162.5" y="5" width="146.5" height="86"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mechanics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBu-Ub-tOu">
-                                                <rect key="frame" x="398.5" y="5" width="97.5" height="86"/>
+                                                <rect key="frame" x="374.5" y="5" width="146" height="86"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myv-Ly-Cyp">
-                                                <rect key="frame" x="622.5" y="5" width="97.5" height="86"/>
+                                                <rect key="frame" x="598" y="5" width="146" height="86"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S.No" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWK-tz-zN3">
-                                                <rect key="frame" x="22.5" y="5" width="75.5" height="86"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trans.No" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWK-tz-zN3">
+                                                <rect key="frame" x="4" y="5" width="112.5" height="86"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -170,7 +169,7 @@
                                             <constraint firstItem="HWK-tz-zN3" firstAttribute="centerX" secondItem="XWT-hI-3so" secondAttribute="centerX" multiplier="0.16" id="606-Xc-JFj"/>
                                             <constraint firstItem="Myv-Ly-Cyp" firstAttribute="centerX" secondItem="hBu-Ub-tOu" secondAttribute="centerX" multiplier="1.5" id="CaY-YB-5xG"/>
                                             <constraint firstItem="hBu-Ub-tOu" firstAttribute="centerX" secondItem="Kx4-6h-EnZ" secondAttribute="centerX" multiplier="1.9" id="CiO-Mq-H1t"/>
-                                            <constraint firstItem="HWK-tz-zN3" firstAttribute="width" secondItem="XWT-hI-3so" secondAttribute="width" multiplier="0.1" id="Jd6-Ao-049"/>
+                                            <constraint firstItem="HWK-tz-zN3" firstAttribute="width" secondItem="XWT-hI-3so" secondAttribute="width" multiplier="0.15" id="Jd6-Ao-049"/>
                                             <constraint firstItem="Kx4-6h-EnZ" firstAttribute="centerX" secondItem="HWK-tz-zN3" secondAttribute="centerX" multiplier="3.92" id="LQZ-2H-UIf"/>
                                             <constraint firstItem="Kx4-6h-EnZ" firstAttribute="height" secondItem="HWK-tz-zN3" secondAttribute="height" id="SnV-xM-Ni3"/>
                                             <constraint firstItem="Kx4-6h-EnZ" firstAttribute="width" secondItem="HWK-tz-zN3" secondAttribute="width" multiplier="1.3" id="Sz1-qd-YyE"/>

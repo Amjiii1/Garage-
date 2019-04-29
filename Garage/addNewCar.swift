@@ -67,8 +67,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         CustomCarMaketableview()
         CustomCarModeltableview()
         modelNumber.isUserInteractionEnabled = false
-//        recommendedAmount.isUserInteractionEnabled = false
-//        engineType.isUserInteractionEnabled = false
         phoneNumber.text = "+966"
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -218,7 +216,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     func CustomCarModeltableview()  {
-        
+    
         self.view.layoutIfNeeded()
         CarModelTableView = UITableView(frame: CGRect(x: self.modelNumber.frame.origin.x, y: self.modelNumber.frame.origin.y, width: self.modelNumber.frame.width, height: 300))
         CarModelTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell2")
@@ -308,6 +306,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell.textLabel!.text = MakeCarDetails[indexPath.row].Name
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.white
+            cell.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
             return cell
         }
         else if tableView == CarModelTableView {
@@ -316,6 +315,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell2.textLabel!.text = ModelCarDetails[indexPath.row].Name
             cell2.backgroundColor = UIColor.darkGray
             cell2.textLabel?.textColor = UIColor.white
+            cell2.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
             return cell2
             
             

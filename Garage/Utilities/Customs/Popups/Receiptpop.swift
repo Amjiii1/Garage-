@@ -81,8 +81,7 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
               Constants.totalprice = (Constants.totalprice - prc.Price!).myRounded(toPlaces: 2)
                    Items.Product.remove(at: indexpath.row)
             self.ReceiptTableview.deleteRows(at: [indexpath], with: .automatic)
-          self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)//(String(format: "%.2f SAR", Constants.totalprice)//("\(Constants.totalprice) SAR")
-          //  self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
+          self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)
             NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
         }
         

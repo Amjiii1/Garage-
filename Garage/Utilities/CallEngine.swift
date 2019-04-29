@@ -16,8 +16,7 @@ class CallEngine {
     
     static var GlocalURL = "http://api-uat.garage.sa/api/"
     static var GliveURL = "http://api-live.garage.sa/api/"
-    
-    static var baseURL =   GlocalURL     //localURL
+        static var baseURL =    GlocalURL
     
     
     static let editCar = "Car/Edit"

@@ -32,16 +32,15 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     let dateFormatter : DateFormatter = DateFormatter()
     var XReport = [XReportModel]()
     
-    var key1  = [1: "amjad", 2:"ali", 3:"abro"]
-    var  key2 = [1,2,3]
     var Status = 0
     var dates: String = ""
     var report: String = ""
+    var flag: Int32 = 12
     
     override func viewDidLoad() {
         super.viewDidLoad()
        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.BlackApp
+        self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.white
         Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
         // Do any additional setup after loading the view.
      
@@ -49,20 +48,53 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
 
     @IBAction func XreportBtn(_ sender: Any) {
+//        connectPrinter()
+//        if flag == 2 {
+//           alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
+//        } else {
         Status = 1
        Xreportdata()
           Status = 0
-    }
+        }
+ //   }
     
     
     @IBAction func ZreportBtn(_ sender: Any) {
-//        UIUtility.showAlertInController(title: "Alert", message: "Availabe in next Build", viewController: self)
+//        if !connectPrinter() {
+//            alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
+//        } else {
           if Status == 1 {
             print("X-Report")
          } else if Status == 0 {
             Xreportdata()
         }
+//        }
         
+    }
+    
+    func alert(view: XZReportViewController, title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.Status = 1
+            self.Xreportdata()
+            self.Status = 0
+            
+//            if self.Status == 1 {
+//                print("X-Report")
+//            } else if self.Status == 0 {
+//                self.Xreportdata()
+//            }
+            
+        })
+        
+        alert.addAction(defaultAction)
+        let cancel = UIAlertAction(title: "No", style: .destructive, handler: { action in
+           
+        })
+        alert.addAction(cancel)
+        DispatchQueue.main.async(execute: {
+            view.present(alert, animated: true)
+        })
     }
     
 //    func setupsettingsq(){
@@ -151,7 +183,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
 //                            }
                         }
                         self!.runPrinterReceiptSequence()
-                        self!.xReportOutlet.isUserInteractionEnabled = true
+                         self!.xReportOutlet.isUserInteractionEnabled = true
                         self!.zReportOutlet.isUserInteractionEnabled = true
                         self!.dismiss(animated: true, completion: nil)
                     }
@@ -194,6 +226,14 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     }
     
 
+    func runPrinterReceiptSequenceEx() -> Bool {
+        
+        if !printData() {
+            finalizePrinterObject()
+            return false
+        }
+        return true
+    }
     
     
         func runPrinterReceiptSequence() -> Bool {
@@ -302,23 +342,22 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
 //                return false
 //            }
     
-            // Section 2 : Purchaced items
-           // for receipt in key1 {
+        
             
                     print(data.TotalSales)
-                          textData.append("TotalSales                       \(data.TotalSales!.myRrounded(toPlaces: 2))\n")
+                          textData.append("TotalSales                         \(data.TotalSales!.myRrounded(toPlaces: 2))\n")
                           textData.append("MinusDiscount                       \(data.MinusDiscount!.myRrounded(toPlaces: 2))\n")
                           textData.append("MinusVoid                           \(data.MinusVoid!.myRrounded(toPlaces: 2))\n")
                           textData.append("MinusComplimentory                  \(data.MinusComplimentory!.myRrounded(toPlaces: 2))\n")
                           textData.append("MinusReturn                         \(data.MinusReturn!.myRrounded(toPlaces: 2))\n")
-                          textData.append("MinusTax                         \(data.MinusTax!.myRrounded(toPlaces: 2))\n")
+                          textData.append("MinusTax                           \(data.MinusTax!.myRrounded(toPlaces: 2))\n")
                           textData.append("--------------------------------------------\n")
                           textData.append("NetSales                          \(data.NetSales!.myRrounded(toPlaces: 2))\n")
                           textData.append("PlusGratuity                        \(data.PlusGratuity!.myRrounded(toPlaces: 2))\n")
                           textData.append("PlusCharges                         \(data.PlusCharges!.myRrounded(toPlaces: 2))\n")
                           textData.append("--------------------------------------------\n")
-                          textData.append("TotalTendered                     \(data.TotalTendered!.myRrounded(toPlaces: 2))\n")
-                          textData.append("Cash                             \(data.Cash!.myRrounded(toPlaces: 2))\n")
+                          textData.append("TotalTendered                      \(data.TotalTendered!.myRrounded(toPlaces: 2))\n")
+                          textData.append("Cash                               \(data.Cash!.myRrounded(toPlaces: 2))\n")
                           textData.append("Card                                \(data.Card!.myRrounded(toPlaces: 2))\n")
                           textData.append("Loyality                            \(data.Loyality!.myRrounded(toPlaces: 2))\n")
                           textData.append("GiftCard                            \(data.GiftCard!.myRrounded(toPlaces: 2))\n")
@@ -460,12 +499,14 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             result = printer!.connect(Constants.Printer, timeout:Int(EPOS2_PARAM_DEFAULT))
             if result != EPOS2_SUCCESS.rawValue {
                 MessageView.showErrorEpos(result, method:"connect")
+                flag = result
                 return false
             }
+            
     
             result = printer!.beginTransaction()
             if result != EPOS2_SUCCESS.rawValue {
-                MessageView.showErrorEpos(result, method:"beginTransaction")
+               // MessageView.showErrorEpos(result, method:"beginTransaction")
                 printer!.disconnect()
                 return false
     
@@ -499,16 +540,20 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
         func isPrintable(_ status: Epos2PrinterStatusInfo?) -> Bool {
             if status == nil {
                 return false
+                print("UnAvailable")
             }
     
             if status!.connection == EPOS2_FALSE {
                 return false
+                print("UnAvailable")
             }
             else if status!.online == EPOS2_FALSE {
+                print("UnAvailable")
                 return false
             }
             else {
                 // print available
+                print("Available")
             }
             return true
         }

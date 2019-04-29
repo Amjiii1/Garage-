@@ -59,9 +59,9 @@ class ReceptionalistView: UIViewController  {
         popController = storyboard.instantiateViewController(withIdentifier: "XZReportViewControllerVc") as! XZReportViewController
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let heightForPopOver = 20*3
+        let heightForPopOver = 20*4
         let popover = nav.popoverPresentationController
-        popController.preferredContentSize = CGSize(width: 300 , height: heightForPopOver)
+        popController.preferredContentSize = CGSize(width: 390 , height: heightForPopOver)
         popover?.permittedArrowDirections = .up
         popover?.backgroundColor = UIColor.white
         popover?.sourceView = self.offlibebtn

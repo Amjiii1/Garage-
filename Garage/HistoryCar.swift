@@ -149,20 +149,19 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pressed = HistoryData[indexPath.row].Total
          let presseda = HistoryData[indexPath.row].Total
-        print(pressed!)
-         print((format: "%.2f", (presseda!)))
+        let double = String(format:"%.2f", presseda!)
+        print(double)
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
-        let serial = HistoryData[indexPath.row].Sno
+        let serial = HistoryData[indexPath.row].TransactionNo
         cell.SrNo.text = "\(serial!)"
         cell.Date.text = HistoryData[indexPath.row].Date
         cell.Mechanic.text = HistoryData[indexPath.row].Mechanic
         cell.Total.text = HistoryData[indexPath.row].Total
-        //cell.Total.text = (format: "%.2f", (total!))
         cell.selectionStyle = .none
         
         return cell

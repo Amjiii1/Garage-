@@ -198,13 +198,12 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     { response in
                         self.showloader1()
                         if let dict = response.result.value as? NSObject {
-                            DispatchQueue.main.async {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 
                                 let Status = dict.value(forKey: "Status") as! Int
                                 let message = dict.value(forKey: "Description") as! String
                                 if Status == 1 {
                                   print(dict)
-                                    //setValue(value: AnyObject?, forKey: String)
                                     if let imagekey = dict.value(forKey: "Image") as? String
                                     {
                                         print(imagekey)
@@ -216,7 +215,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                     self.dismiss(animated: true, completion: nil)
                                 }
                                 
-                            }
+                            })
                         }
                 }
             case .failure(let encodingError):

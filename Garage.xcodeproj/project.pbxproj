@@ -1445,6 +1445,20 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Garage",
 				);
+				NEW_SETTING = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"NumericKeyboard\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marn.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1471,6 +1485,20 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Garage",
+				);
+				NEW_SETTING = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"NumericKeyboard\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marn.garage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

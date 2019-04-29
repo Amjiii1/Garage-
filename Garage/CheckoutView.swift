@@ -272,7 +272,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.Checkoutdate = self.checkoutmodel[indexPath.row].CheckoutDate!
                     Constants.checkoutmechanic = self.checkoutmodel[indexPath.row].MechanicName!
                     Constants.checkoutstatus = self.checkoutmodel[indexPath.row].Status!
-                    Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].OrderNo!
+                    Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].TransactionNo!
                     
                     Constants.subtotal = 0.0
                     Constants.checkoutGrandtotal = 0.0
@@ -424,7 +424,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4!
             Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName!
             Constants.checkoutstatus = checkoutmodel[sender.tag].Status!
-            Constants.checkoutorderNo = checkoutmodel[sender.tag].OrderNo!
+            Constants.checkoutorderNo = checkoutmodel[sender.tag].TransactionNo!
            
             
             Constants.subtotal = 0.0
@@ -501,6 +501,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.70, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.70)
         self.present(popController, animated: true)
+        
         
     }
     

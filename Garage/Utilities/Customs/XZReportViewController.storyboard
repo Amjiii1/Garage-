@@ -1,72 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Amjad_Bold.otf">
-            <string>SFProDisplay-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Report View Controller-->
         <scene sceneID="ZyY-bi-L14">
             <objects>
                 <viewController storyboardIdentifier="XZReportViewControllerVc" id="MY4-nd-tOu" customClass="XZReportViewController" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u5A-Kd-5tS">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="igA-4M-hsn"/>
+                        <viewControllerLayoutGuide type="bottom" id="zR2-KF-eMA"/>
+                    </layoutGuides>
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="u5A-Kd-5tS">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UZ-0x-7HR">
-                                <rect key="frame" x="10" y="29" width="175.5" height="112.5"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="X Report">
-                                    <color key="titleColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UZ-0x-7HR">
+                                <rect key="frame" x="1" y="0.0" width="193" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="72" minY="0.0" maxX="0.0" maxY="60"/>
+                                <state key="normal" title="Report X" image="Recept">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="XreportBtn:" destination="MY4-nd-tOu" eventType="touchUpInside" id="AIx-xf-1Yi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-tE-Otv">
-                                <rect key="frame" x="205" y="29" width="175.5" height="112.5"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
-                                <state key="normal" title="Z Report">
-                                    <color key="titleColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-tE-Otv">
+                                <rect key="frame" x="196" y="0.0" width="193" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="72" minY="0.0" maxX="0.0" maxY="60"/>
+                                <state key="normal" title="Report Z" image="Recept">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="ZreportBtn:" destination="MY4-nd-tOu" eventType="touchUpInside" id="E2P-Xr-S9X"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.79593970070422537" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.2797095070422535" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="height" secondItem="5UZ-0x-7HR" secondAttribute="height" id="5oS-yj-RDO"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="height" secondItem="u5A-Kd-5tS" secondAttribute="height" multiplier="0.75" id="8bB-4u-lTT"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerY" secondItem="231-Pn-TtJ" secondAttribute="centerY" id="Nph-Lz-Vvl"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="height" secondItem="u5A-Kd-5tS" secondAttribute="height" id="8bB-4u-lTT"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerY" secondItem="u5A-Kd-5tS" secondAttribute="centerY" id="Nph-Lz-Vvl"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="width" secondItem="5UZ-0x-7HR" secondAttribute="width" id="R13-eC-ksh"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.45" id="UR0-fi-NZY"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.495" id="UR0-fi-NZY"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerX" secondItem="5UZ-0x-7HR" secondAttribute="centerX" multiplier="3" id="ehn-0W-hvZ"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerX" secondItem="231-Pn-TtJ" secondAttribute="centerX" multiplier="0.5" id="hpN-j8-Y2m"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerX" secondItem="u5A-Kd-5tS" secondAttribute="centerX" multiplier="0.5" id="hpN-j8-Y2m"/>
                             <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerY" secondItem="5UZ-0x-7HR" secondAttribute="centerY" id="iIn-FW-sPx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="231-Pn-TtJ"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <size key="freeformSize" width="390" height="150"/>
                     <connections>
@@ -79,4 +71,7 @@
             <point key="canvasLocation" x="33" y="123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Recept" width="18" height="25"/>
+    </resources>
 </document>

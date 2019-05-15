@@ -132,10 +132,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         modelLbl.isHidden = false
         plateLbl.isHidden = false
         statusLbl.isHidden = false
-        
-        
-        
-        
+     
     }
     
     func Showdetails() {
@@ -284,22 +281,22 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
         
+        guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
         let transaction = MechanicModel[indexPath.row].finishedTransactionNo
         cell.serialNo.text = "\(transaction!)"
         cell.makeLbl.text = MechanicModel[indexPath.row].finishedMakerName
         cell.modelLbl.text = MechanicModel[indexPath.row].finishedModelName
         cell.plateLbl.text = MechanicModel[indexPath.row].finishedRegistrationNo
-        let status = MechanicModel[indexPath.row].finishedBayName   //.finishedSNo
+        let status = MechanicModel[indexPath.row].finishedBayName
         cell.statusLbl.text = "\(status!)"
         cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.gray
         return CGFloat(60)
-        
     }
     
     
@@ -311,7 +308,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         Alamofire.request(url).response { [weak self] (response) in
             guard self != nil else { return  }
             if let error = response.error {
-                debugPrint("🔥 Network Error : ", error)
+                ToastView.show(message: "Network Error", controller: self!)
             } else {
                 do {
                     let json = try JSON(data: response.data!)
@@ -405,6 +402,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
+                    ToastView.show(message: "Network Error", controller: self!)
                 }
             }
         }
@@ -514,11 +512,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         print(Constants.CarIDData)
         print(Constants.orderidmechanic)
         
-        
-        
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        
         storyboard = UIStoryboard(name: Constants.notespopup, bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: Constants.notesPopupVc) as! notesPopup
         //let nav = UINavigationController(rootViewController: popController)

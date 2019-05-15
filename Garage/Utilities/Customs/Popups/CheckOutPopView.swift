@@ -34,18 +34,17 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     private weak var subView: UIView?
     var orderdetails = [Checkoutdetails]()
     
-
-    
     
 //    var printer: Epos2Printer?
 //    var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
 //    var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
+    
     var cartItemStructArray = [ReceiptModel]()
-var printerDetailModelUICells: [PrinterDetailCellUIModel]!
+    var printerDetailModelUICells: [PrinterDetailCellUIModel]!
     
     let viewModel = CheckoutViewModel()
-    var dummyData = ["Discount","SubTotal","VAT \(Constants.percent)%"]
-    var amount = [0,Constants.subtotal,Constants.checkouttax]
+    var dummyData = ["SubTotal","Discount","VAT \(Constants.percent)%"]
+    var amount = [Constants.subtotal,0.00,Constants.checkouttax]
     var workerid = 0
     var assistantid = 0
     
@@ -67,7 +66,9 @@ var printerDetailModelUICells: [PrinterDetailCellUIModel]!
         discouttableview.dataSource = self
         checkout_tableview.separatorStyle = .none
         discouttableview.separatorStyle = .none
-        self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)  //(format: "%.2f", (Constants.checkoutGrandtotal)
+      
+        self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)
+        //(format: "%.2f", (Constants.checkoutGrandtotal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()

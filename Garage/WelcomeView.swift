@@ -22,11 +22,13 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     var AssignedID: Int = 0
     
-    
+    var abc = 12.51
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let new = String(format: "%.f", abc)
+        print(new)
      
         Constants.sessions = UserDefaults.standard.string(forKey: "Session")!
         tableViewWelcome.reloadData()
@@ -38,7 +40,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
-        Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
+        Constants.SuperUser = UserDefaults.standard.integer(forKey: Constants.superuserA)
         Constants.flagEdit = 0
     }
     

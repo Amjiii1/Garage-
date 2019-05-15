@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad10_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Amjad_Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Camera Scan-->
+        <scene sceneID="DaL-ZB-pTj">
+            <objects>
+                <viewController storyboardIdentifier="cameraScanVc" id="lLF-A1-q9V" customClass="cameraScan" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v8y-bE-U5d"/>
+                        <viewControllerLayoutGuide type="bottom" id="ln7-u8-vjB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9NT-jI-Zbr">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="120"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFv-lH-s3U">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="120"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                <state key="normal" title="Open Camera">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cmeraaction:" destination="lLF-A1-q9V" eventType="touchUpInside" id="VlG-bO-C1Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <constraints>
+                            <constraint firstItem="XFv-lH-s3U" firstAttribute="centerY" secondItem="9NT-jI-Zbr" secondAttribute="centerY" id="63q-r5-Ne0"/>
+                            <constraint firstItem="XFv-lH-s3U" firstAttribute="centerX" secondItem="9NT-jI-Zbr" secondAttribute="centerX" id="OHV-jB-7bv"/>
+                            <constraint firstItem="XFv-lH-s3U" firstAttribute="height" secondItem="9NT-jI-Zbr" secondAttribute="height" id="m8c-mK-RyW"/>
+                            <constraint firstItem="XFv-lH-s3U" firstAttribute="width" secondItem="9NT-jI-Zbr" secondAttribute="width" id="pOe-g0-JFT"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="300" height="120"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0iN-64-Dnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="199" y="67"/>
+        </scene>
+    </scenes>
+</document>

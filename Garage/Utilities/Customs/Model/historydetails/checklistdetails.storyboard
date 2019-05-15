@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad10_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmjadRegular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="Amjad_Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Checklist Detials-->
+        <scene sceneID="0aS-rK-fwd">
+            <objects>
+                <viewController storyboardIdentifier="ChecklistDetialsVc" id="M5p-sf-YrS" customClass="ChecklistDetials" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ERd-UI-49R"/>
+                        <viewControllerLayoutGuide type="bottom" id="hVi-OZ-sjH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rfx-zN-Ybr">
+                        <rect key="frame" x="0.0" y="0.0" width="538" height="344.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eI0-o5-jsV">
+                                <rect key="frame" x="0.0" y="0.0" width="538" height="344.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="checklist" id="IbW-1Q-Ni8" customClass="HistoryChecklist" customModule="Garage" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="538" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IbW-1Q-Ni8" id="EmP-7y-Iho">
+                                            <rect key="frame" x="0.0" y="0.0" width="538" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLl-VB-17o">
+                                                    <rect key="frame" x="13.5" y="0.0" width="376.5" height="43.5"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-LD-aaD">
+                                                    <rect key="frame" x="427.5" y="0.0" width="113" height="43.5"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DLl-VB-17o" firstAttribute="width" secondItem="EmP-7y-Iho" secondAttribute="width" multiplier="0.7" id="Cmc-Eg-d5c"/>
+                                                <constraint firstItem="DLl-VB-17o" firstAttribute="centerX" secondItem="EmP-7y-Iho" secondAttribute="centerX" multiplier="0.75" id="FeO-RD-c6w"/>
+                                                <constraint firstItem="r8l-LD-aaD" firstAttribute="width" secondItem="DLl-VB-17o" secondAttribute="width" multiplier="0.3" id="I59-sS-PG4"/>
+                                                <constraint firstItem="DLl-VB-17o" firstAttribute="centerY" secondItem="EmP-7y-Iho" secondAttribute="centerY" id="Lyj-iF-pbh"/>
+                                                <constraint firstItem="r8l-LD-aaD" firstAttribute="height" secondItem="DLl-VB-17o" secondAttribute="height" id="aCB-me-Vym"/>
+                                                <constraint firstItem="DLl-VB-17o" firstAttribute="height" secondItem="EmP-7y-Iho" secondAttribute="height" id="jEx-xX-qiJ"/>
+                                                <constraint firstItem="r8l-LD-aaD" firstAttribute="centerX" secondItem="DLl-VB-17o" secondAttribute="centerX" multiplier="2.4" id="nBh-eD-noG"/>
+                                                <constraint firstItem="r8l-LD-aaD" firstAttribute="centerY" secondItem="DLl-VB-17o" secondAttribute="centerY" id="pXd-zn-xHD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Titlelabel" destination="DLl-VB-17o" id="Ku3-Hm-Fxq"/>
+                                            <outlet property="valuelabel" destination="r8l-LD-aaD" id="LmR-h6-P20"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eI0-o5-jsV" firstAttribute="height" secondItem="rfx-zN-Ybr" secondAttribute="height" id="HVd-jY-sX0"/>
+                            <constraint firstItem="eI0-o5-jsV" firstAttribute="width" secondItem="rfx-zN-Ybr" secondAttribute="width" id="Hvr-fi-Ig2"/>
+                            <constraint firstItem="eI0-o5-jsV" firstAttribute="centerX" secondItem="rfx-zN-Ybr" secondAttribute="centerX" id="Kn5-BL-AeF"/>
+                            <constraint firstItem="eI0-o5-jsV" firstAttribute="centerY" secondItem="rfx-zN-Ybr" secondAttribute="centerY" id="b7l-Tg-i2V"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="538" height="344.5"/>
+                    <connections>
+                        <outlet property="checklistTbl" destination="eI0-o5-jsV" id="ZOj-TO-BMR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h6k-3p-2Hk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="65" y="93"/>
+        </scene>
+    </scenes>
+</document>

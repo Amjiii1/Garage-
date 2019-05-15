@@ -1,26 +1,19 @@
 //
-//  HistoryCell.swift
+//  totalpriceCell.swift
 //  Garage
 //
-//  Created by Amjad on 11/03/1440 AH.
+//  Created by Amjad on 04/09/1440 AH.
 //  Copyright © 1440 Amjad Ali. All rights reserved.
 //
 
 import UIKit
 
-class HistoryCell: UITableViewCell {
+class totalpriceCell: UITableViewCell {
 
     
-    @IBOutlet weak var SrNo: UILabel!
-    @IBOutlet weak var Date: UILabel!
-    @IBOutlet weak var Mechanic: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!
     
-    @IBOutlet weak var Total: UILabel!
-    
-    @IBOutlet weak var detailButton: UIButton!
-    
-    
-    
+    @IBOutlet weak var labeltotal: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

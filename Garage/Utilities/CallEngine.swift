@@ -52,6 +52,7 @@ class CallEngine {
     static let checkout = "order/checkout"
     static let xReport = "report/x/"
     static let zReport = "report/z/"
+    static let carScan = "car/scan/plateno"
     
     
     static var timeout = 30.0

@@ -8,7 +8,24 @@
 
 import UIKit
 
-class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+struct HistoryDetails {
+    static var details = [checkoutItems]()
+    static var savedetail = [checkoutItems]()
+    
+    
+    static var Inspectionlist = [InspectionListH]()
+    static var InspectionDtail = [InspectionDetailsH]()
+    
+    static var SaveInspectionlist = [InspectionListH]()
+    static var SaveInspectionDtail = [InspectionDetailsH]()
+    
+}
+
+
+
+
+class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
     
     
@@ -18,7 +35,8 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var platenmbLabel: UILabel!
     
     var HistoryData = [HistoryModel]()
-    
+//     var Inspectionlist = [InspectionListH]()
+//      var InspectionDtail = [InspectionDetailsH]()
     var count = 0
     
     override func viewDidLoad() {
@@ -73,7 +91,94 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         }
                         
                         
+                        // Items
                         if let history = json["OrdersList"] as? [[String: Any]] {
+                            self.HistoryData.removeAll()
+                            HistoryDetails.details.removeAll()
+                            
+                            for items in history {
+                                if let item = items["OrderItems"] as? [[String: Any]] {
+                                    for details in item {
+                                        let Name = details["ItemName"] as! String
+                                        let AlternateName = details["AlternateName"] as! String
+                                        let Price = details["Price"] as! Double
+                                        let ItemID = details["ItemID"] as! Int
+                                        let Quantity = details["Quantity"] as! Int
+                                        let OrderDetails = details["OrderDetailID"] as! Int
+                                        let itemorderID = details["OrderID"] as! Int
+                                        let itemsdetailed = checkoutItems(Name: Name,AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
+                                        HistoryDetails.details.append(itemsdetailed)
+                                    }
+                                    
+                                }
+                            }
+                            // Notes
+                            for CarNotedetails in history {
+                                if let CarNotes = CarNotedetails["CarNotes"] as? [[String: Any]] {
+                                    print(CarNotes)
+                              
+                                    for notesdetails in CarNotes {
+                                        let NotesComment = notesdetails["NotesComment"] as! String
+                                        print(NotesComment)
+                                        if let NotesImages = notesdetails["NotesImages"] as? [[String: Any]] {
+                                            print(NotesImages)
+                                        }
+                                        print(notesdetails)
+                                      
+                                    }
+                                    
+                                    
+                                }
+                                }
+                            // Checklist
+                                
+                                for CarCheckList in history {
+                                
+                                    if let CheckList = CarCheckList["CheckList"] as? [[String: Any]] {
+                                        HistoryDetails.Inspectionlist.removeAll()
+                                        HistoryDetails.InspectionDtail.removeAll()
+                                        
+                                        HistoryDetails.InspectionDtail = [InspectionDetailsH]()
+                                        for carCheckLists in CheckList  {
+                                        
+                                            let Name = carCheckLists["Name"] as! String
+                                            let InspectionDetails = carCheckLists["InspectionDetails"] as? [[String: Any]]
+                                            let CarInspectionIDH = carCheckLists["CarInspectionID"] as! Int
+                                            let OrderID = carCheckLists["OrderID"] as! Int
+                                            HistoryDetails.InspectionDtail = []
+                                            for sub in InspectionDetails!  {
+//                                            "CarInspectionDetailID": 79,
+//                                            "CarInspectionID": 79,
+//                                            "Name": "air filter",
+//                                            "Value": "I"
+                                                let CarInspectionDetailID = sub["CarInspectionDetailID"] as! Int
+                                                let CarInspectionID = sub["CarInspectionID"] as! Int
+                                                let Name = sub["Name"] as! String
+                                                let Value = sub["Value"] as! String
+                                                
+                                                let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
+                                                HistoryDetails.InspectionDtail.append(newInspectionDetails)
+                                            
+                                            }
+                                            
+                                            let newInspectionList = InspectionListH(InspectionDetailsH: [InspectionDetailsH](), InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
+                                            HistoryDetails.Inspectionlist.append(newInspectionList)
+                                        }
+                                        
+                                        
+                                        
+                                    }
+                            }
+                                    
+                                    
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             for historyorder in history {
                                 print(historyorder)
                                 let neworder = HistoryModel(historyorder: historyorder)
@@ -82,6 +187,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             }
                             
                         }
+                    
                         DispatchQueue.main.async {
                             self.historyTableview.reloadData()
                             self.dismiss(animated: true, completion: nil)
@@ -146,13 +252,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let pressed = HistoryData[indexPath.row].Total
-         let presseda = HistoryData[indexPath.row].Total
-        let double = String(format:"%.2f", presseda!)
-        print(double)
-    }
-    
+   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -162,10 +262,81 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.Date.text = HistoryData[indexPath.row].Date
         cell.Mechanic.text = HistoryData[indexPath.row].Mechanic
         cell.Total.text = HistoryData[indexPath.row].Total
+        cell.detailButton.tag = indexPath.row
+        cell.detailButton.addTarget(self, action:#selector(self.detailAction(_:)), for: .touchUpInside)
         cell.selectionStyle = .none
         
         return cell
+    
+    }
+    
+    
+    
+     @objc func detailAction(_ sender: UIButton){
         
+         HistoryDetails.savedetail.removeAll()
+         HistoryDetails.SaveInspectionDtail.removeAll()
+         HistoryDetails.SaveInspectionlist.removeAll()
+       let id = HistoryData[sender.tag].OrderID!
+        Constants.historytrans = HistoryData[sender.tag].TransactionNo!
+
+        Constants.subtotal = 0.0
+        Constants.checkoutGrandtotal = 0.0
+        Constants.checkouttax = 0.0
+        for itemmodels in  HistoryDetails.details {
+
+            if itemmodels.itemorderid == id {
+
+                Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
+
+                HistoryDetails.savedetail.append(itemmodels)
+            } else if itemmodels.itemorderid != id {
+                print("Not present")
+            }
+
+
+        }
+        Constants.checkouttax = Constants.checkoutGrandtotal * 0.05
+        Constants.subtotal = Constants.checkoutGrandtotal
+        Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
+        
+        
+        for list in HistoryDetails.Inspectionlist {
+            if list.OrderIDH == id {
+                for list2 in HistoryDetails.InspectionDtail {
+                    
+                    HistoryDetails.SaveInspectionDtail.append(list2)
+                }
+              
+                
+            }
+            HistoryDetails.SaveInspectionlist.append(list)
+            
+        }
+        
+        
+        details()
+    }
+    
+    
+    
+    
+    func details() {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenheight = UIScreen.main.bounds.height
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "historydetailview", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "historydetailviewVc") as! Historydetailview
+        // let nav = UINavigationController(rootViewController: popController)
+        popController.modalPresentationStyle = .popover
+        let popOverVC = popController.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.view
+        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+        popOverVC?.sourceRect = CGRect(x: screenWidth*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
+        popController.preferredContentSize = CGSize(width: screenWidth*0.70, height: screenheight*0.5)
+        self.present(popController, animated: true)
     }
     
     

@@ -77,6 +77,7 @@ struct Constants {
     static var OrderPunchDt = "OrderPunchDt"
     static var StatusID = "StatusID"
     static var Items = "Items"
+    static var CheckLiters = "CheckLiters"
     static var NotesComment = "NotesComment"
     static var NotesStatus = "NotesStatus"
     static var NotesImages = "NotesImages"
@@ -88,7 +89,23 @@ struct Constants {
     static var Tax = "Tax"
     static var WorkerID = "WorkerID"
     static var AssistantID = "AssistantID"
+    static var SessionA = "Session"
+    static var SubUserIDA = "SubUserID"
+    static var VATNo = "VATNo"
+    static var LocationNameA = "LocationName"
+    static var FirstNameA = "FirstName"
+    static var ReceiptInfo = "ReceiptInfo"
+    static var CompanyPhonesA = "CompanyPhones"
+    static var InstagramLinkA = "InstagramLink"
+    static var SnapchatLinkA = "SnapchatLink"
+    static var FooterA = "Footer"
+    static var UserExistent = "User does Not Exist"
+    static var Loginfailed = "Login failed! Try Again"
+    static var loggedIn = "loggedIn"
+    static var BusinessCodeSuccess = "BusinessCode Verified Successfully"
+    static var BusinessCodeFailed = "BusinessCode Verified Failed!"
     
+    static var loginSucs = "Login Successfully"
     static var Status = "Status"
     static var Description = "Description"
     static var wrong = "Something went wrong"
@@ -132,10 +149,13 @@ struct Constants {
     static var GiftCardView = "GiftCardView"
     static var CardView = "CardView"
     static var CashView = "CashView"
+    static var superuserA = "superuser"
     
     
     
     
+    
+    static var carliterID = 0
     static var OrderNoData = 0
     static var CarIDData = 0
     static var CarNameData = ""
@@ -182,6 +202,7 @@ struct Constants {
     static var checkouttax: Double = 0.0.myRounded(toPlaces: 2)
     static var tax = "0"
     static var percent = 0
+    static var historytrans = 0
     static var checkoutorderid = 0
     static var checkoutcarid = 0
     static let _4inchScale:Float = 576

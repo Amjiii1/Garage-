@@ -52,9 +52,14 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
 //        if flag == 2 {
 //           alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
 //        } else {
+       if Constants.Printer != "" {
+        
         Status = 1
        Xreportdata()
           Status = 0
+       } else {
+        UIUtility.showAlertInController(title: "Alert", message: "Printer is not Connected", viewController: self)
+        }
         }
  //   }
     
@@ -63,11 +68,18 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
 //        if !connectPrinter() {
 //            alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
 //        } else {
+        
+        if Constants.Printer != "" {
+        
           if Status == 1 {
             print("X-Report")
          } else if Status == 0 {
             Xreportdata()
         }
+    } else {
+            UIUtility.showAlertInController(title: "Alert", message: "Printer is not Connected", viewController: self)
+        }
+    
 //        }
         
     }
@@ -119,6 +131,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
     private func Xreportdata() {
         var url: String = ""
+        
         if Status == 1 {
         url = "\(CallEngine.baseURL)\(CallEngine.xReport)\(Constants.sessions)"
             report = "xreport"
@@ -140,7 +153,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             }
             guard self != nil else { return }
             if let error = response.error {
-                ToastView.show(message: Constants.interneterror, controller: self!)
+                UIUtility.showAlertInController(title: "Alert", message: Constants.interneterror, viewController: self!)
             } else {
                 do {
                     let json = try JSON(data: response.data!)

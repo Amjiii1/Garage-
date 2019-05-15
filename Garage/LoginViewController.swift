@@ -68,8 +68,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate func loggedIn() -> Bool {
         
-        businesssCodeTextField.text = UserDefaults.standard.string(forKey: "loggedIn")
-        return UserDefaults.standard.bool(forKey: "loggedIn")
+        businesssCodeTextField.text = UserDefaults.standard.string(forKey: Constants.loggedIn)
+        return UserDefaults.standard.bool(forKey: Constants.loggedIn)
     }
     
     func arrowImage() {
@@ -111,48 +111,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let descript = login(json: json)
                     if (descript.status == 1) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "Login Successfully", controller: self)
+                            ToastView.show(message: Constants.loginSucs, controller: self)
                         }
-                        if let tax = json["Tax"] as? String {
+                        if let tax = json[Constants.Tax] as? String {
                        Constants.tax = tax
                         }
                         
-                        if let User = json["User"] as? [String: Any] {
+                        if let User = json[Constants.User] as? [String: Any] {
                             print(User)
-                            if  let session = User["Session"] as? String {
-                            UserDefaults.standard.set(session, forKey: "Session")
+                            if  let session = User[Constants.SessionA] as? String {
+                            UserDefaults.standard.set(session, forKey: Constants.SessionA)
                                 Constants.sessions = session
                             }
-                            if  let ordertracker = User["SubUserID"] as? Int {
+                            if  let ordertracker = User[Constants.SubUserIDA] as? Int {
                                 Constants.ordertracker = String (ordertracker)
                             }
                             
-                            if  let VATNo = User["VATNo"] as? String {
+                            if  let VATNo = User[Constants.VATNo] as? String {
                                 Constants.VAT = VATNo
                             }
                             
-                            if  let LocationName = User["LocationName"] as? String {
+                            if  let LocationName = User[Constants.LocationNameA] as? String {
                                 Constants.LocationName = LocationName
                             }
                             
-                            if  let FirstName = User["FirstName"] as? String {
+                            if  let FirstName = User[Constants.FirstNameA] as? String {
                                 Constants.FirstName = FirstName
                             }
                         }
-                      
                         
-                        if let receipt = json["ReceiptInfo"] as? [String: Any] {//
+                        if let receipt = json[Constants.ReceiptInfo] as? [String: Any] {//
                             print(receipt)
-                            if  let CompanyPhones = receipt["CompanyPhones"] as? String {
+                            if  let CompanyPhones = receipt[Constants.CompanyPhonesA] as? String {
                                 Constants.CompanyPhones = CompanyPhones
                             }
-                            if  let InstagramLink = receipt["InstagramLink"] as? String {
+                            if  let InstagramLink = receipt[Constants.InstagramLinkA] as? String {
                                 Constants.InstagramLink = InstagramLink
                             }
-                            if  let SnapchatLink = receipt["SnapchatLink"] as? String {
+                            if  let SnapchatLink = receipt[Constants.SnapchatLinkA] as? String {
                                 Constants.SnapchatLink = SnapchatLink
                             }
-                            if  let Footer = receipt["Footer"] as? String {
+                            if  let Footer = receipt[Constants.FooterA] as? String {
                                 Constants.Footer = Footer
                             }
                         }
@@ -164,7 +163,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.present(initViewController, animated: true, completion: nil)
                     } else if (descript.status == 0) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "User does Not Exist", controller: self)
+                            ToastView.show(message: Constants.UserExistent, controller: self)
                             
                             self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
@@ -200,7 +199,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                     print(error)
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Login failed! Try Again", controller: self)
+                        ToastView.show(message: Constants.Loginfailed, controller: self)
                         self.pinCodeTextField.isEnabled = true
                         self.businesssCodeTextField.isEnabled = true
                     }
@@ -248,13 +247,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let status = Course(json: json)
                     if (status.message == 1) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "BusinessCode Verified Successfully!", controller: self)
+                            ToastView.show(message: Constants.BusinessCodeSuccess, controller: self)
                             self.businesssCodeTextField.isEnabled = true
-                            UserDefaults.standard.set(self.businesssCodeTextField.text, forKey: "loggedIn")
+                            UserDefaults.standard.set(self.businesssCodeTextField.text, forKey: Constants.loggedIn)
                             UserDefaults.standard.synchronize()
                             if let User = json[Constants.Data] as? [String: Any] {
                                 if  let superuser = User[Constants.SuperUserID] as? Int {
-                                     UserDefaults.standard.set(superuser, forKey: "superuser")
+                                     UserDefaults.standard.set(superuser, forKey: Constants.superuserA)
                                 }
                             }
                             
@@ -263,7 +262,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                     else if (status.message == 0) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: "BusinessCode Verified Failed!", controller: self)
+                            ToastView.show(message: Constants.BusinessCodeFailed, controller: self)
                             self.businesssCodeTextField.isEnabled = true
                         }
                     }

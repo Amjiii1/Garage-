@@ -128,11 +128,14 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
     /// - Returns: Void
     private func drawOrderDetails(at yCoordinate: Double) {
         let paperSize = self.receiptSize
-        var attributedString = NSMutableAttributedString(string: "\(Constants.checkoutmechanic)", attributes: sfProDisplay_mediumFontAttributes_27)
+        var attributedString = NSMutableAttributedString(string: "\(Constants.checkoutmechanic)", attributes: sfProDisplay_boldFontAttributes_27
+        
+        
+        )
       //  drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: Double(sfProDisplay_mediumFontAttributes_27_height)))
         drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
 
-        attributedString = NSMutableAttributedString(string: "\(Constants.checkoutbayname)", attributes: sfProDisplay_boldFontAttributes_27)
+        attributedString = NSMutableAttributedString(string: "\(Constants.checkoutbayname)", attributes: sfProDisplay_mediumFontAttributes_27)
 //        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width*0.70), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
 //
 //
@@ -676,7 +679,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             var attributedString = NSMutableAttributedString(string: "\(cartItem.Quantity!) x ", attributes: sfProDisplay_heavyFontAttributes_37bold)
 
             let xCoordinate: Double = Double(attributedString.size().width)
-
+           print(cartItem.Name!.characters.count)
             attributedString.append(NSMutableAttributedString(string: "\(cartItem.Name!)", attributes: sfProDisplay_semiBoldFontAttributes_30))
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
 

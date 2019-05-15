@@ -236,6 +236,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.editcheckout = 1
                     Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
                     Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
+                   // Constants.carliterID = self.checkoutmodel[indexPath.row].
                     
                     if let parentVC = self.parent as? ReceptionalistView {
                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
@@ -477,15 +478,13 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Ammjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
-        
-        PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
+         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
         
     }
     
     
     
     func checkoutpop() {
-        
         let screenSize = UIScreen.main.bounds.width
         let screenheight = UIScreen.main.bounds.size.height
         print(screenheight)
@@ -501,7 +500,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.70, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.70)
         self.present(popController, animated: true)
-        
         
     }
     

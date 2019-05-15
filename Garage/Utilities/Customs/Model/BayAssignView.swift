@@ -16,7 +16,6 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     
     @IBOutlet weak var BayCollectionView: UICollectionView!
     var assigning: Int = 0
-    
     let reuseIdentifier = "cell"
     var WBaydetails = [BayforWelcomeOBj]()
     
@@ -48,7 +47,6 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
         cell?.layer.borderWidth = 2.0
         cell?.layer.borderColor = UIColor.clear.cgColor
        
-        
     }
     
     
@@ -149,8 +147,8 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
         Constants.bayid = 0
         Constants.bayname = "B0"
         if let vc = self.parent as? ReceptionalistView {
-            let storyboard = UIStoryboard(name: "AddnewCar", bundle: nil)
-            let newCarvc = storyboard.instantiateViewController(withIdentifier: "addNewCarVc") as! addNewCar
+            let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+            let newCarvc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as! addNewCar
             vc.switchViewController(vc: newCarvc, showFooter: false)
         }
     }
@@ -205,7 +203,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                    ToastView.show(message: "failed! Check internet", controller: self)
                 }
             }
             if let response = response {

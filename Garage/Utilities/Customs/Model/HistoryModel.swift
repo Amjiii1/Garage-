@@ -15,6 +15,9 @@ class HistoryModel: NSObject {
     var Date: String?
     var Mechanic: String?
     var Total: String?
+    var OrderID: Int?
+    var TotalAmount: Double?
+   // var Tax: Double?
     
     
     override init() {
@@ -22,13 +25,16 @@ class HistoryModel: NSObject {
     }
     
     
-    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String){
+    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String, OrderID: Int?, TotalAmount: Double?){
         
         self.TransactionNo = TransactionNo
         self.Sno = Sno
         self.Date = Date
         self.Mechanic =  Mechanic
         self.Total =  Total
+        self.OrderID =  OrderID
+         self.TotalAmount =  TotalAmount
+       // self.Tax =  Tax
        
         
     }
@@ -40,7 +46,10 @@ class HistoryModel: NSObject {
         let transactionNo = historyorder["TransactionNo"] as? Int,
        let date = historyorder["OrderDate"] as? String,
             let mechanic = historyorder["Mechanic"] as? String,
-            let Total = historyorder["AmountTotal"] as? String
+            let Total = historyorder["AmountTotal"] as? String,
+         let orderID = historyorder["OrderID"] as? Int,
+         let totalAmount = historyorder["TotalAmount"] as? Double
+      //  let Tax = historyorder["Tax"] as? Double
             else { return }
         self.TransactionNo = transactionNo
          self.Sno = sno
@@ -48,6 +57,9 @@ class HistoryModel: NSObject {
         self.Date = date
         self.Mechanic = mechanic
         self.Total = Total
+         self.OrderID = orderID
+        self.TotalAmount = totalAmount
+     //    self.Tax = Tax
         
     }
     

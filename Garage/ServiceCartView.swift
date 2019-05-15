@@ -314,6 +314,12 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     
                                 }
                                 
+                                if  let CheckLitre = items[Constants.CheckLitre] as? Int {
+                                    DispatchQueue.main.async {
+                                        Constants.carliterID = CheckLitre
+                                    }
+                                }
+                                
                             }
                             
                         }
@@ -587,6 +593,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
+                    ToastView.show(message: "🔥 Network Error", controller: self!)
                 }
             }
         }
@@ -991,6 +998,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             Constants.OrderPunchDt: Constants.currentdate,
             Constants.OrderNo:Constants.OrderNoData,
             Constants.StatusID: Constants.orderstatus,
+             Constants.CheckLiters: Constants.carliterID,
             Constants.Items: test as Any]  as [String : Any]
         
          if Constants.flagEdit != 0 || Constants.editcheckout != 0 {

@@ -577,6 +577,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         let session = URLSession.shared
         print(addcarapi)
         session.dataTask(with: addcarapi){ (data, response, error) in
+            
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
@@ -1077,14 +1078,17 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if carplateNumber.text != "" {
             Constants.platenmb = carplateNumber.text!
         }
-       
+        
+        if check.text != "" {
+            Constants.carliterID =  Int(check.text!)!
+        }
         
         
         
         
         
         
-        
+
         if Constants.CarIDData != 0 {
             let parameters = [    Constants.MakeID: Constants.MakeIDData,
                                   Constants.ModelID: Constants.ModelIDData,

@@ -117,6 +117,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
                     
                 } catch {
                     debugPrint("🔥 Network Error : ", error)
+                    ToastView.show(message: "🔥 Network Error", controller: self!)
                 }
             }
         }

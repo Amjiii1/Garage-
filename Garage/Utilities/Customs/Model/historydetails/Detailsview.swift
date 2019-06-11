@@ -57,7 +57,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell.labelItem.text = "\(qty!) x \(name!)"
          
             let price = HistoryDetails.savedetail[indexPath.row].Price
-            cell.labelPrice.text =  "\(price!)"
+            cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"
             cell.selectionStyle = .none
             return cell
         }

@@ -703,6 +703,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
                         print("sucess")
+                         self.removeData()
                     }
                     else if (status == 0) {
                         DispatchQueue.main.async {

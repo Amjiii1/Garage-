@@ -308,6 +308,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var returnValue = 0
         switch (WelcomeSegmented.selectedSegmentIndex) {

@@ -23,7 +23,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     var cartItemStructArray = [ReceiptModel]()
     
     
-    
 
     
     override func viewDidLoad() {
@@ -98,7 +97,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             if let item = items["OrderItems"] as? [[String: Any]] {
                                 for details in item {
                                     let Name = details["ItemName"] as! String
-                                    let AlternateName = details["AlternateName"] as! String
+                                    let AlternateName = details["ItemName"] as! String
                                     let Price = details["Price"] as! Double
                                     let ItemID = details["ItemID"] as! Int
                                     let Quantity = details["Quantity"] as! Int
@@ -288,8 +287,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         } else if itemmodels.itemorderid != Constants.checkoutorderid {
                             
                         }
-                        
-                        
                     }
                     
                     Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
@@ -308,7 +305,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         default:
             break
         }
-        
         return returnValue as? [UITableViewRowAction]
         
     }
@@ -408,7 +404,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
-            Checkoutstruct.sentitems.removeAll()
+            Checkoutstruct.sentitems.removeAll() 
             Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID!
             Constants.checkoutcarid = checkoutmodel[sender.tag].CarID!
             Constants.checkoutplatenmb = checkoutmodel[sender.tag].RegistrationNo!

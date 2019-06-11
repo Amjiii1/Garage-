@@ -20,6 +20,10 @@ struct HistoryDetails {
     static var SaveInspectionlist = [InspectionListH]()
     static var SaveInspectionDtail = [InspectionDetailsH]()
     
+    static var carNotes = [CarNote]()
+    static var savecarNotes = [CarNote]()
+    
+   // static var uploadedimages = [NotesImages]()
 }
 
 
@@ -36,7 +40,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var HistoryData = [HistoryModel]()
 //     var Inspectionlist = [InspectionListH]()
-//      var InspectionDtail = [InspectionDetailsH]()
+    var upimages = [String]()
     var count = 0
     
     override func viewDidLoad() {
@@ -95,12 +99,16 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         if let history = json["OrdersList"] as? [[String: Any]] {
                             self.HistoryData.removeAll()
                             HistoryDetails.details.removeAll()
+                            HistoryDetails.carNotes.removeAll()
+                            HistoryDetails.Inspectionlist.removeAll()
+                            HistoryDetails.InspectionDtail.removeAll()
+                            
                             
                             for items in history {
                                 if let item = items["OrderItems"] as? [[String: Any]] {
                                     for details in item {
                                         let Name = details["ItemName"] as! String
-                                        let AlternateName = details["AlternateName"] as! String
+                                        let AlternateName = details["ItemName"] as! String  // give Alternative name
                                         let Price = details["Price"] as! Double
                                         let ItemID = details["ItemID"] as! Int
                                         let Quantity = details["Quantity"] as! Int
@@ -115,42 +123,34 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             // Notes
                             for CarNotedetails in history {
                                 if let CarNotes = CarNotedetails["CarNotes"] as? [[String: Any]] {
-                                    print(CarNotes)
-                              
                                     for notesdetails in CarNotes {
-                                        let NotesComment = notesdetails["NotesComment"] as! String
-                                        print(NotesComment)
-                                        if let NotesImages = notesdetails["NotesImages"] as? [[String: Any]] {
-                                            print(NotesImages)
-                                        }
-                                        print(notesdetails)
+                                        let notesImage = notesdetails["NotesImages"] as? NSArray
+                                        let NotesComment = notesdetails["NotesComment"] as? String
+                                        let NotesID = notesdetails["NotesID"] as? Int
+                                         let OrderID = notesdetails["OrderID"] as? Int
+                                        let carNote = CarNote(Notes: notesImage as! [String], NotesComment: NotesComment!, NotesID: NotesID!, OrderID: OrderID!)
+                                            HistoryDetails.carNotes.append(carNote)
                                       
                                     }
                                     
                                     
                                 }
                                 }
+                            
                             // Checklist
                                 
                                 for CarCheckList in history {
                                 
                                     if let CheckList = CarCheckList["CheckList"] as? [[String: Any]] {
-                                        HistoryDetails.Inspectionlist.removeAll()
-                                        HistoryDetails.InspectionDtail.removeAll()
-                                        
-                                        HistoryDetails.InspectionDtail = [InspectionDetailsH]()
+                                       
+                                   //     HistoryDetails.InspectionDtail = [InspectionDetailsH]()
                                         for carCheckLists in CheckList  {
-                                        
                                             let Name = carCheckLists["Name"] as! String
                                             let InspectionDetails = carCheckLists["InspectionDetails"] as? [[String: Any]]
                                             let CarInspectionIDH = carCheckLists["CarInspectionID"] as! Int
                                             let OrderID = carCheckLists["OrderID"] as! Int
                                             HistoryDetails.InspectionDtail = []
                                             for sub in InspectionDetails!  {
-//                                            "CarInspectionDetailID": 79,
-//                                            "CarInspectionID": 79,
-//                                            "Name": "air filter",
-//                                            "Value": "I"
                                                 let CarInspectionDetailID = sub["CarInspectionDetailID"] as! Int
                                                 let CarInspectionID = sub["CarInspectionID"] as! Int
                                                 let Name = sub["Name"] as! String
@@ -161,24 +161,13 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                             
                                             }
                                             
-                                            let newInspectionList = InspectionListH(InspectionDetailsH: [InspectionDetailsH](), InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
+                                            let newInspectionList = InspectionListH(InspectionDetailsH: HistoryDetails.InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
                                             HistoryDetails.Inspectionlist.append(newInspectionList)
                                         }
                                         
-                                        
-                                        
                                     }
                             }
-                                    
-                                    
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+               
                             for historyorder in history {
                                 print(historyorder)
                                 let neworder = HistoryModel(historyorder: historyorder)
@@ -275,8 +264,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
      @objc func detailAction(_ sender: UIButton){
         
          HistoryDetails.savedetail.removeAll()
-         HistoryDetails.SaveInspectionDtail.removeAll()
          HistoryDetails.SaveInspectionlist.removeAll()
+        HistoryDetails.SaveInspectionDtail.removeAll()
+        HistoryDetails.savecarNotes.removeAll()
+        
+        
+        
        let id = HistoryData[sender.tag].OrderID!
         Constants.historytrans = HistoryData[sender.tag].TransactionNo!
 
@@ -303,14 +296,23 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         for list in HistoryDetails.Inspectionlist {
             if list.OrderIDH == id {
-                for list2 in HistoryDetails.InspectionDtail {
+                for list2 in list.InspectionDetailsH {
                     
                     HistoryDetails.SaveInspectionDtail.append(list2)
                 }
               
-                
+                HistoryDetails.SaveInspectionlist.append(list)
             }
-            HistoryDetails.SaveInspectionlist.append(list)
+            
+        }
+        
+        for images in HistoryDetails.carNotes {
+            if images.OrderID == id {
+                print(images.Notes)
+                print(images.NotesComment)
+                HistoryDetails.savecarNotes.append(images)
+                
+        }
             
         }
         

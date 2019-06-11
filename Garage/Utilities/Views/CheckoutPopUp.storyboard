@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -176,7 +175,7 @@
                                                 <color key="backgroundColor" red="0.3411764705882353" green="0.34901960784313724" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="25" maxX="24" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="29" minY="0.0" maxX="0.0" maxY="21"/>
+                                                <inset key="imageEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="21"/>
                                                 <state key="normal" title="Cash" image="unselectedCash">
                                                     <color key="titleColor" red="0.79607843140000001" green="0.79607843140000001" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -450,6 +449,9 @@
                                                 <state key="normal" title="Discard">
                                                     <color key="titleColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="discartBtn:" destination="th3-vG-Nbh" eventType="touchUpInside" id="Fb1-IK-DgW"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAw-Dw-7c0">
                                                 <rect key="frame" x="283" y="0.0" width="280.5" height="86"/>
@@ -543,6 +545,7 @@
                     <connections>
                         <outlet property="PopUpView" destination="Cx3-zA-EvZ" id="m1j-Bf-0lI"/>
                         <outlet property="assistantBtn" destination="STZ-P4-OsP" id="COh-5o-fwQ"/>
+                        <outlet property="balacelbl" destination="pRY-oQ-c2V" id="22c-Cp-alB"/>
                         <outlet property="balancetxtf" destination="y5V-8h-jl5" id="ZDm-l7-u3Y"/>
                         <outlet property="buttonStackView" destination="Tk6-IT-YgS" id="gsn-9H-w61"/>
                         <outlet property="buttonstack" destination="Tk6-IT-YgS" id="zA4-sr-dlJ"/>

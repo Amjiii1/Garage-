@@ -782,7 +782,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
 
     func getGrandTotal() -> UIImage {
 
-        let paymentVia = "Cash"
+        let paymentVia = "paid"
 
         var paperSize = CGSize(width: receiptSize.width, height: 180)
 

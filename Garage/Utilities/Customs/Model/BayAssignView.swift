@@ -231,12 +231,14 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                         print(status!)
                         DispatchQueue.main.async {
                             ToastView.show(message: newmessage!, controller: self)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                     
                 } catch {
                     print(error)
                     ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    self.dismiss(animated: true, completion: nil)
                 }
                 
             }

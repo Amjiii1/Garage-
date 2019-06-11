@@ -84,9 +84,8 @@ class PrintJobHelper {
         let printJob: OrderToPrint? = printJobsArray.first
         if let orderToPrint = printJob {
             let printer = availablePrinters.filter{$0.isPrinting == false}.first
-            print(printer!)
             let printerType = orderToPrint.orderDetails.orderPrinterType
-            print("Printer availablity: \(printer?.isPrinting)")
+            print("Printer availablity: \(printer?.isPrinting ?? false)")
             if let printer = printer {
                 printer.isPrinting = true
                 print("Printer availablity T: \(printer.isPrinting)")

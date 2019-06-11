@@ -229,11 +229,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         let detail = [(itemsModel[indexPath.row])]
         for newdetail in detail {
           
-            let product = ReceiptModel(Name: newdetail.Name!, Price: (newdetail.Price! * 1).myRounded(toPlaces: 2), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
-            
+            let product = ReceiptModel(Name: newdetail.Name!, Price: (newdetail.Price! * 1), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+            //here after (newdetail.Price! * 1)
             Items.Product.append(product)
             let price = newdetail.Price! * Double(searchQuantity)
-            Constants.totalprice = (Constants.totalprice + Double(price)).myRounded(toPlaces: 2)
+            Constants.totalprice = (Constants.totalprice + Double(price))//.myRounded(toPlaces: 2)
             self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
             self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
             self.receiptOutlet.titleLabel?.textAlignment = .center
@@ -722,7 +722,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     @IBAction func backBtn(_ sender: Any) {
-        if Constants.editcheckout != 0 {
+        if Constants.editcheckout != 0 ||  Constants.flagEdit != 0 {
             
             ToastView.show(message: "Sorry! You can't step back!", controller: self)
         } else
@@ -900,11 +900,11 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 let pp = Double(newname.price)
                 print(pp)
                 
-                let product = ReceiptModel(Name: newname.name, Price: (newname.price * Double(Constants.counterQTY)).myRounded(toPlaces: 2), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
-                
+                let product = ReceiptModel(Name: newname.name, Price: (newname.price * Double(Constants.counterQTY)), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+                //here after (newname.price * Double(Constants.counterQTY))
                 Items.Product.append(product)
                 let price = newname.price * Double(Constants.counterQTY)
-                Constants.totalprice = (Constants.totalprice + Double(price)).myRounded(toPlaces: 2)
+                Constants.totalprice = (Constants.totalprice + Double(price))//.myRounded(toPlaces: 2)
             //    self.receiptOutlet.titleLabel?.numberOfLines = 0
                 self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
                 self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
@@ -983,7 +983,6 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         let data1 = try! encoder.encode(Items.Product)
         guard let test = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
         var urlorderpunch = ""
-        print(test)
         
         
         print(Constants.OrderIDData)

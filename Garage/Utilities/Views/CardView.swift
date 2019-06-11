@@ -8,6 +8,8 @@
 
 import UIKit
 
+var cardtype: String = ""
+
 enum CardType: Int {
     case Visa = 1
     case MasterCard
@@ -18,14 +20,19 @@ enum CardType: Int {
     var description: String {
         switch self {
         case .Visa:
+            cardtype = "Visa"
             return "Visa"
         case .MasterCard:
+            cardtype = "MasterCard"
             return "MasterCard"
         case .AmericanExpress:
+            cardtype = "AmericanExpress"
             return "AmericanExpress"
         case .Mada:
+            cardtype = "Mada"
             return "Mada"
         case .Others:
+            cardtype = "Others"
             return "Others"
         }
     }
@@ -59,7 +66,8 @@ class CardView: UIView {
         deselectAllBtns()
         let button = sender as! UIButton
         button.isSelected = true
-        
+        button.layer.borderColor = UIColor.DefaultApp.cgColor
+        button.layer.borderWidth = 2.0
         guard let value = CardType(rawValue: button.tag) else { return }
         
         switch value {
@@ -81,6 +89,8 @@ class CardView: UIView {
         for i in 1...5 {
             if let button = stackofCardButtons.viewWithTag(i) as? UIButton {
                 button.isSelected = false
+                button.layer.borderColor = UIColor.white.cgColor
+                button.layer.borderWidth = 2.0
             }
         }
     }

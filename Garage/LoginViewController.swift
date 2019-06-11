@@ -20,6 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logoImage: UIImageView!
     
     
+    
     let companyRightButton: UIButton = UIButton(type: .custom)
     let viewRightOfCompanyField = UIView(frame:
         CGRect(x: 0, y: 0, width: 70, height: 25))
@@ -32,7 +33,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             changeViewForSavedCode()
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

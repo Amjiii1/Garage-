@@ -91,7 +91,6 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     if range != nil {
                         self.Welcomecellobj.append(str)
                     }
-                   
                 }
             }
             tableViewWelcome.reloadData()

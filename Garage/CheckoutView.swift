@@ -23,7 +23,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     var cartItemStructArray = [ReceiptModel]()
     
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +33,14 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         Constants.editcheckout = 0
         Constants.percent = Int(Double(Constants.tax)! * 100)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
-       
-      //  Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
+        
+        //  Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
     }
     
     deinit {
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name("checkoutDone"), object: nil)
     }
-    
     
     
     
@@ -110,7 +108,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             }
                         }
                         
-                        
                         for checkoutlist in order {
                             //                            if let items = checkoutlist["OrderItems"] as? AnyObject{
                             //                                CheckoutItems.Itemdetails.append(items as! CheckoutItems)
@@ -119,10 +116,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             print(order)
                             let details = CheckoutModel(checkoutlist: checkoutlist)
                             self.checkoutmodel.append(details!)
-                        
+                            
                         }
-                        
-                        
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -178,7 +173,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-    
     func showloader() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -193,7 +187,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    
     @IBAction func segmentAction(_ sender: Any) {
         CheckoutDetails()
     }
@@ -204,7 +197,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         var returnValue = 0
         switch (checkoutSegment.selectedSegmentIndex) {
         case 0:
-            
             
             returnValue = checkoutmodel.count
             
@@ -235,7 +227,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.editcheckout = 1
                     Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
                     Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
-                   // Constants.carliterID = self.checkoutmodel[indexPath.row].
+                    // Constants.carliterID = self.checkoutmodel[indexPath.row].
                     
                     if let parentVC = self.parent as? ReceptionalistView {
                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
@@ -294,7 +286,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
                     self.printerreceipt()
                     
-              
                     
                 }
             }
@@ -375,15 +366,14 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
             cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
             cell.checkoutBtn.imageView?.isHidden = true
-         //   cell.checkoutBtn.isUserInteractionEnabled = false
-        //   cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
+            //   cell.checkoutBtn.isUserInteractionEnabled = false
+            //   cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
             let trans3 = checkoutmodel[indexPath.row].TransactionNo
             cell.CSerialnmb.text = "\(trans3!)"
         default:
             break
         }
         cell.selectionStyle = .none
-        
         
         return cell
         
@@ -401,7 +391,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch (checkoutSegment.selectedSegmentIndex) {
             
         case 0:
-            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
+            print("Not any functionality")
+//            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
             Checkoutstruct.sentitems.removeAll() 
@@ -422,7 +413,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName!
             Constants.checkoutstatus = checkoutmodel[sender.tag].Status!
             Constants.checkoutorderNo = checkoutmodel[sender.tag].TransactionNo!
-           
+            
             
             Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0
@@ -448,7 +439,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
         case 2:
-            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
+             print("Not any functionality")
             
         default:
             break
@@ -463,7 +454,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
             
             cartItemStructArray.append(cartItemStruct)
-           
+            
             
             
         }
@@ -473,8 +464,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         
-        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Ammjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
-         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
+        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
+        PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
         
     }
     
@@ -486,8 +477,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         print(screenheight)
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "CheckoutPopUp", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "CheckOutPopVc") as! CheckOutPopView
+        storyboard = UIStoryboard(name: Constants.CheckoutPopUp, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.CheckOutPopVc) as! CheckOutPopView
         popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self

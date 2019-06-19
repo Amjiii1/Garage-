@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,13 +20,26 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GeneralView" translatesAutoresizingMaskIntoConstraints="NO" id="rS7-fk-4HX">
                                 <rect key="frame" x="0.0" y="10" width="834" height="845"/>
                             </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lj-hf-mJH">
+                                <rect key="frame" x="41.5" y="57" width="751" height="84.5"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="18"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="8lj-hf-mJH" firstAttribute="height" secondItem="UYf-xO-E16" secondAttribute="height" multiplier="0.1" id="6dq-Ks-P2c"/>
+                            <constraint firstItem="8lj-hf-mJH" firstAttribute="centerX" secondItem="tiE-Vk-LQv" secondAttribute="centerX" id="7I4-Ky-ca2"/>
                             <constraint firstItem="rS7-fk-4HX" firstAttribute="height" secondItem="UYf-xO-E16" secondAttribute="height" id="Axm-CR-9Rl"/>
                             <constraint firstItem="rS7-fk-4HX" firstAttribute="centerX" secondItem="tiE-Vk-LQv" secondAttribute="centerX" id="WUw-op-hzR"/>
                             <constraint firstItem="rS7-fk-4HX" firstAttribute="centerY" secondItem="tiE-Vk-LQv" secondAttribute="centerY" id="Xe5-iQ-Ugv"/>
+                            <constraint firstItem="8lj-hf-mJH" firstAttribute="centerY" secondItem="tiE-Vk-LQv" secondAttribute="centerY" multiplier="0.23" id="dca-ud-Zqr"/>
                             <constraint firstItem="rS7-fk-4HX" firstAttribute="width" secondItem="UYf-xO-E16" secondAttribute="width" id="fPK-ym-0Vy"/>
+                            <constraint firstItem="8lj-hf-mJH" firstAttribute="width" secondItem="UYf-xO-E16" secondAttribute="width" multiplier="0.9" id="pg2-Bj-iW6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tiE-Vk-LQv"/>
                     </view>
@@ -35,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vbk-bh-6fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="110"/>
+            <point key="canvasLocation" x="94.964028776978424" y="109.80215827338129"/>
         </scene>
     </scenes>
     <resources>

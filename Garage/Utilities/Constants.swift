@@ -82,7 +82,7 @@ struct Constants {
     static var NotesStatus = "NotesStatus"
     static var NotesImages = "NotesImages"
     static var InspectionDetails = "InspectionDetails"
-    static var Date = "Date"
+    static var Date = "Date"  // used in zxreport
     static var AmountTotal = "AmountTotal"
     static var GrandTotal = "GrandTotal"
     static var AmountPaid = "AmountPaid"
@@ -104,10 +104,82 @@ struct Constants {
     static var loggedIn = "loggedIn"
     static var BusinessCodeSuccess = "BusinessCode Verified Successfully"
     static var BusinessCodeFailed = "BusinessCode Verified Failed!"
+    //XZ-Report
+    static var TotalSales = "TotalSales"
+    static var MinusDiscount = "MinusDiscount"
+    static var MinusVoid = "MinusVoid"
+    static var MinusComplimentory = "MinusComplimentory"
+    static var MinusReturn = "MinusReturn"
+    static var MinusTax = "MinusTax"
+    static var NetSales = "NetSales"
+    static var PlusGratuity = "PlusGratuity"
+    static var PlusCharges = "PlusCharges"
+    static var TotalTendered = "TotalTendered"
+    static var Cash = "Cash"
+    static var Card = "Card"
+    static var Loyality = "Loyality"
+    static var GiftCard = "GiftCard"
+    static var Coupons = "Coupons"
+    static var TotalTransactionType = "TotalTransactionType"
+    static var TotalCashOrders = "TotalCashOrders"
+    static var TotalCardOrders = "TotalCardOrders"
+    static var TotatMultiPaymentOrders = "TotatMultiPaymentOrders"
+    static var TotalVoidOrders = "TotalVoidOrders"
+    static var TotalReturnOrders = "TotalReturnOrders"
+    static var TotalOrders = "TotalOrders"
+    // service cart
+    
+    static var CategoriesList = "CategoriesList"
+    static var SubCategoriesList = "SubCategoriesList"
+    static var CategoryID = "CategoryID"
+    static var Name = "Name"
+    static var AlternateName = "AlternateName"
+    static var Image = "Image"
+    static var DisplayOrder = "DisplayOrder"
+    static var LastUpdatedDate = "LastUpdatedDate"
+    static var ItemsList = "ItemsList"
+    static var SubCategoryID = "SubCategoryID"
+    static var ItemID = "ItemID"
+    static var Barcode = "Barcode"
+    static var ItemType = "ItemType"
+    static var Price = "Price"
+    
+    // Settings's view
+    
+    static var General = "General"
+    static var GeneralVCID = "GeneralVCID"
+    static var Hardware = "Hardware"
+    static var HardwareVCID = "HardwareVCID"
+    static var Receipt = "Receipt"
+    static var ReceiptVCID = "ReceiptVCID"
+    static var QuickPay = "QuickPay"
+    static var QuickPayVCID = "QuickPayVCID"
+    static var Database = "Database"
+    static var DatabaseVCID = "DatabaseVCID"
+    static var Language = "Language"
+    static var LanguageVCID = "LanguageVCID"
+    static var Updates = "Updates"
+    static var UpdatesVCID = "UpdatesVCID"
+    
+    
+    //checkoutpop
+    static var CheckoutPopUp = "CheckoutPopUp"
+    static var CheckOutPopVc = "CheckOutPopVc"
+    
+    
+    
+    
+    
+    // historydetails
+    static var historydetailview = "historydetailview"
+    static var historydetailviewVc = "historydetailviewVc"
+    
+    
+    
     
     static var loginSucs = "Login Successfully"
-    static var Status = "Status"
-    static var Description = "Description"
+    static var Status = "Status"   // used in servicecart
+    static var Description = "Description"   // used in servicecart
     static var wrong = "Something went wrong"
     static var invalid = "Invalid sessions"
     static var occured = "Error occured"
@@ -142,6 +214,11 @@ struct Constants {
     static var notesPopupVc = "notesPopupVc"
     static var CheckCarController = "CheckCarController"
     static var CheckCarControllerVc = "CheckCarControllerVc"
+    static var XZReportViewController = "XZReportViewController"
+    static var XZReportViewControllerVc = "XZReportViewControllerVc"
+    static var profilepop = "profilepop"
+    
+    
     static var Subusers = "Subusers"
     static var SubusersVc = "SubusersVc"
     static var VoucherView = "VoucherView"

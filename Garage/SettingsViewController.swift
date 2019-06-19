@@ -83,30 +83,23 @@ class SettingsViewController: UIViewController {
         switch value {
             
         case .General:
-            print("General tapped")
-            childVC = UIStoryboard(name: "General", bundle: nil).instantiateViewController(withIdentifier: "GeneralVCID") as? GeneralViewController
+            childVC = UIStoryboard(name: Constants.General, bundle: nil).instantiateViewController(withIdentifier: Constants.GeneralVCID) as? GeneralViewController
             break
         case .Hardware:
-            print("Hardware tapped")
-            childVC = UIStoryboard(name: "Hardware", bundle: nil).instantiateViewController(withIdentifier: "HardwareVCID") as? HardwareViewController
+            childVC = UIStoryboard(name: Constants.Hardware, bundle: nil).instantiateViewController(withIdentifier: Constants.HardwareVCID) as? HardwareViewController
         case .Receipt:
-            print("Receipt tapped")
-            childVC = UIStoryboard(name: "Receipt", bundle: nil).instantiateViewController(withIdentifier: "ReceiptVCID") as? ReceiptViewController
+            childVC = UIStoryboard(name: Constants.Receipt, bundle: nil).instantiateViewController(withIdentifier: Constants.ReceiptVCID) as? ReceiptViewController
         case .QuickPay:
-             print("QuickPay tapped")
-            childVC = UIStoryboard(name: "QuickPay", bundle: nil).instantiateViewController(withIdentifier: "QuickPayVCID") as? QuickPayViewController
+            childVC = UIStoryboard(name: Constants.QuickPay, bundle: nil).instantiateViewController(withIdentifier: Constants.QuickPayVCID) as? QuickPayViewController
         case .DataBase:
-             print("DataBase tapped")
-            childVC = UIStoryboard(name: "Database", bundle: nil).instantiateViewController(withIdentifier: "DatabaseVCID") as? DatabaseViewController
+            childVC = UIStoryboard(name: Constants.Database, bundle: nil).instantiateViewController(withIdentifier: Constants.DatabaseVCID) as? DatabaseViewController
         case .Language:
-             print("Language tapped")
-            childVC = UIStoryboard(name: "Language", bundle: nil).instantiateViewController(withIdentifier: "LanguageVCID") as? LanguageViewController
+            childVC = UIStoryboard(name: Constants.Language, bundle: nil).instantiateViewController(withIdentifier: Constants.LanguageVCID) as? LanguageViewController
         case .Aboutus:
             print("Aboutus tapped")
         //    childVC = UIStoryboard(name: "Aboutus", bundle: nil).instantiateViewController(withIdentifier: "AboutusVCID") as? AboutusViewController
         case .Updates:
-             print("Updates tapped")
-            childVC = UIStoryboard(name: "Updates", bundle: nil).instantiateViewController(withIdentifier: "UpdatesVCID") as? UpdatesViewController
+            childVC = UIStoryboard(name: Constants.Updates, bundle: nil).instantiateViewController(withIdentifier: Constants.UpdatesVCID) as? UpdatesViewController
         }
         
         if childVC != nil {
@@ -117,8 +110,6 @@ class SettingsViewController: UIViewController {
             childVC?.didMove(toParentViewController: self)
         }
     }
-    
-    
     
     
     func removeNibViews() {
@@ -140,7 +131,6 @@ class SettingsViewController: UIViewController {
         
        dismiss(animated: true, completion: nil)
         
-        
     }
     
     func myButtonTapped(){
@@ -150,7 +140,6 @@ class SettingsViewController: UIViewController {
         //            UIButton.isSelected = true
         //        }
     }
-    
     
     
     

@@ -47,24 +47,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         businesssCodeTextField.layer.borderWidth = 2.0
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
         businesssCodeTextField.text = "POS-"
         arrowImage()
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        
+        let dateString = dateFormatter.string(from: date) 
         if loggedIn() {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
         }  else {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
-            
         }
-       //  Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
-        
-        
+        //  Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
     }
+    
+    
+    
     
     fileprivate func loggedIn() -> Bool {
         
@@ -72,8 +70,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return UserDefaults.standard.bool(forKey: Constants.loggedIn)
     }
     
+    
     func arrowImage() {
-        
         pinCodeTextField.rightViewMode = .always
         let emailImgContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
         let emailImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -91,10 +89,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    
+    
     func PincodeApi() {
         
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.LoginApi)/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
-       
+        
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
@@ -114,13 +115,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             ToastView.show(message: Constants.loginSucs, controller: self)
                         }
                         if let tax = json[Constants.Tax] as? String {
-                       Constants.tax = tax
+                            Constants.tax = tax
                         }
                         
                         if let User = json[Constants.User] as? [String: Any] {
                             print(User)
                             if  let session = User[Constants.SessionA] as? String {
-                            UserDefaults.standard.set(session, forKey: Constants.SessionA)
+                                UserDefaults.standard.set(session, forKey: Constants.SessionA)
                                 Constants.sessions = session
                             }
                             if  let ordertracker = User[Constants.SubUserIDA] as? Int {
@@ -155,8 +156,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 Constants.Footer = Footer
                             }
                         }
-                        
-                        
                         
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
@@ -194,7 +193,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                     
-                    
                 } catch {
                     
                     print(error)
@@ -205,14 +203,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 
-                
             }
             
             
             }.resume()
         
     }
-    
     
     
     
@@ -224,8 +220,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func BusinessCodeAction(_ sender: Any) {
         self.businesssCodeTextField.isEnabled = true
-        
     }
+    
     
     
     func BusinessApi() {
@@ -253,7 +249,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             UserDefaults.standard.synchronize()
                             if let User = json[Constants.Data] as? [String: Any] {
                                 if  let superuser = User[Constants.SuperUserID] as? Int {
-                                     UserDefaults.standard.set(superuser, forKey: Constants.superuserA)
+                                    UserDefaults.standard.set(superuser, forKey: Constants.superuserA)
                                 }
                             }
                             
@@ -273,7 +269,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             self.businesssCodeTextField.isEnabled = true
                         }
                     }
-                    
+                        
                     else if (status.message == 1001) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.invalid, controller: self)
@@ -396,6 +392,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //            self.businesssCodeTextField.isHidden = false
         //        }
     }
+    
     
     
     
@@ -617,6 +614,7 @@ class SecureTextFieldWithCustomFont : UITextField {
     //        }
     //        return dots
 }
+
 
 
 

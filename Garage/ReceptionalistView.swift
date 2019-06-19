@@ -28,6 +28,7 @@ class ReceptionalistView: UIViewController  {
     }
     
     @IBOutlet weak var profileBtnOutlet: UIButton!
+    
     override func viewWillAppear(_ animated: Bool) {
         
         footerViewHeightConstraint.constant = headerView.frame.size.height
@@ -36,10 +37,10 @@ class ReceptionalistView: UIViewController  {
         }
         orginalHeight = UIScreen.main.bounds.height
         showView(index: 1)
-  }
+    }
     
     @IBAction func profileBtn(_ sender: Any) {
-    //    showLocationTable ()
+        //    showLocationTable ()
         //   self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -47,16 +48,16 @@ class ReceptionalistView: UIViewController  {
     @IBAction func logoutButton(_ sender: Any) {
         
         
-//        Constants.platenmb = "0"
-//        Constants.vinnmb = "0"
-//        Constants.CarIDData = 0
-//        Constants.sessions = ""
-//        dismiss(animated: true, completion: nil)
+        //        Constants.platenmb = "0"
+        //        Constants.vinnmb = "0"
+        //        Constants.CarIDData = 0
+        //        Constants.sessions = ""
+        //        dismiss(animated: true, completion: nil)
         
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "XZReportViewController", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "XZReportViewControllerVc") as! XZReportViewController
+        storyboard = UIStoryboard(name: Constants.XZReportViewController, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.XZReportViewControllerVc) as! XZReportViewController
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 20*4
@@ -67,7 +68,7 @@ class ReceptionalistView: UIViewController  {
         popover?.sourceView = self.offlibebtn
         popover?.sourceRect = self.offlibebtn.bounds
         self.present(nav, animated: true, completion: nil)
-      
+        
     }
     
     
@@ -75,8 +76,8 @@ class ReceptionalistView: UIViewController  {
     func showLocationTable () {
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "profilepop", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "profilepop") as! profilePOpViewController
+        storyboard = UIStoryboard(name: Constants.profilepop, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.profilepop) as! profilePOpViewController
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 70*3
@@ -87,7 +88,6 @@ class ReceptionalistView: UIViewController  {
         popover?.sourceView = self.profileBtnOutlet
         popover?.sourceRect = self.profileBtnOutlet.bounds
         self.present(nav, animated: true, completion: nil)
-        
     }
     
     
@@ -143,7 +143,7 @@ class ReceptionalistView: UIViewController  {
     func switchViewController(vc: UIViewController, showFooter: Bool) {
         removeAllChildViewControllers()
         var height: CGFloat = 0.0
-
+        
         if showFooter {
             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height - footerViewheight

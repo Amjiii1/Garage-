@@ -30,17 +30,19 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     @IBOutlet weak var Nextoutlet: UIButton!
     @IBOutlet weak var searchView: UIView!
     
+    
+    
     private var SearchbarTbl: UITableView!
     var categories = [Category]()
     // var Product = [ReceiptModel]()
     var nameArray = [String]()
-  
+    
     var searchQuantity: Int = 1
     var tblSearchResult: UITableView?
     var searchActive : Bool = false
     var itemsModel = [ItemsModel]()
     var itemsfilter = [ItemsModel]()
-  
+    
     var currentState = 0
     var categoryIndex = 0
     var subCategoryIndex = 0
@@ -61,7 +63,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         getSearchData()
         SearcIconImages()
-       
+        
         print("\(Items.nameArray)")
         serviceSearch.attributedPlaceholder = NSAttributedString(string: "   Search Items Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         serviceSearch.textAlignment = .left
@@ -71,12 +73,12 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         colectionview.dataSource = self
         category.backgroundColor = UIColor.darkGray
         getData()
-         BindinfItems()
+        BindinfItems()
         self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
         self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
         self.receiptOutlet.titleLabel?.textAlignment = .center
         serviceSearch.delegate = self
-            self.Customsearchtableview()
+        self.Customsearchtableview()
         serviceSearch.addTarget(self, action: #selector(SearchFunction), for: .touchDown)
         serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControlEvents.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
@@ -88,7 +90,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     }
     
     
-  
+    
     
     
     
@@ -111,7 +113,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     @objc func textFieldDidChanges(_ textField: UITextField) {
         
-     
+        
         if textField.text  != "" {
             if (serviceSearch.text?.count)! != 0 {
                 self.itemsModel.removeAll()
@@ -129,27 +131,26 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             
             serviceSearch.resignFirstResponder()
             serviceSearch.text = ""
-
+            
             self.itemsModel.removeAll()
             for str in itemsfilter {
                 itemsModel.append(str)
             }
             SearchbarTbl.reloadData()
-        
+            
             
         }
-
+        
     }
     
     
-
+    
+    @objc func SearchFunction() {
         
-        @objc func SearchFunction() {
-      
-            SearchbarTbl.isHidden = false
-            SearchbarTbl.reloadData()
-        }
-
+        SearchbarTbl.isHidden = false
+        SearchbarTbl.reloadData()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         self.searchView.endEditing(true)
@@ -173,28 +174,27 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
     }
     
-   
+    
+    
+    
+    func Customsearchtableview()  {
+        self.view.layoutIfNeeded()
+        SearchbarTbl = UITableView(frame: CGRect(x: searchView.frame.origin.x, y: searchView.frame.origin.y+30, width: self.searchView.frame.width, height: 380))
+        SearchbarTbl.register(UITableViewCell.self, forCellReuseIdentifier: "MyCellS")
+        SearchbarTbl.dataSource = self
+        SearchbarTbl.delegate = self
+        SearchbarTbl.backgroundColor = UIColor.darkGray
+        view.addSubview(SearchbarTbl)
+        SearchbarTbl.isHidden = true
         
-        
-        func Customsearchtableview()  {
-            self.view.layoutIfNeeded()
-            SearchbarTbl = UITableView(frame: CGRect(x: searchView.frame.origin.x, y: searchView.frame.origin.y+30, width: self.searchView.frame.width, height: 380))
-            SearchbarTbl.register(UITableViewCell.self, forCellReuseIdentifier: "MyCellS")
-            SearchbarTbl.dataSource = self
-            SearchbarTbl.delegate = self
-            SearchbarTbl.backgroundColor = UIColor.darkGray
-            view.addSubview(SearchbarTbl)
-            SearchbarTbl.isHidden = true
-            
-        }
-       
-
-  
+    }
+    
+    
     
     // MARK:- TableView Delegates
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-       print(itemsModel.count)
-         //   return categories[categoryIndex].subCategories[subCategoryIndex].Searchitems.count
+        print(itemsModel.count)
+        //   return categories[categoryIndex].subCategories[subCategoryIndex].Searchitems.count
         
         return itemsModel.count
     }
@@ -205,21 +205,21 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         cell.textLabel?.textAlignment = .left
         cell.textLabel!.text = itemsModel[indexPath.row].Name
-//        print(self.serviceSearch.frame.width)
-//        let label1 = UILabel(frame: CGRect(x: self.serviceSearch.frame.width - 130, y: 10, width: 100, height: 25))
-//        var price = 0.00
-//        price = itemsModel[indexPath.row].Price!
-//        label1.text = "\(price.myRounded(toPlaces: 2))"
-//        label1.textAlignment = .right
-//        label1.textColor = UIColor.white
-//        label1.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
-//
+        //        print(self.serviceSearch.frame.width)
+        //        let label1 = UILabel(frame: CGRect(x: self.serviceSearch.frame.width - 130, y: 10, width: 100, height: 25))
+        //        var price = 0.00
+        //        price = itemsModel[indexPath.row].Price!
+        //        label1.text = "\(price.myRounded(toPlaces: 2))"
+        //        label1.textAlignment = .right
+        //        label1.textColor = UIColor.white
+        //        label1.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+        //
         cell.backgroundColor = UIColor.darkGray
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
-   //     cell.textLabel?.
-      //  cell.addSubview(label1)
-            return cell
+        //     cell.textLabel?.
+        //  cell.addSubview(label1)
+        return cell
         
     }
     
@@ -228,7 +228,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         let detail = [(itemsModel[indexPath.row])]
         for newdetail in detail {
-          
+            
             let product = ReceiptModel(Name: newdetail.Name!, Price: (newdetail.Price! * 1), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
             //here after (newdetail.Price! * 1)
             Items.Product.append(product)
@@ -239,12 +239,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             self.receiptOutlet.titleLabel?.textAlignment = .center
             SearchbarTbl.isHidden = true
             serviceSearch.resignFirstResponder()
+        }
     }
-    }
     
     
     
-   
     
     func OrderEdit() {
         
@@ -340,7 +339,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             }
                         }
                         DispatchQueue.main.async {
-                             print(Constants.totalprice)
+                            print(Constants.totalprice)
                             self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
                             self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
                             self.receiptOutlet.titleLabel?.textAlignment = .center
@@ -353,7 +352,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             ToastView.show(message: details.description, controller: self)
                         }
                     }
-                    
+                        
                     else if (details.status == 1000) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.wrong, controller: self)
@@ -388,13 +387,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     private func getSearchData() {
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.productapi)\(Constants.sessions)") else { return }
-
+        
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
-
+                    
                 }
             }
             if let data = data {
@@ -404,94 +403,88 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     let status = json[Constants.Status] as? Int
                     let newmessage = json[Constants.Description] as? String
                     if (status == 1) {
-                       print(json)
-                         if let CategoriesList = json["CategoriesList"] as? [[String: Any]] {
+                        print(json)
+                        if let CategoriesList = json["CategoriesList"] as? [[String: Any]] {
                             
                             for Subcategories in CategoriesList {
-                              
-                               if let subCategoriesList = Subcategories["SubCategoriesList"] as? [[String: Any]] {
-                                 for ProductModels in subCategoriesList {
-                                    if let ItemsList = ProductModels["ItemsList"] as? [[String: Any]] {
-                                        for ProductModel in ItemsList {
-                                            let nam = ProductModel["Name"] as! String?
-                                            let neworder = ItemsModel(ProductModel: ProductModel)
-                                            self.itemsModel.append(neworder!)
-                                            self.itemsfilter = self.itemsModel
-                                            
-                                            
+                                
+                                if let subCategoriesList = Subcategories["SubCategoriesList"] as? [[String: Any]] {
+                                    for ProductModels in subCategoriesList {
+                                        if let ItemsList = ProductModels["ItemsList"] as? [[String: Any]] {
+                                            for ProductModel in ItemsList {
+                                                let nam = ProductModel["Name"] as! String?
+                                                let neworder = ItemsModel(ProductModel: ProductModel)
+                                                self.itemsModel.append(neworder!)
+                                                self.itemsfilter = self.itemsModel
+                                                
+                                                
+                                            }
                                         }
+                                        
                                     }
-                                    
-                                }
                                 }
                                 
-
+                                
                                 
                             }
-
+                            
                         }
-//                        self.tblSearchResult?.reloadData()
-
-
+                        //                        self.tblSearchResult?.reloadData()
+                        
+                        
                     } else if (status == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: newmessage!, controller: self)
-
-
+                            
+                            
                         }
                     }
                     else if (status == 1000) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.wrong, controller: self)
-
-
+                            
+                            
                         }
                     }
-
+                        
                     else if (status == 1001) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.invalid, controller: self)
-
+                            
                         }
                     }
-
+                        
                     else {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.occured, controller: self)
-
+                            
                         }
                     }
-
-
+                    
+                    
                 } catch {
-
+                    
                     print(error)
                     DispatchQueue.main.async {
                         ToastView.show(message: "Login failed! Try Again", controller: self)
-
+                        
                     }
                 }
-
-
+                
+                
             }
-
-
+            
+            
             }.resume()
     }
-//
-    
-    
-    
-    
-    
-    
-    
+    //
+   
     
     
     private func getData() {
         let url = "\(CallEngine.baseURL)\(CallEngine.productapi)\(Constants.sessions)"
         Alamofire.request(url).response { [weak self] (response) in
-            if response == nil {
+            if response == nil { 
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self!)
                 }
@@ -507,61 +500,61 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     let desc = json[Constants.Description].stringValue
                     
                     if (status == 1) {
-                        let categoriesList = json["CategoriesList"].arrayValue
+                        let categoriesList = json[Constants.CategoriesList].arrayValue
                         
                         var subCategories = [SubCategory]()
-                         var items = [Item]()
+                        var items = [Item]()
                         
                         
                         for cat in categoriesList {
-                            let subCategoriesList = cat["SubCategoriesList"].arrayValue
-                            let categoryID = cat["CategoryID"].intValue
-                            let name = cat["Name"].stringValue
-                            let alternateName = cat["AlternateName"].stringValue
-                            let catDesc = cat["Description"].stringValue
-                            let catImage = cat["Image"].stringValue
-                            let catStatus = cat["Status"].intValue
-                            let catDisplayOrder = cat["DisplayOrder"].intValue
-                            let catLastUpdatedDate = cat["LastUpdatedDate"].stringValue
+                            let subCategoriesList = cat[Constants.SubCategoriesList].arrayValue
+                            let categoryID = cat[Constants.CategoryID].intValue
+                            let name = cat[Constants.Name].stringValue
+                            let alternateName = cat[Constants.AlternateName].stringValue
+                            let catDesc = cat[Constants.Description].stringValue
+                            let catImage = cat[Constants.Image].stringValue
+                            let catStatus = cat[Constants.Status].intValue
+                            let catDisplayOrder = cat[Constants.DisplayOrder].intValue
+                            let catLastUpdatedDate = cat[Constants.LastUpdatedDate].stringValue
                             
                             subCategories = []
                             
                             for sub in subCategoriesList {
-                                let itemsList = sub["ItemsList"].arrayValue
-                                let subCategoryID = sub["CategoryID"].intValue
-                                let subSubCategoryID = sub["SubCategoryID"].intValue
-                                let subName = sub["Name"].stringValue
-                                let subAlternateName = sub["AlternateName"].stringValue
-                                let subDescription = sub["Description"].stringValue
-                                let subImage = sub["Image"].stringValue
-                                let subStatus = sub["Status"].intValue
-                                let subDisplayOrder = sub["DisplayOrder"].intValue
-                                let subLastUpdatedDate = sub["LastUpdatedDate"].stringValue
+                                let itemsList = sub[Constants.ItemsList].arrayValue
+                                let subCategoryID = sub[Constants.CategoryID].intValue
+                                let subSubCategoryID = sub[Constants.SubCategoryID].intValue
+                                let subName = sub[Constants.Name].stringValue
+                                let subAlternateName = sub[Constants.AlternateName].stringValue
+                                let subDescription = sub[Constants.Description].stringValue
+                                let subImage = sub[Constants.Image].stringValue
+                                let subStatus = sub[Constants.Status].intValue
+                                let subDisplayOrder = sub[Constants.DisplayOrder].intValue
+                                let subLastUpdatedDate = sub[Constants.LastUpdatedDate].stringValue
                                 
-                                 items = []
+                                items = []
                                 
                                 for item in itemsList {
-                                    let itemID = item["ItemID"].intValue
-                                    let itemName = item["Name"].stringValue
-                                    let itemAlternateName = item["AlternateName"].stringValue
-                                    let itemDescription = item["Description"].stringValue
-                                    let price = item["Price"].doubleValue
-                                    let itemImage = item["Image"].stringValue
-                                    let barcode = item["Barcode"].stringValue
-                                    let itemType = item["ItemType"].stringValue
-                                    let itemStatus = item["Status"].intValue
-                                    let itemLastUpdatedDate = item["LastUpdatedDate"].stringValue
-                                    let itemDisplayOrder = item["DisplayOrder"].intValue
-                                    let itemCategoryID = item["CategoryID"].intValue
-                                    let itemSubCategoryID = item["SubCategoryID"].intValue
+                                    let itemID = item[Constants.ItemID].intValue
+                                    let itemName = item[Constants.Name].stringValue
+                                    let itemAlternateName = item[Constants.AlternateName].stringValue
+                                    let itemDescription = item[Constants.Description].stringValue
+                                    let price = item[Constants.Price].doubleValue
+                                    let itemImage = item[Constants.Image].stringValue
+                                    let barcode = item[Constants.Barcode].stringValue
+                                    let itemType = item[Constants.ItemType].stringValue
+                                    let itemStatus = item[Constants.Status].intValue
+                                    let itemLastUpdatedDate = item[Constants.LastUpdatedDate].stringValue
+                                    let itemDisplayOrder = item[Constants.DisplayOrder].intValue
+                                    let itemCategoryID = item[Constants.CategoryID].intValue
+                                    let itemSubCategoryID = item[Constants.SubCategoryID].intValue
                                     
                                     let modifiers = [Modifier]()
                                     
                                     let newItem = Item(itemID: itemID, name: itemName, alternateName: itemAlternateName, desc: itemDescription, price: price, image: itemImage, barcode: barcode, itemType: itemType, status: itemStatus, lastUpdatedDate: itemLastUpdatedDate, displayOrder: itemDisplayOrder, categoryID: itemCategoryID, subCategoryID: itemSubCategoryID, modifiers: modifiers)
                                     items.append(newItem)
-                            
+                                    
                                 }
-                     
+                                
                                 let newSubCategory = SubCategory(items: items , categoryID: subCategoryID, subCategoryID: subSubCategoryID, name: subName, alternateName: subAlternateName, desc: subDescription, image: subImage, status: subStatus, displayOrder: subDisplayOrder, lastUpdatedDate: subLastUpdatedDate)
                                 subCategories.append(newSubCategory)
                             }
@@ -569,22 +562,22 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             self?.categories.append(newCategory)
                             DispatchQueue.main.async {
                                 self?.colectionview.reloadData()
-
+                                
                             }
                         }
                     }
                     else  if (status == 0) {
                         ToastView.show(message: desc, controller: self!)
                     }
-                    
+                        
                     else  if (status == 1000) {
                         ToastView.show(message: Constants.wrong, controller: self!)
                     }
-                    
+                        
                     else  if (status == 1001) {
                         ToastView.show(message: Constants.invalid, controller: self!)
                     }
-                    
+                        
                     else {
                         ToastView.show(message: Constants.occured, controller: self!)
                     }
@@ -646,7 +639,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         currentState = 2
         reloadData()
-       
+        
     }
     
     
@@ -662,10 +655,10 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         }
     }
     
-   
+    
     
     @IBAction func receptBtn(_ sender: Any) {
-            Receiptdetails()
+        Receiptdetails()
     }
     
     @IBAction func nextBtn(_ sender: Any) {
@@ -698,7 +691,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         Constants.CarIDData = 0
         Constants.totalprice = 0
         Constants.counterQTY = 1
-       Constants.OrderIDData = 0
+        Constants.OrderIDData = 0
     }
     
     
@@ -727,16 +720,16 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             ToastView.show(message: "Sorry! You can't step back!", controller: self)
         } else
         {
-        
-        
-        Items.Product.removeAll()
-        Items.nameArray.removeAll()
-        Constants.totalprice = 0
-        if let parentVC = (self.parent as? ReceptionalistView) {
-            let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as? addNewCar
-            parentVC.switchViewController(vc: vc!, showFooter: false)
-        }
+            
+            
+            Items.Product.removeAll()
+            Items.nameArray.removeAll()
+            Constants.totalprice = 0
+            if let parentVC = (self.parent as? ReceptionalistView) {
+                let storyboard = UIStoryboard(name: Constants.AddnewCar, bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: Constants.addNewCarVc) as? addNewCar
+                parentVC.switchViewController(vc: vc!, showFooter: false)
+            }
         }
     }
     
@@ -747,9 +740,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         popController = storyboard.instantiateViewController(withIdentifier: Constants.ReceiptpopVc) as! Receiptpop
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
-        let heightForPopOver = 160 * 3
+        let heightForPopOver = UIScreen.main.bounds.size.height*0.5//160 * 3
         let popover = nav.popoverPresentationController
-        popController.preferredContentSize = CGSize(width: 500 , height: heightForPopOver)
+        popController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width*0.7 , height: heightForPopOver)
         popover?.permittedArrowDirections = .up
         popover?.backgroundColor = UIColor.white
         popover?.sourceView = self.receiptOutlet
@@ -766,7 +759,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-//        print(categories[categoryIndex].subCategories[subCategoryIndex].items.count)
+//                print(categories[categoryIndex].subCategories[subCategoryIndex].items.count)
         switch currentState {
         case 1:
             return categories[categoryIndex].subCategories.count
@@ -788,20 +781,20 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 cell.layer.transform = CATransform3DMakeScale(1,1,1)
             })
         })
-    
+        
         switch currentState {
         case 1:
             cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].name, image: categories[categoryIndex].subCategories[indexPath.row].image)
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
-           //  serviceSearch.isUserInteractionEnabled = false
+        //  serviceSearch.isUserInteractionEnabled = false
         case 2:
             cell.populate(with: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].name, image: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].image)
             cell.plusBtn.isHidden = false
             cell.minusBtn.isHidden = false
             cell.countLbl.isHidden = false
-           //  serviceSearch.isUserInteractionEnabled = true
+            //  serviceSearch.isUserInteractionEnabled = true
             //      new = [(categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].itemID)]
             //             print(new)
             
@@ -816,7 +809,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
-           //  serviceSearch.isUserInteractionEnabled = false
+            //  serviceSearch.isUserInteractionEnabled = false
             cell.countLbl.text = "\(count)"
             print("\(count)")
             // cell.decorate(for: "\(count)", in: self)
@@ -832,21 +825,21 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 15
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
-   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: colectionview.frame.size.width / 3.4, height: colectionview.frame.size.height / 2.7)
     }
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//
-////        let cell = colectionview.cellForItem(at: indexPath)
-////        cell?.layer.borderWidth = 2.0
-////        cell?.layer.borderColor = UIColor.clear.cgColor
-//
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    //
+    ////        let cell = colectionview.cellForItem(at: indexPath)
+    ////        cell?.layer.borderWidth = 2.0
+    ////        cell?.layer.borderColor = UIColor.clear.cgColor
+    //
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
@@ -864,8 +857,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             subcategoryBtn.backgroundColor = UIColor.darkGray
             category.backgroundColor = UIColor.BlackApp
-           // serviceSearch.isUserInteractionEnabled = false
-           
+            // serviceSearch.isUserInteractionEnabled = false
+            
         case 1:
             currentState = 2
             cell.plusBtn.isHidden = false
@@ -878,7 +871,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             itemBtn.backgroundColor = UIColor.darkGray
             subcategoryBtn.backgroundColor = UIColor.BlackApp
-           // serviceSearch.isUserInteractionEnabled = true
+            // serviceSearch.isUserInteractionEnabled = true
             
         default:
             let new = cell.countLbl.text
@@ -905,21 +898,21 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 Items.Product.append(product)
                 let price = newname.price * Double(Constants.counterQTY)
                 Constants.totalprice = (Constants.totalprice + Double(price))//.myRounded(toPlaces: 2)
-            //    self.receiptOutlet.titleLabel?.numberOfLines = 0
+                //    self.receiptOutlet.titleLabel?.numberOfLines = 0
                 self.receiptOutlet.titleLabel?.lineBreakMode = .byWordWrapping
                 self.receiptOutlet.setTitle(String(format: "%.2f \nSAR", Constants.totalprice), for: .normal)
                 self.receiptOutlet.titleLabel?.textAlignment = .center
                 
                 
-//                button.titleLabel?.numberOfLines = 0
-//                button.titleLabel?.lineBreakMode = .byWordWrapping
-//                button.setTitle("Foo\nBar", for: .normal)
-//                button.titleLabel?.textAlignment = .center
+                //                button.titleLabel?.numberOfLines = 0
+                //                button.titleLabel?.lineBreakMode = .byWordWrapping
+                //                button.setTitle("Foo\nBar", for: .normal)
+                //                button.titleLabel?.textAlignment = .center
                 
             }
-//            let cell = colectionview.cellForItem(at: indexPath)
-//            cell?.layer.borderWidth = 2.0
-//            cell?.layer.borderColor = UIColor.DefaultApp.cgColor
+            //            let cell = colectionview.cellForItem(at: indexPath)
+            //            cell?.layer.borderWidth = 2.0
+            //            cell?.layer.borderColor = UIColor.DefaultApp.cgColor
             
             
             break
@@ -932,29 +925,29 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     func PunchOder() {
         
         
-
+        
         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             for models in Items.Product {
                 if models.Status == 201 {
                     print(models)
-                   Items.Product.append(models)
+                    Items.Product.append(models)
                     
                 } else {
                     
-                   Items.Product.removeAll()
+                    Items.Product.removeAll()
                     
                 }
                 
             }
         }
         
-   if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
-    
-    for System in Items.nameArray {
-        
-        Items.Product.append(System as! ReceiptModel)
-    }
+        if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
+            
+            for System in Items.nameArray {
+                
+                Items.Product.append(System as! ReceiptModel)
+            }
         }
         
         if Constants.editcheckout != 0 {
@@ -967,15 +960,15 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             if Constants.flagEdit != 0  {
                 if Constants.bayid != 0 {
                     
-                   Constants.orderstatus = 102
+                    Constants.orderstatus = 102
                 }
                 else {
                     Constants.orderstatus = 101
                 }
             }
         }
-    
-       
+        
+        
         print(Items.Product)
         
         let encoder = JSONEncoder()
@@ -987,7 +980,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         print(Constants.OrderIDData)
         
-     
+        
         let parameters = [
             Constants.SessionID: Constants.sessions,
             Constants.CarID: Constants.CarIDData,
@@ -997,10 +990,10 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             Constants.OrderPunchDt: Constants.currentdate,
             Constants.OrderNo:Constants.OrderNoData,
             Constants.StatusID: Constants.orderstatus,
-             Constants.CheckLiters: Constants.carliterID,
+            Constants.CheckLiters: Constants.carliterID,
             Constants.Items: test as Any]  as [String : Any]
         
-         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
+        if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             urlorderpunch = "\(CallEngine.baseURL)\(CallEngine.OrderEdit)"    //BASE
             print(urlorderpunch)
@@ -1035,8 +1028,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         if (status == 1) {
                             
                             ToastView.show(message: newmessage!, controller: self)
-                             DispatchQueue.main.async {
-                          //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            DispatchQueue.main.async {
+                                //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if Constants.editcheckout != 0 {
                                     if let parentVC = self.parent as? ReceptionalistView {
                                         let storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
@@ -1048,13 +1041,13 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                                     }
                                     
                                 } else {
-                                if let parentVC = self.parent as? ReceptionalistView {
-                                    let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
-                                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
-                                    parentVC.switchViewController(vc: vc!, showFooter: true)
-                                    self.removeDataa()
-                                    self.Nextoutlet.isUserInteractionEnabled = true
-                                }
+                                    if let parentVC = self.parent as? ReceptionalistView {
+                                        let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
+                                        parentVC.switchViewController(vc: vc!, showFooter: true)
+                                        self.removeDataa()
+                                        self.Nextoutlet.isUserInteractionEnabled = true
+                                    }
                                 }
                             }//})
                         }
@@ -1062,38 +1055,38 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: newmessage!, controller: self)
-                                 self.Nextoutlet.isUserInteractionEnabled = true
+                                self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
                         else if (status == 1000) {
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: Constants.wrong, controller: self)
-                                 self.Nextoutlet.isUserInteractionEnabled = true
+                                self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
-                        
+                            
                         else if (status == 1001) {
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: Constants.invalid, controller: self)
-                                 self.Nextoutlet.isUserInteractionEnabled = true
+                                self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
-                        
+                            
                         else  {
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: Constants.occured, controller: self)
-                                 self.Nextoutlet.isUserInteractionEnabled = true
+                                self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
                         
                     } catch {
-                         DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             print(error)
-                        ToastView.show(message: "Edit Failed! error occured", controller: self)
-                         self.Nextoutlet.isUserInteractionEnabled = true
+                            ToastView.show(message: "Edit Failed! error occured", controller: self)
+                            self.Nextoutlet.isUserInteractionEnabled = true
                         }
                     }
                     
@@ -1105,7 +1098,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             
             let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderPunchApi)")!
             
-              print(urlorderpunch)
+            print(urlorderpunch)
             
             //let url = URL(string: urlorderpunch)
             var request = URLRequest(url: url)
@@ -1138,7 +1131,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             ToastView.show(message: newmessage!, controller: self)
                             DispatchQueue.main.async {
-                          //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                                //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 if let parentVC = self.parent as? ReceptionalistView {
                                     let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
@@ -1177,9 +1170,9 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         }
                         
                     } catch {
-                         DispatchQueue.main.async {
-                        print(error)
-                        ToastView.show(message: "Edit Failed! error occured", controller: self)
+                        DispatchQueue.main.async {
+                            print(error)
+                            ToastView.show(message: "Edit Failed! error occured", controller: self)
                         }
                     }
                     

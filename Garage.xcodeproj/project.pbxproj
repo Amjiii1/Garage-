@@ -218,7 +218,6 @@
 		95C1261621930B54009347E9 /* notespopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C1261521930B54009347E9 /* notespopup.storyboard */; };
 		95C57DD5215BA328001C1B76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6E520CCEA2500EC99C2 /* Info.plist */; };
 		95C57DD9215BC076001C1B76 /* CheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C57DD8215BC076001C1B76 /* CheckoutCell.swift */; };
-		95CB78D6226604FF00951D60 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CB78D5226604FF00951D60 /* SearchResultsController.swift */; };
 		95EE0FCB222680A0003F35D2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */; };
 		95EE0FCD222680B4003F35D2 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */; };
 		95EE0FD122268165003F35D2 /* libepos2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FD022268164003F35D2 /* libepos2.a */; };
@@ -461,7 +460,6 @@
 		95C1261821930C3D009347E9 /* notesPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesPopup.swift; sourceTree = "<group>"; };
 		95C57DD6215BA387001C1B76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95C57DD8215BC076001C1B76 /* CheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCell.swift; sourceTree = "<group>"; };
-		95CB78D5226604FF00951D60 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		95EE0FD022268164003F35D2 /* libepos2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libepos2.a; path = Garage/libepos2.a; sourceTree = "<group>"; };
@@ -657,7 +655,6 @@
 				95EE0FDA222696F5003F35D2 /* coffee1.png */,
 				1783CDDE211034A10005CC7B /* ServiceCartView.swift */,
 				9558925922687A9A0071AAF8 /* ItemsModel.swift */,
-				95CB78D5226604FF00951D60 /* SearchResultsController.swift */,
 				9565C34421AD537B00D68EFD /* AFWrapperClass.swift */,
 				956C95C0219AE9B50059EE9E /* heloo.jpg */,
 				956B6C542188867B0025986F /* HistoryCar.swift */,
@@ -1272,7 +1269,6 @@
 				95151CB2221D72C6005F606A /* PrinterDetails+CoreDataClass.swift in Sources */,
 				95383E44215100A8003DE261 /* HardwareView.swift in Sources */,
 				171FAA682119C0490096721E /* LoyaltyView.swift in Sources */,
-				95CB78D6226604FF00951D60 /* SearchResultsController.swift in Sources */,
 				957C44102225297500B482AB /* ReceiptViewController.swift in Sources */,
 				957C4414222529C100B482AB /* DatabaseViewController.swift in Sources */,
 				9553234921F72B7500B6B855 /* CheckCarcell.swift in Sources */,

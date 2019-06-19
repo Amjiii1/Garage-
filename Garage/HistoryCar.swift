@@ -23,7 +23,7 @@ struct HistoryDetails {
     static var carNotes = [CarNote]()
     static var savecarNotes = [CarNote]()
     
-   // static var uploadedimages = [NotesImages]()
+    // static var uploadedimages = [NotesImages]()
 }
 
 
@@ -39,7 +39,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var platenmbLabel: UILabel!
     
     var HistoryData = [HistoryModel]()
-//     var Inspectionlist = [InspectionListH]()
+    //     var Inspectionlist = [InspectionListH]()
     var upimages = [String]()
     var count = 0
     
@@ -79,8 +79,8 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 print(json)
                 
                 if let intstatus = json[Constants.Status] as? Int {
-                  let descript = json[Constants.Description] as? String
-                  //  let status = String (intstatus)
+                    let descript = json[Constants.Description] as? String
+                    //  let status = String (intstatus)
                     if intstatus == 1 {
                         
                         if let model = json["CarModelName"] as? String {
@@ -94,7 +94,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             }
                         }
                         
-                        
+                     
                         // Items
                         if let history = json["OrdersList"] as? [[String: Any]] {
                             self.HistoryData.removeAll()
@@ -127,47 +127,47 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                         let notesImage = notesdetails["NotesImages"] as? NSArray
                                         let NotesComment = notesdetails["NotesComment"] as? String
                                         let NotesID = notesdetails["NotesID"] as? Int
-                                         let OrderID = notesdetails["OrderID"] as? Int
+                                        let OrderID = notesdetails["OrderID"] as? Int
                                         let carNote = CarNote(Notes: notesImage as! [String], NotesComment: NotesComment!, NotesID: NotesID!, OrderID: OrderID!)
-                                            HistoryDetails.carNotes.append(carNote)
-                                      
-                                    }
-                                    
-                                    
-                                }
-                                }
-                            
-                            // Checklist
-                                
-                                for CarCheckList in history {
-                                
-                                    if let CheckList = CarCheckList["CheckList"] as? [[String: Any]] {
-                                       
-                                   //     HistoryDetails.InspectionDtail = [InspectionDetailsH]()
-                                        for carCheckLists in CheckList  {
-                                            let Name = carCheckLists["Name"] as! String
-                                            let InspectionDetails = carCheckLists["InspectionDetails"] as? [[String: Any]]
-                                            let CarInspectionIDH = carCheckLists["CarInspectionID"] as! Int
-                                            let OrderID = carCheckLists["OrderID"] as! Int
-                                            HistoryDetails.InspectionDtail = []
-                                            for sub in InspectionDetails!  {
-                                                let CarInspectionDetailID = sub["CarInspectionDetailID"] as! Int
-                                                let CarInspectionID = sub["CarInspectionID"] as! Int
-                                                let Name = sub["Name"] as! String
-                                                let Value = sub["Value"] as! String
-                                                
-                                                let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
-                                                HistoryDetails.InspectionDtail.append(newInspectionDetails)
-                                            
-                                            }
-                                            
-                                            let newInspectionList = InspectionListH(InspectionDetailsH: HistoryDetails.InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
-                                            HistoryDetails.Inspectionlist.append(newInspectionList)
-                                        }
+                                        HistoryDetails.carNotes.append(carNote)
                                         
                                     }
+                                    
+                                    
+                                }
                             }
-               
+                            
+                            // Checklist
+                            
+                            for CarCheckList in history {
+                                
+                                if let CheckList = CarCheckList["CheckList"] as? [[String: Any]] {
+                                    
+                                    //     HistoryDetails.InspectionDtail = [InspectionDetailsH]()
+                                    for carCheckLists in CheckList  {
+                                        let Name = carCheckLists["Name"] as! String
+                                        let InspectionDetails = carCheckLists["InspectionDetails"] as? [[String: Any]]
+                                        let CarInspectionIDH = carCheckLists["CarInspectionID"] as! Int
+                                        let OrderID = carCheckLists["OrderID"] as! Int
+                                        HistoryDetails.InspectionDtail = []
+                                        for sub in InspectionDetails!  {
+                                            let CarInspectionDetailID = sub["CarInspectionDetailID"] as! Int
+                                            let CarInspectionID = sub["CarInspectionID"] as! Int
+                                            let Name = sub["Name"] as! String
+                                            let Value = sub["Value"] as! String
+                                            
+                                            let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
+                                            HistoryDetails.InspectionDtail.append(newInspectionDetails)
+                                            
+                                        }
+                                        
+                                        let newInspectionList = InspectionListH(InspectionDetailsH: HistoryDetails.InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
+                                        HistoryDetails.Inspectionlist.append(newInspectionList)
+                                    }
+                                    
+                                }
+                            }
+                            
                             for historyorder in history {
                                 print(historyorder)
                                 let neworder = HistoryModel(historyorder: historyorder)
@@ -176,7 +176,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             }
                             
                         }
-                    
+                        
                         DispatchQueue.main.async {
                             self.historyTableview.reloadData()
                             self.dismiss(animated: true, completion: nil)
@@ -185,8 +185,8 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     }
                         
                     else  if intstatus == 0 {
-                         DispatchQueue.main.async {
-                        ToastView.show(message: descript!, controller: self)
+                        DispatchQueue.main.async {
+                            ToastView.show(message: descript!, controller: self)
                             self.dismiss(animated: true, completion: nil)
                         }
                     }
@@ -195,7 +195,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             ToastView.show(message: Constants.wrong, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             
-                          
+                            
                         }
                     }
                         
@@ -203,7 +203,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.invalid, controller: self)
                             self.dismiss(animated: true, completion: nil)
-                           
+                            
                         }
                     }
                         
@@ -211,7 +211,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.occured, controller: self)
                             self.dismiss(animated: true, completion: nil)
-                           
+                            
                         }
                     }
                     
@@ -221,7 +221,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
             } catch let error as NSError {
                 print(error)
-                 ToastView.show(message: "failed! error occured", controller: self)
+                ToastView.show(message: "failed! error occured", controller: self)
                 self.dismiss(animated: true, completion: nil)
             }
         }).resume()
@@ -241,7 +241,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
     }
     
-   
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -256,38 +256,38 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         cell.selectionStyle = .none
         
         return cell
-    
+        
     }
     
     
     
-     @objc func detailAction(_ sender: UIButton){
+    @objc func detailAction(_ sender: UIButton){
         
-         HistoryDetails.savedetail.removeAll()
-         HistoryDetails.SaveInspectionlist.removeAll()
+        HistoryDetails.savedetail.removeAll()
+        HistoryDetails.SaveInspectionlist.removeAll()
         HistoryDetails.SaveInspectionDtail.removeAll()
         HistoryDetails.savecarNotes.removeAll()
         
         
         
-       let id = HistoryData[sender.tag].OrderID!
+        let id = HistoryData[sender.tag].OrderID!
         Constants.historytrans = HistoryData[sender.tag].TransactionNo!
-
+        
         Constants.subtotal = 0.0
         Constants.checkoutGrandtotal = 0.0
         Constants.checkouttax = 0.0
         for itemmodels in  HistoryDetails.details {
-
+            
             if itemmodels.itemorderid == id {
-
+                
                 Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
-
+                
                 HistoryDetails.savedetail.append(itemmodels)
             } else if itemmodels.itemorderid != id {
                 print("Not present")
             }
-
-
+            
+            
         }
         Constants.checkouttax = Constants.checkoutGrandtotal * 0.05
         Constants.subtotal = Constants.checkoutGrandtotal
@@ -300,7 +300,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     
                     HistoryDetails.SaveInspectionDtail.append(list2)
                 }
-              
+                
                 HistoryDetails.SaveInspectionlist.append(list)
             }
             
@@ -312,10 +312,9 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 print(images.NotesComment)
                 HistoryDetails.savecarNotes.append(images)
                 
-        }
+            }
             
         }
-        
         
         details()
     }
@@ -324,12 +323,13 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func details() {
+        
         let screenWidth = UIScreen.main.bounds.width
         let screenheight = UIScreen.main.bounds.height
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "historydetailview", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "historydetailviewVc") as! Historydetailview
+        storyboard = UIStoryboard(name: Constants.historydetailview, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.historydetailviewVc) as! Historydetailview
         // let nav = UINavigationController(rootViewController: popController)
         popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
@@ -339,6 +339,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         popOverVC?.sourceRect = CGRect(x: screenWidth*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenWidth*0.70, height: screenheight*0.5)
         self.present(popController, animated: true)
+        
     }
     
     

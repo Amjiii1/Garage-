@@ -10,12 +10,12 @@ import UIKit
 
 
 struct HistoryDetails {
+    
     static var details = [checkoutItems]()
     static var savedetail = [checkoutItems]()
     
-    
-    static var Inspectionlist = [InspectionListH]()
-    static var InspectionDtail = [InspectionDetailsH]()
+    //    static var Inspectionlist = [InspectionListH]()
+    //    static var InspectionDtail = [InspectionDetailsH]()
     
     static var SaveInspectionlist = [InspectionListH]()
     static var SaveInspectionDtail = [InspectionDetailsH]()
@@ -39,7 +39,13 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var platenmbLabel: UILabel!
     
     var HistoryData = [HistoryModel]()
-    //     var Inspectionlist = [InspectionListH]()
+    
+    
+    
+    var Inspectionlist = [InspectionListH]()
+    var InspectionDtail = [InspectionDetailsH]()
+    
+    
     var upimages = [String]()
     var count = 0
     
@@ -70,7 +76,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func historyData() {
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.HistoryApi)\(Constants.CarIDData)/\(Constants.sessions)")
-        
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
             do {
@@ -83,37 +88,39 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     //  let status = String (intstatus)
                     if intstatus == 1 {
                         
-                        if let model = json["CarModelName"] as? String {
+                        if let model = json[Constants.CarModelName] as? String {
                             DispatchQueue.main.async {
                                 self.carModelLabel.text = model
                             }
                         }
-                        if let CarNoPlate = json["CarNoPlate"] as? String {
+                        if let CarNoPlate = json[Constants.CarNoPlate] as? String {
                             DispatchQueue.main.async {
                                 self.platenmbLabel.text = CarNoPlate
                             }
                         }
                         
-                     
+                        
                         // Items
-                        if let history = json["OrdersList"] as? [[String: Any]] {
+                        if let history = json[Constants.OrdersList] as? [[String: Any]] {
                             self.HistoryData.removeAll()
                             HistoryDetails.details.removeAll()
                             HistoryDetails.carNotes.removeAll()
-                            HistoryDetails.Inspectionlist.removeAll()
-                            HistoryDetails.InspectionDtail.removeAll()
+                            //                            HistoryDetails.Inspectionlist.removeAll()
+                            //                            HistoryDetails.InspectionDtail.removeAll()
+                            self.Inspectionlist.removeAll()
+                            self.InspectionDtail.removeAll()
                             
                             
                             for items in history {
-                                if let item = items["OrderItems"] as? [[String: Any]] {
+                                if let item = items[Constants.OrderItems] as? [[String: Any]] {
                                     for details in item {
-                                        let Name = details["ItemName"] as! String
-                                        let AlternateName = details["ItemName"] as! String  // give Alternative name
-                                        let Price = details["Price"] as! Double
-                                        let ItemID = details["ItemID"] as! Int
-                                        let Quantity = details["Quantity"] as! Int
-                                        let OrderDetails = details["OrderDetailID"] as! Int
-                                        let itemorderID = details["OrderID"] as! Int
+                                        let Name = details[Constants.ItemName] as! String
+                                        let AlternateName = details[Constants.ItemName] as! String  // give Alternative name
+                                        let Price = details[Constants.Price] as! Double
+                                        let ItemID = details[Constants.ItemID] as! Int
+                                        let Quantity = details[Constants.Quantity] as! Int
+                                        let OrderDetails = details[Constants.OrderDetailID] as! Int
+                                        let itemorderID = details[Constants.OrderID] as! Int
                                         let itemsdetailed = checkoutItems(Name: Name,AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
                                         HistoryDetails.details.append(itemsdetailed)
                                     }
@@ -122,12 +129,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             }
                             // Notes
                             for CarNotedetails in history {
-                                if let CarNotes = CarNotedetails["CarNotes"] as? [[String: Any]] {
+                                if let CarNotes = CarNotedetails[Constants.CarNotes] as? [[String: Any]] {
                                     for notesdetails in CarNotes {
-                                        let notesImage = notesdetails["NotesImages"] as? NSArray
-                                        let NotesComment = notesdetails["NotesComment"] as? String
-                                        let NotesID = notesdetails["NotesID"] as? Int
-                                        let OrderID = notesdetails["OrderID"] as? Int
+                                        let notesImage = notesdetails[Constants.NotesImages] as? NSArray
+                                        let NotesComment = notesdetails[Constants.NotesComment] as? String
+                                        let NotesID = notesdetails[Constants.NotesID] as? Int
+                                        let OrderID = notesdetails[Constants.OrderID] as? Int
                                         let carNote = CarNote(Notes: notesImage as! [String], NotesComment: NotesComment!, NotesID: NotesID!, OrderID: OrderID!)
                                         HistoryDetails.carNotes.append(carNote)
                                         
@@ -138,32 +145,32 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             }
                             
                             // Checklist
-                            
                             for CarCheckList in history {
                                 
-                                if let CheckList = CarCheckList["CheckList"] as? [[String: Any]] {
-                                    
-                                    //     HistoryDetails.InspectionDtail = [InspectionDetailsH]()
+                                if let CheckList = CarCheckList[Constants.CheckList] as? [[String: Any]] {
+                                    var InspectionDtail = [InspectionDetailsH]()
                                     for carCheckLists in CheckList  {
-                                        let Name = carCheckLists["Name"] as! String
-                                        let InspectionDetails = carCheckLists["InspectionDetails"] as? [[String: Any]]
-                                        let CarInspectionIDH = carCheckLists["CarInspectionID"] as! Int
-                                        let OrderID = carCheckLists["OrderID"] as! Int
-                                        HistoryDetails.InspectionDtail = []
+                                        let Name = carCheckLists[Constants.Name] as! String
+                                        let InspectionDetails = carCheckLists[Constants.InspectionDetails] as? [[String: Any]]
+                                        let CarInspectionIDH = carCheckLists[Constants.CarInspectionID] as! Int
+                                        let OrderID = carCheckLists[Constants.OrderID] as! Int
+                                        InspectionDtail = []
                                         for sub in InspectionDetails!  {
-                                            let CarInspectionDetailID = sub["CarInspectionDetailID"] as! Int
-                                            let CarInspectionID = sub["CarInspectionID"] as! Int
-                                            let Name = sub["Name"] as! String
-                                            let Value = sub["Value"] as! String
+                                            let CarInspectionDetailID = sub[Constants.CarInspectionDetailID] as! Int
+                                            let CarInspectionID = sub[Constants.CarInspectionID] as! Int
+                                            let Name = sub[Constants.Name] as! String
+                                            let Value = sub[Constants.Value] as! String
                                             
                                             let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
-                                            HistoryDetails.InspectionDtail.append(newInspectionDetails)
+                                            InspectionDtail.append(newInspectionDetails)
                                             
                                         }
                                         
-                                        let newInspectionList = InspectionListH(InspectionDetailsH: HistoryDetails.InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
-                                        HistoryDetails.Inspectionlist.append(newInspectionList)
+                                        let newInspectionList = InspectionListH(InspectionDetailsH: InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
+                                        self.Inspectionlist.append(newInspectionList)
+                                        self.historyTableview.reloadData()
                                     }
+                                    
                                     
                                 }
                             }
@@ -294,7 +301,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
         
         
-        for list in HistoryDetails.Inspectionlist {
+        for list in Inspectionlist {
             if list.OrderIDH == id {
                 for list2 in list.InspectionDetailsH {
                     

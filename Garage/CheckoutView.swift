@@ -87,15 +87,14 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let status = json[Constants.Status] as? Int
                 let discript = json[Constants.Description] as? String
                 if (status == 1) {
-                    if let order = json["OrdersList"] as? [[String: Any]] {
+                    if let order = json[Constants.OrdersList] as? [[String: Any]] {
                         self.checkoutmodel.removeAll()
                         Checkoutstruct.Itemdetails.removeAll()
-                        
                         for items in order {
-                            if let item = items["OrderItems"] as? [[String: Any]] {
+                            if let item = items[Constants.OrderItems] as? [[String: Any]] {
                                 for details in item {
                                     let Name = details["ItemName"] as! String
-                                    let AlternateName = details["ItemName"] as! String
+                                    let AlternateName = details["AlternateName"] as! String
                                     let Price = details["Price"] as! Double
                                     let ItemID = details["ItemID"] as! Int
                                     let Quantity = details["Quantity"] as! Int
@@ -265,6 +264,10 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.checkoutmechanic = self.checkoutmodel[indexPath.row].MechanicName!
                     Constants.checkoutstatus = self.checkoutmodel[indexPath.row].Status!
                     Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].TransactionNo!
+                    Constants.CardType = self.checkoutmodel[indexPath.row].CardType!
+                    Constants.PaymentModes = self.checkoutmodel[indexPath.row].PaymentMode!
+                    Constants.CashAmount = self.checkoutmodel[indexPath.row].CashAmount!
+                    Constants.CardAmount = self.checkoutmodel[indexPath.row].CardAmount!
                     
                     Constants.subtotal = 0.0
                     Constants.checkoutGrandtotal = 0.0
@@ -350,7 +353,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CSerialnmb.text = "\(trans2!)"
             
         case 2:
-            headerlabel.text = "Done"
+            headerlabel.text = "Status"
             headerlabel.textColor = UIColor.white
             headerlabel.font = UIFont(name: "SFProDisplay-Bold", size: 19)
             cell.checkoutBtn.isUserInteractionEnabled = true
@@ -362,9 +365,18 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CModel.text = checkoutmodel[indexPath.row].ModelName
             //  let Bay = checkoutmodel[indexPath.row].BayName
             cell.checkoutBtn.tag = indexPath.row
-            cell.checkoutBtn.setTitle("Done", for: .normal)
-            cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
-            cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+            let status = checkoutmodel[indexPath.row].Status
+            if status == 105 {
+                cell.checkoutBtn.setTitle("Cancelled", for: .normal)
+                cell.checkoutBtn.setTitleColor(UIColor.red, for: .normal)
+                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+            
+            } else  {
+                cell.checkoutBtn.setTitle("Done", for: .normal)
+                cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
+                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+            }
+           
             cell.checkoutBtn.imageView?.isHidden = true
             //   cell.checkoutBtn.isUserInteractionEnabled = false
             //   cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
@@ -413,7 +425,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName!
             Constants.checkoutstatus = checkoutmodel[sender.tag].Status!
             Constants.checkoutorderNo = checkoutmodel[sender.tag].TransactionNo!
-            
+           
             
             Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0

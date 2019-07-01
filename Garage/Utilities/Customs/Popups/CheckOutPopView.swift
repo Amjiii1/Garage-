@@ -30,10 +30,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
     @IBOutlet weak var balacelbl: UILabel!
-    
     private weak var subView: UIView?
+    
+    
     var orderdetails = [Checkoutdetails]()
-    var flag = 1      //this flag is used for cash and card: (cash = 1. card = 3, both = 3 (from cash total and checkout card frm card screen flag convering by checking))
+    var flag = 1      //this flag is used for cash and card: (cash = 1. card = 2, both = 3 (from cash total and checkout card frm card screen flag convering by checking))
     var cardcash: Double = 0.0
     var holdername: String = ""
     var cardnmb: NSNumber = 0
@@ -94,6 +95,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
+    
     @objc func printeradded(notification: Notification) {
         print(Constants.Printer)
     }
@@ -113,7 +115,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 balancetxtf.text = "0"
             } else {
                 let blnce = Constants.checkoutGrandtotal - intFromString!
-                balancetxtf.text = String(format: "%.2f", blnce)
+                balancetxtf.text =  String(format: "%.2f", blnce)
             }
             
         }
@@ -146,9 +148,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }
         
-        
     }
-    
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("printerAdded"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("Notificationusername"), object: nil)
@@ -341,37 +341,34 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func Printletter(_ sender: Any) {
         
-        let printController = UIPrintInteractionController.shared
-        let printInfo = UIPrintInfo(dictionary: [:])
-        printInfo.outputType = UIPrintInfoOutputType.general
-        printInfo.orientation = UIPrintInfoOrientation.portrait
-        printInfo.jobName = "Sample"
-        printController.printInfo = printInfo
-       // printController.showsPageRange = true
-        printController.printingItem = NSData(contentsOf: URL(string: "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf")!)
-        
-        printController.present(animated: true) { (controller, completed, error) in
-            if(!completed && error != nil){
-                DispatchQueue.main.async {
-                    let messageVC = UIAlertController(title: "Failed ", message: "Image not found!" , preferredStyle: .actionSheet)
-                    self.present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                            messageVC.dismiss(animated: true, completion: nil)})}
-                }
-            }
-            else if(completed) {
-                DispatchQueue.main.async {
-                    let messageVC = UIAlertController(title: "Sucess ", message: "Printed succesfully" , preferredStyle: .actionSheet)
-                    self.present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                            messageVC.dismiss(animated: true, completion: nil)})}
-                }
-            }
-        }
+//        let printController = UIPrintInteractionController.shared
+//        let printInfo = UIPrintInfo(dictionary: [:])
+//        printInfo.outputType = UIPrintInfoOutputType.general
+//        printInfo.orientation = UIPrintInfoOrientation.portrait
+//        printInfo.jobName = "Sample"
+//        printController.printInfo = printInfo
+//        // printController.showsPageRange = true
+//        //http://www.pdf995.com/samples/pdf.pdf
+//        printController.printingItem = NSData(contentsOf: URL(string: "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf")!)
+//        printController.present(animated: true) { (controller, completed, error) in
+//            if(!completed && error != nil){
+//                DispatchQueue.main.async {
+//                    let messageVC = UIAlertController(title: "Failed ", message: "Image not found!" , preferredStyle: .actionSheet)
+//                    self.present(messageVC, animated: true) {
+//                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+//                            messageVC.dismiss(animated: true, completion: nil)})}
+//                }
+//            }
+//            else if(completed) {
+//                DispatchQueue.main.async {
+//                    let messageVC = UIAlertController(title: "Sucess ", message: "Printing succesfully" , preferredStyle: .actionSheet)
+//                    self.present(messageVC, animated: true) {
+//                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+//                            messageVC.dismiss(animated: true, completion: nil)})}
+//                }
+//            }
+//        }
     }
-    
-    
-    
     
     
     func UnlistApi() {
@@ -417,7 +414,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
                             self.dismiss(animated: true, completion: nil)
-                            
                         }
                     }
                     else if (status == 0) {
@@ -428,6 +424,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
                             ToastView.show(message: newmessage!, controller: self)
+                            
                             
                         }
                         
@@ -585,7 +582,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         
-        //        let test = ["CardNumber": "", "CardHolderName": "", "CardType": "", "AmountPaid": Constants.checkoutGrandtotal.myRounded(toPlaces: 2), "AmountDiscount": 0.0, "PaymentMode": flag] as [String : Any]
+        
         print(Constants.checkoutmechanic)
         
         if flag == 2 ||  flag == 3 {
@@ -614,14 +611,19 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if Constants.checkoutmechanic != "" {
                         
                         if flag == 3 {
+                            CheckoutObject.removeAll()
                             
                             let object = CheckouObject(CardNumber: "\(cardnmb)", CardHolderName: holdername, CardType: cardtype, AmountPaid: cardamount.myRounded(toPlaces: 2), AmountDiscount: 0.0, PaymentMode: 2)
                             CheckoutObject.append(object)
                             let object1 = CheckouObject(CardNumber: "", CardHolderName: "", CardType: "", AmountPaid: cashamount.myRounded(toPlaces: 2), AmountDiscount: 0.0, PaymentMode: 1)
                             CheckoutObject.append(object1)
+                            Constants.CashAmountcheckout = cashamount.myRounded(toPlaces: 2) // for receipt multi (during checkout)
+                            Constants.CardAmountcheckout = cardamount.myRounded(toPlaces: 2)
+                             Constants.CardTypecheckout = cardtype
                             
                             
                         } else if flag == 2 {
+                            CheckoutObject.removeAll()
                             let object = CheckouObject(CardNumber: "\(cardnmb)", CardHolderName: holdername, CardType: cardtype, AmountPaid: Constants.checkoutGrandtotal.myRounded(toPlaces: 2), AmountDiscount: 0.0, PaymentMode: flag)
                             CheckoutObject.append(object)
                             
@@ -631,9 +633,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         encoder.outputFormatting = .prettyPrinted
                         let data1 = try! encoder.encode(CheckoutObject)
                         guard let object = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
-                        
-                        
-                        
                         
                         
                         let parameters = [   Constants.OrderID: Constants.checkoutorderid,
@@ -689,6 +688,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         ToastView.show(message: newmessage!, controller: self)
                                         
                                         DispatchQueue.main.async {
+                                            Constants.paymentflag = self.flag
+                                            
                                             self.printerreceipt()
                                             //   self.runPrinterReceiptSequence()
                                             NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
@@ -772,23 +773,17 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                     }
                     
-                    
-                    
-                    
-                    
                 }
                 
             }
         } else if flag == 1 {
-            
-            
             
             let test2 = (Double(tenderedbalance.text!) ?? Double.nan).myRounded(toPlaces: 2)
             if (test2) >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2)  || cashamount >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2) {
                 print(test2 )
                 
                 if Constants.checkoutmechanic != "" {
-                    
+                    CheckoutObject.removeAll()
                     let object = CheckouObject(CardNumber: "\(cardnmb)", CardHolderName: holdername, CardType: "", AmountPaid: Constants.checkoutGrandtotal.myRounded(toPlaces: 2), AmountDiscount: 0.0, PaymentMode: flag)
                     CheckoutObject.append(object)
                     
@@ -801,7 +796,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     let parameters = [   Constants.OrderID: Constants.checkoutorderid,
                                          Constants.SessionID: Constants.sessions,
-                                         "PaymentMode": flag,
+                                         Constants.PaymentMode: flag,
                                          Constants.Date: Constants.currentdate,
                                          Constants.AmountTotal: Constants.subtotal.myRounded(toPlaces: 2),
                                          "OrderStatus": 103,
@@ -816,7 +811,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                          Constants.WorkerID: workerid,
                                          Constants.AssistantID: assistantid,
                                          "AmountComplementary": 0,
-                                         "CheckoutDetails": object1 ] as [String : Any]
+                                         Constants.CheckoutDetails: object1 ] as [String : Any]
                     
                     guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
                     var request = URLRequest(url: url)
@@ -852,6 +847,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     ToastView.show(message: newmessage!, controller: self)
                                     
                                     DispatchQueue.main.async {
+                                        Constants.paymentflag = self.flag
                                         self.printerreceipt()
                                         //   self.runPrinterReceiptSequence()
                                         NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
@@ -948,13 +944,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-    
     //    func updateQuickButtonAmount(){
     //        if let view = containerPop as? CashView   {
     //           view.updateFirstButtonAmount()
     //        }
     //    }
-    
     
     func status() {
         
@@ -1011,10 +1005,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         
-        
-        
-        
-        
         let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
         
         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
@@ -1046,12 +1036,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    
     func alert(view: CheckOutPopView, title: String, message: String) {
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Yes", style: .default, handler: { action in
+        let defaultAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
             self.UnlistApi()
-            
         })
         
         alert.addAction(defaultAction)
@@ -1087,7 +1076,7 @@ extension CheckOutPopView: UITextFieldDelegate {
     //amounttendered delegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == tenderedbalance {
-            if let amount = Double(textField.text!) {
+             if let amount = Double(textField.text!) {
                 viewModel.amountTendered = amount
             }
             //   NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)0

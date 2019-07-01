@@ -16,6 +16,7 @@ struct Items {
     static var Product = [ReceiptModel]()
 }
 
+
 class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var serviceSearch: UITextField!
@@ -269,6 +270,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                             DispatchQueue.main.async {
                                 Constants.OrderIDData = OrderID
                                 print(Constants.OrderIDData)
+                            }
+                        }
+                        
+                        if  let OrderID = json["TransactionNo"] as? Int {
+                            DispatchQueue.main.async {
+                                Constants.transedit = OrderID
+                               
                             }
                         }
                         
@@ -927,24 +935,28 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         
         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
-            
+             print(Items.Product)
             for models in Items.Product {
+                Items.Product.removeAll()
                 if models.Status == 201 {
                     print(models)
-                    Items.Product.append(models)
-                    
+                       Items.Product.append(models)
+
                 } else {
-                    
-                    Items.Product.removeAll()
+                    print(models.Status)
+//                    Items.Product.removeAll()
                     
                 }
                 
             }
+            print(Items.Product)
         }
         
         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
             
             for System in Items.nameArray {
+                print(Items.nameArray)
+                print(System.status as Any)
                 
                 Items.Product.append(System as! ReceiptModel)
             }
@@ -1191,10 +1203,7 @@ enum mathFunction {
     
     
     case Subtract
-    
-    
-    
-    
+ 
 }
 
 

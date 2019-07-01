@@ -11,6 +11,7 @@ import Foundation
 
 class CheckoutReceiptBuilder: ReceiptBuilder {
     
+    
     private var orderDetails: Orderdetail!
     private var cartItems: [ReceiptModel]!
     
@@ -783,12 +784,38 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
     }
     
     func getGrandTotal() -> UIImage {
+        var paymentVia = ""
         
-        let paymentVia = "paid"
+        if Constants.checkoutstatus == 103 { // For Reprint
+            Constants.paymentflag = Constants.PaymentModes
+            if Constants.paymentflag == 1 {
+                paymentVia = "Cash"
+            } else if Constants.paymentflag == 2 {
+                paymentVia = "\(Constants.CardType)"
+            } else if Constants.paymentflag == 3 {
+                paymentVia = "\(Constants.CardType)"
+            }
+            
+            
+        } else {
+        
+        if Constants.paymentflag == 1 {
+             paymentVia = "Cash"
+        } else if Constants.paymentflag == 2 {
+            paymentVia = "\(cardtype)"
+        } else if Constants.paymentflag == 3 {
+            print(Constants.CardType)
+            paymentVia = "\(Constants.CardTypecheckout)"
+        }
+        }
+        
+        
         
         var paperSize = CGSize(width: receiptSize.width, height: 180)
         
-        if paymentVia != "" {
+        if Constants.paymentflag == 3 {    // For adding vash and card field
+            paperSize.height = paperSize.height + 80
+        } else {
             paperSize.height = paperSize.height + 30
         }
         
@@ -815,21 +842,56 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         let attributedStringWidth = attributedString.string.size(withAttributes: sfProDisplay_heavyFontAttributes_37bold).width
         drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_30_height))
         
-        yCoordinate = yCoordinate + sfProDisplay_heavyFontAttributes_30_height + 30
+        yCoordinate = yCoordinate + sfProDisplay_heavyFontAttributes_30_height + 20
         
         attributedString = NSMutableAttributedString(string: "الإجمالي", attributes: sfProDisplay_boldFontAttributes_27)
         drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: geezaPro_boldFontAttributes_30_height))
         
-        yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 30
+            yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 30
+        
         
         /// Payment details
         
         if paymentVia != "" {
+            if Constants.paymentflag == 3 { // For adding cash and card field with individual amount
+                attributedString = NSMutableAttributedString(string: "Payment - Cash", attributes: sfProDisplay_mediumFontAttributes_30)
+                // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+                 if Constants.checkoutstatus == 104 {   // reprint or checkout
+              attributedString = NSMutableAttributedString(string: "\(Constants.CashAmountcheckout) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+                 } else {
+                    attributedString = NSMutableAttributedString(string: "\(Constants.CashAmount) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+                    
+                }
+                
+                
+                 //            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
+                let attributedStringWidth3 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+                print(Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth))
+                
+                yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 30
+
+            }
             attributedString = NSMutableAttributedString(string: "Payment - \(paymentVia)", attributes: sfProDisplay_mediumFontAttributes_30)
             // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
             
-            attributedString = NSMutableAttributedString(string: "\(grandTotal) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+             if Constants.paymentflag == 3 {
+                
+                
+                
+                if Constants.checkoutstatus == 104 {
+                    attributedString = NSMutableAttributedString(string: "\(Constants.CardAmountcheckout) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+                } else {
+                
+                
+            attributedString = NSMutableAttributedString(string: "\(Constants.CardAmount) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+            }
+                
+            }  else {
+                 attributedString = NSMutableAttributedString(string: "\(grandTotal) SR", attributes: sfProDisplay_mediumFontAttributes_30)
+            }
             //            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
             let attributedStringWidth3 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))

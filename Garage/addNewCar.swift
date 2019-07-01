@@ -843,6 +843,14 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 print(Constants.OrderIDData)
                             }
                         }
+                        
+                        if  let OrderID = json["TransactionNo"] as? Int {
+                            DispatchQueue.main.async {
+                                Constants.transedit = OrderID
+                                
+                            }
+                        }
+                        
                         if let cars = json[Constants.Cars] as? [[String: Any]] {
                             for items in cars {
                                 print("\(items)")

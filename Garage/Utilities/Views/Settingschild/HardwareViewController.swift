@@ -74,7 +74,6 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
          configureUI()
     }
     
-    
     private func configureUI() {
         availablePrinters.removeAll()
         if let printers = getConnectedPrinters() {
@@ -275,8 +274,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
             DataController.saveContext()
         }
     } catch {
-        
-    }
+               }
 }
     
     

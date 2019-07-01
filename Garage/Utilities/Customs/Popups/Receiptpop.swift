@@ -34,13 +34,14 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
         print("hello")
         self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)
         ReceiptTableview.separatorStyle = .none
+      //  ReceiptTableview.reloadData()
         dataupdate()
     }
     
     func dataupdate() {
     
      if Constants.flagEdit != 0 || Constants.editcheckout != 0  {
-        OrderLabel.text = "\(Constants.OrderIDData)"
+        OrderLabel.text = "\(Constants.transedit)"
         statusLabel.text = "Hold"
         }
      else {
@@ -84,10 +85,11 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
           self.Totalprice.text = String(format: "%.2f SAR", Constants.totalprice)
             NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
         }
-        
+      //  ReceiptTableview.reloadData()
         Delete.backgroundColor = UIColor.red
         
         return [Delete]
+        
     }
    
     

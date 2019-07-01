@@ -104,6 +104,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         } else if Constants.checkflag == 1 {
             finishBtn.isUserInteractionEnabled = true
             finishBtn.isSelected = true
+          //  milesBtn.isHidden = false
+          //  loaderWorks()
             Constants.checkflag = 0
         }
         
@@ -121,7 +123,6 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         carNamelbl.isHidden = true
         milesBtn.isHidden = true
         platenumberlbl.isHidden = true
-        milesBtn.isHidden = true
         dropDwnBtn.isHidden = true
         workingLabel.isHidden = true
         completeView.isHidden = true

@@ -34,6 +34,12 @@ class CheckoutModel: NSObject {
     var BayName: String?
     var BayID: Int?
     var Status: Int?
+    var PaymentMode: Int?
+    var CardType: String?
+    var CashAmount: Double?
+    var CardAmount: Double?
+    
+  
     
     
     
@@ -43,7 +49,7 @@ class CheckoutModel: NSObject {
     }
     
     
-    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, RegistrationNoP1: String, RegistrationNoP2: String, RegistrationNoP3: String,RegistrationNoP4: String, CheckoutDate: String, MechanicName: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: String, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int, Status: Int){
+    init(TransactionNo: Int, MakerName: String, ModelName: String, RegistrationNo: String, RegistrationNoP1: String, RegistrationNoP2: String, RegistrationNoP3: String,RegistrationNoP4: String, CheckoutDate: String, MechanicName: String, OrderID: Int, OrderNo: Int, SNo: Int, CarID: Int, CustomerID: String, MakeID: Int, ModelID: Int, Year: Int, LocationID: Int, VinNo: String, EngineType: String?, BayName: String, BayID: Int, Status: Int, PaymentMode: Int, CardType: String, CashAmount: Double, CardAmount: Double){
         
         self.TransactionNo = TransactionNo
         self.MakerName =  MakerName
@@ -69,6 +75,12 @@ class CheckoutModel: NSObject {
         self.BayName =  BayName
         self.BayID =  BayID
         self.Status =  Status
+        self.PaymentMode =  PaymentMode
+        self.CardType =  CardType
+        self.CashAmount =  CashAmount
+        self.CardAmount =  CardAmount
+        
+        
         
     }
     
@@ -98,8 +110,12 @@ class CheckoutModel: NSObject {
             let Enginetype = checkoutlist["EngineType"] as? String,
             let bayName = checkoutlist["BayName"] as? String,
             let bayID = checkoutlist["BayID"] as? Int,
-             let status = checkoutlist["Status"] as? Int
-            
+             let status = checkoutlist["Status"] as? Int,
+            let paymentMode = checkoutlist["PaymentMode"] as? Int,
+            let cardType = checkoutlist["CardType"] as? String,
+           let cashAmount = checkoutlist["CashAmount"] as? Double,
+           let cardAmount = checkoutlist["CardAmount"] as? Double
+        
             else { return }
         self.TransactionNo = TranscNO
         self.MakerName = maker
@@ -125,6 +141,10 @@ class CheckoutModel: NSObject {
         self.BayName = bayName
         self.BayID = bayID
         self.Status = status
+        self.PaymentMode = paymentMode
+        self.CardType = cardType
+        self.CashAmount = cashAmount
+        self.CardAmount = cardAmount
     
     
     

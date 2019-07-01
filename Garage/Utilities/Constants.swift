@@ -63,7 +63,7 @@ struct Constants {
     static var ModelID = "ModelID"
     static var CarID = "CarID"
     static var CustomerID = "CustomerID"
-    static var OrderID = "OrderID"
+    static var OrderID = "OrderID"  // historycontroller
     static var CarName = "CarName"
     static var CarDescription = "CarDescription"
     static var Color = "Color"
@@ -78,11 +78,14 @@ struct Constants {
     static var StatusID = "StatusID"
     static var Items = "Items"
     static var CheckLiters = "CheckLiters"
-    static var NotesComment = "NotesComment"
+    static var NotesComment = "NotesComment" //historycontroller
     static var NotesStatus = "NotesStatus"
-    static var NotesImages = "NotesImages"
-    static var InspectionDetails = "InspectionDetails"
+    static var NotesImages = "NotesImages" //historycontroller
+    static var InspectionDetails = "InspectionDetails"  //historycontroller
     static var Date = "Date"  // used in zxreport
+    //CheckoutApi
+    static var CheckoutDetails = "CheckoutDetails"
+    static var PaymentMode = "PaymentMode"
     static var AmountTotal = "AmountTotal"
     static var GrandTotal = "GrandTotal"
     static var AmountPaid = "AmountPaid"
@@ -132,17 +135,17 @@ struct Constants {
     static var CategoriesList = "CategoriesList"
     static var SubCategoriesList = "SubCategoriesList"
     static var CategoryID = "CategoryID"
-    static var Name = "Name"
+    static var Name = "Name"   // historyview
     static var AlternateName = "AlternateName"
     static var Image = "Image"
     static var DisplayOrder = "DisplayOrder"
     static var LastUpdatedDate = "LastUpdatedDate"
     static var ItemsList = "ItemsList"
     static var SubCategoryID = "SubCategoryID"
-    static var ItemID = "ItemID"
+    static var ItemID = "ItemID"  // HistoryView controller
     static var Barcode = "Barcode"
     static var ItemType = "ItemType"
-    static var Price = "Price"
+    static var Price = "Price"   // HistoryView controller
     
     // Settings's view
     
@@ -167,12 +170,33 @@ struct Constants {
     static var CheckOutPopVc = "CheckOutPopVc"
     
     
+    // checkoutView
+    
+    static var OrdersList = "OrdersList"    // HistoryView controller
+    static var OrderItems = "OrderItems"    // HistoryView controller
+    
+    
     
     
     
     // historydetails
     static var historydetailview = "historydetailview"
     static var historydetailviewVc = "historydetailviewVc"
+    
+    
+    // HistoryView controller
+    static var CarModelName = "CarModelName"
+    static var CarNoPlate = "CarNoPlate"
+    static var ItemName = "ItemName"
+    static var Quantity = "Quantity"
+    static var OrderDetailID = "OrderDetailID"
+    static var CarNotes = "CarNotes"
+    static var NotesID = "NotesID"
+    static var CheckList = "CheckList"
+    static var CarInspectionID = "CarInspectionID"
+    static var CarInspectionDetailID = "CarInspectionDetailID"
+    static var Value = "Value"
+    
     
     
     
@@ -231,7 +255,7 @@ struct Constants {
     
     
     
-    
+    static var paymentflag = 1
     static var carliterID = 0
     static var OrderNoData = 0
     static var CarIDData = 0
@@ -241,6 +265,7 @@ struct Constants {
     static var ColorData = ""
     static var CustomerIDData = ""
     static var OrderIDData = 0
+    static var transedit = 0
     static let User = "User"
     static var sessions = ""
     static var ordertracker = ""
@@ -292,6 +317,15 @@ struct Constants {
     static var checkoutplatenmb3 = ""
     static var checkoutplatenmb4 = ""
     static var Checkoutdate = ""
+    static var CardType = ""
+    static var CardTypecheckout = ""
+    
+    static var PaymentModes = 0
+    static var CashAmount = 0.0
+    static var CardAmount = 0.0
+    
+    static var CashAmountcheckout = 0.0
+    static var CardAmountcheckout = 0.0
     
     static var checkoutvin = ""
     static var checkoutcarmake = ""

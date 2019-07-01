@@ -165,31 +165,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9H-JV-wlo">
-                                                    <rect key="frame" x="0.0" y="7" width="79" height="56.5"/>
+                                                    <rect key="frame" x="20" y="7" width="79" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.70362015845070425" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPH-Ml-f9f">
-                                                    <rect key="frame" x="154.5" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="155.5" y="7" width="111" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.70210717429577463" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60a-9f-bLa">
-                                                    <rect key="frame" x="333" y="7" width="110.5" height="56.5"/>
+                                                    <rect key="frame" x="334.5" y="7" width="111" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.69844850352112675" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6Q-6b-bFY">
-                                                    <rect key="frame" x="527" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="529.5" y="7" width="111" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.70386773767605637" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRD-fO-czI">
-                                                    <rect key="frame" x="672.5" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="676" y="7" width="111" height="56.5"/>
                                                     <state key="normal">
                                                         <color key="titleColor" white="1" alpha="0.69688050176056338" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -212,11 +212,11 @@
                                                 <constraint firstItem="ZRD-fO-czI" firstAttribute="centerX" secondItem="r6Q-6b-bFY" secondAttribute="centerX" multiplier="1.25" id="grp-Gh-QWt"/>
                                                 <constraint firstItem="UPH-Ml-f9f" firstAttribute="centerY" secondItem="T9H-JV-wlo" secondAttribute="centerY" id="hpv-Ff-8Ea"/>
                                                 <constraint firstItem="ZRD-fO-czI" firstAttribute="centerY" secondItem="r6Q-6b-bFY" secondAttribute="centerY" id="j8E-ZP-ZXW"/>
-                                                <constraint firstItem="UPH-Ml-f9f" firstAttribute="centerX" secondItem="T9H-JV-wlo" secondAttribute="centerX" multiplier="5.3" id="jFG-jh-6ys"/>
+                                                <constraint firstItem="UPH-Ml-f9f" firstAttribute="centerX" secondItem="T9H-JV-wlo" secondAttribute="centerX" multiplier="3.55" id="jFG-jh-6ys"/>
                                                 <constraint firstItem="T9H-JV-wlo" firstAttribute="width" secondItem="Fy0-4G-MK2" secondAttribute="width" multiplier="0.1" id="mgX-bH-0rP"/>
                                                 <constraint firstItem="T9H-JV-wlo" firstAttribute="centerY" secondItem="Fy0-4G-MK2" secondAttribute="centerY" id="tPQ-sz-aC5"/>
                                                 <constraint firstItem="UPH-Ml-f9f" firstAttribute="width" secondItem="T9H-JV-wlo" secondAttribute="width" multiplier="1.4" id="xJg-G1-YvY"/>
-                                                <constraint firstItem="T9H-JV-wlo" firstAttribute="centerX" secondItem="Fy0-4G-MK2" secondAttribute="centerX" multiplier="0.1" id="yfn-2d-6IF"/>
+                                                <constraint firstItem="T9H-JV-wlo" firstAttribute="centerX" secondItem="Fy0-4G-MK2" secondAttribute="centerX" multiplier="0.15" id="yfn-2d-6IF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

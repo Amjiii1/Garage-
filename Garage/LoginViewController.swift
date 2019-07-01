@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var btnUpArrow: UIButton!
     @IBOutlet weak var btnHelp: UIButton!
     @IBOutlet weak var btnCustomer: UIButton!
@@ -346,6 +347,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
     
     func setupUI() {

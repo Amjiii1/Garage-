@@ -208,11 +208,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func workerAction(_ sender: Any) {
-        
         Constants.workerflag = 1
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        
         storyboard = UIStoryboard(name: "Subusers", bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: "SubusersVc") as! Subusers
         let nav = UINavigationController(rootViewController: popController)
@@ -245,6 +243,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         popover?.sourceRect = self.assistantBtn.bounds//CGRect(x: self.assignBtn.bounds.midX, y: self.assignBtn.bounds.midY, width: 0, height: 0)
         self.present(nav, animated: true, completion: nil)
     }
+    
+    
     
     
     
@@ -583,7 +583,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         
-        print(Constants.checkoutmechanic)
+        print(workerid)
+        print(assistantid)
         
         if flag == 2 ||  flag == 3 {
             

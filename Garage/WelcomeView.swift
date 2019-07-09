@@ -578,7 +578,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         popOverVC?.sourceView = self.view
         popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
         popOverVC?.sourceRect = CGRect(x: screenSize*0.5, y: UIScreen.main.bounds.size.height*0.5, width: 0, height: 0)
-        popController.preferredContentSize = CGSize(width: screenSize*0.6, height: 300)
+        popController.preferredContentSize = CGSize(width: screenSize*0.6, height: UIScreen.main.bounds.size.height*0.3)
         self.present(popController, animated: true)
     }
     

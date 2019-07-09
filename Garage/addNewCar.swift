@@ -566,9 +566,10 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func  SearchApiDeatils()  {
         
-        
         print(Constants.platenmb)
         print(Constants.vinnmb)
+        Items.Product.removeAll()
+        Constants.totalprice = 0.0
         
         
         
@@ -586,6 +587,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             }
             if let data = data {
                 print(data)
+                
                 
                 do {
                      self.showloader()
@@ -698,14 +700,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                     
                                 }
-                                
-                                
-                                
-                                
-                                
+                              
                             }
-                            
-                            
                             
                         }
                         
@@ -1081,6 +1077,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
  
     func editDetails() {
+        
+        print(check.text!)
         
         
         if carplateNumber.text != "" {

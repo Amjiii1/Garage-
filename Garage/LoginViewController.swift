@@ -161,6 +161,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)
+                        
                     } else if (descript.status == 0) {
                         DispatchQueue.main.async {
                             ToastView.show(message: Constants.UserExistent, controller: self)

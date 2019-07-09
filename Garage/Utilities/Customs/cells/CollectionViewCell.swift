@@ -23,6 +23,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var minusBtn: UIButton!
     @IBOutlet weak var plusBtn: UIButton!
     
+    @IBOutlet weak var headerlabel: UIView!
     weak var controller: ServiceCartView!
     var name: String!
     

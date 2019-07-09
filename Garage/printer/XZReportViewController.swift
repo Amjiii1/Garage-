@@ -65,10 +65,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
     
     @IBAction func ZreportBtn(_ sender: Any) {
-        //        if !connectPrinter() {
-        //            alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
-        //        } else {
-        
+    
         if Constants.Printer != "" {
             
             if Status == 1 {

@@ -11,12 +11,12 @@ import UIKit
 class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-
+    
     @IBOutlet weak var subusertableview: UITableView!
     
     
     
-     var usersdetail = [SubuserModel]()
+    var usersdetail = [SubuserModel]()
     
     
     override func viewDidLoad() {
@@ -31,7 +31,6 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func  usersdetails()  {
         
         let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.subusers)\(Constants.sessions)")
-        print(url)
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
             do {
@@ -40,7 +39,7 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.usersdetail.removeAll()
                     for SubUser in bay {
                         let subUser = SubuserModel(SubUser: SubUser)
-                            self.usersdetail.append(subUser!)
+                        self.usersdetail.append(subUser!)
                     }
                     
                 }
@@ -55,8 +54,8 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         
     }
-        
-        
+    
+    
     
     // Returns count of items in tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,6 +92,6 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-   
+    
     
 }

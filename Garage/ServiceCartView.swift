@@ -34,20 +34,22 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     
     private var SearchbarTbl: UITableView!
-    var categories = [Category]()
-    // var Product = [ReceiptModel]()
-    var nameArray = [String]()
     
+    
+    var categories = [Category]()
+    var nameArray = [String]()
     var searchQuantity: Int = 1
     var tblSearchResult: UITableView?
     var searchActive : Bool = false
     var itemsModel = [ItemsModel]()
     var itemsfilter = [ItemsModel]()
     
+    
     var currentState = 0
     var categoryIndex = 0
     var subCategoryIndex = 0
     var count = 0
+    var removedata = 0
     var updateprice  = 0
     let dateFormatter : DateFormatter = DateFormatter()
     var meanValuesArray : [String] = ["","0","1","1", "0", ""]
@@ -194,9 +196,6 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     // MARK:- TableView Delegates
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        print(itemsModel.count)
-        //   return categories[categoryIndex].subCategories[subCategoryIndex].Searchitems.count
-        
         return itemsModel.count
     }
     
@@ -276,7 +275,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                         if  let OrderID = json["TransactionNo"] as? Int {
                             DispatchQueue.main.async {
                                 Constants.transedit = OrderID
-                               
+                                
                             }
                         }
                         
@@ -321,9 +320,9 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     
                                 }
                                 
-                                if  let CheckLitre = items[Constants.CheckLitre] as? Int {
+                                if  let CheckLitre = items[Constants.CheckLitre] as? String {
                                     DispatchQueue.main.async {
-                                        Constants.carliterID = CheckLitre
+                                        Constants.carliterID = Int(CheckLitre)!
                                     }
                                 }
                                 
@@ -486,7 +485,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             }.resume()
     }
     //
-   
+    
     
     
     private func getData() {
@@ -655,9 +654,6 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         print("Current State : ", currentState)
         print("Category Index : ", categoryIndex)
         print("Sub Category Index : ", subCategoryIndex)
-        //        print("Category Count : ", categories.count)
-        //        print("SuCategory Count : ", categories[categoryIndex].subCategories.count)
-        //        print("Item Count : ", categories[categoryIndex].subCategories[subCategoryIndex].items.count)
         DispatchQueue.main.async {
             self.colectionview.reloadData()
         }
@@ -767,7 +763,6 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-//                print(categories[categoryIndex].subCategories[subCategoryIndex].items.count)
         switch currentState {
         case 1:
             return categories[categoryIndex].subCategories.count
@@ -796,31 +791,22 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
-        //  serviceSearch.isUserInteractionEnabled = false
         case 2:
             cell.populate(with: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].name, image: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].image)
             cell.plusBtn.isHidden = false
             cell.minusBtn.isHidden = false
             cell.countLbl.isHidden = false
-            //  serviceSearch.isUserInteractionEnabled = true
-            //      new = [(categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].itemID)]
-            //             print(new)
             
             count = count+1
-            print("\(count)")
             cell.decorate(for: "\(count)", in: self)
-            print(count)
         default:
             cell.populate(with: categories[indexPath.row].name, image: categories[indexPath.row].image)
-            // cell.cellDelegate = self
             cell.index = indexPath
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
-            //  serviceSearch.isUserInteractionEnabled = false
             cell.countLbl.text = "\(count)"
-            print("\(count)")
-            // cell.decorate(for: "\(count)", in: self)
+          //  cell.imageView.contentMode = .scaleAspectFill
             
             
         }
@@ -865,7 +851,6 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             subcategoryBtn.backgroundColor = UIColor.darkGray
             category.backgroundColor = UIColor.BlackApp
-            // serviceSearch.isUserInteractionEnabled = false
             
         case 1:
             currentState = 2
@@ -879,7 +864,6 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             reloadData()
             itemBtn.backgroundColor = UIColor.darkGray
             subcategoryBtn.backgroundColor = UIColor.BlackApp
-            // serviceSearch.isUserInteractionEnabled = true
             
         default:
             let new = cell.countLbl.text
@@ -932,20 +916,24 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func PunchOder() {
         
-        
+        print(Constants.carliterID)
         
         if Constants.flagEdit != 0 || Constants.editcheckout != 0 {
-             print(Items.Product)
+            print(Items.Product)
             for models in Items.Product {
+                
+                
+                for i in removedata..<1 {
                 Items.Product.removeAll()
+                    removedata = removedata+1
+                }
                 if models.Status == 201 {
                     print(models)
-                       Items.Product.append(models)
-
+                    Items.Product.append(models)
+                    
                 } else {
                     print(models.Status)
-//                    Items.Product.removeAll()
-                    
+ 
                 }
                 
             }
@@ -979,8 +967,6 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 }
             }
         }
-        
-        
         print(Items.Product)
         
         let encoder = JSONEncoder()
@@ -1203,7 +1189,7 @@ enum mathFunction {
     
     
     case Subtract
- 
+    
 }
 
 

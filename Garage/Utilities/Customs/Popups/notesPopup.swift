@@ -43,7 +43,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         notesComt.textColor = UIColor.lightGray
         let now = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EE, dd LLL yyyy"
+        dateFormatter.dateFormat = "EE dd LLL yyyy"
         let nameOfMonth = dateFormatter.string(from: now)
         let time = Date()
         let timeFormatter = DateFormatter()

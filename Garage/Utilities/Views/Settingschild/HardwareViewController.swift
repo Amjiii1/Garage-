@@ -46,6 +46,8 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     fileprivate var filterOption: Epos2FilterOption = Epos2FilterOption()
     
     @IBOutlet weak var receiptPrinterTableview: UITableView!
+    
+    
     @IBOutlet weak var printertypelabel: UITextField!
     private var availablePrinters = [PrinterDetailsModel]()
     var printerDetailModelUICells: [PrinterDetailCellUIModel]!

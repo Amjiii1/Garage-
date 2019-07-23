@@ -307,10 +307,15 @@ struct Constants {
     static var historytrans = 0
     static var checkoutorderid = 0
     static var checkoutcarid = 0
+    static var checkoutPDF = 0
     static let _4inchScale:Float = 576
     static var Printer = ""//:CGFloat = 576
     static var printermac = ""
     static var checkoutplatenmb = ""
+    static var ZKm = ""
+    static var ZRegistr = ""
+    static var Zdate = ""
+    static var FilterName = ""
     
     static var checkoutplatenmb1 = ""
     static var checkoutplatenmb2 = ""
@@ -319,6 +324,7 @@ struct Constants {
     static var Checkoutdate = ""
     static var CardType = ""
     static var CardTypecheckout = ""
+    static var zebra = ""
     
     static var PaymentModes = 0
     static var CashAmount = 0.0

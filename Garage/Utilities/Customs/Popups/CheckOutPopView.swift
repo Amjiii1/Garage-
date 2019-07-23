@@ -370,6 +370,75 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        }
     }
     
+    func PdfPrinter() {
+        
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Printerletter)\(Constants.checkoutorderid)/\(Constants.sessions)") else { return }
+        print("\(url)")
+       
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response,  error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: Constants.interneterror, controller: self)
+                    
+                }
+            }
+            if let data = data {
+                do {
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    let discript = json[Constants.Description] as? String
+                    if let status = json[Constants.Status] as? Int {
+                        if (status == 1) {
+                            print(json)
+//                            if let order = json["ModelList"] as? [[String: Any]] {
+//
+//                            }
+                        }
+                        else if (status == 0) {
+                            ToastView.show(message: discript!, controller: self)
+                        }
+                            
+                        else if (status == 1000) {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                            
+                        else if (status == 1001) {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                            
+                        else {
+                            ToastView.show(message: Constants.occured, controller: self)
+                        }
+                        
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                    ToastView.show(message: "failed! Try Again", controller: self)
+                }
+                
+            }
+            }.resume()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func UnlistApi() {
         

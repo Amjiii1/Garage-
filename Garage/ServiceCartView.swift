@@ -94,6 +94,63 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     
     
+    func alert(view: ServiceCartView, title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            if Constants.editcheckout != 0 {
+                if let parentVC = self.parent as? ReceptionalistView {
+                    let storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.CheckoutVc) as? CheckoutView
+                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                    self.removeDataa()
+                    self.Nextoutlet.isUserInteractionEnabled = true
+                    
+                }
+                
+            } else {
+                if let parentVC = self.parent as? ReceptionalistView {
+                    let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
+                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                    self.removeDataa()
+                    self.Nextoutlet.isUserInteractionEnabled = true
+                }
+            }
+        })
+        
+        alert.addAction(defaultAction)
+        let cancel = UIAlertAction(title: "No", style: .default, handler: { action in
+            if Constants.editcheckout != 0 {
+                if let parentVC = self.parent as? ReceptionalistView {
+                    let storyboard = UIStoryboard(name: Constants.CheckoutView, bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.CheckoutVc) as? CheckoutView
+                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                    self.removeDataa()
+                    self.Nextoutlet.isUserInteractionEnabled = true
+                    
+                }
+                
+            } else {
+                if let parentVC = self.parent as? ReceptionalistView {
+                    let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
+                    parentVC.switchViewController(vc: vc!, showFooter: true)
+                    self.removeDataa()
+                    self.Nextoutlet.isUserInteractionEnabled = true
+                }
+            }
+        })
+        
+        //        cancel.tintColor = UIColor.red
+        alert.addAction(cancel)
+        DispatchQueue.main.async(execute: {
+            view.present(alert, animated: true)
+        })
+    }
+    
+    
+    
     
     
     
@@ -1068,6 +1125,14 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: Constants.invalid, controller: self)
+                                self.Nextoutlet.isUserInteractionEnabled = true
+                            }
+                        }
+                            
+                        else if (status == 1003) {
+                            
+                            DispatchQueue.main.async {
+                                self.alert(view: self, title: newmessage!, message: "Do you want to continue?")
                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }

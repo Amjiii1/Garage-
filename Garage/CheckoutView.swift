@@ -21,11 +21,15 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var headerlabel: UILabel!
     var checkoutmodel = [CheckoutModel]()
     var cartItemStructArray = [ReceiptModel]()
+    var PDFLetter: String = ""
+     private let dataModel = GeneralViewController()
     
-    
+    var newVariableName = GeneralViewController()
+    var newVariableName2 = GeneralViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         tableViewContainer.dataSource = self
         tableViewContainer.delegate = self
         checkoutSegment.selectedSegmentIndex = 1
@@ -34,7 +38,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         Constants.percent = Int(Double(Constants.tax)! * 100)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckoutView.checkoutDone(notification:)), name: Notification.Name("checkoutDone"), object: nil)
         
-        //  Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
     }
     
     deinit {
@@ -218,7 +221,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         switch (checkoutSegment.selectedSegmentIndex) {
         case 0:
-            print("Nothing")
+            
+             print("nothing")
             
         case 1:
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Edit") { (action, indexpath) in
@@ -237,6 +241,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 }
             }
+            
             
             returnValue = [deleteAction]
             deleteAction.backgroundColor = .black
@@ -292,8 +297,37 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 }
             }
-            returnValue = [deleteAction]
+            
+            
+            let AirPrinter = UITableViewRowAction(style: .destructive, title: "AirPrinter") { (action, indexpath) in
+                DispatchQueue.main.async {
+                    
+                    Constants.checkoutPDF = self.checkoutmodel[indexPath.row].OrderID!
+                    self.PdfPrinter()
+                }
+            }
+            
+            
+            let ZebraPrinter = UITableViewRowAction(style: .destructive, title: "ZebraPrinter") { (action, indexpath) in
+                DispatchQueue.main.async {
+                Constants.ZRegistr = self.checkoutmodel[indexPath.row].OilType!
+               Constants.ZKm = self.checkoutmodel[indexPath.row].CheckLitre!
+               //let date1 = self.checkoutmodel[indexPath.row].CheckoutDate!
+               Constants.FilterName = self.checkoutmodel[indexPath.row].FilterName!
+                    let dateFormatter : DateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let date = Date()
+                    Constants.Zdate = dateFormatter.string(from: date)
+                     print(Constants.Zdate)
+                       self.ZebraPrinter()
+                  
+                }
+            }
+            
+            returnValue = [AirPrinter, deleteAction, ZebraPrinter]
+            AirPrinter.backgroundColor = UIColor.gray
             deleteAction.backgroundColor = UIColor.DefaultApp
+            ZebraPrinter.backgroundColor = UIColor.red
             
             
         default:
@@ -302,6 +336,104 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         return returnValue as? [UITableViewRowAction]
         
     }
+    
+    
+    
+    func PdfPrinter() {
+        
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Printerletter)\(Constants.checkoutPDF)/\(Constants.sessions)") else { return }
+        print("\(url)")
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response,  error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: Constants.interneterror, controller: self)
+                   
+                }
+            }
+            if let data = data {
+                do {
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    let discript = json[Constants.Description] as? String
+                    if let status = json[Constants.Status] as? Int {
+                        if (status == 1) {
+                            print(json)
+                        if let printer = json["Path"] as? String {
+                            if printer != "" {
+                                DispatchQueue.main.async {
+                                print(printer)
+                                
+                                self.PDFLetter = printer
+                                self.Printletter()
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                
+                                
+                                ToastView.show(message: "PDF not found", controller: self)
+                                }
+                            }
+                            }
+                        }
+                        else if (status == 0) {
+                            ToastView.show(message: discript!, controller: self)
+                        }
+                            
+                        else if (status == 1000) {
+                            ToastView.show(message: Constants.wrong, controller: self)
+                        }
+                            
+                        else if (status == 1001) {
+                            ToastView.show(message: Constants.invalid, controller: self)
+                        }
+                            
+                        else {
+                            ToastView.show(message: Constants.occured, controller: self)
+                        }
+                        
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                    ToastView.show(message: "failed! Try Again", controller: self)
+                }
+                
+            }
+            }.resume()
+    }
+    
+    
+    func Printletter() {
+        
+                let printController = UIPrintInteractionController.shared
+                let printInfo = UIPrintInfo(dictionary: [:])
+                printInfo.outputType = UIPrintInfoOutputType.general
+                printInfo.orientation = UIPrintInfoOrientation.portrait
+                printInfo.jobName = "Sample"
+                printController.printInfo = printInfo
+                // printController.showsPageRange = true
+                //http://www.pdf995.com/samples/pdf.pdf
+                print(self.PDFLetter)
+                printController.printingItem = NSData(contentsOf: URL(string:  self.PDFLetter)!)
+                printController.present(animated: true) { (controller, completed, error) in
+                    if(!completed && error != nil){
+                        DispatchQueue.main.async {
+                           ToastView.show(message: "Image not found", controller: self)
+                        }
+                    }
+                    else if(completed) {
+                        DispatchQueue.main.async {
+                          ToastView.show(message: "Printing sucessfully", controller: self)
+                        }
+                    }
+                }
+    }
+    
+    
+    
+    
+    
     
     
     
@@ -403,7 +535,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch (checkoutSegment.selectedSegmentIndex) {
             
         case 0:
-            print("Not any functionality")
+           print("Not any functionality")
 //            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
@@ -452,6 +584,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         case 2:
              print("Not any functionality")
+            print("functionality is abo")
             
         default:
             break
@@ -543,4 +676,108 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func getLanguageName(_ language: PrinterLanguage) -> String? {
+        if language == PRINTER_LANGUAGE_ZPL {
+            return "ZPL"
+        } else  {
+            return "CPCL"
+        }
+        
+    }
+    
+    func ZebraPrinter() {
+         Constants.zebra = UserDefaults.standard.string(forKey: "Zprinter") ?? ""
+        
+        if Constants.zebra == "" {
+            ToastView.show(message: "Zebra Printer Not Selected", controller: self)
+        }else {
+        
+        var connection: (ZebraPrinterConnection & NSObjectProtocol)? = nil
+//        ip.text = UserDefaults.standard.string(forKey: "Zprinter")!
+        let ipAddress = Constants.zebra
+        let portAsString = "6101"
+        let por = Int(portAsString) ?? 0
+        
+        connection = TcpPrinterConnection(address: ipAddress, andWithPort: por)
+        //yes one thinf
+        let didOpen = connection?.open()
+        if didOpen == true {
+            // self.setStatus("Connected...",UIColor.green)
+            print("Connected")
+            
+            //    self.setStatus("Determining Printer Language...",UIColor.yellow)
+            print("Determining Printer Language")
+            
+            var error: Error? = nil
+            var printer = try? ZebraPrinterFactory.getInstance(connection)
+            
+            if printer != nil {
+                let language = printer?.getControlLanguage()
+                //   self.setStatus("Printer Language \(getLanguageName(language!) ?? "nil")",UIColor.cyan)
+                print("Printer Language")
+                //  self.setStatus("Sending Data",UIColor.cyan)
+                print("Sending Data")
+                let sentOK = printTestLabel(language!, onConnection: connection!)
+                
+                
+                if sentOK == true {
+                    //                    self.setStatus("Test Label Sent",UIColor.green)
+                    //                    Sending Data
+                } else {
+                    //   self.setStatus("Test Label Failed to Print",UIColor.red)
+                }
+            } else {
+                //    self.setStatus("Could not Detect Language",UIColor.red)
+            }
+        }else{
+            // self.setStatus("Could not connect to printer",UIColor.red)
+        }
+        // self.setStatus("Disconnecting...",UIColor.red)
+        print("Disconnecting")
+        //printed.
+        connection?.close()
+      //  performingDemo = false
+        
+        // self.setStatus("Not Connected",UIColor.red)
+      
+        
+        //PrintBtn.isEnabled = true
+        }
+    }
+    
+    
+    
+    func printTestLabel(_ language: PrinterLanguage, onConnection connection: (ZebraPrinterConnection & NSObjectProtocol)) -> Bool {
+        var testLabel = ""
+        var err : NSError?
+        if language == PRINTER_LANGUAGE_ZPL {
+            testLabel = "^XA^FWN,^CF0,30,^FT200,70^FDOil Type:  \(Constants.ZRegistr)^FS,^FT200,80^GB250,1,5^FS,^CF0,30,^FT200,120,^FDKM:  \(Constants.ZKm)^FS,^FT200,130^GB250,1,5^FS,^CF0,30,^FT200,170^FDOil Filter:  \(Constants.FilterName)^FS,^FT200,180^GB250,1,5^FS,^CF0,30,^FT200,220^FDDate:  \(Constants.Zdate)^FS,,^FT200,230^GB250,1,5^FS^CF0,20,^XZ"
+            //"^XA^FWN,^CF0,30,^FT200,70^FDOil Type:  \(Constants.ZRegistr)^FS,^FT200,80^GB250,1,5^FS,^CF0,30,^FT200,120,^FDKM:  \(Constants.ZKm)^FS,^FT200,130^GB250,1,5^FS,^CF0,30,^FT200,170^FDOil Filter:  \(Constants.FilterName)^FS,^FT200,180^GB250,1,5^FS,^CF0,30,^FT200,220^FDDate:  \(Constants.Zdate)^FS,,^FT200,230^GB250,1,5^FS^CF0,20,^XZ"
+            let data = testLabel.data(using: .utf8)!
+            connection.write(data, error: &err)
+            
+        } else if language == PRINTER_LANGUAGE_CPCL {
+            
+            testLabel = "! 0 200 200 406 1\r\nON-FEED IGNORE\r\nBOX 20 20 380 380 8\r\nT 0 6 137 177 Test\r\nPRINT\r\n"
+            
+            let data = testLabel.data(using: .utf8)!
+            
+            connection.write(data, error: &err)
+        }
+        if err == nil
+        {
+            return true
+        }else
+        {
+            return false
+        }
+    }
+    
+    
+    
+    
+ 
 }
+
+

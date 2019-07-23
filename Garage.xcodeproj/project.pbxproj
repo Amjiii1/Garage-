@@ -134,6 +134,7 @@
 		956117862281446800B4A7D4 /* cameraScan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956117852281446800B4A7D4 /* cameraScan.storyboard */; };
 		95611788228144C700B4A7D4 /* cameraScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95611787228144C700B4A7D4 /* cameraScan.swift */; };
 		9563DDFF21C67A7800BBC461 /* mechanicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563DDFE21C67A7800BBC461 /* mechanicModel.swift */; };
+		95642B8622DB358000A394DC /* libZSDK_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95642B8522DB358000A394DC /* libZSDK_API.a */; };
 		95644604215B9DD100231EDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95644603215B9DD100231EDF /* Info.plist */; };
 		95647B61219C50720071D5D6 /* popcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95647B60219C50720071D5D6 /* popcell.swift */; };
 		95647B65219C517E0071D5D6 /* popModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95647B64219C517E0071D5D6 /* popModel.swift */; };
@@ -222,7 +223,7 @@
 		95EE0FCD222680B4003F35D2 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */; };
 		95EE0FD122268165003F35D2 /* libepos2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FD022268164003F35D2 /* libepos2.a */; };
 		95EE0FD52226873F003F35D2 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE0FD42226873F003F35D2 /* MessageView.swift */; };
-		95EE0FD9222696EF003F35D2 /* wmark1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95EE0FD8222696EF003F35D2 /* wmark1.png */; };
+		95EE0FD9222696EF003F35D2 /* wmark1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95EE0FD8222696EF003F35D2 /* wmark1.jpg */; };
 		95EE0FDB222696F6003F35D2 /* coffee1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95EE0FDA222696F5003F35D2 /* coffee1.png */; };
 /* End PBXBuildFile section */
 
@@ -380,6 +381,28 @@
 		956117852281446800B4A7D4 /* cameraScan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = cameraScan.storyboard; sourceTree = "<group>"; };
 		95611787228144C700B4A7D4 /* cameraScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraScan.swift; sourceTree = "<group>"; };
 		9563DDFE21C67A7800BBC461 /* mechanicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mechanicModel.swift; sourceTree = "<group>"; };
+		95642B8522DB358000A394DC /* libZSDK_API.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZSDK_API.a; path = Garage/libZSDK_API.a; sourceTree = "<group>"; };
+		95642B8922DB3D4600A394DC /* GraphicsUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicsUtil.h; sourceTree = "<group>"; };
+		95642B8B22DB408700A394DC /* DiscoveredPrinterNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoveredPrinterNetwork.h; sourceTree = "<group>"; };
+		95642B8C22DB409700A394DC /* FieldDescriptionData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FieldDescriptionData.h; sourceTree = "<group>"; };
+		95642B8D22DB40AA00A394DC /* FileUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		95642B8E22DB40B000A394DC /* MagCardReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagCardReader.h; sourceTree = "<group>"; };
+		95642B8F22DB40B500A394DC /* MfiBtPrinterConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MfiBtPrinterConnection.h; sourceTree = "<group>"; };
+		95642B9022DB40BC00A394DC /* NetworkDiscoverer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkDiscoverer.h; sourceTree = "<group>"; };
+		95642B9122DB40C300A394DC /* PrinterStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterStatus.h; sourceTree = "<group>"; };
+		95642B9222DB40C900A394DC /* ResponseValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResponseValidator.h; sourceTree = "<group>"; };
+		95642B9322DB40D100A394DC /* SGD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGD.h; sourceTree = "<group>"; };
+		95642B9422DB40D600A394DC /* SmartCardReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartCardReader.h; sourceTree = "<group>"; };
+		95642B9522DB40DA00A394DC /* TcpPrinterConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TcpPrinterConnection.h; sourceTree = "<group>"; };
+		95642B9622DB40F600A394DC /* FormatUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormatUtil.h; sourceTree = "<group>"; };
+		95642B9722DB410500A394DC /* PrinterStatusMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterStatusMessages.h; sourceTree = "<group>"; };
+		95642B9822DB410F00A394DC /* ToolsUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToolsUtil.h; sourceTree = "<group>"; };
+		95642B9922DB411700A394DC /* ZebraErrorCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZebraErrorCode.h; sourceTree = "<group>"; };
+		95642B9A22DB411B00A394DC /* ZebraPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZebraPrinter.h; sourceTree = "<group>"; };
+		95642B9B22DB411F00A394DC /* ZebraPrinterConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterConnection.h; sourceTree = "<group>"; };
+		95642B9C22DB412500A394DC /* ZebraPrinterFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterFactory.h; sourceTree = "<group>"; };
+		95642B9D22DB412A00A394DC /* ZplPrintMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZplPrintMode.h; sourceTree = "<group>"; };
+		95642B9E22DB413100A394DC /* DiscoveredPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoveredPrinter.h; sourceTree = "<group>"; };
 		95644603215B9DD100231EDF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../../../.Trash/Info.plist; sourceTree = "<group>"; };
 		95647B60219C50720071D5D6 /* popcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popcell.swift; sourceTree = "<group>"; };
 		95647B64219C517E0071D5D6 /* popModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popModel.swift; sourceTree = "<group>"; };
@@ -466,7 +489,7 @@
 		95EE0FD222268422003F35D2 /* Garage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Garage-Bridging-Header.h"; sourceTree = "<group>"; };
 		95EE0FD3222684AB003F35D2 /* ePOS2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ePOS2.h; sourceTree = "<group>"; };
 		95EE0FD42226873F003F35D2 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		95EE0FD8222696EF003F35D2 /* wmark1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wmark1.png; path = ../../../wmark1.png; sourceTree = "<group>"; };
+		95EE0FD8222696EF003F35D2 /* wmark1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = wmark1.jpg; path = ../../../wmark1.jpg; sourceTree = "<group>"; };
 		95EE0FDA222696F5003F35D2 /* coffee1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coffee1.png; path = ../../../coffee1.png; sourceTree = "<group>"; };
 		A5478E8CF7F63D1AD9D9ECFD /* Pods-GarageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarageTests/Pods-GarageTests.release.xcconfig"; sourceTree = "<group>"; };
 		E82AC40409FF209818C7670D /* Pods-GarageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarageUITests/Pods-GarageUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +503,7 @@
 				95EE0FCD222680B4003F35D2 /* libxml2.2.tbd in Frameworks */,
 				95EE0FD122268165003F35D2 /* libepos2.a in Frameworks */,
 				95EE0FCB222680A0003F35D2 /* ExternalAccessory.framework in Frameworks */,
+				95642B8622DB358000A394DC /* libZSDK_API.a in Frameworks */,
 				288E7715DA1B5031588482D3 /* Pods_Garage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,7 +674,7 @@
 				956D71602160CA0B0055A160 /* ToastView.swift */,
 				9574860C21EB447300812FED /* plated.jpg */,
 				9565A98D224BA3AE00150B9B /* marngarage.png */,
-				95EE0FD8222696EF003F35D2 /* wmark1.png */,
+				95EE0FD8222696EF003F35D2 /* wmark1.jpg */,
 				958A7697222BB83400F88D69 /* store1.png */,
 				95EE0FDA222696F5003F35D2 /* coffee1.png */,
 				1783CDDE211034A10005CC7B /* ServiceCartView.swift */,
@@ -694,6 +718,7 @@
 				953470A62209AA690091A7C0 /* CheckoutModel.swift */,
 				95AA6BD0221190D1005D9B44 /* checkoutItems.swift */,
 				955B662A2212C74A009AA43D /* SubusersCell.swift */,
+				95642B8722DB35BE00A394DC /* zebraPrinter */,
 			);
 			path = Garage;
 			sourceTree = "<group>";
@@ -720,6 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				95EE0FD022268164003F35D2 /* libepos2.a */,
+				95642B8522DB358000A394DC /* libZSDK_API.a */,
 				95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */,
 				95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */,
 				14723C20486834A65417B05B /* Pods_Garage.framework */,
@@ -856,6 +882,34 @@
 				955A18EF2283FD4C00A9D3A7 /* NotesDetials.swift */,
 			);
 			path = historydetails;
+			sourceTree = "<group>";
+		};
+		95642B8722DB35BE00A394DC /* zebraPrinter */ = {
+			isa = PBXGroup;
+			children = (
+				95642B8922DB3D4600A394DC /* GraphicsUtil.h */,
+				95642B8B22DB408700A394DC /* DiscoveredPrinterNetwork.h */,
+				95642B8C22DB409700A394DC /* FieldDescriptionData.h */,
+				95642B8D22DB40AA00A394DC /* FileUtil.h */,
+				95642B9622DB40F600A394DC /* FormatUtil.h */,
+				95642B8E22DB40B000A394DC /* MagCardReader.h */,
+				95642B8F22DB40B500A394DC /* MfiBtPrinterConnection.h */,
+				95642B9022DB40BC00A394DC /* NetworkDiscoverer.h */,
+				95642B9122DB40C300A394DC /* PrinterStatus.h */,
+				95642B9722DB410500A394DC /* PrinterStatusMessages.h */,
+				95642B9222DB40C900A394DC /* ResponseValidator.h */,
+				95642B9322DB40D100A394DC /* SGD.h */,
+				95642B9422DB40D600A394DC /* SmartCardReader.h */,
+				95642B9522DB40DA00A394DC /* TcpPrinterConnection.h */,
+				95642B9822DB410F00A394DC /* ToolsUtil.h */,
+				95642B9922DB411700A394DC /* ZebraErrorCode.h */,
+				95642B9A22DB411B00A394DC /* ZebraPrinter.h */,
+				95642B9B22DB411F00A394DC /* ZebraPrinterConnection.h */,
+				95642B9C22DB412500A394DC /* ZebraPrinterFactory.h */,
+				95642B9D22DB412A00A394DC /* ZplPrintMode.h */,
+				95642B9E22DB413100A394DC /* DiscoveredPrinter.h */,
+			);
+			path = zebraPrinter;
 			sourceTree = "<group>";
 		};
 		9567AAAB21D4C3FB00E4A24E /* New Group */ = {
@@ -1020,7 +1074,7 @@
 				957C440E2225295400B482AB /* Receipt.storyboard in Resources */,
 				178E706720D0EDF500BF0382 /* MechanicView.storyboard in Resources */,
 				957C441E22252AF500B482AB /* Updates.storyboard in Resources */,
-				95EE0FD9222696EF003F35D2 /* wmark1.png in Resources */,
+				95EE0FD9222696EF003F35D2 /* wmark1.jpg in Resources */,
 				95C1261621930B54009347E9 /* notespopup.storyboard in Resources */,
 				951C139321539DFF00BDA923 /* UpdatesView.xib in Resources */,
 				171FAA712119C2E10096721E /* CashView.xib in Resources */,

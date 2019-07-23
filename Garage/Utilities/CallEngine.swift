@@ -16,7 +16,7 @@ class CallEngine {
     
     static var GlocalURL = "http://api-uat.garage.sa/api/"
     static var GliveURL = "http://api-live.garage.sa/api/"
-        static var baseURL =    GliveURL
+        static var baseURL =    GlocalURL
     
     
     static let editCar = "Car/Edit"
@@ -53,6 +53,7 @@ class CallEngine {
     static let xReport = "report/x/"
     static let zReport = "report/z/"
     static let carScan = "car/scan/plateno"
+    static let Printerletter = "order/printletter/"
     
     
     static var timeout = 30.0

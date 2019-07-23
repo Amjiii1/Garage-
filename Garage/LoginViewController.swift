@@ -21,7 +21,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logoImage: UIImageView!
     
     
-    
     let companyRightButton: UIButton = UIButton(type: .custom)
     let viewRightOfCompanyField = UIView(frame:
         CGRect(x: 0, y: 0, width: 70, height: 25))
@@ -53,7 +52,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
-        let dateString = dateFormatter.string(from: date) 
+        let dateString = dateFormatter.string(from: date)
+    
         if loggedIn() {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
         }  else {

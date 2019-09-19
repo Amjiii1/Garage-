@@ -95,8 +95,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     
     func alert(view: ServiceCartView, title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
             if Constants.editcheckout != 0 {
                 if let parentVC = self.parent as? ReceptionalistView {
@@ -304,7 +303,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     func OrderEdit() {
         
-        guard let orderdetails = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderDetails)/\(Constants.editOrderid)/\(Constants.sessions)" ) else { return }
+        guard let orderdetails = URL(string: "\(CallEngine.baseURL)\(CallEngine.OrderDetails)/\(Constants.editOrderid)/\(Constants.sessions)") else { return }
         
         let session = URLSession.shared
         
@@ -1224,8 +1223,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                                 ToastView.show(message: Constants.invalid, controller: self)
                             }
                         }
-                            
-                        else  {
+                    
+                        else {
                             
                             DispatchQueue.main.async {
                                 ToastView.show(message: Constants.occured, controller: self)
@@ -1240,8 +1239,8 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                     }
                     
                 }
+                
                 }.resume()
-            
         }
     }
 }

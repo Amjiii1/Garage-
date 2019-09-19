@@ -253,6 +253,9 @@ extension GeneralViewController : UITableViewDelegate, UITableViewDataSource
 //        port.text = "6101"
         UserDefaults.standard.set(Constants.zebra, forKey: "Zprinter")
         UserDefaults.standard.synchronize()
+        
+        ToastView.show(message: "Added", controller: self)
+        dismiss(animated: true, completion: nil)
     }
     
 }

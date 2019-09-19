@@ -9,7 +9,7 @@
 import UIKit
 
 class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     @IBOutlet weak var orderdetailtable: UITableView!
     
@@ -28,7 +28,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
         orderdetailtable.dataSource = self
         totalpricetable.delegate = self
         totalpricetable.dataSource = self
-       
+        
         orderdetailtable.separatorStyle = .none
         totalpricetable.separatorStyle = .none
         grandtotallabel.text = String(format: "%.2f", Constants.checkoutGrandtotal)
@@ -55,7 +55,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let name = HistoryDetails.savedetail[indexPath.row].Name
             let qty = HistoryDetails.savedetail[indexPath.row].Quantity
             cell.labelItem.text = "\(qty!) x \(name!)"
-         
+            
             let price = HistoryDetails.savedetail[indexPath.row].Price
             cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"
             cell.selectionStyle = .none
@@ -65,7 +65,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! totalpriceCell
             cell2.labelTitle.text = dummyData2[indexPath.row]
             let tax = amount2[indexPath.row]
-             cell2.labeltotal.text = String(format: "%.2f", tax)//String(tax)
+            cell2.labeltotal.text = String(format: "%.2f", tax)//String(tax)
             cell2.selectionStyle = .none
             return cell2
             
@@ -79,7 +79,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
     }
     
-
-   
-
+    
+    
+    
 }

@@ -299,9 +299,11 @@ struct Constants {
     static var orderstatus = 0
     static var workerflag = 0
     static var checkoutGrandtotal: Double = 0.0.myRounded(toPlaces: 2)
+    static var checkoutGrandtotalbacken: Double = 0.0.myRounded(toPlaces: 2)
     static var subtotal: Double = 0.0.myRounded(toPlaces: 2)
     static var checkoutQTY = 1.0
     static var checkouttax: Double = 0.0.myRounded(toPlaces: 2)
+    static var checkoutdiscount: Double = 0.0.myRounded(toPlaces: 2)
     static var tax = "0"
     static var percent = 0
     static var historytrans = 0

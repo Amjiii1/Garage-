@@ -16,17 +16,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="CashView" customModule="Garage" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
+            <rect key="frame" x="0.0" y="0.0" width="549" height="314.5"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Rm-9zB">
-                    <rect key="frame" x="5.5" y="22.5" width="537" height="267"/>
+                    <rect key="frame" x="5.5" y="15.5" width="538" height="283.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jgP-Vd-pwt">
-                            <rect key="frame" x="0.0" y="0.0" width="537" height="129.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="538" height="138"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-ly-Z8I">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="129.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="01">
@@ -42,7 +42,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-Pt-VYU">
-                                    <rect key="frame" x="136" y="0.0" width="128.5" height="129.5"/>
+                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="02">
@@ -58,7 +58,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-eq-nIq">
-                                    <rect key="frame" x="272.5" y="0.0" width="128.5" height="129.5"/>
+                                    <rect key="frame" x="273" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="05">
@@ -74,7 +74,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ah9-nr-dT7">
-                                    <rect key="frame" x="409" y="0.0" width="128" height="129.5"/>
+                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="10">
@@ -92,10 +92,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cXm-PS-ie2">
-                            <rect key="frame" x="0.0" y="137.5" width="537" height="129.5"/>
+                            <rect key="frame" x="0.0" y="146" width="538" height="137.5"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="977-X5-vsb">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="129.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="20">
@@ -111,7 +111,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wn0-Ek-0AG">
-                                    <rect key="frame" x="136" y="0.0" width="128.5" height="129.5"/>
+                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="50">
@@ -127,7 +127,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZd-vQ-e0o">
-                                    <rect key="frame" x="272.5" y="0.0" width="128.5" height="129.5"/>
+                                    <rect key="frame" x="273" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="100">
@@ -143,7 +143,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfk-QM-9ff">
-                                    <rect key="frame" x="409" y="0.0" width="128" height="129.5"/>
+                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="500">
@@ -168,30 +168,13 @@
                         <constraint firstAttribute="trailing" secondItem="cXm-PS-ie2" secondAttribute="trailing" id="lqj-x8-Vgu"/>
                     </constraints>
                 </stackView>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfd-Ed-Khs">
-                    <rect key="frame" x="5.5" y="302.5" width="537" height="80"/>
-                    <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
-                    <state key="normal" title="Discount">
-                        <color key="titleColor" red="0.43529411764705883" green="0.43529411764705883" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="10"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="SEI-Rm-9zB" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="1Xx-7G-lCg"/>
-                <constraint firstItem="Hfd-Ed-Khs" firstAttribute="width" secondItem="SEI-Rm-9zB" secondAttribute="width" id="A3r-EJ-7Tn"/>
-                <constraint firstItem="Hfd-Ed-Khs" firstAttribute="height" secondItem="SEI-Rm-9zB" secondAttribute="height" multiplier="0.3" id="Fym-YQ-t6I"/>
-                <constraint firstItem="Hfd-Ed-Khs" firstAttribute="centerY" secondItem="SEI-Rm-9zB" secondAttribute="centerY" multiplier="2.2" id="KU9-vh-RkD"/>
+                <constraint firstItem="SEI-Rm-9zB" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.9" id="1Xx-7G-lCg"/>
                 <constraint firstItem="SEI-Rm-9zB" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.98" id="ScD-E5-Ufm"/>
-                <constraint firstItem="Hfd-Ed-Khs" firstAttribute="centerX" secondItem="SEI-Rm-9zB" secondAttribute="centerX" id="dNT-7O-OTb"/>
                 <constraint firstItem="SEI-Rm-9zB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="f5F-8f-GxQ"/>
-                <constraint firstItem="SEI-Rm-9zB" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.7" id="uqR-N0-aRn"/>
+                <constraint firstItem="SEI-Rm-9zB" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="uqR-N0-aRn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

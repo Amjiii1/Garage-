@@ -9,6 +9,17 @@
 import UIKit
 
 class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+   
+    
+    
+//    func discountApplyPressed(viewController: UIViewController) {
+//        print("cancel pressed in checkoutpopup")
+//    }
+//
+//    func discountCancelPressed(viewController: UIViewController) {
+//        toggleContianerViews()
+//    }
+    
     
     @IBOutlet weak var buttonstack: UIStackView!
     @IBOutlet weak var PopUpView: UIView!
@@ -20,42 +31,56 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var cardBtn: UIButton!
     @IBOutlet weak var cashBtn: UIButton!
     @IBOutlet weak var checkout_tableview: UITableView!
+    
+    @IBOutlet weak var SubtotalAmount: UILabel!
+    
+    @IBOutlet weak var DiscountAmount: UILabel!
+    
+    @IBOutlet weak var TaxAmount: UILabel!
+    
+    
+    
+    
     @IBOutlet weak var workerBtn: UIButton!
     @IBOutlet weak var assistantBtn: UIButton!
     @IBOutlet weak var checkoutoutlet: UIButton!
     @IBOutlet weak var grandtotalBtn: UIButton!
-    @IBOutlet weak var discouttableview: UITableView!
     @IBOutlet weak var tenderedbalance: UITextField!
     @IBOutlet weak var grandtotalLbl: UILabel!
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
     @IBOutlet weak var balacelbl: UILabel!
+    
+    @IBOutlet weak var discountContainer: UIView!
+    
+    @IBOutlet weak var taxLabel: UILabel!
+    
+    
     private weak var subView: UIView?
-    
-    
+    let viewModel = CheckoutViewModel()
+    private var discountVC: DiscountPopViewController?
     var orderdetails = [Checkoutdetails]()
     var flag = 1      //this flag is used for cash and card: (cash = 1. card = 2, both = 3 (from cash total and checkout card frm card screen flag convering by checking))
     var cardcash: Double = 0.0
     var holdername: String = ""
     var cardnmb: NSNumber = 0
     var CheckoutObject = [CheckouObject]()
-    //    var printer: Epos2Printer?
-    //    var valuePrinterSeries: Epos2PrinterSeries = EPOS2_TM_M10
-    //    var valuePrinterModel: Epos2ModelLang = EPOS2_MODEL_ANK
-    
     var cartItemStructArray = [ReceiptModel]()
     var printerDetailModelUICells: [PrinterDetailCellUIModel]!
-    
     var dummyData = ["SubTotal","Discount","VAT \(Constants.percent)%"]
-    var amount = [Constants.subtotal,0.00,Constants.checkouttax]
+    var amount = [Constants.subtotal,Constants.checkoutdiscount,Constants.checkouttax]
     var workerid = 0
     var assistantid = 0
-    let viewModel = CheckoutViewModel()
     var cashamount: Double = 0.0
     var cardamount: Double = 0.0
     
+    
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        discountContainer.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
         if let button = buttonstack.viewWithTag(1) as? UIButton {
@@ -66,11 +91,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         viewModel.checkoutVC = self
         checkout_tableview.delegate = self
         checkout_tableview.dataSource = self
-        discouttableview.delegate = self
-        discouttableview.dataSource = self
+//        discouttableview.delegate = self
+//        discouttableview.dataSource = self
         checkout_tableview.separatorStyle = .none
-        discouttableview.separatorStyle = .none
+      //  discouttableview.separatorStyle = .none
         
+        
+        setCalculationUI()
         self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)
         //(format: "%.2f", (Constants.checkoutGrandtotal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
@@ -89,7 +116,31 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         if result != EPOS2_SUCCESS.rawValue {
             MessageView.showErrorEpos(result, method: "setLogSettings")
         }
+        setUI()
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.printeradded(notification:)), name: Notification.Name("printerAdded"), object: nil)
+        
+    }
+    
+    
+    private func setUI() {
+       
+        viewModel.originalAmount = Constants.checkoutGrandtotal
+      //  viewModel.discountAmount = Constants.checkoutdiscount
+      //  viewModel.totalPrice = Constants.subtotal
+        
+     
+    }
+    
+    func setCalculationUI() {
+        
+        
+        SubtotalAmount.text = String(format: "%.2f", Constants.subtotal)
+        DiscountAmount.text = String(format: "%.2f", Constants.checkoutdiscount)
+        TaxAmount.text =  String(format: "%.2f", Constants.checkouttax)       
+            
+            
+        taxLabel.text = "VAT \(Constants.percent)%"
+        
         
     }
     
@@ -123,17 +174,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    //    func update() {
-    //        if flag == 1 {
-    //            let temp = tenderedbalance.text
-    //            tenderedbalance.text = balancetxtf.text
-    //            balancetxtf.text = temp
-    //        flag = 0
-    //
-    //
-    //    }
-    //    }
-    
     
     @objc func userNotification(notification: Notification) {
         if Constants.workerflag == 1 {
@@ -164,19 +204,19 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var returnvalue = 0
-        if tableView == checkout_tableview {
+      //  if tableView == checkout_tableview {
             returnvalue = Checkoutstruct.sentitems.count
-        }
-        else if tableView == discouttableview {
-            returnvalue = 3
-        }
+      //  }
+//        else if tableView == discouttableview {
+//            returnvalue = 3
+//        }
         return returnvalue
     }
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == checkout_tableview {
+       // if tableView == checkout_tableview {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellcheckout") as! checkoutcell
             cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
             let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
@@ -186,18 +226,18 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = .none
             return cell
         }
-        else if tableView == discouttableview {
-            let cell2 = tableView.dequeueReusableCell(withIdentifier: "dummycell") as! checkoutdiscount
-            cell2.label.text = dummyData[indexPath.row]
-            let tax = amount[indexPath.row]
-            cell2.amount.text = String(format: "%.2f", tax)//String(tax)
-            cell2.selectionStyle = .none
-            //            cell2.textLabel!.text = dummyData[indexPath.row]
-            return cell2
-            
-        }
-        return UITableViewCell()
-    }
+//        else if tableView == discouttableview {
+//            let cell2 = tableView.dequeueReusableCell(withIdentifier: "dummycell") as! checkoutdiscount
+//            print(Constants.checkoutdiscount)
+//            cell2.label.text = dummyData[indexPath.row]
+//            let tax = amount[indexPath.row]
+//            cell2.amount.text = String(format: "%.2f", tax)//String(tax)
+//            cell2.selectionStyle = .none
+//            return cell2
+//
+//        }
+//        return UITableViewCell()
+ //   }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.gray
@@ -245,6 +285,28 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
+    func toggleContianerViews() {
+        if discountContainer.isHidden {
+            self.containerPop.isHidden = true
+            self.discountContainer.isHidden = false
+        }
+        else {
+            self.containerPop.isHidden = false
+            self.discountContainer.isHidden = true
+        }
+    }
+    
+    @IBAction func discountAction(_ sender: Any) {
+
+        if discountVC == nil {
+            discountVC =  DiscountPopViewController(nibName: "DiscountPopViewController", bundle: nil)
+            Common.addChildController(childController: discountVC!, onParent: self, onView: self.discountContainer)
+            discountVC!.delegate = self
+        }
+         toggleContianerViews()
+        
+        
+    }
     
     
     
@@ -267,16 +329,10 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             let temp2 = (Double(temp!)! + Double(balancetxtf.text!)! - Constants.checkoutGrandtotal.myRounded(toPlaces: 2))
             
             tenderedbalance.text = balancetxtf.text
-            if ((Double(temp2)) > (Double(Constants.checkoutGrandtotal))) || ((Double(temp2)) < (Double(Constants.checkoutGrandtotal)))         {
+            if ((Double(temp2)) > (Double(Constants.checkoutGrandtotal))) || ((Double(temp2)) < (Double(Constants.checkoutGrandtotal))) {
                 
                 cardamount = Double(tenderedbalance.text!)!
                 cashamount = Double(temp!)!
-                
-                //                if (Double(cardamount)) == 0.0 {
-                //
-                //
-                //                    flag = 1
-                //                }
                 if ((Double(cashamount)) == (Double(Constants.checkoutGrandtotal.myRounded(toPlaces: 2)))) {
                     
                     
@@ -292,16 +348,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cardcash = Double(temp!)! + Double(balancetxtf.text!)!
                 
                 balancetxtf.text = "0"
-                //                let new = Double(balancetxtf.text!)!
                 
             } else {
                 balancetxtf.text =  String(format: "%.2f", temp2)
             }
             
-            
-            //(temp2
-            
-            // toggleLblBalanceHeading()
         }
         else {
             tenderedbalance.text = "0"
@@ -310,11 +361,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func toggleLblBalanceHeading() {
         if balacelbl.text == "Balance" {
-            //  balancetxtf.textColor = UIColor.black
             balacelbl.text = "Return"
         }
         else {
-            // balancetxtf.textColor = UIColor.black
             balacelbl.text = "Balance"
         }
     }
@@ -324,9 +373,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         flag = 1
         tenderedbalance.isEnabled = true
         viewModel.amountTendered = viewModel.cashAmountTender
-        //        if balacelbl.text == "Return" {
-        //        balacelbl.text = "Balance"
-        //        }
         tenderedbalance.text = String(format: "%g", viewModel.amountTendered)
     }
     
@@ -341,100 +387,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func Printletter(_ sender: Any) {
         
-//        let printController = UIPrintInteractionController.shared
-//        let printInfo = UIPrintInfo(dictionary: [:])
-//        printInfo.outputType = UIPrintInfoOutputType.general
-//        printInfo.orientation = UIPrintInfoOrientation.portrait
-//        printInfo.jobName = "Sample"
-//        printController.printInfo = printInfo
-//        // printController.showsPageRange = true
-//        //http://www.pdf995.com/samples/pdf.pdf
-//        printController.printingItem = NSData(contentsOf: URL(string: "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf")!)
-//        printController.present(animated: true) { (controller, completed, error) in
-//            if(!completed && error != nil){
-//                DispatchQueue.main.async {
-//                    let messageVC = UIAlertController(title: "Failed ", message: "Image not found!" , preferredStyle: .actionSheet)
-//                    self.present(messageVC, animated: true) {
-//                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-//                            messageVC.dismiss(animated: true, completion: nil)})}
-//                }
-//            }
-//            else if(completed) {
-//                DispatchQueue.main.async {
-//                    let messageVC = UIAlertController(title: "Sucess ", message: "Printing succesfully" , preferredStyle: .actionSheet)
-//                    self.present(messageVC, animated: true) {
-//                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-//                            messageVC.dismiss(animated: true, completion: nil)})}
-//                }
-//            }
-//        }
     }
-    
-    func PdfPrinter() {
-        
-        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Printerletter)\(Constants.checkoutorderid)/\(Constants.sessions)") else { return }
-        print("\(url)")
-       
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, response,  error) in
-            if response == nil {
-                DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
-                    
-                }
-            }
-            if let data = data {
-                do {
-                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
-                    let discript = json[Constants.Description] as? String
-                    if let status = json[Constants.Status] as? Int {
-                        if (status == 1) {
-                            print(json)
-//                            if let order = json["ModelList"] as? [[String: Any]] {
-//
-//                            }
-                        }
-                        else if (status == 0) {
-                            ToastView.show(message: discript!, controller: self)
-                        }
-                            
-                        else if (status == 1000) {
-                            ToastView.show(message: Constants.wrong, controller: self)
-                        }
-                            
-                        else if (status == 1001) {
-                            ToastView.show(message: Constants.invalid, controller: self)
-                        }
-                            
-                        else {
-                            ToastView.show(message: Constants.occured, controller: self)
-                        }
-                        
-                    }
-                    
-                } catch let error as NSError {
-                    print(error)
-                    ToastView.show(message: "failed! Try Again", controller: self)
-                }
-                
-            }
-            }.resume()
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -628,7 +581,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-    
     func removeNibViews() {
         if containerPop.subviews.count > 0  {
             let views:[UIView] = containerPop.subviews
@@ -639,25 +591,15 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }
         
-        
     }
     
     
     
     
     func checkoutOrder() {
-        
-        
-        
-        
-        
-        
-        print(workerid)
-        print(assistantid)
+        print(Constants.checkoutdiscount)
         
         if flag == 2 ||  flag == 3 {
-            
-            //let test2 = (Double(tenderedbalance.text!) ?? Double.nan).myRounded(toPlaces: 2)
             if Constants.checkoutGrandtotal.myRounded(toPlaces: 2) == cardcash  {
                 status()
                 if cardtype == "" {
@@ -666,17 +608,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                             messageVC.dismiss(animated: true, completion: nil)})}
                 }
-                    //                else if holdername == "" {
-                    //                    let messageVC = UIAlertController(title: "Alert", message: "Please enter Holdername" , preferredStyle: .actionSheet)
-                    //                    self.present(messageVC, animated: true) {
-                    //                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                    //                            messageVC.dismiss(animated: true, completion: nil)})}
-                    //                } else if cardnmb == 0 {
-                    //                    let messageVC = UIAlertController(title: "Alert", message: "Please enter Cardnmber" , preferredStyle: .actionSheet)
-                    //                    self.present(messageVC, animated: true) {
-                    //                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                    //                            messageVC.dismiss(animated: true, completion: nil)})}
-                    //                }
                 else {
                     if Constants.checkoutmechanic != "" {
                         
@@ -689,22 +620,18 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             CheckoutObject.append(object1)
                             Constants.CashAmountcheckout = cashamount.myRounded(toPlaces: 2) // for receipt multi (during checkout)
                             Constants.CardAmountcheckout = cardamount.myRounded(toPlaces: 2)
-                             Constants.CardTypecheckout = cardtype
-                            
+                            Constants.CardTypecheckout = cardtype
                             
                         } else if flag == 2 {
                             CheckoutObject.removeAll()
                             let object = CheckouObject(CardNumber: "\(cardnmb)", CardHolderName: holdername, CardType: cardtype, AmountPaid: Constants.checkoutGrandtotal.myRounded(toPlaces: 2), AmountDiscount: 0.0, PaymentMode: flag)
                             CheckoutObject.append(object)
-                            
                         }
                         
                         let encoder = JSONEncoder()
                         encoder.outputFormatting = .prettyPrinted
                         let data1 = try! encoder.encode(CheckoutObject)
                         guard let object = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
-                        
-                        
                         let parameters = [   Constants.OrderID: Constants.checkoutorderid,
                                              Constants.SessionID: Constants.sessions,
                                              "PaymentMode": flag,
@@ -713,7 +640,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                              "OrderStatus": 103,
                                              Constants.AmountPaid: tenderedbalance.text!,
                                              Constants.GrandTotal: Constants.checkoutGrandtotal.myRounded(toPlaces: 2),
-                                             "AmountDiscount": 0,
+                                             "AmountDiscount": Constants.checkoutdiscount,
                                              "PartialPayment": 0,
                                              "Gratuity": 0,
                                              "ServiceCharges": 0,
@@ -739,7 +666,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             if response == nil {
                                 DispatchQueue.main.async {
                                     ToastView.show(message: "Login failed! Check internet", controller: self)
-                                    
                                 }
                             }
                             if let response = response {
@@ -829,7 +755,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                                 
                                 
-                                
                             }
                             
                             }.resume()
@@ -862,8 +787,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let data1 = try! encoder.encode(CheckoutObject)
                     guard let object1 = try? JSONSerialization.jsonObject(with: data1, options: []) as? Any else {return}
                     
-                    
-                    
                     let parameters = [   Constants.OrderID: Constants.checkoutorderid,
                                          Constants.SessionID: Constants.sessions,
                                          Constants.PaymentMode: flag,
@@ -872,7 +795,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                          "OrderStatus": 103,
                                          Constants.AmountPaid: tenderedbalance.text!,
                                          Constants.GrandTotal: Constants.checkoutGrandtotal.myRounded(toPlaces: 2),
-                                         "AmountDiscount": 0,
+                                         "AmountDiscount": Constants.checkoutdiscount,
                                          "PartialPayment": 0,
                                          "Gratuity": 0,
                                          "ServiceCharges": 0,
@@ -898,12 +821,12 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if response == nil {
                             DispatchQueue.main.async {
                                 ToastView.show(message: "Login failed! Check internet", controller: self)
-                                
                             }
                         }
                         if let response = response {
                             print(response)
                         }
+                
                         
                         if let data = data {
                             print(data)
@@ -984,9 +907,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 ToastView.show(message: "Edit Failed! error occured", controller: self)
                                 self.grandtotalBtn.isUserInteractionEnabled = true
                                 
-                            }
-                            
-                            
+                            }                            
                             
                         }
                         
@@ -1013,13 +934,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    
-    //    func updateQuickButtonAmount(){
-    //        if let view = containerPop as? CashView   {
-    //           view.updateFirstButtonAmount()
-    //        }
-    //    }
-    
     func status() {
         
         
@@ -1034,7 +948,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cardnmb = myNumber
                 
             }
-            //let card = PaymentMethod.card.description
         }
     }
     
@@ -1043,20 +956,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func CheckoutBtn(_ sender: Any) {
-        
-        //         if flag == 1 {
-        //            print("Paid from card")
-        //        } else if flag == 0 {
-        //            print("Paid by cash")
-        //        }
-        
         self.grandtotalBtn.isUserInteractionEnabled = true
-        //        if Constants.Printer == "" {
-        //           alert(view: self, title: "Printer is not connected", message: "Do you want to add Printer from Settings")
-        //        } else {
         checkoutOrder()
-        //        }
-        //
         
     }
     
@@ -1067,11 +968,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         for receipt in Checkoutstruct.sentitems {
             
             let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
-            
             cartItemStructArray.append(cartItemStruct)
             self.dismiss(animated: true, completion: nil)
-            
-            
         }
         
         
@@ -1080,10 +978,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
         
     }
-    
-    
-    
-    
     
     
     
@@ -1115,48 +1009,27 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         alert.addAction(defaultAction)
         let cancel = UIAlertAction(title: "No", style: .default, handler: { action in
-            //self.dismiss(animated: true, completion: nil)
         })
         
-        //        cancel.tintColor = UIColor.red
         alert.addAction(cancel)
         DispatchQueue.main.async(execute: {
             view.present(alert, animated: true)
         })
     }
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //        if let vc = (self.parent as? CheckoutView)?.parent as? ReceptionalistView {
-        //        vc.removeFooterView()
-        //
-        //        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
 }
+
+
 extension CheckOutPopView: UITextFieldDelegate {
-    //amounttendered delegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == tenderedbalance {
-             if let amount = Double(textField.text!) {
+            if let amount = Double(textField.text!) {
                 viewModel.amountTendered = amount
             }
-            //   NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)0
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == tenderedbalance {
-            //            let newText = (textField.text ?? "") + string
-            
             if let text = textField.text,
                 let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange,
@@ -1164,7 +1037,6 @@ extension CheckOutPopView: UITextFieldDelegate {
                 //backspace on last character
                 if updatedText == "" {
                     viewModel.amountTendered = 0
-                    //  NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
                     return true
                 }
                 let doub = Double(updatedText)
@@ -1206,7 +1078,83 @@ extension CheckOutPopView: CashViewDelegate {
     
 }
 
+extension CheckOutPopView: DiscountPopDelegate {
+    func discountApplyPressed(viewController: UIViewController) {
+        print("apply pressed in checkoutpopup")
 
+        validateDiscount { [weak self] (valid) in
+            if let this = self, valid {
+                this.toggleContianerViews()
+                this.viewModel.calculateAndUpdateUI()
+               NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+                
+            } else {
+                Common.resetAllRecords(in: "Discount")
+            }
+        }
+    }
+
+    func discountCancelPressed(viewController: UIViewController) {
+        print("cancel pressed in checkoutpopup")
+        viewModel.calculateAndUpdateUI()
+        toggleContianerViews()
+      NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+    }
+
+    private func validateDiscount(completion: @escaping (Bool)->()) {
+        guard let discountVC = discountVC else { completion(false) ; return }
+        if let textAmountEntered = discountVC.numPadVC?.txtFieldAmountEnter.text {
+            if let amountEntered = Double(textAmountEntered) {
+                guard let value = discountVC.selectedDiscountType //DiscountType(rawValue: selectedType.rawValue)
+                    else { return }
+
+                switch value {
+                case .Amount:
+                    if amountEntered > Constants.subtotal {
+                        let messageVC = UIAlertController(title: "Checkout Failed", message: "Discount cant be greater than total" , preferredStyle: .actionSheet)
+                        present(messageVC, animated: true) {
+                            Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
+                                messageVC.dismiss(animated: true, completion: nil)})}
+                       // UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
+                        completion(false)
+                        return
+                    } else if amountEntered == Constants.subtotal {
+                        setFullDiscount()
+                    }
+                case .Percentage:
+
+                    let discounttotal = Constants.subtotal * (amountEntered / 100)
+                    let afterDiscountTotal = Constants.subtotal - discounttotal
+                    if afterDiscountTotal < 0 {
+                        let messageVC = UIAlertController(title: "Checkout Failed", message: "Discount cant be greater than total" , preferredStyle: .actionSheet)
+                        present(messageVC, animated: true) {
+                            Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
+                                messageVC.dismiss(animated: true, completion: nil)})}
+                        //UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
+                        completion(false)
+                        return
+                    } else if afterDiscountTotal == 0 {
+                        setFullDiscount()
+                    }
+
+                case .Trend:
+                    print("Trend")
+                }
+              setCalculationUI()
+                
+                
+                completion(true)
+                return
+            }
+           
+        }
+        
+    }
+
+    private func setFullDiscount() {
+        self.tenderedbalance.text = "0"
+    }
+}
 
 
 

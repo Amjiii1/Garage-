@@ -28,13 +28,13 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.white
         return CGFloat(40)
-        
     }
 
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HistoryDetails.SaveInspectionlist[section].InspectionDetailsH.count  //HistoryDetails.SaveInspectionDtail.count
@@ -66,10 +66,7 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "checklist", for: indexPath) as? HistoryChecklist else { return UITableViewCell() }
-        
        // cell.titleLabels.text = HistoryDetails.SaveInspectionDtail[indexPath.row].Name
       //cell.Titlelabel.text = HistoryDetails.SaveInspectionDtail[indexPath.row].Name
         cell.Titlelabel.text = HistoryDetails.SaveInspectionlist[indexPath.section].InspectionDetailsH[indexPath.row].Name

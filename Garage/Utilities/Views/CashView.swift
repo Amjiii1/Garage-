@@ -49,21 +49,35 @@ class CashView: UIView {
     }
     
     func updateFirstButtonAmount(){
-        //set balance as first button amount
-        // if let parent = self.parentContainerViewController as? CheckOutPopView {
-        if let button1 = stackView1.viewWithTag(1) as? UIButton {
-            let balance = Constants.checkoutGrandtotal //{
-            let doubleBalance = Double(balance) //{
-            if doubleBalance > 0.0 {
-                button1.setTitle(String(format: "%.2f", balance), for: .normal)
-                return
+        if let parent = self.parentContainerViewController as? CheckOutPopView {
+            if let button1 = stackView1.viewWithTag(1) as? UIButton {
+                if let balance = parent.balancetxtf.text {
+                    if let doubleBalance = Double(balance) {
+                        if doubleBalance > 0.0 {
+                            button1.setTitle(balance, for: .normal)
+                            return
+                        }
+                    }
+                }
+                button1.setTitle(String(format: "1.0"), for: .normal)
+                
             }
-            // }
-            // }
-            button1.setTitle(String(format: "1.0"), for: .normal)
-            
         }
-        // }
+//        //set balance as first button amount
+//        // if let parent = self.parentContainerViewController as? CheckOutPopView {
+//        if let button1 = stackView1.viewWithTag(1) as? UIButton {
+//            let balance = Constants.checkoutGrandtotal //{
+//            let doubleBalance = Double(balance) //{
+//            if doubleBalance > 0.0 {
+//                button1.setTitle(String(format: "%.2f", balance), for: .normal)
+//                return
+//            }
+//            // }
+//            // }
+//            button1.setTitle(String(format: "1.0"), for: .normal)
+//
+//        }
+//        // }
     }
     
     

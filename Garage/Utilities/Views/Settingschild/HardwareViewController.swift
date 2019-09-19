@@ -39,8 +39,8 @@ struct PrinterDetailCellUIModel {
 class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, Epos2DiscoveryDelegate {
     
     //var printers = [PrinterDetailsModel]()
-     private var manufacturer: String!
-     private var macAddress: String!
+    private var manufacturer: String!
+    private var macAddress: String!
     var printerDetailsModels: [PrinterDetailsModel]?
     fileprivate var printerList: [Epos2DeviceInfo] = []
     fileprivate var filterOption: Epos2FilterOption = Epos2FilterOption()
@@ -58,13 +58,13 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-      
+        
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         filterOption.deviceType = EPOS2_TYPE_PRINTER.rawValue
-//        receiptPrinterTableview.delegate = self
-//        receiptPrinterTableview.dataSource = self
+        //        receiptPrinterTableview.delegate = self
+        //        receiptPrinterTableview.dataSource = self
         // printertypelabel.text = Constants.Printer
         if Added() {
             printertypelabel.addTarget(self, action: #selector(printertypelabelChange(_:)), for: .editingChanged)
@@ -72,8 +72,8 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
             printertypelabel.addTarget(self, action: #selector(printertypelabelChange(_:)), for: .editingChanged)
             
         }
-       print(Constants.Printer)
-         configureUI()
+        print(Constants.Printer)
+        configureUI()
     }
     
     private func configureUI() {
@@ -98,7 +98,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         
         if availablePrinters.count > 0 {
-           print(availablePrinters)
+            print(availablePrinters)
         }
         
         
@@ -161,16 +161,16 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         receiptPrinterTableview.reloadData()
         
-//        else {
-//            Constants.Printer = UserDefaults.standard.string(forKey: "printer")!
-//        }
+        //        else {
+        //            Constants.Printer = UserDefaults.standard.string(forKey: "printer")!
+        //        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-       
-          //  Constants.Printer = UserDefaults.standard.string(forKey: "printer")!
-            
-            
+        
+        //  Constants.Printer = UserDefaults.standard.string(forKey: "printer")!
+        
+        
         while Epos2Discovery.stop() == EPOS2_ERR_PROCESSING.rawValue {
             // retry stop function
         }
@@ -191,7 +191,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     
     @IBAction func disconnectBtn(_ sender: Any) {
- 
+        
         
         if printerDetailModelUICells == nil {
             let messageVC = UIAlertController(title: "Alert ", message: "You can select another printer through discover" , preferredStyle: .actionSheet)
@@ -199,23 +199,23 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (_) in
                     messageVC.dismiss(animated: true, completion: nil)})}
         } else {
-        
-        deletePrinter(printerDetailModelUICell: printerDetailModelUICells)
-        if Constants.Printer != "" {
-            let prefs = UserDefaults.standard
-            printertypelabel.text = prefs.string(forKey:"printer")
-            Constants.Printer = ""
-            printertypelabel.text = ""
-            prefs.removeObject(forKey:"printer")
-            //connectOutlet.setTitle("Connect", for: .normal)
-          
-                }
+            
+            deletePrinter(printerDetailModelUICell: printerDetailModelUICells)
+            if Constants.Printer != "" {
+                let prefs = UserDefaults.standard
+                printertypelabel.text = prefs.string(forKey:"printer")
+                Constants.Printer = ""
+                printertypelabel.text = ""
+                prefs.removeObject(forKey:"printer")
+                //connectOutlet.setTitle("Connect", for: .normal)
+                
+            }
             //       }
             // Setting kitchen and checkout printers
             PrintJobHelper.setPrinters()
             receiptPrinterTableview.reloadData()
-          //  dismiss(animated: true, completion: nil)
-            }
+            //  dismiss(animated: true, completion: nil)
+        }
     }
     
     
@@ -229,55 +229,55 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (_) in
                     messageVC.dismiss(animated: true, completion: nil)})}
         } else {
- 
-                addPrinter(printerDetailModelUICell: printerDetailModelUICells)
-                printertypelabel.text = "\(Constants.Printer)"
-                UserDefaults.standard.set(printertypelabel.text, forKey: "printer")
-                UserDefaults.standard.synchronize()
-                // selectedPrinter(printer: printerList[indexPath.row])
-                NotificationCenter.default.post(name: Notification.Name("printerAdded"), object: nil)
-               // connectOutlet.setTitle("Disconnect", for: .normal)
-//                connectOutlet.titleLabel?.text = "Disconnect"
-//                UserDefaults.standard.set(connectOutlet.titleLabel?.text, forKey: "title")
-//                UserDefaults.standard.synchronize()
-//                connectOutlet.isSelected = true
-          //  } else
-                
-//                deletePrinter(printerDetailModelUICell: printerDetailModelUICells)
+            
+            addPrinter(printerDetailModelUICell: printerDetailModelUICells)
+            printertypelabel.text = "\(Constants.Printer)"
+            UserDefaults.standard.set(printertypelabel.text, forKey: "printer")
+            UserDefaults.standard.synchronize()
+            // selectedPrinter(printer: printerList[indexPath.row])
+            NotificationCenter.default.post(name: Notification.Name("printerAdded"), object: nil)
+            // connectOutlet.setTitle("Disconnect", for: .normal)
+            //                connectOutlet.titleLabel?.text = "Disconnect"
+            //                UserDefaults.standard.set(connectOutlet.titleLabel?.text, forKey: "title")
+            //                UserDefaults.standard.synchronize()
+            //                connectOutlet.isSelected = true
+            //  } else
+            
+            //                deletePrinter(printerDetailModelUICell: printerDetailModelUICells)
             //                        if C{onstants.Printer != "" {
-//                            let prefs = UserDefaults.standard
-//                            printertypelabel.text = prefs.string(forKey:"printer")
-//                            Constants.Printer = ""
-//                            printertypelabel.text = ""
-//                            prefs.removeObject(forKey:"printer")
-//                           //connectOutlet.setTitle("Connect", for: .normal)
-//                            connectOutlet.titleLabel?.text = "Disconnect"
-//                            UserDefaults.standard.set(connectOutlet.titleLabel?.text, forKey: "title")
-//                            UserDefaults.standard.synchronize()
-//                            connectOutlet.isSelected = false
-                    //    }
+            //                            let prefs = UserDefaults.standard
+            //                            printertypelabel.text = prefs.string(forKey:"printer")
+            //                            Constants.Printer = ""
+            //                            printertypelabel.text = ""
+            //                            prefs.removeObject(forKey:"printer")
+            //                           //connectOutlet.setTitle("Connect", for: .normal)
+            //                            connectOutlet.titleLabel?.text = "Disconnect"
+            //                            UserDefaults.standard.set(connectOutlet.titleLabel?.text, forKey: "title")
+            //                            UserDefaults.standard.synchronize()
+            //                            connectOutlet.isSelected = false
+            //    }
             
             // Setting kitchen and checkout printers
             PrintJobHelper.setPrinters()
-           receiptPrinterTableview.reloadData()
-         dismiss(animated: true, completion: nil)
+            receiptPrinterTableview.reloadData()
+            dismiss(animated: true, completion: nil)
         }
     }
-
-
-
- func deletePrinter(printerDetailModelUICell: [PrinterDetailCellUIModel]) {
-    let fetchRequest: NSFetchRequest = PrinterDetails.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "ipAddress = %@", printerDetailModelUICell[1].subTitle)
-    do {
-        let result = try DataController.context.fetch(fetchRequest).first
-        if let result = result {
-            DataController.context.delete(result)
-            DataController.saveContext()
+    
+    
+    
+    func deletePrinter(printerDetailModelUICell: [PrinterDetailCellUIModel]) {
+        let fetchRequest: NSFetchRequest = PrinterDetails.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "ipAddress = %@", printerDetailModelUICell[1].subTitle)
+        do {
+            let result = try DataController.context.fetch(fetchRequest).first
+            if let result = result {
+                DataController.context.delete(result)
+                DataController.saveContext()
+            }
+        } catch {
         }
-    } catch {
-               }
-}
+    }
     
     
     
@@ -295,7 +295,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         print(selectedPrinter.model)
         
         let connectButtonTitle = selectedPrinter.isConnected ? "Connected" : "Connect"
-
+        
         let printerDetailCellUIModels = [
             PrinterDetailCellUIModel(title: "Model", subTitle: selectedPrinter.model, buttonType: ButtonType.uiButton, buttonTitle: connectButtonTitle, isButtonSelected: selectedPrinter.isConnected),
             PrinterDetailCellUIModel(title: "IP Address", subTitle: selectedPrinter.ipAddress, buttonType: ButtonType.none),
@@ -307,8 +307,8 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
             PrinterDetailCellUIModel(title: "mac Address", subTitle: selectedPrinter.macAddress, buttonType: ButtonType.uiButton, buttonTitle: connectButtonTitle, isButtonSelected: selectedPrinter.isConnected),
             PrinterDetailCellUIModel(title: "Alias", subTitle: selectedPrinter.model, isSubTitleTouchable: true, buttonType: ButtonType.none)]
         
-              configureUI(printerDetailCellUIModel: printerDetailCellUIModels, manufacturer: (selectedPrinter.manufacturer?.rawValue)!, macAddress: selectedPrinter.macAddress)
-     
+        configureUI(printerDetailCellUIModel: printerDetailCellUIModels, manufacturer: (selectedPrinter.manufacturer?.rawValue)!, macAddress: selectedPrinter.macAddress)
+        
         
         //print(printerDetailCellUIModels)
         
@@ -347,44 +347,44 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         return rowNumber
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let identifier = "basis-cell"
+        let identifier = "basis-cell"
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: identifier)
         }
-
+        
         if indexPath.section == 0 {
             if indexPath.row >= 0 && indexPath.row < printerDetailsModels!.count {
-              //  printers = printerList[indexPath.row]
+                //  printers = printerList[indexPath.row]
                 cell!.textLabel?.text = printerDetailsModels![indexPath.row].model
                 cell!.detailTextLabel?.text = printerDetailsModels![indexPath.row].target
-
+                
             }
         }
         else {
             cell!.textLabel?.text = "other..."
             cell!.detailTextLabel?.text = ""
         }
-
+        
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-                Constants.Printer = printerList[indexPath.row].target
-//            printertypelabel.text = "\(Constants.Printer)"
+            Constants.Printer = printerList[indexPath.row].target
+            //            printertypelabel.text = "\(Constants.Printer)"
             UserDefaults.standard.set(Constants.Printer, forKey: "printer")
             UserDefaults.standard.synchronize()
-           // selectedPrinter(printer: printerList[indexPath.row])
-             NotificationCenter.default.post(name: Notification.Name("printerAdded"), object: nil)
+            // selectedPrinter(printer: printerList[indexPath.row])
+            NotificationCenter.default.post(name: Notification.Name("printerAdded"), object: nil)
             selectedPrinter(printer: printerDetailsModels![indexPath.row])
-         
+            
             print(printerDetailsModels as Any)
-
+            
         }
         else {
             performSelector(onMainThread: #selector(HardwareViewController.connectDevice), with:self, waitUntilDone:false)
         }
-
+        
     }
     
     
@@ -402,7 +402,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         object.isKitchenPrinter = printerDetailModelUICell[5].isSwitchOn
         object.numberOfCopies = Int16(printerDetailModelUICell[6].subTitle)!
         object.alias = printerDetailModelUICell[7].subTitle
-       // object.macAddress = self.macAddress
+        // object.macAddress = self.macAddress
         DataController.saveContext()
     }
     
@@ -416,40 +416,40 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let BDAddress = NSMutableString()
         let result = btConnection?.connectDevice(BDAddress)
         if result == EPOS2_SUCCESS.rawValue {
-           
+            
             self.navigationController?.popToRootViewController(animated: true)
         }
         else {
             Epos2Discovery.start(filterOption, delegate:self)
             receiptPrinterTableview.reloadData()
         }
-      //  PrinterDetailsModel
+        //  PrinterDetailsModel
     }
-//    @IBAction func restartDiscovery(_ sender: AnyObject) {
-//        var result = EPOS2_SUCCESS.rawValue;
-//
-//        while true {
-//            result = Epos2Discovery.stop()
-//
-//            if result != EPOS2_ERR_PROCESSING.rawValue {
-//                if (result == EPOS2_SUCCESS.rawValue) {
-//                    break;
-//                }
-//                else {
-//                    MessageView.showErrorEpos(result, method:"stop")
-//                    return;
-//                }
-//            }
-//        }
-//
-//        printerList.removeAll()
-//        printerView.reloadData()
-//
-//        result = Epos2Discovery.start(filterOption, delegate:self)
-//        if result != EPOS2_SUCCESS.rawValue {
-//            MessageView.showErrorEpos(result, method:"start")
-//        }
-//    }
+    //    @IBAction func restartDiscovery(_ sender: AnyObject) {
+    //        var result = EPOS2_SUCCESS.rawValue;
+    //
+    //        while true {
+    //            result = Epos2Discovery.stop()
+    //
+    //            if result != EPOS2_ERR_PROCESSING.rawValue {
+    //                if (result == EPOS2_SUCCESS.rawValue) {
+    //                    break;
+    //                }
+    //                else {
+    //                    MessageView.showErrorEpos(result, method:"stop")
+    //                    return;
+    //                }
+    //            }
+    //        }
+    //
+    //        printerList.removeAll()
+    //        printerView.reloadData()
+    //
+    //        result = Epos2Discovery.start(filterOption, delegate:self)
+    //        if result != EPOS2_SUCCESS.rawValue {
+    //            MessageView.showErrorEpos(result, method:"start")
+    //        }
+    //    }
     
     
     func onDiscovery(_ deviceInfo: Epos2DeviceInfo!) {
@@ -480,53 +480,51 @@ extension HardwareViewController: SearchPrinterHelperDelegate {
     func discoverdPrinters(printers: Set<PrinterDetailsModel>?) {
         if let printers = printers {
             var discoverdPrinters = Array(printers)
-         //   receiptPrinterTableview.reloadData()
+            //   receiptPrinterTableview.reloadData()
             /// Remove redundant printers
             DispatchQueue.main.async {
                 for availablePrinter in self.availablePrinters {
-                
-                for i in 0..<discoverdPrinters.count {
-                    self.receiptPrinterTableview.reloadData()
-                    print("aaae \(i)")
-                    print("discoverdPrinters[i]: \(discoverdPrinters)")
-                    print("discoverdPrinters[i]: \(discoverdPrinters[i])")
-                    print("availablePrinter: \(availablePrinter)")
                     
-                    
-                    
-                    if availablePrinter.ipAddress == discoverdPrinters[i].ipAddress {
-                        discoverdPrinters.remove(at: i)
+                    for i in 0..<discoverdPrinters.count {
+                        self.receiptPrinterTableview.reloadData()
+                        print("aaae \(i)")
+                        print("discoverdPrinters[i]: \(discoverdPrinters)")
+                        print("discoverdPrinters[i]: \(discoverdPrinters[i])")
+                        print("availablePrinter: \(availablePrinter)")
+                        
+                        if availablePrinter.ipAddress == discoverdPrinters[i].ipAddress {
+                            discoverdPrinters.remove(at: i)
+                        }
+                        
                     }
-                    
+                    Epos2Discovery.stop()
                 }
-               Epos2Discovery.stop()
-            }
             }
             
-           
+            
             
             if discoverdPrinters.count > 0 {
                 print(discoverdPrinters)
-               setupTableView(printerDetailsModels: discoverdPrinters)
+                setupTableView(printerDetailsModels: discoverdPrinters)
                 receiptPrinterTableview.delegate = self
                 receiptPrinterTableview.dataSource = self
-//                if !isPrinterViewExpanded {
-//                    isPrinterViewExpanded = true
-//                    addPrinterViewBottomConstraint = addPrinterViewBottomConstraint.setMultiplier(multiplier: 1.1)
-//                    addConstraintsToFitInside(parentView: addPrinterContainerView, childView: addPrinterDialogueView!, spacingFromAllSides: 12)
-//                    UIView.animate(withDuration: 0.5) {
-//                        self.view.layoutIfNeeded()
-//                    }
-//                }
+                //                if !isPrinterViewExpanded {
+                //                    isPrinterViewExpanded = true
+                //                    addPrinterViewBottomConstraint = addPrinterViewBottomConstraint.setMultiplier(multiplier: 1.1)
+                //                    addConstraintsToFitInside(parentView: addPrinterContainerView, childView: addPrinterDialogueView!, spacingFromAllSides: 12)
+                //                    UIView.animate(withDuration: 0.5) {
+                //                        self.view.layoutIfNeeded()
+                //                    }
+                //                }
             } else {
-                 UIUtility.showAlertInController(title: "Alert", message: "NO new Printers Found", viewController: self)
+                UIUtility.showAlertInController(title: "Alert", message: "NO new Printers Found", viewController: self)
             }
         }
-       
+        
         Loader.stopLoading()
-
+        
     }
-   
+    
 }
 extension Collection where Indices.Iterator.Element == Index {
     subscript (safe index: Index) -> Iterator.Element? {

@@ -9,7 +9,7 @@
 import UIKit
 
 class Historydetailview: UIViewController {
-
+    
     @IBOutlet weak var orderdetailsBtn: UIButton!
     @IBOutlet weak var checklistBtn: UIButton!
     
@@ -69,15 +69,15 @@ class Historydetailview: UIViewController {
         var vc: UIViewController!
         switch index {
         case 1:
-       vc = UIStoryboard(name: "detailsView", bundle: nil).instantiateViewController(withIdentifier: "DetailsviewVc") as? Detailsview
+            vc = UIStoryboard(name: "detailsView", bundle: nil).instantiateViewController(withIdentifier: "DetailsviewVc") as? Detailsview
             break
             
         case 2:
-           
+            
             vc = UIStoryboard(name: "checklistdetails", bundle: nil).instantiateViewController(withIdentifier: "ChecklistDetialsVc") as? ChecklistDetials
             break
         case 3:
-         vc = UIStoryboard(name: "NotesDetails", bundle: nil).instantiateViewController(withIdentifier: "NotesDetialsVc") as? NotesDetials
+            vc = UIStoryboard(name: "NotesDetails", bundle: nil).instantiateViewController(withIdentifier: "NotesDetialsVc") as? NotesDetials
             break
         default:
             break
@@ -112,5 +112,5 @@ class Historydetailview: UIViewController {
         changeView(index: sender.tag)
     }
     
-   
+    
 }

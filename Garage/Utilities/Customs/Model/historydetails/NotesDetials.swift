@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class NotesDetials: UIViewController {
-
+    
     @IBOutlet weak var notescomment: UITextView!
     
     @IBOutlet weak var image1: UIImageView!
@@ -40,24 +40,24 @@ class NotesDetials: UIViewController {
         
         for comment in HistoryDetails.savecarNotes {
             
-                
+            
             if comment.NotesComment != "" {
                 self.notescomment.text = comment.NotesComment
             } else {
-                    notescomment.text = "No comments added"
-                    notescomment.textColor     = UIColor.black
-                    notescomment.textAlignment = .center
-                }
+                notescomment.text = "No comments added"
+                notescomment.textColor     = UIColor.black
+                notescomment.textAlignment = .center
+            }
             
             for  image in comment.Notes {
-               // DispatchQueue.main.async {
+                // DispatchQueue.main.async {
                 
                 if self.image1.image == nil {
-                if let url = URL(string: image) {
-                    self.image1.kf.indicatorType = .activity
-                    self.image1.kf.setImage(with: url)
-                 
-                }
+                    if let url = URL(string: image) {
+                        self.image1.kf.indicatorType = .activity
+                        self.image1.kf.setImage(with: url)
+                        
+                    }
                 } else if self.image2.image == nil {
                     if let url = URL(string: image) {
                         self.image2.kf.indicatorType = .activity
@@ -70,9 +70,9 @@ class NotesDetials: UIViewController {
                     }
                 }
                 
-        
-            
-        }
+                
+                
+            }
             
             
             
@@ -90,7 +90,7 @@ class NotesDetials: UIViewController {
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-         let tappedImage = tapGestureRecognizer.view as! UIImageView
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
         let newImageView = UIImageView(image: tappedImage.image)
         newImageView.frame = UIScreen.main.bounds
         newImageView.backgroundColor = .black
@@ -108,11 +108,11 @@ class NotesDetials: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
-
     
     
     
-
-   
-
+    
+    
+    
+    
 }

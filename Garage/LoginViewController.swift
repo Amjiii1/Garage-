@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var businesssCodeTextField: UITextField!
     @IBOutlet weak var logoImage: UIImageView!
     
-    
     let companyRightButton: UIButton = UIButton(type: .custom)
     let viewRightOfCompanyField = UIView(frame:
         CGRect(x: 0, y: 0, width: 70, height: 25))
@@ -33,7 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             changeViewForSavedCode()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         btnUpArrow.isHidden = true
@@ -59,7 +58,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }  else {
             businesssCodeTextField.addTarget(self, action: #selector(bussinessCodeDidChange(_:)), for: .editingChanged)
         }
-        //  Constants.SuperUser = UserDefaults.standard.integer(forKey: "superuser")
     }
     
     
@@ -93,10 +91,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    
+
     func PincodeApi() {
         
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.LoginApi)/\(pinCodeTextField.text!)/\(businesssCodeTextField.text!)") else { return }
-        
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
@@ -340,13 +339,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLayoutSubviews() {
         setupUI()
-        //        businesssCodeTextField.layer.cornerRadius = 30.0
-        //        pinCodeTextField.layer.cornerRadius = 30.0
+       
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

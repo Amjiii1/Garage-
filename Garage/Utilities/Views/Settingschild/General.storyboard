@@ -8,6 +8,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmjadRegular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="Amjad_Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--General View Controller-->
         <scene sceneID="8CY-qG-Bv4">
@@ -18,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MZt-gz-zhb">
-                                <rect key="frame" x="41.5" y="261.5" width="751" height="169"/>
+                                <rect key="frame" x="41.5" y="305" width="751" height="169"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="OhI-zT-jlo">
@@ -50,38 +58,59 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yaU-KJ-71P">
-                                <rect key="frame" x="41.5" y="113" width="300.5" height="51"/>
+                                <rect key="frame" x="41.5" y="91.5" width="300.5" height="50.5"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="port" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PB1-BC-fbY">
-                                <rect key="frame" x="41.5" y="182.5" width="300.5" height="50.5"/>
+                                <rect key="frame" x="41.5" y="150" width="300.5" height="50.5"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35J-S6-M4h">
-                                <rect key="frame" x="342" y="485" width="150" height="68"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35J-S6-M4h">
+                                <rect key="frame" x="342" y="550" width="150" height="67.5"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.66639147840000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Print"/>
                                 <connections>
                                     <action selector="PrintPressed:" destination="1AO-bZ-5Qx" eventType="touchUpInside" id="QXh-aJ-G7T"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zebra Printer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kx2-mx-jOh">
+                                <rect key="frame" x="252.5" y="21.5" width="300.5" height="50.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAN Discovered" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-Mx-xza">
+                                <rect key="frame" x="41.5" y="237.5" width="300.5" height="50.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" red="0.95294117649999999" green="0.66639147840000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PB1-BC-fbY" firstAttribute="centerY" secondItem="yaU-KJ-71P" secondAttribute="centerY" multiplier="1.5" id="1K1-eZ-PoN"/>
                             <constraint firstItem="PB1-BC-fbY" firstAttribute="width" secondItem="yaU-KJ-71P" secondAttribute="width" id="1jX-cO-Azo"/>
-                            <constraint firstItem="MZt-gz-zhb" firstAttribute="centerY" secondItem="tiE-Vk-LQv" secondAttribute="centerY" multiplier="0.8" id="Jcj-Tj-zkF"/>
+                            <constraint firstItem="c2a-Mx-xza" firstAttribute="centerY" secondItem="PB1-BC-fbY" secondAttribute="centerY" multiplier="1.5" id="3D8-83-Zx7"/>
+                            <constraint firstItem="c2a-Mx-xza" firstAttribute="centerX" secondItem="PB1-BC-fbY" secondAttribute="centerX" id="5d2-Xq-iEw"/>
+                            <constraint firstItem="Kx2-mx-jOh" firstAttribute="centerX" secondItem="yaU-KJ-71P" secondAttribute="centerX" multiplier="2.1" id="5zT-JN-9yB"/>
+                            <constraint firstItem="Kx2-mx-jOh" firstAttribute="centerY" secondItem="yaU-KJ-71P" secondAttribute="centerY" multiplier="0.4" id="EL8-Rf-36T"/>
+                            <constraint firstItem="Kx2-mx-jOh" firstAttribute="height" secondItem="yaU-KJ-71P" secondAttribute="height" id="HzY-JD-yfT"/>
+                            <constraint firstItem="MZt-gz-zhb" firstAttribute="centerY" secondItem="tiE-Vk-LQv" secondAttribute="centerY" multiplier="0.9" id="Jcj-Tj-zkF"/>
                             <constraint firstItem="35J-S6-M4h" firstAttribute="width" secondItem="MZt-gz-zhb" secondAttribute="width" multiplier="0.2" id="KXJ-96-8QX"/>
+                            <constraint firstItem="c2a-Mx-xza" firstAttribute="width" secondItem="PB1-BC-fbY" secondAttribute="width" id="Lti-hD-aGC"/>
                             <constraint firstItem="yaU-KJ-71P" firstAttribute="width" secondItem="MZt-gz-zhb" secondAttribute="width" multiplier="0.4" id="NpN-Ra-oer"/>
-                            <constraint firstItem="yaU-KJ-71P" firstAttribute="centerY" secondItem="MZt-gz-zhb" secondAttribute="centerY" multiplier="0.4" id="O8n-hq-Pvg"/>
+                            <constraint firstItem="yaU-KJ-71P" firstAttribute="centerY" secondItem="MZt-gz-zhb" secondAttribute="centerY" multiplier="0.3" id="O8n-hq-Pvg"/>
                             <constraint firstItem="35J-S6-M4h" firstAttribute="centerY" secondItem="MZt-gz-zhb" secondAttribute="centerY" multiplier="1.5" id="Ojh-Xu-ShK"/>
+                            <constraint firstItem="Kx2-mx-jOh" firstAttribute="width" secondItem="yaU-KJ-71P" secondAttribute="width" id="TU3-AM-U8l"/>
                             <constraint firstItem="PB1-BC-fbY" firstAttribute="centerX" secondItem="yaU-KJ-71P" secondAttribute="centerX" id="VU7-gZ-CuW"/>
                             <constraint firstItem="yaU-KJ-71P" firstAttribute="leading" secondItem="MZt-gz-zhb" secondAttribute="leading" id="XBS-5d-lm2"/>
                             <constraint firstItem="yaU-KJ-71P" firstAttribute="height" secondItem="MZt-gz-zhb" secondAttribute="height" multiplier="0.3" id="fQU-kV-Kbu"/>
+                            <constraint firstItem="c2a-Mx-xza" firstAttribute="height" secondItem="PB1-BC-fbY" secondAttribute="height" id="j2T-uz-Wam"/>
                             <constraint firstItem="MZt-gz-zhb" firstAttribute="centerX" secondItem="tiE-Vk-LQv" secondAttribute="centerX" id="jMS-58-ASO"/>
                             <constraint firstItem="MZt-gz-zhb" firstAttribute="width" secondItem="UYf-xO-E16" secondAttribute="width" multiplier="0.9" id="lxS-zB-3je"/>
                             <constraint firstItem="35J-S6-M4h" firstAttribute="height" secondItem="MZt-gz-zhb" secondAttribute="height" multiplier="0.4" id="nxb-uW-cyf"/>

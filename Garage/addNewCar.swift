@@ -131,6 +131,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         let date = Date()
         let calendar = Calendar.current
         var year = calendar.component(.year, from: date)
+        year = year + 1
         let pastyear = year - 100
         for _ in pastyear...year  {
             print("\(year) ")
@@ -339,15 +340,11 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func makeCardetails() {
         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.MakelistApi)\(Constants.sessions)") else { return }
-        print(url)
-        
-        
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
-                    
                 }
             }
             if let data = data {
@@ -411,7 +408,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: Constants.interneterror, controller: self)
-                    
                 }
             }
             if let data = data {

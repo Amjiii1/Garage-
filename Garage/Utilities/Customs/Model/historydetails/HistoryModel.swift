@@ -17,7 +17,7 @@ class HistoryModel: NSObject {
     var Total: String?
     var OrderID: Int?
     var TotalAmount: Double?
-   // var Tax: Double?
+    // var Tax: Double?
     
     
     override init() {
@@ -25,7 +25,7 @@ class HistoryModel: NSObject {
     }
     
     
-    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String, OrderID: Int?, TotalAmount: Double?){
+    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String, OrderID: Int?, TotalAmount: Double?) {
         
         self.TransactionNo = TransactionNo
         self.Sno = Sno
@@ -33,33 +33,33 @@ class HistoryModel: NSObject {
         self.Mechanic =  Mechanic
         self.Total =  Total
         self.OrderID =  OrderID
-         self.TotalAmount =  TotalAmount
-       // self.Tax =  Tax
-       
+        self.TotalAmount =  TotalAmount
+        // self.Tax =  Tax
+        
         
     }
     
     
     
     init?(historyorder: [String: Any]) {
-      guard  let sno = historyorder["SNo"] as? Int?,
-        let transactionNo = historyorder["TransactionNo"] as? Int,
-       let date = historyorder["OrderDate"] as? String,
+        guard  let sno = historyorder["SNo"] as? Int?,
+            let transactionNo = historyorder["TransactionNo"] as? Int,
+            let date = historyorder["OrderDate"] as? String,
             let mechanic = historyorder["Mechanic"] as? String,
             let Total = historyorder["AmountTotal"] as? String,
-         let orderID = historyorder["OrderID"] as? Int,
-         let totalAmount = historyorder["TotalAmount"] as? Double
-      //  let Tax = historyorder["Tax"] as? Double
+            let orderID = historyorder["OrderID"] as? Int,
+            let totalAmount = historyorder["TotalAmount"] as? Double
+            //  let Tax = historyorder["Tax"] as? Double
             else { return }
         self.TransactionNo = transactionNo
-         self.Sno = sno
+        self.Sno = sno
         self.Sno = sno
         self.Date = date
         self.Mechanic = mechanic
         self.Total = Total
-         self.OrderID = orderID
+        self.OrderID = orderID
         self.TotalAmount = totalAmount
-     //    self.Tax = Tax
+        //    self.Tax = Tax
         
     }
     

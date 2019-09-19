@@ -15,19 +15,25 @@ class ReceptionalistView: UIViewController  {
     @IBOutlet weak var footerViewContainer: UIView!
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var offlibebtn: UIButton!
-    
-    
+    @IBOutlet weak var profileBtnOutlet: UIButton!
     
     
     var footerViewheight: CGFloat = 0.0
     var orginalHeight: CGFloat = 0.0
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // GeneralNibView.frame.size = settingContianerPop.frame.size
     }
     
-    @IBOutlet weak var profileBtnOutlet: UIButton!
+    
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -39,10 +45,16 @@ class ReceptionalistView: UIViewController  {
         showView(index: 1)
     }
     
+    
+    
+    
+    
     @IBAction func profileBtn(_ sender: Any) {
         //    showLocationTable ()
         //   self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    
     
     
     @IBAction func logoutButton(_ sender: Any) {
@@ -91,7 +103,6 @@ class ReceptionalistView: UIViewController  {
     }
     
     
-    
     func showView(index: Int) {
         
         var storyboard: UIStoryboard!
@@ -115,7 +126,6 @@ class ReceptionalistView: UIViewController  {
             //            let url = URL(string: "https://www.marnpos.com/#/home")
             //            let requestObj = URLRequest(url: url! as URL)
             //            WebView.loadRequest(requestObj)
-            
         }
         
         if vc != nil {
@@ -125,6 +135,8 @@ class ReceptionalistView: UIViewController  {
             }
         }
     }
+    
+    
     
     func removeAllChildViewControllers() {
         
@@ -140,6 +152,8 @@ class ReceptionalistView: UIViewController  {
         }
     }
     
+    
+    
     func switchViewController(vc: UIViewController, showFooter: Bool) {
         removeAllChildViewControllers()
         var height: CGFloat = 0.0
@@ -153,9 +167,8 @@ class ReceptionalistView: UIViewController  {
             self.view.layoutIfNeeded()
             height = orginalHeight - headerView.frame.size.height
             footerViewHeightConstraint.constant = 0
-            
-            
         }
+        
         self.view.layoutIfNeeded()
         vc.view.frame = CGRect(x: 0, y: 0, width: containerView.frame.size.width, height: height)
         self.addChildViewController(vc)
@@ -164,6 +177,13 @@ class ReceptionalistView: UIViewController  {
         
     }
     
+    
+    
+    
+    
+    
+    
+    
     func removeFooterView() {
         for subView in footerViewContainer.subviews {
             subView.removeFromSuperview()
@@ -171,6 +191,9 @@ class ReceptionalistView: UIViewController  {
         footerViewHeightConstraint.constant = 0
         self.view.layoutIfNeeded()
     }
+    
+    
+    
     
     func addFooterView1(selected: Int) {
         removeFooterView()
@@ -182,6 +205,8 @@ class ReceptionalistView: UIViewController  {
         footerViewWithTabs.frame = CGRect(x: 0, y: 0, width: footerViewContainer.frame.size.width, height: footerViewContainer.frame.size.height)
         footerViewContainer.addSubview(footerViewWithTabs)
     }
+    
+    
     
     func addFooterView2() {
         removeFooterView()
@@ -195,6 +220,13 @@ class ReceptionalistView: UIViewController  {
     }
     
 }
+
+
+
+
+
+
+
 
 extension ReceptionalistView: FooterViewWithTabsDelegate {
     func selectedButtonIndex(index: Int) {

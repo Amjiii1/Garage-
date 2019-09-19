@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmjadRegular.otf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="DiscountTableViewCell" customModule="Garage" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="58"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-a6-3jK">
+                    <rect key="frame" x="0.0" y="0.0" width="329" height="58"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQd-eP-fKn">
+                            <rect key="frame" x="265" y="8" width="2" height="42"/>
+                            <color key="backgroundColor" red="0.40000000000000002" green="0.42745098039215684" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="2" id="llx-s6-kgw"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqt-hG-9Z4">
+                            <rect key="frame" x="287" y="8" width="19" height="20"/>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp3-p8-dxQ">
+                            <rect key="frame" x="279.5" y="32" width="34" height="20"/>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                            <color key="textColor" red="0.95294117649999999" green="0.66639147840000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="BQd-eP-fKn" firstAttribute="centerY" secondItem="kKQ-a6-3jK" secondAttribute="centerY" id="0XW-Pd-oEw"/>
+                        <constraint firstItem="Mp3-p8-dxQ" firstAttribute="top" secondItem="iqt-hG-9Z4" secondAttribute="bottom" constant="4" id="7gu-a1-h30"/>
+                        <constraint firstAttribute="trailing" secondItem="BQd-eP-fKn" secondAttribute="trailing" constant="62" id="FsU-0N-4H7"/>
+                        <constraint firstItem="iqt-hG-9Z4" firstAttribute="centerX" secondItem="Mp3-p8-dxQ" secondAttribute="centerX" id="VKv-VU-UVv"/>
+                        <constraint firstItem="iqt-hG-9Z4" firstAttribute="top" secondItem="kKQ-a6-3jK" secondAttribute="top" constant="8" id="Vob-80-Rk5"/>
+                        <constraint firstAttribute="bottom" secondItem="BQd-eP-fKn" secondAttribute="bottom" constant="8" id="bNV-kx-aVx"/>
+                        <constraint firstItem="BQd-eP-fKn" firstAttribute="top" secondItem="kKQ-a6-3jK" secondAttribute="top" constant="8" id="fkf-21-zQF"/>
+                        <constraint firstAttribute="trailing" secondItem="iqt-hG-9Z4" secondAttribute="trailing" constant="23" id="rdQ-DI-O3s"/>
+                        <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Mp3-p8-dxQ" secondAttribute="bottom" constant="13.5" id="y3s-lA-ADh"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="National Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sl-45-ou7">
+                    <rect key="frame" x="16" y="19" width="97" height="20"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <accessibility key="accessibilityConfiguration" identifier="discountCellIdentifier"/>
+            <constraints>
+                <constraint firstItem="1Sl-45-ou7" firstAttribute="centerY" secondItem="kKQ-a6-3jK" secondAttribute="centerY" id="1KG-BW-PGE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="kKQ-a6-3jK" secondAttribute="bottom" id="BJH-bg-5ts"/>
+                <constraint firstItem="kKQ-a6-3jK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Lke-ir-CMI"/>
+                <constraint firstItem="1Sl-45-ou7" firstAttribute="leading" secondItem="kKQ-a6-3jK" secondAttribute="leading" constant="16" id="ORT-Uu-0n0"/>
+                <constraint firstItem="kKQ-a6-3jK" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="SAA-gj-XMe"/>
+                <constraint firstItem="kKQ-a6-3jK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Zct-7H-ncb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kKQ-a6-3jK" secondAttribute="trailing" id="hFu-gX-mlc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="4"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="lblAmount" destination="iqt-hG-9Z4" id="ZDu-Im-wDD"/>
+                <outlet property="lblCurrency" destination="Mp3-p8-dxQ" id="bOV-AE-K1f"/>
+                <outlet property="lblTitle" destination="1Sl-45-ou7" id="pOH-1l-nm2"/>
+            </connections>
+            <point key="canvasLocation" x="130.40000000000001" y="158.32083958020991"/>
+        </view>
+    </objects>
+</document>

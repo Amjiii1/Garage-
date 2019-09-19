@@ -20,6 +20,11 @@ class ToastView: UIViewController {
         super.viewDidLoad()
        
     }
+    
+    
+    
+    
+    
 
     static func show(message: String, controller: UIViewController) {
         let screenSize = UIScreen.main.bounds
@@ -28,7 +33,7 @@ class ToastView: UIViewController {
         let toastContainer = UIView(frame: CGRect())
         toastContainer.backgroundColor = UIColor.white
         toastContainer.alpha = 0.0
-        toastContainer.layer.cornerRadius = 25;
+        toastContainer.layer.cornerRadius = 25
         toastContainer.clipsToBounds  =  true
         let toastLabel = UILabel(frame: CGRect())
         toastLabel.textColor = UIColor.black

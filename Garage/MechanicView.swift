@@ -30,7 +30,6 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var finishedTableview: UITableView!
     @IBOutlet weak var labelsView: UIView!
     @IBOutlet weak var completeView: UIView!
-    
     @IBOutlet weak var serialNo: UILabel!
     @IBOutlet weak var makeLbl: UILabel!
     @IBOutlet weak var modelLbl: UILabel!
@@ -96,11 +95,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     func donebtnenable() {
-        
         if Constants.checkflag == 0 {
             finishBtn.isUserInteractionEnabled = false
-            
-            
         } else if Constants.checkflag == 1 {
             finishBtn.isUserInteractionEnabled = true
             finishBtn.isSelected = true
@@ -171,8 +167,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         modelLbl.isHidden = true
         plateLbl.isHidden = true
         statusLbl.isHidden = true
-        
-    }
+}
     
     
     

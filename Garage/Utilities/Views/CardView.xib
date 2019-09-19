@@ -16,20 +16,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="CardView" customModule="Garage" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="548" height="445"/>
+            <rect key="frame" x="0.0" y="0.0" width="548" height="315"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUp-MQ-3s5">
-                    <rect key="frame" x="164.5" y="44.5" width="219" height="44.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                    <rect key="frame" x="164.5" y="31.5" width="219" height="31.5"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="26"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="pkg-ay-QRR">
-                    <rect key="frame" x="5.5" y="122.5" width="537" height="66.5"/>
+                    <rect key="frame" x="5.5" y="94.5" width="537" height="63"/>
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmt-8c-Dda">
-                            <rect key="frame" x="0.0" y="0.0" width="94" height="66.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="94" height="63"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" backgroundImage="visa"/>
                             <connections>
@@ -37,7 +37,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-PE-jBy">
-                            <rect key="frame" x="111" y="0.0" width="93.5" height="66.5"/>
+                            <rect key="frame" x="111" y="0.0" width="93.5" height="63"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" backgroundImage="mastercard"/>
                             <connections>
@@ -45,21 +45,21 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vad-aX-oyW">
-                            <rect key="frame" x="221.5" y="0.0" width="94" height="66.5"/>
+                            <rect key="frame" x="221.5" y="0.0" width="94" height="63"/>
                             <state key="normal" image="amex"/>
                             <connections>
                                 <action selector="btnCardTypeSelected:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="dSF-Pm-FPc"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="4" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmo-9h-2hZ">
-                            <rect key="frame" x="332.5" y="0.0" width="93.5" height="66.5"/>
+                            <rect key="frame" x="332.5" y="0.0" width="93.5" height="63"/>
                             <state key="normal" image="mada"/>
                             <connections>
                                 <action selector="btnCardTypeSelected:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="246-lk-ias"/>
                             </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atg-4N-NQN">
-                            <rect key="frame" x="443" y="0.0" width="94" height="66.5"/>
+                            <rect key="frame" x="443" y="0.0" width="94" height="63"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,13 +86,13 @@
                     </constraints>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card No." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elo-kZ-LLj">
-                    <rect key="frame" x="29" y="248.5" width="134" height="26.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <rect key="frame" x="29" y="201.5" width="134" height="25.5"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQi-pz-Pwf">
-                    <rect key="frame" x="5.5" y="278" width="181" height="67"/>
+                    <rect key="frame" x="5.5" y="236.5" width="181" height="63"/>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
@@ -107,7 +107,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R5f-0x-u38">
-                    <rect key="frame" x="230" y="278" width="307" height="67"/>
+                    <rect key="frame" x="230" y="236.5" width="307" height="63"/>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
@@ -122,8 +122,8 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holder Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mag-Qb-6Om">
-                    <rect key="frame" x="270" y="248.5" width="227" height="26.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <rect key="frame" x="270" y="201.5" width="227" height="25.5"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -131,24 +131,24 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YUp-MQ-3s5" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="18n-ac-Qgk"/>
-                <constraint firstItem="fQi-pz-Pwf" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="2FD-kk-4iu"/>
+                <constraint firstItem="fQi-pz-Pwf" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.2" id="2FD-kk-4iu"/>
                 <constraint firstItem="Elo-kZ-LLj" firstAttribute="height" secondItem="fQi-pz-Pwf" secondAttribute="height" multiplier="0.4" id="Dqo-7J-ny3"/>
                 <constraint firstItem="fQi-pz-Pwf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.35" id="H4M-3N-qAo"/>
                 <constraint firstItem="Elo-kZ-LLj" firstAttribute="centerX" secondItem="fQi-pz-Pwf" secondAttribute="centerX" id="IHV-5c-7cH"/>
-                <constraint firstItem="mag-Qb-6Om" firstAttribute="centerY" secondItem="R5f-0x-u38" secondAttribute="centerY" multiplier="0.84" id="KbR-QZ-9pE"/>
-                <constraint firstItem="pkg-ay-QRR" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.7" id="LEl-l7-DRt"/>
+                <constraint firstItem="mag-Qb-6Om" firstAttribute="centerY" secondItem="R5f-0x-u38" secondAttribute="centerY" multiplier="0.8" id="KbR-QZ-9pE"/>
+                <constraint firstItem="pkg-ay-QRR" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.8" id="LEl-l7-DRt"/>
                 <constraint firstItem="mag-Qb-6Om" firstAttribute="width" secondItem="R5f-0x-u38" secondAttribute="width" multiplier="0.74" id="Mkz-an-ru8"/>
                 <constraint firstItem="YUp-MQ-3s5" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="PHM-ac-Bvg"/>
                 <constraint firstItem="pkg-ay-QRR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.98" id="Sx1-qX-x5f"/>
-                <constraint firstItem="pkg-ay-QRR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="VL4-Hj-OzV"/>
+                <constraint firstItem="pkg-ay-QRR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.2" id="VL4-Hj-OzV"/>
                 <constraint firstItem="R5f-0x-u38" firstAttribute="centerY" secondItem="fQi-pz-Pwf" secondAttribute="centerY" id="Vtd-vd-fB8"/>
                 <constraint firstItem="fQi-pz-Pwf" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.33" id="a7o-Sp-0bB"/>
                 <constraint firstItem="YUp-MQ-3s5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aAp-xH-4Z7"/>
                 <constraint firstItem="Elo-kZ-LLj" firstAttribute="width" secondItem="fQi-pz-Pwf" secondAttribute="width" multiplier="0.74" id="bEA-JF-aYB"/>
-                <constraint firstItem="Elo-kZ-LLj" firstAttribute="centerY" secondItem="fQi-pz-Pwf" secondAttribute="centerY" multiplier="0.84" id="cTO-LI-cgY"/>
+                <constraint firstItem="Elo-kZ-LLj" firstAttribute="centerY" secondItem="fQi-pz-Pwf" secondAttribute="centerY" multiplier="0.8" id="cTO-LI-cgY"/>
                 <constraint firstItem="R5f-0x-u38" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.4" id="die-aD-jab"/>
                 <constraint firstItem="pkg-ay-QRR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gRJ-5x-GTm"/>
-                <constraint firstItem="fQi-pz-Pwf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.4" id="jne-60-scW"/>
+                <constraint firstItem="fQi-pz-Pwf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.7" id="jne-60-scW"/>
                 <constraint firstItem="mag-Qb-6Om" firstAttribute="height" secondItem="R5f-0x-u38" secondAttribute="height" multiplier="0.4" id="ntF-ZW-R3S"/>
                 <constraint firstItem="R5f-0x-u38" firstAttribute="height" secondItem="fQi-pz-Pwf" secondAttribute="height" id="nx1-YO-OU4"/>
                 <constraint firstItem="YUp-MQ-3s5" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.3" id="rwG-rd-z5e"/>

@@ -740,7 +740,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         // let discountPercent = String(format: "%g", (Constants.percent))
         let englishTitles = ["Sub Total", "Discount", "VAT (\(Constants.percent)%)"]
         let arabicTitles = ["المجموع", "الخصم", "ضريبة القيمة المضافة"]
-        let amounts = [Constants.subtotal, Constants.discountValue, Constants.checkouttax] as [Any]
+        let amounts = [Constants.subtotal, Constants.checkoutdiscount, Constants.checkouttax] as [Any]
         
         let paperSize = CGSize(width: receiptSize.width, height: CGFloat(3 * 140) - 40)
         

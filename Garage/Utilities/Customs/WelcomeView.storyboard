@@ -290,7 +290,7 @@
                 <viewControllerPlaceholder storyboardName="BayForWelcome" referencedIdentifier="BayForWelcomeVc" id="c8T-Id-hTY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="meR-J9-aHD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="615" y="665"/>
+            <point key="canvasLocation" x="599" y="672"/>
         </scene>
         <!--carScannerVc-->
         <scene sceneID="W0k-xX-J6e">
@@ -306,7 +306,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="addNewCarVc" storyboardName="AddnewCar" referencedIdentifier="addNewCarVc" id="o2n-3t-zmW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kX-Tr-5pD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="610" y="826"/>
+            <point key="canvasLocation" x="599" y="828"/>
         </scene>
     </scenes>
     <resources>

@@ -120,7 +120,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
        
         DispatchQueue.main.async {
             //   let params: Parameters = ["name": "abcd", "gender": "Male"]
-            
+           print(self.myImage!)
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 
                 multipartFormData.append(UIImageJPEGRepresentation(self.myImage!, 0.0)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
@@ -224,8 +224,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             camerView.layer.addSublayer(previewLayer)
         }
         
-        
-        
         captureSession.startRunning()
         
     }
@@ -270,8 +268,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     func found(code: String) {
-        print(code)
-        
         addVintextfield.backgroundColor = UIColor.darkGray
         addVintextfield.isUserInteractionEnabled = true
         addVintextfield.text = code
@@ -305,9 +301,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     @IBAction func continueBtn(_ sender: Any) {
-        
-        
-        
         
         if addplateTextfield.text! == "" && addVintextfield.text! == "" {
             ToastView.show(message: "Please Enter any one Field", controller: self)

@@ -54,10 +54,12 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @objc func service(notification: Notification) {
+        // Refreshing data
         self.ApiImplimentations()
     }
     
     @objc func unlist(notification: Notification) {
+        // Refreshing data
         self.ApiImplimentations()
     }
   
@@ -80,6 +82,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     
+    
+    
+    // Plate number Search field
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField.text  != "" {
@@ -184,6 +189,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+    
     func showloader() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         
@@ -201,7 +207,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     
-    
+    // fatching data of all, waitlist, assigned from Api's
     func ApiImplimentations() {
         
         var Apiurl = ""
@@ -330,8 +336,12 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         return returnValue
     }
     
+    
+    
+    
+    
+    // cancel from any bay, assigning to waitlist
     func AssignToWait() {
-        
         
         let parameters = [
             Constants.OrderID: AssignedID,
@@ -565,6 +575,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+    // view of selecting any bay
     func tapped() {
         let screenSize = UIScreen.main.bounds.width
         var storyboard: UIStoryboard!

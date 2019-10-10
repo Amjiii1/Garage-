@@ -1,0 +1,18 @@
+
+/* Class = "UIButton"; normalTitle = "Services"; ObjectID = "1UF-8Z-UGb"; */
+"1UF-8Z-UGb.normalTitle" = "الخدمات";
+
+/* Class = "UILabel"; text = "B1"; ObjectID = "7Jl-OE-gyc"; */
+"7Jl-OE-gyc.text" = "B1";
+
+/* Class = "UIButton"; normalTitle = "Unlist"; ObjectID = "8BT-F1-hjc"; */
+"8BT-F1-hjc.normalTitle" = "إلغاء القائمة";
+
+/* Class = "UILabel"; text = "Hyundai BAC-2313"; ObjectID = "Ha9-hr-bEq"; */
+"Ha9-hr-bEq.text" = "Hyundai BAC-2313";
+
+/* Class = "UIButton"; normalTitle = "Edit Car"; ObjectID = "jpF-iH-GFD"; */
+"jpF-iH-GFD.normalTitle" = "تحرير سيارة";
+
+/* Class = "UILabel"; text = "Assign to a Mechanic"; ObjectID = "kdX-5p-4Ic"; */
+"kdX-5p-4Ic.text" = "تكليف لميكانيكي";

@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  Garage
+
+  Created by Amjad on 04/02/1441 AH.
+  Copyright © 1441 Amjad Ali. All rights reserved.
+*/
+
+
+
+"Pleasewait" = "ارجوك انتظر...";
+
+"SelectBay" = "إختيار المكان";
+
+"SearchItemsName" = "البحث بإسم الصنف";
+
+"Bay" = "مكان الخدمة";
+
+"Action" = "تحرير";
+
+"Status" = "الحالة";
+
+"Checkout" = "إنهاء الفاتورة";
+
+"Done" = "تم";
+
+"VAT" = "ضريبي";
+"likeToUpdate" = "هل ترغب في تحديث؟";
+"newVersionAvailable" = "النسخة الجديدة المتاحة";
+"noUpdatesAvailable" = "أية تحديثات متوفرة";
+"Update" = "تحديث";
+"Later" = "في وقت لاحق";
+"Version" = "الإصدار";
+"Nochecklistadded" = "لم تتم إضافة قائمة مرجعية";
+"Nocommentsadded" = "لم تتم إضافة أي تعليقات";
+"SubTotal" = "المجموع";
+"Discount" = "الخصم";
+"VAT5" = "الضريبة (5٪)";
+"EnterPlatenumber" = "إداخال رقم اللوحة";
+"EnterVinnumber" = "إدخال رقم الهيكل";
+"SelectyourCarMake" = "اختر سيارتك";
+"SelectyourCarModel" = "اختر طراز سيارتك";
+"restart" = "إعادة تشغيل التطبيق مطلوب من أجل تطبيق لغة جديدة";
+"Alert" = "إنذار";
+"History" = "الأرشيف";
+"ZebraPrinter" = " طباعة الملصق";
+"Reprint" = "إعادة الطباعة";
+"AirPrint" = " طباعة A4";
+"Cancel" = "إلغاء";
+"Edit" = "تعديل";
+"delete" = "حذف";
+"new" = "جديد";
+"Hold"= "معلق";
+"Somethingwentwrong" = "هناك خطأ ما";
+"Invalidsessions" = "جلسات غير صالحة";
+"Erroroccured" = "حدث خطأ";
+"Checkinternet" = "فشل تسجيل الدخول! تحقق الانترنت";
+"wantto?" = "هل تريد الاستمرار؟";
+"Failed" = "فشل ";
+"limitExceeded" = "تم تجاوز الحد";
+"PleaseselectCard" = "يرجى اختيار البطاقة";
+"Discard" = "هل تريد تجاهل الطلب؟";
+"PrinternotConnected" = "الطابعة غير متصلة";
+"OK" = "حسنا";
+"sucessfully" = "الطباعة بنجاح";
+"CheckoutFailed" = "فشل السحب";
+"selectWorker" = "يرجى اختيار العامل!";
+"EnterAmount!" = "الرجاء إدخال المبلغ الإجمالي!";
+"Discountcantgreater" = "لا يمكن أن يكون الخصم أكبر من";
+"Balance" = "توازن";
+"Return" = "إرجاع";
+"Sorryback" = "آسف! لا يمكنك التراجع!";
+"SelectItems!" = "الرجاء اختيار العناصر!";
+"SelectBayName" = "الرجاء اختيار اسم الخليج أولاً!";
+"EnteranyField" ="الرجاء إدخال أي حقل واحد";
+"deatilsCar" = "يرجى إضافة تفاصيل السيارة";
+"mendatoryfields" = "الرجاء إضافة الحقول التصحيحية!";
+"Numberinvalid" = "رقم الهاتف غير صالح! أقل من الشكل";
+"NumberGreater" = "رقم الهاتف غير صالح! أكبر من الشكل";
+"AlreadyAssigned" = "عذرا لا يمكن تعديل الطلب! تم التعيين بالفعل إلى";

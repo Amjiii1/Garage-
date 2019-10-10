@@ -23,6 +23,18 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var AssignedID: Int = 0
     
     var abc = 12.51
+    
+    
+    
+    //Localization
+    
+     let Cancel = NSLocalizedString("Cancel", comment: "")
+    let AlreadyAssigned = NSLocalizedString("AlreadyAssigned", comment: "")
+    
+    
+    
+    
+    //Localization
   
     
     override func viewDidLoad() {
@@ -42,6 +54,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
         Constants.SuperUser = UserDefaults.standard.integer(forKey: Constants.superuserA)
         Constants.flagEdit = 0
+        
+
     }
     
     deinit {
@@ -191,8 +205,8 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     func showloader() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -233,7 +247,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             if response == nil {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     self.WelcomeSegmented.isUserInteractionEnabled = true
                 }
             }
@@ -274,7 +288,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 else if (status == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.wrong, controller: self)
+                        ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -283,7 +297,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 else if (status == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.invalid, controller: self)
+                        ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -292,7 +306,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.occured, controller: self)
+                        ToastView.show(message: LocalizedString.occured, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -365,7 +379,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     
                 }
             }
@@ -394,25 +408,25 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     else if (status == 1000) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
                     else if (status == 1001) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
                     else  {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                 }
                 
             }
@@ -434,7 +448,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 1:
             print("Nothing")
         case 2:
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Cancel") { (action, indexpath) in
+            let deleteAction = UITableViewRowAction(style: .destructive, title: Cancel) { (action, indexpath) in
                 self.AssignedID = self.Welcomecellobj[indexPath.row].OrderID!
                 print(self.AssignedID)
                 self.AssignToWait()
@@ -444,7 +458,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }
           
             returnValue = [deleteAction]
-            deleteAction.backgroundColor = .black
+            deleteAction.backgroundColor = .DefaultApp
             
         default:
             break
@@ -555,7 +569,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
             else {
                 
-                ToastView.show(message: "Sorry Order cannot be Edit! Already Assigned to \(bayname!)", controller: self)
+                ToastView.show(message: "\(AlreadyAssigned) \(bayname!)", controller: self)
             }
          
         case 1:
@@ -597,7 +611,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @objc func add1(_ sender: UIButton){
         let new = Welcomecellobj[sender.tag].TransactionNo
         print(new!)
-    }
+    } 
 
     
     @objc func add2(_ sender: UIButton){

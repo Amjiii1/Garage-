@@ -118,7 +118,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                     self.dismiss(animated: true, completion: nil)
                 }
                 
@@ -237,7 +237,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                     self.dismiss(animated: true, completion: nil)
                 }
                 

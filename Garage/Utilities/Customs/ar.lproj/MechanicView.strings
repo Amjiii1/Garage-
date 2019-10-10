@@ -1,0 +1,57 @@
+
+/* Class = "UILabel"; text = "Make"; ObjectID = "5LU-xy-0Rk"; */
+"5LU-xy-0Rk.text" = "ماركة المركبة";
+
+/* Class = "UIButton"; normalTitle = "Loading"; ObjectID = "5os-JN-DNa"; */
+"5os-JN-DNa.normalTitle" = "تحميل";
+
+/* Class = "UIButton"; normalTitle = "Check Car"; ObjectID = "5u7-6h-jeO"; */
+"5u7-6h-jeO.normalTitle" = "فحص المركبة";
+
+/* Class = "UILabel"; text = "subtitle"; ObjectID = "IXU-y7-Idc"; */
+"IXU-y7-Idc.text" = "عنوان فرعي";//"subtitle";
+
+/* Class = "UILabel"; text = "Click loading for assigned Car"; ObjectID = "JAk-R0-W0h"; */
+"JAk-R0-W0h.text" = "انقر فوق تحميل للسيارة المخصصة";//"Click loading for assigned Car";
+
+/* Class = "UILabel"; text = "Trans.No"; ObjectID = "PBZ-oE-ji8"; */
+"PBZ-oE-ji8.text" = "رقم العملية";
+
+/* Class = "UIButton"; normalTitle = "Save & Finish"; ObjectID = "Qr9-Rt-cw7"; */
+"Qr9-Rt-cw7.normalTitle" = "حفظ و إنهاء";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XzW-Wc-DgT"; */
+"XzW-Wc-DgT.text" = "Label";
+
+/* Class = "UILabel"; text = "Bay"; ObjectID = "ZWu-Ht-J7T"; */
+"ZWu-Ht-J7T.text" = "مكان الخدمة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aZC-cO-Rgf"; */
+"aZC-cO-Rgf.text" = "Label";
+
+/* Class = "UILabel"; text = "Working on"; ObjectID = "bXL-hB-anW"; */
+"bXL-hB-anW.text" = "العمل على";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "cOf-CG-x4f"; */
+"cOf-CG-x4f.normalTitle" = "0";
+
+/* Class = "UISegmentedControl"; deU-Y5-Mlh.segmentTitles[0] = "Current"; ObjectID = "deU-Y5-Mlh"; */
+"deU-Y5-Mlh.segmentTitles[0]" = "تيار";//"Current";
+
+/* Class = "UISegmentedControl"; deU-Y5-Mlh.segmentTitles[1] = "Finished"; ObjectID = "deU-Y5-Mlh"; */
+"deU-Y5-Mlh.segmentTitles[1]" = "إنهاء";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "i6v-Ib-vlG"; */
+"i6v-Ib-vlG.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kqH-lZ-PF1"; */
+"kqH-lZ-PF1.text" = "Label";
+
+/* Class = "UILabel"; text = "Model"; ObjectID = "n1j-NW-bjp"; */
+"n1j-NW-bjp.text" = "طراز المركبة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xpH-Xd-g6X"; */
+"xpH-Xd-g6X.text" = "Label";
+
+/* Class = "UILabel"; text = "No.Plate"; ObjectID = "xto-ka-15w"; */
+"xto-ka-15w.text" = "رقم اللوحة";

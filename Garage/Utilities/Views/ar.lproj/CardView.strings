@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Card No."; ObjectID = "Elo-kZ-LLj"; */
+"Elo-kZ-LLj.text" = "رقم البطاقة";
+
+/* Class = "UILabel"; text = "Card Details"; ObjectID = "YUp-MQ-3s5"; */
+"YUp-MQ-3s5.text" = "تفاصيل البطاقة";
+
+/* Class = "UIButton"; normalTitle = "Others"; ObjectID = "atg-4N-NQN"; */
+"atg-4N-NQN.normalTitle" = "أخرى";
+
+/* Class = "UIButton"; selectedTitle = "Others"; ObjectID = "atg-4N-NQN"; */
+"atg-4N-NQN.selectedTitle" = "أخرى";
+
+/* Class = "UILabel"; text = "Holder Name"; ObjectID = "mag-Qb-6Om"; */
+"mag-Qb-6Om.text" = "الإسم بالبطاقة";

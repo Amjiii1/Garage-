@@ -23,9 +23,26 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     var cartItemStructArray = [ReceiptModel]()
     var PDFLetter: String = ""
     private let dataModel = GeneralViewController()
-    
     var newVariableName = GeneralViewController()
     var newVariableName2 = GeneralViewController()
+    
+    
+    //Localization
+    
+    let BayAr = NSLocalizedString("Bay", comment: "")
+    let Action = NSLocalizedString("Action", comment: "")
+    let Status = NSLocalizedString("Status", comment: "")
+    let Checkout = NSLocalizedString("Checkout", comment: "")
+    let Done = NSLocalizedString("Done", comment: "")
+    let ZebraPrinterAr = NSLocalizedString("ZebraPrinter", comment: "")
+    let Reprint = NSLocalizedString("Reprint", comment: "")
+    let AirPrint = NSLocalizedString("AirPrint", comment: "")
+    let Edit = NSLocalizedString("Edit", comment: "")
+    let PrintingSucuess  = NSLocalizedString("sucessfully", comment: "")
+    
+    //Localization
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +61,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name("checkoutDone"), object: nil)
     }
+    
+    
     
     
     
@@ -76,7 +95,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     self.dismiss(animated: true, completion: nil)
                     self.checkoutSegment.isUserInteractionEnabled = true
                 }
@@ -95,8 +114,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         for items in order {
                             if let item = items[Constants.OrderItems] as? [[String: Any]] {
                                 for details in item {
-                                    let Name = details["ItemName"] as! String
-                                    let AlternateName = details["AlternateName"] as! String
+                                    let Name = details["ItemName"] as? String  ?? ""
+                                    let AlternateName = details["AlternateName"] as? String  ?? ""
                                     let Price = details["Price"] as! Double
                                     let ItemID = details["ItemID"] as! Int
                                     let Quantity = details["Quantity"] as! Int
@@ -139,7 +158,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 else if (status == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.wrong, controller: self)
+                        ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
@@ -147,7 +166,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 else if (status == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.invalid, controller: self)
+                        ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
@@ -155,7 +174,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 else  {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.occured, controller: self)
+                        ToastView.show(message: LocalizedString.occured, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
                 }
@@ -175,7 +194,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func showloader() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -224,7 +243,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             print("nothing")
             
         case 1:
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Edit") { (action, indexpath) in
+            let deleteAction = UITableViewRowAction(style: .destructive, title: Edit) { (action, indexpath) in
                 DispatchQueue.main.async {
                     Constants.editcheckout = 1
                     Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
@@ -241,13 +260,15 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
             
-            
+           
             returnValue = [deleteAction]
-            deleteAction.backgroundColor = .black
+            deleteAction.backgroundColor = .DefaultApp
+
+            
         case 2:
             
             
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Re-Print") { (action, indexpath) in
+            let Rprint = UITableViewRowAction(style: .destructive, title: Reprint) { (action, indexpath) in
                 DispatchQueue.main.async {
                     
                     Checkoutstruct.sentitems.removeAll()
@@ -272,25 +293,19 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     Constants.PaymentModes = self.checkoutmodel[indexPath.row].PaymentMode!
                     Constants.CashAmount = self.checkoutmodel[indexPath.row].CashAmount!
                     Constants.CardAmount = self.checkoutmodel[indexPath.row].CardAmount!
+                    Constants.subtotal = self.checkoutmodel[indexPath.row].AmountTotal!
+                    Constants.checkoutGrandtotal = self.checkoutmodel[indexPath.row].GrandTotal!
+                    Constants.checkouttax = self.checkoutmodel[indexPath.row].Tax!
+                    Constants.checkoutdiscount = self.checkoutmodel[indexPath.row].AmountDiscount!
                     
-                    Constants.subtotal = 0.0
-                    Constants.checkoutGrandtotal = 0.0
-                    Constants.checkouttax = 0.0
                     for itemmodels in Checkoutstruct.Itemdetails {
-                        
                         if itemmodels.itemorderid == Constants.checkoutorderid {
-                            
-                            Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
                             
                             Checkoutstruct.sentitems.append(itemmodels)
                         } else if itemmodels.itemorderid != Constants.checkoutorderid {
                             
                         }
                     }
-                    
-                    Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
-                    Constants.subtotal = Constants.checkoutGrandtotal
-                    Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
                     self.printerreceipt()
                     
                     
@@ -298,7 +313,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             
-            let AirPrinter = UITableViewRowAction(style: .destructive, title: "AirPrinter") { (action, indexpath) in
+            let AirPrinter = UITableViewRowAction(style: .destructive, title: AirPrint) { (action, indexpath) in
                 DispatchQueue.main.async {
                     
                     Constants.checkoutPDF = self.checkoutmodel[indexPath.row].OrderID!
@@ -307,7 +322,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             
-            let ZebraPrinter = UITableViewRowAction(style: .destructive, title: "ZebraPrinter") { (action, indexpath) in
+            let ZebraPrinter = UITableViewRowAction(style: .destructive, title: ZebraPrinterAr) { (action, indexpath) in
                 DispatchQueue.main.async {
                     Constants.ZRegistr = self.checkoutmodel[indexPath.row].OilType!
                     Constants.ZKm = self.checkoutmodel[indexPath.row].CheckLitre!
@@ -324,11 +339,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
             
-            returnValue = [AirPrinter, deleteAction, ZebraPrinter]
+            returnValue = [AirPrinter, Rprint, ZebraPrinter]
             //AirPrinter.backgroundColor = UIColor(patternImage: UIImage(named: "diesel.png")!)
-            AirPrinter.backgroundColor = UIColor.gray
-            deleteAction.backgroundColor = UIColor.DefaultApp
-            ZebraPrinter.backgroundColor = UIColor.red
+            AirPrinter.backgroundColor = UIColor.red
+            Rprint.backgroundColor = UIColor.DefaultApp
+            ZebraPrinter.backgroundColor = UIColor.orange
             
             
         default:
@@ -349,7 +364,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     
                 }
             }
@@ -382,15 +397,15 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         }
                             
                         else if (status == 1000) {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                             
                         else if (status == 1001) {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                             
                         else {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                         
                     }
@@ -425,7 +440,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             else if(completed) {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Printing sucessfully", controller: self)
+                    ToastView.show(message: self.PrintingSucuess, controller: self)
                 }
             }
         }
@@ -442,7 +457,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         switch (checkoutSegment.selectedSegmentIndex) {
         case 0:
-            headerlabel.text = "Bay"
+            headerlabel.text = BayAr
             headerlabel.textColor = UIColor.white
             headerlabel.font = UIFont(name: "SFProDisplay-Bold", size: 19)
             print(indexPath)
@@ -463,7 +478,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
         case 1:
-            headerlabel.text = "Action"
+            headerlabel.text = Action
             headerlabel.textColor = UIColor.white
             headerlabel.font = UIFont(name: "SFProDisplay-Bold", size: 19)
             print(indexPath)
@@ -474,7 +489,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CMake.text = checkoutmodel[indexPath.row].MakerName
             cell.CModel.text = checkoutmodel[indexPath.row].ModelName
             cell.checkoutBtn.tag = indexPath.row
-            cell.checkoutBtn.setTitle("Checkout", for: .normal)
+            cell.checkoutBtn.setTitle(Checkout, for: .normal)
             cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
             cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
             cell.checkoutBtn.addTarget(self, action:#selector(self.addccheckout(_:)), for: .touchUpInside)
@@ -482,7 +497,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CSerialnmb.text = "\(trans2!)"
             
         case 2:
-            headerlabel.text = "Status"
+            headerlabel.text = Status
             headerlabel.textColor = UIColor.white
             headerlabel.font = UIFont(name: "SFProDisplay-Bold", size: 19)
             cell.checkoutBtn.isUserInteractionEnabled = true
@@ -501,7 +516,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
                 
             } else  {
-                cell.checkoutBtn.setTitle("Done", for: .normal)
+                cell.checkoutBtn.setTitle(Done, for: .normal)
                 cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
                 cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
             }
@@ -567,7 +582,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             Constants.checkoutdiscount = 0.00        
             Constants.subtotal = Constants.checkoutGrandtotal
-            //Constants.checkoutGrandtotal =  Constants.subtotal - 5 // discount field
             Constants.checkouttax = Constants.checkoutGrandtotal * Double(Constants.tax)!
             Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
             checkoutpop()
@@ -586,16 +600,16 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         for receipt in Checkoutstruct.sentitems {
             
-            let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
+            let cartItemStruct = ReceiptModel(Name: receipt.Name!, AlternateName: receipt.AlternateName, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
             cartItemStructArray.append(cartItemStruct)
             
         }
         
         
-        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
+        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", AlternateName: "Ali", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
     }
-   
+    
     
     
     func checkoutpop() {
@@ -626,7 +640,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     
     @IBAction func settings(_ sender: Any) {
-                setupsettings()
+        setupsettings()
     }
     
     
@@ -663,7 +677,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             return "ZPL"
         } else  {
             return "CPCL"
-
+            
             
         }
     }
@@ -684,7 +698,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             connection = TcpPrinterConnection(address: ipAddress, andWithPort: por)
             let didOpen = connection?.open()
-
+            
             
             if didOpen == true {
                 // self.setStatus("Connected...",UIColor.green)
@@ -696,7 +710,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 var error: Error? = nil
                 var printer = try? ZebraPrinterFactory.getInstance(connection)
-           
+                
                 if printer != nil {
                     let language = printer?.getControlLanguage()
                     //   self.setStatus("Printer Language \(getLanguageName(language!) ?? "nil")",UIColor.cyan)
@@ -720,7 +734,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 ToastView.show(message: "Something wrong in Zebra Printer", controller: self)
             }
             // self.setStatus("Disconnecting...",UIColor.red)
-           
+            
             //printed.
             connection?.close()
             //  performingDemo = false
@@ -739,7 +753,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         var testLabel = ""
         var err : NSError?
         if language == PRINTER_LANGUAGE_ZPL {
-            testLabel = "^XA^FWN,^CF0,33,^FT200,70^FD\(Constants.ZRegistr)^FS,^FT200,80^GB250,1,5^FS,^CF0,33,^FT200,120,^FDKM:  \(Constants.ZKm)^FS,^FT200,130^GB250,1,5^FS,^CF0,33,^FT200,170^FD\(Constants.FilterName)^FS,^FT200,180^GB250,1,5^FS,^CF0,33,^FT200,220^FDDate:  \(Constants.Zdate)^FS,,^FT200,230^GB250,1,5^FS^CF0,33,^XZ"
+            testLabel = "^XA^FWN,^CF0,30,^FT200,70^FD\(Constants.ZRegistr)^FS,^FT200,80^GB250,1,4^FS,^CF0,30,^FT200,120,^FDKM:  \(Constants.ZKm)^FS,^FT200,130^GB250,1,4^FS,^CF0,30,^FT200,170^FD\(Constants.FilterName)^FS,^FT200,180^GB250,1,4^FS,^CF0,30,^FT200,220^FDDate:  \(Constants.Zdate)^FS,,^FT200,230^GB250,1,4^FS^CF0,30,^XZ"
             //"^XA^FWN,^CF0,30,^FT200,70^FDOil Type:  \(Constants.ZRegistr)^FS,^FT200,80^GB250,1,5^FS,^CF0,30,^FT200,120,^FDKM:  \(Constants.ZKm)^FS,^FT200,130^GB250,1,5^FS,^CF0,30,^FT200,170^FDOil Filter:  \(Constants.FilterName)^FS,^FT200,180^GB250,1,5^FS,^CF0,30,^FT200,220^FDDate:  \(Constants.Zdate)^FS,,^FT200,230^GB250,1,5^FS^CF0,20,^XZ"
             let data = testLabel.data(using: .utf8)!
             connection.write(data, error: &err)

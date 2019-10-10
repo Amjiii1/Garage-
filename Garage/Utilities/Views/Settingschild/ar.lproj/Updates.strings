@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Software Update"; ObjectID = "0w9-Lg-Wla"; */
+"0w9-Lg-Wla.text" = "تحديث النظام";
+
+/* Class = "UIButton"; normalTitle = "Download & Install"; ObjectID = "6mH-EJ-imv"; */
+"6mH-EJ-imv.normalTitle" = "تحميل ملف التثبيت";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "EyC-Nt-A4M"; */
+"EyC-Nt-A4M.text" = "الإصدار";

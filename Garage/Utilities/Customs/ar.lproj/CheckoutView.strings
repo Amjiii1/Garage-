@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "Trans.No"; ObjectID = "7cA-Vu-siy"; */
+"7cA-Vu-siy.text" = "رقم العملية";
+
+/* Class = "UILabel"; text = "Model"; ObjectID = "Ds3-gM-qeM"; */
+"Ds3-gM-qeM.text" = "طراز المركبة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "KpW-Kh-SBX"; */
+"KpW-Kh-SBX.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Lcv-kQ-2os"; */
+"Lcv-kQ-2os.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "TbJ-p8-Jrq"; */
+"TbJ-p8-Jrq.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Checkout"; ObjectID = "Toc-JY-0ng"; */
+"Toc-JY-0ng.normalTitle" = "إنهاء الفاتورة";
+
+/* Class = "UILabel"; text = "Make"; ObjectID = "cDY-dN-qv9"; */
+"cDY-dN-qv9.text" = "صانع السيارة ";
+
+/* Class = "UISegmentedControl"; gyC-r2-7U1.segmentTitles[0] = "In Work"; ObjectID = "gyC-r2-7U1"; */
+"gyC-r2-7U1.segmentTitles[0]" = "تحت الإجراء ";
+
+/* Class = "UISegmentedControl"; gyC-r2-7U1.segmentTitles[1] = "Hold"; ObjectID = "gyC-r2-7U1"; */
+"gyC-r2-7U1.segmentTitles[1]" = "معلقه";
+
+/* Class = "UISegmentedControl"; gyC-r2-7U1.segmentTitles[2] = "Done"; ObjectID = "gyC-r2-7U1"; */
+"gyC-r2-7U1.segmentTitles[2]" = "تم";
+
+/* Class = "UILabel"; text = "No.Plate"; ObjectID = "laE-lB-gV5"; */
+"laE-lB-gV5.text" = "رقم اللوحة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "pjU-2Q-cbn"; */
+"pjU-2Q-cbn.text" = "Label";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "wSl-Lf-AuQ"; */
+"wSl-Lf-AuQ.text" = "الحالة";

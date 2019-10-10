@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         businesssCodeTextField.text = "POS-"
-        arrowImage()
+    //    arrowImage()
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
@@ -100,7 +100,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     self.pinCodeTextField.isEnabled = true
                     self.businesssCodeTextField.isEnabled = true
                 }
@@ -171,7 +171,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                     else if (descript.status == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             
                             self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
@@ -180,7 +180,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                     else if (descript.status == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
                         }
@@ -188,7 +188,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             self.pinCodeTextField.isEnabled = true
                             self.businesssCodeTextField.isEnabled = true
                         }
@@ -266,20 +266,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                     else if (status.message == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             self.businesssCodeTextField.isEnabled = true
                         }
                     }
                         
                     else if (status.message == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             self.businesssCodeTextField.isEnabled = true
                         }
                     }
                     else  {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             self.businesssCodeTextField.isEnabled = true
                         }
                     }
@@ -317,8 +317,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         else if  businesssCodeTextField.text!.characters.count > 10 {
             
-            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }

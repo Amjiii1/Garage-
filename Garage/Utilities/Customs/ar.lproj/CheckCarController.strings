@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5r6-qE-oQa"; */
+"5r6-qE-oQa.text" = "Label";
+
+/* Class = "UILabel"; text = "Service"; ObjectID = "RA3-NR-U00"; */
+"RA3-NR-U00.text" = "الخدمات";
+
+/* Class = "UILabel"; text = "A          B        C"; ObjectID = "g1v-J6-5xq"; */
+"g1v-J6-5xq.text" = "A          B        C";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ssY-WV-uck"; */
+"ssY-WV-uck.normalTitle" = "إلغاء";
+
+/* Class = "UIButton"; normalTitle = "Save & Continue"; ObjectID = "tzf-MH-6bl"; */
+"tzf-MH-6bl.normalTitle" = "حفظ و متابعة";

@@ -1,0 +1,26 @@
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "1it-eC-l0v"; */
+"1it-eC-l0v.normalTitle" = "حفظ";
+
+/* Class = "UIButton"; normalTitle = "Checked"; ObjectID = "Iou-qJ-Ldr"; */
+"Iou-qJ-Ldr.normalTitle" = "التحقق";
+
+/* Class = "UIButton"; normalTitle = "Delete Event"; ObjectID = "LlH-Pg-fj0"; */
+"LlH-Pg-fj0.normalTitle" = "حذف الحدث
+";
+
+/* Class = "UIButton"; normalTitle = "Add Pictures"; ObjectID = "WpS-Xn-iOa"; */
+"WpS-Xn-iOa.normalTitle" = "إضافة الصور
+";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "e7N-1g-cqK"; */
+"e7N-1g-cqK.text" = "الحالة ";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "ftb-OV-Jaf"; */
+"ftb-OV-Jaf.text" = "الملاحظات";
+
+/* Class = "UILabel"; text = "Monday, 10 Nov 2018"; ObjectID = "hOq-B6-RGk"; */
+"hOq-B6-RGk.text" = "Monday, 10 Nov 2018";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zSH-6Y-Fx5"; */
+"zSH-6Y-Fx5.text" = "Label";

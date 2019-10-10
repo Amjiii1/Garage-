@@ -1,0 +1,36 @@
+
+/* Class = "UIButton"; normalTitle = "Assign"; ObjectID = "37N-Ft-Y5u"; */
+"37N-Ft-Y5u.normalTitle" = "تعيين";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "5I5-pJ-b1O"; */
+"5I5-pJ-b1O.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "GPk-Th-JSD"; */
+"GPk-Th-JSD.normalTitle" = "التالي";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Uml-4R-buF"; */
+"Uml-4R-buF.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Item"; ObjectID = "ZxQ-ag-MuO"; */
+"ZxQ-ag-MuO.normalTitle" = "الأصناف";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "bbr-fz-cku"; */
+"bbr-fz-cku.normalTitle" = "العودة";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "eSp-I9-pwl"; */
+"eSp-I9-pwl.text" = "الإجمالي";
+
+/* Class = "UIButton"; normalTitle = "Home"; ObjectID = "hYw-s8-qRx"; */
+"hYw-s8-qRx.normalTitle" = "Home";
+
+/* Class = "UILabel"; text = "1x"; ObjectID = "ipb-ji-lH4"; */
+"ipb-ji-lH4.text" = "1x";
+
+/* Class = "UIButton"; normalTitle = "Category"; ObjectID = "sHM-QV-aUN"; */
+"sHM-QV-aUN.normalTitle" = "القائمة الرائيسية";
+
+/* Class = "UIButton"; normalTitle = "Sub-Category"; ObjectID = "tqP-aq-yqc"; */
+"tqP-aq-yqc.normalTitle" = "القائمة الفرعية";
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "vFB-mf-Jsn"; */
+"vFB-mf-Jsn.normalTitle" = "-";

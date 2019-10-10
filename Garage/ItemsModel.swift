@@ -12,7 +12,7 @@ class ItemsModel: Codable {
 
     var ItemID: Int?
     var Name: String?
-//    var AlternateName: String?
+    var AlternateName: String?
 //    var Desc: String?
     var Price: Double?
 //    var Image: String?
@@ -32,7 +32,7 @@ class ItemsModel: Codable {
 //    }
 //    
     
-    init(ItemID: Int, Name: String, Price: Double) {
+    init(ItemID: Int, Name: String, AlternateName: String, Price: Double) {
         
         self.ItemID = ItemID
         self.Name = Name
@@ -45,6 +45,7 @@ class ItemsModel: Codable {
 
         guard let itemID = ProductModel["ItemID"] as? Int,
             let name = ProductModel["Name"] as? String,
+            let alternateName = ProductModel["AlternateName"] as? String,
             let price = ProductModel["Price"] as? Double
     
 //            let image = ProductModel["Image"] as? String,
@@ -61,6 +62,7 @@ class ItemsModel: Codable {
         
         self.ItemID = itemID
         self.Name = name
+          self.AlternateName = alternateName
         self.Price = price
     
     

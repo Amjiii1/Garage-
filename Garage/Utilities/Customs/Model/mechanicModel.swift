@@ -16,6 +16,7 @@ struct Orderdetail {
     let OrderID: Int
     let ItemID: Int
     let ItemName: String
+     let AlternateName: String
     let ItemImage: String
     let Quantity: Int
     let Price: Double

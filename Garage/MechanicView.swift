@@ -44,10 +44,21 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     var MechanicModel = [MechanicTableviewModel]()
    
-    
+     // btnWelcome.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
     
     var OrderDetails = [Orderdetail]()
     let reuseIdentifier = "MechanicCell"
+    
+    //Localization
+    
+    let SelectBay = NSLocalizedString("SelectBay", comment: "")
+    let SelectBayName = NSLocalizedString("SelectBayName", comment: "")
+    
+    
+    //Localization
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +77,20 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         donebtnenable()
          bay0()
         NotificationCenter.default.addObserver(self, selector: #selector(MechanicView.BayNotification(notification:)), name: Notification.Name("Notificationbayname"), object: nil)
+        if L102Language.currentAppleLanguage() == "ar" {
+            finishBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,30)
+            checkcarBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,30)
+            loadingBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 45, right: 66)
+            assignserviceBtn.titleEdgeInsets = UIEdgeInsetsMake(0,20,0,0)
+            assignserviceBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:30, bottom: 0, right: 0)
+        }
         
     }
     
     func bay0() {
        if Constants.bayname == "B0" {
-        assignserviceBtn.setTitle("Select Bay", for: .normal)
+        
+        assignserviceBtn.setTitle(SelectBay, for: .normal)
        } else {
          assignserviceBtn.setTitle("\(Constants.bayname)", for: .normal)
         }
@@ -172,7 +191,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     func showloader() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -232,7 +251,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 else if (statusmessage == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.wrong, controller: self)
+                        ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -241,7 +260,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 else if (statusmessage == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message: Constants.invalid, controller: self)
+                        ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -250,7 +269,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.dismiss(animated: true, completion: nil)
-                        ToastView.show(message:Constants.occured, controller: self)
+                        ToastView.show(message:LocalizedString.occured, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
                     
@@ -361,6 +380,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             let OrderDetailID = order["OrderDetailID"].intValue
                             let ItemID = order["ItemID"].intValue
                             let ItemName = order["ItemName"].stringValue
+                            let AlternateName = order["AlternateName"].stringValue
                             let ItemImage = order["ItemImage"].stringValue
                             let Quantity = order["Quantity"].intValue
                             let Price = order["Price"].doubleValue
@@ -371,7 +391,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                             let ItemDate = order["ItemDate"].stringValue
                             let Mode = order["Mode"].stringValue
                             
-                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: Constants.orderidmechanic,ItemID: ItemID, ItemName: ItemName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode, orderPrinterType: PrinterType.checkout)
+                            let orders = Orderdetail(OrderDetailID: OrderDetailID, OrderID: Constants.orderidmechanic,ItemID: ItemID, ItemName: ItemName,AlternateName: AlternateName, ItemImage: ItemImage, Quantity: Quantity, Price: Price,  TotalCost: TotalCost, LOYALTYPoints: LOYALTYPoints, StatusID: StatusID, ItemDate: ItemDate, Mode: Mode, orderPrinterType: PrinterType.checkout)
                             self?.OrderDetails.append(orders)
                             DispatchQueue.main.async {
                                 self?.collectionViewSlot.reloadData()
@@ -385,15 +405,15 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     }
                         
                     else  if (status == 1000) {
-                        ToastView.show(message: Constants.wrong, controller: self!)
+                        ToastView.show(message: LocalizedString.wrong, controller: self!)
                     }
                         
                     else  if (status == 1001) {
-                        ToastView.show(message: Constants.invalid, controller: self!)
+                        ToastView.show(message: LocalizedString.invalid, controller: self!)
                     }
                         
                     else {
-                        ToastView.show(message: Constants.occured, controller: self!)
+                        ToastView.show(message: LocalizedString.occured, controller: self!)
                     }
                     
                 } catch {
@@ -444,8 +464,12 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 cell.layer.transform = CATransform3DMakeScale(1,1,1)
             })
         })
+        if L102Language.currentAppleLanguage() == "ar" {
+          cell.Mpopulate(with: OrderDetails[indexPath.item].AlternateName, image: OrderDetails[indexPath.item].ItemImage)
+        } else {
+            cell.Mpopulate(with: OrderDetails[indexPath.item].ItemName, image: OrderDetails[indexPath.item].ItemImage)
+        }
         
-        cell.Mpopulate(with: OrderDetails[indexPath.item].ItemName, image: OrderDetails[indexPath.item].ItemImage)
         
         let testButton = UIButton(type: .custom)
         testButton.frame = CGRect(x: 0, y: 0, width: 0.5 * notesBtn.frame.size.width, height: 0.5 * notesBtn.frame.size.height)
@@ -583,7 +607,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
         if Constants.bayid == 0 {
-            ToastView.show(message: "Please Select BayName First!", controller: self)
+            ToastView.show(message: SelectBayName, controller: self)
         } else {
             flag = 1
             
@@ -684,7 +708,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -710,21 +734,21 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     
                     else if (status == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             self.removeData()
                         }
                     }
                     
                     else if (status == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             self.removeData()
                         }
                     }
                     
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             self.removeData()
                         }
                     }
@@ -769,7 +793,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -795,27 +819,27 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     else if (status == 1000) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
                     
                     else if (status == 1001) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
                     
                     else {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                 }
                 
             }
@@ -884,7 +908,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -926,27 +950,27 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     else if (status == 1000) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
                     
                     else if (status == 1001) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
                     
                     else {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                 }
                 
             }

@@ -107,6 +107,9 @@ struct Constants {
     static var loggedIn = "loggedIn"
     static var BusinessCodeSuccess = "BusinessCode Verified Successfully"
     static var BusinessCodeFailed = "BusinessCode Verified Failed!"
+    
+    
+    
     //XZ-Report
     static var TotalSales = "TotalSales"
     static var MinusDiscount = "MinusDiscount"
@@ -188,6 +191,7 @@ struct Constants {
     static var CarModelName = "CarModelName"
     static var CarNoPlate = "CarNoPlate"
     static var ItemName = "ItemName"
+   // static var AlternateName = "AlternateName"
     static var Quantity = "Quantity"
     static var OrderDetailID = "OrderDetailID"
     static var CarNotes = "CarNotes"
@@ -204,13 +208,12 @@ struct Constants {
     static var loginSucs = "Login Successfully"
     static var Status = "Status"   // used in servicecart
     static var Description = "Description"   // used in servicecart
-    static var wrong = "Something went wrong"
-    static var invalid = "Invalid sessions"
-    static var occured = "Error occured"
-    
+//    static var wrong = "Something went wrong"
+//    static var invalid = "Invalid sessions"
+//    static var occured = "Error occured"
+//    static var interneterror = "Login failed! Check internet"
     
     // viewcontrollers
-    static var interneterror = "Login failed! Check internet"
     static var ReceptionalistView = "ReceptionalistView"
     static var ReceptionalistVc = "ReceptionalistVc"
     static var BayForWelcome = "BayForWelcome"
@@ -241,6 +244,8 @@ struct Constants {
     static var XZReportViewController = "XZReportViewController"
     static var XZReportViewControllerVc = "XZReportViewControllerVc"
     static var profilepop = "profilepop"
+    static var language = 0
+    static var savelang = "savelang"
     
     
     static var Subusers = "Subusers"
@@ -252,6 +257,12 @@ struct Constants {
     static var CashView = "CashView"
     static var superuserA = "superuser"
     
+    //localization
+    
+    static let wait = NSLocalizedString("Pleasewait", comment: "")
+    
+    
+    //localization
     
     
     
@@ -307,6 +318,10 @@ struct Constants {
     static var tax = "0"
     static var percent = 0
     static var historytrans = 0
+    static var historydiscount: Double = 0.0
+    static var historysubtotal: Double = 0.0
+    static var historygrandtotal: Double = 0.0
+    static var historytax: Double = 0.0
     static var checkoutorderid = 0
     static var checkoutcarid = 0
     static var checkoutPDF = 0

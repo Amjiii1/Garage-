@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "Welcome"; ObjectID = "cmG-jR-6pd"; */
+"cmG-jR-6pd.normalTitle" = "الإستقبال";
+
+/* Class = "UIButton"; normalTitle = "Checkout"; ObjectID = "kOj-00-aD5"; */
+"kOj-00-aD5.normalTitle" = "إنهاء الفاتورة";
+
+/* Class = "UIButton"; normalTitle = "Service"; ObjectID = "knm-xK-wPu"; */
+"knm-xK-wPu.normalTitle" = "مقدم الخدمة";

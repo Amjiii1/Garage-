@@ -1,0 +1,15 @@
+
+/* Class = "UIButton"; normalTitle = "Percentage"; ObjectID = "6jc-i5-GXh"; */
+"6jc-i5-GXh.normalTitle" = "النسبة المئوية";
+
+/* Class = "UIButton"; normalTitle = "Trend"; ObjectID = "AJd-KR-V9T"; */
+"AJd-KR-V9T.normalTitle" = "اتجاه";
+
+/* Class = "UIButton"; normalTitle = "Apply"; ObjectID = "Omr-K9-mfC"; */
+"Omr-K9-mfC.normalTitle" = "تطبيق";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "P2N-09-hfY"; */
+"P2N-09-hfY.normalTitle" = "واضح";
+
+/* Class = "UIButton"; normalTitle = "Amount"; ObjectID = "cNA-iC-uMo"; */
+"cNA-iC-uMo.normalTitle" = "كمية";

@@ -1,0 +1,30 @@
+
+/* Class = "UIButton"; normalTitle = "About us"; ObjectID = "4uX-qU-mUP"; */
+"4uX-qU-mUP.normalTitle" = "معلومات عنا";
+
+/* Class = "UIButton"; normalTitle = "Database"; ObjectID = "7Ly-IK-xYC"; */
+"7Ly-IK-xYC.normalTitle" = "قاعدة البيانات";
+
+/* Class = "UIButton"; normalTitle = "Save & Closed"; ObjectID = "X34-Ps-Lei"; */
+"X34-Ps-Lei.normalTitle" = "حفظ ومغلق";
+
+/* Class = "UIButton"; normalTitle = "Updates"; ObjectID = "ZRz-yB-AjD"; */
+"ZRz-yB-AjD.normalTitle" = "التحديثات";
+
+/* Class = "UIButton"; normalTitle = "Language"; ObjectID = "a5S-cq-tJD"; */
+"a5S-cq-tJD.normalTitle" = "لغة";
+
+/* Class = "UIButton"; normalTitle = "Receipt"; ObjectID = "aFU-RX-cRU"; */
+"aFU-RX-cRU.normalTitle" = "إيصال";
+
+/* Class = "UIButton"; normalTitle = "Quickpay"; ObjectID = "gic-NZ-WPh"; */
+"gic-NZ-WPh.normalTitle" = "الدفع السريع";
+
+/* Class = "UIButton"; normalTitle = "Hardware"; ObjectID = "nM4-bs-Qyk"; */
+"nM4-bs-Qyk.normalTitle" = "المعدات";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "vqB-Gp-af5"; */
+"vqB-Gp-af5.text" = "الإعدادات";
+
+/* Class = "UIButton"; normalTitle = "General"; ObjectID = "xXV-rr-e5B"; */
+"xXV-rr-e5B.normalTitle" = "جنرال لواء";

@@ -32,6 +32,19 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var Numberpadview: NumberPad!
     @IBOutlet weak var NumberpadViewCheck: NumberPad!
+    @IBOutlet weak var reScanBtn: UIButton!
+   
+    
+    @IBOutlet weak var vinLbl: UILabel!
+    @IBOutlet weak var plateLbl: UILabel!
+    @IBOutlet weak var nmbrLbl: UILabel!
+    @IBOutlet weak var checkLbl: UILabel!
+    @IBOutlet weak var makLbl: UILabel!
+    @IBOutlet weak var modelLbl: UILabel!
+    @IBOutlet weak var yearLbl: UILabel!
+    @IBOutlet weak var engineLbl: UILabel!
+    @IBOutlet weak var recomLbl: UILabel!
+    
     
     let dateFormatter : DateFormatter = DateFormatter()
     private var CarMakeTableView: UITableView!
@@ -46,8 +59,27 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var orderdetails = [ReceiptModel]()
     
     
+    //Localization
+    
+    let SelectyourCarMake = NSLocalizedString("SelectyourCarMake", comment: "")
+    let SelectyourCarModel = NSLocalizedString("SelectyourCarModel", comment: "")
+    let Historyar = NSLocalizedString("History", comment: "")
+    let deatilsCar = NSLocalizedString("deatilsCar", comment: "")
+    let mendatoryfield = NSLocalizedString("mendatoryfields", comment: "")
+    let Numberinvalid = NSLocalizedString("Numberinvalid", comment: "")
+    let NumberGreater = NSLocalizedString("NumberGreater", comment: "")
+    
+    //Localization
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         Numberpadview.isHidden = true
         NumberpadViewCheck.isHidden = true
         makeCardetails()
@@ -73,6 +105,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         currentTime()
         historyBtn.layer.shadowColor = UIColor.white.cgColor   
         historyBtn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        if L102Language.currentAppleLanguage() == "ar" {
+        LanguageUIUpdate()
+        }
         
         
     }
@@ -120,6 +155,28 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         NumberpadViewCheck.delegate = self
         
     }
+    
+    
+    
+    func LanguageUIUpdate() {
+        
+        reScanBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
+        assignBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 0, right: 0)
+        reScanBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:12, bottom: 0, right: 0)
+        historyBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:12, bottom: 0, right: 0)
+        vinLbl.textAlignment = NSTextAlignment.right
+         plateLbl.textAlignment = NSTextAlignment.right
+         nmbrLbl.textAlignment = NSTextAlignment.right
+         checkLbl.textAlignment = NSTextAlignment.right
+         makLbl.textAlignment = NSTextAlignment.right
+         modelLbl.textAlignment = NSTextAlignment.right
+         yearLbl.textAlignment = NSTextAlignment.right
+         engineLbl.textAlignment = NSTextAlignment.right
+        recomLbl.textAlignment = NSTextAlignment.right
+    }
+    
+    
+    
     
     
     
@@ -237,8 +294,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         VinNumber.attributedPlaceholder = NSAttributedString(string: "XXXXXXXXXXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         phoneNumber.attributedPlaceholder = NSAttributedString(string: "+966XXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         check.attributedPlaceholder = NSAttributedString(string: "0000", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        carMake.attributedPlaceholder = NSAttributedString(string: "Select your Car Make", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        modelNumber.attributedPlaceholder = NSAttributedString(string: "Select your Car Model", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        carMake.attributedPlaceholder = NSAttributedString(string: SelectyourCarMake, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        modelNumber.attributedPlaceholder = NSAttributedString(string: SelectyourCarModel, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         recommendedAmount.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         engineType.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
     }
@@ -308,6 +365,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.white
             cell.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+            cell.textLabel?.textAlignment = .left
             return cell
         }
         else if tableView == CarModelTableView {
@@ -317,6 +375,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell2.backgroundColor = UIColor.darkGray
             cell2.textLabel?.textColor = UIColor.white
             cell2.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+            cell2.textLabel?.textAlignment = .left
             return cell2
             
             
@@ -344,7 +403,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let data = data {
@@ -371,15 +430,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         }
                             
                         else if (status == 1000) {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                             
                         else if (status == 1001) {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                             
                         else {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     DispatchQueue.main.async {
@@ -407,7 +466,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: url) { (data, response,  error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let data = data {
@@ -431,15 +490,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         }
                         
                         else if (status == 1000) {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                         
                         else if (status == 1001) {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                         
                         else {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                         
                     }
@@ -489,7 +548,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     func showloader() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -551,7 +610,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         else {
             
-            ToastView.show(message: "Please Add deatils of Car", controller: self)
+            ToastView.show(message: deatilsCar, controller: self)
             
             
             
@@ -577,7 +636,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     
                 }
             }
@@ -591,7 +650,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     print(json)
                     Constants.history = json["OrderHistoryCount"] as! Int
                     DispatchQueue.main.async {
-                        self.historyBtn.titleLabel?.text = "History (\(Constants.history))"
+                        self.historyBtn.titleLabel?.text = "\(self.Historyar) (\(Constants.history))"
                     }
                     let details = Cardetails(json: json)
                     if (details.status == 1) {
@@ -734,7 +793,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else if (details.status == 1000) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message:Constants.wrong, controller: self)
+                            ToastView.show(message:LocalizedString.wrong, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
@@ -750,7 +809,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else if (details.status == 1001) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message:Constants.invalid, controller: self)
+                            ToastView.show(message:LocalizedString.invalid, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
@@ -766,7 +825,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message:Constants.occured, controller: self)
+                            ToastView.show(message:LocalizedString.occured, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
@@ -782,7 +841,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 } catch {
                     
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Failed to load! error occured", controller: self)
+                        ToastView.show(message: LocalizedString.occured, controller: self)
                         self.dismiss(animated: true, completion: nil)
                         if self.carplateNumber.text != "" {
 //                            self.carplateNumber.isUserInteractionEnabled = false
@@ -813,7 +872,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         session.dataTask(with: orderdetails){ (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let data = data {
@@ -827,7 +886,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         self.showloader()
                         Constants.history = json["OrderHistoryCount"] as! Int
                         DispatchQueue.main.async {
-                            self.historyBtn.titleLabel?.text = "History (\(Constants.history))"
+                            self.historyBtn.titleLabel?.text = "\(self.Historyar) (\(Constants.history))"
                         }
                         if  let OrderID = json[Constants.OrderID] as? Int {
                             DispatchQueue.main.async {
@@ -938,12 +997,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         if let order = json["Orderdetail"] as? [[String: Any]] {
                             for orders in order {
                                 print(orders)
-                                let Name = orders["ItemName"] as! String
+                                let Name = orders["ItemName"] as? String  ?? ""
+                                let AlternateName = orders["AlternateName"] as? String  ?? ""
                                 let Price = orders["Price"] as! Double
                                 let ItemID = orders["ItemID"] as! Int
                                 let Quantity = orders["Quantity"] as! Int
                                 let OrderDetails = orders["OrderDetailID"] as! Int
-                                let products = ReceiptModel(Name: Name, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                let products = ReceiptModel(Name: Name, AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(products)
                                 let price = Price *  Double(Constants.counterQTY)
                                 Constants.totalprice = Constants.totalprice + Double(price)
@@ -976,21 +1036,21 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else if (details.status == 1000) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
                     
                     else if (details.status == 1001) {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
                     
                     else {
                         
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                    
@@ -998,7 +1058,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 } catch {
                     
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Failed to load! error occured", controller: self)
+                        ToastView.show(message: LocalizedString.occured, controller: self)
                     }
                     
                 }
@@ -1029,47 +1089,47 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     
-    func punchOrder() {
-        
-        let parameters = [ Constants.SessionID: Constants.sessions,
-                           Constants.CarID:Constants.CarIDData,
-                           Constants.OrderTakerID: Constants.ordertracker,
-                           Constants.BayID: Constants.bayid,
-                           Constants.OrderID:  Constants.OrderIDData,
-                           Constants.OrderPunchDt: Constants.currentdate ] as [String : Any]
-        
-        guard let url = URL(string: "http://garageapi.isalespos.com/api/order/new") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        request.httpBody = httpBody
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if response == nil {
-                DispatchQueue.main.async {
-                    ToastView.show(message: "Login failed! Check internet", controller: self)
-                    
-                }
-            }
-            if let response = response {
-                print(response)
-            }
-            
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
-                }
-            }
-            
-            }.resume()
-        
-        
-    }
+//    func punchOrder() {
+//
+//        let parameters = [ Constants.SessionID: Constants.sessions,
+//                           Constants.CarID:Constants.CarIDData,
+//                           Constants.OrderTakerID: Constants.ordertracker,
+//                           Constants.BayID: Constants.bayid,
+//                           Constants.OrderID:  Constants.OrderIDData,
+//                           Constants.OrderPunchDt: Constants.currentdate ] as [String : Any]
+//
+//        guard let url = URL(string: "http://garageapi.isalespos.com/api/order/new") else { return }
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+//        request.httpBody = httpBody
+//
+//        let session = URLSession.shared
+//        session.dataTask(with: request) { (data, response, error) in
+//            if response == nil {
+//                DispatchQueue.main.async {
+//                    ToastView.show(message: "Login failed! Check internet", controller: self)
+//
+//                }
+//            }
+//            if let response = response {
+//                print(response)
+//            }
+//
+//            if let data = data {
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                    print(json)
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//
+//            }.resume()
+//
+//
+//    }
     
  
     func editDetails() {
@@ -1095,7 +1155,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             let parameters = [    Constants.MakeID: Constants.MakeIDData,
                                   Constants.ModelID: Constants.ModelIDData,
                                   Constants.CarID: Constants.CarIDData,
-                                  Constants.CustomerID: Constants.CustomerIDData,
+                                   Constants.CustomerID: Constants.CustomerIDData,
                                   Constants.CustomerContact: phoneNumber.text!,
                                   Constants.VinNo: VinNumber.text!,
                                   Constants.MakerName: carMake.text!,
@@ -1103,7 +1163,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                   Constants.CarName: Constants.CarNameData,
                                   Constants.CarDescription: "",
                                   Constants.Year: yearNumber.text!,
-                                  Constants.Color: "green",
+                                  Constants.Color: "white",
                                   Constants.RegistrationNo: carplateNumber.text!,
                                   Constants.ImagePath: "",
                                   Constants.SessionID: Constants.sessions,
@@ -1113,17 +1173,17 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             if (carplateNumber.text == "")  || (phoneNumber.text == "" || modelNumber.text == "") {
                 
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Please Add mendatory fields!", controller: self)
-                    // self.staric.textColor = UIColor.red
+                    ToastView.show(message: self.mendatoryfield, controller: self)
+                  //   self.staric.textColor = UIColor.red // here
                     self.phStaric.textColor = UIColor.red
                     self.CarStaric.textColor = UIColor.red
                     self.modelStaric.textColor = UIColor.red
                 }
                     
                 } else if phoneNumber.text!.count < 13 {
-                    ToastView.show(message: "Phone Number is invalid! Less than format", controller: self)
+                    ToastView.show(message: Numberinvalid, controller: self)
                 } else if phoneNumber.text!.count > 13 {
-                    ToastView.show(message: "Phone Number is invalid! Greater than format", controller: self)
+                    ToastView.show(message: NumberGreater, controller: self)
                 
             }
             else {
@@ -1142,7 +1202,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 session.dataTask(with: request) { (data, response, error) in
                     if response == nil {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.interneterror, controller: self)
+                            ToastView.show(message: LocalizedString.interneterror, controller: self)
                         }
                     }
                     if let response = response {
@@ -1186,27 +1246,27 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.wrong, controller: self)
+                                    ToastView.show(message: LocalizedString.wrong, controller: self)
                                 }
                             }
                             else if (status == 1001) {
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.invalid, controller: self)
+                                    ToastView.show(message: LocalizedString.invalid, controller: self)
                                 }
                             }
                             else  {
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.occured, controller: self)
+                                    ToastView.show(message: LocalizedString.occured, controller: self)
                                 }
                             }
                             
                         } catch {
                             print(error)
-                            ToastView.show(message: "Edit Failed! error occured", controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             
                         }
                         
@@ -1232,7 +1292,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                   Constants.CarName: Constants.CarNameData,
                                   Constants.CarDescription: "",
                                   Constants.Year: yearNumber.text!,
-                                  Constants.Color: "green",
+                                  Constants.Color: "white",
                                   Constants.RegistrationNo: carplateNumber.text!,
                                   Constants.ImagePath: "",
                                   Constants.SessionID: Constants.sessions,
@@ -1242,7 +1302,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             if (carplateNumber.text == "")  || (phoneNumber.text == "" || modelNumber.text == "") {
                 
                 DispatchQueue.main.async {
-                    ToastView.show(message: "Please Add mendatory fields!", controller: self)
+                    ToastView.show(message: self.mendatoryfield, controller: self)
                     //  self.staric.textColor = UIColor.red
                     self.phStaric.textColor = UIColor.red
                     self.CarStaric.textColor = UIColor.red
@@ -1251,9 +1311,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 }
                 
             } else if phoneNumber.text!.count < 13 {
-                ToastView.show(message: "Phone Number is invalid! Less than format", controller: self)
+                ToastView.show(message: Numberinvalid, controller: self)
             } else if phoneNumber.text!.count > 13 {
-                ToastView.show(message: "Phone Number is invalid! Greater than format", controller: self)
+                ToastView.show(message: NumberGreater, controller: self)
                 
             }
                 
@@ -1273,7 +1333,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 session.dataTask(with: request) { (data, response, error) in
                     if response == nil {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.interneterror, controller: self)
+                            ToastView.show(message: LocalizedString.interneterror, controller: self)
                         }
                     }
                     if let response = response {
@@ -1315,28 +1375,28 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.wrong, controller: self)
+                                    ToastView.show(message: LocalizedString.wrong, controller: self)
                                 }
                             }
                             else if (status == 1001) {
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.invalid, controller: self)
+                                    ToastView.show(message: LocalizedString.invalid, controller: self)
                                 }
                             }
                             else  {
                                 
                                 print(status!)
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: Constants.occured, controller: self)
+                                    ToastView.show(message: LocalizedString.occured, controller: self)
                                 }
                             }
                             
                             
                         } catch {
                             print(error)
-                            ToastView.show(message: "Added failed! error occured", controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             
                         }
                     }
@@ -1414,8 +1474,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         else if textField.text!.characters.count  > 8  {
-            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }
@@ -1442,8 +1502,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @objc func phoneNumberediting(_ textField: UITextField) {
        print("Pressed")
         if phoneNumber.text!.characters.count == 13 {
-            let alert = UIAlertController(title: "Alert", message: "Limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             //            return false
         }
@@ -1464,8 +1524,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         else if textField.text!.characters.count  > 17  {
-            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }

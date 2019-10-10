@@ -25,6 +25,17 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var totalprice = 0
     
     
+    //Localization
+    
+    let delete = NSLocalizedString("delete", comment: "")
+    let new = NSLocalizedString("new", comment: "")
+    let Hold = NSLocalizedString("Hold", comment: "")
+
+    
+    //Localization
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -42,12 +53,12 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
      if Constants.flagEdit != 0 || Constants.editcheckout != 0  {
         OrderLabel.text = "\(Constants.transedit)"
-        statusLabel.text = "Hold"
+        statusLabel.text = Hold
         }
      else {
         
         OrderLabel.text = "0"
-        statusLabel.text = "new"
+        statusLabel.text = new
         
         }
     }
@@ -65,7 +76,7 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        let Delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexpath) in
+        let Delete = UITableViewRowAction(style: .destructive, title: delete) { (action, indexpath) in
             if Constants.flagEdit != 0  || Constants.editcheckout != 0 {
                  let Model = Items.Product[indexpath.row]
                 Model.Mode = "Delete"
@@ -96,8 +107,12 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiptCell", for: indexPath) as! ReceiptCell
         
-        
-        cell.ProductName.text = Items.Product[indexPath.row].Name
+        if L102Language.currentAppleLanguage() == "ar" {
+           cell.ProductName.text = Items.Product[indexPath.row].AlternateName
+        } else {
+           cell.ProductName.text = Items.Product[indexPath.row].Name
+        }
+        //here
         let qty = Items.Product[indexPath.row].Quantity
         cell.ProductPrice.text = "\(qty!)"
         let price = Items.Product[indexPath.row].Price

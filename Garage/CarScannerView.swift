@@ -24,6 +24,20 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     var myImage: UIImage!
     var flag = 0
+   
+    
+    
+    //Localization
+    
+    let EnterPlatenumber = NSLocalizedString("EnterPlatenumber", comment: "")
+    let EnterVinnumber = NSLocalizedString("EnterVinnumber", comment: "")
+    let EnteranyField = NSLocalizedString("EnteranyField", comment: "")
+    
+    
+    
+    
+    //Localization
+    
     
     
     @IBAction func scannerBackBtn(_ sender: Any) {
@@ -49,7 +63,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         NotificationCenter.default.removeObserver(self, name: Notification.Name("imageadded"), object: nil)
     }
     
-    
+
     
     
     @objc func images(notification: Notification) {
@@ -136,9 +150,11 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                     
                     upload.uploadProgress(closure: { (Progress) in
                         print("Upload Progress: \(Progress.fractionCompleted)")
+                        self.showLoader()
                     })
                     
                     upload.responseJSON { response in
+                        self.showLoader()
                         //self.delegate?.showSuccessAlert()
                         print(response.request)  // original URL request
                         print(response.response) // URL response
@@ -148,8 +164,9 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                         //self.removeImage("frame", fileExtension: "txt")
                         if let JSON = response.result.value as? NSObject {
                             DispatchQueue.main.async {
+                                let Status = JSON.value(forKey: "Status") as! Int
                                 let descript = JSON.value(forKey: "Description") as! String
-                                print(descript)
+                                 if Status == 1 {
                                 ToastView.show(message: descript, controller: self)
                                 if let Platenmb = JSON.value(forKey: "PlateNo") as? String {
                                     self.addplateTextfield.backgroundColor = UIColor.darkGray
@@ -157,13 +174,21 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                                         UIFont.boldSystemFont(ofSize: 14.0)])
                                     self.addplateTextfield.isUserInteractionEnabled = true
                                     self.addplateTextfield.text  = Platenmb
+                                    }
+                                    self.dismiss(animated: true, completion: nil)
+                                 } else if Status == 0 {
+                                    ToastView.show(message: descript, controller: self)
+                                    self.dismiss(animated: true, completion: nil)
+                                    
                                 }
+                                
+                                
                             }
                         }
                     }
                     
                 case .failure(let encodingError):
-                    //self.delegate?.showFailAlert()
+                    self.dismiss(animated: true, completion: nil)
                     print(encodingError)
                     ToastView.show(message: "\(encodingError)", controller: self)
                 }
@@ -286,12 +311,14 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     }
     
     func showLoader() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         loadingIndicator.startAnimating();
+        loadingIndicator.backgroundColor = UIColor.DefaultApp
+        loadingIndicator.layer.cornerRadius = 18.0
         
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
@@ -303,7 +330,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     @IBAction func continueBtn(_ sender: Any) {
         
         if addplateTextfield.text! == "" && addVintextfield.text! == "" {
-            ToastView.show(message: "Please Enter any one Field", controller: self)
+            ToastView.show(message: EnteranyField, controller: self)
         }
         else if addplateTextfield.text! == "" {
             Constants.vinnmb = addVintextfield.text!
@@ -329,17 +356,19 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     @IBAction func addPlateNmbBtn(_ sender: Any)  {
+        
         addVintextfield.isUserInteractionEnabled = false
         addplateTextfield.backgroundColor = UIColor.darkGray
-        addplateTextfield.attributedPlaceholder = NSAttributedString(string: "Enter Plate number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
+        addplateTextfield.attributedPlaceholder = NSAttributedString(string: EnterPlatenumber, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addplateTextfield.isUserInteractionEnabled = true
     }
     
     
     @IBAction func addVinAction(_ sender: Any) {
+    
         addplateTextfield.isUserInteractionEnabled = false
         addVintextfield.backgroundColor = UIColor.darkGray
-        addVintextfield.attributedPlaceholder = NSAttributedString(string: "Enter Vin number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
+        addVintextfield.attributedPlaceholder = NSAttributedString(string: EnterVinnumber, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addVintextfield.isUserInteractionEnabled = true
     }
     
@@ -359,8 +388,8 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             
         }
         else if textField.text!.characters.count  > 8  {
-            let alert = UIAlertController(title: "Alert", message: "limit Exceeded", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }

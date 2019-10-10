@@ -61,6 +61,26 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     var SearchData:Array<Dictionary<String,String>> = []
     var search:String=""
     
+    
+    //Localization
+    
+    let SearchItemsName = NSLocalizedString("SearchItemsName", comment: "")
+    let Sorryback = NSLocalizedString("Sorryback", comment: "")
+    let SelectItems = NSLocalizedString("SelectItems", comment: "")
+    
+    
+    
+    
+    //Localization
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,8 +88,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         SearcIconImages()
         
         print("\(Items.nameArray)")
-        serviceSearch.attributedPlaceholder = NSAttributedString(string: "   Search Items Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        serviceSearch.textAlignment = .left
+            serviceSearch.attributedPlaceholder = NSAttributedString(string:    SearchItemsName, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+         serviceSearch.textAlignment = .left
         subcategoryBtn.isHidden = true
         itemBtn.isHidden = true
         colectionview.delegate = self
@@ -85,6 +105,11 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         serviceSearch.addTarget(self, action: #selector(SearchFunction), for: .touchDown)
         serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControlEvents.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+        if L102Language.currentAppleLanguage() == "ar" {
+            Reassignoutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 0, right: 0)
+           // category.al
+           
+        }
     }
     
     deinit {
@@ -261,6 +286,8 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         cell.textLabel?.textAlignment = .left
         cell.textLabel!.text = itemsModel[indexPath.row].Name
+         cell.textLabel!.text = itemsModel[indexPath.row].AlternateName
+        
         //        print(self.serviceSearch.frame.width)
         //        let label1 = UILabel(frame: CGRect(x: self.serviceSearch.frame.width - 130, y: 10, width: 100, height: 25))
         //        var price = 0.00
@@ -285,7 +312,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         let detail = [(itemsModel[indexPath.row])]
         for newdetail in detail {
             
-            let product = ReceiptModel(Name: newdetail.Name!, Price: (newdetail.Price! * 1), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+            let product = ReceiptModel(Name: newdetail.Name!, AlternateName: newdetail.AlternateName, Price: (newdetail.Price! * 1), ItemID: newdetail.ItemID!, Quantity:  searchQuantity, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
             //here after (newdetail.Price! * 1)
             Items.Product.append(product)
             let price = newdetail.Price! * Double(searchQuantity)
@@ -310,7 +337,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         session.dataTask(with: orderdetails){ (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let data = data {
@@ -390,12 +417,13 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                         if let order = json["Orderdetail"] as? [[String: Any]] {
                             for orders in order {
                                 print(orders)
-                                let Name = orders["ItemName"] as! String
+                                let Name = orders["ItemName"] as? String  ?? ""
+                                let AlternateName = orders["AlternateName"] as? String  ?? ""
                                 let Price = orders["Price"] as! Double
                                 let ItemID = orders["ItemID"] as! Int
                                 let Quantity = orders["Quantity"] as! Int
                                 let OrderDetails = orders["OrderDetailID"] as! Int
-                                let editproducts = ReceiptModel(Name: Name, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
+                                let editproducts = ReceiptModel(Name: Name, AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(editproducts)
                                 let price = Price * Double(Constants.counterQTY)
                                 Constants.totalprice = Constants.totalprice + Double(price)
@@ -418,17 +446,17 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                         
                     else if (details.status == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
                     else if (details.status == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     
@@ -436,7 +464,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                 } catch {
                     
                     DispatchQueue.main.async {
-                        ToastView.show(message: "Failed to load! error occured", controller: self)
+                        ToastView.show(message: LocalizedString.occured, controller: self)
                     }
                     
                 }
@@ -455,7 +483,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         session.dataTask(with: url) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                     
                 }
             }
@@ -504,7 +532,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     }
                     else if (status == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             
                             
                         }
@@ -512,14 +540,14 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                         
                     else if (status == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             
                         }
                     }
                         
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             
                         }
                     }
@@ -549,12 +577,12 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         Alamofire.request(url).response { [weak self] (response) in
             if response == nil { 
                 DispatchQueue.main.async {
-                    ToastView.show(message: Constants.interneterror, controller: self!)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self!)
                 }
             }
             guard self != nil else { return }
             if let error = response.error {
-                ToastView.show(message: Constants.interneterror, controller: self!)
+                ToastView.show(message: LocalizedString.interneterror, controller: self!)
             } else {
                 do {
                     let json = try JSON(data: response.data!)
@@ -634,15 +662,15 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                     }
                         
                     else  if (status == 1000) {
-                        ToastView.show(message: Constants.wrong, controller: self!)
+                        ToastView.show(message: LocalizedString.wrong, controller: self!)
                     }
                         
                     else  if (status == 1001) {
-                        ToastView.show(message: Constants.invalid, controller: self!)
+                        ToastView.show(message: LocalizedString.invalid, controller: self!)
                     }
                         
                     else {
-                        ToastView.show(message: Constants.occured, controller: self!)
+                        ToastView.show(message: LocalizedString.occured, controller: self!)
                     }
                     
                     
@@ -733,7 +761,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         }
         else {
             
-            ToastView.show(message: "Please Select Items!", controller: self)
+            ToastView.show(message: SelectItems, controller: self)
             
         }
         
@@ -777,7 +805,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     @IBAction func backBtn(_ sender: Any) {
         if Constants.editcheckout != 0 ||  Constants.flagEdit != 0 {
             
-            ToastView.show(message: "Sorry! You can't step back!", controller: self)
+            ToastView.show(message: Sorryback, controller: self)
         } else
         {
             
@@ -843,12 +871,21 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         switch currentState {
         case 1:
-            cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].name, image: categories[categoryIndex].subCategories[indexPath.row].image)
+            if L102Language.currentAppleLanguage() == "ar" {
+                   cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].alternateName, image: categories[categoryIndex].subCategories[indexPath.row].image)
+            } else {
+                cell.populate(with: categories[categoryIndex].subCategories[indexPath.row].name, image: categories[categoryIndex].subCategories[indexPath.row].image)
+            }
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
         case 2:
-            cell.populate(with: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].name, image: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].image)
+            if L102Language.currentAppleLanguage() == "ar" {
+                cell.populate(with: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].alternateName, image: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].image)
+            } else {
+                cell.populate(with: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].name, image: categories[categoryIndex].subCategories[subCategoryIndex].items[indexPath.row].image)
+            }
+          
             cell.plusBtn.isHidden = false
             cell.minusBtn.isHidden = false
             cell.countLbl.isHidden = false
@@ -856,7 +893,11 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             count = count+1
             cell.decorate(for: "\(count)", in: self)
         default:
-            cell.populate(with: categories[indexPath.row].name, image: categories[indexPath.row].image)
+            if L102Language.currentAppleLanguage() == "ar" {
+                cell.populate(with: categories[indexPath.row].alternateName, image: categories[indexPath.row].image)
+            } else {
+                cell.populate(with: categories[indexPath.row].name, image: categories[indexPath.row].image)
+            }
             cell.index = indexPath
             cell.plusBtn.isHidden = true
             cell.minusBtn.isHidden = true
@@ -941,7 +982,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 let pp = Double(newname.price)
                 print(pp)
                 
-                let product = ReceiptModel(Name: newname.name, Price: (newname.price * Double(Constants.counterQTY)), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
+                let product = ReceiptModel(Name: newname.name, AlternateName: newname.alternateName, Price: (newname.price * Double(Constants.counterQTY)), ItemID: newname.itemID, Quantity:  Constants.counterQTY, Mode: Constants.mode, OrderDetailID: 0, Status: 201)
                 //here after (newname.price * Double(Constants.counterQTY))
                 Items.Product.append(product)
                 let price = newname.price * Double(Constants.counterQTY)
@@ -1066,7 +1107,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                 
                 if response == nil {
                     DispatchQueue.main.async {
-                        ToastView.show(message: Constants.interneterror, controller: self)
+                        ToastView.show(message: LocalizedString.interneterror, controller: self)
                     }
                 }
                 if let response = response {
@@ -1115,7 +1156,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         else if (status == 1000) {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.wrong, controller: self)
+                                ToastView.show(message: LocalizedString.wrong, controller: self)
                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
@@ -1123,7 +1164,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         else if (status == 1001) {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.invalid, controller: self)
+                                ToastView.show(message: LocalizedString.invalid, controller: self)
                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
@@ -1131,7 +1172,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         else if (status == 1003) {
                             
                             DispatchQueue.main.async {
-                                self.alert(view: self, title: newmessage!, message: "Do you want to continue?")
+                                self.alert(view: self, title: newmessage!, message: LocalizedString.wantto)
                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
@@ -1139,7 +1180,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         else  {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.occured, controller: self)
+                                ToastView.show(message: LocalizedString.occured, controller: self)
                                 self.Nextoutlet.isUserInteractionEnabled = true
                             }
                         }
@@ -1147,7 +1188,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                     } catch {
                         DispatchQueue.main.async {
                             print(error)
-                            ToastView.show(message: "Edit Failed! error occured", controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             self.Nextoutlet.isUserInteractionEnabled = true
                         }
                     }
@@ -1176,7 +1217,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             session.dataTask(with: request) { (data, response, error) in
                 if response == nil {
                     DispatchQueue.main.async {
-                        ToastView.show(message: Constants.interneterror, controller: self)
+                        ToastView.show(message: LocalizedString.interneterror, controller: self)
                     }
                 }
                 if let response = response {
@@ -1213,28 +1254,28 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                         else if (status == 1000) {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.wrong, controller: self)
+                                ToastView.show(message: LocalizedString.wrong, controller: self)
                             }
                         }
                             
                         else if (status == 1001) {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.invalid, controller: self)
+                                ToastView.show(message: LocalizedString.invalid, controller: self)
                             }
                         }
                     
                         else {
                             
                             DispatchQueue.main.async {
-                                ToastView.show(message: Constants.occured, controller: self)
+                                ToastView.show(message: LocalizedString.occured, controller: self)
                             }
                         }
                         
                     } catch {
                         DispatchQueue.main.async {
                             print(error)
-                            ToastView.show(message: "Edit Failed! error occured", controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
                     

@@ -28,6 +28,10 @@ class ReceptionalistView: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // GeneralNibView.frame.size = settingContianerPop.frame.size
+        if L102Language.currentAppleLanguage() == "ar" {
+
+            profileBtnOutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:10, bottom: 0, right: 0)
+        }
     }
     
     

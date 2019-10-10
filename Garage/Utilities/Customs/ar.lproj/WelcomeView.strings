@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "60a-9f-bLa"; */
+"60a-9f-bLa.text" = "Label";
+
+/* Class = "UILabel"; text = "Model"; ObjectID = "A1t-GU-cYg"; */
+"A1t-GU-cYg.text" = "طراز المركبة";//"Model";
+
+/* Class = "UILabel"; text = "Action"; ObjectID = "ChA-0G-5nZ"; */
+"ChA-0G-5nZ.text" = "تحرير";//"Action";
+
+/* Class = "UIButton"; normalTitle = "Add new Car"; ObjectID = "Rck-Xz-Vag"; */
+"Rck-Xz-Vag.normalTitle" = "إضافة مركبة";//"Add new Car";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T9H-JV-wlo"; */
+"T9H-JV-wlo.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UPH-Ml-f9f"; */
+"UPH-Ml-f9f.text" = "Label";
+
+/* Class = "UILabel"; text = "No.Plate"; ObjectID = "WgQ-Mo-Etn"; */
+"WgQ-Mo-Etn.text" = "رقم اللوحة";//"No.Plate";
+
+/* Class = "UITextField"; placeholder = "Search Car By PlateNo"; ObjectID = "hVH-HU-DWD"; */
+"hVH-HU-DWD.placeholder" = "البحث عن مركبة بـ لوحة السيارة";//"Search Car By PlateNo";
+
+/* Class = "UILabel"; text = "Make"; ObjectID = "kjg-vL-L0c"; */
+"kjg-vL-L0c.text" = "ماركة المركبة";//"Make";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "r6Q-6b-bFY"; */
+"r6Q-6b-bFY.text" = "Label";
+
+/* Class = "UISegmentedControl"; ybL-j6-WGj.segmentTitles[0] = "All"; ObjectID = "ybL-j6-WGj"; */
+"ybL-j6-WGj.segmentTitles[0]" = "الكل";//"All";
+
+/* Class = "UISegmentedControl"; ybL-j6-WGj.segmentTitles[1] = "Waitlist"; ObjectID = "ybL-j6-WGj"; */
+"ybL-j6-WGj.segmentTitles[1]" = "قائمة الإنتظار";//"Waitlist";
+
+/* Class = "UISegmentedControl"; ybL-j6-WGj.segmentTitles[2] = "Assigned"; ObjectID = "ybL-j6-WGj"; */
+"ybL-j6-WGj.segmentTitles[2]" = "تعيين";//"Assigned";
+
+/* Class = "UILabel"; text = "Trans.No"; ObjectID = "yk6-WX-Vra"; */
+"yk6-WX-Vra.text" = "رقم العملية";//"Trans.No";

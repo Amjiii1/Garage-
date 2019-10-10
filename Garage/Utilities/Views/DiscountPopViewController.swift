@@ -24,8 +24,8 @@ protocol DiscountPopDelegate: class {
 
 
 class DiscountPopViewController: UIViewController {
-
-     let discountCellIdentifier = "discountCellIdentifier"
+    
+    let discountCellIdentifier = "discountCellIdentifier"
     let discountViewModel = DiscountViewModel()
     
     @IBOutlet weak var discountContainerView: UIView!
@@ -34,7 +34,7 @@ class DiscountPopViewController: UIViewController {
     @IBOutlet weak var stackOfTopButtons: UIStackView!
     weak var delegate: DiscountPopDelegate?
     var numPadVC: MyNumPadViewController?
-     var selectedDiscountType:DiscountType!
+    var selectedDiscountType:DiscountType!
     
     
     
@@ -62,7 +62,7 @@ class DiscountPopViewController: UIViewController {
     @IBAction func applyPressed(_ sender: Any) {
         saveDiscount()
         self.delegate?.discountApplyPressed(viewController: self)
-       // self.delegate?.discountCancelPressed(viewController: self)
+        // self.delegate?.discountCancelPressed(viewController: self)
     }
     
     
@@ -131,9 +131,8 @@ class DiscountPopViewController: UIViewController {
             
         case .Trend:
             discountTableview.isHidden = false
-    
+            
         }
-        
         
         
     }
@@ -146,8 +145,8 @@ class DiscountPopViewController: UIViewController {
         let nib = UINib.init(nibName: "DiscountTableViewCell", bundle: nil)
         discountTableview.register(nib, forCellReuseIdentifier: discountCellIdentifier)
         discountViewModel.setDiscountViewModels()
-
-
+        
+        
         if let amountButton = stackOfTopButtons.viewWithTag(2) as? UIButton {
             topdiscountbuttons(amountButton)
         }
@@ -156,20 +155,9 @@ class DiscountPopViewController: UIViewController {
         
         
         
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 
 extension DiscountPopViewController: UITableViewDelegate, UITableViewDataSource {
@@ -183,7 +171,7 @@ extension DiscountPopViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let v = UIView()
         v.backgroundColor = UIColor.clear
-        return                                              v
+        return v
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

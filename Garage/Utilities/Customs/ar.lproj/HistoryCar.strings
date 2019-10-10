@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "7Tt-2m-rCC"; */
+"7Tt-2m-rCC.text" = "Label";
+
+/* Class = "UILabel"; text = "Action"; ObjectID = "GII-ai-dwH"; */
+"GII-ai-dwH.text" = "تحرير";
+
+/* Class = "UILabel"; text = "Trans.No"; ObjectID = "HWK-tz-zN3"; */
+"HWK-tz-zN3.text" = "رقم العملية";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "Kx4-6h-EnZ"; */
+"Kx4-6h-EnZ.text" = "التاريخ";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "Myv-Ly-Cyp"; */
+"Myv-Ly-Cyp.text" = "الإجمالي";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Rnw-w5-WIn"; */
+"Rnw-w5-WIn.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Details"; ObjectID = "Uks-dN-EdV"; */
+"Uks-dN-EdV.normalTitle" = "تفاصيل ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "amI-Nt-1U6"; */
+"amI-Nt-1U6.text" = "Label";
+
+/* Class = "UILabel"; text = "No Car"; ObjectID = "bWw-ie-zt5"; */
+"bWw-ie-zt5.text" = "لا سيارة";
+
+/* Class = "UILabel"; text = "No Car"; ObjectID = "da8-cw-uam"; */
+"da8-cw-uam.text" = "لا سيارة";
+
+/* Class = "UILabel"; text = "Mechanics"; ObjectID = "hBu-Ub-tOu"; */
+"hBu-Ub-tOu.text" = "الفني";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "k4J-xN-UJS"; */
+"k4J-xN-UJS.normalTitle" = "العودة";
+
+/* Class = "UILabel"; text = "Car History"; ObjectID = "oF1-EJ-T4d"; */
+"oF1-EJ-T4d.text" = "أرشيف المركبة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "v8M-fp-kyQ"; */
+"v8M-fp-kyQ.text" = "Label";

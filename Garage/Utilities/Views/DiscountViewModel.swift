@@ -34,9 +34,9 @@ class DiscountViewModel {
     }
     
     func setDiscountViewModels() {
-        let discountModel1 = discountModel(name: "National Day", amount: "10", currencySymbol: "SAR")
-        let discountModel2 = discountModel(name: "Father's Day", amount: "5", currencySymbol: "%")
-        let discountModel3 = discountModel(name: "Happiness Day", amount: "3", currencySymbol: "SAR")
+        let discountModel1 = discountModel(name: "Comming Soon", amount: "10", currencySymbol: "SAR")
+        let discountModel2 = discountModel(name: "Comming Soon", amount: "5", currencySymbol: "%")
+        let discountModel3 = discountModel(name: "Comming Soon", amount: "3", currencySymbol: "SAR")
         discountModels.append(discountModel1)
         discountModels.append(discountModel2)
         discountModels.append(discountModel3)

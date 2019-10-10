@@ -9,17 +9,6 @@
 import UIKit
 
 class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-   
-    
-    
-//    func discountApplyPressed(viewController: UIViewController) {
-//        print("cancel pressed in checkoutpopup")
-//    }
-//
-//    func discountCancelPressed(viewController: UIViewController) {
-//        toggleContianerViews()
-//    }
-    
     
     @IBOutlet weak var buttonstack: UIStackView!
     @IBOutlet weak var PopUpView: UIView!
@@ -31,16 +20,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var cardBtn: UIButton!
     @IBOutlet weak var cashBtn: UIButton!
     @IBOutlet weak var checkout_tableview: UITableView!
-    
     @IBOutlet weak var SubtotalAmount: UILabel!
-    
     @IBOutlet weak var DiscountAmount: UILabel!
-    
     @IBOutlet weak var TaxAmount: UILabel!
-    
-    
-    
-    
     @IBOutlet weak var workerBtn: UIButton!
     @IBOutlet weak var assistantBtn: UIButton!
     @IBOutlet weak var checkoutoutlet: UIButton!
@@ -50,9 +32,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let dateFormatter : DateFormatter = DateFormatter()
     @IBOutlet weak var balancetxtf: UITextField!
     @IBOutlet weak var balacelbl: UILabel!
-    
     @IBOutlet weak var discountContainer: UIView!
-    
     @IBOutlet weak var taxLabel: UILabel!
     
     
@@ -67,12 +47,22 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     var CheckoutObject = [CheckouObject]()
     var cartItemStructArray = [ReceiptModel]()
     var printerDetailModelUICells: [PrinterDetailCellUIModel]!
-    var dummyData = ["SubTotal","Discount","VAT \(Constants.percent)%"]
     var amount = [Constants.subtotal,Constants.checkoutdiscount,Constants.checkouttax]
     var workerid = 0
     var assistantid = 0
     var cashamount: Double = 0.0
     var cardamount: Double = 0.0
+    
+    //Localization
+    
+    let VAT = NSLocalizedString("VAT", comment: "")
+    let selectWorker = NSLocalizedString("selectWorker", comment: "")
+    let EnterAmount = NSLocalizedString("EnterAmount!", comment: "")
+    let Discountcantgreater = NSLocalizedString("Discountcantgreater", comment: "")
+    let CheckoutFailed = NSLocalizedString("CheckoutFailed", comment: "")
+    
+    
+    //Localization
     
     
     
@@ -80,26 +70,22 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         discountContainer.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
         if let button = buttonstack.viewWithTag(1) as? UIButton {
             tabButtonaction(button)
         }
-        //  buttonstack.layer.cornerRadius = 14.0
         tenderedbalance.delegate = self
         viewModel.checkoutVC = self
         checkout_tableview.delegate = self
         checkout_tableview.dataSource = self
-//        discouttableview.delegate = self
-//        discouttableview.dataSource = self
         checkout_tableview.separatorStyle = .none
-      //  discouttableview.separatorStyle = .none
         
         
         setCalculationUI()
         self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)
-        //(format: "%.2f", (Constants.checkoutGrandtotal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
@@ -119,31 +105,28 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         setUI()
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.printeradded(notification:)), name: Notification.Name("printerAdded"), object: nil)
         
+        if L102Language.currentAppleLanguage() == "ar" {
+            cashBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 30)
+            cardBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 35)
+            giftcardBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 35)
+            loyalityBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 30)
+            voucherBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 35)
+        }
+        
     }
     
-    
     private func setUI() {
-       
         viewModel.originalAmount = Constants.checkoutGrandtotal
-      //  viewModel.discountAmount = Constants.checkoutdiscount
-      //  viewModel.totalPrice = Constants.subtotal
-        
-     
     }
     
     func setCalculationUI() {
         
-        
         SubtotalAmount.text = String(format: "%.2f", Constants.subtotal)
         DiscountAmount.text = String(format: "%.2f", Constants.checkoutdiscount)
         TaxAmount.text =  String(format: "%.2f", Constants.checkouttax)       
-            
-            
-        taxLabel.text = "VAT \(Constants.percent)%"
-        
-        
+        taxLabel.text = "\(VAT) (\(Constants.percent)%)"
+   
     }
-    
     
     
     
@@ -171,7 +154,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }
         
-        
     }
     
     
@@ -180,12 +162,10 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.workerBtn.setTitle("\(Constants.FullName)", for: .normal)
             Constants.checkoutmechanic = Constants.FullName
             workerid = Constants.SubUserID
-            
             Constants.workerflag = 0
         } else {
             self.assistantBtn.setTitle("\(Constants.FullName)", for: .normal)
             assistantid = Constants.SubUserID
-            
         }
         
     }
@@ -193,6 +173,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         NotificationCenter.default.removeObserver(self, name: Notification.Name("printerAdded"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("Notificationusername"), object: nil)
     }
+    
+    
+    
+   
+    
+    
+    
     
     
     
@@ -204,21 +191,21 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var returnvalue = 0
-      //  if tableView == checkout_tableview {
             returnvalue = Checkoutstruct.sentitems.count
-      //  }
-//        else if tableView == discouttableview {
-//            returnvalue = 3
-//        }
         return returnvalue
     }
+    
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       // if tableView == checkout_tableview {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellcheckout") as! checkoutcell
-            cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
+        if L102Language.currentAppleLanguage() == "ar" {
+           cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].AlternateName
+        } else {
+           cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
+        }
+
             let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
             cell.Qtylabel.text = "\(qty!)"
             let price = Checkoutstruct.sentitems[indexPath.row].Price
@@ -226,18 +213,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = .none
             return cell
         }
-//        else if tableView == discouttableview {
-//            let cell2 = tableView.dequeueReusableCell(withIdentifier: "dummycell") as! checkoutdiscount
-//            print(Constants.checkoutdiscount)
-//            cell2.label.text = dummyData[indexPath.row]
-//            let tax = amount[indexPath.row]
-//            cell2.amount.text = String(format: "%.2f", tax)//String(tax)
-//            cell2.selectionStyle = .none
-//            return cell2
-//
-//        }
-//        return UITableViewCell()
- //   }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.gray
@@ -311,7 +287,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-    
     func updateAmountTenderForCardView() {
         flag = 2
         let cashAmount = viewModel.amountTendered
@@ -334,25 +309,19 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cardamount = Double(tenderedbalance.text!)!
                 cashamount = Double(temp!)!
                 if ((Double(cashamount)) == (Double(Constants.checkoutGrandtotal.myRounded(toPlaces: 2)))) {
-                    
-                    
                     flag = 1
                 }
                 
                 if ((Double(cashamount)) < (Double(Constants.checkoutGrandtotal.myRounded(toPlaces: 2))))  && (Double(cashamount)) != 0.0 {
                     
-                    
                     flag = 3
                 }
-                
                 cardcash = Double(temp!)! + Double(balancetxtf.text!)!
-                
                 balancetxtf.text = "0"
                 
             } else {
                 balancetxtf.text =  String(format: "%.2f", temp2)
             }
-            
         }
         else {
             tenderedbalance.text = "0"
@@ -360,11 +329,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func toggleLblBalanceHeading() {
-        if balacelbl.text == "Balance" {
-            balacelbl.text = "Return"
+        if balacelbl.text == LocalizedString.Balance {
+            balacelbl.text = LocalizedString.Return
         }
         else {
-            balacelbl.text = "Balance"
+            balacelbl.text = LocalizedString.Balance
         }
     }
     
@@ -380,7 +349,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func discartBtn(_ sender: Any) {
-        alert(view: self, title: "Alert", message: "Do you want to Discard the order?")
+        alert(view: self, title: LocalizedString.Alert, message: LocalizedString.Discard)
     }
     
     
@@ -416,7 +385,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "failed! Check internet", controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let response = response {
@@ -441,7 +410,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 0) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
+                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
                             self.present(messageVC, animated: true) {
                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -455,7 +424,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 1000) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
+                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
                             self.present(messageVC, animated: true) {
                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -468,7 +437,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 1001) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
+                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
                             self.present(messageVC, animated: true) {
                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -480,7 +449,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                     else  {
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
+                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
                             self.present(messageVC, animated: true) {
                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -492,7 +461,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                 } catch {
                     print(error)
-                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                    ToastView.show(message: LocalizedString.occured, controller: self)
                     self.dismiss(animated: true, completion: nil)
                 }
                 
@@ -579,7 +548,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    
+
     
     func removeNibViews() {
         if containerPop.subviews.count > 0  {
@@ -603,7 +572,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             if Constants.checkoutGrandtotal.myRounded(toPlaces: 2) == cardcash  {
                 status()
                 if cardtype == "" {
-                    let messageVC = UIAlertController(title: "Alert", message: "Please select Card" , preferredStyle: .actionSheet)
+                    let messageVC = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.PleaseselectCard, preferredStyle: .actionSheet)
                     self.present(messageVC, animated: true) {
                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                             messageVC.dismiss(animated: true, completion: nil)})}
@@ -665,7 +634,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         session.dataTask(with: request) { (data, response, error) in
                             if response == nil {
                                 DispatchQueue.main.async {
-                                    ToastView.show(message: "Login failed! Check internet", controller: self)
+                                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                                 }
                             }
                             if let response = response {
@@ -698,7 +667,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else if (status == 0) {
                                         
                                         DispatchQueue.main.async {
-                                            let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
+                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -711,7 +680,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else if (status == 1000) {
                                         
                                         DispatchQueue.main.async {
-                                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
+                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -724,7 +693,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else if (status == 1001) {
                                         
                                         DispatchQueue.main.async {
-                                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
+                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -736,7 +705,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                     else  {
                                         DispatchQueue.main.async {
-                                            let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
+                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                     messageVC.dismiss(animated: true, completion: nil)})}
@@ -749,7 +718,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                 } catch {
                                     print(error)
-                                    ToastView.show(message: "Edit Failed! error occured", controller: self)
+                                    ToastView.show(message: LocalizedString.occured, controller: self)
                                     self.grandtotalBtn.isUserInteractionEnabled = true
                                     
                                 }
@@ -760,7 +729,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }.resume()
                         
                     }   else {
-                        let messageVC = UIAlertController(title: "Checkout Failed", message: "Please select Worker!" , preferredStyle: .actionSheet)
+                        let messageVC = UIAlertController(title: CheckoutFailed, message: selectWorker , preferredStyle: .actionSheet)
                         present(messageVC, animated: true) {
                             Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -820,7 +789,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     session.dataTask(with: request) { (data, response, error) in
                         if response == nil {
                             DispatchQueue.main.async {
-                                ToastView.show(message: "Login failed! Check internet", controller: self)
+                                ToastView.show(message: LocalizedString.interneterror, controller: self)
                             }
                         }
                         if let response = response {
@@ -853,7 +822,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 0) {
                                     
                                     DispatchQueue.main.async {
-                                        let messageVC = UIAlertController(title: "Failed ", message: "\(newmessage!)" , preferredStyle: .actionSheet)
+                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -866,7 +835,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 1000) {
                                     
                                     DispatchQueue.main.async {
-                                        let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.wrong)" , preferredStyle: .actionSheet)
+                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -879,7 +848,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 1001) {
                                     
                                     DispatchQueue.main.async {
-                                        let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.invalid)" , preferredStyle: .actionSheet)
+                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -891,7 +860,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                 else  {
                                     DispatchQueue.main.async {
-                                        let messageVC = UIAlertController(title: "Failed ", message: "\(Constants.occured)" , preferredStyle: .actionSheet)
+                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
                                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -904,7 +873,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 
                             } catch {
                                 print(error)
-                                ToastView.show(message: "Edit Failed! error occured", controller: self)
+                                ToastView.show(message: LocalizedString.occured, controller: self)
                                 self.grandtotalBtn.isUserInteractionEnabled = true
                                 
                             }                            
@@ -914,7 +883,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }.resume()
                     
                 }   else {
-                    let messageVC = UIAlertController(title: "Checkout Failed", message: "Please select Worker!" , preferredStyle: .actionSheet)
+                    let messageVC = UIAlertController(title: CheckoutFailed, message: selectWorker , preferredStyle: .actionSheet)
                     present(messageVC, animated: true) {
                         Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                             messageVC.dismiss(animated: true, completion: nil)})}
@@ -922,7 +891,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                 }
             } else {
-                let messageVC = UIAlertController(title: "Checkout Failed", message: "Please Enter Total Amount!" , preferredStyle: .actionSheet)
+                let messageVC = UIAlertController(title: CheckoutFailed, message: EnterAmount , preferredStyle: .actionSheet)
                 present(messageVC, animated: true) {
                     Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                         messageVC.dismiss(animated: true, completion: nil)})}
@@ -967,13 +936,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         for receipt in Checkoutstruct.sentitems {
             
-            let cartItemStruct = ReceiptModel(Name: receipt.Name!, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
+            let cartItemStruct = ReceiptModel(Name: receipt.Name!, AlternateName: receipt.AlternateName, Price: receipt.Price!, ItemID: receipt.ItemID!, Quantity: receipt.Quantity!, Mode: "new", OrderDetailID: receipt.OrderDetailID!, Status: 1)
             cartItemStructArray.append(cartItemStruct)
             self.dismiss(animated: true, completion: nil)
         }
         
         
-        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
+        let orderToPrint = Orderdetail.init(OrderDetailID: 12, OrderID: 12, ItemID: 1, ItemName: "Amjad", AlternateName: "Ali", ItemImage: "store.png", Quantity: 32, Price: 21, TotalCost: 11, LOYALTYPoints: 1, StatusID: 2, ItemDate: Constants.currentdate, Mode: "new", orderPrinterType: PrinterType.checkout)
         
         PrintJobHelper.addCheckoutOrderInPrinterQueue(orderDetails: orderToPrint, cartItems:cartItemStructArray)
         
@@ -1111,7 +1080,7 @@ extension CheckOutPopView: DiscountPopDelegate {
                 switch value {
                 case .Amount:
                     if amountEntered > Constants.subtotal {
-                        let messageVC = UIAlertController(title: "Checkout Failed", message: "Discount cant be greater than total" , preferredStyle: .actionSheet)
+                        let messageVC = UIAlertController(title: CheckoutFailed, message: Discountcantgreater , preferredStyle: .actionSheet)
                         present(messageVC, animated: true) {
                             Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                                 messageVC.dismiss(animated: true, completion: nil)})}
@@ -1126,7 +1095,7 @@ extension CheckOutPopView: DiscountPopDelegate {
                     let discounttotal = Constants.subtotal * (amountEntered / 100)
                     let afterDiscountTotal = Constants.subtotal - discounttotal
                     if afterDiscountTotal < 0 {
-                        let messageVC = UIAlertController(title: "Checkout Failed", message: "Discount cant be greater than total" , preferredStyle: .actionSheet)
+                        let messageVC = UIAlertController(title: CheckoutFailed, message: Discountcantgreater , preferredStyle: .actionSheet)
                         present(messageVC, animated: true) {
                             Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                                 messageVC.dismiss(animated: true, completion: nil)})}

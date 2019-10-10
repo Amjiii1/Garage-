@@ -46,7 +46,7 @@
                                     <action selector="Pincodefield:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="d59-a5-clI"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGs-Li-hSS" userLabel="businessCode" customClass="CustomTextField" customModule="Garage" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGs-Li-hSS" userLabel="businessCode" customClass="CustomTextField" customModule="Garage" customModuleProvider="target">
                                 <rect key="frame" x="283.5" y="549.5" width="267" height="69"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.25882352939999997" green="0.26274509800000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

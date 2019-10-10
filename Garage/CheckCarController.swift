@@ -23,6 +23,11 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ChecklistTableview: UITableView!
     
     
+    var A = "A"
+    var B = "B"
+    var C = "C"
+    
+    
     
     var Inspectionlist = [InspectionList]()
     
@@ -36,6 +41,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         Constants.checkflag = 1
         Checklist.CheckcarPost.removeAll()
     }
+    
     
     private func getDetails() {
         let url = ("\(CallEngine.baseURL)\(CallEngine.carinspection)/\(Constants.SuperUser)/\(Constants.sessions)")
@@ -99,19 +105,19 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
                         
                     else  if (status == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self!)
+                            ToastView.show(message: LocalizedString.wrong, controller: self!)
                         }
                     }
                         
                     else  if (status == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self!)
+                            ToastView.show(message: LocalizedString.invalid, controller: self!)
                         }
                     }
                         
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self!)
+                            ToastView.show(message: LocalizedString.occured, controller: self!)
                         }
                     }
                     
@@ -223,26 +229,28 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         mainStackView.axis = .horizontal
         mainStackView.alignment = .center
         mainStackView.distribution = .fill
-        // mainStackView.distribution = .fillEqually//
         mainStackView.spacing = 10
+      
         
         let titletStackView = UIStackView()
         titletStackView.axis = .horizontal
         titletStackView.alignment = .leading
+
         titletStackView.distribution = .fillEqually
-        titletStackView.alignment = .center
+        //titletStackView.alignment = .center
         titletStackView.spacing = 5//10
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = true
         label.text = Inspectionlist[section].Name
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)//UIFont.systemFont(ofSize: 20.0)
         label.textColor = .white
+        label.textAlignment = .left
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.widthAnchor.constraint(equalToConstant: 49.5).isActive = true
+
         print(label.widthAnchor)
-        titletStackView.addArrangedSubview(label)
+//        titletStackView.addArrangedSubview(label)
         
         //let images = UIImage(named: Inspectionlist[section].Image)
         let url = URL(string: Inspectionlist[section].Image)
@@ -254,8 +262,18 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         
         image.widthAnchor.constraint(equalToConstant: 30).isActive = true
         image.contentMode = .scaleAspectFit
-        
-        titletStackView.addArrangedSubview(image)
+        if L102Language.currentAppleLanguage() == "ar" {
+            titletStackView.addArrangedSubview(image)
+           // label.textAlignment = .left
+            titletStackView.addArrangedSubview(label)
+            A = "C"
+            B = "B"
+            C = "A"
+        } else {
+           // label.textAlignment = .right
+            titletStackView.addArrangedSubview(label)
+             titletStackView.addArrangedSubview(image)
+        }
         
         let buttonStackView = UIStackView()
         buttonStackView.axis = .horizontal
@@ -263,18 +281,19 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 15
         let buttonA = UIButton()
-        buttonA.setTitle("A", for: .normal)
-        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        buttonA.setTitle(A, for: .normal)
+        buttonA.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18)//UIFont.boldSystemFont(ofSize: 18)
         //        buttonA.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         buttonA.translatesAutoresizingMaskIntoConstraints = false
         buttonA.widthAnchor.constraint(equalToConstant: 30).isActive = true
         let buttonB = UIButton()
-        buttonB.setTitle("B", for: .normal)
-        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        buttonB.setTitle(B, for: .normal)
+        buttonB.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         //        buttonB.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         let buttonC = UIButton()
-        buttonC.setTitle("C", for: .normal)
-        buttonA.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        buttonC.setTitle(C, for: .normal)
+        buttonC.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         //        buttonC.setImage(#imageLiteral(resourceName: "unchecked"), for: .normal)
         //        buttonA.tag = section
         //        buttonA.addTarget(self, action: #selector(selectAType(_:)), for: .touchUpInside)
@@ -285,8 +304,13 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         buttonStackView.addArrangedSubview(buttonA)
         buttonStackView.addArrangedSubview(buttonB)
         buttonStackView.addArrangedSubview(buttonC)
-        mainStackView.addArrangedSubview(titletStackView)
-        mainStackView.addArrangedSubview(buttonStackView)
+         if L102Language.currentAppleLanguage() == "ar" {
+            mainStackView.addArrangedSubview(buttonStackView)
+            mainStackView.addArrangedSubview(titletStackView)
+         } else {
+             mainStackView.addArrangedSubview(titletStackView)
+             mainStackView.addArrangedSubview(buttonStackView)
+        }
         mainStackView.frame = CGRect(x: 25, y: 0, width: tableView.frame.width - 50, height: 40)
         customeView.addSubview(mainStackView)
         return customeView

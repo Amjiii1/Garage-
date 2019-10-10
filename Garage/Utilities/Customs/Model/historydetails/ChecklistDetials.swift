@@ -14,6 +14,15 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var checklistTbl: UITableView!
     
     
+    
+    //Localization
+    
+    let Nochecklistadded = NSLocalizedString("Nochecklistadded", comment: "")
+    
+    
+    //Localization
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checklistTbl.allowsMultipleSelection = true
@@ -54,7 +63,7 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
         else
         {
             let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text          = "No checklist added"
+            noDataLabel.text          = Nochecklistadded
             noDataLabel.textColor     = UIColor.black
             noDataLabel.textAlignment = .center
             tableView.backgroundView  = noDataLabel

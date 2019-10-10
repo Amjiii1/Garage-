@@ -1,0 +1,19 @@
+
+/* Class = "UIButton"; normalTitle = "Re-Order"; ObjectID = "6fk-Jc-Xm0"; */
+"6fk-Jc-Xm0.normalTitle" = "إعادة ترتيب
+";
+
+/* Class = "UILabel"; text = "Monday, 10 Apr 2017"; ObjectID = "ENy-Y2-HoV"; */
+"ENy-Y2-HoV.text" = "Monday, 10 Apr 2017";
+
+/* Class = "UILabel"; text = "#1320"; ObjectID = "KiW-ho-D0G"; */
+"KiW-ho-D0G.text" = "#1320";
+
+/* Class = "UIButton"; normalTitle = "Notes"; ObjectID = "T21-7N-wNQ"; */
+"T21-7N-wNQ.normalTitle" = "الملاحظات";
+
+/* Class = "UIButton"; normalTitle = "Order Details"; ObjectID = "gF4-Zl-0zB"; */
+"gF4-Zl-0zB.normalTitle" = "تفاصيل الخدمة";
+
+/* Class = "UIButton"; normalTitle = "Checklist"; ObjectID = "wVp-Yl-9sj"; */
+"wVp-Yl-9sj.normalTitle" = "قائمة الفحص";

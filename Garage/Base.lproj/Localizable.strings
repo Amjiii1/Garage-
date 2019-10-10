@@ -1,0 +1,78 @@
+/* 
+  Localizable.strings
+  Garage
+
+  Created by Amjad on 04/02/1441 AH.
+  Copyright © 1441 Amjad Ali. All rights reserved.
+*/
+
+"Pleasewait" = "Please wait...";
+
+"SelectBay" = "Select Bay";
+
+"SearchItemsName" = "Search Items Name";
+
+"Bay" = "Bay";
+
+"Action" = "Action";
+
+"Status" = "Status";
+
+"Checkout" = "Checkout";
+
+"Done" = "Done";
+"VAT" = "VAT";
+"likeToUpdate" = "Would you like to update?";
+"newVersionAvailable" = "New Version Available";
+"noUpdatesAvailable" = "No updates available";
+"Update" = "Update";
+"Later" = "Later";
+"Version" = "Version";
+"Nochecklistadded" = "No checklist added";
+"Nocommentsadded" = "No comments added";
+"EnterPlatenumber" = "Enter Plate number";
+"EnterVinnumber" = "Enter Vin number";
+"SelectyourCarMake" = "Select your Car Make";
+"SelectyourCarModel" = "Select your Car Model";
+"restart" = "App restart required in order to apply new language";
+"Alert" = "Alert";
+"History" = "History";
+"ZebraPrinter" = "Zebra Printer";
+"Reprint" = "Re-print";
+"AirPrint" = "Air Print";
+"Cancel" = "Cancel";
+"Edit" = "Edit";
+"delete" = "delete";
+"new" = "New";
+"Hold"= "Hold";
+"Somethingwentwrong" = "Something went wrong";
+"Invalidsessions" = "Invalid sessions";
+"Erroroccured" = "Error occured";
+"Checkinternet" = "Login failed! Check internet";
+"wantto?" = "Do you want to continue?";
+"Failed" = "Failed ";
+"limitExceeded" = "limit Exceeded";
+"PleaseselectCard" = "Please select Card";
+"Discard" = "Do you want to Discard the order?";
+"NOPrintersFound" = "NO new Printers Found";
+"PrinternotConnected" = "Printer is not Connected";
+"OK" = "OK";
+"sucessfully" = "Printing sucessfully";
+"CheckoutFailed" = "Checkout Failed";
+"selectWorker" = "Please select Worker!";
+"EnterAmount!" = "Please Enter Total Amount!";
+"Balance" = "Balance";
+"Return" = "Return";
+"Sorryback" = "Sorry! You can't step back!";
+"SelectItems!" = "Please Select Items!";
+"SelectBayName" = "Please Select BayName First!";
+"EnteranyField" ="Please Enter any one Field";
+"deatilsCar" = "Please Add deatils of Car";
+"mendatoryfields" = "Please Add mendatory fields!";
+"Numberinvalid" = "Phone Number is invalid! Less than format";
+"NumberGreater" = "Phone Number is invalid! Greater than format";
+"AlreadyAssigned" = "Sorry Order cannot be Edit! Already Assigned to";
+
+
+
+

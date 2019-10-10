@@ -13,10 +13,6 @@ struct HistoryDetails {
     
     static var details = [checkoutItems]()
     static var savedetail = [checkoutItems]()
-    
-    //    static var Inspectionlist = [InspectionListH]()
-    //    static var InspectionDtail = [InspectionDetailsH]()
-    
     static var SaveInspectionlist = [InspectionListH]()
     static var SaveInspectionDtail = [InspectionDetailsH]()
     
@@ -27,11 +23,7 @@ struct HistoryDetails {
 }
 
 
-
-
 class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-    
-    
     
     @IBOutlet weak var historyTableview: UITableView!
     @IBOutlet weak var carModelLabel: UILabel!
@@ -61,7 +53,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func showloader() {
         
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -104,8 +96,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             self.HistoryData.removeAll()
                             HistoryDetails.details.removeAll()
                             HistoryDetails.carNotes.removeAll()
-                            //                            HistoryDetails.Inspectionlist.removeAll()
-                            //                            HistoryDetails.InspectionDtail.removeAll()
                             self.Inspectionlist.removeAll()
                             self.InspectionDtail.removeAll()
                             
@@ -113,8 +103,10 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             for items in history {
                                 if let item = items[Constants.OrderItems] as? [[String: Any]] {
                                     for details in item {
-                                        let Name = details[Constants.ItemName] as! String
-                                        let AlternateName = details[Constants.ItemName] as! String  // give Alternative name
+                                        let Name = details[Constants.ItemName] as? String  ?? ""
+                                      //  guard let AlternateName = details[Constants.AlternateName] , error == nil else { return }
+                                        let AlternateName = details[Constants.AlternateName] as? String  ?? ""
+                                       // let AlternateName = details[Constants.AlternateName] as! String  // give Alternative name
                                         let Price = details[Constants.Price] as! Double
                                         let ItemID = details[Constants.ItemID] as! Int
                                         let Quantity = details[Constants.Quantity] as! Int
@@ -196,7 +188,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     }
                     else if (intstatus == 1000) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.wrong, controller: self)
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             
                             
@@ -205,7 +197,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                     else if (intstatus == 1001) {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.invalid, controller: self)
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             
                         }
@@ -213,7 +205,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                     else {
                         DispatchQueue.main.async {
-                            ToastView.show(message: Constants.occured, controller: self)
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             self.dismiss(animated: true, completion: nil)
                             
                         }
@@ -225,7 +217,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
             } catch let error as NSError {
                 print(error)
-                ToastView.show(message: "failed! error occured", controller: self)
+                ToastView.show(message: LocalizedString.occured, controller: self)
                 self.dismiss(animated: true, completion: nil)
             }
         }).resume()
@@ -276,15 +268,22 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let id = HistoryData[sender.tag].OrderID!
         Constants.historytrans = HistoryData[sender.tag].TransactionNo!
+        Constants.historygrandtotal = HistoryData[sender.tag].GrandTotal!
+        Constants.historydiscount = HistoryData[sender.tag].Discount!
+        Constants.historysubtotal = HistoryData[sender.tag].TotalAmount!
+        Constants.historytax = HistoryData[sender.tag].Tax!
+
         
-        Constants.subtotal = 0.0
-        Constants.checkoutGrandtotal = 0.0
-        Constants.checkouttax = 0.0
+        
+        
+//        Constants.subtotal = 0.0
+//        Constants.checkoutGrandtotal = 0.0
+//        Constants.checkouttax = 0.0
         for itemmodels in  HistoryDetails.details {
             
             if itemmodels.itemorderid == id {
                 
-                Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
+           //     Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
                 
                 HistoryDetails.savedetail.append(itemmodels)
             } else if itemmodels.itemorderid != id {
@@ -293,9 +292,9 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             
         }
-        Constants.checkouttax = Constants.checkoutGrandtotal * 0.05
-        Constants.subtotal = Constants.checkoutGrandtotal
-        Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
+//        Constants.checkouttax = Constants.checkoutGrandtotal * 0.05
+//        Constants.subtotal = Constants.checkoutGrandtotal
+//        Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
         
         
         for list in Inspectionlist {

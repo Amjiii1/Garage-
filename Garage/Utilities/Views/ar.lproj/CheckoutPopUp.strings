@@ -1,0 +1,90 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "252-mk-BsB"; */
+"252-mk-BsB.text" = "Label";
+
+/* Class = "UILabel"; text = "QTY"; ObjectID = "4AM-s2-uJd"; */
+"4AM-s2-uJd.text" = "كمية";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "564-dq-WwE"; */
+"564-dq-WwE.text" = "سعر";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5b5-9U-dMs"; */
+"5b5-9U-dMs.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "67V-bN-Zch"; */
+"67V-bN-Zch.text" = "Label";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "CVS-cb-0Qt"; */
+"CVS-cb-0Qt.text" = "0.00";
+
+/* Class = "UIButton"; normalTitle = "Cash"; ObjectID = "E9J-Cm-NnP"; */
+"E9J-Cm-NnP.normalTitle" = "نقداً";
+
+/* Class = "UIButton"; normalTitle = "Voucher"; ObjectID = "G14-ye-ajJ"; */
+"G14-ye-ajJ.normalTitle" = "قسيمة";
+
+/* Class = "UILabel"; text = "Worker"; ObjectID = "G2d-Rh-nLc"; */
+"G2d-Rh-nLc.text" = "الموظف";
+
+/* Class = "UIButton"; normalTitle = "Discard"; ObjectID = "GfZ-Z4-gCa"; */
+"GfZ-Z4-gCa.normalTitle" = "بطاقة مرفوضة";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "Gk1-uq-vat"; */
+"Gk1-uq-vat.text" = "0.00";
+
+/* Class = "UILabel"; text = "Assistant"; ObjectID = "Qiz-Rc-iXV"; */
+"Qiz-Rc-iXV.text" = "المساعد";
+
+/* Class = "UILabel"; text = "Grand Total"; ObjectID = "RcR-cM-0sr"; */
+"RcR-cM-0sr.text" = "إجمالي المبلغ";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "RpP-rg-vec"; */
+"RpP-rg-vec.text" = "الخصم";
+
+/* Class = "UIButton"; normalTitle = "Loyality"; ObjectID = "Rsn-mF-S9y"; */
+"Rsn-mF-S9y.normalTitle" = "الولاء";
+
+/* Class = "UILabel"; text = "Amount Tendered"; ObjectID = "S5B-10-eaK"; */
+"S5B-10-eaK.text" = "مبلغ الخصم";
+
+/* Class = "UIButton"; normalTitle = "None"; ObjectID = "STZ-P4-OsP"; */
+"STZ-P4-OsP.normalTitle" = "لا شيء";
+
+/* Class = "UIButton"; normalTitle = "AirPrint"; ObjectID = "UAw-Dw-7c0"; */
+"UAw-Dw-7c0.normalTitle" = "طباعة الـ A4";
+
+/* Class = "UIButton"; normalTitle = "Discount"; ObjectID = "dPH-D2-WP8"; */
+"dPH-D2-WP8.normalTitle" = "الخصم";
+
+/* Class = "UILabel"; text = "Checkout"; ObjectID = "hLE-aJ-zpL"; */
+"hLE-aJ-zpL.text" = "إنهاء الفاتورة";
+
+/* Class = "UIButton"; normalTitle = "Not Selected"; ObjectID = "hmd-T4-1AH"; */
+"hmd-T4-1AH.normalTitle" = "لم يتم اختياره";
+
+/* Class = "UILabel"; text = "SubTotal"; ObjectID = "l4F-fB-yFd"; */
+"l4F-fB-yFd.text" = "المجموع";
+
+/* Class = "UIButton"; normalTitle = "Checkout"; ObjectID = "mzF-ta-sfD"; */
+"mzF-ta-sfD.normalTitle" = "إنهاء الفاتورة";
+
+/* Class = "UILabel"; text = "Balance"; ObjectID = "pRY-oQ-c2V"; */
+"pRY-oQ-c2V.text" = "المتبقي";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "r3M-N5-ZzI"; */
+"r3M-N5-ZzI.text" = "0.00";
+
+/* Class = "UILabel"; text = "Product"; ObjectID = "rA4-bl-S3f"; */
+"rA4-bl-S3f.text" = "منتج";
+
+/* Class = "UILabel"; text = "Tax(0%)"; ObjectID = "rds-BQ-KSM"; */
+"rds-BQ-KSM.text" = "ضريبي(0%)";
+
+/* Class = "UIButton"; normalTitle = "Gift Card"; ObjectID = "ws3-QS-7tb"; */
+"ws3-QS-7tb.normalTitle" = "بطاقةالهدايا";
+
+/* Class = "UIButton"; normalTitle = "Card"; ObjectID = "zD8-4T-KeL"; */
+"zD8-4T-KeL.normalTitle" = "البطاقة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zz2-HM-TCm"; */
+"zz2-HM-TCm.text" = "Label";

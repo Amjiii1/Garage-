@@ -1,0 +1,9 @@
+
+/* Class = "UISegmentedControl"; 3Rc-E0-tzA.segmentTitles[0] = "English"; ObjectID = "3Rc-E0-tzA"; */
+"3Rc-E0-tzA.segmentTitles[0]" = "English";
+
+/* Class = "UISegmentedControl"; 3Rc-E0-tzA.segmentTitles[1] = "Arabic"; ObjectID = "3Rc-E0-tzA"; */
+"3Rc-E0-tzA.segmentTitles[1]" = "عربى";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "3VF-zn-HRi"; */
+"3VF-zn-HRi.text" = "لغة";

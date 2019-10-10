@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "Product"; ObjectID = "1Oe-jX-GIQ"; */
+"1Oe-jX-GIQ.text" = "المنتجات";
+
+/* Class = "UILabel"; text = "Trans:No"; ObjectID = "6Cc-4S-eCB"; */
+"6Cc-4S-eCB.text" = "رقم العملية";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "94g-dn-KyN"; */
+"94g-dn-KyN.text" = "Label";
+
+/* Class = "UILabel"; text = "Total:"; ObjectID = "Aoi-5d-6xW"; */
+"Aoi-5d-6xW.text" = "الإجمالي";
+
+/* Class = "UILabel"; text = "Receipt"; ObjectID = "GaA-od-Clj"; */
+"GaA-od-Clj.text" = "الفاتورة";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "KjD-UA-AVQ"; */
+"KjD-UA-AVQ.text" = "سعر";
+
+/* Class = "UILabel"; text = "dummy SAR"; ObjectID = "QEg-cF-e7r"; */
+"QEg-cF-e7r.text" = "dummy SAR";
+
+/* Class = "UILabel"; text = "#41201"; ObjectID = "RSa-Jd-eCD"; */
+"RSa-Jd-eCD.text" = "#41201";
+
+/* Class = "UILabel"; text = "Hold"; ObjectID = "YRf-x4-zPD"; */
+"YRf-x4-zPD.text" = "معلقه";
+
+/* Class = "UILabel"; text = "Qty."; ObjectID = "bxw-ch-7mp"; */
+"bxw-ch-7mp.text" = "كمية";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iYy-J7-SPc"; */
+"iYy-J7-SPc.text" = "Label";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "jjv-J2-LFH"; */
+"jjv-J2-LFH.text" = "الحالة";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vrF-jj-SR7"; */
+"vrF-jj-SR7.text" = "Label";

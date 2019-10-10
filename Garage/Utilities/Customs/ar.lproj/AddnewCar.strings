@@ -1,0 +1,54 @@
+
+/* Class = "UILabel"; text = "Phone Number"; ObjectID = "4ZE-9U-19V"; */
+"4ZE-9U-19V.text" = "رقم الجوال";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "B5m-P7-R1p"; */
+"B5m-P7-R1p.text" = "*";
+
+/* Class = "UIButton"; normalTitle = "Re scan"; ObjectID = "Bkp-yG-R1A"; */
+"Bkp-yG-R1A.normalTitle" = "إعادة البحث";
+
+/* Class = "UIButton"; normalTitle = " History    (   0   )"; ObjectID = "CgC-rK-w2l"; */
+"CgC-rK-w2l.normalTitle" = " الأرشيف    (   0   )";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "DqM-1N-X1H"; */
+"DqM-1N-X1H.normalTitle" = "المتابعة";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "K5D-I1-i3W"; */
+"K5D-I1-i3W.normalTitle" = "العودة";
+
+/* Class = "UILabel"; text = "Year"; ObjectID = "Ooq-Rg-McG"; */
+"Ooq-Rg-McG.text" = "سنة الصنع";
+
+/* Class = "UIButton"; normalTitle = "Assign"; ObjectID = "S8I-nb-Kup"; */
+"S8I-nb-Kup.normalTitle" = "تعيين";
+
+/* Class = "UILabel"; text = "Engine Type (Cylinder)"; ObjectID = "XC5-jn-dJd"; */
+"XC5-jn-dJd.text" = "نوع المحرك";
+
+/* Class = "UILabel"; text = "Car Plate"; ObjectID = "XqN-RT-HWe"; */
+"XqN-RT-HWe.text" = "رقم اللوحة";
+
+/* Class = "UILabel"; text = "Check"; ObjectID = "YI9-bR-4jJ"; */
+"YI9-bR-4jJ.text" = "فحص";
+
+/* Class = "UILabel"; text = "Car Make"; ObjectID = "bOu-Kh-IIa"; */
+"bOu-Kh-IIa.text" = "ماركة المركبة";
+
+/* Class = "UILabel"; text = "VIN"; ObjectID = "cmK-RB-Y7t"; */
+"cmK-RB-Y7t.text" = "رقم الهيكل";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "dFW-kJ-8Lu"; */
+"dFW-kJ-8Lu.text" = "*";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "fVG-tS-VPb"; */
+"fVG-tS-VPb.text" = "*";
+
+/* Class = "UILabel"; text = "Model"; ObjectID = "iZ7-cG-Is3"; */
+"iZ7-cG-Is3.text" = "طراز المركبة";
+
+/* Class = "UILabel"; text = "Recommended Amount"; ObjectID = "jaq-84-0GX"; */
+"jaq-84-0GX.text" = "الكمية الموصى بها";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "qo5-3D-8V9"; */
+"qo5-3D-8V9.text" = "*";

@@ -53,7 +53,7 @@ class UIUtility: NSObject {
     
     static func showAlertInController(title: String, message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let okAction = UIAlertAction(title: LocalizedString.OK, style: .default) { (action) in 
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(okAction)

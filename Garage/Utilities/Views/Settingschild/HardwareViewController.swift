@@ -517,7 +517,7 @@ extension HardwareViewController: SearchPrinterHelperDelegate {
                 //                    }
                 //                }
             } else {
-                UIUtility.showAlertInController(title: "Alert", message: "NO new Printers Found", viewController: self)
+                UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.NOPrintersFound, viewController: self)
             }
         }
         

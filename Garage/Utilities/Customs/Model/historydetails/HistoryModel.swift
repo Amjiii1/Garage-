@@ -17,7 +17,10 @@ class HistoryModel: NSObject {
     var Total: String?
     var OrderID: Int?
     var TotalAmount: Double?
-    // var Tax: Double?
+    var GrandTotal: Double?
+    var Discount: Double?
+    var Tax: Double?
+    
     
     
     override init() {
@@ -25,7 +28,7 @@ class HistoryModel: NSObject {
     }
     
     
-    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String, OrderID: Int?, TotalAmount: Double?) {
+    init(TransactionNo: Int?, Sno: Int?, Date: String, Mechanic: String, Total: String, OrderID: Int?, TotalAmount: Double?, GrandTotal: Double?, Discount: Double?, Tax: Double) {
         
         self.TransactionNo = TransactionNo
         self.Sno = Sno
@@ -34,6 +37,9 @@ class HistoryModel: NSObject {
         self.Total =  Total
         self.OrderID =  OrderID
         self.TotalAmount =  TotalAmount
+        self.GrandTotal =  GrandTotal
+        self.Discount = Discount
+        self.Tax = Tax
         // self.Tax =  Tax
         
         
@@ -48,8 +54,10 @@ class HistoryModel: NSObject {
             let mechanic = historyorder["Mechanic"] as? String,
             let Total = historyorder["AmountTotal"] as? String,
             let orderID = historyorder["OrderID"] as? Int,
-            let totalAmount = historyorder["TotalAmount"] as? Double
-            //  let Tax = historyorder["Tax"] as? Double
+            let totalAmount = historyorder["TotalAmount"] as? Double,
+            let grandTotal = historyorder["GrandTotal"] as? Double,
+            let discount = historyorder["Discount"] as? Double,
+            let Tax = historyorder["Tax"] as? Double
             else { return }
         self.TransactionNo = transactionNo
         self.Sno = sno
@@ -59,7 +67,9 @@ class HistoryModel: NSObject {
         self.Total = Total
         self.OrderID = orderID
         self.TotalAmount = totalAmount
-        //    self.Tax = Tax
+         self.GrandTotal = grandTotal
+        self.Discount = discount
+        self.Tax = Tax
         
     }
     

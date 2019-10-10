@@ -16,22 +16,27 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var totalpricetable: UITableView!
     
     @IBOutlet weak var grandtotallabel: UILabel!
+   
     
-    
-    
-    var dummyData2 = ["SubTotal","Discount","VAT 5%"]
-    var amount2 = [Constants.subtotal,0.00,Constants.checkouttax]
+    var dummyData2 = [String]()
+    var amount2 = [Constants.historysubtotal,Constants.historydiscount,Constants.historytax]
+    var name = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if L102Language.currentAppleLanguage() == "ar" {
+         dummyData2 = ["المجموع","الخصم","الضريبة (5٪)"]
+        } else {
+          dummyData2 = ["SubTotal","Discount","VAT 5%"]
+        }
+        
         orderdetailtable.delegate = self
         orderdetailtable.dataSource = self
         totalpricetable.delegate = self
         totalpricetable.dataSource = self
-        
         orderdetailtable.separatorStyle = .none
         totalpricetable.separatorStyle = .none
-        grandtotallabel.text = String(format: "%.2f", Constants.checkoutGrandtotal)
+        grandtotallabel.text = String(format: "%.2f", Constants.historygrandtotal)
     }
     
     
@@ -52,9 +57,14 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         if tableView == orderdetailtable {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! orderdetailCell
-            let name = HistoryDetails.savedetail[indexPath.row].Name
+            if L102Language.currentAppleLanguage() == "ar" {
+                name = HistoryDetails.savedetail[indexPath.row].AlternateName!
+            } else {
+                name = HistoryDetails.savedetail[indexPath.row].Name!
+            }
+    
             let qty = HistoryDetails.savedetail[indexPath.row].Quantity
-            cell.labelItem.text = "\(qty!) x \(name!)"
+            cell.labelItem.text = "\(qty!) x \(name)"
             
             let price = HistoryDetails.savedetail[indexPath.row].Price
             cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"

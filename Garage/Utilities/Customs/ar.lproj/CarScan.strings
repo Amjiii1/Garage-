@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "NLi-X7-e3i"; */
+"NLi-X7-e3i.normalTitle" = "العودة";
+
+/* Class = "UIButton"; normalTitle = "Add Plate No."; ObjectID = "kjN-sg-ReV"; */
+"kjN-sg-ReV.normalTitle" = "إضافة رقم اللوحة";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "osd-b9-woP"; */
+"osd-b9-woP.normalTitle" = "المتابعة";
+
+/* Class = "UIButton"; normalTitle = "Add VIN"; ObjectID = "wQZ-Aq-T5V"; */
+"wQZ-Aq-T5V.normalTitle" = "إضافة رقم الهيكل";

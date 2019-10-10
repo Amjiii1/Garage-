@@ -18,6 +18,19 @@ class NotesDetials: UIViewController {
     
     @IBOutlet weak var image3: UIImageView!
     
+    
+    //Localization
+    
+    let Nocommentsadded = NSLocalizedString("Nocommentsadded", comment: "")
+    
+    
+    //Localization
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         comment()
@@ -44,7 +57,7 @@ class NotesDetials: UIViewController {
             if comment.NotesComment != "" {
                 self.notescomment.text = comment.NotesComment
             } else {
-                notescomment.text = "No comments added"
+                notescomment.text = Nocommentsadded
                 notescomment.textColor     = UIColor.black
                 notescomment.textAlignment = .center
             }
@@ -79,7 +92,7 @@ class NotesDetials: UIViewController {
         }
         
         if self.notescomment.text == "" {
-            notescomment.text = "No notes added"
+            notescomment.text = Nocommentsadded
             notescomment.textColor     = UIColor.black
             notescomment.textAlignment = .center
         }

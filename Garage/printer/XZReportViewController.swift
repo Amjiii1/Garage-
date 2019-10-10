@@ -42,6 +42,10 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.white
         Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
+        if L102Language.currentAppleLanguage() == "ar" {
+            xReportOutlet.imageEdgeInsets  = UIEdgeInsetsMake(0,0,60,72)//titleEdgeInsets = UIEdgeInsetsMake(50,0,0,30)
+           zReportOutlet.imageEdgeInsets = UIEdgeInsetsMake(0,0,60,72)
+        }
         // Do any additional setup after loading the view.
         
     }
@@ -58,7 +62,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             Xreportdata()
             Status = 0
         } else {
-            UIUtility.showAlertInController(title: "Alert", message: "Printer is not Connected", viewController: self)
+            UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.PrinternotConnected, viewController: self)
         }
     }
     //   }
@@ -74,7 +78,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
                 Xreportdata()
             }
         } else {
-            UIUtility.showAlertInController(title: "Alert", message: "Printer is not Connected", viewController: self)
+            UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.PrinternotConnected, viewController: self)
         }
         
         //        }
@@ -143,14 +147,14 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
         Alamofire.request(url).response { [weak self] (response) in
             if response == nil {
                 DispatchQueue.main.async {
-                    UIUtility.showAlertInController(title: "Alert", message: Constants.interneterror, viewController: self!)
+                    UIUtility.showAlertInController(title:  LocalizedString.Alert, message: LocalizedString.interneterror, viewController: self!)
                     self!.xReportOutlet.isUserInteractionEnabled = true
                     self!.zReportOutlet.isUserInteractionEnabled = true
                 }
             }
             guard self != nil else { return }
             if let error = response.error {
-                UIUtility.showAlertInController(title: "Alert", message: Constants.interneterror, viewController: self!)
+                UIUtility.showAlertInController(title:  LocalizedString.Alert, message: LocalizedString.interneterror, viewController: self!)
             } else {
                 do {
                     let json = try JSON(data: response.data!)
@@ -198,26 +202,26 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
                         self!.dismiss(animated: true, completion: nil)
                     }
                     else  if (status == 0) {
-                        UIUtility.showAlertInController(title: "Alert", message: desc, viewController: self!)
+                        UIUtility.showAlertInController(title: LocalizedString.Alert, message: desc, viewController: self!)
                         self!.xReportOutlet.isUserInteractionEnabled = true
                         self!.zReportOutlet.isUserInteractionEnabled = true
                     }
                         
                     else  if (status == 1000) {
-                        UIUtility.showAlertInController(title: "Alert", message: Constants.wrong, viewController: self!)
+                        UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.wrong, viewController: self!)
                         self!.xReportOutlet.isUserInteractionEnabled = true
                         self!.zReportOutlet.isUserInteractionEnabled = true
                     }
                         
                     else  if (status == 1001) {
-                        ToastView.show(message: Constants.invalid, controller: self!)
-                        UIUtility.showAlertInController(title: "Alert", message: Constants.invalid, viewController: self!)
+                        ToastView.show(message: LocalizedString.invalid, controller: self!)
+                        UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.invalid, viewController: self!)
                         self!.xReportOutlet.isUserInteractionEnabled = true
                         self!.zReportOutlet.isUserInteractionEnabled = true
                     }
                         
                     else {
-                        UIUtility.showAlertInController(title: "Alert", message: desc, viewController: self!)
+                        UIUtility.showAlertInController(title: LocalizedString.Alert, message: desc, viewController: self!)
                         self!.xReportOutlet.isUserInteractionEnabled = true
                         self!.zReportOutlet.isUserInteractionEnabled = true
                     }

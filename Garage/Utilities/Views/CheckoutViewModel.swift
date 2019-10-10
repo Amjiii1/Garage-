@@ -26,6 +26,7 @@ class CheckoutViewModel {
             checkoutVC?.TaxAmount.text = String(format: "%.2f", Constants.checkouttax)
             self.totalPrice =  self.totalPrice + Constants.checkouttax
             Constants.checkoutGrandtotal =  self.totalPrice
+       //     Constants.checkoutorderid = self.cashAmountTender
   
         }
     }
@@ -45,11 +46,11 @@ class CheckoutViewModel {
         if balanceRounded >  0 {
             checkoutVC?.balancetxtf.text = String(format: "%.2f", balanceRounded)
             checkoutVC?.balancetxtf.textColor = UIColor.red
-            checkoutVC?.balacelbl.text = "Balance"
+            checkoutVC?.balacelbl.text = LocalizedString.Balance
            // checkoutVC?.cashBackLbl.text = "0"
         }
         else {
-            checkoutVC?.balacelbl.text = "Return"
+            checkoutVC?.balacelbl.text = LocalizedString.Return
             checkoutVC?.balancetxtf.text = String(format: "%.2f", abs(balanceRounded))
             checkoutVC?.balancetxtf.textColor = UIColor.DefaultApp
            // checkoutVC?.cashBackLbl.text =  ("\(abs(balanceRounded))")

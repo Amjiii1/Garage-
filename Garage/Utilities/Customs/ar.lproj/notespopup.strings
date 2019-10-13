@@ -6,12 +6,10 @@
 "Iou-qJ-Ldr.normalTitle" = "التحقق";
 
 /* Class = "UIButton"; normalTitle = "Delete Event"; ObjectID = "LlH-Pg-fj0"; */
-"LlH-Pg-fj0.normalTitle" = "حذف الحدث
-";
+"LlH-Pg-fj0.normalTitle" = "إلغاء الملاحظة";
 
 /* Class = "UIButton"; normalTitle = "Add Pictures"; ObjectID = "WpS-Xn-iOa"; */
-"WpS-Xn-iOa.normalTitle" = "إضافة الصور
-";
+"WpS-Xn-iOa.normalTitle" = "إضافة الصور";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "e7N-1g-cqK"; */
 "e7N-1g-cqK.text" = "الحالة ";

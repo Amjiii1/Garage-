@@ -55,6 +55,7 @@
 		951DE23B232A74820042AD02 /* Discount+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951DE23A232A74820042AD02 /* Discount+CoreDataClass.swift */; };
 		951DE23D232A74A00042AD02 /* Discount+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951DE23C232A74A00042AD02 /* Discount+CoreDataProperties.swift */; };
 		951F1F6022102E4200444CED /* checkoutcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951F1F5F22102E4200444CED /* checkoutcell.swift */; };
+		952065B323533663004A535F /* profilepop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952065B523533663004A535F /* profilepop.storyboard */; };
 		9524371F2251EB4A0000CCDF /* XZReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524371E2251EB4A0000CCDF /* XZReportViewController.swift */; };
 		95243723225228520000CCDF /* Xreport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95243722225228520000CCDF /* Xreport.swift */; };
 		95243725225256660000CCDF /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95243724225256660000CCDF /* Printer.swift */; };
@@ -164,7 +165,6 @@
 		9568FB462250B8E50045399A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FB452250B8E50045399A /* StringExtension.swift */; };
 		956B6C4921872F440025986F /* profilePOpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C4821872F440025986F /* profilePOpViewController.swift */; };
 		956B6C4B218733EB0025986F /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C4A218733EB0025986F /* ProfileCell.swift */; };
-		956B6C4D218740920025986F /* profilepop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956B6C4C218740920025986F /* profilepop.storyboard */; };
 		956B6C51218851830025986F /* Receiptpop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C50218851830025986F /* Receiptpop.swift */; };
 		956B6C552188867B0025986F /* HistoryCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C542188867B0025986F /* HistoryCar.swift */; };
 		956B6C5921899B030025986F /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B6C5821899B030025986F /* CollectionViewCell.swift */; };
@@ -293,6 +293,7 @@
 		951DE23A232A74820042AD02 /* Discount+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Discount+CoreDataClass.swift"; sourceTree = "<group>"; };
 		951DE23C232A74A00042AD02 /* Discount+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Discount+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		951F1F5F22102E4200444CED /* checkoutcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutcell.swift; sourceTree = "<group>"; };
+		952065B423533663004A535F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/profilepop.storyboard; sourceTree = "<group>"; };
 		9524371E2251EB4A0000CCDF /* XZReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZReportViewController.swift; sourceTree = "<group>"; };
 		95243722225228520000CCDF /* Xreport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xreport.swift; sourceTree = "<group>"; };
 		95243724225256660000CCDF /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
@@ -456,7 +457,6 @@
 		9568FB452250B8E50045399A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		956B6C4821872F440025986F /* profilePOpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profilePOpViewController.swift; sourceTree = "<group>"; };
 		956B6C4A218733EB0025986F /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		956B6C4C218740920025986F /* profilepop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = profilepop.storyboard; sourceTree = "<group>"; };
 		956B6C50218851830025986F /* Receiptpop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiptpop.swift; sourceTree = "<group>"; };
 		956B6C542188867B0025986F /* HistoryCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCar.swift; sourceTree = "<group>"; };
 		956B6C5821899B030025986F /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -643,7 +643,7 @@
 				9551590F2342029900A413FA /* AddnewCar.storyboard */,
 				17FEF6C720CCEA1600EC99C2 /* LoginView.storyboard */,
 				9533D4EA23435D6B006E63EF /* MechanicView.storyboard */,
-				956B6C4C218740920025986F /* profilepop.storyboard */,
+				952065B523533663004A535F /* profilepop.storyboard */,
 				957C43E7222275ED00B482AB /* Mechanicpop.storyboard */,
 				9533D52B234622AA006E63EF /* XZReportViewController.storyboard */,
 				9533D55F2349CF45006E63EF /* cameraScan.storyboard */,
@@ -1102,7 +1102,7 @@
 				9533D4DE234344D9006E63EF /* CarScan.storyboard in Resources */,
 				958A7698222BB83500F88D69 /* store1.png in Resources */,
 				9533D5492349CCB9006E63EF /* detailsView.storyboard in Resources */,
-				956B6C4D218740920025986F /* profilepop.storyboard in Resources */,
+				952065B323533663004A535F /* profilepop.storyboard in Resources */,
 				9533D5712349E368006E63EF /* MyNumPadViewController.xib in Resources */,
 				9533D53323462833006E63EF /* historydetailview.storyboard in Resources */,
 				957C440A222526FE00B482AB /* Hardware.storyboard in Resources */,
@@ -1441,6 +1441,14 @@
 				955159002341E9C100A413FA /* ar */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		952065B523533663004A535F /* profilepop.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				952065B423533663004A535F /* Base */,
+			);
+			name = profilepop.storyboard;
 			sourceTree = "<group>";
 		};
 		9533D4E0234344D9006E63EF /* CarScan.storyboard */ = {

@@ -139,6 +139,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             if  let FirstName = User[Constants.FirstNameA] as? String {
                                 Constants.FirstName = FirstName
                             }
+                            if  let userImage = User[Constants.userimage] as? String {
+                                Constants.userImage = userImage
+                            }
                         }
                         
                         if let receipt = json[Constants.ReceiptInfo] as? [String: Any] {//

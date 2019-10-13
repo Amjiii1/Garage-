@@ -19,10 +19,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     var Welcomecellobj = [WelcomeModel]()
     var fruitsArray = [WelcomeModel]()
-    
+    let dateFormatter : DateFormatter = DateFormatter()
     var AssignedID: Int = 0
     
-    var abc = 12.51
     
     
     
@@ -39,9 +38,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let new = String(format: "%.f", abc)
-        print(new)
-     
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        Constants.currentdate = dateString
         Constants.sessions = UserDefaults.standard.string(forKey: "Session")!
         tableViewWelcome.reloadData()
         tableViewWelcome.dataSource = self
@@ -213,7 +213,6 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         loadingIndicator.startAnimating();
         loadingIndicator.backgroundColor = UIColor.DefaultApp
          loadingIndicator.layer.cornerRadius = 18.0
-        
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
@@ -577,6 +576,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             Constants.BMake = Welcomecellobj[sender.tag].MakerName!
             Constants.editOrderid = Welcomecellobj[sender.tag].OrderID!
             Constants.bayid = Welcomecellobj[sender.tag].BayID!
+            Constants.editcarid = Welcomecellobj[sender.tag].CarID!
             Constants.orderstatus = 101
             tapped()
             

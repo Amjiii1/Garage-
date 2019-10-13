@@ -182,33 +182,57 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
     
     
     func UnlistApi() {
+
         let parameters = [
-            Constants.OrderID: Constants.editOrderid,
             Constants.BayID: Constants.bayid,
-            Constants.type: "unlist",
-            Constants.SessionID: Constants.sessions]  as [String : Any]
+            "AmountDiscount": 0,
+                        Constants.PaymentMode: 1,
+                        "Gratuity": 0,
+                        Constants.CarID:  Constants.editcarid,
+                        Constants.GrandTotal: 0,
+                        "ServiceCharges": 0,
+                        Constants.AmountTotal: 0,
+                        "PartialPayment": 0,
+                        Constants.OrderID: Constants.editOrderid,
+                        Constants.Date: Constants.currentdate,
+                        Constants.SessionID: Constants.sessions,
+                        Constants.WorkerID: 0,
+                        Constants.AmountPaid: 0,
+                        "OrderStatus": 105,
+                        "AmountComplementary": 0,
+                        Constants.Tax: 0,
+                        "CheckoutDetails": [[
+                            "CardHolderName": "",
+                            "AmountPaid": 0,
+                            "CardType": "",
+                            "AmountDiscount": 0,
+                            "PaymentMode": 1,
+                            "CardNumber": ""
+                            ]],
+                        Constants.AssistantID: 0]  as [String : Any]
         
-        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Unlist)")!
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PATCH"
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
-        let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
-        if let json = jsonS {
-            print(json)
+        if let JSONString = String(data: httpBody, encoding: .utf8) {
+            
+            print(JSONString)
         }
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    ToastView.show(message: "failed! Check internet", controller: self)
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
                 }
             }
             if let response = response {
                 print(response)
             }
+            
             if let data = data {
                 print(data)
                 do {

@@ -22,6 +22,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var countLbl: UILabel!
     @IBOutlet weak var minusBtn: UIButton!
     @IBOutlet weak var plusBtn: UIButton!
+    @IBOutlet weak var stackview: UIStackView!
     
     @IBOutlet weak var headerlabel: UIView!
     weak var controller: ServiceCartView!
@@ -91,6 +92,9 @@ class CollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
        plusBtn.layer.cornerRadius = plusBtn.frame.size.width/2
          minusBtn.layer.cornerRadius = minusBtn.frame.size.width/2
+        if L102Language.currentAppleLanguage() == "ar" {
+            plusBtn.trailingAnchor.constraint(equalTo: self.stackview.trailingAnchor, constant: 10)
+        }
         
     //    plusBtn.layer.cornerRadius = plusBtn.frame.size.height/2
     

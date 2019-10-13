@@ -34,6 +34,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     let Status = NSLocalizedString("Status", comment: "")
     let Checkout = NSLocalizedString("Checkout", comment: "")
     let Done = NSLocalizedString("Done", comment: "")
+    let Void = NSLocalizedString("Void", comment: "")
     let ZebraPrinterAr = NSLocalizedString("ZebraPrinter", comment: "")
     let Reprint = NSLocalizedString("Reprint", comment: "")
     let AirPrint = NSLocalizedString("AirPrint", comment: "")
@@ -511,7 +512,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.checkoutBtn.tag = indexPath.row
             let status = checkoutmodel[indexPath.row].Status
             if status == 105 {
-                cell.checkoutBtn.setTitle("Cancelled", for: .normal)
+                cell.checkoutBtn.setTitle(Void, for: .normal)
                 cell.checkoutBtn.setTitleColor(UIColor.red, for: .normal)
                 cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
                 

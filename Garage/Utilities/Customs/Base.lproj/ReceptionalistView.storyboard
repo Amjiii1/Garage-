@@ -39,7 +39,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-AO-46U">
                                         <rect key="frame" x="535" y="28" width="181" height="55.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Amjad" translatesAutoresizingMaskIntoConstraints="NO" id="LkA-7t-Alp">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LkA-7t-Alp">
                                                 <rect key="frame" x="6" y="6.5" width="42.5" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -71,7 +71,7 @@
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="145" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Admin" image="dropDown">
+                                        <state key="normal" image="dropDown">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -153,6 +153,7 @@
                         <outlet property="headerView" destination="oya-0V-bPx" id="C6Y-ga-tID"/>
                         <outlet property="offlibebtn" destination="Gm2-q9-QT7" id="Vhw-30-oFW"/>
                         <outlet property="profileBtnOutlet" destination="6zp-xw-VQu" id="5JN-KD-c35"/>
+                        <outlet property="profileImage" destination="LkA-7t-Alp" id="9UY-b4-QJF"/>
                         <segue destination="RrT-tt-aya" kind="show" identifier="MechanicVc" id="HVb-Es-tlP"/>
                         <segue destination="19b-Iz-w5V" kind="show" identifier="CheckoutVc" id="vCa-qI-FGw"/>
                         <segue destination="LmI-mf-xKd" kind="show" identifier="WelcomeVc" id="LVG-9i-Rcg"/>
@@ -168,7 +169,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="ServiceVc" storyboardName="WelcomeView" referencedIdentifier="WelcomeVc" id="LmI-mf-xKd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrk-lt-BhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="-153"/>
+            <point key="canvasLocation" x="632" y="-192"/>
         </scene>
         <!--MechanicVc-->
         <scene sceneID="dv6-Za-FT1">
@@ -176,7 +177,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="MechanicVc" storyboardName="MechanicView" referencedIdentifier="MechanicVc" id="RrT-tt-aya" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rW9-eA-5ZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="-78"/>
+            <point key="canvasLocation" x="631" y="-97"/>
         </scene>
         <!--CheckoutVc-->
         <scene sceneID="qze-NJ-5fL">
@@ -184,11 +185,10 @@
                 <viewControllerPlaceholder storyboardIdentifier="CheckoutVc" storyboardName="CheckoutView" referencedIdentifier="CheckoutVc" id="19b-Iz-w5V" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paJ-QZ-Sye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="-16"/>
+            <point key="canvasLocation" x="633" y="-3"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Amjad" width="640" height="640"/>
         <image name="Loginbg" width="768" height="1024"/>
         <image name="dropDown" width="11" height="7"/>
         <image name="menuButton" width="50" height="50"/>

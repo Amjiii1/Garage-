@@ -107,6 +107,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
         if L102Language.currentAppleLanguage() == "ar" {
             Reassignoutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 0, right: 0)
+           
            // category.al
            
         }

@@ -53,6 +53,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     var cashamount: Double = 0.0
     var cardamount: Double = 0.0
     
+    
     //Localization
     
     let VAT = NSLocalizedString("VAT", comment: "")
@@ -60,7 +61,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let EnterAmount = NSLocalizedString("EnterAmount!", comment: "")
     let Discountcantgreater = NSLocalizedString("Discountcantgreater", comment: "")
     let CheckoutFailed = NSLocalizedString("CheckoutFailed", comment: "")
-    
     
     //Localization
     
@@ -125,7 +125,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         DiscountAmount.text = String(format: "%.2f", Constants.checkoutdiscount)
         TaxAmount.text =  String(format: "%.2f", Constants.checkouttax)       
         taxLabel.text = "\(VAT) (\(Constants.percent)%)"
-   
+        
     }
     
     
@@ -176,7 +176,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
-   
+    
     
     
     
@@ -191,7 +191,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var returnvalue = 0
-            returnvalue = Checkoutstruct.sentitems.count
+        returnvalue = Checkoutstruct.sentitems.count
         return returnvalue
     }
     
@@ -199,21 +199,21 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellcheckout") as! checkoutcell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellcheckout") as! checkoutcell
         if L102Language.currentAppleLanguage() == "ar" {
-           cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].AlternateName
+            cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].AlternateName
         } else {
-           cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
+            cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
         }
-
-            let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
-            cell.Qtylabel.text = "\(qty!)"
-            let price = Checkoutstruct.sentitems[indexPath.row].Price
-            cell.pricelabel.text =  "\(price!.myRounded(toPlaces: 2))"
-            cell.selectionStyle = .none
-            return cell
-        }
-
+        
+        let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
+        cell.Qtylabel.text = "\(qty!)"
+        let price = Checkoutstruct.sentitems[indexPath.row].Price
+        cell.pricelabel.text =  "\(price!.myRounded(toPlaces: 2))"
+        cell.selectionStyle = .none
+        return cell
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.separatorColor = UIColor.gray
@@ -273,13 +273,13 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @IBAction func discountAction(_ sender: Any) {
-
+        
         if discountVC == nil {
             discountVC =  DiscountPopViewController(nibName: "DiscountPopViewController", bundle: nil)
             Common.addChildController(childController: discountVC!, onParent: self, onView: self.discountContainer)
             discountVC!.delegate = self
         }
-         toggleContianerViews()
+        toggleContianerViews()
         
         
     }
@@ -365,21 +365,44 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     func UnlistApi() {
         
         let parameters = [
+            "AmountDiscount": 0,
+            Constants.PaymentMode: 1,
+            "Gratuity": 0,
+            Constants.CarID:  Constants.checkoutcarid,
+            Constants.GrandTotal: 0,
+            "ServiceCharges": 0,
+            Constants.AmountTotal: 0,
+            "PartialPayment": 0,
             Constants.OrderID: Constants.checkoutorderid,
-            //  Constants.BayID: Constants.bayid,
-            Constants.type: "unlist",
-            Constants.SessionID: Constants.sessions]  as [String : Any]
+            Constants.Date: Constants.currentdate,
+            Constants.SessionID: Constants.sessions,
+            Constants.WorkerID: workerid,
+            Constants.AmountPaid: 0,
+            "OrderStatus": 105,
+            "AmountComplementary": 0,
+            Constants.Tax: 0,
+            "CheckoutDetails": [[
+            "CardHolderName": "",
+            "AmountPaid": 0,
+            "CardType": "",
+            "AmountDiscount": 0,
+            "PaymentMode": 1,
+            "CardNumber": ""
+            ]],
+            Constants.AssistantID: assistantid,
+            ]  as [String : Any]
         
-        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Unlist)")!
+      //  let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Unlist)")!
+         guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.checkout)") else { return }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PATCH"
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted) else { return }
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
-        let jsonS = NSString(data: httpBody, encoding: String.Encoding.utf8.rawValue)
-        if let json = jsonS {
-            print(json)
+        if let JSONString = String(data: httpBody, encoding: .utf8) {
+            
+            print(JSONString)
         }
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -391,6 +414,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let response = response {
                 print(response)
             }
+            
             if let data = data {
                 print(data)
                 do {
@@ -548,7 +572,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-
+    
     
     func removeNibViews() {
         if containerPop.subviews.count > 0  {
@@ -795,7 +819,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if let response = response {
                             print(response)
                         }
-                
+                        
                         
                         if let data = data {
                             print(data)
@@ -1050,33 +1074,33 @@ extension CheckOutPopView: CashViewDelegate {
 extension CheckOutPopView: DiscountPopDelegate {
     func discountApplyPressed(viewController: UIViewController) {
         print("apply pressed in checkoutpopup")
-
+        
         validateDiscount { [weak self] (valid) in
             if let this = self, valid {
                 this.toggleContianerViews()
                 this.viewModel.calculateAndUpdateUI()
-               NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
                 
             } else {
                 Common.resetAllRecords(in: "Discount")
             }
         }
     }
-
+    
     func discountCancelPressed(viewController: UIViewController) {
         print("cancel pressed in checkoutpopup")
         viewModel.calculateAndUpdateUI()
         toggleContianerViews()
-      NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name("buttonpressed"), object: nil)
     }
-
+    
     private func validateDiscount(completion: @escaping (Bool)->()) {
         guard let discountVC = discountVC else { completion(false) ; return }
         if let textAmountEntered = discountVC.numPadVC?.txtFieldAmountEnter.text {
             if let amountEntered = Double(textAmountEntered) {
                 guard let value = discountVC.selectedDiscountType //DiscountType(rawValue: selectedType.rawValue)
                     else { return }
-
+                
                 switch value {
                 case .Amount:
                     if amountEntered > Constants.subtotal {
@@ -1084,14 +1108,14 @@ extension CheckOutPopView: DiscountPopDelegate {
                         present(messageVC, animated: true) {
                             Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
                                 messageVC.dismiss(animated: true, completion: nil)})}
-                       // UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
+                        // UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
                         completion(false)
                         return
                     } else if amountEntered == Constants.subtotal {
                         setFullDiscount()
                     }
                 case .Percentage:
-
+                    
                     let discounttotal = Constants.subtotal * (amountEntered / 100)
                     let afterDiscountTotal = Constants.subtotal - discounttotal
                     if afterDiscountTotal < 0 {
@@ -1105,21 +1129,21 @@ extension CheckOutPopView: DiscountPopDelegate {
                     } else if afterDiscountTotal == 0 {
                         setFullDiscount()
                     }
-
+                    
                 case .Trend:
                     print("Trend")
                 }
-              setCalculationUI()
+                setCalculationUI()
                 
                 
                 completion(true)
                 return
             }
-           
+            
         }
         
     }
-
+    
     private func setFullDiscount() {
         self.tenderedbalance.text = "0"
     }

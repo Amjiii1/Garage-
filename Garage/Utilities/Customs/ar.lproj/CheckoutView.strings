@@ -18,7 +18,7 @@
 "Toc-JY-0ng.normalTitle" = "إنهاء الفاتورة";
 
 /* Class = "UILabel"; text = "Make"; ObjectID = "cDY-dN-qv9"; */
-"cDY-dN-qv9.text" = "صانع السيارة ";
+"cDY-dN-qv9.text" = "ماركة المركبة";
 
 /* Class = "UISegmentedControl"; gyC-r2-7U1.segmentTitles[0] = "In Work"; ObjectID = "gyC-r2-7U1"; */
 "gyC-r2-7U1.segmentTitles[0]" = "تحت الإجراء ";

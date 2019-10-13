@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 class ReceptionalistView: UIViewController  {
@@ -17,6 +18,7 @@ class ReceptionalistView: UIViewController  {
     @IBOutlet weak var offlibebtn: UIButton!
     @IBOutlet weak var profileBtnOutlet: UIButton!
     
+    @IBOutlet weak var profileImage: UIImageView!
     
     var footerViewheight: CGFloat = 0.0
     var orginalHeight: CGFloat = 0.0
@@ -28,6 +30,13 @@ class ReceptionalistView: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // GeneralNibView.frame.size = settingContianerPop.frame.size
+        profileBtnOutlet.setTitle(Constants.FirstName,for: .normal)
+        if self.profileImage.image == nil {
+            if let url = URL(string: Constants.userImage) {
+                self.profileImage.kf.indicatorType = .activity
+                self.profileImage.kf.setImage(with: url)
+                
+            }} 
         if L102Language.currentAppleLanguage() == "ar" {
 
             profileBtnOutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:10, bottom: 0, right: 0)

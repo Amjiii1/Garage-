@@ -12,13 +12,13 @@
 "IXU-y7-Idc.text" = "عنوان فرعي";//"subtitle";
 
 /* Class = "UILabel"; text = "Click loading for assigned Car"; ObjectID = "JAk-R0-W0h"; */
-"JAk-R0-W0h.text" = "انقر فوق تحميل للسيارة المخصصة";//"Click loading for assigned Car";
+"JAk-R0-W0h.text" = "انقر لتحميل السيارة المخصصة";//"Click loading for assigned Car";
 
 /* Class = "UILabel"; text = "Trans.No"; ObjectID = "PBZ-oE-ji8"; */
 "PBZ-oE-ji8.text" = "رقم العملية";
 
 /* Class = "UIButton"; normalTitle = "Save & Finish"; ObjectID = "Qr9-Rt-cw7"; */
-"Qr9-Rt-cw7.normalTitle" = "حفظ و إنهاء";
+"Qr9-Rt-cw7.normalTitle" = "حفظإنهاء";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "XzW-Wc-DgT"; */
 "XzW-Wc-DgT.text" = "Label";
@@ -36,7 +36,7 @@
 "cOf-CG-x4f.normalTitle" = "0";
 
 /* Class = "UISegmentedControl"; deU-Y5-Mlh.segmentTitles[0] = "Current"; ObjectID = "deU-Y5-Mlh"; */
-"deU-Y5-Mlh.segmentTitles[0]" = "تيار";//"Current";
+"deU-Y5-Mlh.segmentTitles[0]" = "تحت الإجراء";//"Current";
 
 /* Class = "UISegmentedControl"; deU-Y5-Mlh.segmentTitles[1] = "Finished"; ObjectID = "deU-Y5-Mlh"; */
 "deU-Y5-Mlh.segmentTitles[1]" = "إنهاء";

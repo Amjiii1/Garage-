@@ -30,7 +30,7 @@
 "XqN-RT-HWe.text" = "رقم اللوحة";
 
 /* Class = "UILabel"; text = "Check"; ObjectID = "YI9-bR-4jJ"; */
-"YI9-bR-4jJ.text" = "فحص";
+"YI9-bR-4jJ.text" = "العداد";
 
 /* Class = "UILabel"; text = "Car Make"; ObjectID = "bOu-Kh-IIa"; */
 "bOu-Kh-IIa.text" = "ماركة المركبة";

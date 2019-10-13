@@ -24,10 +24,10 @@
 "amI-Nt-1U6.text" = "Label";
 
 /* Class = "UILabel"; text = "No Car"; ObjectID = "bWw-ie-zt5"; */
-"bWw-ie-zt5.text" = "لا سيارة";
+"bWw-ie-zt5.text" = "لا توجد مركبة";
 
 /* Class = "UILabel"; text = "No Car"; ObjectID = "da8-cw-uam"; */
-"da8-cw-uam.text" = "لا سيارة";
+"da8-cw-uam.text" = "لا توجد مركبة";
 
 /* Class = "UILabel"; text = "Mechanics"; ObjectID = "hBu-Ub-tOu"; */
 "hBu-Ub-tOu.text" = "الفني";

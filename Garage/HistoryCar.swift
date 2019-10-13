@@ -44,6 +44,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.showloader()
         historyData()
         historyTableview.dataSource = self
         historyTableview.delegate = self
@@ -70,7 +71,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
             do {
-                self.showloader()
+               // self.showloader()
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
                 

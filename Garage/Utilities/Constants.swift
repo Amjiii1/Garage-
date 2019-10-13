@@ -97,6 +97,7 @@ struct Constants {
     static var VATNo = "VATNo"
     static var LocationNameA = "LocationName"
     static var FirstNameA = "FirstName"
+     static var userimage = "ImageURL"
     static var ReceiptInfo = "ReceiptInfo"
     static var CompanyPhonesA = "CompanyPhones"
     static var InstagramLinkA = "InstagramLink"
@@ -293,6 +294,7 @@ struct Constants {
     static var carmakeid = 2
     static var editOrderid = 0
     static var flagEdit = 0
+    static var editcarid = 0
     static var BMake = ""
     static var Bplate = ""
     static var mode = "Add"
@@ -373,6 +375,7 @@ struct Constants {
     static var SnapchatLink = "-"
     static var Footer = "-"
     static var FirstName = "-"
+    static var userImage = "-"
     
     
     

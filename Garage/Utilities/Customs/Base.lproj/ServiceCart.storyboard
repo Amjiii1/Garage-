@@ -191,7 +191,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="218" height="49"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="ouP-7j-Geg">
-                                                                            <rect key="frame" x="10" y="10" width="197.5" height="34"/>
+                                                                            <rect key="frame" x="10" y="10" width="198" height="34"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFB-mf-Jsn">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="32.5" height="34"/>
@@ -217,7 +217,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5I5-pJ-b1O">
-                                                                                    <rect key="frame" x="165" y="0.0" width="32.5" height="34"/>
+                                                                                    <rect key="frame" x="165.5" y="0.0" width="32.5" height="34"/>
                                                                                     <color key="backgroundColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.45882352941176469" alpha="0.70447293133802813" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>
                                                                                     <state key="normal" title="+">
@@ -232,14 +232,14 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.34509803921568627" green="0.34509803921568627" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="ouP-7j-Geg" secondAttribute="trailing" multiplier="1.05" id="13u-lJ-Gla"/>
+                                                                        <constraint firstAttribute="right" secondItem="ouP-7j-Geg" secondAttribute="rightMargin" multiplier="1.05" id="13u-lJ-Gla"/>
                                                                         <constraint firstAttribute="height" constant="49" id="2ft-gn-Mzc"/>
                                                                         <constraint firstItem="ipb-ji-lH4" firstAttribute="width" secondItem="BUE-Tq-yaz" secondAttribute="width" multiplier="0.5" id="6gk-pg-gHX"/>
                                                                         <constraint firstItem="vFB-mf-Jsn" firstAttribute="width" secondItem="BUE-Tq-yaz" secondAttribute="width" multiplier="0.15" id="Asp-f4-HNf"/>
                                                                         <constraint firstItem="5I5-pJ-b1O" firstAttribute="width" secondItem="BUE-Tq-yaz" secondAttribute="width" multiplier="0.15" id="Fsd-15-AEg"/>
                                                                         <constraint firstAttribute="bottom" secondItem="ouP-7j-Geg" secondAttribute="bottom" constant="5" id="jBI-fS-eja"/>
                                                                         <constraint firstItem="ouP-7j-Geg" firstAttribute="top" secondItem="BUE-Tq-yaz" secondAttribute="top" constant="10" id="kPB-Xl-UQu"/>
-                                                                        <constraint firstItem="ouP-7j-Geg" firstAttribute="leading" secondItem="BUE-Tq-yaz" secondAttribute="leading" constant="10" id="nxg-GV-YdQ"/>
+                                                                        <constraint firstItem="ouP-7j-Geg" firstAttribute="left" secondItem="BUE-Tq-yaz" secondAttribute="leftMargin" constant="2" id="nxg-GV-YdQ"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -268,6 +268,7 @@
                                                             <outlet property="imageView" destination="w6C-04-a7Y" id="hoV-07-pda"/>
                                                             <outlet property="minusBtn" destination="vFB-mf-Jsn" id="AXS-Lh-CIy"/>
                                                             <outlet property="plusBtn" destination="5I5-pJ-b1O" id="0up-A5-4Mi"/>
+                                                            <outlet property="stackview" destination="ouP-7j-Geg" id="cW7-LX-GzN"/>
                                                             <outlet property="subtitle" destination="Uml-4R-buF" id="VC5-8w-Gdh"/>
                                                         </connections>
                                                     </collectionViewCell>

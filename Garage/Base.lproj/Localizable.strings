@@ -72,6 +72,7 @@
 "Numberinvalid" = "Phone Number is invalid! Less than format";
 "NumberGreater" = "Phone Number is invalid! Greater than format";
 "AlreadyAssigned" = "Sorry Order cannot be Edit! Already Assigned to";
+"Void" = "Void";
 
 
 

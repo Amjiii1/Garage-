@@ -16,7 +16,6 @@ import UIKit
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
-        
         UIApplication.shared.statusBarStyle = .lightContent
        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.5))
         showDashboard()

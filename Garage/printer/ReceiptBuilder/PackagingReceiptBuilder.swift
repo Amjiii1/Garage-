@@ -12,7 +12,7 @@ class PackagingReceiptBuilder: ReceiptBuilder {
     private var orderToPrint: Orderdetail!
     private var receiptSize: CGSize = CGSize(width: 0.0, height: 100.0)
     private let paddingFromLeft: Double = Double(Constants._4inchScale * 0.08)
-
+   
     // Fonts' height with respect to thir attributes
     private var sfProDisplay_semiBoldFontAttributes_90_height: Double!
     private var sfProDisplay_mediumFontAttributes_27_height: Double!

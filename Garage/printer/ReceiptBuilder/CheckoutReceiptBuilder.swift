@@ -19,8 +19,10 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
     private var companyInfo: CompanyInfo!
     
     private var receiptSize: CGSize = CGSize(width: 0.0, height: 100.0)
-    private let paddingFromLeft: Double = Double(Constants._4inchScale * 0.08)
     
+    
+    private let paddingFromLeft: Double = Double(Constants._4inchScale * 0.08) //0.08
+   
     // Fonts' height with respect to thir attributes
     private var sfProDisplay_semiBoldFontAttributes_90_height: Double!
     private var sfProDisplay_mediumFontAttributes_27_height: Double!
@@ -120,9 +122,9 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
         let timeString = FormatHelper.getFormattedTime(date: date, timeFormat: TimeFormat.hour12)
         let timeStringSize: CGSize = timeString.size(withAttributes: sfProDisplay_mediumFontAttributes_27)
         var attributedString = NSMutableAttributedString(string: "\(dateString)", attributes: sfProDisplay_mediumFontAttributes_27)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(receiptWidth), height: sfProDisplay_mediumFontAttributes_27_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_27_height))
         attributedString = NSMutableAttributedString(string: "\(timeString)", attributes: sfProDisplay_mediumFontAttributes_27)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptWidth*0.92)-timeStringSize.width), y: yCoordinate, width: Double(receiptWidth), height: sfProDisplay_mediumFontAttributes_27_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptWidth*0.92)-timeStringSize.width), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_27_height))
     }
     
     /// Draws order details i.e. transaction number, order number, order type etc
@@ -131,12 +133,13 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
     /// - Returns: Void
     private func drawOrderDetails(at yCoordinate: Double) {
         let paperSize = self.receiptSize
+        print(paperSize)
         var attributedString = NSMutableAttributedString(string: "\(Constants.checkoutmechanic)", attributes: sfProDisplay_boldFontAttributes_27
             
             
         )
         //  drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: Double(sfProDisplay_mediumFontAttributes_27_height)))
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
         
         attributedString = NSMutableAttributedString(string: "\(Constants.checkoutbayname)", attributes: sfProDisplay_mediumFontAttributes_27)
         //        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width*0.70), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
@@ -144,392 +147,52 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
         //
         //        attributedString = NSMutableAttributedString(string: "\(cartItem.Price!.myRounded(toPlaces: 2)) SR", attributes: sfProDisplay_boldFontAttributes_27)
         let attributedStringWidth1 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth1), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(attributedString.size().width) - paddingFromLeft - Double(attributedStringWidth1), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+        } else {
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth1), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+        }
+        
         
         
         
         attributedString = NSMutableAttributedString(string: "\(Constants.checkoutcarmake)", attributes: sfProDisplay_mediumFontAttributes_27)
         //  drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_mediumFontAttributes_27_height))
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 45, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
         
         attributedString = NSMutableAttributedString(string: "\(Constants.checkoutcarmodel)", attributes: sfProDisplay_mediumFontAttributes_27)
         //  drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width*0.70), y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
         let attributedStringWidth2 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth2), y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+        if L102Language.currentAppleLanguage() == "ar" {
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(attributedString.size().width) - paddingFromLeft - Double(attributedStringWidth2), y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+          
+        } else {
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth2), y: yCoordinate + 45, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+           
+        }
+        
         
         if receiptConfigurationModel.showTable {
             attributedString = NSMutableAttributedString(string: "Km \(Constants.checkoutcustm)", attributes: sfProDisplay_mediumFontAttributes_27)
             
             // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_mediumFontAttributes_27_height))
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate + 90, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
         }
         
         if let orderTaker = orderDetails.orderPrinterType {
             attributedString = NSMutableAttributedString(string: "\(Constants.checkoutyear)", attributes: sfProDisplay_mediumFontAttributes_27)
             // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width*0.70), y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
             let attributedStringWidth3 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+            if L102Language.currentAppleLanguage() == "ar" {
+               drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(attributedString.size().width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+            } else {
+               drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate + 90, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+            }
+           
         }
     }
-    class func createEnglishXreport(_ width:CGFloat,xReport:Xreport) -> UIImage {
-        
-        let isSmall = width < 400
-        let boldFontName = isSmall ? Constants.boldWritingReceipt : Constants.boldWritingReceipt
-        var heightValue:CGFloat = 0
-        let separator =      isSmall ? "------------------------------------------" : "----------------------------------------------------"
-        let fontName = isSmall ? Constants.WritingReceipt : Constants.WritingReceipt
-        let fontSize = isSmall ? Constants.smallWritingReceiptSize : Constants.smallWritingReceiptSize
-        let boldFontSize = isSmall ? Constants.smallWritingReceiptSize :  Constants.smallWritingReceiptSize
-        
-        let numberOflines:CGFloat = isSmall ? 37 : 36
-        //        if(xReport.isZreport){
-        //            numberOflines = numberOflines - 1
-        //        }
-        let paperSize = CGSize(width: width, height: numberOflines * 30)
-        var tempImage: UIImage? = nil
-        tempImage = UIImage()
-        UIGraphicsBeginImageContext(paperSize)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(UIColor.white.cgColor)
-        let tempRect = CGRect(x: 0, y: 0, width: paperSize.width, height: paperSize.height)
-        tempImage!.draw(in: tempRect)
-        context?.fill(tempRect)
-        let halfWidth = width/2
-        heightValue = 0
-        
-        //let xReport = DBEngine.getXReport()
-        let lastMargin:CGFloat = 10
-        let separatorMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(separator, fontName: fontName, fontSize: fontSize))
-        
-        var  ReportTitle = "X-Report"
-        //        if(xReport.isZreport) {
-        //            ReportTitle = "Z-Report"
-        //        }
-        
-        let xReportTitle = NSMutableAttributedString(attributedString: UIUtility.boldString(ReportTitle, fontName: boldFontName, fontSize: boldFontSize))
-        
-        UIUtility.drawInRectWithString(xReportTitle, frame: CGRect(x: halfWidth - (xReportTitle.size().width/2), y: heightValue, width: xReportTitle.size().width, height: 30))
-        
-        heightValue+=30
-        
-        
-        let LocationName = "sds"//Defaults.getLocation().name
-        let locationTitle = NSMutableAttributedString(attributedString: UIUtility.boldString(LocationName, fontName: boldFontName, fontSize: boldFontSize))
-        
-        UIUtility.drawInRectWithString(locationTitle, frame: CGRect(x: halfWidth - (locationTitle.size().width/2), y: heightValue, width: locationTitle.size().width, height: 30))
-        
-        heightValue+=30
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        var tempString =   "User:"
-        var tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        var detailLabel =   " amjad"
-        var detailMutableLabel = NSMutableAttributedString(attributedString: UIUtility.boldString(detailLabel, fontName: fontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(detailMutableLabel, frame: CGRect(x: tempMutableString.size().width, y: heightValue, width: detailMutableLabel.size().width, height: 30))
-        
-        
-        tempString =   "Date:"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width/2, y: heightValue, width: tempMutableString.size().width, height: 30))
-        detailLabel =   " Ali"
-        detailMutableLabel = NSMutableAttributedString(attributedString: UIUtility.boldString(detailLabel, fontName: fontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(detailMutableLabel, frame: CGRect(x: width/2 + tempMutableString.size().width, y: heightValue, width: detailMutableLabel.size().width, height: 30))
-        
-        heightValue+=30
-        
-        
-        
-        tempString =   "Print Time:"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        // heightValue+=30
-        
-        detailLabel =   " Amjad"
-        detailMutableLabel = NSMutableAttributedString(attributedString: UIUtility.boldString(detailLabel, fontName: fontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(detailMutableLabel, frame: CGRect(x: tempMutableString.size().width, y: heightValue, width: detailMutableLabel.size().width, height: 30))
-        
-        
-        heightValue+=30
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        
-        tempString =   "Total Sales"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.totalSales
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Minus Discount"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.minusDiscount
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Minus Void"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.minusVoid
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Minus Complimentary"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.minusComplimentary
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Minus Returns"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.minuesReturns
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Minus Tax"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.tax
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        
-        tempString =   "Net Sales"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   "SAR.\(xReport.netSales!)"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Plus Gratuity"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.plusGratuity
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Plus Charges"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.plusCharges
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Tendered"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   "SAR.\(xReport.totalTendered!)"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        tempString =   "Cash"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.cash
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Card"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.credit
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Loyalty"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.loyalty
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Gift Card"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.plusCharges
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        tempString =   "Coupons"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.plusCharges
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        //        if(!xReport.isZreport) {
-        //            tempString =   "Ledger"
-        //            tempMutableString = NSMutableAttributedString(attributedString: Utilities.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        //            Utilities.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        //
-        //            tempString =   xReport.plusCharges
-        //            tempMutableString = NSMutableAttributedString(attributedString: Utilities.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        //            Utilities.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        //
-        //            heightValue+=30
-        //        }
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        
-        tempString =   "Total (By Transaction Type)"
-        if(isSmall) {
-            tempString =   "Total (By TrN Type)"
-        }
-        
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        if(isSmall) {
-            heightValue+=30
-        }
-        tempString =   "SAR.\(xReport.totalTrNTypes!)"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        //Total orders list
-        
-        tempString =   "Total Cash Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.TotalCashOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Card Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.TotalCardOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Multi-Payment Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.TotalMultiPayOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Void Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.TotalVoidOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Return Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.TotalRefundOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        
-        
-        //Draw Line
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        tempString =   "Total Orders"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: 0, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        tempString =   xReport.totalOrders
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: boldFontName, fontSize: boldFontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: width - tempMutableString.size().width - lastMargin, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        heightValue+=30
-        
-        UIUtility.drawInRectWithString(separatorMutableString, frame: CGRect(x: 0, y: heightValue, width: separatorMutableString.size().width, height: 30))
-        heightValue+=30
-        
-        
-        
-        tempString =   "Powered by marnpos.com"
-        tempMutableString = NSMutableAttributedString(attributedString: UIUtility.boldString(tempString, fontName: fontName, fontSize: fontSize))
-        UIUtility.drawInRectWithString(tempMutableString, frame: CGRect(x: halfWidth - tempMutableString.size().width/2, y: heightValue, width: tempMutableString.size().width, height: 30))
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-        
-    }
-    
+ 
     
     
     
@@ -603,12 +266,19 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         if name != "" {
             //            yCoordinate = yCoordinate + 20
             let attributedString = NSMutableAttributedString(string: "\(Constants.checkoutorderNo)", attributes: sfProDisplay_mediumFontAttributes_32)
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+             if L102Language.currentAppleLanguage() == "ar" {
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((attributedString.size().width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+             } else {
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+            }
+            
+        
+            //attributedString.accessibilityLanguage
         }
         
         if receiptConfigurationModel.showLogo {
             let attributedString = NSAttributedString(attachment: logo) as! NSMutableAttributedString
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/2), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/2), y: yCoordinate, width: Double(attributedString.size().width), height: Double((logo.image?.size.height)!)))
             yCoordinate = yCoordinate + Double((logo.image?.size.height)!) + 10
         }
         
@@ -684,11 +354,11 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             let xCoordinate: Double = Double(attributedString.size().width)
             print(cartItem.Name!.characters.count)
             attributedString.append(NSMutableAttributedString(string: "\(cartItem.Name!)", attributes: sfProDisplay_semiBoldFontAttributes_30))
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
             
             attributedString = NSMutableAttributedString(string: "\(cartItem.Price!.myRounded(toPlaces: 2)) SR", attributes: sfProDisplay_boldFontAttributes_27)
             let attributedStringWidth = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_boldFontAttributes_27_height))
             
             yCoordinate = yCoordinate + 20
             
@@ -763,18 +433,18 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             let arabicTitle = arabicTitles[i]
             var attributedString = NSMutableAttributedString(string: "\(englishTitle)", attributes: sfProDisplay_semiBoldFontAttributes_30)
             
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_semiBoldFontAttributes_30_height))
-            
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_semiBoldFontAttributes_30_height))
+            print(paddingFromLeft)
             let amount = String(format: "%.2f", (amounts[i] as! CVarArg))
             attributedString = NSMutableAttributedString(string: "\(amount) SR", attributes: sfProDisplay_boldFontAttributes_27)
             
             let attributedStringWidth = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
-            
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_boldFontAttributes_27_height))
+             print(paddingFromLeft)
             attributedString = NSMutableAttributedString(string: "\n\(arabicTitle)", attributes: geezaPro_boldFontAttributes_30)
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: Double(attributedString.size().height)))
             yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 40
-            
+             print(paddingFromLeft)
             yCoordinate = yCoordinate + 40
         }
         
@@ -836,16 +506,16 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         /// Grand Total
         let grandTotal = String(format: "%.2f", (Constants.checkoutGrandtotal))
         var attributedString = NSMutableAttributedString(string: "Grand Total", attributes: sfProDisplay_heavyFontAttributes_37bold)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
         
         attributedString = NSMutableAttributedString(string: "\(grandTotal) SR", attributes: sfProDisplay_heavyFontAttributes_37bold)
         let attributedStringWidth = attributedString.string.size(withAttributes: sfProDisplay_heavyFontAttributes_37bold).width
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_30_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_30_height))
         
         yCoordinate = yCoordinate + sfProDisplay_heavyFontAttributes_30_height + 20
         
         attributedString = NSMutableAttributedString(string: "الإجمالي", attributes: sfProDisplay_boldFontAttributes_27)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: geezaPro_boldFontAttributes_30_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: geezaPro_boldFontAttributes_30_height))
         
             yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 30
         
@@ -856,7 +526,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             if Constants.paymentflag == 3 { // For adding cash and card field with individual amount
                 attributedString = NSMutableAttributedString(string: "Payment - Cash", attributes: sfProDisplay_mediumFontAttributes_30)
                 // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
-                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
                  if Constants.checkoutstatus == 104 {   // reprint or checkout
               attributedString = NSMutableAttributedString(string: "\(Constants.CashAmountcheckout) SR", attributes: sfProDisplay_mediumFontAttributes_30)
                  } else {
@@ -867,7 +537,12 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
                 
                  //            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
                 let attributedStringWidth3 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+                 if L102Language.currentAppleLanguage() == "ar" {
+                    drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(attributedString.size().width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+                 } else {
+                    drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+                }
+        
                 print(Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth))
                 
                 yCoordinate = yCoordinate + geezaPro_boldFontAttributes_30_height + 30
@@ -875,7 +550,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             }
             attributedString = NSMutableAttributedString(string: "Payment - \(paymentVia)", attributes: sfProDisplay_mediumFontAttributes_30)
             // drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_heavyFontAttributes_37_height))
+            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
             
              if Constants.paymentflag == 3 {
                 
@@ -893,8 +568,14 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
                  attributedString = NSMutableAttributedString(string: "\(grandTotal) SR", attributes: sfProDisplay_mediumFontAttributes_30)
             }
             //            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
+            
             let attributedStringWidth3 = attributedString.string.size(withAttributes: sfProDisplay_boldFontAttributes_27).width
-            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+             if L102Language.currentAppleLanguage() == "ar" {
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(attributedString.size().width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+             } else {
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth3), y: yCoordinate, width: Double(paperSize.width), height: sfProDisplay_boldFontAttributes_27_height))
+            }
+            
             print(Double(paperSize.width) - paddingFromLeft - Double(attributedStringWidth))
         }
         
@@ -925,7 +606,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         
         let attributedString = NSMutableAttributedString(string: Constants.Footer, attributes: sfProDisplay_mediumFontAttributes_27)
         let attributedStringSize = attributedString.string.size(withAttributes: sfProDisplay_mediumFontAttributes_27)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width - attributedStringSize.width)/2, y: yCoordinate, width: Double(self.receiptSize.width), height: sfProDisplay_mediumFontAttributes_27_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width - attributedStringSize.width)/2, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_27_height))
         
         yCoordinate = yCoordinate + 40
         
@@ -953,6 +634,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         tempImage.draw(in: tempRect)
         context?.fill(tempRect)
         let attachment = NSTextAttachment()
+        
         // Start: Transation Number (on top)
         
         
@@ -1040,7 +722,6 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         var image = getHeaderForCheckout()
         
         image = mergeImageTopToBottom(topImage: image, bottomImage: getTransactionDetails())
-        
         image = mergeImageTopToBottom(topImage: image, bottomImage: getWhiteImage(size: CGSize(width: receiptSize.width, height: 30)))
         image = mergeImageTopToBottom(topImage: image, bottomImage: getSeparator())
         image = mergeImageTopToBottom(topImage: image, bottomImage: getWhiteImage(size: CGSize(width: receiptSize.width, height: 30)))

@@ -16,17 +16,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="CashView" customModule="Garage" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="549" height="314.5"/>
+            <rect key="frame" x="0.0" y="0.0" width="549" height="315"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Rm-9zB">
-                    <rect key="frame" x="5.5" y="15.5" width="538" height="283.5"/>
+                    <rect key="frame" x="5.5" y="16" width="538" height="283.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jgP-Vd-pwt">
-                            <rect key="frame" x="0.0" y="0.0" width="538" height="138"/>
+                            <rect key="frame" x="0.0" y="0.0" width="538" height="137.5"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-ly-Z8I">
-                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="138"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="01">
@@ -42,7 +42,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-Pt-VYU">
-                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="138"/>
+                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="02">
@@ -58,7 +58,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-eq-nIq">
-                                    <rect key="frame" x="273" y="0.0" width="128.5" height="138"/>
+                                    <rect key="frame" x="273" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="05">
@@ -74,7 +74,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ah9-nr-dT7">
-                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="138"/>
+                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="137.5"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="10">
@@ -92,10 +92,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cXm-PS-ie2">
-                            <rect key="frame" x="0.0" y="146" width="538" height="137.5"/>
+                            <rect key="frame" x="0.0" y="145.5" width="538" height="138"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="977-X5-vsb">
-                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="137.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="20">
@@ -111,7 +111,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wn0-Ek-0AG">
-                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="137.5"/>
+                                    <rect key="frame" x="136.5" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="50">
@@ -127,7 +127,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZd-vQ-e0o">
-                                    <rect key="frame" x="273" y="0.0" width="128.5" height="137.5"/>
+                                    <rect key="frame" x="273" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="100">
@@ -143,7 +143,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfk-QM-9ff">
-                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="137.5"/>
+                                    <rect key="frame" x="409.5" y="0.0" width="128.5" height="138"/>
                                     <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                     <state key="normal" title="500">
@@ -162,10 +162,10 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="jgP-Vd-pwt" firstAttribute="leading" secondItem="SEI-Rm-9zB" secondAttribute="leading" id="Its-lY-qfj"/>
-                        <constraint firstAttribute="trailing" secondItem="jgP-Vd-pwt" secondAttribute="trailing" id="Nc0-Qe-p3y"/>
-                        <constraint firstItem="cXm-PS-ie2" firstAttribute="leading" secondItem="SEI-Rm-9zB" secondAttribute="leading" id="ZpW-rY-Pab"/>
-                        <constraint firstAttribute="trailing" secondItem="cXm-PS-ie2" secondAttribute="trailing" id="lqj-x8-Vgu"/>
+                        <constraint firstItem="jgP-Vd-pwt" firstAttribute="left" secondItem="SEI-Rm-9zB" secondAttribute="leftMargin" id="Its-lY-qfj"/>
+                        <constraint firstAttribute="right" secondItem="jgP-Vd-pwt" secondAttribute="rightMargin" id="Nc0-Qe-p3y"/>
+                        <constraint firstItem="cXm-PS-ie2" firstAttribute="left" secondItem="SEI-Rm-9zB" secondAttribute="leftMargin" id="ZpW-rY-Pab"/>
+                        <constraint firstAttribute="right" secondItem="cXm-PS-ie2" secondAttribute="rightMargin" id="lqj-x8-Vgu"/>
                     </constraints>
                 </stackView>
             </subviews>

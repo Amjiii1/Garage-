@@ -593,7 +593,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         print(Constants.checkoutdiscount)
         
         if flag == 2 ||  flag == 3 {
-            if Constants.checkoutGrandtotal.myRounded(toPlaces: 2) == cardcash  {
+            if cardcash >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2)   {
                 status()
                 if cardtype == "" {
                     let messageVC = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.PleaseselectCard, preferredStyle: .actionSheet)

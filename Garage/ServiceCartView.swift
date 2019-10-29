@@ -420,10 +420,10 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                 print(orders)
                                 let Name = orders["ItemName"] as? String  ?? ""
                                 let AlternateName = orders["AlternateName"] as? String  ?? ""
-                                let Price = orders["Price"] as! Double
-                                let ItemID = orders["ItemID"] as! Int
-                                let Quantity = orders["Quantity"] as! Int
-                                let OrderDetails = orders["OrderDetailID"] as! Int
+                                let Price = orders["Price"] as? Double  ?? 0.0
+                                let ItemID = orders["ItemID"] as? Int  ?? 0
+                                let Quantity = orders["Quantity"] as? Int  ?? 0
+                                let OrderDetails = orders["OrderDetailID"] as? Int  ?? 0
                                 let editproducts = ReceiptModel(Name: Name, AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(editproducts)
                                 let price = Price * Double(Constants.counterQTY)
@@ -504,7 +504,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     for ProductModels in subCategoriesList {
                                         if let ItemsList = ProductModels["ItemsList"] as? [[String: Any]] {
                                             for ProductModel in ItemsList {
-                                                let nam = ProductModel["Name"] as! String?
+                                                let nam = ProductModel["Name"] as? String  ?? ""
                                                 let neworder = ItemsModel(ProductModel: ProductModel)
                                                 self.itemsModel.append(neworder!)
                                                 self.itemsfilter = self.itemsModel

@@ -86,8 +86,8 @@ class PopOver: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Select item from tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        Constants.bayid = Baydetails[indexPath.row].BayID!
-        Constants.bayname = Baydetails[indexPath.row].Name!
+        Constants.bayid = Baydetails[indexPath.row].BayID ?? 0
+        Constants.bayname = Baydetails[indexPath.row].Name ?? ""
         NotificationCenter.default.post(name: Notification.Name("Notificationbayname"), object: nil)
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark

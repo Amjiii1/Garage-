@@ -299,12 +299,12 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         guard let cell = finishedTableview.dequeueReusableCell(withIdentifier: "MechanicTableviewCell", for: indexPath) as? MechanicTableviewCell else { return UITableViewCell() }
         let transaction = MechanicModel[indexPath.row].finishedTransactionNo
-        cell.serialNo.text = "\(transaction!)"
+        cell.serialNo.text = "\(transaction  ?? 0)"
         cell.makeLbl.text = MechanicModel[indexPath.row].finishedMakerName
         cell.modelLbl.text = MechanicModel[indexPath.row].finishedModelName
         cell.plateLbl.text = MechanicModel[indexPath.row].finishedRegistrationNo
         let status = MechanicModel[indexPath.row].finishedBayName
-        cell.statusLbl.text = "\(status!)"
+        cell.statusLbl.text = "\(status  ?? "")"
         cell.selectionStyle = .none
         return cell
     }

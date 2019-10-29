@@ -8,11 +8,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Amjad_Bold.otf">
-            <string>SFProDisplay-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Language View Controller-->
         <scene sceneID="Vls-F8-osY">
@@ -26,13 +21,13 @@
                                 <rect key="frame" x="41.5" y="87.5" width="751" height="84.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VF-zn-HRi">
-                                        <rect key="frame" x="0.0" y="17" width="150.5" height="50.5"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="19"/>
+                                        <rect key="frame" x="20" y="17" width="150.5" height="50.5"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Rc-E0-tzA">
-                                        <rect key="frame" x="518" y="24.5" width="210.5" height="36.5"/>
+                                        <rect key="frame" x="468" y="28.5" width="263" height="29"/>
                                         <segments>
                                             <segment title="English"/>
                                             <segment title="Arabic"/>
@@ -45,14 +40,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="width" secondItem="9E4-fe-dGn" secondAttribute="width" multiplier="0.35" id="73B-8A-bra"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Rc-E0-tzA" secondAttribute="trailing" constant="20" id="94g-mF-2rw"/>
                                     <constraint firstItem="3VF-zn-HRi" firstAttribute="height" secondItem="9E4-fe-dGn" secondAttribute="height" multiplier="0.6" id="Dix-eh-Bva"/>
                                     <constraint firstItem="3VF-zn-HRi" firstAttribute="centerY" secondItem="9E4-fe-dGn" secondAttribute="centerY" id="E1E-jv-dV0"/>
+                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="centerY" secondItem="3VF-zn-HRi" secondAttribute="centerY" id="E1y-yN-Z4Q"/>
                                     <constraint firstItem="3VF-zn-HRi" firstAttribute="width" secondItem="9E4-fe-dGn" secondAttribute="width" multiplier="0.2" id="LUA-8S-Z7O"/>
-                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="height" secondItem="3VF-zn-HRi" secondAttribute="height" multiplier="0.7" id="PdC-Bh-Snm"/>
-                                    <constraint firstItem="3VF-zn-HRi" firstAttribute="centerX" secondItem="9E4-fe-dGn" secondAttribute="centerX" multiplier="0.2" id="Tfq-0I-FHQ"/>
-                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="centerY" secondItem="3VF-zn-HRi" secondAttribute="centerY" id="bho-o9-9UF"/>
-                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="width" secondItem="3VF-zn-HRi" secondAttribute="width" multiplier="1.4" id="rUU-RU-Jgj"/>
-                                    <constraint firstItem="3Rc-E0-tzA" firstAttribute="centerX" secondItem="3VF-zn-HRi" secondAttribute="centerX" multiplier="8.3" id="yAP-LQ-CMt"/>
+                                    <constraint firstItem="3VF-zn-HRi" firstAttribute="leading" secondItem="9E4-fe-dGn" secondAttribute="leading" constant="20" id="sgg-Zs-iR9"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -61,7 +55,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.94899867957746475" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9E4-fe-dGn" firstAttribute="centerX" secondItem="wgb-VR-Cye" secondAttribute="centerX" id="AFo-6o-TBw"/>
                             <constraint firstItem="9E4-fe-dGn" firstAttribute="height" secondItem="X7L-ef-aS5" secondAttribute="height" multiplier="0.1" id="G62-T6-jzU"/>

@@ -167,7 +167,11 @@ class PrintJobHelper {
     static fileprivate func getCompanyInfo()-> CompanyInfo? {
       //  if let _ = getReceipt() {
             //            let companyInfo = CompanyInfo(logo: UIImage(named: "store.png")!, name: receipt.companyTitle!, phoneNumber: receipt.companyPhones!, valueAddedTaxNumber: "1234567890", snapchatLink: receipt.snapchatLink!, instagranLink: receipt.instagramLink!)
-            
+           // self.imageview.kf.setImage(with: "url")
+//]]]
+//UIImage(data:Constants.ImageF)
+        
+        // UIImage(data:Constants.Logoimage! as Data)!
         let companyInfo = CompanyInfo(logo: UIImage(named: "marngarage.png")!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
             return companyInfo
 //        }

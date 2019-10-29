@@ -164,8 +164,8 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                         //self.removeImage("frame", fileExtension: "txt")
                         if let JSON = response.result.value as? NSObject {
                             DispatchQueue.main.async {
-                                let Status = JSON.value(forKey: "Status") as! Int
-                                let descript = JSON.value(forKey: "Description") as! String
+                                let Status = JSON.value(forKey: "Status") as? Int  ?? 0
+                                let descript = JSON.value(forKey: "Description") as? String  ?? ""
                                  if Status == 1 {
                                 ToastView.show(message: descript, controller: self)
                                 if let Platenmb = JSON.value(forKey: "PlateNo") as? String {

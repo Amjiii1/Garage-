@@ -63,6 +63,7 @@ struct Constants {
     static var ModelID = "ModelID"
     static var CarID = "CarID"
     static var CustomerID = "CustomerID"
+    static var Gender = "Gender"
     static var OrderID = "OrderID"  // historycontroller
     static var CarName = "CarName"
     static var CarDescription = "CarDescription"
@@ -108,6 +109,7 @@ struct Constants {
     static var loggedIn = "loggedIn"
     static var BusinessCodeSuccess = "BusinessCode Verified Successfully"
     static var BusinessCodeFailed = "BusinessCode Verified Failed!"
+    static var CompanyLogoURL = "CompanyLogoURL"
     
     
     
@@ -376,6 +378,9 @@ struct Constants {
     static var Footer = "-"
     static var FirstName = "-"
     static var userImage = "-"
+    static var Currentversion = ""
+    static var Logoimage:  NSData?
+
     
     
     

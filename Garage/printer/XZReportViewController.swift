@@ -16,6 +16,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
     @IBOutlet weak var zReportOutlet: UIButton!
     
+    @IBOutlet weak var SettingsBtn: UIButton!
     
     
     var printer: Epos2Printer?
@@ -52,12 +53,9 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
     
     @IBAction func XreportBtn(_ sender: Any) {
-        //        connectPrinter()
-        //        if flag == 2 {
-        //           alert(view: self, title: "Printer has something wrong! not connected", message: "Do you want to Continue")
-        //        } else {
+
         if Constants.Printer != "" {
-            
+ 
             Status = 1
             Xreportdata()
             Status = 0
@@ -65,7 +63,6 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             UIUtility.showAlertInController(title: LocalizedString.Alert, message: LocalizedString.PrinternotConnected, viewController: self)
         }
     }
-    //   }
     
     
     @IBAction func ZreportBtn(_ sender: Any) {
@@ -109,6 +106,33 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             view.present(alert, animated: true)
         })
     }
+    
+    
+    
+    
+    
+    
+    @IBAction func SettingsAction(_ sender: Any) {
+        let screenSize = UIScreen.main.bounds.width
+        let screenheight = UIScreen.main.bounds.size.height
+        print(screenheight)
+        var storyboard: UIStoryboard!
+        var popController: UIViewController!
+        storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+        popController.modalPresentationStyle = .popover
+        let popOverVC = popController.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.view
+        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
+        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
+        self.present(popController, animated: true)
+//        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     
     //    func setupsettingsq(){
     //        let screenSize = UIScreen.main.bounds.width

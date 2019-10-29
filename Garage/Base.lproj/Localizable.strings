@@ -53,7 +53,7 @@
 "Failed" = "Failed ";
 "limitExceeded" = "limit Exceeded";
 "PleaseselectCard" = "Please select Card";
-"Discard" = "Do you want to Discard the order?";
+"Discarded" = "Do you want to Discard the order?";
 "NOPrintersFound" = "NO new Printers Found";
 "PrinternotConnected" = "Printer is not Connected";
 "OK" = "OK";
@@ -73,6 +73,7 @@
 "NumberGreater" = "Phone Number is invalid! Greater than format";
 "AlreadyAssigned" = "Sorry Order cannot be Edit! Already Assigned to";
 "Void" = "Void";
+"rollyear" = "roll up for year";
 
 
 

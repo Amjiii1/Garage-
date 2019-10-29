@@ -22,11 +22,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zR2-KF-eMA"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="u5A-Kd-5tS">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="597.5" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UZ-0x-7HR">
-                                <rect key="frame" x="1" y="0.0" width="193" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="197" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="72" minY="0.0" maxX="0.0" maxY="60"/>
@@ -37,8 +37,21 @@
                                     <action selector="XreportBtn:" destination="MY4-nd-tOu" eventType="touchUpInside" id="AIx-xf-1Yi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIJ-oy-VOb">
+                                <rect key="frame" x="400.5" y="0.0" width="197" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="72" minY="0.0" maxX="0.0" maxY="60"/>
+                                <state key="normal" title="Settings" image="Recept">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="SettingsAction:" destination="MY4-nd-tOu" eventType="touchUpInside" id="7Oo-1V-MPJ"/>
+                                    <action selector="ZreportBtn:" destination="MY4-nd-tOu" eventType="touchUpInside" id="dK9-NK-hMZ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-tE-Otv">
-                                <rect key="frame" x="196" y="0.0" width="193" height="150"/>
+                                <rect key="frame" x="200" y="0.0" width="197.5" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="72" minY="0.0" maxX="0.0" maxY="60"/>
@@ -52,14 +65,18 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="0.2797095070422535" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="height" secondItem="5UZ-0x-7HR" secondAttribute="height" id="5oS-yj-RDO"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="height" secondItem="u5A-Kd-5tS" secondAttribute="height" id="8bB-4u-lTT"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerY" secondItem="u5A-Kd-5tS" secondAttribute="centerY" id="Nph-Lz-Vvl"/>
-                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="width" secondItem="5UZ-0x-7HR" secondAttribute="width" id="R13-eC-ksh"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.495" id="UR0-fi-NZY"/>
-                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerX" secondItem="5UZ-0x-7HR" secondAttribute="centerX" multiplier="3" id="ehn-0W-hvZ"/>
-                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerX" secondItem="u5A-Kd-5tS" secondAttribute="centerX" multiplier="0.5" id="hpN-j8-Y2m"/>
-                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerY" secondItem="5UZ-0x-7HR" secondAttribute="centerY" id="iIn-FW-sPx"/>
+                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerX" secondItem="5UZ-0x-7HR" secondAttribute="centerX" multiplier="3.03" id="0y0-EN-PXG"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="width" secondItem="u5A-Kd-5tS" secondAttribute="width" multiplier="0.33" id="ASV-Y3-pP6"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="height" secondItem="u5A-Kd-5tS" secondAttribute="height" id="O6Y-Ye-5IU"/>
+                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="centerY" secondItem="5UZ-0x-7HR" secondAttribute="centerY" id="OYC-8S-hFc"/>
+                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="height" secondItem="5UZ-0x-7HR" secondAttribute="height" id="TrG-Mz-rDP"/>
+                            <constraint firstItem="3ZG-tE-Otv" firstAttribute="width" secondItem="5UZ-0x-7HR" secondAttribute="width" id="VLR-DW-OlW"/>
+                            <constraint firstItem="AIJ-oy-VOb" firstAttribute="height" secondItem="3ZG-tE-Otv" secondAttribute="height" id="dpv-TN-ZeI"/>
+                            <constraint firstItem="AIJ-oy-VOb" firstAttribute="centerX" secondItem="3ZG-tE-Otv" secondAttribute="centerX" multiplier="1.67" id="fyS-Yl-prh"/>
+                            <constraint firstItem="AIJ-oy-VOb" firstAttribute="centerY" secondItem="3ZG-tE-Otv" secondAttribute="centerY" id="qDS-5D-v2g"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerX" secondItem="u5A-Kd-5tS" secondAttribute="centerX" multiplier="0.33" id="sEd-MW-Iry"/>
+                            <constraint firstItem="5UZ-0x-7HR" firstAttribute="centerY" secondItem="u5A-Kd-5tS" secondAttribute="centerY" id="ulx-pO-BOl"/>
+                            <constraint firstItem="AIJ-oy-VOb" firstAttribute="width" secondItem="3ZG-tE-Otv" secondAttribute="width" id="vhL-yD-iOT"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -67,8 +84,9 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <size key="freeformSize" width="390" height="150"/>
+                    <size key="freeformSize" width="597.5" height="150"/>
                     <connections>
+                        <outlet property="SettingsBtn" destination="AIJ-oy-VOb" id="oen-Xe-6pj"/>
                         <outlet property="xReportOutlet" destination="5UZ-0x-7HR" id="puR-wN-fav"/>
                         <outlet property="zReportOutlet" destination="3ZG-tE-Otv" id="IXY-iG-m5N"/>
                     </connections>

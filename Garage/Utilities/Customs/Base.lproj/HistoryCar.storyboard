@@ -146,11 +146,6 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="16"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWT-hI-3so">
                                         <rect key="frame" x="0.0" y="0.0" width="751" height="96"/>

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -109,7 +108,7 @@
                                     <constraint firstItem="kdX-5p-4Ic" firstAttribute="width" secondItem="0h5-gR-DTb" secondAttribute="width" multiplier="0.3" id="y50-yc-gye"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpF-iH-GFD">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpF-iH-GFD">
                                 <rect key="frame" x="36" y="249.5" width="103.5" height="45"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
@@ -126,7 +125,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UF-8Z-UGb">
-                                <rect key="frame" x="172.5" y="249.5" width="145" height="45"/>
+                                <rect key="frame" x="32.5" y="249.5" width="145" height="45"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                 <state key="normal" title="Services">
@@ -171,7 +170,7 @@
                             <constraint firstItem="QNS-Vk-egC" firstAttribute="height" secondItem="oiQ-Yy-7mo" secondAttribute="height" multiplier="0.5" id="gCM-Yx-YxO"/>
                             <constraint firstItem="0h5-gR-DTb" firstAttribute="top" secondItem="oiQ-Yy-7mo" secondAttribute="top" id="iW1-DY-t1Y"/>
                             <constraint firstItem="8BT-F1-hjc" firstAttribute="height" secondItem="jpF-iH-GFD" secondAttribute="height" id="mP4-yf-f6i"/>
-                            <constraint firstItem="1UF-8Z-UGb" firstAttribute="centerX" secondItem="jpF-iH-GFD" secondAttribute="centerX" multiplier="2.8" id="mq3-BI-YXS"/>
+                            <constraint firstItem="1UF-8Z-UGb" firstAttribute="centerX" secondItem="jpF-iH-GFD" secondAttribute="centerX" multiplier="1.2" id="mq3-BI-YXS"/>
                             <constraint firstItem="jpF-iH-GFD" firstAttribute="centerY" secondItem="xzB-0o-c8e" secondAttribute="centerY" multiplier="1.7" id="p26-PA-9ec"/>
                             <constraint firstItem="1UF-8Z-UGb" firstAttribute="width" secondItem="jpF-iH-GFD" secondAttribute="width" multiplier="1.4" id="rAY-8D-q7z"/>
                             <constraint firstItem="xzB-0o-c8e" firstAttribute="trailing" secondItem="0h5-gR-DTb" secondAttribute="trailing" id="rGy-qP-lQi"/>

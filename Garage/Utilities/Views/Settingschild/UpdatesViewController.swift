@@ -46,7 +46,7 @@ class UpdatesViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.lbllatestversion.text = "\(LocalizedString.Version) \(latestVersion)"
-         //   self.lblCurrentVersion.text = "\(LocalizedString.Version) \(AppInfoHelper.getAppCurrentVersion())"
+            Constants.Currentversion = "\(LocalizedString.Version) \(AppInfoHelper.getAppCurrentVersion())"
             
            // self.logoView.layer.cornerRadius = self.logoView.frame.size.height/2.5
         }

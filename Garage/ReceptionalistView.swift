@@ -33,10 +33,12 @@ class ReceptionalistView: UIViewController  {
         profileBtnOutlet.setTitle(Constants.FirstName,for: .normal)
         if self.profileImage.image == nil {
             if let url = URL(string: Constants.userImage) {
+                print(Constants.userImage)
                 self.profileImage.kf.indicatorType = .activity
                 self.profileImage.kf.setImage(with: url)
                 
-            }} 
+            }}
+        
         if L102Language.currentAppleLanguage() == "ar" {
 
             profileBtnOutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:10, bottom: 0, right: 0)
@@ -87,7 +89,7 @@ class ReceptionalistView: UIViewController  {
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 20*4
         let popover = nav.popoverPresentationController
-        popController.preferredContentSize = CGSize(width: 390 , height: heightForPopOver)
+        popController.preferredContentSize = CGSize(width: 500 , height: heightForPopOver)
         popover?.permittedArrowDirections = .up
         popover?.backgroundColor = UIColor.white
         popover?.sourceView = self.offlibebtn

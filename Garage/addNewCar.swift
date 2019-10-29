@@ -44,9 +44,17 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @IBOutlet weak var yearLbl: UILabel!
     @IBOutlet weak var engineLbl: UILabel!
     @IBOutlet weak var recomLbl: UILabel!
+    @IBOutlet weak var genderLbl: UILabel!
+    
+    @IBOutlet weak var GenderView: UIView!
+    @IBOutlet weak var femaleBtn: UIButton!
+    @IBOutlet weak var maleBtn: UIButton!
     
     
-    let dateFormatter : DateFormatter = DateFormatter()
+    
+    
+    
+        let dateFormatter : DateFormatter = DateFormatter()
     private var CarMakeTableView: UITableView!
     private var CarModelTableView: UITableView!
     var MakeCarDetails = [makeCarModel]()
@@ -57,7 +65,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var someInts = [Int]()
     var flexmakeid = 2
     var orderdetails = [ReceiptModel]()
-    
+    var Gender:  String = ""
+    var GenderID: Int = 1
     
     //Localization
     
@@ -68,6 +77,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     let mendatoryfield = NSLocalizedString("mendatoryfields", comment: "")
     let Numberinvalid = NSLocalizedString("Numberinvalid", comment: "")
     let NumberGreater = NSLocalizedString("NumberGreater", comment: "")
+    let rollyear = NSLocalizedString("rollyear", comment: "")
     
     //Localization
     
@@ -75,14 +85,16 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         Numberpadview.isHidden = true
         NumberpadViewCheck.isHidden = true
         makeCardetails()
+        if let button = GenderView.viewWithTag(GenderID) as? UIButton {
+            TabMaleFmale(button)
+        }
+//        first.addTarget(self, action: "textFieldDidChange:", for: UIControlEvents.EditingChanged)
+//        second.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         carplateNumber.defaultTextAttributes.updateValue(15.0, forKey: NSAttributedString.Key.kern.rawValue)
         check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControlEvents.touchDown)
         carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
@@ -108,6 +120,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if L102Language.currentAppleLanguage() == "ar" {
         LanguageUIUpdate()
         }
+    
         
         
     }
@@ -173,6 +186,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
          yearLbl.textAlignment = NSTextAlignment.right
          engineLbl.textAlignment = NSTextAlignment.right
         recomLbl.textAlignment = NSTextAlignment.right
+        genderLbl.textAlignment = NSTextAlignment.right
     }
     
     
@@ -289,7 +303,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     override func viewDidLayoutSubviews() {
-        
         carplateNumber.attributedPlaceholder = NSAttributedString(string: "XXX-0000", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         VinNumber.attributedPlaceholder = NSAttributedString(string: "XXXXXXXXXXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         phoneNumber.attributedPlaceholder = NSAttributedString(string: "+966XXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
@@ -298,8 +311,14 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         modelNumber.attributedPlaceholder = NSAttributedString(string: SelectyourCarModel, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         recommendedAmount.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
         engineType.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        yearNumber.attributedPlaceholder = NSAttributedString(string: rollyear, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+   
     }
-    
+
+    func background(string: String)-> NSMutableAttributedString {
+        return NSMutableAttributedString(string: string, attributes:
+            [NSAttributedStringKey.backgroundColor : UIColor.red ])
+    }
     
     @objc func CarmakeFunction() {
         NumberpadViewCheck.isHidden = true
@@ -318,15 +337,15 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == CarMakeTableView {
             
-            Constants.MakeIDData = MakeCarDetails[indexPath.row].MakeID!
+            Constants.MakeIDData = MakeCarDetails[indexPath.row].MakeID ?? 0
             self.carMake.text = MakeCarDetails[indexPath.row].Name
             CarMakeTableView.isHidden = true
             modelNumber.isUserInteractionEnabled = true
             modelCardetails()
         } else if  tableView == CarModelTableView {
-            Constants.ModelIDData = ModelCarDetails[indexPath.row].ModelID!
+            Constants.ModelIDData = ModelCarDetails[indexPath.row].ModelID ?? 0
             self.modelNumber.text = ModelCarDetails[indexPath.row].Name
-            let year: Int = ModelCarDetails[indexPath.row].Year!
+            let year: Int = ModelCarDetails[indexPath.row].Year ?? 0
             self.yearNumber.text = String(year)
             self.engineType.text = ModelCarDetails[indexPath.row].EngineNo
             self.recommendedAmount.text = ModelCarDetails[indexPath.row].RecommendedLitres
@@ -364,7 +383,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell.textLabel!.text = MakeCarDetails[indexPath.row].Name
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.white
-            cell.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+            cell.textLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 18.0)
             cell.textLabel?.textAlignment = .left
             return cell
         }
@@ -374,7 +393,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             cell2.textLabel!.text = ModelCarDetails[indexPath.row].Name
             cell2.backgroundColor = UIColor.darkGray
             cell2.textLabel?.textColor = UIColor.white
-            cell2.textLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18.0)
+            cell2.textLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 18.0)
             cell2.textLabel?.textAlignment = .left
             return cell2
             
@@ -590,6 +609,57 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     
+    @IBAction func TabMaleFmale(_ sender: UIButton) {
+        
+        checkboxDidTap(sender: sender)
+        
+        switch sender.tag {
+            
+        case 1:
+        maleBtn.layer.borderWidth = 2.0
+        maleBtn.layer.borderColor = UIColor.DefaultApp.cgColor
+        maleBtn.setTitleColor(.DefaultApp, for: .normal)
+        femaleBtn.layer.borderWidth = 2.0
+        femaleBtn.layer.borderColor = UIColor.clear.cgColor
+        femaleBtn.setTitleColor(.white, for: .normal)
+            print("Male")
+            Gender = "Male"
+            
+        case 2:
+            femaleBtn.layer.borderWidth = 2.0
+            femaleBtn.layer.borderColor = UIColor.DefaultApp.cgColor
+            femaleBtn.setTitleColor(.DefaultApp, for: .normal)
+            maleBtn.layer.borderWidth = 2.0
+            maleBtn.layer.borderColor = UIColor.clear.cgColor
+            maleBtn.setTitleColor(.white, for: .normal)
+            print("Female")
+            Gender = "Female"
+            break
+       
+        default:
+            break
+        }
+        
+    }
+    
+    
+    
+    
+    func checkboxDidTap(sender: UIButton) {
+        
+        for i in 1...2 {
+            if let btn = GenderView.viewWithTag(i) as? UIButton {
+                btn.isSelected = false
+                
+            }
+        }
+        sender.isSelected = true
+        
+    }
+    
+ 
+    
+    
     func CardetailsData() {
         
         if Constants.platenmb != "0" || Constants.vinnmb != "0" {
@@ -629,9 +699,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
         
         guard let addcarapi = URL(string: "\(CallEngine.baseURL)\(CallEngine.SearchCarApi)\(Constants.platenmb)/\(Constants.vinnmb)/\(Constants.sessions)" ) else { return }
-        print(addcarapi)
         let session = URLSession.shared
-        print(addcarapi)
         session.dataTask(with: addcarapi){ (data, response, error) in
             
             if response == nil {
@@ -648,7 +716,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                      self.showloader()
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
-                    Constants.history = json["OrderHistoryCount"] as! Int
+                    Constants.history = json["OrderHistoryCount"] as? Int  ?? 0
                     DispatchQueue.main.async {
                         self.historyBtn.titleLabel?.text = "\(self.Historyar) (\(Constants.history))"
                     }
@@ -755,6 +823,23 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                     
                                 }
+                                
+                                if  let Gender = items[Constants.Gender] as? String {
+                                    DispatchQueue.main.async {
+                                        if Gender == "Female" {
+                                            self.GenderID = 2
+                                        } else {
+                                            self.GenderID = 1
+                                        }
+                                        if let button = self.GenderView.viewWithTag(self.GenderID) as? UIButton {
+                                        self.TabMaleFmale(button)
+                                        }
+                            
+                                      
+                                     }
+                                    
+                                }
+                                
                               
                             }
                             
@@ -884,7 +969,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     let details = Cardetails(json: json)
                     if (details.status == 1) {
                         self.showloader()
-                        Constants.history = json["OrderHistoryCount"] as! Int
+                        Constants.history = json["OrderHistoryCount"] as? Int  ?? 0
                         DispatchQueue.main.async {
                             self.historyBtn.titleLabel?.text = "\(self.Historyar) (\(Constants.history))"
                         }
@@ -989,6 +1074,21 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                     
                                 }
+                                if  let Gender = items[Constants.Gender] as? String {
+                                    DispatchQueue.main.async {
+                                        if Gender == "Female" {
+                                            self.GenderID = 2
+                                        } else {
+                                            self.GenderID = 1
+                                        }
+                                        if let button = self.GenderView.viewWithTag(self.GenderID) as? UIButton {
+                                            self.TabMaleFmale(button)
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                }
                                 
                             }
                             
@@ -999,10 +1099,10 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 print(orders)
                                 let Name = orders["ItemName"] as? String  ?? ""
                                 let AlternateName = orders["AlternateName"] as? String  ?? ""
-                                let Price = orders["Price"] as! Double
-                                let ItemID = orders["ItemID"] as! Int
-                                let Quantity = orders["Quantity"] as! Int
-                                let OrderDetails = orders["OrderDetailID"] as! Int
+                                let Price = orders["Price"] as? Double  ?? 0.0
+                                let ItemID = orders["ItemID"] as? Int  ?? 0
+                                let Quantity = orders["Quantity"] as? Int  ?? 0
+                                let OrderDetails = orders["OrderDetailID"] as? Int  ?? 0
                                 let products = ReceiptModel(Name: Name, AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity, Mode: Constants.modeupdate,OrderDetailID: OrderDetails, Status: 202)
                                 Items.Product.append(products)
                                 let price = Price *  Double(Constants.counterQTY)
@@ -1169,7 +1269,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                   Constants.SessionID: Constants.sessions,
                                   Constants.CheckLitre: check.text!,
                                   Constants.EngineType: engineType.text!,
-                                  Constants.RecommendedAmount: recommendedAmount.text!] as [String : Any]
+                                  Constants.RecommendedAmount: recommendedAmount.text!,
+                                  Constants.Gender: Gender] as [String : Any]
             if (carplateNumber.text == "")  || (phoneNumber.text == "" || modelNumber.text == "") {
                 
                 DispatchQueue.main.async {
@@ -1204,11 +1305,11 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         DispatchQueue.main.async {
                             ToastView.show(message: LocalizedString.interneterror, controller: self)
                         }
+                        
                     }
                     if let response = response {
                         print(response)
                     }
-                    
                     
                     if let data = data {
                         print(data)
@@ -1270,10 +1371,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             
                         }
                         
-                        
-                        
                     }
-                    
                     
                     
                     }.resume()
@@ -1298,7 +1396,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                   Constants.SessionID: Constants.sessions,
                                   Constants.CheckLitre: check.text!,
                                   Constants.EngineType: engineType.text!,
-                                  Constants.RecommendedAmount: recommendedAmount.text!] as [String : Any]
+                                  Constants.RecommendedAmount: recommendedAmount.text!,
+                                  Constants.Gender: Gender ] as [String : Any]
             if (carplateNumber.text == "")  || (phoneNumber.text == "" || modelNumber.text == "") {
                 
                 DispatchQueue.main.async {
@@ -1427,7 +1526,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         self.carplateNumber.isUserInteractionEnabled = true
         self.VinNumber.isUserInteractionEnabled = true
         
-        
     }
     
     
@@ -1439,7 +1537,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             parentVC.switchViewController(vc: history!, showFooter: false)
             
         }
-        
     }
     
     
@@ -1469,7 +1566,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         textField.text = currentText
-        if textField.text!.characters.count  == 8{
+        if textField.text!.characters.count  == 8 {
             carplateNumber.resignFirstResponder()
             
         }
@@ -1520,8 +1617,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if textField.text!.characters.count  == 17  {
             
             VinNumber.resignFirstResponder()
-            
-            
         }
         else if textField.text!.characters.count  > 17  {
             let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)

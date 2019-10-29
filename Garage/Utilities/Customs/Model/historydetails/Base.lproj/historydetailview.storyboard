@@ -139,7 +139,7 @@
                                     <constraint firstItem="AoJ-D4-lIs" firstAttribute="centerX" secondItem="Jqt-ye-IhA" secondAttribute="centerX" id="T2L-42-dLA"/>
                                     <constraint firstItem="dMc-Cw-MR8" firstAttribute="centerY" secondItem="Jqt-ye-IhA" secondAttribute="centerY" multiplier="1.7" id="URp-3l-2GT"/>
                                     <constraint firstItem="AoJ-D4-lIs" firstAttribute="width" secondItem="Jqt-ye-IhA" secondAttribute="width" id="Y5h-N5-G8z"/>
-                                    <constraint firstItem="dMc-Cw-MR8" firstAttribute="centerX" secondItem="Jqt-ye-IhA" secondAttribute="centerX" multiplier="0.6" id="ebc-S7-hg6"/>
+                                    <constraint firstItem="dMc-Cw-MR8" firstAttribute="leading" secondItem="Jqt-ye-IhA" secondAttribute="leading" constant="16" id="xTV-1T-rfJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-XD-Hz6">

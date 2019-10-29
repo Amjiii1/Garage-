@@ -117,11 +117,12 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                                 for details in item {
                                     let Name = details["ItemName"] as? String  ?? ""
                                     let AlternateName = details["AlternateName"] as? String  ?? ""
-                                    let Price = details["Price"] as! Double
-                                    let ItemID = details["ItemID"] as! Int
-                                    let Quantity = details["Quantity"] as! Int
-                                    let OrderDetails = details["OrderDetailID"] as! Int
-                                    let itemorderID = details["OrderID"] as! Int
+                                    let Price = details["Price"] as? Double  ?? 0.0
+                                    let ItemID = details["ItemID"] as? Int  ?? 0
+                                    let Quantity = details["Quantity"] as? Int  ?? 0
+                                    let OrderDetails = details["OrderDetailID"] as? Int  ?? 0
+                                    let itemorderID = details["OrderID"] as? Int  ?? 0
+                                    
                                     let itemsdetailed = checkoutItems(Name: Name,AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
                                     Checkoutstruct.Itemdetails.append(itemsdetailed)
                                 }
@@ -247,8 +248,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             let deleteAction = UITableViewRowAction(style: .destructive, title: Edit) { (action, indexpath) in
                 DispatchQueue.main.async {
                     Constants.editcheckout = 1
-                    Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID!
-                    Constants.bayid = self.checkoutmodel[indexPath.row].BayID!
+                    Constants.editOrderid = self.checkoutmodel[indexPath.row].OrderID ?? 0
+                    Constants.bayid = self.checkoutmodel[indexPath.row].BayID ?? 0
                     // Constants.carliterID = self.checkoutmodel[indexPath.row].
                     
                     if let parentVC = self.parent as? ReceptionalistView {
@@ -273,31 +274,31 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 DispatchQueue.main.async {
                     
                     Checkoutstruct.sentitems.removeAll()
-                    Constants.checkoutorderid = self.checkoutmodel[indexPath.row].OrderID!
-                    Constants.checkoutcarid = self.checkoutmodel[indexPath.row].CarID!
-                    Constants.checkoutplatenmb = self.checkoutmodel[indexPath.row].RegistrationNo!
-                    Constants.checkoutvin = self.checkoutmodel[indexPath.row].VinNo!
-                    Constants.checkoutcarmake = self.checkoutmodel[indexPath.row].MakerName!
-                    Constants.checkoutcarmodel = self.checkoutmodel[indexPath.row].ModelName!
-                    Constants.checkoutbayname = self.checkoutmodel[indexPath.row].BayName!
-                    Constants.checkoutyear = self.checkoutmodel[indexPath.row].Year!
-                    Constants.checkoutcustm = self.checkoutmodel[indexPath.row].CustomerID!
-                    Constants.checkoutplatenmb1 = self.checkoutmodel[indexPath.row].RegistrationNoP1!
-                    Constants.checkoutplatenmb2 = self.checkoutmodel[indexPath.row].RegistrationNoP2!
-                    Constants.checkoutplatenmb3 = self.checkoutmodel[indexPath.row].RegistrationNoP3!
-                    Constants.checkoutplatenmb4 = self.checkoutmodel[indexPath.row].RegistrationNoP4!
-                    Constants.Checkoutdate = self.checkoutmodel[indexPath.row].CheckoutDate!
-                    Constants.checkoutmechanic = self.checkoutmodel[indexPath.row].MechanicName!
-                    Constants.checkoutstatus = self.checkoutmodel[indexPath.row].Status!
-                    Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].TransactionNo!
-                    Constants.CardType = self.checkoutmodel[indexPath.row].CardType!
-                    Constants.PaymentModes = self.checkoutmodel[indexPath.row].PaymentMode!
-                    Constants.CashAmount = self.checkoutmodel[indexPath.row].CashAmount!
-                    Constants.CardAmount = self.checkoutmodel[indexPath.row].CardAmount!
-                    Constants.subtotal = self.checkoutmodel[indexPath.row].AmountTotal!
-                    Constants.checkoutGrandtotal = self.checkoutmodel[indexPath.row].GrandTotal!
-                    Constants.checkouttax = self.checkoutmodel[indexPath.row].Tax!
-                    Constants.checkoutdiscount = self.checkoutmodel[indexPath.row].AmountDiscount!
+                    Constants.checkoutorderid = self.checkoutmodel[indexPath.row].OrderID ?? 0
+                    Constants.checkoutcarid = self.checkoutmodel[indexPath.row].CarID ?? 0
+                    Constants.checkoutplatenmb = self.checkoutmodel[indexPath.row].RegistrationNo ?? ""
+                    Constants.checkoutvin = self.checkoutmodel[indexPath.row].VinNo ?? ""
+                    Constants.checkoutcarmake = self.checkoutmodel[indexPath.row].MakerName ?? ""
+                    Constants.checkoutcarmodel = self.checkoutmodel[indexPath.row].ModelName ?? ""
+                    Constants.checkoutbayname = self.checkoutmodel[indexPath.row].BayName ?? ""
+                    Constants.checkoutyear = self.checkoutmodel[indexPath.row].Year ?? 0
+                    Constants.checkoutcustm = self.checkoutmodel[indexPath.row].CustomerID ?? ""
+                    Constants.checkoutplatenmb1 = self.checkoutmodel[indexPath.row].RegistrationNoP1 ?? ""
+                    Constants.checkoutplatenmb2 = self.checkoutmodel[indexPath.row].RegistrationNoP2 ?? ""
+                    Constants.checkoutplatenmb3 = self.checkoutmodel[indexPath.row].RegistrationNoP3 ?? ""
+                    Constants.checkoutplatenmb4 = self.checkoutmodel[indexPath.row].RegistrationNoP4 ?? ""
+                    Constants.Checkoutdate = self.checkoutmodel[indexPath.row].CheckoutDate ?? ""
+                    Constants.checkoutmechanic = self.checkoutmodel[indexPath.row].MechanicName ?? ""
+                    Constants.checkoutstatus = self.checkoutmodel[indexPath.row].Status ?? 0
+                    Constants.checkoutorderNo = self.checkoutmodel[indexPath.row].TransactionNo ?? 0
+                    Constants.CardType = self.checkoutmodel[indexPath.row].CardType ?? ""
+                    Constants.PaymentModes = self.checkoutmodel[indexPath.row].PaymentMode ?? 0
+                    Constants.CashAmount = self.checkoutmodel[indexPath.row].CashAmount ?? 0
+                    Constants.CardAmount = self.checkoutmodel[indexPath.row].CardAmount ?? 0
+                    Constants.subtotal = self.checkoutmodel[indexPath.row].AmountTotal ?? 0
+                    Constants.checkoutGrandtotal = self.checkoutmodel[indexPath.row].GrandTotal ?? 0
+                    Constants.checkouttax = self.checkoutmodel[indexPath.row].Tax ?? 0
+                    Constants.checkoutdiscount = self.checkoutmodel[indexPath.row].AmountDiscount ?? 0
                     
                     for itemmodels in Checkoutstruct.Itemdetails {
                         if itemmodels.itemorderid == Constants.checkoutorderid {
@@ -317,7 +318,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             let AirPrinter = UITableViewRowAction(style: .destructive, title: AirPrint) { (action, indexpath) in
                 DispatchQueue.main.async {
                     
-                    Constants.checkoutPDF = self.checkoutmodel[indexPath.row].OrderID!
+                    Constants.checkoutPDF = self.checkoutmodel[indexPath.row].OrderID ?? 0
                     self.PdfPrinter()
                 }
             }
@@ -325,10 +326,10 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             let ZebraPrinter = UITableViewRowAction(style: .destructive, title: ZebraPrinterAr) { (action, indexpath) in
                 DispatchQueue.main.async {
-                    Constants.ZRegistr = self.checkoutmodel[indexPath.row].OilType!
-                    Constants.ZKm = self.checkoutmodel[indexPath.row].CheckLitre!
+                    Constants.ZRegistr = self.checkoutmodel[indexPath.row].OilType ?? "-"
+                    Constants.ZKm = self.checkoutmodel[indexPath.row].CheckLitre ?? "-"
                     //let date1 = self.checkoutmodel[indexPath.row].CheckoutDate!
-                    Constants.FilterName = self.checkoutmodel[indexPath.row].FilterName!
+                    Constants.FilterName = self.checkoutmodel[indexPath.row].FilterName ?? "-"
                     let dateFormatter : DateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "dd/MM/yyyy"
                     let date = Date()
@@ -394,7 +395,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             }
                         }
                         else if (status == 0) {
-                            ToastView.show(message: discript!, controller: self)
+                            ToastView.show(message: discript ?? "Null data", controller: self)
                         }
                             
                         else if (status == 1000) {
@@ -468,7 +469,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.CMake.text = checkoutmodel[indexPath.row].MakerName
             cell.CModel.text = checkoutmodel[indexPath.row].ModelName
             let trans = checkoutmodel[indexPath.row].TransactionNo
-            cell.CSerialnmb.text = "\(trans!)"
+            cell.CSerialnmb.text = "\(trans ?? 0)"
             let Bay = checkoutmodel[indexPath.row].BayName
             cell.checkoutBtn.tag = indexPath.row
             cell.checkoutBtn.setTitle(Bay, for: .normal)
@@ -526,7 +527,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             //   cell.checkoutBtn.isUserInteractionEnabled = false
             //   cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
             let trans3 = checkoutmodel[indexPath.row].TransactionNo
-            cell.CSerialnmb.text = "\(trans3!)"
+            cell.CSerialnmb.text = "\(trans3 ?? 0)"
         default:
             break
         }
@@ -545,24 +546,23 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             //            ToastView.show(message: "Under Development! Be patient (Assigned)", controller: self)
             
         case 1:
-            Checkoutstruct.sentitems.removeAll() 
-            Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID!
-            Constants.checkoutcarid = checkoutmodel[sender.tag].CarID!
-            Constants.checkoutplatenmb = checkoutmodel[sender.tag].RegistrationNo!
-            Constants.checkoutvin = checkoutmodel[sender.tag].VinNo!
-            Constants.checkoutcarmake = checkoutmodel[sender.tag].MakerName!
-            Constants.checkoutcarmodel = checkoutmodel[sender.tag].ModelName!
-            Constants.checkoutbayname = checkoutmodel[sender.tag].BayName!
-            Constants.checkoutyear = checkoutmodel[sender.tag].Year!
-            Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID!
-            Constants.checkoutplatenmb1 = checkoutmodel[sender.tag].RegistrationNoP1!
-            Constants.checkoutplatenmb2 = checkoutmodel[sender.tag].RegistrationNoP2!
-            Constants.checkoutplatenmb3 = checkoutmodel[sender.tag].RegistrationNoP3!
-            Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4!
-            Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4!
-            Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName!
-            Constants.checkoutstatus = checkoutmodel[sender.tag].Status!
-            Constants.checkoutorderNo = checkoutmodel[sender.tag].TransactionNo!
+            Checkoutstruct.sentitems.removeAll()
+            Constants.checkoutorderid = checkoutmodel[sender.tag].OrderID ?? 0
+            Constants.checkoutcarid = checkoutmodel[sender.tag].CarID ?? 0
+            Constants.checkoutplatenmb = checkoutmodel[sender.tag].RegistrationNo ?? ""
+            Constants.checkoutvin = checkoutmodel[sender.tag].VinNo ?? ""
+            Constants.checkoutcarmake = checkoutmodel[sender.tag].MakerName ?? ""
+            Constants.checkoutcarmodel = checkoutmodel[sender.tag].ModelName ?? ""
+            Constants.checkoutbayname = checkoutmodel[sender.tag].BayName ?? ""
+            Constants.checkoutyear = checkoutmodel[sender.tag].Year ?? 0
+            Constants.checkoutcustm = checkoutmodel[sender.tag].CustomerID ?? ""
+            Constants.checkoutplatenmb1 = checkoutmodel[sender.tag].RegistrationNoP1 ?? ""
+            Constants.checkoutplatenmb2 = checkoutmodel[sender.tag].RegistrationNoP2 ?? ""
+            Constants.checkoutplatenmb3 = checkoutmodel[sender.tag].RegistrationNoP3 ?? ""
+            Constants.checkoutplatenmb4 = checkoutmodel[sender.tag].RegistrationNoP4 ?? ""
+            Constants.checkoutmechanic = checkoutmodel[sender.tag].MechanicName ?? ""
+            Constants.checkoutstatus = checkoutmodel[sender.tag].Status ?? 0
+            Constants.checkoutorderNo = checkoutmodel[sender.tag].TransactionNo ?? 0
             
             Constants.subtotal = 0.0
             Constants.checkoutGrandtotal = 0.0

@@ -17,6 +17,7 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var grandtotallabel: UILabel!
    
+    @IBOutlet weak var grandTotaltitle: UILabel!
     
     var dummyData2 = [String]()
     var amount2 = [Constants.historysubtotal,Constants.historydiscount,Constants.historytax]
@@ -37,6 +38,13 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
         orderdetailtable.separatorStyle = .none
         totalpricetable.separatorStyle = .none
         grandtotallabel.text = String(format: "%.2f", Constants.historygrandtotal)
+        
+        if L102Language.currentAppleLanguage() == "ar" {
+            grandTotaltitle.textAlignment = .right
+            grandtotallabel.textAlignment = .left
+        }
+        
+        
     }
     
     
@@ -59,15 +67,23 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! orderdetailCell
             if L102Language.currentAppleLanguage() == "ar" {
                 name = HistoryDetails.savedetail[indexPath.row].AlternateName!
+                let qty = HistoryDetails.savedetail[indexPath.row].Quantity
+                cell.labelItem.text = "\(qty!) x \(name)"
+                let price = HistoryDetails.savedetail[indexPath.row].Price
+                cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"
+                cell.labelItem.textAlignment = .right
+                cell.labelPrice.textAlignment = .left
             } else {
                 name = HistoryDetails.savedetail[indexPath.row].Name!
+                let qty = HistoryDetails.savedetail[indexPath.row].Quantity
+                cell.labelItem.text = "\(qty!) x \(name)"
+                let price = HistoryDetails.savedetail[indexPath.row].Price
+                cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"
             }
     
-            let qty = HistoryDetails.savedetail[indexPath.row].Quantity
-            cell.labelItem.text = "\(qty!) x \(name)"
             
-            let price = HistoryDetails.savedetail[indexPath.row].Price
-            cell.labelPrice.text =  "\(price!.myRounded(toPlaces: 2))"
+            
+            
             cell.selectionStyle = .none
             return cell
         }
@@ -76,6 +92,10 @@ class Detailsview: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell2.labelTitle.text = dummyData2[indexPath.row]
             let tax = amount2[indexPath.row]
             cell2.labeltotal.text = String(format: "%.2f", tax)//String(tax)
+            if L102Language.currentAppleLanguage() == "ar" {
+                cell2.labeltotal.textAlignment = .left
+                cell2.labelTitle.textAlignment = .right
+            }
             cell2.selectionStyle = .none
             return cell2
             

@@ -18,7 +18,6 @@ struct HistoryDetails {
     
     static var carNotes = [CarNote]()
     static var savecarNotes = [CarNote]()
-    
     // static var uploadedimages = [NotesImages]()
 }
 
@@ -31,6 +30,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var platenmbLabel: UILabel!
     
     var HistoryData = [HistoryModel]()
+    var PDFLetterH: String = ""
     
     
     
@@ -40,6 +40,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var upimages = [String]()
     var count = 0
+    
+     let AirPrint = NSLocalizedString("AirPrint", comment: "")
+    let PrintingSucuess  = NSLocalizedString("sucessfully", comment: "")
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,14 +110,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                 if let item = items[Constants.OrderItems] as? [[String: Any]] {
                                     for details in item {
                                         let Name = details[Constants.ItemName] as? String  ?? ""
-                                      //  guard let AlternateName = details[Constants.AlternateName] , error == nil else { return }
                                         let AlternateName = details[Constants.AlternateName] as? String  ?? ""
-                                       // let AlternateName = details[Constants.AlternateName] as! String  // give Alternative name
-                                        let Price = details[Constants.Price] as! Double
-                                        let ItemID = details[Constants.ItemID] as! Int
-                                        let Quantity = details[Constants.Quantity] as! Int
-                                        let OrderDetails = details[Constants.OrderDetailID] as! Int
-                                        let itemorderID = details[Constants.OrderID] as! Int
+                                        let Price = details[Constants.Price] as? Double  ?? 0.0
+                                        let ItemID = details[Constants.ItemID] as? Int  ?? 0
+                                        let Quantity = details[Constants.Quantity] as? Int  ?? 0
+                                        let OrderDetails = details[Constants.OrderDetailID] as? Int  ?? 0
+                                        let itemorderID = details[Constants.OrderID] as? Int  ?? 0
                                         let itemsdetailed = checkoutItems(Name: Name,AlternateName: AlternateName, Price: Price, ItemID: ItemID, Quantity: Quantity,OrderDetailID: OrderDetails, itemorderid: itemorderID)
                                         HistoryDetails.details.append(itemsdetailed)
                                     }
@@ -141,16 +145,16 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                 if let CheckList = CarCheckList[Constants.CheckList] as? [[String: Any]] {
                                     var InspectionDtail = [InspectionDetailsH]()
                                     for carCheckLists in CheckList  {
-                                        let Name = carCheckLists[Constants.Name] as! String
+                                        let Name = carCheckLists[Constants.Name] as? String  ?? ""
                                         let InspectionDetails = carCheckLists[Constants.InspectionDetails] as? [[String: Any]]
-                                        let CarInspectionIDH = carCheckLists[Constants.CarInspectionID] as! Int
-                                        let OrderID = carCheckLists[Constants.OrderID] as! Int
+                                        let CarInspectionIDH = carCheckLists[Constants.CarInspectionID] as? Int  ?? 0
+                                        let OrderID = carCheckLists[Constants.OrderID] as? Int  ?? 0
                                         InspectionDtail = []
                                         for sub in InspectionDetails!  {
-                                            let CarInspectionDetailID = sub[Constants.CarInspectionDetailID] as! Int
-                                            let CarInspectionID = sub[Constants.CarInspectionID] as! Int
-                                            let Name = sub[Constants.Name] as! String
-                                            let Value = sub[Constants.Value] as! String
+                                            let CarInspectionDetailID = sub[Constants.CarInspectionDetailID] as? Int  ?? 0
+                                            let CarInspectionID = sub[Constants.CarInspectionID] as? Int  ?? 0
+                                            let Name = sub[Constants.Name] as? String  ?? ""
+                                            let Value = sub[Constants.Value] as? String  ?? ""
                                             let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
                                             InspectionDtail.append(newInspectionDetails)
                                             
@@ -243,7 +247,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
         let serial = HistoryData[indexPath.row].TransactionNo
-        cell.SrNo.text = "\(serial!)"
+        cell.SrNo.text = "\(serial ?? 0)"
         cell.Date.text = HistoryData[indexPath.row].Date
         cell.Mechanic.text = HistoryData[indexPath.row].Mechanic
         cell.Total.text = HistoryData[indexPath.row].Total
@@ -254,6 +258,119 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+       
+        let AirPrinter = UITableViewRowAction(style: .destructive, title: AirPrint) { (action, indexpath) in
+            DispatchQueue.main.async {
+                
+                Constants.checkoutPDF = self.HistoryData[indexPath.row].OrderID ?? 0
+                self.PdfPrinterH()
+            }
+        }
+        
+     
+        AirPrinter.backgroundColor = UIColor.DefaultApp
+        
+        return [AirPrinter]
+    }
+    
+    
+    
+    func PdfPrinterH() {
+        
+        guard let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.Printerletter)\(Constants.checkoutPDF)/\(Constants.sessions)") else { return }
+        print("\(url)")
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { (data, response,  error) in
+            if response == nil {
+                DispatchQueue.main.async {
+                    ToastView.show(message: LocalizedString.interneterror, controller: self)
+                    
+                }
+            }
+            if let data = data {
+                do {
+                    guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
+                    let discript = json[Constants.Description] as? String
+                    if let status = json[Constants.Status] as? Int {
+                        if (status == 1) {
+                            print(json)
+                            if let printer = json["Path"] as? String {
+                                if printer != "" {
+                                    DispatchQueue.main.async {
+                                        print(printer)
+                                        
+                                        self.PDFLetterH = printer
+                                        self.PrintletterH()
+                                    }
+                                } else {
+                                    DispatchQueue.main.async {
+                                        
+                                        
+                                        ToastView.show(message: "PDF not found", controller: self)
+                                    }
+                                }
+                            }
+                        }
+                        else if (status == 0) {
+                            ToastView.show(message: discript ?? "Null data", controller: self)
+                        }
+                            
+                        else if (status == 1000) {
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
+                        }
+                            
+                        else if (status == 1001) {
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
+                        }
+                            
+                        else {
+                            ToastView.show(message: LocalizedString.occured, controller: self)
+                        }
+                        
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                    ToastView.show(message: "failed! Try Again", controller: self)
+                }
+                
+            }
+            }.resume()
+    }
+    
+    
+    func PrintletterH() {
+        
+        let printController = UIPrintInteractionController.shared
+        let printInfo = UIPrintInfo(dictionary: [:])
+        printInfo.outputType = UIPrintInfoOutputType.general
+        printInfo.orientation = UIPrintInfoOrientation.portrait
+        printInfo.jobName = "Receipt Details"
+        printController.printInfo = printInfo
+        // printController.showsPageRange = true
+        //http://www.pdf995.com/samples/pdf.pdf
+        print(self.PDFLetterH)
+        printController.printingItem = NSData(contentsOf: URL(string:  self.PDFLetterH)!)
+        printController.present(animated: true) { (controller, completed, error) in
+            if(!completed && error != nil){
+                DispatchQueue.main.async {
+                    ToastView.show(message: "Image not found", controller: self)
+                }
+            }
+            else if(completed) {
+                DispatchQueue.main.async {
+                    ToastView.show(message: self.PrintingSucuess, controller: self)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     
     
@@ -266,12 +383,12 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         
         
-        let id = HistoryData[sender.tag].OrderID!
-        Constants.historytrans = HistoryData[sender.tag].TransactionNo!
-        Constants.historygrandtotal = HistoryData[sender.tag].GrandTotal!
-        Constants.historydiscount = HistoryData[sender.tag].Discount!
-        Constants.historysubtotal = HistoryData[sender.tag].TotalAmount!
-        Constants.historytax = HistoryData[sender.tag].Tax!
+        let id = HistoryData[sender.tag].OrderID  ?? 0
+        Constants.historytrans = HistoryData[sender.tag].TransactionNo  ?? 0
+        Constants.historygrandtotal = HistoryData[sender.tag].GrandTotal  ?? 0
+        Constants.historydiscount = HistoryData[sender.tag].Discount  ?? 0
+        Constants.historysubtotal = HistoryData[sender.tag].TotalAmount  ?? 0
+        Constants.historytax = HistoryData[sender.tag].Tax  ?? 0
 
         
         

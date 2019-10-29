@@ -42,9 +42,11 @@ struct CompanyInfo {
     var snapchatLink: String = ""
     var instagranLink: String = ""
     
+    }
     
     
-}
+    
+
 
 
 struct Cars {

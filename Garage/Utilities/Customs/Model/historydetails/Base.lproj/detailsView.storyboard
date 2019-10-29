@@ -40,27 +40,27 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mK-aM-NuZ">
-                                                    <rect key="frame" x="13.5" y="2" width="269" height="35"/>
+                                                    <rect key="frame" x="20" y="4.5" width="269" height="34.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqd-EM-jWZ">
-                                                    <rect key="frame" x="375" y="2" width="134.5" height="35"/>
+                                                    <rect key="frame" x="383.5" y="4.5" width="134.5" height="34.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="5mK-aM-NuZ" firstAttribute="centerY" secondItem="aoL-Do-vaU" secondAttribute="centerY" id="3f5-Uc-OwY"/>
+                                                <constraint firstItem="tqd-EM-jWZ" firstAttribute="centerY" secondItem="5mK-aM-NuZ" secondAttribute="centerY" id="CSn-74-n1e"/>
                                                 <constraint firstItem="tqd-EM-jWZ" firstAttribute="height" secondItem="5mK-aM-NuZ" secondAttribute="height" id="Ckp-N6-uYf"/>
-                                                <constraint firstItem="tqd-EM-jWZ" firstAttribute="centerX" secondItem="5mK-aM-NuZ" secondAttribute="centerX" multiplier="2.99" id="Egn-d3-XZx"/>
                                                 <constraint firstItem="tqd-EM-jWZ" firstAttribute="width" secondItem="5mK-aM-NuZ" secondAttribute="width" multiplier="0.5" id="WFa-oS-9WG"/>
                                                 <constraint firstItem="5mK-aM-NuZ" firstAttribute="height" secondItem="aoL-Do-vaU" secondAttribute="height" multiplier="0.8" id="Xp4-R1-kjW"/>
-                                                <constraint firstItem="5mK-aM-NuZ" firstAttribute="centerY" secondItem="aoL-Do-vaU" secondAttribute="centerY" multiplier="0.9" id="XpH-t7-XSz"/>
+                                                <constraint firstItem="5mK-aM-NuZ" firstAttribute="leading" secondItem="aoL-Do-vaU" secondAttribute="leading" constant="20" id="dvH-zz-ToV"/>
                                                 <constraint firstItem="5mK-aM-NuZ" firstAttribute="width" secondItem="aoL-Do-vaU" secondAttribute="width" multiplier="0.5" id="hM4-hr-uRz"/>
-                                                <constraint firstItem="5mK-aM-NuZ" firstAttribute="centerX" secondItem="aoL-Do-vaU" secondAttribute="centerX" multiplier="0.55" id="i8e-t1-Sgn"/>
-                                                <constraint firstItem="tqd-EM-jWZ" firstAttribute="centerY" secondItem="5mK-aM-NuZ" secondAttribute="centerY" id="wf2-4J-30E"/>
+                                                <constraint firstAttribute="trailing" secondItem="tqd-EM-jWZ" secondAttribute="trailing" constant="20" id="ofL-Fx-H3q"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -74,13 +74,13 @@
                                 <rect key="frame" x="0.0" y="305" width="538" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVM-qf-cBj">
-                                        <rect key="frame" x="292" y="0.0" width="215" height="41"/>
+                                        <rect key="frame" x="356.5" y="10.5" width="161.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLC-9F-es0">
-                                        <rect key="frame" x="13.5" y="0.0" width="215" height="41"/>
+                                        <rect key="frame" x="20" y="10.5" width="161.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -89,13 +89,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IVM-qf-cBj" firstAttribute="height" secondItem="oLC-9F-es0" secondAttribute="height" id="1H4-oB-QH3"/>
-                                    <constraint firstItem="IVM-qf-cBj" firstAttribute="centerX" secondItem="oLC-9F-es0" secondAttribute="centerX" multiplier="3.3" id="1ci-sb-FaX"/>
-                                    <constraint firstItem="IVM-qf-cBj" firstAttribute="centerY" secondItem="oLC-9F-es0" secondAttribute="centerY" id="AaZ-Gn-dC1"/>
-                                    <constraint firstItem="oLC-9F-es0" firstAttribute="centerX" secondItem="qWa-9u-Mvj" secondAttribute="centerX" multiplier="0.45" id="Pxt-aF-1UE"/>
+                                    <constraint firstItem="oLC-9F-es0" firstAttribute="centerY" secondItem="qWa-9u-Mvj" secondAttribute="centerY" id="AB1-Fr-LEN"/>
+                                    <constraint firstAttribute="trailing" secondItem="IVM-qf-cBj" secondAttribute="trailing" constant="20" id="PBo-FZ-fWo"/>
                                     <constraint firstItem="IVM-qf-cBj" firstAttribute="width" secondItem="oLC-9F-es0" secondAttribute="width" id="Qxd-Mf-5iO"/>
-                                    <constraint firstItem="oLC-9F-es0" firstAttribute="centerY" secondItem="qWa-9u-Mvj" secondAttribute="centerY" id="RMn-vI-XGK"/>
-                                    <constraint firstItem="oLC-9F-es0" firstAttribute="height" secondItem="qWa-9u-Mvj" secondAttribute="height" id="WS8-BK-APf"/>
-                                    <constraint firstItem="oLC-9F-es0" firstAttribute="width" secondItem="qWa-9u-Mvj" secondAttribute="width" multiplier="0.4" id="kgR-CA-Mbf"/>
+                                    <constraint firstItem="oLC-9F-es0" firstAttribute="leading" secondItem="qWa-9u-Mvj" secondAttribute="leading" constant="20" id="Uvr-oW-hrL"/>
+                                    <constraint firstItem="oLC-9F-es0" firstAttribute="height" secondItem="qWa-9u-Mvj" secondAttribute="height" multiplier="0.5" id="WS8-BK-APf"/>
+                                    <constraint firstItem="IVM-qf-cBj" firstAttribute="centerY" secondItem="oLC-9F-es0" secondAttribute="centerY" id="X1U-4u-Upb"/>
+                                    <constraint firstItem="oLC-9F-es0" firstAttribute="width" secondItem="qWa-9u-Mvj" secondAttribute="width" multiplier="0.3" id="kgR-CA-Mbf"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhW-bI-oMQ">
@@ -113,27 +113,27 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvj-zf-yY4">
-                                                            <rect key="frame" x="13.5" y="-2" width="215" height="43.5"/>
+                                                            <rect key="frame" x="20" y="0.0" width="161.5" height="43.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cue-qL-vTJ">
-                                                            <rect key="frame" x="334.5" y="-2" width="172" height="43.5"/>
+                                                            <rect key="frame" x="389" y="0.0" width="129" height="43.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="cue-qL-vTJ" firstAttribute="centerX" secondItem="Xvj-zf-yY4" secondAttribute="centerX" multiplier="3.475" id="2C8-7B-MIs"/>
-                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="centerX" secondItem="PFU-yq-5PK" secondAttribute="centerX" multiplier="0.45" id="5GN-Be-irY"/>
-                                                        <constraint firstItem="cue-qL-vTJ" firstAttribute="centerY" secondItem="Xvj-zf-yY4" secondAttribute="centerY" id="5W7-iS-ei4"/>
-                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="width" secondItem="PFU-yq-5PK" secondAttribute="width" multiplier="0.4" id="9Jo-Fl-hBY"/>
+                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="leading" secondItem="PFU-yq-5PK" secondAttribute="leading" constant="20" id="6fl-TZ-cLe"/>
+                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="width" secondItem="PFU-yq-5PK" secondAttribute="width" multiplier="0.3" id="9Jo-Fl-hBY"/>
                                                         <constraint firstItem="Xvj-zf-yY4" firstAttribute="height" secondItem="PFU-yq-5PK" secondAttribute="height" id="Kd9-CR-uYM"/>
                                                         <constraint firstItem="cue-qL-vTJ" firstAttribute="height" secondItem="Xvj-zf-yY4" secondAttribute="height" id="VxI-KJ-s3r"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cue-qL-vTJ" secondAttribute="trailing" constant="20" id="gSm-Xn-mBo"/>
                                                         <constraint firstItem="cue-qL-vTJ" firstAttribute="width" secondItem="Xvj-zf-yY4" secondAttribute="width" multiplier="0.8" id="oLs-uh-2ob"/>
-                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="centerY" secondItem="PFU-yq-5PK" secondAttribute="centerY" multiplier="0.9" id="r2I-9F-2Cm"/>
+                                                        <constraint firstItem="Xvj-zf-yY4" firstAttribute="centerY" secondItem="PFU-yq-5PK" secondAttribute="centerY" id="ueD-pJ-XCy"/>
+                                                        <constraint firstItem="cue-qL-vTJ" firstAttribute="centerY" secondItem="Xvj-zf-yY4" secondAttribute="centerY" id="zmY-Nc-WJm"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -157,7 +157,7 @@
                         <constraints>
                             <constraint firstItem="qWa-9u-Mvj" firstAttribute="trailing" secondItem="UhW-bI-oMQ" secondAttribute="trailing" id="ALP-e1-Th9"/>
                             <constraint firstItem="aKw-ji-YQ9" firstAttribute="height" secondItem="Km5-r8-Kpp" secondAttribute="height" multiplier="0.55" id="AgO-2q-u4T"/>
-                            <constraint firstItem="qWa-9u-Mvj" firstAttribute="top" secondItem="Km5-r8-Kpp" secondAttribute="top" constant="305" id="Baa-sA-SmE"/>
+                            <constraint firstItem="qWa-9u-Mvj" firstAttribute="centerX" secondItem="Km5-r8-Kpp" secondAttribute="centerX" id="DEF-dB-LHf"/>
                             <constraint firstItem="aKw-ji-YQ9" firstAttribute="top" secondItem="BBl-Ne-P5u" secondAttribute="bottom" id="DyL-Hh-WM7"/>
                             <constraint firstItem="Fe1-5g-uMK" firstAttribute="top" secondItem="qWa-9u-Mvj" secondAttribute="bottom" constant="-1.5" id="GXl-Qv-saN"/>
                             <constraint firstItem="qWa-9u-Mvj" firstAttribute="left" secondItem="aKw-ji-YQ9" secondAttribute="leftMargin" constant="-15" id="KPe-mb-g77"/>
@@ -171,6 +171,7 @@
                     </view>
                     <size key="freeformSize" width="538" height="344.5"/>
                     <connections>
+                        <outlet property="grandTotaltitle" destination="oLC-9F-es0" id="wC5-Lk-YCv"/>
                         <outlet property="grandtotallabel" destination="IVM-qf-cBj" id="9Az-5n-iLM"/>
                         <outlet property="orderdetailtable" destination="aKw-ji-YQ9" id="Mec-OB-QgV"/>
                         <outlet property="totalpricetable" destination="qpS-WX-y6q" id="VDu-ZM-XPa"/>

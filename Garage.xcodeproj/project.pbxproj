@@ -213,6 +213,7 @@
 		95AA6BD1221190D1005D9B44 /* checkoutItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA6BD0221190D1005D9B44 /* checkoutItems.swift */; };
 		95C57DD5215BA328001C1B76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6E520CCEA2500EC99C2 /* Info.plist */; };
 		95C57DD9215BC076001C1B76 /* CheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C57DD8215BC076001C1B76 /* CheckoutCell.swift */; };
+		95E97F3523604C1200D6D6DA /* AboutusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E97F3423604C1200D6D6DA /* AboutusViewController.swift */; };
 		95EE0FCB222680A0003F35D2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */; };
 		95EE0FCD222680B4003F35D2 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */; };
 		95EE0FD122268165003F35D2 /* libepos2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE0FD022268164003F35D2 /* libepos2.a */; };
@@ -297,7 +298,6 @@
 		9524371E2251EB4A0000CCDF /* XZReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZReportViewController.swift; sourceTree = "<group>"; };
 		95243722225228520000CCDF /* Xreport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xreport.swift; sourceTree = "<group>"; };
 		95243724225256660000CCDF /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
-		9533D4DB23432E9A006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddnewCar.strings; sourceTree = "<group>"; };
 		9533D4DD23433086006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FooterViewWithTabs.strings; sourceTree = "<group>"; };
 		9533D4DF234344D9006E63EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CarScan.storyboard; sourceTree = "<group>"; };
 		9533D4E2234344DC006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/CarScan.strings; sourceTree = "<group>"; };
@@ -375,6 +375,7 @@
 		9541CA192327D2F30092120C /* MyNumPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNumPadViewController.swift; sourceTree = "<group>"; };
 		9547D9F5221432AE001DBB72 /* checkoutdiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutdiscount.swift; sourceTree = "<group>"; };
 		954A16A121B6C93E00ABF0CD /* modelCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelCar.swift; sourceTree = "<group>"; };
+		954D88D7235608CA00588DC1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddnewCar.strings; sourceTree = "<group>"; };
 		955158FF2341E9C100A413FA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LoginView.strings; sourceTree = "<group>"; };
 		955159002341E9C100A413FA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		955159022341E9F900A413FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WelcomeView.storyboard; sourceTree = "<group>"; };
@@ -505,6 +506,7 @@
 		95C1261821930C3D009347E9 /* notesPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesPopup.swift; sourceTree = "<group>"; };
 		95C57DD6215BA387001C1B76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95C57DD8215BC076001C1B76 /* CheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCell.swift; sourceTree = "<group>"; };
+		95E97F3423604C1200D6D6DA /* AboutusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutusViewController.swift; sourceTree = "<group>"; };
 		95EE0FCA222680A0003F35D2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		95EE0FCC222680B4003F35D2 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		95EE0FD022268164003F35D2 /* libepos2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libepos2.a; path = Garage/libepos2.a; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				957C4413222529C100B482AB /* DatabaseViewController.swift */,
 				9533D57D2349EFB3006E63EF /* Language.storyboard */,
 				957C441722252A1A00B482AB /* LanguageViewController.swift */,
+				95E97F3423604C1200D6D6DA /* AboutusViewController.swift */,
 				957C441922252AA500B482AB /* Aboutus.storyboard */,
 				9533D586234A1F7D006E63EF /* Updates.storyboard */,
 				957C441F22252B2100B482AB /* UpdatesViewController.swift */,
@@ -1264,6 +1267,7 @@
 				9588D31B223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift in Sources */,
 				9547D9F6221432AE001DBB72 /* checkoutdiscount.swift in Sources */,
 				9567AAAF21D4D35100E4A24E /* CheckCarfile.swift in Sources */,
+				95E97F3523604C1200D6D6DA /* AboutusViewController.swift in Sources */,
 				9537B7D1221AB7FE008F01C8 /* PackagingReceiptBuilder.swift in Sources */,
 				95243725225256660000CCDF /* Printer.swift in Sources */,
 				957C442022252B2100B482AB /* UpdatesViewController.swift in Sources */,
@@ -1707,7 +1711,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9551590E2342029900A413FA /* Base */,
-				9533D4DB23432E9A006E63EF /* ar */,
+				954D88D7235608CA00588DC1 /* ar */,
 			);
 			name = AddnewCar.storyboard;
 			sourceTree = "<group>";

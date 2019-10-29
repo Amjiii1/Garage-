@@ -35,6 +35,11 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var discountContainer: UIView!
     @IBOutlet weak var taxLabel: UILabel!
     
+    @IBOutlet weak var priceAllig: UILabel!
+    
+    
+    
+    @IBOutlet weak var discountBtn: UIButton!
     
     private weak var subView: UIView?
     let viewModel = CheckoutViewModel()
@@ -61,6 +66,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     let EnterAmount = NSLocalizedString("EnterAmount!", comment: "")
     let Discountcantgreater = NSLocalizedString("Discountcantgreater", comment: "")
     let CheckoutFailed = NSLocalizedString("CheckoutFailed", comment: "")
+    let Discarded = NSLocalizedString("Discarded", comment: "")
+    
     
     //Localization
     
@@ -70,7 +77,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+   
         discountContainer.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
@@ -83,8 +90,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         checkout_tableview.dataSource = self
         checkout_tableview.separatorStyle = .none
         
-        
+        setbuttonshadow()
         setCalculationUI()
+        
         self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -112,7 +120,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             loyalityBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 30)
             voucherBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 35)
         }
-        
     }
     
     private func setUI() {
@@ -125,8 +132,46 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         DiscountAmount.text = String(format: "%.2f", Constants.checkoutdiscount)
         TaxAmount.text =  String(format: "%.2f", Constants.checkouttax)       
         taxLabel.text = "\(VAT) (\(Constants.percent)%)"
+        if L102Language.currentAppleLanguage() == "ar" {
+            SubtotalAmount.textAlignment = .left
+            DiscountAmount.textAlignment = .left
+            TaxAmount.textAlignment = .left
+            
+            priceAllig.textAlignment = .left
+        }
+        
         
     }
+    
+    
+    func setbuttonshadow() {
+    
+        
+        
+        assistantBtn.layer.shadowColor = UIColor.gray.cgColor
+        assistantBtn.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        assistantBtn.layer.masksToBounds = false
+        assistantBtn.layer.shadowRadius = 1
+        assistantBtn.layer.shadowOpacity = 0.5
+        
+        
+        
+        workerBtn.layer.shadowColor = UIColor.gray.cgColor
+        workerBtn.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        workerBtn.layer.masksToBounds = false
+        workerBtn.layer.shadowRadius = 1
+        workerBtn.layer.shadowOpacity = 0.5
+        
+        discountBtn.layer.shadowColor = UIColor.gray.cgColor
+        discountBtn.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        discountBtn.layer.masksToBounds = false
+        discountBtn.layer.shadowRadius = 1
+        discountBtn.layer.shadowOpacity = 0.5
+    
+    }
+    
+    
+    
     
     
     
@@ -202,14 +247,22 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellcheckout") as! checkoutcell
         if L102Language.currentAppleLanguage() == "ar" {
             cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].AlternateName
+            let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
+            cell.Qtylabel.text = "\(qty ?? 0)"
+            let price = Checkoutstruct.sentitems[indexPath.row].Price
+            cell.pricelabel.text =  "\(price!.myRounded(toPlaces: 2))"
+            cell.productlabel.textAlignment = .right
+            cell.pricelabel.textAlignment = .left
+            
         } else {
             cell.productlabel.text = Checkoutstruct.sentitems[indexPath.row].Name
+            let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
+            cell.Qtylabel.text = "\(qty ?? 0)"
+            let price = Checkoutstruct.sentitems[indexPath.row].Price
+            cell.pricelabel.text =  "\(price!.myRounded(toPlaces: 2))"
         }
         
-        let qty = Checkoutstruct.sentitems[indexPath.row].Quantity
-        cell.Qtylabel.text = "\(qty!)"
-        let price = Checkoutstruct.sentitems[indexPath.row].Price
-        cell.pricelabel.text =  "\(price!.myRounded(toPlaces: 2))"
+       
         cell.selectionStyle = .none
         return cell
     }
@@ -349,7 +402,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBAction func discartBtn(_ sender: Any) {
-        alert(view: self, title: LocalizedString.Alert, message: LocalizedString.Discard)
+        alert(view: self, title: LocalizedString.Alert, message: Discarded)
     }
     
     

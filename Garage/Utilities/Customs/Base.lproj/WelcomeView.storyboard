@@ -177,19 +177,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60a-9f-bLa">
-                                                    <rect key="frame" x="334.5" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="315.5" y="7" width="149.5" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.69844850352112675" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6Q-6b-bFY">
-                                                    <rect key="frame" x="529.5" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="510.5" y="7" width="149.5" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="0.70386773767605637" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRD-fO-czI">
-                                                    <rect key="frame" x="676" y="7" width="111" height="56.5"/>
+                                                    <rect key="frame" x="656.5" y="7" width="150" height="56.5"/>
                                                     <state key="normal">
                                                         <color key="titleColor" white="1" alpha="0.69688050176056338" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -205,7 +205,7 @@
                                                 <constraint firstItem="60a-9f-bLa" firstAttribute="centerY" secondItem="UPH-Ml-f9f" secondAttribute="centerY" id="T0d-h5-7Nj"/>
                                                 <constraint firstItem="r6Q-6b-bFY" firstAttribute="centerX" secondItem="60a-9f-bLa" secondAttribute="centerX" multiplier="1.5" id="YNx-0z-0bh"/>
                                                 <constraint firstItem="60a-9f-bLa" firstAttribute="height" secondItem="UPH-Ml-f9f" secondAttribute="height" id="Yk8-ks-E6o"/>
-                                                <constraint firstItem="60a-9f-bLa" firstAttribute="width" secondItem="UPH-Ml-f9f" secondAttribute="width" id="ZTN-1l-1H1"/>
+                                                <constraint firstItem="60a-9f-bLa" firstAttribute="width" secondItem="UPH-Ml-f9f" secondAttribute="width" multiplier="1.35" id="ZTN-1l-1H1"/>
                                                 <constraint firstItem="ZRD-fO-czI" firstAttribute="width" secondItem="r6Q-6b-bFY" secondAttribute="width" id="cI3-Ny-Vw5"/>
                                                 <constraint firstItem="60a-9f-bLa" firstAttribute="centerX" secondItem="UPH-Ml-f9f" secondAttribute="centerX" multiplier="1.85" id="eLF-Mn-qfH"/>
                                                 <constraint firstItem="T9H-JV-wlo" firstAttribute="height" secondItem="Fy0-4G-MK2" secondAttribute="height" multiplier="0.8" id="frA-IV-yA1"/>
@@ -285,7 +285,7 @@
                 <viewControllerPlaceholder storyboardName="BayForWelcome" referencedIdentifier="BayForWelcomeVc" id="c8T-Id-hTY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="meR-J9-aHD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="558" y="669"/>
+            <point key="canvasLocation" x="558" y="681"/>
         </scene>
         <!--carScannerVc-->
         <scene sceneID="W0k-xX-J6e">
@@ -293,7 +293,7 @@
                 <viewControllerPlaceholder storyboardName="CarScan" referencedIdentifier="carScannerVc" id="JRV-NT-bjj" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltz-CT-o9j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="754"/>
+            <point key="canvasLocation" x="609" y="759"/>
         </scene>
         <!--addNewCarVc-->
         <scene sceneID="K4S-jc-Mnl">

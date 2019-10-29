@@ -34,7 +34,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Za5-zF-MNP" secondAttribute="height" multiplier="131:40" id="Zx8-PO-Imr"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="sideLogo"/>
+                                        <state key="normal" backgroundImage="sideLog3"/>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-AO-46U">
                                         <rect key="frame" x="535" y="28" width="181" height="55.5"/>
@@ -52,7 +52,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.23137254901960785" alpha="0.79750770246478875" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="LkA-7t-Alp" firstAttribute="height" secondItem="uiB-AO-46U" secondAttribute="height" multiplier="0.76" id="Aqv-mP-H87"/>
                                             <constraint firstItem="LkA-7t-Alp" firstAttribute="centerX" secondItem="uiB-AO-46U" secondAttribute="centerX" multiplier="0.3" id="e93-b9-ous"/>
@@ -192,6 +192,6 @@
         <image name="Loginbg" width="768" height="1024"/>
         <image name="dropDown" width="11" height="7"/>
         <image name="menuButton" width="50" height="50"/>
-        <image name="sideLogo" width="131" height="40"/>
+        <image name="sideLog3" width="197" height="60"/>
     </resources>
 </document>

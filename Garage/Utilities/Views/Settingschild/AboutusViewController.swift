@@ -9,11 +9,26 @@
 import UIKit
 
 class AboutusViewController: UIViewController {
+    
+    
+    @IBOutlet weak var mainView: UIView!
+    
+    @IBOutlet weak var versionLbl: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        versionLbl.text = Constants.Currentversion
+   
+        
+//        mainView.layer.shadowColor = UIColor.black.cgColor
+//        mainView.layer.shadowOpacity = 1
+//        mainView.layer.shadowOffset = .zero
+//        mainView.layer.shadowRadius = 14
+//        mainView.layer.shadowPath = UIBezierPath(rect: mainView.bounds).cgPath
+   //     mainView.layer.shouldRasterize = true
+        
     }
     
 

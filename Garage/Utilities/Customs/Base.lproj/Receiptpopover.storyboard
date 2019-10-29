@@ -21,7 +21,7 @@
         <scene sceneID="UL5-JV-Lix">
             <objects>
                 <viewController storyboardIdentifier="ReceiptpopVc" id="BtG-5i-7ej" customClass="Receiptpop" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GyG-NX-hHp">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="GyG-NX-hHp">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

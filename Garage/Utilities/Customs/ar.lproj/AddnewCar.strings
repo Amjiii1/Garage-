@@ -2,6 +2,9 @@
 /* Class = "UILabel"; text = "Phone Number"; ObjectID = "4ZE-9U-19V"; */
 "4ZE-9U-19V.text" = "رقم الجوال";
 
+/* Class = "UILabel"; text = "Gender"; ObjectID = "6y8-Xn-huB"; */
+"6y8-Xn-huB.text" = "جنس";
+
 /* Class = "UILabel"; text = "*"; ObjectID = "B5m-P7-R1p"; */
 "B5m-P7-R1p.text" = "*";
 
@@ -50,5 +53,13 @@
 /* Class = "UILabel"; text = "Recommended Amount"; ObjectID = "jaq-84-0GX"; */
 "jaq-84-0GX.text" = "الكمية الموصى بها";
 
+/* Class = "UIButton"; normalTitle = "Female"; ObjectID = "puA-9G-1Dl"; */
+"puA-9G-1Dl.normalTitle" = "أنثى";
+
 /* Class = "UILabel"; text = "*"; ObjectID = "qo5-3D-8V9"; */
 "qo5-3D-8V9.text" = "*";
+
+/* Class = "UIButton"; normalTitle = "Male"; ObjectID = "wbB-mz-UDW"; */
+"wbB-mz-UDW.normalTitle" = "الذكر";
+
+

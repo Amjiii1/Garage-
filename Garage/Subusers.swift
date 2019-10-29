@@ -68,8 +68,8 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Select item from tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        Constants.SubUserID = usersdetail[indexPath.row].SubUserID!
-        Constants.FullName = usersdetail[indexPath.row].FullName!
+        Constants.SubUserID = usersdetail[indexPath.row].SubUserID ?? 0
+        Constants.FullName = usersdetail[indexPath.row].FullName ?? ""
         NotificationCenter.default.post(name: Notification.Name("Notificationusername"), object: nil)
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark

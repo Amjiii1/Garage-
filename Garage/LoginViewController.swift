@@ -35,6 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         btnUpArrow.isHidden = true
         btnHelp.isHidden = true
         btnCustomer.isHidden = true
@@ -158,6 +159,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             if  let Footer = receipt[Constants.FooterA] as? String {
                                 Constants.Footer = Footer
                             }
+                            if  let logo = receipt[Constants.CompanyLogoURL] as? String {
+                                let url = NSURL(string:logo)
+                                let data = NSData(contentsOf:url! as URL)
+                                if data != nil {
+                                    Constants.Logoimage = data
+                                }
+                            }
+                            
+                            
                         }
                         
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
@@ -622,4 +632,11 @@ class SecureTextFieldWithCustomFont : UITextField {
 
 
 
-
+extension String {
+    func toImage() -> UIImage? {
+        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
+            return UIImage(data: data)
+        }
+        return nil
+    }
+}

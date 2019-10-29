@@ -22,7 +22,7 @@ class LocalizedString {
     static let wantto = NSLocalizedString("Do you want to continue?", comment: "")
     static let Failed  = NSLocalizedString("Failed ", comment: "")
     static let PleaseselectCard  = NSLocalizedString("PleaseselectCard ", comment: "")
-    static let Discard  = NSLocalizedString("Discard ", comment: "")
+    //static let Discard  = NSLocalizedString("Discarded ", comment: "")
      static let NOPrintersFound  = NSLocalizedString("NOPrintersFound", comment: "")
     static let PrinternotConnected  = NSLocalizedString("PrinternotConnected", comment: "")
     static let OK  = NSLocalizedString("OK", comment: "")

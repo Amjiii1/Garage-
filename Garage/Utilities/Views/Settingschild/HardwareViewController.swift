@@ -47,6 +47,15 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var receiptPrinterTableview: UITableView!
     
+    @IBOutlet weak var ip: UITextField!
+    
+    @IBOutlet weak var port: UITextField!
+    
+    
+    @IBOutlet weak var ZebraTable: UITableView!
+    
+    
+    
     
     @IBOutlet weak var printertypelabel: UITextField!
     private var availablePrinters = [PrinterDetailsModel]()
@@ -55,10 +64,54 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var connectOutlet: UIButton!
     
     
+    var performingDemo = false
+    
+    
+    
+    
+    var printers : [DiscoveredPrinter]? {
+        didSet
+        {
+            if printers != nil
+            {
+                self.ZebraTable.reloadData()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do{
+            var arr = try NetworkDiscoverer.localBroadcast(withTimeout: 30)
+            if arr != nil
+            {
+                self.printers = arr  as! [DiscoveredPrinter]
+            }else{
+                self.printers = nil
+            }
+        }catch(let err)
+        {
+            print(err.localizedDescription)
+        }
         
+        if Add() {
+            ip.addTarget(self, action: #selector(printertypelabelChanges(_:)), for: .editingChanged)
+        }  else {
+            ip.addTarget(self, action: #selector(printertypelabelChanges(_:)), for: .editingChanged)
+            
+        }
+        port.text = "6101"
+        /// ip.text = UserDefaults.standard.string(forKey: "Zprinter")!
+        
+        // Do any additional setup after loading the view.
+        self.performingDemo = false;
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -75,6 +128,94 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         print(Constants.Printer)
         configureUI()
     }
+    
+    
+    
+   
+    
+    
+    func printImageOnly() {
+        // Print
+        //  DispatchQueue.global(qos: .background).async {
+        if self.ip.text != "" {
+            do {
+                let ipAddress = ip.text!
+                let portAsString = port.text!
+                let por = Int(portAsString) ?? 0
+                let connection = TcpPrinterConnection(address: ipAddress, andWithPort: por)
+                if connection?.open() == true {
+                    let printer = ZebraPrinterFactory.getInstance(connection, with: PRINTER_LANGUAGE_ZPL)
+                    
+                    // Print image
+                    do {
+                        try printer?.getToolsUtil().sendCommand("^XA")
+                        
+                        let imageURL = Bundle.main.url(forResource: "wmark1", withExtension: "jpg")!
+                        let imageData = try Data(contentsOf: imageURL)
+                        let image = UIImage(data: imageData)
+                        
+                        if image != nil && image!.cgImage != nil {
+                            try printer?.getGraphicsUtil().print(image!.cgImage!, atX: 0, atY: 20, withWidth: 400, withHeight: 200, andIsInsideFormat: true)
+                        }
+                        try printer?.getToolsUtil().sendCommand("^XZ")
+                    }
+                }
+                
+                //connection?.close()
+                //connection = nil
+            } catch {
+                DispatchQueue.main.sync {
+                    // Display alert
+                    let alert = UIAlertController(title: "Message", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+                    
+                    if var currentViewController = UIApplication.shared.keyWindow?.rootViewController {
+                        while let presentedViewController = currentViewController.presentedViewController {
+                            currentViewController = presentedViewController
+                        }
+                        
+                        // Display message with current view controller
+                        currentViewController.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        } else {
+            DispatchQueue.main.sync {
+                // Display alert
+                let alert = UIAlertController(title: "Message", message: "Please set up printer first.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+                
+                if var currentViewController = UIApplication.shared.keyWindow?.rootViewController {
+                    while let presentedViewController = currentViewController.presentedViewController {
+                        currentViewController = presentedViewController
+                    }
+                    
+                    // Display message with current view controller
+                    currentViewController.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+        //  }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     private func configureUI() {
         availablePrinters.removeAll()
@@ -120,7 +261,22 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     
     
+    fileprivate func Add() -> Bool {
+        ip.text = UserDefaults.standard.string(forKey: "Zprinter")
+        
+        return UserDefaults.standard.bool(forKey: "Zprinter")
+    }
     
+    @objc func printertypelabelChanges(_ textField: UITextField) {
+        
+        if ip.text!.characters.count != 0 {
+            print("added")
+        }
+        else {
+            print("deleted")
+        }
+        
+    }
     
     
     
@@ -329,24 +485,36 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     
     
-    
-    
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return printerDetailsModels!.count
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return printerDetailsModels!.count
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var rowNumber: Int = 0
+        var Int = 0
+        
+          if tableView == receiptPrinterTableview {
+        //var rowNumber: Int = 0
         if section == 0 {
-            rowNumber =  printerDetailsModels!.count
+            Int =  printerDetailsModels!.count
         }
         else {
-            rowNumber = 1
+            Int = 1
         }
-        return rowNumber
+       // Int = rowNumber
+        }
+        else if tableView == ZebraTable {
+        
+        
+        if let printers = self.printers
+        {
+            Int = printers.count
+        }
+     //     Int =  0
+        }
+        
+        return Int
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == receiptPrinterTableview {
         let identifier = "basis-cell"
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
@@ -367,8 +535,20 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         
         return cell!
+        }
+            
+        else if tableView == ZebraTable {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+            cell.textLabel!.text = self.printers![indexPath.row].address
+            
+            return cell
+            
+        }
+        return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == receiptPrinterTableview {
         if indexPath.section == 0 {
             Constants.Printer = printerList[indexPath.row].target
             //            printertypelabel.text = "\(Constants.Printer)"
@@ -384,6 +564,25 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         else {
             performSelector(onMainThread: #selector(HardwareViewController.connectDevice), with:self, waitUntilDone:false)
         }
+            
+        }
+        else if tableView == ZebraTable {
+            Constants.zebra = self.printers![indexPath.row].address
+            ip.text = Constants.zebra
+            //        port.text = "6101"
+            UserDefaults.standard.set(Constants.zebra, forKey: "Zprinter")
+            UserDefaults.standard.synchronize()
+            
+            ToastView.show(message: "Added", controller: self)
+            dismiss(animated: true, completion: nil)
+        }
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.separatorColor = UIColor.gray
+        return CGFloat(60)
         
     }
     
@@ -531,3 +730,41 @@ extension Collection where Indices.Iterator.Element == Index {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+
+//extension HardwareViewController : UITableViewDelegate, UITableViewDataSource
+//{
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+//        cell.textLabel!.text = self.printers![indexPath.row].address
+//
+//        return cell
+//    }
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if let printers = self.printers
+//        {
+//            return printers.count
+//        }
+//        return 0
+//    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        tableView.separatorColor = UIColor.gray
+//        return CGFloat(60)
+//
+//    }
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        Constants.zebra = self.printers![indexPath.row].address
+//        ip.text = Constants.zebra
+//        //        port.text = "6101"
+//        UserDefaults.standard.set(Constants.zebra, forKey: "Zprinter")
+//        UserDefaults.standard.synchronize()
+//
+//        ToastView.show(message: "Added", controller: self)
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+//}

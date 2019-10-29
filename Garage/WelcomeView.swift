@@ -448,7 +448,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             print("Nothing")
         case 2:
             let deleteAction = UITableViewRowAction(style: .destructive, title: Cancel) { (action, indexpath) in
-                self.AssignedID = self.Welcomecellobj[indexPath.row].OrderID!
+                self.AssignedID = self.Welcomecellobj[indexPath.row].OrderID ?? 0
                 print(self.AssignedID)
                 self.AssignToWait()
                 self.Welcomecellobj.remove(at: indexPath.row)
@@ -491,7 +491,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             cell.make.text = Welcomecellobj[indexPath.row].MakerName
             cell.model.text = Welcomecellobj[indexPath.row].ModelName
             let trans = Welcomecellobj[indexPath.row].TransactionNo
-            cell.serialnmb.text = "\(trans!)"
+            cell.serialnmb.text = "\(trans ?? 0)"
             cell.editBtn.tag = indexPath.row
             cell.editBtn.setTitle("", for: .normal)
             cell.editBtn.setImage(#imageLiteral(resourceName: "editbilal"), for: .normal)
@@ -511,7 +511,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             cell.editBtn.setImage(#imageLiteral(resourceName: "welcomearrow"), for: .normal)
             //   cell.editBtn.addTarget(self, action:#selector(self.add1(_:)), for: .touchUpInside)
             let trans2 = Welcomecellobj[indexPath.row].TransactionNo
-            cell.serialnmb.text = "\(trans2!)"
+            cell.serialnmb.text = "\(trans2 ?? 0)"
             
         case 2:
             cell.editBtn.isUserInteractionEnabled = true
@@ -572,11 +572,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }
          
         case 1:
-            Constants.Bplate = Welcomecellobj[sender.tag].RegistrationNo!
-            Constants.BMake = Welcomecellobj[sender.tag].MakerName!
-            Constants.editOrderid = Welcomecellobj[sender.tag].OrderID!
-            Constants.bayid = Welcomecellobj[sender.tag].BayID!
-            Constants.editcarid = Welcomecellobj[sender.tag].CarID!
+            Constants.Bplate = Welcomecellobj[sender.tag].RegistrationNo ?? ""
+            Constants.BMake = Welcomecellobj[sender.tag].MakerName ?? ""
+            Constants.editOrderid = Welcomecellobj[sender.tag].OrderID ?? 0
+            Constants.bayid = Welcomecellobj[sender.tag].BayID ?? 0
+            Constants.editcarid = Welcomecellobj[sender.tag].CarID ?? 0
             Constants.orderstatus = 101
             tapped()
             

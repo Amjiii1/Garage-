@@ -59,7 +59,7 @@
 "Failed" = "فشل ";
 "limitExceeded" = "تم تجاوز الحد";
 "PleaseselectCard" = "يرجى اختيار البطاقة";
-"Discard" = "هل تريد تجاهل الطلب؟";
+"Discarded" = "هل تريد تجاهل الطلب؟";
 "PrinternotConnected" = "الطابعة غير متصلة";
 "OK" = "حسنا";
 "sucessfully" = "الطباعة بنجاح";
@@ -79,3 +79,4 @@
 "NumberGreater" = "رقم الهاتف غير صالح! أكبر من الشكل";
 "AlreadyAssigned" = "عذرا لا يمكن تعديل الطلب! تم التعيين بالفعل إلى";
 "Void" = "رفض";
+"rollyear" = "نشمر لمدة عام";

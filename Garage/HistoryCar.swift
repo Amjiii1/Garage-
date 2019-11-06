@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import NVActivityIndicatorView
 
 struct HistoryDetails {
     
@@ -22,7 +22,7 @@ struct HistoryDetails {
 }
 
 
-class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate,NVActivityIndicatorViewable {
     
     @IBOutlet weak var historyTableview: UITableView!
     @IBOutlet weak var carModelLabel: UILabel!
@@ -31,9 +31,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var HistoryData = [HistoryModel]()
     var PDFLetterH: String = ""
-    
-    
-    
     var Inspectionlist = [InspectionListH]()
     var InspectionDtail = [InspectionDetailsH]()
     
@@ -41,7 +38,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     var upimages = [String]()
     var count = 0
     
-     let AirPrint = NSLocalizedString("AirPrint", comment: "")
+    let AirPrint = NSLocalizedString("AirPrint", comment: "")
     let PrintingSucuess  = NSLocalizedString("sucessfully", comment: "")
     
     
@@ -49,26 +46,10 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        historyData()
-        historyTableview.dataSource = self
-        historyTableview.delegate = self
-        historyTableview.reloadData()
+        self.historyData()
+        self.historyTableview.reloadData()
     }
     
-    
-    func showloader() {
-        
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
     
     
     func historyData() {
@@ -76,7 +57,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else { return }
             do {
-                self.showloader()
+                self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json)
                 
@@ -162,7 +143,9 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                         
                                         let newInspectionList = InspectionListH(InspectionDetailsH: InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
                                         self.Inspectionlist.append(newInspectionList)
+                                         DispatchQueue.main.async {
                                         self.historyTableview.reloadData()
+                                        }
                                     }
                                     
                                 }
@@ -179,21 +162,21 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                         DispatchQueue.main.async {
                             self.historyTableview.reloadData()
-                            self.dismiss(animated: true, completion: nil)
+                            self.stopAnimating()
                         }
                         
                     }
                         
                     else  if intstatus == 0 {
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: descript!, controller: self)
-                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                     else if (intstatus == 1000) {
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.wrong, controller: self)
-                            self.dismiss(animated: true, completion: nil)
                             
                             
                         }
@@ -201,16 +184,16 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                     else if (intstatus == 1001) {
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.invalid, controller: self)
-                            self.dismiss(animated: true, completion: nil)
                             
                         }
                     }
                         
                     else {
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.occured, controller: self)
-                            self.dismiss(animated: true, completion: nil)
                             
                         }
                     }
@@ -221,8 +204,8 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
             } catch let error as NSError {
                 print(error)
+                self.stopAnimating()
                 ToastView.show(message: LocalizedString.occured, controller: self)
-                self.dismiss(animated: true, completion: nil)
             }
         }).resume()
     }
@@ -260,7 +243,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-       
+        
         let AirPrinter = UITableViewRowAction(style: .destructive, title: AirPrint) { (action, indexpath) in
             DispatchQueue.main.async {
                 
@@ -269,7 +252,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }
         
-     
+        
         AirPrinter.backgroundColor = UIColor.DefaultApp
         
         return [AirPrinter]
@@ -292,6 +275,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
             if let data = data {
                 do {
+                   // self.startAnimating(message: "Please wait..", messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     let discript = json[Constants.Description] as? String
                     if let status = json[Constants.Status] as? Int {
@@ -303,6 +287,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                         print(printer)
                                         
                                         self.PDFLetterH = printer
+                                        //self.stopAnimating()
                                         self.PrintletterH()
                                     }
                                 } else {
@@ -310,31 +295,41 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                         
                                         
                                         ToastView.show(message: "PDF not found", controller: self)
+                                       // self.stopAnimating()
                                     }
                                 }
                             }
                         }
                         else if (status == 0) {
                             ToastView.show(message: discript ?? "Null data", controller: self)
+                          //  self.stopAnimating()
                         }
                             
                         else if (status == 1000) {
+                            
                             ToastView.show(message: LocalizedString.wrong, controller: self)
+                          //  self.stopAnimating()
                         }
                             
                         else if (status == 1001) {
+                            
                             ToastView.show(message: LocalizedString.invalid, controller: self)
+                           // self.stopAnimating()
                         }
                             
                         else {
+                           
                             ToastView.show(message: LocalizedString.occured, controller: self)
+                           //  self.stopAnimating()
                         }
                         
                     }
                     
                 } catch let error as NSError {
+                    
                     print(error)
                     ToastView.show(message: "failed! Try Again", controller: self)
+                    //self.stopAnimating()
                 }
                 
             }
@@ -389,31 +384,14 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         Constants.historydiscount = HistoryData[sender.tag].Discount  ?? 0
         Constants.historysubtotal = HistoryData[sender.tag].TotalAmount  ?? 0
         Constants.historytax = HistoryData[sender.tag].Tax  ?? 0
-
         
-        
-        
-//        Constants.subtotal = 0.0
-//        Constants.checkoutGrandtotal = 0.0
-//        Constants.checkouttax = 0.0
         for itemmodels in  HistoryDetails.details {
-            
             if itemmodels.itemorderid == id {
-                
-           //     Constants.checkoutGrandtotal = Constants.checkoutGrandtotal + itemmodels.Price!
-                
                 HistoryDetails.savedetail.append(itemmodels)
             } else if itemmodels.itemorderid != id {
                 print("Not present")
             }
-            
-            
         }
-//        Constants.checkouttax = Constants.checkoutGrandtotal * 0.05
-//        Constants.subtotal = Constants.checkoutGrandtotal
-//        Constants.checkoutGrandtotal =  Constants.checkoutGrandtotal + Constants.checkouttax
-        
-        
         for list in Inspectionlist {
             if list.OrderIDH == id {
                 for list2 in list.InspectionDetailsH {
@@ -423,7 +401,6 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 HistoryDetails.SaveInspectionlist.append(list)
             }
-            
         }
         
         for images in HistoryDetails.carNotes {

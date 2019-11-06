@@ -14,9 +14,9 @@ class CallEngine {
 //    static var LiveURL = "http://api-v1.isalesgarage.com/api/"
 //    static var localURL = "http://garageapi.isalespos.com/api/"
     
-    static var GlocalURL = "http://api-uat.garage.sa/api/"
-    static var GliveURL = "http://api-live.garage.sa/api/"
-        static var baseURL =  GlocalURL
+    static var LiveURL = "http://api-uat.garage.sa/api/"
+    static var localURL = "http://api-live.garage.sa/api/"
+    static var baseURL =  localURL
     
     
     static let editCar = "Car/Edit"
@@ -55,12 +55,8 @@ class CallEngine {
     static let carScan = "car/scan/plateno"
     static let Printerletter = "order/printletter/"
     
-    
     static var timeout = 30.0
    //  private var printer: Epos2Printer?
-    
-    
-    
     
     
 //    class func printXReport(completion: @escaping (_ savedChanges: Bool,_ message:String) -> Void){

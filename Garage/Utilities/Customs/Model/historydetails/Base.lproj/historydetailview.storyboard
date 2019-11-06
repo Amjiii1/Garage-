@@ -101,6 +101,9 @@
                                                         <integer key="value" value="14"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="reOrderBtn:" destination="Ryw-cA-2FB" eventType="touchUpInside" id="DcQ-oM-OOV"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1320" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiW-ho-D0G">
                                                 <rect key="frame" x="24" y="41" width="140" height="38.5"/>

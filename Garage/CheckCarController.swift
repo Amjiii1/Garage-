@@ -367,14 +367,14 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func savecontinueBtn(_ sender: Any) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+         DispatchQueue.main.async {
             
             if let parentVC = self.parent as? ReceptionalistView {
                 let storyboard = UIStoryboard(name: "MechanicView", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MechanicVc") as? MechanicView
                 parentVC.switchViewController(vc: vc!, showFooter: true)
             }
-        })
+        }//)
         
         
     }

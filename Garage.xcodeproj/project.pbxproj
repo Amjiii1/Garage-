@@ -144,6 +144,8 @@
 		955EC29F21A3042400F16253 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EC29E21A3042400F16253 /* HistoryModel.swift */; };
 		955FFD0121BE98ED00876FB5 /* CallEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955FFD0021BE98ED00876FB5 /* CallEngine.swift */; };
 		95611788228144C700B4A7D4 /* cameraScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95611787228144C700B4A7D4 /* cameraScan.swift */; };
+		956274AA2369C91600DB0EBE /* General.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956274AC2369C91600DB0EBE /* General.storyboard */; };
+		956274B7236ADF9000DB0EBE /* Receipt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956274B9236ADF9000DB0EBE /* Receipt.storyboard */; };
 		9563DDFF21C67A7800BBC461 /* mechanicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563DDFE21C67A7800BBC461 /* mechanicModel.swift */; };
 		95642B8622DB358000A394DC /* libZSDK_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95642B8522DB358000A394DC /* libZSDK_API.a */; };
 		95644604215B9DD100231EDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95644603215B9DD100231EDF /* Info.plist */; };
@@ -190,11 +192,9 @@
 		957C43E8222275ED00B482AB /* Mechanicpop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C43E7222275ED00B482AB /* Mechanicpop.storyboard */; };
 		957C43EA2222761B00B482AB /* Mechanicpop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C43E92222761B00B482AB /* Mechanicpop.swift */; };
 		957C43EC222276CB00B482AB /* MechanicpopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C43EB222276CB00B482AB /* MechanicpopCell.swift */; };
-		957C44062225267D00B482AB /* General.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C44052225267D00B482AB /* General.storyboard */; };
 		957C4408222526CC00B482AB /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C4407222526CC00B482AB /* GeneralViewController.swift */; };
 		957C440A222526FE00B482AB /* Hardware.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C4409222526FE00B482AB /* Hardware.storyboard */; };
 		957C440C2225271100B482AB /* HardwareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C440B2225271100B482AB /* HardwareViewController.swift */; };
-		957C440E2225295400B482AB /* Receipt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C440D2225295400B482AB /* Receipt.storyboard */; };
 		957C44102225297500B482AB /* ReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C440F2225297500B482AB /* ReceiptViewController.swift */; };
 		957C4412222529A100B482AB /* Database.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957C4411222529A100B482AB /* Database.storyboard */; };
 		957C4414222529C100B482AB /* DatabaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C4413222529C100B482AB /* DatabaseViewController.swift */; };
@@ -209,6 +209,9 @@
 		9588D317223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D316223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift */; };
 		9588D319223A852B00225C37 /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D318223A852B00225C37 /* FormatHelper.swift */; };
 		9588D31B223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */; };
+		958A628D237152DE00B15B66 /* subuserAsist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958A628C237152DE00B15B66 /* subuserAsist.storyboard */; };
+		958A628F237154CA00B15B66 /* SubuserAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958A628E237154CA00B15B66 /* SubuserAssist.swift */; };
+		958A62912371554400B15B66 /* SubuserAssistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958A62902371554400B15B66 /* SubuserAssistCell.swift */; };
 		958A7698222BB83500F88D69 /* store1.png in Resources */ = {isa = PBXBuildFile; fileRef = 958A7697222BB83400F88D69 /* store1.png */; };
 		95AA6BD1221190D1005D9B44 /* checkoutItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA6BD0221190D1005D9B44 /* checkoutItems.swift */; };
 		95C57DD5215BA328001C1B76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17FEF6E520CCEA2500EC99C2 /* Info.plist */; };
@@ -322,7 +325,6 @@
 		9533D525234621F6006E63EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BayForWelcome.storyboard; sourceTree = "<group>"; };
 		9533D528234621FA006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/BayForWelcome.strings; sourceTree = "<group>"; };
 		9533D52A234622AA006E63EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/XZReportViewController.storyboard; sourceTree = "<group>"; };
-		9533D52D234622AD006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/XZReportViewController.strings; sourceTree = "<group>"; };
 		9533D52F234626AD006E63EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HistoryCar.storyboard; sourceTree = "<group>"; };
 		9533D532234626B1006E63EF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HistoryCar.strings; sourceTree = "<group>"; };
 		9533D53423462833006E63EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/historydetailview.storyboard; sourceTree = "<group>"; };
@@ -416,6 +418,11 @@
 		955EC29E21A3042400F16253 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		955FFD0021BE98ED00876FB5 /* CallEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallEngine.swift; sourceTree = "<group>"; };
 		95611787228144C700B4A7D4 /* cameraScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cameraScan.swift; sourceTree = "<group>"; };
+		956274AB2369C91600DB0EBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/General.storyboard; sourceTree = "<group>"; };
+		956274AE2369C91B00DB0EBE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/General.strings; sourceTree = "<group>"; };
+		956274B8236ADF9000DB0EBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receipt.storyboard; sourceTree = "<group>"; };
+		956274BB236ADFB000DB0EBE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Receipt.strings; sourceTree = "<group>"; };
+		956274BD236AE44500DB0EBE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/XZReportViewController.strings; sourceTree = "<group>"; };
 		9563DDFE21C67A7800BBC461 /* mechanicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mechanicModel.swift; sourceTree = "<group>"; };
 		95642B8522DB358000A394DC /* libZSDK_API.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZSDK_API.a; path = Garage/libZSDK_API.a; sourceTree = "<group>"; };
 		95642B8922DB3D4600A394DC /* GraphicsUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicsUtil.h; sourceTree = "<group>"; };
@@ -482,11 +489,9 @@
 		957C43E7222275ED00B482AB /* Mechanicpop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mechanicpop.storyboard; sourceTree = "<group>"; };
 		957C43E92222761B00B482AB /* Mechanicpop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanicpop.swift; sourceTree = "<group>"; };
 		957C43EB222276CB00B482AB /* MechanicpopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicpopCell.swift; sourceTree = "<group>"; };
-		957C44052225267D00B482AB /* General.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = General.storyboard; sourceTree = "<group>"; };
 		957C4407222526CC00B482AB /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		957C4409222526FE00B482AB /* Hardware.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hardware.storyboard; sourceTree = "<group>"; };
 		957C440B2225271100B482AB /* HardwareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareViewController.swift; sourceTree = "<group>"; };
-		957C440D2225295400B482AB /* Receipt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receipt.storyboard; sourceTree = "<group>"; };
 		957C440F2225297500B482AB /* ReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptViewController.swift; sourceTree = "<group>"; };
 		957C4411222529A100B482AB /* Database.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Database.storyboard; sourceTree = "<group>"; };
 		957C4413222529C100B482AB /* DatabaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewController.swift; sourceTree = "<group>"; };
@@ -501,6 +506,9 @@
 		9588D316223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptConfiguration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9588D318223A852B00225C37 /* FormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
 		9588D31A223A8AD200225C37 /* ReceiptConfiguration+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptConfiguration+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		958A628C237152DE00B15B66 /* subuserAsist.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = subuserAsist.storyboard; sourceTree = "<group>"; };
+		958A628E237154CA00B15B66 /* SubuserAssist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubuserAssist.swift; sourceTree = "<group>"; };
+		958A62902371554400B15B66 /* SubuserAssistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubuserAssistCell.swift; sourceTree = "<group>"; };
 		958A7697222BB83400F88D69 /* store1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store1.png; sourceTree = "<group>"; };
 		95AA6BD0221190D1005D9B44 /* checkoutItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutItems.swift; sourceTree = "<group>"; };
 		95C1261821930C3D009347E9 /* notesPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesPopup.swift; sourceTree = "<group>"; };
@@ -631,6 +639,7 @@
 				957D4F3C2158EB6200262AA1 /* HeaderView.xib */,
 				9533D51C23461E82006E63EF /* CheckCarController.storyboard */,
 				9533D55A2349CEB9006E63EF /* Subusers.storyboard */,
+				958A628C237152DE00B15B66 /* subuserAsist.storyboard */,
 				9533D4EF23438D36006E63EF /* CheckoutView.storyboard */,
 				9533D5122345FB50006E63EF /* Receiptpopover.storyboard */,
 				9533D5172345FEB6006E63EF /* PopOver.storyboard */,
@@ -723,6 +732,7 @@
 				178E706C20D0EFD000BF0382 /* CheckoutView.swift */,
 				178E706220D0DD6100BF0382 /* Main.storyboard */,
 				955B66282212C717009AA43D /* Subusers.swift */,
+				958A628E237154CA00B15B66 /* SubuserAssist.swift */,
 				955B662C2212C7B0009AA43D /* SubuserModel.swift */,
 				9533D50C2345D0C8006E63EF /* AmjadRegular.otf */,
 				9533D545234632C1006E63EF /* Localizable.strings */,
@@ -737,6 +747,7 @@
 				953470A62209AA690091A7C0 /* CheckoutModel.swift */,
 				95AA6BD0221190D1005D9B44 /* checkoutItems.swift */,
 				955B662A2212C74A009AA43D /* SubusersCell.swift */,
+				958A62902371554400B15B66 /* SubuserAssistCell.swift */,
 				95642B8722DB35BE00A394DC /* zebraPrinter */,
 			);
 			path = Garage;
@@ -943,11 +954,11 @@
 		957C44042225266400B482AB /* Settingschild */ = {
 			isa = PBXGroup;
 			children = (
-				957C44052225267D00B482AB /* General.storyboard */,
+				956274AC2369C91600DB0EBE /* General.storyboard */,
 				957C4407222526CC00B482AB /* GeneralViewController.swift */,
 				957C4409222526FE00B482AB /* Hardware.storyboard */,
 				957C440B2225271100B482AB /* HardwareViewController.swift */,
-				957C440D2225295400B482AB /* Receipt.storyboard */,
+				956274B9236ADF9000DB0EBE /* Receipt.storyboard */,
 				957C440F2225297500B482AB /* ReceiptViewController.swift */,
 				957C4411222529A100B482AB /* Database.storyboard */,
 				957C4413222529C100B482AB /* DatabaseViewController.swift */,
@@ -1090,11 +1101,12 @@
 				9565A98E224BA3AE00150B9B /* marngarage.png in Resources */,
 				9533D4ED23438D36006E63EF /* CheckoutView.storyboard in Resources */,
 				955159012341E9F900A413FA /* WelcomeView.storyboard in Resources */,
-				957C440E2225295400B482AB /* Receipt.storyboard in Resources */,
+				956274B7236ADF9000DB0EBE /* Receipt.storyboard in Resources */,
 				9533D4E823435D6B006E63EF /* MechanicView.storyboard in Resources */,
 				9533D584234A1F7D006E63EF /* Updates.storyboard in Resources */,
 				9533D51F23461F77006E63EF /* notespopup.storyboard in Resources */,
 				9533D5622349CFE4006E63EF /* CashView.xib in Resources */,
+				958A628D237152DE00B15B66 /* subuserAsist.storyboard in Resources */,
 				9533D50F2345D1E8006E63EF /* Amjad_Bold.otf in Resources */,
 				17F856552119876D006BEF5C /* VoucherView.xib in Resources */,
 				957C4412222529A100B482AB /* Database.storyboard in Resources */,
@@ -1133,7 +1145,7 @@
 				17FEF6CB20CCEA2500EC99C2 /* Assets.xcassets in Resources */,
 				9533D5672349CFFC006E63EF /* CardView.xib in Resources */,
 				950C39682332659100DB3B3E /* DiscountTableViewCell.xib in Resources */,
-				957C44062225267D00B482AB /* General.storyboard in Resources */,
+				956274AA2369C91600DB0EBE /* General.storyboard in Resources */,
 				9551591423420B1F00A413FA /* ReceptionalistView.storyboard in Resources */,
 				9533D5152345FEB6006E63EF /* PopOver.storyboard in Resources */,
 				9533D51A23461E82006E63EF /* CheckCarController.storyboard in Resources */,
@@ -1226,6 +1238,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/NumericKeyboard/NumericKeyboard.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -1234,6 +1247,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NumericKeyboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -1314,6 +1328,7 @@
 				9568FB462250B8E50045399A /* StringExtension.swift in Sources */,
 				95647B61219C50720071D5D6 /* popcell.swift in Sources */,
 				955B66292212C717009AA43D /* Subusers.swift in Sources */,
+				958A62912371554400B15B66 /* SubuserAssistCell.swift in Sources */,
 				9588D317223A828200225C37 /* ReceiptConfiguration+CoreDataClass.swift in Sources */,
 				9537B7B8221AB3B5008F01C8 /* PrinterDetailsModel.swift in Sources */,
 				955BDD1421B5558800F95542 /* makeCarModel.swift in Sources */,
@@ -1369,6 +1384,7 @@
 				9537B7C6221AB6D6008F01C8 /* Printable.swift in Sources */,
 				957C43EC222276CB00B482AB /* MechanicpopCell.swift in Sources */,
 				956EACEF221C090B001F5A12 /* DataController.swift in Sources */,
+				958A628F237154CA00B15B66 /* SubuserAssist.swift in Sources */,
 				9588D319223A852B00225C37 /* FormatHelper.swift in Sources */,
 				955BDD1621B6891C00F95542 /* modelCarModel.swift in Sources */,
 				955B662B2212C74A009AA43D /* SubusersCell.swift in Sources */,
@@ -1549,7 +1565,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9533D52A234622AA006E63EF /* Base */,
-				9533D52D234622AD006E63EF /* ar */,
+				956274BD236AE44500DB0EBE /* ar */,
 			);
 			name = XZReportViewController.storyboard;
 			sourceTree = "<group>";
@@ -1723,6 +1739,24 @@
 				9551591A23420B8C00A413FA /* ar */,
 			);
 			name = ReceptionalistView.storyboard;
+			sourceTree = "<group>";
+		};
+		956274AC2369C91600DB0EBE /* General.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				956274AB2369C91600DB0EBE /* Base */,
+				956274AE2369C91B00DB0EBE /* ar */,
+			);
+			name = General.storyboard;
+			sourceTree = "<group>";
+		};
+		956274B9236ADF9000DB0EBE /* Receipt.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				956274B8236ADF9000DB0EBE /* Base */,
+				956274BB236ADFB000DB0EBE /* ar */,
+			);
+			name = Receipt.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 
-
-class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, NVActivityIndicatorViewable  {
     
     
     @IBOutlet weak var MechanicSegmented: UISegmentedControl!
@@ -188,28 +188,14 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         statusLbl.isHidden = true
 }
     
-    
-    
-    func showloader() {
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    
+   
     
     func FinishedApi() {
         
         let Apiurl = "\(CallEngine.baseURL)\(CallEngine.finishedOrderlist)/\(Constants.sessions)"
         self.MechanicSegmented.isUserInteractionEnabled = false
         DispatchQueue.main.async {
-            self.showloader()
+           self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
         }
         let url = URL(string: Apiurl)
         //    print(Apiurl)
@@ -233,16 +219,16 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         self.MechanicModel.append(newDetails!)
                     }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                DispatchQueue.main.async {
                     
-                    self.dismiss(animated: true, completion: nil)
+                    self.stopAnimating()
                     self.finishedTableview.reloadData()
                     self.MechanicSegmented.isUserInteractionEnabled = true
-                })
+                }//)
             }
                 else if (statusmessage == 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: descriptmessage!, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
@@ -250,7 +236,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                 }
                 else if (statusmessage == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
@@ -259,7 +245,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     
                 else if (statusmessage == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
@@ -268,7 +254,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     
                 else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message:LocalizedString.occured, controller: self)
                         self.MechanicSegmented.isUserInteractionEnabled = true
                     })
@@ -279,7 +265,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             
                 
                 catch let error as NSError {
-                self.dismiss(animated: true, completion: nil)
+                 self.stopAnimating()
                 self.MechanicSegmented.isUserInteractionEnabled = true
                 ToastView.show(message: "failed to load", controller: self)
             }

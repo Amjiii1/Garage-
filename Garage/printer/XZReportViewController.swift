@@ -46,6 +46,7 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
         if L102Language.currentAppleLanguage() == "ar" {
             xReportOutlet.imageEdgeInsets  = UIEdgeInsetsMake(0,0,60,72)//titleEdgeInsets = UIEdgeInsetsMake(50,0,0,30)
            zReportOutlet.imageEdgeInsets = UIEdgeInsetsMake(0,0,60,72)
+            SettingsBtn.imageEdgeInsets = UIEdgeInsetsMake(0,0,60,72)
         }
         // Do any additional setup after loading the view.
         

@@ -18,7 +18,7 @@
         <scene sceneID="8CY-qG-Bv4">
             <objects>
                 <viewController storyboardIdentifier="GeneralVCID" id="1AO-bZ-5Qx" customClass="GeneralViewController" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UYf-xO-E16">
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="UYf-xO-E16">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="845"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -77,8 +77,8 @@
                                         <rect key="frame" x="701" y="32" width="51" height="31"/>
                                         <color key="onTintColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alphabatec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOt-jp-hZM">
-                                        <rect key="frame" x="20" y="128" width="87" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alphabetic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOt-jp-hZM">
+                                        <rect key="frame" x="20" y="128" width="81" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

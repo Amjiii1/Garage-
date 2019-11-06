@@ -12,6 +12,9 @@ target 'Garage' do
    pod 'Kingfisher'
    pod 'NumericKeyboard'
    pod 'SwiftyJSON', '~> 4.0'
+   pod 'NVActivityIndicatorView'
+  
+  
       
 
 

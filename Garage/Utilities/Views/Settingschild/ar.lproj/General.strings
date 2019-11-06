@@ -1,0 +1,51 @@
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "1gs-9J-Fcf"; */
+"1gs-9J-Fcf.text" = "القائمة الرائيسية";
+
+/* Class = "UISegmentedControl"; 6KK-cK-JGj.segmentTitles[0] = "Numbers"; ObjectID = "6KK-cK-JGj"; */
+"6KK-cK-JGj.segmentTitles[0]" = "أعداد";
+
+/* Class = "UISegmentedControl"; 6KK-cK-JGj.segmentTitles[1] = "Alpha"; ObjectID = "6KK-cK-JGj"; */
+"6KK-cK-JGj.segmentTitles[1]" = "ألفا";
+
+/* Class = "UILabel"; text = "Items"; ObjectID = "Aeo-K3-BxH"; */
+"Aeo-K3-BxH.text" = "الأصناف";
+
+/* Class = "UISegmentedControl"; DXb-0Y-BeA.segmentTitles[0] = "Numbers"; ObjectID = "DXb-0Y-BeA"; */
+"DXb-0Y-BeA.segmentTitles[0]" = "أعداد";
+
+/* Class = "UISegmentedControl"; DXb-0Y-BeA.segmentTitles[1] = "Alpha"; ObjectID = "DXb-0Y-BeA"; */
+"DXb-0Y-BeA.segmentTitles[1]" = "ألفا";
+
+/* Class = "UILabel"; text = "Modifiers"; ObjectID = "DjH-8J-SVV"; */
+"DjH-8J-SVV.text" = "الصفات التعريفية";
+
+/* Class = "UILabel"; text = "Alphabatec"; ObjectID = "GOt-jp-hZM"; */
+"GOt-jp-hZM.text" = "أبجدي";
+
+/* Class = "UILabel"; text = "Automatic Syncing"; ObjectID = "TmP-qY-cSB"; */
+"TmP-qY-cSB.text" = "Automatic Syncing";
+
+/* Class = "UILabel"; text = "Image"; ObjectID = "WFY-RT-oxr"; */
+"WFY-RT-oxr.text" = "صورة";
+
+/* Class = "UILabel"; text = "Product Type"; ObjectID = "Ybq-J2-DMP"; */
+"Ybq-J2-DMP.text" = "نوع المنتج";
+
+/* Class = "UISegmentedControl"; eNZ-wc-Wyr.segmentTitles[0] = "Numbers"; ObjectID = "eNZ-wc-Wyr"; */
+"eNZ-wc-Wyr.segmentTitles[0]" = "أعداد";
+
+/* Class = "UISegmentedControl"; eNZ-wc-Wyr.segmentTitles[1] = "Alpha"; ObjectID = "eNZ-wc-Wyr"; */
+"eNZ-wc-Wyr.segmentTitles[1]" = "ألفا";
+
+/* Class = "UISegmentedControl"; gmb-QA-VGR.segmentTitles[0] = "Numbers"; ObjectID = "gmb-QA-VGR"; */
+"gmb-QA-VGR.segmentTitles[0]" = "أعداد";
+
+/* Class = "UISegmentedControl"; gmb-QA-VGR.segmentTitles[1] = "Alpha"; ObjectID = "gmb-QA-VGR"; */
+"gmb-QA-VGR.segmentTitles[1]" = "ألفا";
+
+/* Class = "UILabel"; text = "Sub Category"; ObjectID = "n4Q-mM-wLw"; */
+"n4Q-mM-wLw.text" = "القائمة الفرعية";
+
+/* Class = "UILabel"; text = "Products"; ObjectID = "ns1-Fq-eUu"; */
+"ns1-Fq-eUu.text" = "المنتجات";

@@ -20,7 +20,7 @@ final class Shared {
 struct  Course {
     let message: Int
     
-    init(json: [String: Any]) {message = (json["Status"] as? Int)!
+    init(json: [String: Any]) {message = json["Status"] as? Int ?? 1000
     }
 }
 
@@ -31,7 +31,7 @@ struct  login {
     // let User: [String: Any]
     
     init(json: [String: Any]) {
-      status  = (json["Status"] as? Int)!
+      status  = json["Status"] as? Int ?? 1000
      
         
    // User = (json["User"] as? [String: Any])!
@@ -288,7 +288,9 @@ struct Constants {
     static var bayid = 0
      static var bayname = "B0"
     static var SubUserID = 0
+     static var SubUserIDAssist = 0
     static var FullName = "A"
+    static var FullNameAsis = "A"
     static var history = 0
     static var currentdate = ""
     static var totalprice: Double = 0
@@ -362,9 +364,11 @@ struct Constants {
     static var checkoutCheckL = 0
     static var checkoutcustm = "-"
     static var checkoutmechanic = "-"
+    static var checkoutAssistant = "-"
     static var checkoutstatus = 0
     static var checkoutorderNo = 0
     static let smallPrinter:CGFloat = 384
+     static let smallestPrinter:CGFloat = 84
     static let mediumPrinter:CGFloat = 576
     static var discountValue: Double = 0
     static var VAT = "-"
@@ -432,7 +436,7 @@ struct  Cardetails {
    
     
     init(json: [String: Any]) {
-        status = (json["Status"] as? Int)!
+        status = json["Status"] as? Int ?? 1000
         description = json["Description"] as? String ?? ""
         model = json["ModelName"] as? String ?? ""
         make = json["MakerName"] as? String ?? ""

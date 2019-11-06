@@ -28,6 +28,12 @@ class GeneralViewController: UIViewController {
     
     
     
+   
+    override func viewWillAppear(_ animated: Bool) {
+        UIUtility.showAlertInController(title: "Sorry", message: "Functionality will be available soon", viewController: self)
+        
+    }
+    
 }
     
                                           

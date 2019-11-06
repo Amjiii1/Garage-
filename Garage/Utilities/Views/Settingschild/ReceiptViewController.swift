@@ -13,10 +13,16 @@ class ReceiptViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+
+        
     }
     
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIUtility.showAlertInController(title: "Sorry", message: "Functionality will be available soon", viewController: self)
+        
+    }
     /*
     // MARK: - Navigation
 

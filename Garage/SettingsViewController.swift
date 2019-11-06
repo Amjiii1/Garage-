@@ -133,7 +133,7 @@ class SettingsViewController: UIViewController {
     
     DispatchQueue.main.async {
     // to open General tab by default
-    if let button = self.tabButtonsStackView.viewWithTag(1) as? UIButton  {
+    if let button = self.tabButtonsStackView.viewWithTag(2) as? UIButton  {
     print(button)
     self.tabButtonaction(button)
     }

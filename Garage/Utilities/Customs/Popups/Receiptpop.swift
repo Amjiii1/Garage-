@@ -75,6 +75,8 @@ class Receiptpop: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+   
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let Delete = UITableViewRowAction(style: .destructive, title: delete) { (action, indexpath) in
             if Constants.flagEdit != 0  || Constants.editcheckout != 0 {

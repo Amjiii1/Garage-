@@ -3,6 +3,9 @@ PODS:
   - IQKeyboardManager (6.2.1)
   - Kingfisher (5.4.0)
   - NumericKeyboard (1.4.0)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -10,6 +13,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Kingfisher
   - NumericKeyboard
+  - NVActivityIndicatorView
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -18,6 +22,7 @@ SPEC REPOS:
     - IQKeyboardManager
     - Kingfisher
     - NumericKeyboard
+    - NVActivityIndicatorView
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -25,8 +30,9 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 964638372b4a61892cc74fdfa6fd26de8c9464a2
   Kingfisher: 9c8f2cc6710334e06f32ba2b45e77707d5e2f0c9
   NumericKeyboard: fc5c650c82cdd41c40fe7f0f74ed73cb703d45ba
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 8ba17245f372adc7b57b29e8c390d4ebb3005c16
+PODFILE CHECKSUM: 896dbc6f3cac649618ed4b0a960841d377b3fbda
 
 COCOAPODS: 1.5.3

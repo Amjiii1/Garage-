@@ -27,9 +27,9 @@ class SearchPrinterHelper: NSObject {
     private var printerConnectionMedium: ConnectionMedium?
     private var printers: Set<PrinterDetailsModel> = Set<PrinterDetailsModel>()
     
-    //    fileprivate var callbackCount = 0
-    //    //it should match no of supported manufacturers
-    //    final fileprivate var requiredCallbackCount = 1
+        fileprivate var callbackCount = 0
+        //it should match no of supported manufacturers
+        final fileprivate var requiredCallbackCount = 1
     
     private func configurePrinters() {
         //        callbackCount = 0
@@ -84,11 +84,11 @@ extension SearchPrinterHelper: EpsonPrinterHelperDelegate {
         printerDetail.macAddress = target.macAddress
         printerDetail.manufacturer = PrinterManufacturer.epson
         printers.insert(printerDetail)
-        delegate?.discoverdPrinters(printers: printers)
-        //        callbackCount = callbackCount + 1
-        //        if callbackCount == requiredCallbackCount {
-        //            delegate?.discoverdPrinters(printers: printers)
-        //        }
+      //  delegate?.discoverdPrinters(printers: printers)
+                callbackCount = callbackCount + 1
+                if callbackCount == requiredCallbackCount {
+                    delegate?.discoverdPrinters(printers: printers)
+                }
     }
     
 }

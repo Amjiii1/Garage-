@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate,NVActivityIndicatorViewable  {
     
     @IBOutlet weak var buttonstack: UIStackView!
     @IBOutlet weak var PopUpView: UIView!
@@ -95,6 +96,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.checkoutoutlet.setTitle(String(format: "%.2f SAR", Constants.checkoutGrandtotal), for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotification(notification:)), name: Notification.Name("Notificationusername"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CheckOutPopView.userNotificationAssist(notification:)), name: Notification.Name("NotificationusernameAsist"), object: nil)
+        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
@@ -203,20 +206,37 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @objc func userNotification(notification: Notification) {
-        if Constants.workerflag == 1 {
+     //   if Constants.workerflag == 1 {
             self.workerBtn.setTitle("\(Constants.FullName)", for: .normal)
             Constants.checkoutmechanic = Constants.FullName
             workerid = Constants.SubUserID
-            Constants.workerflag = 0
-        } else {
-            self.assistantBtn.setTitle("\(Constants.FullName)", for: .normal)
-            assistantid = Constants.SubUserID
-        }
+     //       Constants.workerflag = 0
+//        } else {
+//            self.assistantBtn.setTitle("\(Constants.FullName)", for: .normal)
+//            assistantid = Constants.SubUserID
+//        }
         
     }
+    
+    @objc func userNotificationAssist(notification: Notification) {
+        
+            self.assistantBtn.setTitle("\(Constants.FullNameAsis)", for: .normal)
+        Constants.checkoutAssistant = Constants.FullNameAsis
+            assistantid = Constants.SubUserIDAssist
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("printerAdded"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("Notificationusername"), object: nil)
+         NotificationCenter.default.removeObserver(self, name: Notification.Name("NotificationusernameAsist"), object: nil)
+        
     }
     
     
@@ -280,8 +300,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         Constants.workerflag = 1
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: "Subusers", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "SubusersVc") as! Subusers
+        storyboard = UIStoryboard(name: Constants.Subusers, bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: Constants.SubusersVc) as! Subusers
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 80*3
@@ -299,8 +319,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func AssistantAction(_ sender: Any) {
         var storyboard: UIStoryboard!
         var popController: UIViewController!
-        storyboard = UIStoryboard(name: Constants.Subusers, bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: Constants.SubusersVc) as! Subusers
+        storyboard = UIStoryboard(name: "subuserAsist", bundle: nil)
+        popController = storyboard.instantiateViewController(withIdentifier: "SubusersAsistVc") as! SubuserAssist
         let nav = UINavigationController(rootViewController: popController)
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let heightForPopOver = 80*3
@@ -721,6 +741,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             if let data = data {
                                 print(data)
                                 do {
+                                    self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                                     print(json)
                                     
@@ -737,13 +758,14 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                             NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
                                             self.dismiss(animated: true, completion: nil)
                                             self.grandtotalBtn.isUserInteractionEnabled = true
-                                            
+                                            self.stopAnimating()
                                         }
                                         
                                     }
                                     else if (status == 0) {
                                         
                                         DispatchQueue.main.async {
+                                            self.stopAnimating()
                                             let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -757,6 +779,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else if (status == 1000) {
                                         
                                         DispatchQueue.main.async {
+                                            self.stopAnimating()
                                             let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -770,6 +793,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else if (status == 1001) {
                                         
                                         DispatchQueue.main.async {
+                                            self.stopAnimating()
                                             let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -782,6 +806,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                     else  {
                                         DispatchQueue.main.async {
+                                            self.stopAnimating()
                                             let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
                                             self.present(messageVC, animated: true) {
                                                 Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -795,6 +820,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                 } catch {
                                     print(error)
+                                    self.stopAnimating()
                                     ToastView.show(message: LocalizedString.occured, controller: self)
                                     self.grandtotalBtn.isUserInteractionEnabled = true
                                     
@@ -877,6 +903,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if let data = data {
                             print(data)
                             do {
+                                 self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                                 guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
                                 print(json)
                                 
@@ -892,6 +919,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         NotificationCenter.default.post(name: Notification.Name("checkoutDone"), object: nil)
                                         self.dismiss(animated: true, completion: nil)
                                         self.grandtotalBtn.isUserInteractionEnabled = true
+                                        self.stopAnimating()
                                         
                                     }
                                     
@@ -899,6 +927,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 0) {
                                     
                                     DispatchQueue.main.async {
+                                        self.stopAnimating()
                                         let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -912,6 +941,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 1000) {
                                     
                                     DispatchQueue.main.async {
+                                        self.stopAnimating()
                                         let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -925,6 +955,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else if (status == 1001) {
                                     
                                     DispatchQueue.main.async {
+                                        self.stopAnimating()
                                         let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -937,6 +968,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                 else  {
                                     DispatchQueue.main.async {
+                                        self.stopAnimating()
                                         let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
                                         self.present(messageVC, animated: true) {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
@@ -950,6 +982,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 
                             } catch {
                                 print(error)
+                                self.stopAnimating()
                                 ToastView.show(message: LocalizedString.occured, controller: self)
                                 self.grandtotalBtn.isUserInteractionEnabled = true
                                 

@@ -60,7 +60,7 @@ class LanguageViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
             Constants.language = UserDefaults.standard.integer(forKey: Constants.savelang)
-           exit(0)
+         //  exit(0)
         })
         
         alert.addAction(defaultAction)

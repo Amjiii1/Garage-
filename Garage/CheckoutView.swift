@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
+
 
 struct Checkoutstruct {
     static var Itemdetails = [checkoutItems]()
     static var sentitems = [checkoutItems]()
 }
 
-class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate,NVActivityIndicatorViewable {
     
     @IBOutlet weak var tableViewContainer: UITableView!
     @IBOutlet weak var checkoutSegment: UISegmentedControl!
@@ -25,7 +27,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
     private let dataModel = GeneralViewController()
     var newVariableName = GeneralViewController()
     var newVariableName2 = GeneralViewController()
-    
     
     //Localization
     
@@ -88,7 +89,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         self.checkoutSegment.isUserInteractionEnabled = false
         DispatchQueue.main.async {
-            self.showloader()
+            self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
             
         }
         let url = URL(string: Apiurl)
@@ -97,7 +98,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             if response == nil {
                 DispatchQueue.main.async {
                     ToastView.show(message: LocalizedString.interneterror, controller: self)
-                    self.dismiss(animated: true, completion: nil)
+                     self.stopAnimating()
                     self.checkoutSegment.isUserInteractionEnabled = true
                 }
             }
@@ -142,16 +143,19 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                         }
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                  //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         
-                        self.dismiss(animated: true, completion: nil)
+                    
+                    DispatchQueue.main.async {
+                        self.stopAnimating()
                         self.tableViewContainer.reloadData()
-                        self.checkoutSegment.isUserInteractionEnabled = true
-                    })
+                         self.checkoutSegment.isUserInteractionEnabled = true
+                    }
+                   // })
                 }
                 else if (status == 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: discript!, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
@@ -159,7 +163,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 else if (status == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
@@ -167,7 +171,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 else if (status == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
@@ -175,7 +179,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 else  {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.occured, controller: self)
                         self.checkoutSegment.isUserInteractionEnabled = true
                     })
@@ -183,7 +187,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
             } catch let error as NSError {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                     self.stopAnimating()
                     self.checkoutSegment.isUserInteractionEnabled = true
                     ToastView.show(message: "\(error)", controller: self)
                 }
@@ -195,18 +199,6 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-    func showloader() {
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
     
     
     @IBAction func segmentAction(_ sender: Any) {
@@ -269,6 +261,11 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         case 2:
             
+            
+            if self.checkoutmodel[indexPath.row].Status == 105 {
+               print("void is here")
+                
+            } else {
             
             let Rprint = UITableViewRowAction(style: .destructive, title: Reprint) { (action, indexpath) in
                 DispatchQueue.main.async {
@@ -341,12 +338,15 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
             
+        
+            
             returnValue = [AirPrinter, Rprint, ZebraPrinter]
             //AirPrinter.backgroundColor = UIColor(patternImage: UIImage(named: "diesel.png")!)
             AirPrinter.backgroundColor = UIColor.red
             Rprint.backgroundColor = UIColor.DefaultApp
             ZebraPrinter.backgroundColor = UIColor.orange
             
+            }
             
         default:
             break
@@ -372,6 +372,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             if let data = data {
                 do {
+                  //  self.startAnimating(message: "Please wait..", messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     let discript = json[Constants.Description] as? String
                     if let status = json[Constants.Status] as? Int {
@@ -383,11 +384,12 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                                         print(printer)
                                         
                                         self.PDFLetter = printer
+                                       // self.stopAnimating()
                                         self.Printletter()
                                     }
                                 } else {
                                     DispatchQueue.main.async {
-                                        
+                                     //   self.stopAnimating()
                                         
                                         ToastView.show(message: "PDF not found", controller: self)
                                     }
@@ -395,18 +397,22 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                             }
                         }
                         else if (status == 0) {
+                           // self.stopAnimating()
                             ToastView.show(message: discript ?? "Null data", controller: self)
                         }
                             
                         else if (status == 1000) {
+                          //  self.stopAnimating()
                             ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                             
                         else if (status == 1001) {
+                          //  self.stopAnimating()
                             ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                             
                         else {
+                          //  self.stopAnimating()
                             ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                         
@@ -414,6 +420,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                 } catch let error as NSError {
                     print(error)
+                   // self.stopAnimating()
                     ToastView.show(message: "failed! Try Again", controller: self)
                 }
                 
@@ -428,7 +435,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let printInfo = UIPrintInfo(dictionary: [:])
         printInfo.outputType = UIPrintInfoOutputType.general
         printInfo.orientation = UIPrintInfoOrientation.portrait
-        printInfo.jobName = "Sample"
+        printInfo.jobName = "Receipt details"
         printController.printInfo = printInfo
         // printController.showsPageRange = true
         //http://www.pdf995.com/samples/pdf.pdf
@@ -515,12 +522,13 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             if status == 105 {
                 cell.checkoutBtn.setTitle(Void, for: .normal)
                 cell.checkoutBtn.setTitleColor(UIColor.red, for: .normal)
-                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 18)
+                
                 
             } else  {
                 cell.checkoutBtn.setTitle(Done, for: .normal)
                 cell.checkoutBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
-                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 17)
+                cell.checkoutBtn.titleLabel!.font = UIFont(name: "SFProDisplay-Bold" , size: 18)
             }
             
             cell.checkoutBtn.imageView?.isHidden = true

@@ -9,9 +9,10 @@ import UIKit
 import IQKeyboardManager
 import Alamofire
 import NumericKeyboard
+import NVActivityIndicatorView
 
 
-class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate,NVActivityIndicatorViewable  {
     
     
     @IBOutlet weak var VinNumber: UITextField!
@@ -566,19 +567,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     
-    func showloader() {
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
+
     
 //    func lockPlateImage() {
 //
@@ -713,7 +702,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 
                 
                 do {
-                     self.showloader()
+                     self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     Constants.history = json["OrderHistoryCount"] as? Int  ?? 0
@@ -722,7 +711,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     }
                     let details = Cardetails(json: json)
                     if (details.status == 1) {
-                      //  self.showloader()
                         
                         if let cars = json[Constants.Cars] as? [[String: Any]] {
                             for items in cars {
@@ -845,8 +833,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             
                         }
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            self.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                           self.stopAnimating()
                             if self.carplateNumber.text != "" {
                               //  self.carplateNumber.isUserInteractionEnabled = false
                                // self.lockPlateImage()
@@ -855,7 +843,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 self.VinNumber.isUserInteractionEnabled = false
                                 self.lockvinImage()
                             }
-                        })
+                        }//)
                         
                     }
                         
@@ -863,7 +851,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: details.description, controller: self)
-                            self.dismiss(animated: true, completion: nil)
+                            self.stopAnimating()
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
 //                                self.lockPlateImage()
@@ -879,7 +867,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:LocalizedString.wrong, controller: self)
-                            self.dismiss(animated: true, completion: nil)
+                            self.stopAnimating()
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
 //                                self.lockPlateImage()
@@ -895,7 +883,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:LocalizedString.invalid, controller: self)
-                            self.dismiss(animated: true, completion: nil)
+                            self.stopAnimating()
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
 //                                self.lockPlateImage()
@@ -911,7 +899,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                         
                         DispatchQueue.main.async {
                             ToastView.show(message:LocalizedString.occured, controller: self)
-                            self.dismiss(animated: true, completion: nil)
+                            self.stopAnimating()
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
 //                                self.lockPlateImage()
@@ -927,7 +915,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     
                     DispatchQueue.main.async {
                         ToastView.show(message: LocalizedString.occured, controller: self)
-                        self.dismiss(animated: true, completion: nil)
+                        self.stopAnimating()
                         if self.carplateNumber.text != "" {
 //                            self.carplateNumber.isUserInteractionEnabled = false
 //                            self.lockPlateImage()
@@ -964,11 +952,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 print(data)
                 
                 do {
+                    self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     print(json)
                     let details = Cardetails(json: json)
                     if (details.status == 1) {
-                        self.showloader()
+                        
                         Constants.history = json["OrderHistoryCount"] as? Int  ?? 0
                         DispatchQueue.main.async {
                             self.historyBtn.titleLabel?.text = "\(self.Historyar) (\(Constants.history))"
@@ -1112,8 +1101,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 //                                Items.nameArray.append(newDict)
                             }
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                            self.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                             self.stopAnimating()
                             if self.carplateNumber.text != "" {
 //                                self.carplateNumber.isUserInteractionEnabled = false
 //                                self.lockPlateImage()
@@ -1122,13 +1111,14 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                 self.VinNumber.isUserInteractionEnabled = false
                                 self.lockvinImage()
                             }
-                        })
+                        }//)
                         
                     }
                         
                     else if (details.status == 0) {
                         
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: details.description, controller: self)
                         }
                     }
@@ -1136,6 +1126,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else if (details.status == 1000) {
                         
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.wrong, controller: self)
                         }
                     }
@@ -1143,6 +1134,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else if (details.status == 1001) {
                         
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.invalid, controller: self)
                         }
                     }
@@ -1150,6 +1142,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                     else {
                         
                         DispatchQueue.main.async {
+                            self.stopAnimating()
                             ToastView.show(message: LocalizedString.occured, controller: self)
                         }
                     }
@@ -1158,6 +1151,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 } catch {
                     
                     DispatchQueue.main.async {
+                        self.stopAnimating()
                         ToastView.show(message: LocalizedString.occured, controller: self)
                     }
                     
@@ -1326,14 +1320,17 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                                     }
                                 }
                                 ToastView.show(message: newmessage!, controller: self)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                                //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                                    DispatchQueue.main.async {
                                     if let parentVC = self.parent as? ReceptionalistView {
                                         let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
                                         let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
                                         parentVC.switchViewController(vc: vc!, showFooter: false)
                                         
                                     }
-                                })
+                               // })
+                            }
+                                
                                 
                             }
                             else if (status == 0) {

@@ -9,9 +9,10 @@
 import AVFoundation  
 import UIKit
 import Alamofire
+import NVActivityIndicatorView
 
 
-class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
+class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate,NVActivityIndicatorViewable {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     //  var scanEnabled: Bool = false
@@ -41,7 +42,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     
     @IBAction func scannerBackBtn(_ sender: Any) {
-        //self.dismiss(animated: true, completion: nil)
         if let parentVC = self.parent as? ReceptionalistView {
             let storyboard = UIStoryboard(name: Constants.WelcomeView, bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: Constants.WelcomeVc) as? WelcomeView
@@ -150,16 +150,16 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                     
                     upload.uploadProgress(closure: { (Progress) in
                         print("Upload Progress: \(Progress.fractionCompleted)")
-                        self.showLoader()
+                       self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     })
                     
                     upload.responseJSON { response in
-                        self.showLoader()
                         //self.delegate?.showSuccessAlert()
-                        print(response.request)  // original URL request
-                        print(response.response) // URL response
-                        print(response.data)     // server data
-                        print(response.result)   // result of response serialization
+                         NVActivityIndicatorPresenter.sharedInstance.setMessage("response...")
+//                        print(response.request)  // original URL request
+//                        print(response.response) // URL response
+//                        print(response.data)     // server data
+//                        print(response.result)   // result of response serialization
                         //                        self.showSuccesAlert()
                         //self.removeImage("frame", fileExtension: "txt")
                         if let JSON = response.result.value as? NSObject {
@@ -175,10 +175,10 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                                     self.addplateTextfield.isUserInteractionEnabled = true
                                     self.addplateTextfield.text  = Platenmb
                                     }
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.stopAnimating()
                                  } else if Status == 0 {
                                     ToastView.show(message: descript, controller: self)
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.stopAnimating()
                                     
                                 }
                                 
@@ -188,7 +188,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                     }
                     
                 case .failure(let encodingError):
-                    self.dismiss(animated: true, completion: nil)
+                    self.stopAnimating()
                     print(encodingError)
                     ToastView.show(message: "\(encodingError)", controller: self)
                 }
@@ -288,7 +288,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
             found(code: stringValue)
         }
         
-        //  dismiss(animated: true)
     }
     
     
@@ -309,21 +308,6 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
-    func showLoader() {
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
     
     
     

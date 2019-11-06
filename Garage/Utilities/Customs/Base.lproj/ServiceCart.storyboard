@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Amjad_Bold.otf">
+        <array key="SF-Pro-Display-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
     </customFonts>
@@ -184,6 +184,9 @@
                                                                         <constraint firstAttribute="bottom" secondItem="Uml-4R-buF" secondAttribute="bottom" constant="15" id="tjL-PF-UPm"/>
                                                                     </constraints>
                                                                 </view>
+                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat1x" translatesAutoresizingMaskIntoConstraints="NO" id="XXc-lC-l59">
+                                                                    <rect key="frame" x="28" y="69" width="162" height="129"/>
+                                                                </imageView>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w6C-04-a7Y">
                                                                     <rect key="frame" x="0.0" y="49" width="218" height="169"/>
                                                                 </imageView>
@@ -248,13 +251,17 @@
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="w6C-04-a7Y" secondAttribute="trailing" id="1sF-eQ-IEY"/>
                                                             <constraint firstItem="w6C-04-a7Y" firstAttribute="top" secondItem="BUE-Tq-yaz" secondAttribute="bottom" id="AAq-kA-rNY"/>
+                                                            <constraint firstItem="XXc-lC-l59" firstAttribute="leading" secondItem="cpE-01-sdn" secondAttribute="leadingMargin" constant="20" id="COb-Vw-agz"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="XXc-lC-l59" secondAttribute="trailing" constant="20" id="HtX-v3-X5p"/>
                                                             <constraint firstItem="ozU-jF-NuQ" firstAttribute="top" secondItem="w6C-04-a7Y" secondAttribute="bottom" id="JIs-QB-sOL"/>
                                                             <constraint firstItem="ozU-jF-NuQ" firstAttribute="leading" secondItem="cpE-01-sdn" secondAttribute="leading" id="LMN-Jy-NYT"/>
                                                             <constraint firstItem="BUE-Tq-yaz" firstAttribute="top" secondItem="cpE-01-sdn" secondAttribute="top" id="N91-le-1z1"/>
                                                             <constraint firstAttribute="trailing" secondItem="BUE-Tq-yaz" secondAttribute="trailing" id="OH2-j9-Y0o"/>
                                                             <constraint firstItem="BUE-Tq-yaz" firstAttribute="leading" secondItem="cpE-01-sdn" secondAttribute="leading" id="STh-aV-s5n"/>
+                                                            <constraint firstItem="XXc-lC-l59" firstAttribute="top" secondItem="BUE-Tq-yaz" secondAttribute="bottom" constant="20" id="Skg-z6-zKt"/>
                                                             <constraint firstItem="w6C-04-a7Y" firstAttribute="leading" secondItem="cpE-01-sdn" secondAttribute="leading" id="WLq-Dz-QTm"/>
                                                             <constraint firstAttribute="trailing" secondItem="ozU-jF-NuQ" secondAttribute="trailing" id="aJV-FE-iWP"/>
+                                                            <constraint firstItem="ozU-jF-NuQ" firstAttribute="top" secondItem="XXc-lC-l59" secondAttribute="bottom" constant="20" id="fe9-R0-dxM"/>
                                                             <constraint firstAttribute="bottom" secondItem="ozU-jF-NuQ" secondAttribute="bottom" id="n73-3E-EOG"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -372,5 +379,6 @@
     </scenes>
     <resources>
         <image name="Assign" width="21" height="21"/>
+        <image name="cat1x" width="74" height="59"/>
     </resources>
 </document>

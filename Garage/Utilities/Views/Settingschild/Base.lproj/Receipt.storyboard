@@ -24,7 +24,7 @@
         <scene sceneID="WfW-eN-rWw">
             <objects>
                 <viewController storyboardIdentifier="ReceiptVCID" id="Znf-Sn-oRg" customClass="ReceiptViewController" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dtn-CP-oX8">
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="Dtn-CP-oX8">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="845"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

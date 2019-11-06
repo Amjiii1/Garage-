@@ -271,7 +271,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
              } else {
                 drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
             }
-            
+            yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 10
         
             //attributedString.accessibilityLanguage
         }

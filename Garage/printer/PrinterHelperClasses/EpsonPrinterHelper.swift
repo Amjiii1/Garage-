@@ -115,12 +115,40 @@ class EpsonPrinterHelper: NSObject {
         if printerSeries.contains("m30") || printerSeries.contains("M30") {
             printerPaperWidth = Constants.mediumPrinter
             return EPOS2_TM_M30
-        } else if printerSeries.contains("p20") || printerSeries.contains("P20") {
+        }  else if printerSeries.contains("t20") || printerSeries.contains("T20") {
+            printerPaperWidth = 550//Constants.mediumPrinter
+            return EPOS2_TM_T20
+        }
+        else if(printerSeries.contains("p80") || printerSeries.contains("P80")) {
             printerPaperWidth = Constants.smallPrinter
-            return EPOS2_TM_P20
+            return EPOS2_TM_P80
+        }else if(printerSeries.contains("p20") || printerSeries.contains("P20")) {
+            printerPaperWidth = 50
+          return EPOS2_TM_P20
         }
         return EPOS2_TM_M10
     }
+    
+//    func getPrinterSeries(printerSeriesName printerSeries: String) ->  Epos2PrinterSeries {
+//        //"TM-m30"
+//        if(printerSeries.contains("m30") || printerSeries.contains("M30")) {
+//            printerPaperWidth = Constants.mediumPrinter
+//            return EPOS2_TM_M30
+//        }
+//        else if printerSeries.contains("t20") || printerSeries.contains("T20") {
+//            printerPaperWidth = 500//Constants.mediumPrinter
+//            return EPOS2_TM_T20
+//        }
+//        else if(printerSeries.contains("p20") || printerSeries.contains("P20")) {
+//            printerPaperWidth = Constants.smallPrinter
+//            return EPOS2_TM_P20
+//        }
+//        else {
+//            printerPaperWidth = Constants.mediumPrinter
+//        }
+//
+//        return EPOS2_TM_M10
+//    }
 
     /// Checks on behalf of Epos2PrinterStatusInfo if it is printable
     /// - Parameters:

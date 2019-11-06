@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import NVActivityIndicatorView
 
 struct DataNotes {
     static var comment = String()
@@ -16,7 +17,7 @@ struct DataNotes {
 }
 
 
-class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,NVActivityIndicatorViewable {
     
     
     @IBOutlet weak var Image1: UIImageView!
@@ -161,20 +162,6 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     
-    func showloader1() {
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-        loadingIndicator.layer.cornerRadius = 18.0
-     
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
     
     
     func upload() {
@@ -196,9 +183,9 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 upload.responseJSON
                     
                     { response in
-                        self.showloader1()
+                       self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                         if let dict = response.result.value as? NSObject {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            DispatchQueue.main.async {
                                 
                                 let Status = dict.value(forKey: "Status") as! Int
                                 let message = dict.value(forKey: "Description") as! String
@@ -209,17 +196,17 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                         print(imagekey)
                                         self.images.append(imagekey)
                                     }
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.stopAnimating()
                                 } else if Status == 0 {
                                     ToastView.show(message: message, controller: self)
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.stopAnimating()
                                 }
                                 
-                            })
+                            }//)
                         }
                 }
             case .failure(let encodingError):
-                self.dismiss(animated: true, completion: nil)
+                self.stopAnimating()
                 break
                 
             }

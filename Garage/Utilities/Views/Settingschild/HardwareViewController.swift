@@ -688,6 +688,9 @@ extension HardwareViewController: SearchPrinterHelperDelegate {
                         self.receiptPrinterTableview.reloadData()
                         print("aaae \(i)")
                         print("discoverdPrinters[i]: \(discoverdPrinters)")
+//                        if discoverdPrinters[i] == 1 {
+//                          UIUtility.showAlertInController(title: "Sorry", message: "Functionality will be available soon", viewController: self)
+//                        }
                         print("discoverdPrinters[i]: \(discoverdPrinters[i])")
                         print("availablePrinter: \(availablePrinter)")
                         

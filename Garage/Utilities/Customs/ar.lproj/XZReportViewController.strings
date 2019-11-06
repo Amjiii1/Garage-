@@ -4,3 +4,7 @@
 
 /* Class = "UIButton"; normalTitle = "Report X"; ObjectID = "5UZ-0x-7HR"; */
 "5UZ-0x-7HR.normalTitle" = "تقرير مختصر";
+
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "AIJ-oy-VOb"; */
+"AIJ-oy-VOb.normalTitle" = "الإعدادات";

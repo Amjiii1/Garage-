@@ -172,7 +172,7 @@ class PrintJobHelper {
 //UIImage(data:Constants.ImageF)
         
         // UIImage(data:Constants.Logoimage! as Data)!
-        let companyInfo = CompanyInfo(logo: UIImage(named: "marngarage.png")!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
+        let companyInfo = CompanyInfo(logo: UIImage(data:Constants.Logoimage! as Data)!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
             return companyInfo
 //        }
 //        return nil
@@ -365,22 +365,22 @@ fileprivate class PrintJob {
     /// Mock Printer Details Object (for TESTING PURPOSE only)
     ///
     /// - Returns: PrinterDetailsModel
-    private func mockPrinterDetails()-> PrinterDetailsModel {
-        let printerDetailsModel = PrinterDetailsModel()
-        printerDetailsModel.model = "TM-m30"
-        printerDetailsModel.ipAddress = "192.168.0.233"
-        printerDetailsModel.target = "192.168.0.233"
-        printerDetailsModel.isCashPrinter = true
-        printerDetailsModel.isKickDrawer = true
-        printerDetailsModel.isKitchenPrinter = true
-        printerDetailsModel.numberOfCopies = 1
-        printerDetailsModel.alias = "TM-m30"
-        printerDetailsModel.manufacturer = .epson
-        printerDetailsModel.isConnected = true
-        printerDetailsModel.macAddress = "64:EB:8C:FE:2A:3E"
-        printerDetailsModel.isPrinting = false
-        return printerDetailsModel
-    }
+//    private func mockPrinterDetails()-> PrinterDetailsModel {
+//        let printerDetailsModel = PrinterDetailsModel()
+//        printerDetailsModel.model = "TM-m30"
+//        printerDetailsModel.ipAddress = "192.168.0.233"
+//        printerDetailsModel.target = "192.168.0.233"
+//        printerDetailsModel.isCashPrinter = true
+//        printerDetailsModel.isKickDrawer = true
+//        printerDetailsModel.isKitchenPrinter = true
+//        printerDetailsModel.numberOfCopies = 1
+//        printerDetailsModel.alias = "TM-m30"
+//        printerDetailsModel.manufacturer = .epson
+//        printerDetailsModel.isConnected = true
+//        printerDetailsModel.macAddress = "64:EB:8C:FE:2A:3E"
+//        printerDetailsModel.isPrinting = false
+//        return printerDetailsModel
+//    }
 }
 
 // MARK:- Implementation of PrinterContextDelegate Methods

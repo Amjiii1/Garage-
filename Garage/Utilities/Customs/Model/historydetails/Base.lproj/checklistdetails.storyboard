@@ -39,14 +39,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="538" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLl-VB-17o">
-                                                    <rect key="frame" x="13.5" y="0.0" width="376.5" height="43.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLl-VB-17o">
+                                                    <rect key="frame" x="14" y="0.0" width="376.5" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-LD-aaD">
-                                                    <rect key="frame" x="427.5" y="0.0" width="113" height="43.5"/>
+                                                    <rect key="frame" x="411" y="0.0" width="113" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -54,12 +54,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DLl-VB-17o" firstAttribute="width" secondItem="EmP-7y-Iho" secondAttribute="width" multiplier="0.7" id="Cmc-Eg-d5c"/>
-                                                <constraint firstItem="DLl-VB-17o" firstAttribute="centerX" secondItem="EmP-7y-Iho" secondAttribute="centerX" multiplier="0.75" id="FeO-RD-c6w"/>
                                                 <constraint firstItem="r8l-LD-aaD" firstAttribute="width" secondItem="DLl-VB-17o" secondAttribute="width" multiplier="0.3" id="I59-sS-PG4"/>
+                                                <constraint firstAttribute="trailing" secondItem="r8l-LD-aaD" secondAttribute="trailing" constant="14" id="JYK-yA-Ki5"/>
                                                 <constraint firstItem="DLl-VB-17o" firstAttribute="centerY" secondItem="EmP-7y-Iho" secondAttribute="centerY" id="Lyj-iF-pbh"/>
                                                 <constraint firstItem="r8l-LD-aaD" firstAttribute="height" secondItem="DLl-VB-17o" secondAttribute="height" id="aCB-me-Vym"/>
+                                                <constraint firstItem="DLl-VB-17o" firstAttribute="leading" secondItem="EmP-7y-Iho" secondAttribute="leading" constant="14" id="gwx-3n-uIg"/>
                                                 <constraint firstItem="DLl-VB-17o" firstAttribute="height" secondItem="EmP-7y-Iho" secondAttribute="height" id="jEx-xX-qiJ"/>
-                                                <constraint firstItem="r8l-LD-aaD" firstAttribute="centerX" secondItem="DLl-VB-17o" secondAttribute="centerX" multiplier="2.4" id="nBh-eD-noG"/>
                                                 <constraint firstItem="r8l-LD-aaD" firstAttribute="centerY" secondItem="DLl-VB-17o" secondAttribute="centerY" id="pXd-zn-xHD"/>
                                             </constraints>
                                         </tableViewCellContentView>

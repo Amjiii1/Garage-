@@ -1,19 +1,20 @@
 //
-//  Subusers.swift
+//  SubuserAssist.swift
 //  Garage
 //
-//  Created by Amjad on 07/06/1440 AH.
-//  Copyright © 1440 Amjad Ali. All rights reserved.
+//  Created by Amjad on 08/03/1441 AH.
+//  Copyright © 1441 Amjad Ali. All rights reserved.
 //
 
 import UIKit
 
-class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SubuserAssist: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+
     
     
     
-    @IBOutlet weak var subusertableview: UITableView!
     
+    @IBOutlet weak var AssistantTable: UITableView!
     
     
     var usersdetail = [SubuserModel]()
@@ -22,8 +23,8 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        subusertableview.dataSource = self
-        subusertableview.delegate = self
+        AssistantTable.dataSource = self
+        AssistantTable.delegate = self
         usersdetails()
     }
     
@@ -44,7 +45,7 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 DispatchQueue.main.async {
-                    self.subusertableview.reloadData()
+                    self.AssistantTable.reloadData()
                 }
                 
             } catch let error as NSError {
@@ -68,10 +69,9 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Select item from tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        Constants.SubUserID = usersdetail[indexPath.row].SubUserID ?? 0
-        Constants.FullName = usersdetail[indexPath.row].FullName ?? ""
-        
-        NotificationCenter.default.post(name: Notification.Name("Notificationusername"), object: nil)
+        Constants.SubUserIDAssist = usersdetail[indexPath.row].SubUserID ?? 0
+        Constants.FullNameAsis = usersdetail[indexPath.row].FullName ?? ""
+        NotificationCenter.default.post(name: Notification.Name("NotificationusernameAsist"), object: nil)
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
         }
@@ -86,8 +86,8 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //Assign values for tableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SubusersCell", for: indexPath) as! SubusersCell
-        cell.usersNamelbl.text = usersdetail[indexPath.row].FullName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubuserAssistCell", for: indexPath) as! SubuserAssistCell
+        cell.AssistantName.text = usersdetail[indexPath.row].FullName
         
         
         return cell

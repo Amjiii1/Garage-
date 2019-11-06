@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
+class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate,NVActivityIndicatorViewable {
     
     
     @IBOutlet var welcomeView: UIView!
@@ -204,25 +205,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     
-    func showloader() {
-        
-        let alert = UIAlertController(title: nil, message: Constants.wait, preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        loadingIndicator.startAnimating();
-        loadingIndicator.backgroundColor = UIColor.DefaultApp
-         loadingIndicator.layer.cornerRadius = 18.0
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
     
     
     
     // fatching data of all, waitlist, assigned from Api's
     func ApiImplimentations() {
-        
         var Apiurl = ""
         switch (WelcomeSegmented.selectedSegmentIndex) {
             
@@ -237,15 +224,14 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         self.WelcomeSegmented.isUserInteractionEnabled = false
         DispatchQueue.main.async {
-            self.showloader()
+            self.startAnimating(message: Constants.wait, messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
          
         }
         let url = URL(string: Apiurl)
-        //    print(Apiurl)
         URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
             if response == nil {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                    self.stopAnimating()
                     ToastView.show(message: LocalizedString.interneterror, controller: self)
                     self.WelcomeSegmented.isUserInteractionEnabled = true
                 }
@@ -270,15 +256,17 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                         self.fruitsArray = self.Welcomecellobj
                     }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.dismiss(animated: true, completion: nil)
+            
+                    DispatchQueue.main.async {
+                     self.stopAnimating()
                     self.tableViewWelcome.reloadData()
                     self.WelcomeSegmented.isUserInteractionEnabled = true
-                  })
+                  }
+                    
             }
                  else if (status == 0) {
                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                         self.dismiss(animated: true, completion: nil)
+                        self.stopAnimating()
                         ToastView.show(message: discript!, controller: self)
                       self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
@@ -286,7 +274,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 }
                 else if (status == 1000) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.wrong, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
@@ -295,7 +283,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
                 else if (status == 1001) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.invalid, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
@@ -304,7 +292,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
                 else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        self.dismiss(animated: true, completion: nil)
+                         self.stopAnimating()
                         ToastView.show(message: LocalizedString.occured, controller: self)
                         self.WelcomeSegmented.isUserInteractionEnabled = true
                     })
@@ -313,7 +301,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
             } catch let error as NSError {
                  DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                 self.stopAnimating()
                 self.WelcomeSegmented.isUserInteractionEnabled = true
                 ToastView.show(message: "\(error)", controller: self)
                 }

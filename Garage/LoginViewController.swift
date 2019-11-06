@@ -35,7 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         btnUpArrow.isHidden = true
         btnHelp.isHidden = true
         btnCustomer.isHidden = true
@@ -48,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pinCodeTextField.layer.borderColor = UIColor.white.cgColor
         pinCodeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         businesssCodeTextField.text = "POS-"
-    //    arrowImage()
+        //    arrowImage()
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = Date()
@@ -640,3 +639,13 @@ extension String {
         return nil
     }
 }
+
+
+//extension String {
+//
+//    var isDigit: Bool {
+//        get {
+//            return !unicodeScalars.isEmpty && CharacterSet.decimalDigits.contains(unicodeScalars.first!)
+//        }
+//    }
+//}

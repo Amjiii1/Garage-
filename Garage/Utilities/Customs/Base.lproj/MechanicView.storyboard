@@ -227,6 +227,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="202" height="183"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat1x" translatesAutoresizingMaskIntoConstraints="NO" id="KAU-Bp-O7r">
+                                                            <rect key="frame" x="38" y="28" width="126" height="87"/>
+                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-i0-Nq9">
                                                             <rect key="frame" x="0.0" y="2.5" width="202" height="128.5"/>
                                                         </imageView>
@@ -255,8 +258,12 @@
                                                     <constraint firstItem="OtB-i0-Nq9" firstAttribute="height" secondItem="bsF-AV-jqa" secondAttribute="height" multiplier="0.7" id="5vc-Qc-6Fb"/>
                                                     <constraint firstItem="6HA-Dj-Zbl" firstAttribute="leading" secondItem="bsF-AV-jqa" secondAttribute="leading" id="ErN-JK-dNF"/>
                                                     <constraint firstItem="6HA-Dj-Zbl" firstAttribute="top" secondItem="OtB-i0-Nq9" secondAttribute="bottom" multiplier="0.88" constant="20" id="GOt-Kh-OMs"/>
+                                                    <constraint firstItem="KAU-Bp-O7r" firstAttribute="leading" secondItem="bsF-AV-jqa" secondAttribute="leadingMargin" constant="30" id="REA-sd-CGU"/>
                                                     <constraint firstItem="OtB-i0-Nq9" firstAttribute="centerX" secondItem="bsF-AV-jqa" secondAttribute="centerX" id="TqF-Sl-Bgg"/>
+                                                    <constraint firstItem="6HA-Dj-Zbl" firstAttribute="top" secondItem="KAU-Bp-O7r" secondAttribute="bottom" constant="20" id="VMV-1I-63Z"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="KAU-Bp-O7r" secondAttribute="trailing" constant="30" id="YMt-R2-zLQ"/>
                                                     <constraint firstItem="OtB-i0-Nq9" firstAttribute="centerY" secondItem="bsF-AV-jqa" secondAttribute="centerY" multiplier="0.73" id="aCo-pB-rCe"/>
+                                                    <constraint firstItem="KAU-Bp-O7r" firstAttribute="top" secondItem="bsF-AV-jqa" secondAttribute="topMargin" constant="20" id="ceB-sW-l4o"/>
                                                     <constraint firstItem="OtB-i0-Nq9" firstAttribute="width" secondItem="bsF-AV-jqa" secondAttribute="width" id="gEg-4f-PHB"/>
                                                     <constraint firstAttribute="bottom" secondItem="6HA-Dj-Zbl" secondAttribute="bottom" id="j3B-qv-Jd0"/>
                                                     <constraint firstAttribute="trailing" secondItem="6HA-Dj-Zbl" secondAttribute="trailing" id="oI8-xe-UaT"/>
@@ -565,6 +572,7 @@
         <image name="Scheckcar" width="20" height="25"/>
         <image name="UCheckcar" width="20" height="25"/>
         <image name="addNote" width="25" height="25"/>
+        <image name="cat1x" width="74" height="59"/>
         <image name="details" width="30" height="33"/>
         <image name="dropDown" width="11" height="7"/>
         <image name="refresh" width="13" height="15"/>

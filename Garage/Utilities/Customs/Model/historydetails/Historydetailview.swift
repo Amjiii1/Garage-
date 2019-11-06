@@ -99,6 +99,20 @@ class Historydetailview: UIViewController {
         }
     }
     
+    @IBAction func reOrderBtn(_ sender: Any) {
+        
+        if let parentVC = self.parent as? ReceptionalistView {
+            let storyboard = UIStoryboard(name: Constants.ServiceCart, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Constants.ServiceCartVc) as? ServiceCartView
+            parentVC.switchViewController(vc: vc!, showFooter: false)
+        }
+        
+        
+        
+    }
+    
+    
+    
     
     @IBAction func buttonsAction(_ sender: UIButton) {
         

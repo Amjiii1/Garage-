@@ -30,13 +30,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c96-W0-vR8">
-                                <rect key="frame" x="41.5" y="67.5" width="225.5" height="38"/>
+                                <rect key="frame" x="41.5" y="67.5" width="225" height="38"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rqg-Za-YJk">
-                                <rect key="frame" x="281" y="67.5" width="101.5" height="38"/>
+                                <rect key="frame" x="280.5" y="67.5" width="101.5" height="38"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.71764705882352942" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <state key="normal" title="Discover">
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfH-d1-o38">
-                                <rect key="frame" x="390.5" y="67.5" width="101.5" height="38"/>
+                                <rect key="frame" x="387.5" y="67.5" width="101.5" height="38"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <state key="normal" title="connect">
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19C-0d-0ch">
-                                <rect key="frame" x="496" y="67.5" width="111" height="38"/>
+                                <rect key="frame" x="494.5" y="67.5" width="111.5" height="38"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.71764705880000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <state key="normal" title="Disconnect">
@@ -75,7 +75,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EPSON Printer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I96-hd-mlO">
-                                <rect key="frame" x="288.5" y="24" width="225" height="38.5"/>
+                                <rect key="frame" x="304.5" y="24" width="225" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -138,11 +138,12 @@
                             <constraint firstItem="vKg-SG-Ghk" firstAttribute="centerX" secondItem="pNX-n8-l0e" secondAttribute="centerX" multiplier="2.6" id="0hp-kA-Tun"/>
                             <constraint firstItem="I96-hd-mlO" firstAttribute="width" secondItem="c96-W0-vR8" secondAttribute="width" id="1Fn-Bd-NAM"/>
                             <constraint firstItem="c96-W0-vR8" firstAttribute="centerY" secondItem="zEu-Hv-5ss" secondAttribute="centerY" multiplier="0.4" id="2na-qo-n4a"/>
+                            <constraint firstItem="I96-hd-mlO" firstAttribute="centerX" secondItem="zEu-Hv-5ss" secondAttribute="centerX" id="5Lz-r1-59X"/>
                             <constraint firstItem="FfH-d1-o38" firstAttribute="height" secondItem="Rqg-Za-YJk" secondAttribute="height" id="65U-sw-RJ9"/>
                             <constraint firstItem="Rqg-Za-YJk" firstAttribute="height" secondItem="c96-W0-vR8" secondAttribute="height" id="6IG-dL-MiX"/>
                             <constraint firstItem="c96-W0-vR8" firstAttribute="height" secondItem="zEu-Hv-5ss" secondAttribute="height" multiplier="0.3" id="862-Vh-aAr"/>
+                            <constraint firstItem="FfH-d1-o38" firstAttribute="centerX" secondItem="Rqg-Za-YJk" secondAttribute="centerX" multiplier="1.323" id="9Lp-yI-N7t"/>
                             <constraint firstItem="c96-W0-vR8" firstAttribute="width" secondItem="zEu-Hv-5ss" secondAttribute="width" multiplier="0.3" id="BXX-9B-hQV"/>
-                            <constraint firstItem="I96-hd-mlO" firstAttribute="centerX" secondItem="c96-W0-vR8" secondAttribute="centerX" multiplier="2.6" id="Bvt-U9-a4s"/>
                             <constraint firstItem="pNX-n8-l0e" firstAttribute="leading" secondItem="fbT-Wz-6V4" secondAttribute="leading" id="Dk2-0W-IEv"/>
                             <constraint firstItem="fbT-Wz-6V4" firstAttribute="centerY" secondItem="jro-D8-7WF" secondAttribute="centerY" multiplier="1.5" id="Evl-3L-DJq"/>
                             <constraint firstItem="pNX-n8-l0e" firstAttribute="width" secondItem="fbT-Wz-6V4" secondAttribute="width" multiplier="0.3" id="GoU-vh-ZvK"/>
@@ -155,7 +156,6 @@
                             <constraint firstItem="zEu-Hv-5ss" firstAttribute="centerX" secondItem="jro-D8-7WF" secondAttribute="centerX" id="UQV-83-N9u"/>
                             <constraint firstItem="rPr-yP-XVg" firstAttribute="width" secondItem="d5R-xy-f25" secondAttribute="width" multiplier="0.95" id="UXo-hf-gTD"/>
                             <constraint firstItem="vKg-SG-Ghk" firstAttribute="centerY" secondItem="pNX-n8-l0e" secondAttribute="centerY" multiplier="0.84" id="UYj-dc-SiM"/>
-                            <constraint firstItem="19C-0d-0ch" firstAttribute="centerX" secondItem="FfH-d1-o38" secondAttribute="centerX" multiplier="1.25" id="XA9-gc-B7d"/>
                             <constraint firstItem="rPr-yP-XVg" firstAttribute="centerX" secondItem="jro-D8-7WF" secondAttribute="centerX" id="Xbg-VI-3ff"/>
                             <constraint firstItem="I96-hd-mlO" firstAttribute="height" secondItem="c96-W0-vR8" secondAttribute="height" id="XeU-XQ-D3r"/>
                             <constraint firstItem="pNX-n8-l0e" firstAttribute="height" secondItem="fbT-Wz-6V4" secondAttribute="height" multiplier="0.25" id="a0U-b8-62L"/>
@@ -165,19 +165,19 @@
                             <constraint firstItem="FfH-d1-o38" firstAttribute="centerY" secondItem="Rqg-Za-YJk" secondAttribute="centerY" id="cKP-R3-UKP"/>
                             <constraint firstItem="FfH-d1-o38" firstAttribute="width" secondItem="Rqg-Za-YJk" secondAttribute="width" id="d1i-Bt-wSx"/>
                             <constraint firstItem="19C-0d-0ch" firstAttribute="centerY" secondItem="FfH-d1-o38" secondAttribute="centerY" id="dmH-yc-2sy"/>
-                            <constraint firstItem="FfH-d1-o38" firstAttribute="centerX" secondItem="Rqg-Za-YJk" secondAttribute="centerX" multiplier="1.33" id="frg-2a-Xmd"/>
                             <constraint firstItem="19C-0d-0ch" firstAttribute="width" secondItem="FfH-d1-o38" secondAttribute="width" multiplier="1.1" id="g9j-qy-Fr8"/>
                             <constraint firstItem="zEu-Hv-5ss" firstAttribute="height" secondItem="d5R-xy-f25" secondAttribute="height" multiplier="0.15" id="gae-p0-E98"/>
-                            <constraint firstItem="c96-W0-vR8" firstAttribute="left" secondItem="zEu-Hv-5ss" secondAttribute="leftMargin" constant="-15" id="jBK-RH-XUh"/>
+                            <constraint firstItem="19C-0d-0ch" firstAttribute="centerX" secondItem="FfH-d1-o38" secondAttribute="centerX" multiplier="1.255" id="h5e-fO-YZS"/>
+                            <constraint firstItem="c96-W0-vR8" firstAttribute="left" secondItem="jro-D8-7WF" secondAttribute="left" constant="41.5" id="iYD-2u-IqF"/>
                             <constraint firstItem="rPr-yP-XVg" firstAttribute="centerY" secondItem="jro-D8-7WF" secondAttribute="centerY" multiplier="0.74" id="kod-xT-U4x"/>
                             <constraint firstItem="zEu-Hv-5ss" firstAttribute="centerY" secondItem="jro-D8-7WF" secondAttribute="centerY" multiplier="0.5" id="mVx-d1-naD"/>
                             <constraint firstItem="gdt-mP-FqU" firstAttribute="centerX" secondItem="pNX-n8-l0e" secondAttribute="centerX" id="nW5-Bq-Zdk"/>
                             <constraint firstItem="gdt-mP-FqU" firstAttribute="height" secondItem="pNX-n8-l0e" secondAttribute="height" id="oEM-z4-Vsf"/>
-                            <constraint firstItem="Rqg-Za-YJk" firstAttribute="centerX" secondItem="c96-W0-vR8" secondAttribute="centerX" multiplier="2.15" id="oN1-Yk-E7O"/>
                             <constraint firstItem="Rff-EF-OlA" firstAttribute="width" secondItem="gdt-mP-FqU" secondAttribute="width" id="pUi-F9-bHb"/>
                             <constraint firstItem="Rff-EF-OlA" firstAttribute="centerY" secondItem="gdt-mP-FqU" secondAttribute="centerY" multiplier="1.12" id="rjD-oo-XRU"/>
                             <constraint firstItem="Rff-EF-OlA" firstAttribute="centerX" secondItem="gdt-mP-FqU" secondAttribute="centerX" id="rtz-y2-Hsf"/>
                             <constraint firstItem="Rqg-Za-YJk" firstAttribute="width" secondItem="c96-W0-vR8" secondAttribute="width" multiplier="0.45" id="rxr-Uk-BIX"/>
+                            <constraint firstItem="Rqg-Za-YJk" firstAttribute="centerX" secondItem="c96-W0-vR8" secondAttribute="centerX" multiplier="2.15" id="tSw-Ix-BCt"/>
                             <constraint firstItem="I96-hd-mlO" firstAttribute="centerY" secondItem="c96-W0-vR8" secondAttribute="centerY" multiplier="0.5" id="uOQ-Lw-qge"/>
                             <constraint firstItem="fbT-Wz-6V4" firstAttribute="centerX" secondItem="jro-D8-7WF" secondAttribute="centerX" id="ur5-xn-6yV"/>
                             <constraint firstItem="vKg-SG-Ghk" firstAttribute="width" secondItem="pNX-n8-l0e" secondAttribute="width" id="xIa-67-26Z"/>

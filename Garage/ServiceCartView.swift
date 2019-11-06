@@ -68,17 +68,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     let Sorryback = NSLocalizedString("Sorryback", comment: "")
     let SelectItems = NSLocalizedString("SelectItems", comment: "")
     
-    
-    
-    
     //Localization
-    
-    
-    
-    
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -203,10 +193,19 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
             if (serviceSearch.text?.count)! != 0 {
                 self.itemsModel.removeAll()
                 for str in itemsfilter {
-                    let range = str.Name?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
-                    if range != nil {
-                        self.itemsModel.append(str)
+                    
+                    if L102Language.currentAppleLanguage() == "ar" {
+                       let range = str.AlternateName?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
+                        if range != nil {
+                            self.itemsModel.append(str)
+                        }
+                    } else {
+                       let range = str.Name?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
+                        if range != nil {
+                            self.itemsModel.append(str)
+                        }
                     }
+
                     
                 }
             }
@@ -285,9 +284,15 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCellS", for: indexPath as IndexPath)
         
+         if L102Language.currentAppleLanguage() == "ar" {
+             cell.textLabel!.text = itemsModel[indexPath.row].AlternateName
+            
+         } else {
+            cell.textLabel!.text = itemsModel[indexPath.row].Name
+        }
         cell.textLabel?.textAlignment = .left
-        cell.textLabel!.text = itemsModel[indexPath.row].Name
-         cell.textLabel!.text = itemsModel[indexPath.row].AlternateName
+        
+        
         
         //        print(self.serviceSearch.frame.width)
         //        let label1 = UILabel(frame: CGRect(x: self.serviceSearch.frame.width - 130, y: 10, width: 100, height: 25))
@@ -904,7 +909,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.minusBtn.isHidden = true
             cell.countLbl.isHidden = true
             cell.countLbl.text = "\(count)"
-          //  cell.imageView.contentMode = .scaleAspectFill
+        //    cell.imageView.contentMode = .scaleAspectFit
             
             
         }

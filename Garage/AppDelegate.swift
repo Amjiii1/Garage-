@@ -14,7 +14,7 @@ import UIKit
     var window: UIWindow?
      var navigationVC: UINavigationController?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
         UIApplication.shared.statusBarStyle = .lightContent
        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.5))

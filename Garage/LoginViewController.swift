@@ -162,16 +162,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 let url = NSURL(string:logo)
                                 let data = NSData(contentsOf:url! as URL)
                                 if data != nil {
-                                    Constants.Logoimage = data
+                                    Constants.Logoimage = data!
                                 }
                             }
                             
                             
                         }
-                        
+                         DispatchQueue.main.async {
                         let storyboard: UIStoryboard = UIStoryboard(name: Constants.ReceptionalistView, bundle: nil)
                         let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: Constants.ReceptionalistVc) as! ReceptionalistView
                         self.present(initViewController, animated: true, completion: nil)
+                        }
                         
                     } else if (descript.status == 0) {
                         DispatchQueue.main.async {
@@ -313,8 +314,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField.text!.characters.count  == 4          {
+        if textField.text!.count  == 4          {
             pinCodeTextField.isEnabled = false
+            if L102Language.currentAppleLanguage() == "ar" {
+                let NumberStr: String = textField.text!
+                let Formatter = NumberFormatter()
+                Formatter.locale = NSLocale(localeIdentifier: "EN") as Locale?
+                if let final = Formatter.number(from: NumberStr) {
+                    textField.text = "\(final)"
+            }
+           
+                
+            }
             PincodeApi()
             
         }
@@ -322,15 +333,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func bussinessCodeDidChange(_ textField: UITextField) {
         
-        if businesssCodeTextField.text!.characters.count == 10 {
+        if businesssCodeTextField.text!.count == 10 {
             businesssCodeTextField.isEnabled = false
             BusinessApi()
         }
             
-        else if  businesssCodeTextField.text!.characters.count > 10 {
+        else if  businesssCodeTextField.text!.count > 10 {
             
-            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }
@@ -587,7 +598,7 @@ class SecureTextFieldWithCustomFont : UITextField {
         self.actualText = ""
     }
     @objc func editingDidChange() {
-        if(self.actualText.characters.count > (self.text?.characters.count)!) {
+        if(self.actualText.count > (self.text?.count)!) {
             self.text = ""
             self.textFrom = ""
             self.actualText = ""
@@ -601,8 +612,8 @@ class SecureTextFieldWithCustomFont : UITextField {
     }
     func finishTF() {
         self.actualText = self.text!
-        if( self.text != nil && (self.text?.characters.count)! > 0) {
-            self.textFrom += String(describing: (self.text?.characters.last!)!)
+        if( self.text != nil && (self.text?.count)! > 0) {
+            self.textFrom += String(describing: (self.text?.last!)!)
         }
         else {
             self.textFrom = ""
@@ -641,11 +652,11 @@ extension String {
 }
 
 
-//extension String {
-//
-//    var isDigit: Bool {
-//        get {
-//            return !unicodeScalars.isEmpty && CharacterSet.decimalDigits.contains(unicodeScalars.first!)
-//        }
-//    }
-//}
+extension String {
+
+    var isDigit: Bool {
+        get {
+            return !unicodeScalars.isEmpty && CharacterSet.decimalDigits.contains(unicodeScalars.first!)
+        }
+    }
+}

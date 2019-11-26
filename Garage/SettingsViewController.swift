@@ -47,7 +47,7 @@ class SettingsViewController: UIViewController {
          dismiss(animated: true, completion: nil)
     }
     
-    
+   
     
     override func viewDidLayoutSubviews() {
         saveBtn.layer.shadowColor = UIColor.gray.cgColor
@@ -160,9 +160,9 @@ class SettingsViewController: UIViewController {
     
     func addChildView(index: Int) {
         
-        for childVC in self.childViewControllers {
-            childVC.willMove(toParentViewController: nil)
-            childVC.removeFromParentViewController()
+        for childVC in self.children {
+            childVC.willMove(toParent: nil)
+            childVC.removeFromParent()
             childVC.view.removeFromSuperview()
         }
         
@@ -195,9 +195,9 @@ class SettingsViewController: UIViewController {
         if childVC != nil {
             childVC?.view.frame.size = settingContianerPop.frame.size
             childVC?.view.frame.origin = CGPoint(x: 0, y: 0)
-            addChildViewController(childVC!)
+            addChild(childVC!)
             settingContianerPop.addSubview((childVC?.view)!)
-            childVC?.didMove(toParentViewController: self)
+            childVC?.didMove(toParent: self)
         }
     }
     
@@ -221,6 +221,12 @@ class SettingsViewController: UIViewController {
        dismiss(animated: true, completion: nil)
         
     }
+    
+    
+    @IBAction func dismissSettings(_ sender: Any) {
+         dismiss(animated: true, completion: nil)
+    }
+    
     
     func myButtonTapped(){
         //        if  UIButton.isSelected == true {

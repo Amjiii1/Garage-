@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,12 +26,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="deU-Y5-Mlh">
-                                <rect key="frame" x="223" y="12.5" width="388" height="29"/>
+                                <rect key="frame" x="208.5" y="11" width="417" height="32.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="Pc9-xd-oOJ"/>
-                                    <constraint firstAttribute="width" constant="388" id="Zmm-tY-X0G"/>
-                                </constraints>
                                 <segments>
                                     <segment title="Current"/>
                                     <segment title="Finished"/>
@@ -45,7 +41,7 @@
                                 <rect key="frame" x="21" y="0.0" width="166.5" height="53.5"/>
                                 <color key="backgroundColor" red="0.21568627450980393" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
-                                <inset key="imageEdgeInsets" minX="100" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="130" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="dropDown">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -507,12 +503,14 @@
                             <constraint firstItem="qrG-eS-csl" firstAttribute="centerX" secondItem="ANa-24-XO0" secondAttribute="centerX" id="Zwx-HL-330"/>
                             <constraint firstItem="4mm-3A-noN" firstAttribute="centerX" secondItem="v8C-1O-VwM" secondAttribute="centerX" id="a2D-AM-7bP"/>
                             <constraint firstItem="ANa-24-XO0" firstAttribute="width" secondItem="bXL-hB-anW" secondAttribute="width" multiplier="1.3" id="aNI-lE-8RL"/>
+                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="width" secondItem="Och-OO-ce3" secondAttribute="width" multiplier="0.5" id="enA-F0-ddE"/>
                             <constraint firstItem="4mm-3A-noN" firstAttribute="width" secondItem="v8C-1O-VwM" secondAttribute="width" id="ggw-sj-WhX"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="centerX" secondItem="lVL-lV-oyi" secondAttribute="centerX" multiplier="0.25" id="gtj-jC-7jd"/>
                             <constraint firstItem="bXL-hB-anW" firstAttribute="top" secondItem="v8C-1O-VwM" secondAttribute="top" id="idl-HN-wDD"/>
                             <constraint firstItem="bXL-hB-anW" firstAttribute="centerX" secondItem="VdP-Jm-gMc" secondAttribute="centerX" id="kIx-X3-7uj"/>
                             <constraint firstItem="Pzp-mP-udE" firstAttribute="width" secondItem="Och-OO-ce3" secondAttribute="width" multiplier="0.2" id="lGz-Gh-kSQ"/>
                             <constraint firstItem="ANa-24-XO0" firstAttribute="centerX" secondItem="bXL-hB-anW" secondAttribute="centerX" id="oBE-p3-Rnt"/>
+                            <constraint firstItem="deU-Y5-Mlh" firstAttribute="height" secondItem="Och-OO-ce3" secondAttribute="height" multiplier="0.035" id="oQT-oi-ynV"/>
                             <constraint firstItem="4mm-3A-noN" firstAttribute="centerY" secondItem="v8C-1O-VwM" secondAttribute="centerY" multiplier="1.05" id="q2W-rh-KKn"/>
                             <constraint firstItem="4mm-3A-noN" firstAttribute="top" secondItem="yaq-kL-em6" secondAttribute="bottom" id="uXX-os-qDG"/>
                             <constraint firstItem="yaq-kL-em6" firstAttribute="top" secondItem="v8C-1O-VwM" secondAttribute="top" id="yGg-xf-n7r"/>

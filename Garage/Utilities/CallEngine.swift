@@ -14,12 +14,15 @@ class CallEngine {
 //    static var LiveURL = "http://api-v1.isalesgarage.com/api/"
 //    static var localURL = "http://garageapi.isalespos.com/api/"
     
-    static var LiveURL = "http://api-uat.garage.sa/api/"
-    static var localURL = "http://api-live.garage.sa/api/"
+    static var localURL = "http://api-uat.garage.sa/api/"
+    static var LiveURL = "http://api-live.garage.sa/api/"
     static var baseURL =  localURL
     
     
+    
+    // Api's
     static let editCar = "Car/Edit"
+    
     static let addCar = "Car/add"
     static let Welcomelistall = "orderlist/all/"
     static let Welcomelistassigned = "orderlist/assigned/"

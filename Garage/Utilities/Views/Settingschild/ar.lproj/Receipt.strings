@@ -1,27 +1,27 @@
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "4da-yi-Rcc"; */
-"4da-yi-Rcc.text" = "عنوان";
+"4da-yi-Rcc.text" = "العنوان";
 
 /* Class = "UILabel"; text = "Logo"; ObjectID = "7NZ-5o-RJR"; */
-"7NZ-5o-RJR.text" = "شعار";
+"7NZ-5o-RJR.text" = "العلامة التجارية";
 
 /* Class = "UILabel"; text = "Company Name"; ObjectID = "7a5-R3-8Re"; */
-"7a5-R3-8Re.text" = "اسم الشركة";
+"7a5-R3-8Re.text" = "اسم المنشأة";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "9Yv-vc-CEX"; */
-"9Yv-vc-CEX.text" = "البريد الإلكتروني";
+"9Yv-vc-CEX.text" = "الإيميل";
 
 /* Class = "UILabel"; text = "Receipt Print"; ObjectID = "J9L-TM-mqV"; */
 "J9L-TM-mqV.text" = "إيصال الطباعة";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "JdV-5K-yTE"; */
-"JdV-5K-yTE.text" = "موقع الكتروني";
+"JdV-5K-yTE.text" = "الموقع الإلكتروني";
 
 /* Class = "UILabel"; text = "Languages"; ObjectID = "OAO-Cm-6rS"; */
 "OAO-Cm-6rS.text" = "اللغات";
 
 /* Class = "UILabel"; text = "Print Receipt"; ObjectID = "Spg-cj-omK"; */
-"Spg-cj-omK.text" = "اطبع الايصال";
+"Spg-cj-omK.text" = "طباعة الإيصال";
 
 /* Class = "UILabel"; text = "Arabic"; ObjectID = "UiA-y9-Mla"; */
 "UiA-y9-Mla.text" = "عربى";

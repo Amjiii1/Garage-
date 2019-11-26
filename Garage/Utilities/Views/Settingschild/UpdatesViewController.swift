@@ -54,7 +54,7 @@ class UpdatesViewController: UIViewController {
     }
     
     private func showUpdateDialogue() {
-        let alert = UIAlertController(title: LocalizedString.newVersionAvailable, message: LocalizedString.likeToUpdate, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: LocalizedString.newVersionAvailable, message: LocalizedString.likeToUpdate, preferredStyle: UIAlertController.Style.alert)
         
         let updateButton = UIAlertAction(title: LocalizedString.Update, style: .default, handler: {(_ action: UIAlertAction) -> Void in
             AppInfoHelper.openAppStoreToUpdateApp()

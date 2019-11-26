@@ -18,7 +18,7 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     //Localization
     
     let Nochecklistadded = NSLocalizedString("Nochecklistadded", comment: "")
-    
+  
     
     //Localization
     
@@ -76,9 +76,14 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "checklist", for: indexPath) as? HistoryChecklist else { return UITableViewCell() }
-       // cell.titleLabels.text = HistoryDetails.SaveInspectionDtail[indexPath.row].Name
-      //cell.Titlelabel.text = HistoryDetails.SaveInspectionDtail[indexPath.row].Name
-        cell.Titlelabel.text = HistoryDetails.SaveInspectionlist[indexPath.section].InspectionDetailsH[indexPath.row].Name
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            
+            cell.Titlelabel.text = HistoryDetails.SaveInspectionlist[indexPath.section].InspectionDetailsH[indexPath.row].AlternativeH
+        } else{
+            cell.Titlelabel.text = HistoryDetails.SaveInspectionlist[indexPath.section].InspectionDetailsH[indexPath.row].Name
+        }
+        
         cell.valuelabel.text = HistoryDetails.SaveInspectionlist[indexPath.section].InspectionDetailsH[indexPath.row].Value//HistoryDetails.SaveInspectionDtail[indexPath.row].Value
         
         cell.contentView.backgroundColor = UIColor.clear
@@ -88,7 +93,14 @@ class ChecklistDetials: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return HistoryDetails.SaveInspectionlist[section].NameH
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            
+            return HistoryDetails.SaveInspectionlist[section].AlternativeH
+        } else{
+            return HistoryDetails.SaveInspectionlist[section].NameH
+        }
+        
     }
 //
 //    func numberOfSections(in tableView: UITableView) -> Int {

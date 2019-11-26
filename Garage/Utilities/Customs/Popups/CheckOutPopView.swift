@@ -81,7 +81,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
    
         discountContainer.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
+       // self.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
         if let button = buttonstack.viewWithTag(1) as? UIButton {
             tabButtonaction(button)
         }
@@ -243,6 +243,9 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     
+    @IBAction func dismissCheckout(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     
@@ -507,10 +510,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 0) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
+
                             ToastView.show(message: newmessage!, controller: self)
                             
                             
@@ -521,11 +521,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 1000) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
+
+                            ToastView.show(message: LocalizedString.wrong, controller: self)
                             
                         }
                         
@@ -534,11 +531,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                     else if (status == 1001) {
                         
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
+
+                            ToastView.show(message: LocalizedString.invalid, controller: self)
                             
                         }
                         
@@ -546,11 +540,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                     else  {
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
-                            ToastView.show(message: newmessage!, controller: self)
+
+                            ToastView.show(message: LocalizedString.occured, controller: self)
                             
                         }
                         
@@ -669,10 +660,8 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             if cardcash >= Constants.checkoutGrandtotal.myRounded(toPlaces: 2)   {
                 status()
                 if cardtype == "" {
-                    let messageVC = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.PleaseselectCard, preferredStyle: .actionSheet)
-                    self.present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                            messageVC.dismiss(animated: true, completion: nil)})}
+                    ToastView.show(message: LocalizedString.PleaseselectCard, controller: self)
+
                 }
                 else {
                     if Constants.checkoutmechanic != "" {
@@ -766,10 +755,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                         DispatchQueue.main.async {
                                             self.stopAnimating()
-                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
-                                            self.present(messageVC, animated: true) {
-                                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                    messageVC.dismiss(animated: true, completion: nil)})}
                                             ToastView.show(message: newmessage!, controller: self)
                                             self.grandtotalBtn.isUserInteractionEnabled = true
                                         }
@@ -780,11 +765,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                         DispatchQueue.main.async {
                                             self.stopAnimating()
-                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
-                                            self.present(messageVC, animated: true) {
-                                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                    messageVC.dismiss(animated: true, completion: nil)})}
-                                            ToastView.show(message: newmessage!, controller: self)
+                                            ToastView.show(message: LocalizedString.wrong, controller: self)
                                             self.grandtotalBtn.isUserInteractionEnabled = true
                                         }
                                         
@@ -794,11 +775,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                         DispatchQueue.main.async {
                                             self.stopAnimating()
-                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
-                                            self.present(messageVC, animated: true) {
-                                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                    messageVC.dismiss(animated: true, completion: nil)})}
-                                            ToastView.show(message: newmessage!, controller: self)
+                                            ToastView.show(message: LocalizedString.invalid, controller: self)
                                             self.grandtotalBtn.isUserInteractionEnabled = true
                                         }
                                         
@@ -807,11 +784,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     else  {
                                         DispatchQueue.main.async {
                                             self.stopAnimating()
-                                            let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
-                                            self.present(messageVC, animated: true) {
-                                                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                    messageVC.dismiss(animated: true, completion: nil)})}
-                                            ToastView.show(message: newmessage!, controller: self)
+                                            ToastView.show(message: LocalizedString.occured, controller: self)
                                             self.grandtotalBtn.isUserInteractionEnabled = true
                                         }
                                         
@@ -832,10 +805,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }.resume()
                         
                     }   else {
-                        let messageVC = UIAlertController(title: CheckoutFailed, message: selectWorker , preferredStyle: .actionSheet)
-                        present(messageVC, animated: true) {
-                            Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                                messageVC.dismiss(animated: true, completion: nil)})}
+                        ToastView.show(message: selectWorker, controller: self)
                         self.grandtotalBtn.isUserInteractionEnabled = true
                         
                     }
@@ -928,10 +898,6 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                     DispatchQueue.main.async {
                                         self.stopAnimating()
-                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(newmessage!)" , preferredStyle: .actionSheet)
-                                        self.present(messageVC, animated: true) {
-                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                messageVC.dismiss(animated: true, completion: nil)})}
                                         ToastView.show(message: newmessage!, controller: self)
                                         self.grandtotalBtn.isUserInteractionEnabled = true
                                     }
@@ -942,11 +908,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                     DispatchQueue.main.async {
                                         self.stopAnimating()
-                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.wrong)" , preferredStyle: .actionSheet)
-                                        self.present(messageVC, animated: true) {
-                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                messageVC.dismiss(animated: true, completion: nil)})}
-                                        ToastView.show(message: newmessage!, controller: self)
+                                        ToastView.show(message: LocalizedString.wrong, controller: self)
                                         self.grandtotalBtn.isUserInteractionEnabled = true
                                     }
                                     
@@ -956,11 +918,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     
                                     DispatchQueue.main.async {
                                         self.stopAnimating()
-                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.invalid)" , preferredStyle: .actionSheet)
-                                        self.present(messageVC, animated: true) {
-                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                messageVC.dismiss(animated: true, completion: nil)})}
-                                        ToastView.show(message: newmessage!, controller: self)
+                                        ToastView.show(message: LocalizedString.invalid, controller: self)
                                         self.grandtotalBtn.isUserInteractionEnabled = true
                                     }
                                     
@@ -969,11 +927,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 else  {
                                     DispatchQueue.main.async {
                                         self.stopAnimating()
-                                        let messageVC = UIAlertController(title: LocalizedString.Failed, message: "\(LocalizedString.occured)" , preferredStyle: .actionSheet)
-                                        self.present(messageVC, animated: true) {
-                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                                                messageVC.dismiss(animated: true, completion: nil)})}
-                                        ToastView.show(message: newmessage!, controller: self)
+                                        ToastView.show(message: LocalizedString.occured, controller: self)
                                         self.grandtotalBtn.isUserInteractionEnabled = true
                                     }
                                     
@@ -993,20 +947,14 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }.resume()
                     
                 }   else {
-                    let messageVC = UIAlertController(title: CheckoutFailed, message: selectWorker , preferredStyle: .actionSheet)
-                    present(messageVC, animated: true) {
-                        Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                            messageVC.dismiss(animated: true, completion: nil)})}
+                    ToastView.show(message: selectWorker, controller: self)
                     self.grandtotalBtn.isUserInteractionEnabled = true
                     
                 }
             } else {
-                let messageVC = UIAlertController(title: CheckoutFailed, message: EnterAmount , preferredStyle: .actionSheet)
-                present(messageVC, animated: true) {
-                    Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                        messageVC.dismiss(animated: true, completion: nil)})}
+                ToastView.show(message: EnterAmount, controller: self)
                 self.grandtotalBtn.isUserInteractionEnabled = true
-                
+             
                 
             }
         }
@@ -1190,11 +1138,8 @@ extension CheckOutPopView: DiscountPopDelegate {
                 switch value {
                 case .Amount:
                     if amountEntered > Constants.subtotal {
-                        let messageVC = UIAlertController(title: CheckoutFailed, message: Discountcantgreater , preferredStyle: .actionSheet)
-                        present(messageVC, animated: true) {
-                            Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                                messageVC.dismiss(animated: true, completion: nil)})}
-                        // UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
+                        ToastView.show(message: Discountcantgreater, controller: self)
+
                         completion(false)
                         return
                     } else if amountEntered == Constants.subtotal {
@@ -1205,11 +1150,7 @@ extension CheckOutPopView: DiscountPopDelegate {
                     let discounttotal = Constants.subtotal * (amountEntered / 100)
                     let afterDiscountTotal = Constants.subtotal - discounttotal
                     if afterDiscountTotal < 0 {
-                        let messageVC = UIAlertController(title: CheckoutFailed, message: Discountcantgreater , preferredStyle: .actionSheet)
-                        present(messageVC, animated: true) {
-                            Timer.scheduledTimer(withTimeInterval:1.0, repeats: false, block: { (_) in
-                                messageVC.dismiss(animated: true, completion: nil)})}
-                        //UIUtility.showAlertInController(message: "Discount cant be greater than total", viewController: self)
+                        ToastView.show(message: Discountcantgreater, controller: self)
                         completion(false)
                         return
                     } else if afterDiscountTotal == 0 {

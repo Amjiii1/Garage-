@@ -61,7 +61,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             // create a string with up to 7 leading zeros with a random number 0...9999999
             result = String(format:"%07d", arc4random_uniform(10000000) )
             // generate another random number if the set of characters count is less than four
-        } while Set<Character>(result.characters).count < 7
+        } while Set<Character>(result).count < 7
         return result    // ran 8 times
     }
    
@@ -122,10 +122,10 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     func openCamera()
     {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self// as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -140,8 +140,9 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if flag == 0 {
                 self.Image1.image = pickedImage
                 flag = 1
@@ -170,7 +171,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             
             {
                 (multipartFormData) in
-                multipartFormData.append(UIImageJPEGRepresentation(self.image, 0.1)!, withName: "image", fileName: "\(self.fourUniqueDigits).jpg", mimeType: "image/jpeg")
+                multipartFormData.append(self.image.jpegData(compressionQuality: 0.1)!, withName: "image", fileName: "\(self.fourUniqueDigits).jpg", mimeType: "image/jpeg")
                 
         }, to: "\(CallEngine.baseURL)\(CallEngine.notesImguploadapi)",headers:nil)
         { (result) in
@@ -205,7 +206,7 @@ class notesPopup: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                             }//)
                         }
                 }
-            case .failure(let encodingError):
+            case .failure( _):
                 self.stopAnimating()
                 break
                 

@@ -28,9 +28,9 @@ class FooterViewWithTabs: UIView {
     override func awakeFromNib() {
         buttons = [btnWelcome, btnService, btnCheckout]
         if L102Language.currentAppleLanguage() == "ar" {
-            btnWelcome.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
-            btnService.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
-            btnCheckout.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
+            btnWelcome.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 25)
+            btnService.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 25)
+            btnCheckout.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 25)
         }
     }
     

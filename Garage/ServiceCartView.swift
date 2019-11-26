@@ -32,12 +32,10 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     @IBOutlet weak var searchView: UIView!
     
     
-    
     private var SearchbarTbl: UITableView!
     
     
     var categories = [Category]()
-    var nameArray = [String]()
     var searchQuantity: Int = 1
     var tblSearchResult: UITableView?
     var searchActive : Bool = false
@@ -64,7 +62,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     //Localization
     
-    let SearchItemsName = NSLocalizedString("SearchItemsName", comment: "")
+    let SearchItemsName = NSLocalizedString("   SearchItemsName", comment: "")
     let Sorryback = NSLocalizedString("Sorryback", comment: "")
     let SelectItems = NSLocalizedString("SelectItems", comment: "")
     
@@ -78,7 +76,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         SearcIconImages()
         
         print("\(Items.nameArray)")
-            serviceSearch.attributedPlaceholder = NSAttributedString(string:    SearchItemsName, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        serviceSearch.attributedPlaceholder = NSAttributedString(string:    SearchItemsName, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
          serviceSearch.textAlignment = .left
         subcategoryBtn.isHidden = true
         itemBtn.isHidden = true
@@ -93,7 +91,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
         serviceSearch.delegate = self
         self.Customsearchtableview()
         serviceSearch.addTarget(self, action: #selector(SearchFunction), for: .touchDown)
-        serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControlEvents.editingChanged)
+        serviceSearch.addTarget(self, action: #selector(textFieldDidChanges(_:)), for: UIControl.Event.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(ServiceCartView.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
         if L102Language.currentAppleLanguage() == "ar" {
             Reassignoutlet.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 0, right: 0)

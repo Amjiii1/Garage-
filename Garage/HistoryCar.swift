@@ -127,6 +127,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                     var InspectionDtail = [InspectionDetailsH]()
                                     for carCheckLists in CheckList  {
                                         let Name = carCheckLists[Constants.Name] as? String  ?? ""
+                                        let AName = carCheckLists[Constants.AlternateName] as? String  ?? ""
                                         let InspectionDetails = carCheckLists[Constants.InspectionDetails] as? [[String: Any]]
                                         let CarInspectionIDH = carCheckLists[Constants.CarInspectionID] as? Int  ?? 0
                                         let OrderID = carCheckLists[Constants.OrderID] as? Int  ?? 0
@@ -135,13 +136,14 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                                             let CarInspectionDetailID = sub[Constants.CarInspectionDetailID] as? Int  ?? 0
                                             let CarInspectionID = sub[Constants.CarInspectionID] as? Int  ?? 0
                                             let Name = sub[Constants.Name] as? String  ?? ""
+                                            let AName = sub[Constants.AlternateName] as? String  ?? ""
                                             let Value = sub[Constants.Value] as? String  ?? ""
-                                            let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, Value: Value)
+                                            let newInspectionDetails = InspectionDetailsH(CarInspectionDetailIDH: CarInspectionDetailID, CarInspectionIDH: CarInspectionID, Name: Name, AlternativeH: AName, Value: Value)
                                             InspectionDtail.append(newInspectionDetails)
                                             
                                         }
                                         
-                                        let newInspectionList = InspectionListH(InspectionDetailsH: InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, OrderIDH: OrderID)
+                                        let newInspectionList = InspectionListH(InspectionDetailsH: InspectionDtail, InspectionIDH: CarInspectionIDH, NameH: Name, AlternativeH: AName, OrderIDH: OrderID)
                                         self.Inspectionlist.append(newInspectionList)
                                          DispatchQueue.main.async {
                                         self.historyTableview.reloadData()
@@ -275,7 +277,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
             if let data = data {
                 do {
-                   // self.startAnimating(message: "Please wait..", messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
+                    //self.startAnimating(message: "Please wait..", messageFont: UIFont(name:"SFProDisplay-Bold", size: 18.0), type: .ballPulse, color: UIColor.DefaultApp)
                     guard  let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}
                     let discript = json[Constants.Description] as? String
                     if let status = json[Constants.Status] as? Int {
@@ -308,7 +310,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         else if (status == 1000) {
                             
                             ToastView.show(message: LocalizedString.wrong, controller: self)
-                          //  self.stopAnimating()
+                            self.stopAnimating()
                         }
                             
                         else if (status == 1001) {
@@ -341,8 +343,8 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let printController = UIPrintInteractionController.shared
         let printInfo = UIPrintInfo(dictionary: [:])
-        printInfo.outputType = UIPrintInfoOutputType.general
-        printInfo.orientation = UIPrintInfoOrientation.portrait
+        printInfo.outputType = UIPrintInfo.OutputType.general
+        printInfo.orientation = UIPrintInfo.Orientation.portrait
         printInfo.jobName = "Receipt Details"
         printController.printInfo = printInfo
         // printController.showsPageRange = true
@@ -428,7 +430,7 @@ class HistoryCar: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         storyboard = UIStoryboard(name: Constants.historydetailview, bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: Constants.historydetailviewVc) as! Historydetailview
         // let nav = UINavigationController(rootViewController: popController)
-        popController.modalPresentationStyle = .popover
+       // popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view

@@ -108,10 +108,8 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                     else if (status == 0) {
                         print(status!)
                         DispatchQueue.main.async {
-                            let messageVC = UIAlertController(title: "\(newmessage!)", message: "Failed" , preferredStyle: .actionSheet)
-                            self.present(messageVC, animated: true) {
-                                Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { (_) in
-                                    messageVC.dismiss(animated: true, completion: nil)})}
+                             ToastView.show(message: newmessage!, controller: self)
+
                             self.dismiss(animated: true, completion: nil)
                         }
                     }
@@ -152,6 +150,16 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
             vc.switchViewController(vc: newCarvc, showFooter: false)
         }
     }
+    
+    
+    
+    
+    @IBAction func dissmissBtn(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     
     @IBAction func ServiceBtn(_ sender: Any) {

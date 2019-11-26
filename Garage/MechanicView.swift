@@ -78,10 +78,10 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
          bay0()
         NotificationCenter.default.addObserver(self, selector: #selector(MechanicView.BayNotification(notification:)), name: Notification.Name("Notificationbayname"), object: nil)
         if L102Language.currentAppleLanguage() == "ar" {
-            finishBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,30)
-            checkcarBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,30)
+            finishBtn.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 30)
+            checkcarBtn.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 30)
             loadingBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 45, right: 66)
-            assignserviceBtn.titleEdgeInsets = UIEdgeInsetsMake(0,20,0,0)
+            assignserviceBtn.titleEdgeInsets = UIEdgeInsets(top: 0,left: 20,bottom: 0,right: 0)
             assignserviceBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:30, bottom: 0, right: 0)
         }
         
@@ -119,6 +119,9 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         } else if Constants.checkflag == 1 {
             finishBtn.isUserInteractionEnabled = true
             finishBtn.isSelected = true
+            notesBtn.isUserInteractionEnabled = true
+            checkcarBtn.isUserInteractionEnabled = true
+            checkcarBtn.isSelected = true
           //  milesBtn.isHidden = false
           //  loaderWorks()
             Constants.checkflag = 0

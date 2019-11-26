@@ -30,8 +30,8 @@ override init(frame: CGRect) {
 }
 
 func setupTintColor() {
-    clearButtonMode = UITextFieldViewMode.whileEditing
-    borderStyle = UITextBorderStyle.roundedRect
+    clearButtonMode = UITextField.ViewMode.whileEditing
+    borderStyle = UITextField.BorderStyle.roundedRect
     layer.cornerRadius = 8.0
     layer.masksToBounds = true
     layer.borderColor = tintColor.cgColor

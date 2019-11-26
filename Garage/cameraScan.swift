@@ -9,7 +9,7 @@
 import UIKit
 
 
-var addImage: UIImage!
+
 
 class cameraScan: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -29,12 +29,14 @@ class cameraScan: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     
+    
+    
     func openCamera()
     {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self// as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -47,23 +49,19 @@ class cameraScan: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-         addImage = nil
+        // addImage = nil
         picker.dismiss(animated: true, completion: nil)
         dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("imageadded"), object: nil)
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImaged = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImaged = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
-            
-            print(pickedImaged)
-            print(addImage)
-            addImage = nil
-             print(addImage)
-            addImage = pickedImaged
-             print(addImage)
+//            addImage = nil
+//            addImage = pickedImaged
            
         NotificationCenter.default.post(name: Notification.Name("imageadded"), object: nil)
         picker.dismiss(animated: true, completion: nil)

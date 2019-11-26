@@ -13,7 +13,7 @@ extension UIView {
             viewsDictionary["v\(index)"] = view
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutFormatOptions(),
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(),
                                                       metrics: nil, views: viewsDictionary))
     }
 }

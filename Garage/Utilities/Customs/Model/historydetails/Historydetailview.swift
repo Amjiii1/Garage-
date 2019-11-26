@@ -59,9 +59,9 @@ class Historydetailview: UIViewController {
     func changeView(index: Int) {
         
         
-        for vc in self.childViewControllers {
-            vc.willMove(toParentViewController: nil)
-            vc.removeFromParentViewController()
+        for vc in self.children {
+            vc.willMove(toParent: nil)
+            vc.removeFromParent()
             vc.view.removeFromSuperview()
         }
         
@@ -90,12 +90,12 @@ class Historydetailview: UIViewController {
         if vc != nil {
             vc?.view.frame.size = containerView.frame.size
             vc?.view.frame.origin = CGPoint(x: 0, y: 0)
-            addChildViewController(vc!)
+            addChild(vc!)
             containerView.addSubview((vc?.view)!)
-            vc?.didMove(toParentViewController: self)
-            UIView.transition(with: containerView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-            }) { (completed) in
-            }
+            vc?.didMove(toParent: self)
+//            UIView.transition(with: containerView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+//            }) { (completed) in
+//            }
         }
     }
     
@@ -110,6 +110,15 @@ class Historydetailview: UIViewController {
         
         
     }
+    
+    
+    @IBAction func dissmissHistoryDetails(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     
     
     

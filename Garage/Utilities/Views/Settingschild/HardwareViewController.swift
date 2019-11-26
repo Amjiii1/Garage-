@@ -269,7 +269,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @objc func printertypelabelChanges(_ textField: UITextField) {
         
-        if ip.text!.characters.count != 0 {
+        if ip.text!.count != 0 {
             print("added")
         }
         else {
@@ -292,7 +292,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @objc func printertypelabelChange(_ textField: UITextField) {
         
-        if printertypelabel.text!.characters.count != 0 {
+        if printertypelabel.text!.count != 0 {
             print("added")
         }
         else {
@@ -350,10 +350,8 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         
         if printerDetailModelUICells == nil {
-            let messageVC = UIAlertController(title: "Alert ", message: "You can select another printer through discover" , preferredStyle: .actionSheet)
-            self.present(messageVC, animated: true) {
-                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (_) in
-                    messageVC.dismiss(animated: true, completion: nil)})}
+            ToastView.show(message: "You can select another printer through discover", controller: self)
+
         } else {
             
             deletePrinter(printerDetailModelUICell: printerDetailModelUICells)
@@ -380,10 +378,8 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBAction func connectdisconnect(_ sender: Any) {
         
         if printerDetailModelUICells == nil {
-            let messageVC = UIAlertController(title: "Failed ", message: "Please Select Printer First!" , preferredStyle: .actionSheet)
-            self.present(messageVC, animated: true) {
-                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (_) in
-                    messageVC.dismiss(animated: true, completion: nil)})}
+             ToastView.show(message: "Please Select Printer First!", controller: self)
+
         } else {
             
             addPrinter(printerDetailModelUICell: printerDetailModelUICells)

@@ -6,14 +6,14 @@ class NumberKeyButton: UIButton {
     
     let animationDuration: TimeInterval = 0.2
     var key: NumberKey?
-    private var backgroundColors: [UIControlState.RawValue: UIColor] = [:]
+    private var backgroundColors: [UIControl.State.RawValue: UIColor] = [:]
     private var originRect: CGRect = CGRect.zero
     private var originTintColor: UIColor?
     private var originHightlightColor: UIColor?
     
     override var isHighlighted: Bool {
         didSet {
-            guard let color = self.backgroundColors[isHighlighted ? UIControlState.highlighted.rawValue : UIControlState.normal.rawValue] else {
+            guard let color = self.backgroundColors[isHighlighted ? UIControl.State.highlighted.rawValue : UIControl.State.normal.rawValue] else {
                 return
             }
             
@@ -49,7 +49,7 @@ class NumberKeyButton: UIButton {
         }
     }
     
-    func setBackgroundColor(color: UIColor, forState: UIControlState) {
+    func setBackgroundColor(color: UIColor, forState: UIControl.State) {
         backgroundColors[forState.rawValue] = color
         if forState == .normal {
             self.layer.backgroundColor = color.cgColor
@@ -84,7 +84,7 @@ class NumberKeyButton: UIButton {
         setImage(image, for: .normal)
         setImage(image, for: .highlighted)
         tintColor = color
-        originHightlightColor = backgroundColors[UIControlState.highlighted.rawValue]
+        originHightlightColor = backgroundColors[UIControl.State.highlighted.rawValue]
         originTintColor = tintColor
     }
 }

@@ -44,9 +44,9 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
         self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.white
         Constants.Printer = UserDefaults.standard.string(forKey: "printer") ?? ""
         if L102Language.currentAppleLanguage() == "ar" {
-            xReportOutlet.imageEdgeInsets  = UIEdgeInsetsMake(0,0,60,72)//titleEdgeInsets = UIEdgeInsetsMake(50,0,0,30)
-           zReportOutlet.imageEdgeInsets = UIEdgeInsetsMake(0,0,60,72)
-            SettingsBtn.imageEdgeInsets = UIEdgeInsetsMake(0,0,60,72)
+            xReportOutlet.imageEdgeInsets  = UIEdgeInsets(top: 0,left: 0,bottom: 60,right: 72)//titleEdgeInsets = UIEdgeInsetsMake(50,0,0,30)
+            zReportOutlet.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 60,right: 72)
+            SettingsBtn.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 60,right: 72)
         }
         // Do any additional setup after loading the view.
         
@@ -114,21 +114,21 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
     
     
     @IBAction func SettingsAction(_ sender: Any) {
-        let screenSize = UIScreen.main.bounds.width
-        let screenheight = UIScreen.main.bounds.size.height
-        print(screenheight)
-        var storyboard: UIStoryboard!
-        var popController: UIViewController!
-        storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
-        popController.modalPresentationStyle = .popover
-        let popOverVC = popController.popoverPresentationController
-        popOverVC?.delegate = self
-        popOverVC?.sourceView = self.view
-        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
-        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
-        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
-        self.present(popController, animated: true)
+//        let screenSize = UIScreen.main.bounds.width
+//        let screenheight = UIScreen.main.bounds.size.height
+//        print(screenheight)
+//        var storyboard: UIStoryboard!
+//        var popController: UIViewController!
+//        storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
+//        popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
+//        popController.modalPresentationStyle = .popover
+//        let popOverVC = popController.popoverPresentationController
+//        popOverVC?.delegate = self
+//        popOverVC?.sourceView = self.view
+//        popOverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue:0)
+//        popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
+//        popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
+//        self.present(popController, animated: true)
 //        self.dismiss(animated: true, completion: nil)
     }
     
@@ -315,7 +315,17 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             var result = EPOS2_SUCCESS.rawValue
             
             let textData: NSMutableString = NSMutableString()
-            let logoData = UIImage(named: "marngarage.png")
+            
+            if  Constants.Logoimage == nil {
+                if let img = UIImage(named: "dropDown.png") {
+                    if let data:Data = img.pngData() {
+                        Constants.Logoimage = data as NSData
+                    }
+                }
+                
+            }
+            let logoData = UIImage(data:Constants.Logoimage! as Data)!
+            
             
             if logoData == nil {
                 return false
@@ -328,8 +338,8 @@ class XZReportViewController: UIViewController,Epos2PtrReceiveDelegate, UIPopove
             }
             
             result = printer!.add(logoData, x: 0, y:0,
-                                  width:Int(logoData!.size.width),
-                                  height:Int(logoData!.size.height),
+                                  width:Int(logoData.size.width),
+                                  height:Int(logoData.size.height),
                                   color:EPOS2_COLOR_1.rawValue,
                                   mode:EPOS2_MODE_MONO.rawValue,
                                   halftone:EPOS2_HALFTONE_DITHER.rawValue,

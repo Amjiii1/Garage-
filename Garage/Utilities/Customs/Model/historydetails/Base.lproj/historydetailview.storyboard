@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
         <!--Historydetailview-->
         <scene sceneID="lJL-pW-eW6">
             <objects>
-                <viewController storyboardIdentifier="historydetailviewVc" id="Ryw-cA-2FB" customClass="Historydetailview" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="historydetailviewVc" modalPresentationStyle="formSheet" id="Ryw-cA-2FB" customClass="Historydetailview" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDn-Qq-hhP">
                         <rect key="frame" x="0.0" y="0.0" width="538" height="530"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,7 +89,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoJ-D4-lIs">
                                         <rect key="frame" x="0.0" y="0.0" width="538" height="120.5"/>
                                         <subviews>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fk-Jc-Xm0">
+                                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fk-Jc-Xm0">
                                                 <rect key="frame" x="417" y="36" width="107.5" height="48.5"/>
                                                 <color key="backgroundColor" red="0.95294117649999999" green="0.66639147840000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -117,6 +117,13 @@
                                                 <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="td5-Hb-Fr5">
+                                                <rect key="frame" x="507" y="37" width="16" height="22"/>
+                                                <state key="normal" image="cross"/>
+                                                <connections>
+                                                    <action selector="dissmissHistoryDetails:" destination="Ryw-cA-2FB" eventType="touchUpInside" id="mDq-2R-cnr"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -125,6 +132,7 @@
                                             <constraint firstItem="KiW-ho-D0G" firstAttribute="centerX" secondItem="6fk-Jc-Xm0" secondAttribute="centerX" multiplier="0.2" id="7pC-yA-JQu"/>
                                             <constraint firstItem="ENy-Y2-HoV" firstAttribute="width" secondItem="KiW-ho-D0G" secondAttribute="width" multiplier="1.25" id="C1W-ux-vh8"/>
                                             <constraint firstItem="6fk-Jc-Xm0" firstAttribute="height" secondItem="AoJ-D4-lIs" secondAttribute="height" multiplier="0.4" id="C5d-7C-hXf"/>
+                                            <constraint firstAttribute="right" secondItem="td5-Hb-Fr5" secondAttribute="right" constant="15" id="HFo-lk-8E5"/>
                                             <constraint firstItem="6fk-Jc-Xm0" firstAttribute="centerX" secondItem="AoJ-D4-lIs" secondAttribute="centerX" multiplier="1.75" id="JwE-1z-zEi"/>
                                             <constraint firstItem="KiW-ho-D0G" firstAttribute="centerY" secondItem="6fk-Jc-Xm0" secondAttribute="centerY" id="Mk0-8T-tMz"/>
                                             <constraint firstItem="KiW-ho-D0G" firstAttribute="width" secondItem="6fk-Jc-Xm0" secondAttribute="width" multiplier="1.3" id="NqW-yk-Wv8"/>
@@ -132,6 +140,7 @@
                                             <constraint firstItem="6fk-Jc-Xm0" firstAttribute="centerY" secondItem="AoJ-D4-lIs" secondAttribute="centerY" id="csO-nS-Aw2"/>
                                             <constraint firstItem="ENy-Y2-HoV" firstAttribute="height" secondItem="KiW-ho-D0G" secondAttribute="height" id="mxR-rU-B2u"/>
                                             <constraint firstItem="ENy-Y2-HoV" firstAttribute="centerX" secondItem="KiW-ho-D0G" secondAttribute="centerX" multiplier="1.2" id="vDK-Qy-QlC"/>
+                                            <constraint firstItem="td5-Hb-Fr5" firstAttribute="centerY" secondItem="AoJ-D4-lIs" secondAttribute="centerY" multiplier="0.8" id="xgh-EP-QO7"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -179,4 +188,7 @@
             <point key="canvasLocation" x="33.812949640287769" y="73.920863309352526"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cross" width="16" height="16"/>
+    </resources>
 </document>

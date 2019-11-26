@@ -433,8 +433,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         let printController = UIPrintInteractionController.shared
         let printInfo = UIPrintInfo(dictionary: [:])
-        printInfo.outputType = UIPrintInfoOutputType.general
-        printInfo.orientation = UIPrintInfoOrientation.portrait
+        printInfo.outputType = UIPrintInfo.OutputType.general
+        printInfo.orientation = UIPrintInfo.Orientation.portrait
         printInfo.jobName = "Receipt details"
         printController.printInfo = printInfo
         // printController.showsPageRange = true
@@ -629,7 +629,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         var popController: UIViewController!
         storyboard = UIStoryboard(name: Constants.CheckoutPopUp, bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: Constants.CheckOutPopVc) as! CheckOutPopView
-        popController.modalPresentationStyle = .popover
+       // popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view
@@ -662,7 +662,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         var popController: UIViewController!
         storyboard = UIStoryboard(name: "SettingsViewController", bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: "SettingViewControllerVc") as! SettingsViewController
-        popController.modalPresentationStyle = .popover
+       // popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view
@@ -717,8 +717,8 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //    self.setStatus("Determining Printer Language...",UIColor.yellow)
                 print("Determining Printer Language")
                 
-                var error: Error? = nil
-                var printer = try? ZebraPrinterFactory.getInstance(connection)
+                var _: Error? = nil
+                let printer = try? ZebraPrinterFactory.getInstance(connection)
                 
                 if printer != nil {
                     let language = printer?.getControlLanguage()

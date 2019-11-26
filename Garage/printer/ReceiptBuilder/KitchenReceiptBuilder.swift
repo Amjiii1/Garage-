@@ -28,7 +28,7 @@ struct Common {
     /// - Parameter parentController: Parent Controller
     /// - Parameter parentView: Parent's view to which subview will be added
     static func addChildController(childController: UIViewController, onParent parentController: UIViewController, onView parentView: UIView?) {
-        parentController.addChildViewController(childController)
+        parentController.addChild(childController)
         
         if let parentView = parentView {
             childController.view.bounds = parentView.bounds
@@ -38,16 +38,16 @@ struct Common {
         else {
             parentController.view.addSubview(childController.view)
         }
-        childController.didMove(toParentViewController: parentController)
+        childController.didMove(toParent: parentController)
     }
     
     /// Remove a Child view controller from Parent
     ///
     /// - Parameter childController: Child Controller to be removed
     static func hideContentController(childController: UIViewController) {
-        childController.willMove(toParentViewController: nil)
+        childController.willMove(toParent: nil)
         childController.view.removeFromSuperview()
-        childController.removeFromParentViewController()
+        childController.removeFromParent()
     }
     
     /// Add a Child view controller on Parent as a subview
@@ -57,10 +57,10 @@ struct Common {
     /// - Parameter parentView: Parent's view to which subview will be added
     /// - Parameter frame: Parent's view to which subview will be added
     static func addChildController(childController: UIViewController, onParent parentController: UIViewController, onView parentView: UIView, childframe frame: CGRect) {
-        parentController.addChildViewController(childController)
+        parentController.addChild(childController)
         childController.view.frame = frame
         parentView.addSubview(childController.view)
-        childController.didMove(toParentViewController: parentController)
+        childController.didMove(toParent: parentController)
     }
     
 //    static func getItemsTotal(items: [CartItem]) -> Double {

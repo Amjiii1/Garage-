@@ -1,6 +1,6 @@
 //
 //  CheckCarController.swift
-//  Garage
+//  Garagesa
 //
 //  Created by Amjad on 18/04/1440 AH.
 //  Copyright © 1440 Amjad Ali. All rights reserved.
@@ -37,6 +37,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         self.ChecklistTableview.allowsMultipleSelectionDuringEditing = true
         ChecklistTableview.delegate = self
         ChecklistTableview.dataSource = self
+        ChecklistTableview.delegate = self
         getDetails()
         Constants.checkflag = 1
         Checklist.CheckcarPost.removeAll()
@@ -144,15 +145,32 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "checkCell", for: indexPath) as? CheckCarcell else { return UITableViewCell() }
         
-        cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].Name
-        cell.checkboxA.tag = (indexPath.section * 1000) + indexPath.row
-        cell.checkBoxB.tag = (indexPath.section * 1000) + indexPath.row
-        cell.checkBoxC.tag = (indexPath.section * 1000) + indexPath.row
+        
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].AlternateName
+        } else{
+           cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].Name
+        }
+        
+        let indexofcell = (indexPath.section * 1000) + indexPath.row
+        print(indexofcell)
+        if indexofcell < 3000 {
+        cell.checkboxA.tag = indexofcell
+        cell.checkBoxB.tag = indexofcell
+        cell.checkBoxC.tag = indexofcell
         cell.checkboxA.addTarget(self, action:#selector(self.tabA(_:)), for: .touchUpInside)
         cell.checkBoxB.addTarget(self, action:#selector(self.tabB(_:)), for: .touchUpInside)
-        cell.checkBoxC.addTarget(self, action:#selector(self.tabC(_:)), for: .touchUpInside)//sectionData[indexPath.section]![indexPath.row]
+        cell.checkBoxC.addTarget(self, action:#selector(self.tabC(_:)), for: .touchUpInside)
+            cell.contentView.backgroundColor = UIColor.blue
         
-        cell.contentView.backgroundColor = UIColor.clear
+            print("Amjad")
+        } else {
+            cell.contentView.backgroundColor = UIColor.red
+            print("Rafi")
+        }
+        
+        
         cell.selectionStyle = .none
         return cell
         
@@ -214,7 +232,13 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Inspectionlist[section].Name
+         if L102Language.currentAppleLanguage() == "ar" {
+            
+            
+        return Inspectionlist[section].AlternateName
+         } else{
+            return Inspectionlist[section].Name
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -242,7 +266,14 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = true
-        label.text = Inspectionlist[section].Name
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            
+            label.text = Inspectionlist[section].AlternateName
+        } else{
+             label.text = Inspectionlist[section].Name
+        }
+       
         label.font = UIFont(name: "SFProDisplay-Bold", size: 18)//UIFont.systemFont(ofSize: 20.0)
         label.textColor = .white
         label.textAlignment = .left
@@ -319,9 +350,14 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc private func selectCType(_ sender: UIButton) {
         let section = sender.tag
+        var count: Int = 0
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+            count = Inspectionlist[section].AlternateName.count
+        } else{
+            count = Inspectionlist[section].Name.count
+        }
         
-        let count = Inspectionlist[section].Name.count
-        print(count)
         for i in 0...count {
             print(section)
             let index = IndexPath(row: i, section: section)
@@ -336,7 +372,13 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     @objc private func selectBType(_ sender: UIButton) {
         let section = sender.tag
         print("selectBType")
-        let count = Inspectionlist[section].Name.count
+        var count: Int = 0
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+           count = Inspectionlist[section].AlternateName.count
+        } else{
+            count = Inspectionlist[section].Name.count
+        }
         for i in 0...count {
             let index = IndexPath(row: i, section: section)
             if let cell = ChecklistTableview.cellForRow(at: index) as? CheckCarcell {
@@ -350,7 +392,13 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     @objc private func selectAType(_ sender: UIButton) {
         let section = sender.tag
         print("selectAType")
-        let count = Inspectionlist[section].Name.count
+       var count: Int = 0
+        if L102Language.currentAppleLanguage() == "ar" {
+            
+             count = Inspectionlist[section].AlternateName.count
+        } else{
+             count = Inspectionlist[section].Name.count
+        }
         for i in 0...count {
             let index = IndexPath(row: i, section: section)
             if let cell = ChecklistTableview.cellForRow(at: index) as? CheckCarcell {

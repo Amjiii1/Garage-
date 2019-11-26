@@ -39,4 +39,18 @@ class CheckCarcell: UITableViewCell {
         checkBoxB.isSelected = false
         checkBoxC.isSelected = false
     }
+    
+    override func prepareForReuse() {
+        // invoke superclass implementation
+        super.prepareForReuse()
+
+        // reset (hide) the checkmark label
+//        self.checkboxA.isSelected = false
+//         self.checkBoxB.isSelected = false
+//         self.checkBoxC.isSelected = false
+
+    }
+
+    
+    
 }

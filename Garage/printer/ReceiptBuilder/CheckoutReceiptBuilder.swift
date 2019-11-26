@@ -352,7 +352,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             var attributedString = NSMutableAttributedString(string: "\(cartItem.Quantity!) x ", attributes: sfProDisplay_heavyFontAttributes_37bold)
             
             let xCoordinate: Double = Double(attributedString.size().width)
-            print(cartItem.Name!.characters.count)
+            print(cartItem.Name!.count)
             attributedString.append(NSMutableAttributedString(string: "\(cartItem.Name!)", attributes: sfProDisplay_semiBoldFontAttributes_30))
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: paddingFromLeft, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_heavyFontAttributes_37_height))
             

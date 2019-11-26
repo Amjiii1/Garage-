@@ -18,21 +18,16 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var WelcomeSegmented: UISegmentedControl!
     @IBOutlet weak var tableViewWelcome: UITableView!
     
-    var Welcomecellobj = [WelcomeModel]()
-    var fruitsArray = [WelcomeModel]()
+    var Welcomedata = [WelcomeModel]()
+    var filterdata = [WelcomeModel]()
     let dateFormatter : DateFormatter = DateFormatter()
     var AssignedID: Int = 0
-    
-    
     
     
     //Localization
     
      let Cancel = NSLocalizedString("Cancel", comment: "")
     let AlreadyAssigned = NSLocalizedString("AlreadyAssigned", comment: "")
-    
-    
-    
     
     //Localization
   
@@ -50,7 +45,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         SearcIconImage()
         ApiImplimentations()
         carSearchTextField.delegate = self
-        carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        carSearchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.service(notification:)), name: Notification.Name("ServiceDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(WelcomeView.unlist(notification:)), name: Notification.Name("unlistDone"), object: nil)
         Constants.SuperUser = UserDefaults.standard.integer(forKey: Constants.superuserA)
@@ -104,12 +99,12 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         if textField.text  != "" {
             if (carSearchTextField.text?.count)! != 0 {
-                self.Welcomecellobj.removeAll()
-                for str in fruitsArray {
+                self.Welcomedata.removeAll()
+                for str in filterdata {
                     let range = str.RegistrationNo?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
                      print(str)
                     if range != nil {
-                        self.Welcomecellobj.append(str)
+                        self.Welcomedata.append(str)
                     }
                 }
             }
@@ -119,9 +114,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             carSearchTextField.resignFirstResponder()
             carSearchTextField.text = ""
-            self.Welcomecellobj.removeAll()
-            for str in fruitsArray {
-                Welcomecellobj.append(str)
+            self.Welcomedata.removeAll()
+            for str in filterdata {
+                Welcomedata.append(str)
             }
             tableViewWelcome.reloadData()
             
@@ -131,7 +126,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 3))
         }
         textField.text = currentText
-        if textField.text!.characters.count  == 8  {
+        if textField.text!.count  == 8  {
             
             
         }
@@ -165,9 +160,9 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         carSearchTextField.resignFirstResponder()
         carSearchTextField.text = ""
-        self.Welcomecellobj.removeAll()
-        for str in fruitsArray {
-            Welcomecellobj.append(str)
+        self.Welcomedata.removeAll()
+        for str in filterdata {
+            Welcomedata.append(str)
         }
         tableViewWelcome.reloadData()
         return false
@@ -176,11 +171,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (carSearchTextField.text?.count)! != 0 {
-            self.Welcomecellobj.removeAll()
-            for str in fruitsArray {
+            self.Welcomedata.removeAll()
+            for str in filterdata {
                 let range = str.RegistrationNo?.range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
                 if range != nil {
-                    self.Welcomecellobj.append(str)
+                    self.Welcomedata.append(str)
                 }
             }
         }
@@ -246,19 +241,19 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let discript = json[Constants.Description] as? String
                 if (status == 1) {
                 if let order = json["OrdersList"] as? [[String: Any]] {
-                    self.Welcomecellobj.removeAll()
+                    self.Welcomedata.removeAll()
                     
                     
                     for OrdersList in order {
                         
                         let neworder = WelcomeModel(OrdersList: OrdersList)
-                        self.Welcomecellobj.append(neworder!)
-                        self.fruitsArray = self.Welcomecellobj
+                        self.Welcomedata.append(neworder!)
+                        self.filterdata = self.Welcomedata
                     }
                 }
             
                     DispatchQueue.main.async {
-                     self.stopAnimating()
+                    self.stopAnimating()
                     self.tableViewWelcome.reloadData()
                     self.WelcomeSegmented.isUserInteractionEnabled = true
                   }
@@ -323,13 +318,13 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         case 0:
             
             
-            returnValue = Welcomecellobj.count
+            returnValue = Welcomedata.count
             
         case 1:
-            returnValue = Welcomecellobj.count
+            returnValue = Welcomedata.count
         case 2:
             
-            returnValue = Welcomecellobj.count
+            returnValue = Welcomedata.count
             
         default:
             break
@@ -436,10 +431,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             print("Nothing")
         case 2:
             let deleteAction = UITableViewRowAction(style: .destructive, title: Cancel) { (action, indexpath) in
-                self.AssignedID = self.Welcomecellobj[indexPath.row].OrderID ?? 0
+                self.AssignedID = self.Welcomedata[indexPath.row].OrderID ?? 0
                 print(self.AssignedID)
                 self.AssignToWait()
-                self.Welcomecellobj.remove(at: indexPath.row)
+                self.Welcomedata.remove(at: indexPath.row)
                 self.tableViewWelcome.deleteRows(at: [indexPath], with: .automatic)
                 self.tableViewWelcome.reloadData()
             }
@@ -475,10 +470,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             print(indexPath)
             print(indexPath.row)
             print(WelcomeSegmented.selectedSegmentIndex)
-            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-            cell.make.text = Welcomecellobj[indexPath.row].MakerName
-            cell.model.text = Welcomecellobj[indexPath.row].ModelName
-            let trans = Welcomecellobj[indexPath.row].TransactionNo
+            cell.plateNmb.text = Welcomedata[indexPath.row].RegistrationNo
+            cell.make.text = Welcomedata[indexPath.row].MakerName
+            cell.model.text = Welcomedata[indexPath.row].ModelName
+            let trans = Welcomedata[indexPath.row].TransactionNo
             cell.serialnmb.text = "\(trans ?? 0)"
             cell.editBtn.tag = indexPath.row
             cell.editBtn.setTitle("", for: .normal)
@@ -492,13 +487,13 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             print(indexPath.row)
             cell.editBtn.isUserInteractionEnabled = true
             print(WelcomeSegmented.selectedSegmentIndex)
-            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-            cell.make.text = Welcomecellobj[indexPath.row].MakerName
-            cell.model.text = Welcomecellobj[indexPath.row].ModelName
+            cell.plateNmb.text = Welcomedata[indexPath.row].RegistrationNo
+            cell.make.text = Welcomedata[indexPath.row].MakerName
+            cell.model.text = Welcomedata[indexPath.row].ModelName
             cell.editBtn.setTitle("", for: .normal)
             cell.editBtn.setImage(#imageLiteral(resourceName: "welcomearrow"), for: .normal)
             //   cell.editBtn.addTarget(self, action:#selector(self.add1(_:)), for: .touchUpInside)
-            let trans2 = Welcomecellobj[indexPath.row].TransactionNo
+            let trans2 = Welcomedata[indexPath.row].TransactionNo
             cell.serialnmb.text = "\(trans2 ?? 0)"
             
         case 2:
@@ -506,10 +501,10 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             print(indexPath)
             print(indexPath.row)
             print(WelcomeSegmented.selectedSegmentIndex)
-            cell.plateNmb.text = Welcomecellobj[indexPath.row].RegistrationNo
-            cell.make.text = Welcomecellobj[indexPath.row].MakerName
-            cell.model.text = Welcomecellobj[indexPath.row].ModelName
-            let Bay = Welcomecellobj[indexPath.row].BayName
+            cell.plateNmb.text = Welcomedata[indexPath.row].RegistrationNo
+            cell.make.text = Welcomedata[indexPath.row].MakerName
+            cell.model.text = Welcomedata[indexPath.row].ModelName
+            let Bay = Welcomedata[indexPath.row].BayName
             cell.editBtn.tag = indexPath.row
             cell.editBtn.setTitle(Bay, for: .normal)
             cell.editBtn.setTitleColor(UIColor.DefaultApp, for: .normal)
@@ -517,7 +512,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             cell.editBtn.imageView?.isHidden = true
             cell.editBtn.isUserInteractionEnabled = false
             //                 cell.editBtn.addTarget(self, action:#selector(self.add2(_:)), for: .touchUpInside)
-            let trans3 = Welcomecellobj[indexPath.row].TransactionNo
+            let trans3 = Welcomedata[indexPath.row].TransactionNo
             cell.serialnmb.text = "\(trans3!)"
         default:
             break
@@ -534,11 +529,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
         case 0:
             
-            let bay = Welcomecellobj[sender.tag].BayID
-            let bayname = Welcomecellobj[sender.tag].BayName
+            let bay = Welcomedata[sender.tag].BayID
+            let bayname = Welcomedata[sender.tag].BayName
             
             if bay == 0 {
-                if let new = Welcomecellobj[sender.tag].OrderID {
+                if let new = Welcomedata[sender.tag].OrderID {
                     Constants.editOrderid = new
                     Constants.flagEdit = 1
                     Constants.bayid = 0
@@ -560,11 +555,11 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }
          
         case 1:
-            Constants.Bplate = Welcomecellobj[sender.tag].RegistrationNo ?? ""
-            Constants.BMake = Welcomecellobj[sender.tag].MakerName ?? ""
-            Constants.editOrderid = Welcomecellobj[sender.tag].OrderID ?? 0
-            Constants.bayid = Welcomecellobj[sender.tag].BayID ?? 0
-            Constants.editcarid = Welcomecellobj[sender.tag].CarID ?? 0
+            Constants.Bplate = Welcomedata[sender.tag].RegistrationNo ?? ""
+            Constants.BMake = Welcomedata[sender.tag].MakerName ?? ""
+            Constants.editOrderid = Welcomedata[sender.tag].OrderID ?? 0
+            Constants.bayid = Welcomedata[sender.tag].BayID ?? 0
+            Constants.editcarid = Welcomedata[sender.tag].CarID ?? 0
             Constants.orderstatus = 101
             tapped()
             
@@ -585,7 +580,7 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
         storyboard = UIStoryboard(name: Constants.BayForWelcome, bundle: nil)
         popController = storyboard.instantiateViewController(withIdentifier: Constants.BayForWelcomeVc) as! BayAssignView
        // let nav = UINavigationController(rootViewController: popController)
-        popController.modalPresentationStyle = .popover
+    //    popController.modalPresentationStyle = .popover
         let popOverVC = popController.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.view
@@ -597,13 +592,13 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @objc func add1(_ sender: UIButton){
-        let new = Welcomecellobj[sender.tag].TransactionNo
+        let new = Welcomedata[sender.tag].TransactionNo
         print(new!)
     } 
 
     
     @objc func add2(_ sender: UIButton){
-        let new = Welcomecellobj[sender.tag].TransactionNo
+        let new = Welcomedata[sender.tag].TransactionNo
         print(new!)
         
     }

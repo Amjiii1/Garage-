@@ -45,6 +45,7 @@ class LocalizedString {
     static var occured =  NSLocalizedString("Erroroccured", comment: "")
     static var interneterror = NSLocalizedString("Checkinternet", comment: "")
     static var limitExceeded = NSLocalizedString("limitExceeded", comment: "")
+    static var incorrectVin = NSLocalizedString("VinCorrect", comment: "")
     
     
     

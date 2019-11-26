@@ -171,7 +171,15 @@ class PrintJobHelper {
 //]]]
 //UIImage(data:Constants.ImageF)
         
-        // UIImage(data:Constants.Logoimage! as Data)!
+        if  Constants.Logoimage == nil {
+            if let img = UIImage(named: "dropDown.png") {
+                if let data:Data = img.pngData() {
+                    Constants.Logoimage = data as NSData
+                }
+            }
+            
+        }
+    
         let companyInfo = CompanyInfo(logo: UIImage(data:Constants.Logoimage! as Data)!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
             return companyInfo
 //        }

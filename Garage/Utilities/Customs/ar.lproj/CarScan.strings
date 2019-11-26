@@ -8,5 +8,14 @@
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "osd-b9-woP"; */
 "osd-b9-woP.normalTitle" = "المتابعة";
 
+/* Class = "UISegmentedControl"; tgH-SK-3f5.segmentTitles[0] = "By Plate"; ObjectID = "tgH-SK-3f5"; */
+"tgH-SK-3f5.segmentTitles[0]" = "بواسطة لوحة";
+
+/* Class = "UISegmentedControl"; tgH-SK-3f5.segmentTitles[1] = "By Vin"; ObjectID = "tgH-SK-3f5"; */
+"tgH-SK-3f5.segmentTitles[1]" = "بواسطة فين";
+
 /* Class = "UIButton"; normalTitle = "Add VIN"; ObjectID = "wQZ-Aq-T5V"; */
 "wQZ-Aq-T5V.normalTitle" = "إضافة رقم الهيكل";
+
+
+

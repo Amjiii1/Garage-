@@ -31,7 +31,7 @@ class UIUtility: NSObject {
             }
             alert.addAction(okAction)
             let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow.windowLevel = UIWindowLevelAlert
+            alertWindow.windowLevel = UIWindow.Level.alert
             alertWindow.rootViewController = UIViewController()
             alertWindow.makeKeyAndVisible()
             alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
@@ -64,7 +64,7 @@ class UIUtility: NSObject {
         let attrString = NSMutableAttributedString(string: string)
         let boldRange = (string as NSString).range(of: string)
         attrString.beginEditing()
-        attrString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: fontName, size: (fontSize))!, range: boldRange)
+        attrString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: fontName, size: (fontSize))!, range: boldRange)
         attrString.endEditing()
         return attrString
     }

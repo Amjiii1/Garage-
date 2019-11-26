@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
         <!--Bay Assign View-->
         <scene sceneID="bZI-ZX-ltv">
             <objects>
-                <viewController storyboardIdentifier="BayForWelcomeVc" id="3mg-a8-8lc" customClass="BayAssignView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BayForWelcomeVc" modalPresentationStyle="formSheet" id="3mg-a8-8lc" customClass="BayAssignView" customModule="Garage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oiQ-Yy-7mo">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,25 +29,25 @@
                                 <rect key="frame" x="25" y="85" width="450" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9po-CG-M0P">
-                                    <size key="itemSize" width="86" height="117"/>
+                                    <size key="itemSize" width="101" height="119"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="sGz-AN-h27" customClass="barforWelcome" customModule="Garage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="16.5" width="86" height="117"/>
+                                        <rect key="frame" x="0.0" y="15.5" width="101" height="119"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="86" height="117"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="101" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvz-bS-5C5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="117"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="119"/>
                                                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jl-OE-gyc">
-                                                    <rect key="frame" x="21.5" y="29.5" width="43" height="58.5"/>
+                                                    <rect key="frame" x="10" y="30" width="81" height="59.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="7Jl-OE-gyc" firstAttribute="width" secondItem="bvz-bS-5C5" secondAttribute="width" multiplier="0.5" id="91F-jm-alc"/>
+                                            <constraint firstItem="7Jl-OE-gyc" firstAttribute="width" secondItem="bvz-bS-5C5" secondAttribute="width" multiplier="0.8" id="91F-jm-alc"/>
                                             <constraint firstItem="bvz-bS-5C5" firstAttribute="centerX" secondItem="sGz-AN-h27" secondAttribute="centerX" id="G0n-x2-zkI"/>
                                             <constraint firstItem="bvz-bS-5C5" firstAttribute="centerY" secondItem="sGz-AN-h27" secondAttribute="centerY" id="Is5-ft-p7K"/>
                                             <constraint firstItem="7Jl-OE-gyc" firstAttribute="centerX" secondItem="bvz-bS-5C5" secondAttribute="centerX" id="O9h-rM-nVT"/>
@@ -84,20 +84,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="85"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign to a Mechanic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdX-5p-4Ic">
-                                        <rect key="frame" x="175" y="4.5" width="150" height="34"/>
+                                        <rect key="frame" x="125" y="4.5" width="250" height="34"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hyundai BAC-2313" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ha9-hr-bEq">
-                                        <rect key="frame" x="152.5" y="42.5" width="195" height="34"/>
+                                        <rect key="frame" x="87.5" y="42.5" width="325" height="34"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1M4-67-3QX">
+                                        <rect key="frame" x="469" y="10.5" width="16" height="22"/>
+                                        <state key="normal" image="cross"/>
+                                        <connections>
+                                            <action selector="dissmissBtn:" destination="3mg-a8-8lc" eventType="touchUpInside" id="99j-xo-o9q"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="1M4-67-3QX" firstAttribute="centerY" secondItem="0h5-gR-DTb" secondAttribute="centerY" multiplier="0.5" id="82I-nL-zQ2"/>
+                                    <constraint firstAttribute="right" secondItem="1M4-67-3QX" secondAttribute="right" constant="15" id="8Tx-xw-waO"/>
                                     <constraint firstItem="kdX-5p-4Ic" firstAttribute="centerX" secondItem="0h5-gR-DTb" secondAttribute="centerX" id="GGG-RR-GbG"/>
                                     <constraint firstItem="Ha9-hr-bEq" firstAttribute="centerY" secondItem="kdX-5p-4Ic" secondAttribute="centerY" multiplier="2.8" id="Mzm-i0-Noj"/>
                                     <constraint firstItem="Ha9-hr-bEq" firstAttribute="height" secondItem="kdX-5p-4Ic" secondAttribute="height" id="N1y-Qu-ySu"/>
@@ -105,7 +114,7 @@
                                     <constraint firstItem="Ha9-hr-bEq" firstAttribute="centerX" secondItem="kdX-5p-4Ic" secondAttribute="centerX" id="Nur-T0-pPY"/>
                                     <constraint firstItem="Ha9-hr-bEq" firstAttribute="width" secondItem="kdX-5p-4Ic" secondAttribute="width" multiplier="1.3" id="OP2-Jo-6rh"/>
                                     <constraint firstItem="kdX-5p-4Ic" firstAttribute="height" secondItem="0h5-gR-DTb" secondAttribute="height" multiplier="0.4" id="hSL-Aa-RSb"/>
-                                    <constraint firstItem="kdX-5p-4Ic" firstAttribute="width" secondItem="0h5-gR-DTb" secondAttribute="width" multiplier="0.3" id="y50-yc-gye"/>
+                                    <constraint firstItem="kdX-5p-4Ic" firstAttribute="width" secondItem="0h5-gR-DTb" secondAttribute="width" multiplier="0.5" id="y50-yc-gye"/>
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpF-iH-GFD">
@@ -194,4 +203,7 @@
             <point key="canvasLocation" x="253.95683453237413" y="-2.1582733812949639"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cross" width="16" height="16"/>
+    </resources>
 </document>

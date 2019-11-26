@@ -12,31 +12,27 @@ import Alamofire
 import NVActivityIndicatorView
 
 
-class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate,NVActivityIndicatorViewable {
+class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate,NVActivityIndicatorViewable, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     //  var scanEnabled: Bool = false
-    
     @IBOutlet weak var camerView: UIView!
     @IBOutlet weak var addVintextfield: UITextField!
     @IBOutlet weak var addplateTextfield: UITextField!
     @IBOutlet weak var camerabtnOutlet: UIButton!
     @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var Vinbtn: UIButton!
+    @IBOutlet weak var Platebtn: UIButton!
+    @IBOutlet weak var segmentedcontrol: UISegmentedControl!
     
     var myImage: UIImage!
     var flag = 0
-   
-    
-    
+    var addImage: UIImage!
     //Localization
-    
     let EnterPlatenumber = NSLocalizedString("EnterPlatenumber", comment: "")
     let EnterVinnumber = NSLocalizedString("EnterVinnumber", comment: "")
     let EnteranyField = NSLocalizedString("EnteranyField", comment: "")
-    
-    
-    
-    
     //Localization
     
     
@@ -49,14 +45,16 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         capturingImage()
         addplateTextfield.isUserInteractionEnabled = false
-        addplateTextfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        addplateTextfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         addVintextfield.isUserInteractionEnabled = false
         //  editVinPlateImage()
         NotificationCenter.default.addObserver(self, selector: #selector(CarScannerView.images(notification:)), name: Notification.Name("imageadded"), object: nil)
+    
     }
     
     deinit {
@@ -111,21 +109,74 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
     @IBAction func cameraBtn(_ sender: Any) {
         
-        var storyboard: UIStoryboard!
-        var popController: UIViewController!
-        storyboard = UIStoryboard(name: "cameraScan", bundle: nil)
-        popController = storyboard.instantiateViewController(withIdentifier: "cameraScanVc") as! cameraScan
-        //let nav = UINavigationController(rootViewController: popController)
-        popController.modalPresentationStyle = .popover
-        let heightForPopOver = 60*2
-        let popover = popController.popoverPresentationController
-        popController.preferredContentSize = CGSize(width: 300 , height: heightForPopOver)
-        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 3)
-        popover?.permittedArrowDirections =  UIPopoverArrowDirection.down
-        popover?.backgroundColor = UIColor.white
-        popover?.sourceView = self.camerabtnOutlet
-        popover?.sourceRect = self.camerabtnOutlet.bounds
-        self.present(popController, animated: true, completion: nil)
+        openCamera()
+//        var storyboard: UIStoryboard!
+//        var popController: UIViewController!
+//        storyboard = UIStoryboard(name: "cameraScan", bundle: nil)
+//        popController = storyboard.instantiateViewController(withIdentifier: "cameraScanVc") as! cameraScan
+//        //let nav = UINavigationController(rootViewController: popController)
+//        popController.modalPresentationStyle = .popover
+//        let heightForPopOver = 60*2
+//        let popover = popController.popoverPresentationController
+//        popController.preferredContentSize = CGSize(width: 300 , height: heightForPopOver)
+//        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 3)
+//        popover?.permittedArrowDirections =  UIPopoverArrowDirection.down
+//        popover?.backgroundColor = UIColor.white
+//        popover?.sourceView = self.camerabtnOutlet
+//        popover?.sourceRect = self.camerabtnOutlet.bounds
+//        self.present(popController, animated: true, completion: nil)
+    }
+    
+    
+    func openCamera()
+    {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self //as! UIImagePickerControllerDelegate & UINavigationControllerDelegate// as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.allowsEditing = false
+            imagePicker.modalPresentationStyle = .overFullScreen
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        addImage = nil
+        picker.dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: Notification.Name("imageadded"), object: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImaged = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            addImage = nil
+            addImage = pickedImaged
+            
+            NotificationCenter.default.post(name: Notification.Name("imageadded"), object: nil)
+            picker.dismiss(animated: true, completion: nil)
+            
+//            let svc = self.storyboard!.instantiateViewController(withIdentifier: Constants.carScannerVc) as! CarScannerView
+//            self.present(svc, animated: true, completion: nil)
+//            if let vc = self.parent as? ReceptionalistView {
+//                let storyboard = UIStoryboard(name: Constants.CarScan, bundle: nil)
+//                let carScanner = storyboard.instantiateViewController(withIdentifier: Constants.carScannerVc) as!CarScannerView
+//                vc.switchViewController(vc: carScanner, showFooter: false)
+//
+//            }
+            //        capturingImage()
+            
+        }
+        
+        
     }
     
     
@@ -137,7 +188,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
            print(self.myImage!)
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 
-                multipartFormData.append(UIImageJPEGRepresentation(self.myImage!, 0.0)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+                multipartFormData.append(self.myImage.jpegData(compressionQuality: 0.0)!, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
                 
                 // for (key, value) in params {
                 //                            multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
@@ -170,7 +221,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
                                 ToastView.show(message: descript, controller: self)
                                 if let Platenmb = JSON.value(forKey: "PlateNo") as? String {
                                     self.addplateTextfield.backgroundColor = UIColor.darkGray
-                                    self.addplateTextfield.attributedPlaceholder = NSAttributedString(string: "Enter Plate number", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font:
+                                    self.addplateTextfield.attributedPlaceholder = NSAttributedString(string: "Enter Plate number", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,.font:
                                         UIFont.boldSystemFont(ofSize: 14.0)])
                                     self.addplateTextfield.isUserInteractionEnabled = true
                                     self.addplateTextfield.text  = Platenmb
@@ -247,6 +298,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         if flag == 0 {
             self.view.layoutIfNeeded()
             camerView.layer.addSublayer(previewLayer)
+            
         }
         
         captureSession.startRunning()
@@ -295,8 +347,8 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         addVintextfield.backgroundColor = UIColor.darkGray
         addVintextfield.isUserInteractionEnabled = true
         addVintextfield.text = code
-        if code.characters.count  > 17  {
-            addVintextfield.text = String(code.characters.dropFirst())
+        if code.count  > 17  {
+            addVintextfield.text = String(code.dropFirst())
         }
         
     }
@@ -310,6 +362,30 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     }
     
     
+    
+    @IBAction func Segmentopt(_ sender: Any) {
+        
+        switch segmentedcontrol.selectedSegmentIndex
+        {
+        case 0:
+            Platebtn.isHidden = false
+            addplateTextfield.isHidden = false
+            camerabtnOutlet.isHidden = false
+            imageview.isHidden = false
+        
+            
+        case 1:
+            Platebtn.isHidden = true
+            addplateTextfield.isHidden = true
+            camerabtnOutlet.isHidden = true
+            imageview.isHidden = true
+            
+        
+        default:
+            break
+        }
+    }
+        
     
     @IBAction func continueBtn(_ sender: Any) {
         
@@ -343,7 +419,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         
         addVintextfield.isUserInteractionEnabled = false
         addplateTextfield.backgroundColor = UIColor.darkGray
-        addplateTextfield.attributedPlaceholder = NSAttributedString(string: EnterPlatenumber, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
+        addplateTextfield.attributedPlaceholder = NSAttributedString(string: EnterPlatenumber, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addplateTextfield.isUserInteractionEnabled = true
     }
     
@@ -352,7 +428,7 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
     
         addplateTextfield.isUserInteractionEnabled = false
         addVintextfield.backgroundColor = UIColor.darkGray
-        addVintextfield.attributedPlaceholder = NSAttributedString(string: EnterVinnumber, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
+        addVintextfield.attributedPlaceholder = NSAttributedString(string: EnterVinnumber, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,.font: UIFont.boldSystemFont(ofSize: 14.0)])
         addVintextfield.isUserInteractionEnabled = true
     }
     
@@ -363,17 +439,19 @@ class CarScannerView: UIViewController , AVCaptureMetadataOutputObjectsDelegate,
         
         var currentText = textField.text!.replacingOccurrences(of: "-", with: "")
         if currentText.count >= 4 {
-            currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 3))
+        currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 3))
+            
+            
         }
         textField.text = currentText
-        if textField.text!.characters.count  == 8          {
+        if textField.text!.count  == 8          {
             
             addplateTextfield.resignFirstResponder()
             
         }
-        else if textField.text!.characters.count  > 8  {
-            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
+        else if textField.text!.count  > 8  {
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }

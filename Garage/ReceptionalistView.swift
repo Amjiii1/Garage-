@@ -156,12 +156,12 @@ class ReceptionalistView: UIViewController  {
     func removeAllChildViewControllers() {
         
         
-        if childViewControllers.count > 0 {
-            let viewControllers:[UIViewController] = childViewControllers
+        if children.count > 0 {
+            let viewControllers:[UIViewController] = children
             for viewContoller in viewControllers  {
-                viewContoller.willMove(toParentViewController: nil)
+                viewContoller.willMove(toParent: nil)
                 viewContoller.view.removeFromSuperview()
-                viewContoller.removeFromParentViewController()
+                viewContoller.removeFromParent()
                 
             }
         }
@@ -186,9 +186,9 @@ class ReceptionalistView: UIViewController  {
         
         self.view.layoutIfNeeded()
         vc.view.frame = CGRect(x: 0, y: 0, width: containerView.frame.size.width, height: height)
-        self.addChildViewController(vc)
+        self.addChild(vc)
         self.containerView.addSubview(vc.view)
-        vc.didMove(toParentViewController: self)
+        vc.didMove(toParent: self)
         
     }
     

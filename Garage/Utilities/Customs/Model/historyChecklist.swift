@@ -14,6 +14,7 @@ struct InspectionListH {
     let InspectionDetailsH: [InspectionDetailsH]
     let InspectionIDH: Int
     let NameH: String
+    let AlternativeH: String
     let OrderIDH: Int
 }
 
@@ -22,6 +23,7 @@ struct  InspectionDetailsH {
     let CarInspectionDetailIDH: Int
     let CarInspectionIDH: Int
     let Name: String
+    let AlternativeH: String
     let Value: String
    
 }

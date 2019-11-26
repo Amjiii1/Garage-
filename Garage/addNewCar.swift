@@ -60,11 +60,8 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     private var CarModelTableView: UITableView!
     var MakeCarDetails = [makeCarModel]()
     var ModelCarDetails = [modelCar]()
-    var countryEventsArray = [String]()
     var datePicker: UIDatePicker?
     var pickerData = [String]()
-    var someInts = [Int]()
-    var flexmakeid = 2
     var orderdetails = [ReceiptModel]()
     var Gender:  String = ""
     var GenderID: Int = 1
@@ -96,12 +93,12 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         }
 //        first.addTarget(self, action: "textFieldDidChange:", for: UIControlEvents.EditingChanged)
 //        second.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
-        carplateNumber.defaultTextAttributes.updateValue(15.0, forKey: NSAttributedString.Key.kern.rawValue)
-        check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControlEvents.touchDown)
-        carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
-         phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControlEvents.touchDown)
+        carplateNumber.defaultTextAttributes.updateValue(15.0, forKey: NSAttributedString.Key(rawValue: NSAttributedString.Key.kern.rawValue))
+        check.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: UIControl.Event.touchDown)
+        carplateNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        phoneNumber.addTarget(self, action: #selector(phoneNumberDidChange(_:)), for: UIControl.Event.touchDown)
          phoneNumber.addTarget(self, action: #selector(phoneNumberediting(_:)), for: .editingChanged)
-        VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControlEvents.editingChanged)
+        VinNumber.addTarget(self, action: #selector(VinNumberDidChange(_:)), for: UIControl.Event.editingChanged)
         carMake.addTarget(self, action: #selector(CarmakeFunction), for: .touchDown)
         modelNumber.addTarget(self, action: #selector(CarmodeltFunction), for: .touchDown)
         CardetailsData()
@@ -174,7 +171,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func LanguageUIUpdate() {
         
-        reScanBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0,0,25)
+        reScanBtn.titleEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 25)
         assignBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:20, bottom: 0, right: 0)
         reScanBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:12, bottom: 0, right: 0)
         historyBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:12, bottom: 0, right: 0)
@@ -304,21 +301,21 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     
     override func viewDidLayoutSubviews() {
-        carplateNumber.attributedPlaceholder = NSAttributedString(string: "XXX-0000", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        VinNumber.attributedPlaceholder = NSAttributedString(string: "XXXXXXXXXXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        phoneNumber.attributedPlaceholder = NSAttributedString(string: "+966XXXXXXXXX", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        check.attributedPlaceholder = NSAttributedString(string: "0000", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        carMake.attributedPlaceholder = NSAttributedString(string: SelectyourCarMake, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        modelNumber.attributedPlaceholder = NSAttributedString(string: SelectyourCarModel, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        recommendedAmount.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        engineType.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
-        yearNumber.attributedPlaceholder = NSAttributedString(string: rollyear, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        carplateNumber.attributedPlaceholder = NSAttributedString(string: "XXX-0000", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        VinNumber.attributedPlaceholder = NSAttributedString(string: "XXXXXXXXXXXXXXXXX", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        phoneNumber.attributedPlaceholder = NSAttributedString(string: "+966XXXXXXXXX", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        check.attributedPlaceholder = NSAttributedString(string: "0000", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        carMake.attributedPlaceholder = NSAttributedString(string: SelectyourCarMake, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        modelNumber.attributedPlaceholder = NSAttributedString(string: SelectyourCarModel, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        recommendedAmount.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        engineType.attributedPlaceholder = NSAttributedString(string: "00", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
+        yearNumber.attributedPlaceholder = NSAttributedString(string: rollyear, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray,.font: UIFont.boldSystemFont(ofSize: 16.0)])
    
     }
 
     func background(string: String)-> NSMutableAttributedString {
         return NSMutableAttributedString(string: string, attributes:
-            [NSAttributedStringKey.backgroundColor : UIColor.red ])
+            [NSAttributedString.Key.backgroundColor : UIColor.red ])
     }
     
     @objc func CarmakeFunction() {
@@ -894,6 +891,24 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                             }
                         }
                     }
+                        
+                    else if (details.status == 1002) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message:LocalizedString.incorrectVin, controller: self)
+                            self.stopAnimating()
+                            if self.carplateNumber.text != "" {
+                                //                                self.carplateNumber.isUserInteractionEnabled = false
+                                //                                self.lockPlateImage()
+                            }
+                            if self.VinNumber.text != "" {
+                                self.VinNumber.isUserInteractionEnabled = false
+                                self.lockvinImage()
+                            }
+                        }
+                    }
+                        
+            
                         
                     else {
                         
@@ -1563,13 +1578,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
         textField.text = currentText
-        if textField.text!.characters.count  == 8 {
+        if textField.text!.count  == 8 {
             carplateNumber.resignFirstResponder()
             
         }
-        else if textField.text!.characters.count  > 8  {
-            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
+        else if textField.text!.count  > 8  {
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }
@@ -1595,9 +1610,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     @objc func phoneNumberediting(_ textField: UITextField) {
        print("Pressed")
-        if phoneNumber.text!.characters.count == 13 {
-            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
+        if phoneNumber.text!.count == 13 {
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             //            return false
         }
@@ -1611,13 +1626,13 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @objc func VinNumberDidChange(_ textField: UITextField) {
         
         
-        if textField.text!.characters.count  == 17  {
+        if textField.text!.count  == 17  {
             
             VinNumber.resignFirstResponder()
         }
-        else if textField.text!.characters.count  > 17  {
-            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertActionStyle.default, handler: nil))
+        else if textField.text!.count  > 17  {
+            let alert = UIAlertController(title: LocalizedString.Alert, message: LocalizedString.limitExceeded, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: LocalizedString.OK, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }

@@ -1,21 +1,21 @@
 
 /* Class = "UILabel"; text = "Category"; ObjectID = "1gs-9J-Fcf"; */
-"1gs-9J-Fcf.text" = "القائمة الرائيسية";
+"1gs-9J-Fcf.text" = "الأصناف الرائيسية";
 
 /* Class = "UISegmentedControl"; 6KK-cK-JGj.segmentTitles[0] = "Numbers"; ObjectID = "6KK-cK-JGj"; */
-"6KK-cK-JGj.segmentTitles[0]" = "أعداد";
+"6KK-cK-JGj.segmentTitles[0]" = "بالأرقام";
 
 /* Class = "UISegmentedControl"; 6KK-cK-JGj.segmentTitles[1] = "Alpha"; ObjectID = "6KK-cK-JGj"; */
-"6KK-cK-JGj.segmentTitles[1]" = "ألفا";
+"6KK-cK-JGj.segmentTitles[1]" = "أبجدي";
 
 /* Class = "UILabel"; text = "Items"; ObjectID = "Aeo-K3-BxH"; */
-"Aeo-K3-BxH.text" = "الأصناف";
+"Aeo-K3-BxH.text" = "المنتجات";
 
 /* Class = "UISegmentedControl"; DXb-0Y-BeA.segmentTitles[0] = "Numbers"; ObjectID = "DXb-0Y-BeA"; */
-"DXb-0Y-BeA.segmentTitles[0]" = "أعداد";
+"DXb-0Y-BeA.segmentTitles[0]" = "بالأرقام";
 
 /* Class = "UISegmentedControl"; DXb-0Y-BeA.segmentTitles[1] = "Alpha"; ObjectID = "DXb-0Y-BeA"; */
-"DXb-0Y-BeA.segmentTitles[1]" = "ألفا";
+"DXb-0Y-BeA.segmentTitles[1]" = "أبجدي";
 
 /* Class = "UILabel"; text = "Modifiers"; ObjectID = "DjH-8J-SVV"; */
 "DjH-8J-SVV.text" = "الصفات التعريفية";
@@ -27,25 +27,25 @@
 "TmP-qY-cSB.text" = "Automatic Syncing";
 
 /* Class = "UILabel"; text = "Image"; ObjectID = "WFY-RT-oxr"; */
-"WFY-RT-oxr.text" = "صورة";
+"WFY-RT-oxr.text" = "بالصور";
 
 /* Class = "UILabel"; text = "Product Type"; ObjectID = "Ybq-J2-DMP"; */
-"Ybq-J2-DMP.text" = "نوع المنتج";
+"Ybq-J2-DMP.text" = "ترتيب المنتجات";
 
 /* Class = "UISegmentedControl"; eNZ-wc-Wyr.segmentTitles[0] = "Numbers"; ObjectID = "eNZ-wc-Wyr"; */
-"eNZ-wc-Wyr.segmentTitles[0]" = "أعداد";
+"eNZ-wc-Wyr.segmentTitles[0]" = "بالأرقام";
 
 /* Class = "UISegmentedControl"; eNZ-wc-Wyr.segmentTitles[1] = "Alpha"; ObjectID = "eNZ-wc-Wyr"; */
-"eNZ-wc-Wyr.segmentTitles[1]" = "ألفا";
+"eNZ-wc-Wyr.segmentTitles[1]" = "أبجدي";
 
 /* Class = "UISegmentedControl"; gmb-QA-VGR.segmentTitles[0] = "Numbers"; ObjectID = "gmb-QA-VGR"; */
-"gmb-QA-VGR.segmentTitles[0]" = "أعداد";
+"gmb-QA-VGR.segmentTitles[0]" = "بالأرقام";
 
 /* Class = "UISegmentedControl"; gmb-QA-VGR.segmentTitles[1] = "Alpha"; ObjectID = "gmb-QA-VGR"; */
-"gmb-QA-VGR.segmentTitles[1]" = "ألفا";
+"gmb-QA-VGR.segmentTitles[1]" = "أبجدي";
 
 /* Class = "UILabel"; text = "Sub Category"; ObjectID = "n4Q-mM-wLw"; */
-"n4Q-mM-wLw.text" = "القائمة الفرعية";
+"n4Q-mM-wLw.text" = " الأصناف الفرعية";
 
 /* Class = "UILabel"; text = "Products"; ObjectID = "ns1-Fq-eUu"; */
-"ns1-Fq-eUu.text" = "المنتجات";
+"ns1-Fq-eUu.text" = "عرض المنتجات";

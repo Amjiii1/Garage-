@@ -30,7 +30,7 @@ class Loader1: NSObject {
             shapeLayer.strokeColor = (UIColor.DefaultApp as! CGColor) //UIColor.init(netHex: 0x2D9D8A).cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 10.0
-        shapeLayer.lineCap = kCALineCapRound
+            shapeLayer.lineCap = CAShapeLayerLineCap.round
         
         
         blurView.layer.addSublayer(shapeLayer)
@@ -65,7 +65,7 @@ class Loader1: NSObject {
             
             animation.duration = ANIMATION_DURATION
             animation.isRemovedOnCompletion = true
-            animation.fillMode = kCAFillModeForwards
+            animation.fillMode = CAMediaTimingFillMode.forwards
             shapeLayer.add(animation, forKey: "drawLineAnimation")
             CATransaction.commit()
         }
@@ -87,7 +87,7 @@ class Loader1: NSObject {
             
             animation.duration = ANIMATION_DURATION
             animation.isRemovedOnCompletion = true
-            animation.fillMode = kCAFillModeForwards
+            animation.fillMode = CAMediaTimingFillMode.forwards
             shapeLayer.add(animation, forKey: "drawLineAnimation")
             CATransaction.commit()
         }
@@ -163,8 +163,8 @@ class Loader {
             frame.origin.y = (rootVC.view.frame.height / 2) - (loaderHeight/2)
             loaderView.frame = frame
             rootVC.view.addSubview(loaderView)
-            rootVC.view.bringSubview(toFront: fakeTempView)
-            rootVC.view.bringSubview(toFront: loaderView)
+            rootVC.view.bringSubviewToFront(fakeTempView)
+            rootVC.view.bringSubviewToFront(loaderView)
         }
         loaderView.startAnimating()
         }
@@ -206,7 +206,7 @@ class Loader {
         let frame = CGRect(x: 10, y: 0, width: loaderWidth, height: loaderHeight)
         loaderView.frame = frame
         view.addSubview(loaderView)
-        view.bringSubview(toFront: loaderView)
+        view.bringSubviewToFront(loaderView)
         if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
             fakeTempView.frame = rootVC.view.frame
             rootVC.view.addSubview(fakeTempView)

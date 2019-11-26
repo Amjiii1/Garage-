@@ -88,6 +88,7 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubusersCell", for: indexPath) as! SubusersCell
         cell.usersNamelbl.text = usersdetail[indexPath.row].FullName
+   
         
         
         return cell

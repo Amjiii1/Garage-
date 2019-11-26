@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,11 +39,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-r2-7U1">
-                                <rect key="frame" x="229.5" y="18.5" width="375" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="2Xv-VN-mu3"/>
-                                    <constraint firstAttribute="width" constant="375" id="Cn7-iY-jc5"/>
-                                </constraints>
+                                <rect key="frame" x="208.5" y="18" width="417" height="32"/>
                                 <segments>
                                     <segment title="In Work"/>
                                     <segment title="Hold"/>
@@ -217,8 +213,8 @@
                             <constraint firstItem="SB2-yS-aiX" firstAttribute="trailing" secondItem="Qos-Kb-fJ2" secondAttribute="trailing" constant="24" id="6ux-O6-WbX"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="centerX" secondItem="Qos-Kb-fJ2" secondAttribute="centerX" id="BMh-qE-odl"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="width" secondItem="Qos-Kb-fJ2" secondAttribute="width" id="Dkx-zS-OkF"/>
+                            <constraint firstItem="gyC-r2-7U1" firstAttribute="height" secondItem="tdX-sV-DKV" secondAttribute="height" multiplier="0.035" id="EJm-ah-62r"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="top" secondItem="Qos-Kb-fJ2" secondAttribute="top" multiplier="0.55" id="Eb2-1R-X4D"/>
-                            <constraint firstItem="gyC-r2-7U1" firstAttribute="height" secondItem="pyW-uL-To0" secondAttribute="height" multiplier="0.45" id="IdH-qZ-Ikc"/>
                             <constraint firstItem="Qos-Kb-fJ2" firstAttribute="bottom" secondItem="SB2-yS-aiX" secondAttribute="bottom" id="J6e-wV-qCp"/>
                             <constraint firstItem="gyC-r2-7U1" firstAttribute="centerY" secondItem="pyW-uL-To0" secondAttribute="centerYWithinMargins" constant="-10" id="Jhh-Yf-cqb"/>
                             <constraint firstItem="mVi-EO-igu" firstAttribute="width" secondItem="Qos-Kb-fJ2" secondAttribute="width" id="KIu-3K-65L"/>
@@ -231,6 +227,7 @@
                             <constraint firstItem="Qos-Kb-fJ2" firstAttribute="centerX" secondItem="SB2-yS-aiX" secondAttribute="centerX" id="kWP-3c-CK8"/>
                             <constraint firstItem="mVi-EO-igu" firstAttribute="centerX" secondItem="Qos-Kb-fJ2" secondAttribute="centerX" id="ldI-6d-5e2"/>
                             <constraint firstItem="rhU-6c-F8M" firstAttribute="leading" secondItem="Qos-Kb-fJ2" secondAttribute="leading" id="oSb-JO-GmW"/>
+                            <constraint firstItem="gyC-r2-7U1" firstAttribute="width" secondItem="tdX-sV-DKV" secondAttribute="width" multiplier="0.5" id="xo0-qL-sJr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SB2-yS-aiX"/>
                     </view>

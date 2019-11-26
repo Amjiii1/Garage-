@@ -74,6 +74,7 @@
 "AlreadyAssigned" = "Sorry Order cannot be Edit! Already Assigned to";
 "Void" = "Void";
 "rollyear" = "roll up for year";
+"VinCorrect" = "Vin-No or No-Plate Parameters Is Not Correct";
 
 
 

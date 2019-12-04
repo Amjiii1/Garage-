@@ -147,30 +147,26 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         if L102Language.currentAppleLanguage() == "ar" {
-            
             cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].AlternateName
-        } else{
-           cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].Name
+        } else {
+            cell.titleLabels.text = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].Name
         }
+        let checkboxA = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].IsInspection
+        cell.checkboxA.isSelected = checkboxA
+        let checkBoxB = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].IsReplace
+        cell.checkBoxB.isSelected = checkBoxB
+        let checkBoxC = Inspectionlist[indexPath.section].InspectionDetails[indexPath.row].IsInspectWithoutReplace
+        cell.checkBoxC.isSelected = checkBoxC
         
         let indexofcell = (indexPath.section * 1000) + indexPath.row
         print(indexofcell)
-        if indexofcell < 3000 {
         cell.checkboxA.tag = indexofcell
         cell.checkBoxB.tag = indexofcell
         cell.checkBoxC.tag = indexofcell
         cell.checkboxA.addTarget(self, action:#selector(self.tabA(_:)), for: .touchUpInside)
         cell.checkBoxB.addTarget(self, action:#selector(self.tabB(_:)), for: .touchUpInside)
         cell.checkBoxC.addTarget(self, action:#selector(self.tabC(_:)), for: .touchUpInside)
-            cell.contentView.backgroundColor = UIColor.blue
-        
-            print("Amjad")
-        } else {
-            cell.contentView.backgroundColor = UIColor.red
-            print("Rafi")
-        }
-        
-        
+        cell.contentView.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
         return cell
         
@@ -190,7 +186,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    @objc func tabB(_ sender: UIButton){
+    @objc func tabB(_ sender: UIButton) {
         let row = sender.tag % 1000
         let section = sender.tag / 1000
         let count = [(Inspectionlist[section].InspectionDetails[row])]
@@ -203,7 +199,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    @objc func tabC(_ sender: UIButton){
+    @objc func tabC(_ sender: UIButton) {
         let row = sender.tag % 1000
         let section = sender.tag / 1000
         let count = [(Inspectionlist[section].InspectionDetails[row])]
@@ -236,7 +232,7 @@ class CheckCarController: UIViewController, UITableViewDelegate, UITableViewData
             
             
         return Inspectionlist[section].AlternateName
-         } else{
+         } else {
             return Inspectionlist[section].Name
         }
     }

@@ -28,6 +28,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pey-P8-t1T">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxs-kJ-lRP">
                                 <rect key="frame" x="0.0" y="167" width="834" height="945"/>
                                 <subviews>
@@ -35,13 +39,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="834" height="132"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqB-Gp-af5">
-                                                <rect key="frame" x="30" y="47" width="117.5" height="37.5"/>
+                                                <rect key="frame" x="30" y="46.5" width="122.5" height="38.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X34-Ps-Lei">
-                                                <rect key="frame" x="663" y="41.5" width="141" height="49"/>
+                                                <rect key="frame" x="657" y="41" width="147" height="50"/>
                                                 <color key="backgroundColor" red="0.20392156862745098" green="0.21176470588235294" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                                 <state key="normal" title="Save &amp; Closed">
@@ -236,10 +240,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pey-P8-t1T" firstAttribute="centerX" secondItem="qwe-dq-71p" secondAttribute="centerX" id="3ec-je-aLW"/>
                             <constraint firstItem="fxs-kJ-lRP" firstAttribute="left" secondItem="qwe-dq-71p" secondAttribute="leftMargin" constant="-20" id="562-XC-whX"/>
                             <constraint firstAttribute="right" secondItem="fxs-kJ-lRP" secondAttribute="rightMargin" constant="8" id="95h-kw-0Wp"/>
+                            <constraint firstItem="pey-P8-t1T" firstAttribute="centerY" secondItem="qwe-dq-71p" secondAttribute="centerY" id="Bdi-aw-9Qb"/>
                             <constraint firstItem="OCr-hI-4QV" firstAttribute="top" secondItem="fxs-kJ-lRP" secondAttribute="bottom" id="Mey-bH-AcV"/>
+                            <constraint firstItem="pey-P8-t1T" firstAttribute="width" secondItem="qwe-dq-71p" secondAttribute="width" id="Z7s-h6-8DM"/>
                             <constraint firstItem="fxs-kJ-lRP" firstAttribute="height" secondItem="qwe-dq-71p" secondAttribute="height" multiplier="0.85" id="bUK-CR-abj"/>
+                            <constraint firstItem="pey-P8-t1T" firstAttribute="height" secondItem="qwe-dq-71p" secondAttribute="height" id="tXl-Rb-51a"/>
                         </constraints>
                     </view>
                     <connections>
@@ -247,6 +255,7 @@
                         <outlet property="generalBtn" destination="xXV-rr-e5B" id="ajg-Nj-Vaq"/>
                         <outlet property="hardwareBtn" destination="nM4-bs-Qyk" id="0yy-bH-TsK"/>
                         <outlet property="languageBtn" destination="a5S-cq-tJD" id="HZi-Np-SAP"/>
+                        <outlet property="mainView" destination="pey-P8-t1T" id="37I-kw-m6L"/>
                         <outlet property="quickpayBtn" destination="gic-NZ-WPh" id="qHi-tC-wxx"/>
                         <outlet property="receiptBtn" destination="aFU-RX-cRU" id="I9p-iK-GQh"/>
                         <outlet property="saveBtn" destination="X34-Ps-Lei" id="7y3-Ci-sdh"/>

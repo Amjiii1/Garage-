@@ -295,7 +295,7 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
                             print("Hello world")
                         }
                         else {
-                        self.WBaydetails.append(baylist!)
+                            self.WBaydetails.append(baylist!)
                         }
                     }
                 }
@@ -314,5 +314,5 @@ class BayAssignView: UIViewController, UICollectionViewDataSource, UICollectionV
         
         
     }
-    
+
 }

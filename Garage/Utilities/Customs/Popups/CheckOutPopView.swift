@@ -9,6 +9,12 @@
 import UIKit
 import NVActivityIndicatorView
 
+struct Workers {
+     static var usersdetail = [SubuserModel]()
+}
+
+
+
 class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate,NVActivityIndicatorViewable  {
     
     @IBOutlet weak var buttonstack: UIStackView!
@@ -38,6 +44,7 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBOutlet weak var priceAllig: UILabel!
     
+    @IBOutlet weak var mainviewtop: UIView!
     
     
     @IBOutlet weak var discountBtn: UIButton!
@@ -123,7 +130,21 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
             loyalityBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 30)
             voucherBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:0, bottom: 30, right: 35)
         }
+        
+        usersdetails()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
+        self.mainviewtop.addGestureRecognizer(tap)
     }
+    
+
+
+@objc func handleTap(){
+    dismiss(animated: true, completion: nil)
+    
+}
+
+    
+    
     
     private func setUI() {
         viewModel.originalAmount = Constants.checkoutGrandtotal
@@ -296,6 +317,30 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
         return CGFloat(40)
         
     }
+    
+    func  usersdetails()  {
+        
+        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.subusers)\(Constants.sessions)")
+        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                if let bay = json["SubuserList"] as? [[String: Any]] {
+                    Workers.usersdetail.removeAll()
+                    for SubUser in bay {
+                        let subUser = SubuserModel(SubUser: SubUser)
+                        Workers.usersdetail.append(subUser!)
+                    }
+                    
+                }
+            } catch let error as NSError {
+                print(error)
+            }
+        }).resume()
+        
+        
+    }
+    
     
     
     
@@ -781,6 +826,15 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                     }
                                         
+                                    else if (status == 1005) {
+                                        
+                                        DispatchQueue.main.async {
+                                            self.stopAnimating()
+                                            ToastView.show(message: newmessage!, controller: self)
+                                            self.grandtotalBtn.isUserInteractionEnabled = true
+                                        }
+                                    }
+                                        
                                     else  {
                                         DispatchQueue.main.async {
                                             self.stopAnimating()
@@ -922,6 +976,14 @@ class CheckOutPopView: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         self.grandtotalBtn.isUserInteractionEnabled = true
                                     }
                                     
+                                }
+                                else if (status == 1005) {
+                                    
+                                    DispatchQueue.main.async {
+                                        self.stopAnimating()
+                                        ToastView.show(message: newmessage!, controller: self)
+                                        self.grandtotalBtn.isUserInteractionEnabled = true
+                                    }
                                 }
                                     
                                 else  {

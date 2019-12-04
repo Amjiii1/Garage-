@@ -169,7 +169,7 @@
                                 <rect key="frame" x="49" y="610" width="319" height="70"/>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaq-84-0GX">
-                                <rect key="frame" x="57" y="684.5" width="223.5" height="42"/>
+                                <rect key="frame" x="57" y="692" width="223.5" height="42"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -499,7 +499,7 @@
                             <constraint firstItem="jiv-WM-I8x" firstAttribute="centerX" secondItem="Bkp-yG-R1A" secondAttribute="centerX" multiplier="2.1" id="ZjE-QA-r6N"/>
                             <constraint firstItem="lFM-ig-DRx" firstAttribute="height" secondItem="ZzI-bQ-x5Q" secondAttribute="height" id="Zrt-lV-JMz"/>
                             <constraint firstItem="Hx4-uq-WXq" firstAttribute="width" secondItem="4kR-Qg-no6" secondAttribute="width" id="agu-v1-OFR"/>
-                            <constraint firstItem="jaq-84-0GX" firstAttribute="centerY" secondItem="4El-Ws-A3k" secondAttribute="centerY" multiplier="0.9" id="bDe-YG-Rce"/>
+                            <constraint firstItem="jaq-84-0GX" firstAttribute="centerY" secondItem="4El-Ws-A3k" secondAttribute="centerY" multiplier="0.91" id="bDe-YG-Rce"/>
                             <constraint firstItem="HwO-QB-Vis" firstAttribute="width" secondItem="lFM-ig-DRx" secondAttribute="width" id="bFZ-ap-a0M"/>
                             <constraint firstItem="CgC-rK-w2l" firstAttribute="centerX" secondItem="4El-Ws-A3k" secondAttribute="centerX" multiplier="1.65" id="bkg-yT-RVb"/>
                             <constraint firstItem="TJo-Kj-tSd" firstAttribute="width" secondItem="ZzI-bQ-x5Q" secondAttribute="width" id="cTF-Wx-7Qn"/>

@@ -241,6 +241,10 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             cashier = companyInfo.cashier
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
         }
+        if receiptConfigurationModel.showEmail {
+            cashier = companyInfo.cashier
+            paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
+        }
         
         if Constants.checkoutstatus == 103 {
             paperSize.height = paperSize.height + 110  //80
@@ -307,7 +311,7 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/2), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height))
             yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 10
         }
-        
+      //  vin
         
         let attributedString = NSMutableAttributedString(string: "VIN: \(companyInfo.vin)", attributes: sfProDisplay_mediumFontAttributes_32)
         drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/2), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height))

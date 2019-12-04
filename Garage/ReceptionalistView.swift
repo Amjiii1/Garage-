@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 
-class ReceptionalistView: UIViewController  {
+class ReceptionalistView: UIViewController {
     
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var containerView: UIView!
@@ -235,12 +235,6 @@ class ReceptionalistView: UIViewController  {
     }
     
 }
-
-
-
-
-
-
 
 
 extension ReceptionalistView: FooterViewWithTabsDelegate {

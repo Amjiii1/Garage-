@@ -10,7 +10,6 @@ import UIKit
 import Alamofire 
 import SwiftyJSON
 
-
 struct Items {
     static var nameArray = [AnyObject]()
     static var Product = [ReceiptModel]()
@@ -62,7 +61,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     //Localization
     
-    let SearchItemsName = NSLocalizedString("   SearchItemsName", comment: "")
+    let SearchItemsName = NSLocalizedString("SearchItemsName", comment: "")
     let Sorryback = NSLocalizedString("Sorryback", comment: "")
     let SelectItems = NSLocalizedString("SelectItems", comment: "")
     
@@ -219,7 +218,6 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                 itemsModel.append(str)
             }
             SearchbarTbl.reloadData()
-            
             
         }
         
@@ -507,7 +505,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
                                     for ProductModels in subCategoriesList {
                                         if let ItemsList = ProductModels["ItemsList"] as? [[String: Any]] {
                                             for ProductModel in ItemsList {
-                                                let nam = ProductModel["Name"] as? String  ?? ""
+                                    //            let name = ProductModel["Name"] as? String  ?? ""
                                                 let neworder = ItemsModel(ProductModel: ProductModel)
                                                 self.itemsModel.append(neworder!)
                                                 self.itemsfilter = self.itemsModel
@@ -1173,7 +1171,7 @@ extension ServiceCartView: UICollectionViewDelegate, UICollectionViewDataSource,
                             }
                         }
                             
-                        else if (status == 1003) {
+                        else if (status == 1005) {
                             
                             DispatchQueue.main.async {
                                 self.alert(view: self, title: newmessage!, message: LocalizedString.wantto)

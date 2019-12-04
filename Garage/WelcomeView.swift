@@ -94,6 +94,16 @@ class WelcomeView: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Plate number Search field
     @objc func textFieldDidChange(_ textField: UITextField) {
         

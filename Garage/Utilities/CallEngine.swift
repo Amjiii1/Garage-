@@ -11,11 +11,13 @@ import Alamofire
 
 class CallEngine {
     
-//    static var LiveURL = "http://api-v1.isalesgarage.com/api/"
-//    static var localURL = "http://garageapi.isalespos.com/api/"
+
     
+    // Local
     static var localURL = "http://api-uat.garage.sa/api/"
+    // Live
     static var LiveURL = "http://api-live.garage.sa/api/"
+    
     static var baseURL =  localURL
     
     

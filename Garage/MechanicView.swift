@@ -37,7 +37,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var statusLbl: UILabel!
     
     
-    
+     var bayflag = 1
     var flag: Int = 0
     var flag2: Int = 0
     var rec = "0"
@@ -84,6 +84,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
             assignserviceBtn.titleEdgeInsets = UIEdgeInsets(top: 0,left: 20,bottom: 0,right: 0)
             assignserviceBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left:30, bottom: 0, right: 0)
         }
+        baylistMechanic()
         
     }
     
@@ -129,6 +130,53 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
     }
+    
+    func  baylistMechanic()  {
+        
+        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.BayAssignApi)\(Constants.sessions)")
+        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                if let bay = json["BaysList"] as? [[String: Any]] {
+                    Bay.Baydetails.removeAll()
+                    for Baylist in bay {
+                        
+                        print(self.bayflag)
+                        let baylist = popModel(Baylist: Baylist)
+                  //      if self.bayflag == 1 {
+                            let new = baylist?.Name
+                            let new1 = baylist?.BayID
+                            if (new == "Waiting List") && (new1 == 0)   {
+                                print("Hello world")
+                            } else {
+                                Bay.Baydetails.append(baylist!)
+                            }
+                            
+                   //      } //else {
+                         //   Bay.Baydetails.append(baylist!)
+                            
+                        //}
+                        
+                    }
+                    
+                }
+//                DispatchQueue.main.async {
+//                    //self.tablviepopover.reloadData()
+//                    Constants.bayflag = 0
+//                }
+                
+            } catch let error as NSError {
+                print(error)
+                Constants.bayflag = 0
+            }
+        }).resume()
+        
+        
+    }
+    
+    
+    
     
     
     func HideDetails() {
@@ -177,9 +225,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         checkcarBtn.isHidden = false
         finishBtn.isHidden = false
         carNamelbl.isHidden = false
-        milesBtn.isHidden = false
         platenumberlbl.isHidden = false
-        milesBtn.isHidden = false
+       milesBtn.isHidden = false
         dropDwnBtn.isHidden = false
         workingLabel.isHidden = false
         finishedTableview.isHidden = true
@@ -189,7 +236,8 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         modelLbl.isHidden = true
         plateLbl.isHidden = true
         statusLbl.isHidden = true
-}
+        
+    }
     
    
     
@@ -254,6 +302,11 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                     })
                     
                 }
+                    
+
+                    
+                    
+                    
                     
                 else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -541,7 +594,7 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     @IBAction func SeetingsBtnexp(_ sender: Any) {
-        Constants.bayflag = 1
+//        Constants.bayflag = 1
         var storyboard: UIStoryboard!
         var popController: UIViewController!
         
@@ -947,6 +1000,14 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
                         
                         DispatchQueue.main.async {
                             ToastView.show(message: LocalizedString.invalid, controller: self)
+                        }
+                    }
+                        
+                        
+                    else if (status == 1004) {
+                        
+                        DispatchQueue.main.async {
+                            ToastView.show(message: newmessage!, controller: self)
                         }
                     }
                     

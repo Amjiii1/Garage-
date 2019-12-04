@@ -153,8 +153,8 @@
                                         <rect key="frame" x="690" y="180" width="51" height="31"/>
                                         <color key="onTintColor" red="0.95294117647058818" green="0.71764705882352942" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4da-yi-Rcc">
-                                        <rect key="frame" x="20" y="263" width="63" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vin No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4da-yi-Rcc">
+                                        <rect key="frame" x="20" y="263" width="51" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -271,6 +271,14 @@
                         <viewLayoutGuide key="safeArea" id="yoe-Mc-ylR"/>
                     </view>
                     <size key="freeformSize" width="834" height="845"/>
+                    <connections>
+                        <outlet property="CompanyNameSwitch" destination="Xmb-rJ-u8P" id="qz1-1H-r7H"/>
+                        <outlet property="EmailSwitch" destination="icS-g7-hMM" id="DEg-G1-E2q"/>
+                        <outlet property="LogoSwitch" destination="XcQ-2D-6oj" id="g71-vA-r9V"/>
+                        <outlet property="PrintReceiptSwitch" destination="0sA-1o-taM" id="fbf-IW-ZdW"/>
+                        <outlet property="VinSwitch" destination="Gph-pU-cwV" id="XuU-m0-9WP"/>
+                        <outlet property="WebSwitch" destination="Yog-dd-AmY" id="DDA-5o-XuB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOK-u1-Mdv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

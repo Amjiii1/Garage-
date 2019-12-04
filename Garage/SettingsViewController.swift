@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBOutlet weak var settingContianerPop: UIView!
@@ -27,6 +27,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var topview: UIView!
     
+    @IBOutlet var mainView: UIView!
     
     
     enum SettingViews: Int {
@@ -44,9 +45,18 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabButtonsStackView.backgroundColor = UIColor.white
-         dismiss(animated: true, completion: nil)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
+        self.mainView.addGestureRecognizer(tap)
+     
     }
     
+ 
+
+
+@objc func handleTap(){
+    dismiss(animated: true, completion: nil)
+
+}
    
     
     override func viewDidLayoutSubviews() {

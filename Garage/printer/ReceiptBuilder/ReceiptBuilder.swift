@@ -14,7 +14,6 @@ class ReceiptBuilder {
 
     private let scale: CGFloat = 3.0
     let singleLineSpace = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 20.0)!]
-
     let sfProDisplay_semiBoldFontAttributes_90 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 40.0)!]
     let sfProDisplay_mediumFontAttributes_27 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 27.0)!]
     let sfProDisplay_boldFontAttributes_27 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.bold.rawValue, size: 27.0)!]
@@ -24,14 +23,11 @@ class ReceiptBuilder {
     let sfProDisplay_heavyFontAttributes_30 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 30.0)!]
     let sfProDisplay_semiBoldFontAttributes_30 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 30.0)!]
     let sfProDisplay_semiBoldFontAttributes_30bold = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.bold.rawValue, size: 30.0)!]
-    
     let sfProDisplay_mediumFontAttributes_30 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 30.0)!]
     let sfProDisplay_mediumFontAttributes_32 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 32.0)!]
-
     let geezaPro_boldFontAttributes_27 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 27.0)!]
     let geezaPro_boldFontAttributes_30 = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.medium.rawValue, size: 30.0)!]
     let geezaPro_boldFontAttributes_30bold = [NSAttributedString.Key.font: UIFont(name: FontsHelper.SFProDisplay.bold.rawValue, size: 30.0)!]
-
 
     // MARK:- Public Methods
 
@@ -105,7 +101,6 @@ class ReceiptBuilder {
     }
 
     // MARK:- Private Methods
-
     /// Creates white colored image
     /// - Parameters:
     ///     - rect: CGRect

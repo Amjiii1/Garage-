@@ -12,6 +12,10 @@ import NumericKeyboard
 import NVActivityIndicatorView
 
 
+struct Bay {
+    static var Baydetails = [popModel]()
+}
+
 class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate,NVActivityIndicatorViewable  {
     
     
@@ -118,8 +122,7 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if L102Language.currentAppleLanguage() == "ar" {
         LanguageUIUpdate()
         }
-    
-        
+        baylist()
         
     }
     
@@ -186,11 +189,6 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         recomLbl.textAlignment = NSTextAlignment.right
         genderLbl.textAlignment = NSTextAlignment.right
     }
-    
-    
-    
-    
-    
     
     
     
@@ -326,9 +324,9 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         CarMakeTableView.isHidden = false
         CarModelTableView.isHidden = true
         self.modelNumber.text  = ""
-        self.yearNumber.text  = ""
-        self.recommendedAmount.text  = ""
-        self.engineType.text  = ""
+//        self.yearNumber.text  = ""
+//        self.recommendedAmount.text  = ""
+//        self.engineType.text  = ""
     }
     
     
@@ -343,10 +341,10 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         } else if  tableView == CarModelTableView {
             Constants.ModelIDData = ModelCarDetails[indexPath.row].ModelID ?? 0
             self.modelNumber.text = ModelCarDetails[indexPath.row].Name
-            let year: Int = ModelCarDetails[indexPath.row].Year ?? 0
-            self.yearNumber.text = String(year)
-            self.engineType.text = ModelCarDetails[indexPath.row].EngineNo
-            self.recommendedAmount.text = ModelCarDetails[indexPath.row].RecommendedLitres
+//          let year: Int = ModelCarDetails[indexPath.row].Year ?? 0
+//            self.yearNumber.text = String(year)
+//            self.engineType.text = ModelCarDetails[indexPath.row].EngineNo
+//            self.recommendedAmount.text = ModelCarDetails[indexPath.row].RecommendedLitres
             
             CarModelTableView.isHidden = true
             yearNumber.isUserInteractionEnabled = true
@@ -530,6 +528,33 @@ class addNewCar: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 
             }
             }.resume()
+        
+    }
+    
+    
+    func  baylist()  {
+        
+        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.BayAssignApi)\(Constants.sessions)")
+        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                if let bay = json["BaysList"] as? [[String: Any]] {
+                     Bay.Baydetails.removeAll()
+                    for Baylist in bay {
+                        
+                        let baylist = popModel(Baylist: Baylist)
+                            Bay.Baydetails.append(baylist!)
+                    }
+                    
+                }
+                
+                
+            } catch let error as NSError {
+                print(error)
+            }
+        }).resume()
+        
         
     }
     

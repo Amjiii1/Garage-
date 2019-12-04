@@ -16,7 +16,7 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     
-    var usersdetail = [SubuserModel]()
+   
     
     
     override func viewDidLoad() {
@@ -24,42 +24,42 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.isNavigationBarHidden = true
         subusertableview.dataSource = self
         subusertableview.delegate = self
-        usersdetails()
+        subusertableview.reloadData()
     }
     
     
-    func  usersdetails()  {
-        
-        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.subusers)\(Constants.sessions)")
-        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
-            guard let data = data, error == nil else { return }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-                if let bay = json["SubuserList"] as? [[String: Any]] {
-                    self.usersdetail.removeAll()
-                    for SubUser in bay {
-                        let subUser = SubuserModel(SubUser: SubUser)
-                        self.usersdetail.append(subUser!)
-                    }
-                    
-                }
-                DispatchQueue.main.async {
-                    self.subusertableview.reloadData()
-                }
-                
-            } catch let error as NSError {
-                print(error)
-            }
-        }).resume()
-        
-        
-    }
+//    func  usersdetails()  {
+//
+//        let url = URL(string: "\(CallEngine.baseURL)\(CallEngine.subusers)\(Constants.sessions)")
+//        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
+//            guard let data = data, error == nil else { return }
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+//                if let bay = json["SubuserList"] as? [[String: Any]] {
+//                    self.usersdetail.removeAll()
+//                    for SubUser in bay {
+//                        let subUser = SubuserModel(SubUser: SubUser)
+//                        self.usersdetail.append(subUser!)
+//                    }
+//
+//                }
+//                DispatchQueue.main.async {
+//                    self.subusertableview.reloadData()
+//                }
+//
+//            } catch let error as NSError {
+//                print(error)
+//            }
+//        }).resume()
+//
+//
+//    }
     
     
     
     // Returns count of items in tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersdetail.count
+        return Workers.usersdetail.count
     }
     
     
@@ -68,8 +68,8 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Select item from tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        Constants.SubUserID = usersdetail[indexPath.row].SubUserID ?? 0
-        Constants.FullName = usersdetail[indexPath.row].FullName ?? ""
+        Constants.SubUserID = Workers.usersdetail[indexPath.row].SubUserID ?? 0
+        Constants.FullName = Workers.usersdetail[indexPath.row].FullName ?? ""
         
         NotificationCenter.default.post(name: Notification.Name("Notificationusername"), object: nil)
         if let cell = tableView.cellForRow(at: indexPath) {
@@ -87,7 +87,7 @@ class Subusers: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubusersCell", for: indexPath) as! SubusersCell
-        cell.usersNamelbl.text = usersdetail[indexPath.row].FullName
+        cell.usersNamelbl.text = Workers.usersdetail[indexPath.row].FullName
    
         
         

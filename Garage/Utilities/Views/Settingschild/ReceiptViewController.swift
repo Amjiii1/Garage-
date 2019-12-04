@@ -10,6 +10,16 @@ import UIKit
 
 class ReceiptViewController: UIViewController {
 
+    
+    @IBOutlet weak var PrintReceiptSwitch: UISwitch!
+    @IBOutlet weak var LogoSwitch: UISwitch!
+    @IBOutlet weak var CompanyNameSwitch: UISwitch!
+    @IBOutlet weak var VinSwitch: UISwitch!
+    @IBOutlet weak var EmailSwitch: UISwitch!
+    @IBOutlet weak var WebSwitch: UISwitch!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

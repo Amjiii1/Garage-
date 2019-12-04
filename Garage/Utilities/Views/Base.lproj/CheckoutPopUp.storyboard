@@ -31,6 +31,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KnU-oR-fIy">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmO-h1-Km7">
                                 <rect key="frame" x="0.0" y="222.5" width="834" height="889.5"/>
                                 <subviews>
@@ -667,8 +671,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="KnU-oR-fIy" firstAttribute="width" secondItem="Cx3-zA-EvZ" secondAttribute="width" id="9wk-Pf-FsX"/>
                             <constraint firstAttribute="trailing" secondItem="qmO-h1-Km7" secondAttribute="trailing" id="HeX-ed-jju"/>
                             <constraint firstItem="qmO-h1-Km7" firstAttribute="height" secondItem="Cx3-zA-EvZ" secondAttribute="height" multiplier="0.8" id="Jru-73-sXI"/>
+                            <constraint firstItem="KnU-oR-fIy" firstAttribute="height" secondItem="Cx3-zA-EvZ" secondAttribute="height" id="SQs-dX-be7"/>
+                            <constraint firstItem="KnU-oR-fIy" firstAttribute="centerY" secondItem="Cx3-zA-EvZ" secondAttribute="centerY" id="Tsl-XA-0kM"/>
+                            <constraint firstItem="KnU-oR-fIy" firstAttribute="centerX" secondItem="Cx3-zA-EvZ" secondAttribute="centerX" id="gYr-2V-Egs"/>
                             <constraint firstItem="qmO-h1-Km7" firstAttribute="leading" secondItem="Cx3-zA-EvZ" secondAttribute="leading" id="iT3-GQ-wqI"/>
                             <constraint firstItem="OCq-uZ-vwH" firstAttribute="top" secondItem="qmO-h1-Km7" secondAttribute="bottom" id="lRb-Wt-ily"/>
                         </constraints>
@@ -693,6 +701,7 @@
                         <outlet property="grandtotalBtn" destination="xE8-XY-HZX" id="13A-r9-TE1"/>
                         <outlet property="grandtotalLbl" destination="5b5-9U-dMs" id="85N-10-h9i"/>
                         <outlet property="loyalityBtn" destination="Rsn-mF-S9y" id="0LE-FG-KBM"/>
+                        <outlet property="mainviewtop" destination="KnU-oR-fIy" id="0we-PE-IL2"/>
                         <outlet property="priceAllig" destination="564-dq-WwE" id="ZgO-rJ-DgT"/>
                         <outlet property="taxLabel" destination="rds-BQ-KSM" id="Zji-IE-XLz"/>
                         <outlet property="tenderedbalance" destination="SuU-5y-Buf" id="bHq-Lt-Ilu"/>

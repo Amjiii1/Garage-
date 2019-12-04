@@ -670,6 +670,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
         popOverVC?.sourceRect = CGRect(x: screenSize, y: screenheight*0.80, width: 0, height: 0)
         popController.preferredContentSize = CGSize(width: screenSize, height: screenheight*0.80)
         self.present(popController, animated: true)
+       
     }
     
     

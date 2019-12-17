@@ -12,11 +12,13 @@ class ReceiptConfigurationModel {
     var isPrintReceipt: Bool = true
     var showKitchenHangingSpace : Bool = true
     var showLogo: Bool = true
-    var showCompanyName: Bool = true
-    var showAddress: Bool = true
+    var showlocation: Bool = true
+    var showvalueAddedTaxNumber: Bool = true
     var showPhone: Bool = true
-    var showEmail: Bool = true
-    var showWebsite: Bool = true
+    var showcashier: Bool = true
+    var showvin: Bool = true
     var showTable: Bool = true
     
+    
+ 
 }

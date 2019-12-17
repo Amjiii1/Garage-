@@ -180,7 +180,7 @@ class PrintJobHelper {
             
         }
     
-        let companyInfo = CompanyInfo(logo: UIImage(data:Constants.Logoimage! as Data)!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
+        let companyInfo = CompanyInfo(logo: UIImage(data:Constants.Logoimage! as Data)!, name: Constants.LocationName, phoneNumber: Constants.CompanyPhones, valueAddedTaxNumber: Constants.VAT, cashier: Constants.FirstName,checkoutorderNo: Constants.checkoutorderNo, vin: Constants.checkoutvin, reprint: "Re-Print", snapchatLink: Constants.SnapchatLink, instagranLink: Constants.InstagramLink)
             return companyInfo
 //        }
 //        return nil
@@ -195,11 +195,11 @@ class PrintJobHelper {
             configurationModel.isPrintReceipt = configuration.isPrintReceipt
             configurationModel.showKitchenHangingSpace = configuration.showKitchenHangingSpace
             configurationModel.showLogo = configuration.showLogo
-            configurationModel.showCompanyName = configuration.showCompanyName
-            configurationModel.showAddress = configuration.showAddress
+            configurationModel.showlocation = configuration.showlocation
+            configurationModel.showvalueAddedTaxNumber = configuration.showvalueAddedTaxNumber
             configurationModel.showPhone = configuration.showPhone
-            configurationModel.showEmail = configuration.showEmail
-            configurationModel.showWebsite = configuration.showWebsite
+            configurationModel.showcashier = configuration.showcashier
+            configurationModel.showvin = configuration.showvin
             configurationModel.showTable = configuration.showTable
             return configurationModel
         } else {

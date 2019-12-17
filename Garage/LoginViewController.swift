@@ -206,9 +206,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     DispatchQueue.main.async {
                         ToastView.show(message: Constants.Loginfailed, controller: self)
                         self.pinCodeTextField.isEnabled = true
-                        self.businesssCodeTextField.isEnabled = true
                     }
+//                    DispatchQueue.main.async {
+//                        ToastView.show(message: Constants.Loginfailed, controller: self)
+//                        self.pinCodeTextField.isEnabled = true
+//                        self.businesssCodeTextField.isEnabled = true
+//                    }
                 }
+                
+                
                 
             }
             

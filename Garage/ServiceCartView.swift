@@ -54,8 +54,7 @@ class ServiceCartView: UIViewController, UISearchBarDelegate, UITextFieldDelegat
     
     var new = [Int]()
     
-    var AllData:Array<Dictionary<String,String>> = []
-    var SearchData:Array<Dictionary<String,String>> = []
+//    var SearchData:Array<Dictionary<String,String>> = []
     var search:String=""
     
     

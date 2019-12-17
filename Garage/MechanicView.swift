@@ -129,6 +129,13 @@ class MechanicView: UIViewController, UICollectionViewDelegate, UICollectionView
         }
         
         
+//        Hello, This is Amjad ali holding CNIC: 4120159261539 and Number 03338115999, currently I`m residing in Saudi Arabia, Sir my sim`s roaming was on previous 1 year however very important calls I have to receive but previous two days it showing no service , please sort out whats wrong?
+//        
+//        Ihave select mannualy right now where it does not show ufone, only shown local network
+//        
+//        network being selected successfully but service is not available
+//        
+        
     }
     
     func  baylistMechanic()  {

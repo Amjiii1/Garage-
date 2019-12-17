@@ -597,7 +597,7 @@ class CheckoutView: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
         case 2:
-            print("Not any functionality")
+          print("Refuned will be used here")
             
         default:
             break

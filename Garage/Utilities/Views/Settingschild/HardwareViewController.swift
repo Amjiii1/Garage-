@@ -546,7 +546,7 @@ class HardwareViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == receiptPrinterTableview {
         if indexPath.section == 0 {
-            Constants.Printer = printerList[indexPath.row].target
+            Constants.Printer = printerList[indexPath.row].target ?? ""
             //            printertypelabel.text = "\(Constants.Printer)"
             UserDefaults.standard.set(Constants.Printer, forKey: "printer")
             UserDefaults.standard.synchronize()

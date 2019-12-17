@@ -131,9 +131,22 @@ class Historydetailview: UIViewController {
                 
             }
         }
+      //  tabBar.selectionIndicatorImage = UIImage().createSelectionIndicator(color: BLUE, size: CGSize(width: tabBar.frame.width/CGFloat(tabBar.items!.count), height:  tabBar.frame.height), lineWidth: 2.0)
         sender.isSelected = true
         changeView(index: sender.tag)
     }
     
     
+}
+
+
+extension UIImage {
+    func createSelectionIndicator(color: UIColor, size: CGSize, lineWidth: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(x: 0, y: size.height - lineWidth, width: size.width, height: lineWidth))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
 }

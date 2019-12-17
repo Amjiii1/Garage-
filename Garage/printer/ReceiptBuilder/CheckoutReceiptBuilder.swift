@@ -1,7 +1,6 @@
 //
 //  CheckoutReceiptBuilder.swift
 //  Garage
-//
 //  Created by Amjad on 13/06/1440 AH.
 //  Copyright © 1440 Amjad Ali. All rights reserved.
 //
@@ -97,6 +96,38 @@ class CheckoutReceiptBuilder: ReceiptBuilder {
             xCoordinate = xCoordinate - Double((attachment.image?.size.width)!) - 10
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: xCoordinate, y: yCoordinate, width: Double((attachment.image?.size.width)!), height: Double((attachment.image?.size.height)!)))
         }
+        
+        
+        
+        
+//        if  !companyInfo.snapchatLink.isEmpty {
+//            attachment.image = UIImage(named: "snapchatg.png")!
+//            var attributedString = NSAttributedString(attachment: attachment) as! NSMutableAttributedString
+//            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: xCoordinate, y: yCoordinate+30, width: Double((attachment.image?.size.width)!), height: Double((attachment.image?.size.height)!)))
+//            xCoordinate = xCoordinate + Double((attachment.image?.size.width)!)
+//
+//            attributedString = NSMutableAttributedString(string: companyInfo.snapchatLink, attributes: sfProDisplay_mediumFontAttributes_30)
+//            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: xCoordinate + 10, y: yCoordinate - 8 , width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
+//        }
+//
+//        /// instagram link and logo
+//
+//        if !companyInfo.instagranLink.isEmpty {
+//            var attributedString = NSMutableAttributedString(string: companyInfo.instagranLink, attributes: sfProDisplay_mediumFontAttributes_30)
+//
+//            let attributedStringWidth: Double = Double(attributedString.string.size(withAttributes: sfProDisplay_mediumFontAttributes_30).width)
+//
+//            xCoordinate = Double(receiptSize.width) - padding - attributedStringWidth
+//
+//            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: xCoordinate, y: yCoordinate - 8, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_30_height))
+//
+//            attachment.image = UIImage(named: "insta.png")!
+//            attributedString = NSAttributedString(attachment: attachment) as! NSMutableAttributedString
+//
+//            xCoordinate = xCoordinate - Double((attachment.image?.size.width)!) - 10
+//            drawInRectWithString(mutableString: attributedString, frame: CGRect(x: xCoordinate, y: yCoordinate+30, width: Double((attachment.image?.size.width)!), height: Double((attachment.image?.size.height)!)))
+//        }
+        
         
     }
     
@@ -208,41 +239,43 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         let logo = NSTextAttachment()
         var name = ""
         var phoneNumber = ""
-        var VAT = ""
+        var valueAddedTaxNumber = ""
         var cashier = ""
+        var vin = ""
+       
         
-        if receiptConfigurationModel.showLogo {
+        if receiptConfigurationModel.showLogo {    // real logo of receipt
             logo.image = companyInfo.logo
             paperSize.height = paperSize.height + (logo.image?.size.height)!
         }
         
-        if receiptConfigurationModel.showCompanyName {
+        if receiptConfigurationModel.showlocation {  // location name
             name = companyInfo.name
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_32_height) + 10
         }
         
-        if receiptConfigurationModel.showCompanyName {
-            name = companyInfo.name
+//        if receiptConfigurationModel.showLogo { // order nmb
+//            checkoutorderNo = companyInfo.checkoutorderNo
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
-        }
+//        }
         
-        if receiptConfigurationModel.showPhone {
+        if receiptConfigurationModel.showPhone { // phnumb
             phoneNumber = companyInfo.phoneNumber
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
         }
         
         
-        if receiptConfigurationModel.showPhone {
-            VAT = companyInfo.valueAddedTaxNumber
+        if receiptConfigurationModel.showvalueAddedTaxNumber { //VAT
+            valueAddedTaxNumber = companyInfo.valueAddedTaxNumber
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
         }
         
-        if receiptConfigurationModel.showEmail {
+        if receiptConfigurationModel.showcashier { // CASHIER
             cashier = companyInfo.cashier
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
         }
-        if receiptConfigurationModel.showEmail {
-            cashier = companyInfo.cashier
+        if receiptConfigurationModel.showvin { //VIN
+            vin = companyInfo.vin
             paperSize.height = paperSize.height + CGFloat(sfProDisplay_mediumFontAttributes_30_height) + 10
         }
         
@@ -267,18 +300,19 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 40   //10
         }
         
-        if name != "" {
+        //if checkoutorderNo != 0 {
             //            yCoordinate = yCoordinate + 20
             let attributedString = NSMutableAttributedString(string: "\(Constants.checkoutorderNo)", attributes: sfProDisplay_mediumFontAttributes_32)
              if L102Language.currentAppleLanguage() == "ar" {
-                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((attributedString.size().width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/7), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height+5))
              } else {
-                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-(logo.image?.size.width)!)/7), y: yCoordinate, width: Double((logo.image?.size.width)!), height: Double((logo.image?.size.height)!)))
+                drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/7), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height+5))
             }
             yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 10
         
             //attributedString.accessibilityLanguage
-        }
+       // }
+        
         
         if receiptConfigurationModel.showLogo {
             let attributedString = NSAttributedString(attachment: logo) as! NSMutableAttributedString
@@ -300,8 +334,8 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         }
         
         
-        if VAT != "" {
-            let attributedString = NSMutableAttributedString(string: "VAT: \(VAT)", attributes: sfProDisplay_mediumFontAttributes_32)
+        if valueAddedTaxNumber != "" {
+            let attributedString = NSMutableAttributedString(string: "VAT: \(valueAddedTaxNumber)", attributes: sfProDisplay_mediumFontAttributes_32)
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/2), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height))
             yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 10
         }
@@ -311,11 +345,11 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
             drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/2), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height))
             yCoordinate = yCoordinate + sfProDisplay_mediumFontAttributes_30_height + 10
         }
-      //  vin
         
+        if vin != "" {
         let attributedString = NSMutableAttributedString(string: "VIN: \(companyInfo.vin)", attributes: sfProDisplay_mediumFontAttributes_32)
         drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double((receiptSize.width-attributedString.size().width)/2), y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_32_height))
-        
+        }
         
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -590,8 +624,8 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
     
     func getCheckoutFooter() -> UIImage {
         
-        let paperSize = CGSize(width: receiptSize.width, height: 140.0)
-        
+        let paperSize = CGSize(width: receiptSize.width, height: CGFloat(Double(Constants.Footer.count) * 1.5))
+       
         var yCoordinate: Double = 0
         
         let tempImage = UIImage()
@@ -607,18 +641,36 @@ extension CheckoutReceiptBuilder: CheckoutReceiptPrintable {
         // End: Small Separator
         
         yCoordinate = yCoordinate + 20
+        drawLinks(at: yCoordinate)
+   
+        yCoordinate = yCoordinate + 50
         
-        let attributedString = NSMutableAttributedString(string: Constants.Footer, attributes: sfProDisplay_mediumFontAttributes_27)
+        
+        let attributedString = NSMutableAttributedString(string: Constants.Footer, attributes:sfProDisplay_mediumFontAttributes_27)
+        print(attributedString)
+        let myParagraphStyle = NSMutableParagraphStyle()
+        myParagraphStyle.alignment = .center // center the text
+        myParagraphStyle.lineSpacing = 5 //Change spacing between lines
+        myParagraphStyle.paragraphSpacing = 5 //Change space between paragraphs
+        attributedString.addAttributes([.paragraphStyle: myParagraphStyle], range: NSRange(location: 0, length: attributedString.length))
+
+//        print(attributedString)
+        
+        
         let attributedStringSize = attributedString.string.size(withAttributes: sfProDisplay_mediumFontAttributes_27)
-        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width - attributedStringSize.width)/2, y: yCoordinate, width: Double(attributedString.size().width), height: sfProDisplay_mediumFontAttributes_27_height))
+        drawInRectWithString(mutableString: attributedString, frame: CGRect(x: Double(paperSize.width - attributedStringSize.width)/2, y: yCoordinate, width: Double(attributedString.size().width), height: Double(attributedString.size().height)))
+        
+        print(attributedString)
         
         yCoordinate = yCoordinate + 40
         
-        drawLinks(at: yCoordinate)
+//       drawLinks(at: yCoordinate)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+       // drawLinks(at: yCoordinate)
         return newImage!
+        
     }
     
     func setWidthOfReceipt(width: CGFloat) {

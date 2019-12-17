@@ -37,6 +37,7 @@ struct CompanyInfo {
     var phoneNumber: String = ""
     var valueAddedTaxNumber: String = ""
     var cashier: String = "-"
+    var checkoutorderNo = 00
     var vin: String = "-"
     var reprint: String = "-"
     var snapchatLink: String = ""

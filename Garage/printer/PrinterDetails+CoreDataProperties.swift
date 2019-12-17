@@ -27,4 +27,9 @@ extension PrinterDetails {
     @NSManaged public var target: String!
     @NSManaged public var macAddress: String
     
+    
+    
+    
+    
+    
 }

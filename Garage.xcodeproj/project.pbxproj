@@ -560,6 +560,7 @@
 		176F2B4220E4B7E9008DB208 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				957C4407222526CC00B482AB /* GeneralViewController.swift */,
 				176F2B4320E4B809008DB208 /* Constants.swift */,
 				9533D5822349FE0B006E63EF /* LocalizedString.swift */,
 				17A67B4220CF787200660B7A /* Customs */,
@@ -955,7 +956,6 @@
 			isa = PBXGroup;
 			children = (
 				956274AC2369C91600DB0EBE /* General.storyboard */,
-				957C4407222526CC00B482AB /* GeneralViewController.swift */,
 				957C4409222526FE00B482AB /* Hardware.storyboard */,
 				957C440B2225271100B482AB /* HardwareViewController.swift */,
 				956274B9236ADF9000DB0EBE /* Receipt.storyboard */,
